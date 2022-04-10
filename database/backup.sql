@@ -1,3 +1,44 @@
+set client_min_messages to warning;
+
+-- DANGER: this is NOT how to do it in the real world.
+-- `drop schema` INSTANTLY ERASES EVERYTHING.
+drop schema "public" cascade;
+
+-- SCHEMA/CREATE TABLE SECTION
+
+create schema "public";
+
+CREATE TABLE public.characters(
+  "id" SERIAL NOT NULL,
+  "name" VARCHAR(500) NOT NULL,
+  "rosterId" VARCHAR NOT NULL,
+  "displayName" VARCHAR(500) NOT NULL,
+  "createdAt" TIMESTAMPTZ(6) NOT NULL DEFAULT NOW(),
+  PRIMARY KEY("id")
+);
+
+
+CREATE TABLE public.moves(
+  "moveId" SERIAL NOT NULL,
+  "name" VARCHAR(50) NOT NULL,
+  "damage" VARCHAR(50) NOT NULL,
+  "activeFrames" VARCHAR(50) NOT NULL,
+  "totalFrames" VARCHAR(50) NOT NULL,
+  "hitboxType" VARCHAR(50) NOT NULL,
+  "createdAt" TIMESTAMPTZ(6) NOT NULL DEFAULT NOW(),
+  PRIMARY KEY("moveId")
+);
+
+CREATE TABLE public.characterData(
+  "id" int NOT NULL,
+  -- "throwId" SERIAL REFERENCES public.throws,
+  -- "attributeid" SERIAL REFERENCES public.attributes,
+  -- "miscellaneousId" SERIAL REFERENCES public.miscellaneous,
+  "moveId" SERIAL REFERENCES public.moves
+);
+
+-- INSERT INTO/DATA SECTION
+
 INSERT INTO public.characters ("name", "rosterId", "displayName")
   VALUES
     ('banjo', '73', 'banjo & kazooie'),
@@ -5,7 +46,7 @@ INSERT INTO public.characters ("name", "rosterId", "displayName")
     ('joker', '71', 'joker');
 
 INSERT INTO public.moves AS "banjo"
-  ("name", "damage", "activeFrames", "totalFrames", "hitboxType")
+  ("name", "damage", "activeFrames", "totalFrames", "type")
   VALUES
     ('jab 1', '2.2%', '4-6', '27', 'single'),
     ('jab 2', '2.2%', '4-6', '24', 'single'),
@@ -30,7 +71,7 @@ INSERT INTO public.moves AS "banjo"
     ('down special', '0.5/8.5%', '10-143', '44',  'contact/explosion');
 
 INSERT INTO public.moves AS "inkling"
-  ("name", "damage", "activeFrames", "totalFrames", "hitboxType")
+  ("name", "damage", "activeFrames", "totalFrames", "type")
   VALUES
     ('jab 1', '2.0%', '3-4', '19', 'single'),
     ('jab 2', '2.0%', '2-3', '21', 'single'),
@@ -55,7 +96,7 @@ INSERT INTO public.moves AS "inkling"
     ('down special', '9.4-15.0%', '20-159', '47-65',  'charge');
 
 INSERT INTO public.moves AS "joker"
-  ("name", "damage", "activeFrames", "totalFrames", "hitboxType")
+  ("name", "damage", "activeFrames", "totalFrames", "type")
   VALUES
     ('jab 1', '2.0 (2.7)%', '4-5(4-5)', '23', 'single (arsene)'),
     ('jab 2', '1.5 (2.2)%', '3-4(3-4)', '23', 'single (arsene)'),
