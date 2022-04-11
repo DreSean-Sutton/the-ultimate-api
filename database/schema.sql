@@ -7,12 +7,12 @@ drop schema "public" cascade;
 create schema "public";
 
 CREATE TABLE public.characters(
-  "id" SERIAL NOT NULL,
-  "name" VARCHAR(500) NOT NULL,
+  "characterId" SERIAL NOT NULL,
+  "character" VARCHAR(500) NOT NULL,
   "rosterId" VARCHAR NOT NULL,
   "displayName" VARCHAR(500) NOT NULL,
   "createdAt" TIMESTAMPTZ(6) NOT NULL DEFAULT NOW(),
-  PRIMARY KEY("id")
+  PRIMARY KEY("characterId")
 );
 
 
@@ -28,7 +28,7 @@ CREATE TABLE public.moves(
 );
 
 CREATE TABLE public.characterData(
-  "id" int NOT NULL,
+  "characterId" int NOT NULL,
   -- "throwId" SERIAL REFERENCES public.throws,
   -- "attributeid" SERIAL REFERENCES public.attributes,
   -- "miscellaneousId" SERIAL REFERENCES public.miscellaneous,

@@ -4,17 +4,15 @@ set client_min_messages to warning;
 -- `drop schema` INSTANTLY ERASES EVERYTHING.
 drop schema "public" cascade;
 
--- SCHEMA/CREATE TABLE SECTION
-
 create schema "public";
 
 CREATE TABLE public.characters(
-  "id" SERIAL NOT NULL,
-  "name" VARCHAR(500) NOT NULL,
+  "characterId" SERIAL NOT NULL,
+  "character" VARCHAR(500) NOT NULL,
   "rosterId" VARCHAR NOT NULL,
   "displayName" VARCHAR(500) NOT NULL,
   "createdAt" TIMESTAMPTZ(6) NOT NULL DEFAULT NOW(),
-  PRIMARY KEY("id")
+  PRIMARY KEY("characterId")
 );
 
 
@@ -30,23 +28,25 @@ CREATE TABLE public.moves(
 );
 
 CREATE TABLE public.characterData(
-  "id" int NOT NULL,
+  "characterId" int NOT NULL,
   -- "throwId" SERIAL REFERENCES public.throws,
   -- "attributeid" SERIAL REFERENCES public.attributes,
   -- "miscellaneousId" SERIAL REFERENCES public.miscellaneous,
   "moveId" SERIAL REFERENCES public.moves
 );
 
+
 -- INSERT INTO/DATA SECTION
 
-INSERT INTO public.characters ("name", "rosterId", "displayName")
+INSERT INTO public.characters ("character", "rosterId", "displayName")
   VALUES
     ('banjo', '73', 'banjo & kazooie'),
+    ('bayonetta', '63', 'bayonetta'),
     ('inkling', '64', 'inkling'),
     ('joker', '71', 'joker');
 
 INSERT INTO public.moves AS "banjo"
-  ("name", "damage", "activeFrames", "totalFrames", "type")
+  ("name", "damage", "activeFrames", "totalFrames", "hitboxType")
   VALUES
     ('jab 1', '2.2%', '4-6', '27', 'single'),
     ('jab 2', '2.2%', '4-6', '24', 'single'),
@@ -70,8 +70,40 @@ INSERT INTO public.moves AS "banjo"
     ('up special', '3.0%', '15(31)', '58', '(charged)'),
     ('down special', '0.5/8.5%', '10-143', '44',  'contact/explosion');
 
+INSERT INTO public.moves AS "bayonetta"
+  ("name", "damage", "activeFrames", "totalFrames", "hitboxType")
+  VALUES
+    ('jab 1', '1.4%', '9-12', '31', 'single'),
+    ('jab 2', '1.4%', '7-8', '31', 'single'),
+    ('jab 3', '2.2%', '7-8', '39', 'single'),
+    ('rapid jab', '0.5/0.2%', '6 [rehit: 4]', '--', 'single/multi'),
+    ('rapid jab finisher', '5.0%', '4-5/11-12', '62', 'single'),
+    ('forward tilt 1', '3.0%', '12', '31', 'single'),
+    ('forward tilt 2', '3.0%', '12', '39', 'single'),
+    ('forward tilt 3', '7.0%', '14-15', '39', 'single'),
+    ('up tilt', '1.5/6.0%', '7-9/10-12/13-15', '31', 'single/single/final'),
+    ('down tilt', '5.0/6.0%', '7-8', '28', 'close/tipper'),
+    ('dash attack', '10.0/8.0%', '15-20/21-26', '42', 'early/late'),
+    ('forward smash', '16.0/14.0%', '17-21', '66', 'tipper/close'),
+    ('up smash', '17.0/16.0/15.0%', '18-19/20-21/22-23', '64', 'early/late/latest'),
+    ('down smash', '15.0%', '17-18/22/23-25', '65', 'stomp/early/late'),
+    ('neutral air', '8.0/6.0/3.0%', '9-17/18-25 (26-66)', '32', 'early/late/(extended)'),
+    ('forward air 1', '4.0%', '7-9', '37', 'single'),
+    ('forward air 2', '3.3%', '7-9', '39', 'single'),
+    ('forward air 3', '7.0%', '12-15', '46', 'single'),
+    ('back air', '13.0/10.0%', '11-14', '34', 'tipper/close'),
+    ('up air', '7.5/3.0%', '9-18 (21-65)', '29', 'single/(extended)'),
+    ('down air', '7.0/8.0/9.0/5.0%', '18-35/1-2', '52', 'closest/close/tipper/landing'),
+    ('neutral special', '1.3%', '17-26/22-31/32-41/37-46..', '75', 'multi'),
+    ('neutral special (charged)', '2.7%', '42/47/57/62..', '100', 'multi'),
+    -- ('side special (ground)', '8.0/7.0/5.0%', '15-16', '82', 'early/late'),
+    ('afterburner kick, up', '6.0/7.0/6.0%', '7-9/10-14/15-19', '31', 'early/late/latest'),
+    ('afterburner kick, down', '6.5/5.0%', '8-25/1', '43', 'normal/landing'),
+    ('up special', '3.0/0.2/3.0%', '6/11-25 [rehit: 3]/27-28', '31', 'first/multi/final'),
+    ('down special', '--', '8-27', '66',  'counter');
+
 INSERT INTO public.moves AS "inkling"
-  ("name", "damage", "activeFrames", "totalFrames", "type")
+  ("name", "damage", "activeFrames", "totalFrames", "hitboxType")
   VALUES
     ('jab 1', '2.0%', '3-4', '19', 'single'),
     ('jab 2', '2.0%', '2-3', '21', 'single'),
@@ -96,7 +128,7 @@ INSERT INTO public.moves AS "inkling"
     ('down special', '9.4-15.0%', '20-159', '47-65',  'charge');
 
 INSERT INTO public.moves AS "joker"
-  ("name", "damage", "activeFrames", "totalFrames", "type")
+  ("name", "damage", "activeFrames", "totalFrames", "hitboxType")
   VALUES
     ('jab 1', '2.0 (2.7)%', '4-5(4-5)', '23', 'single (arsene)'),
     ('jab 2', '1.5 (2.2)%', '3-4(3-4)', '23', 'single (arsene)'),
@@ -110,14 +142,14 @@ INSERT INTO public.moves AS "joker"
     ('forward smash', '14.0 (22.0)%', '16-18(16-19)', '47', 'single'),
     ('up smash', '12.0 (17.0)%', '10-14', '51', 'single'),
     ('down smash', '12.0 (18.0)%', '12-13/16-17', '51', 'front/back'),
-    ('neutral air', '7.0 (7.0/4.0)%', '12-27', '54', 'single(front/back)'),
+    ('neutral air', '7.0 (7.0/4.0)%', '12-27', '54', 'single (front/back)'),
     ('forward air', '2.0/5.0 (2.0/13.0)%', '7-8/12-14', '47', 'first/second'),
     ('back air', '9.0 (16.0)%', '7-8', '31', 'single'),
     ('up air', '0.7/3.0 (0.7/10.0)%', '5-18 [rehit: 3]/20-21', '39', 'multi/final'),
     ('down air', '8.0 (8.0/8.0)%', '13-16 (13-16/15-16)', '46', 'single (first/second'),
     ('neutral b', '5.0/3.0/1.0%', '12/37/65..', '36/61/92', 'close/med/far'),
     ('side b', '1.0/2.0% [rehit: 1%]', '16-42/1-19 [rehit: 45]', '52', 'contact/erupt'),
-    ('side b, arsene', '1.0/2.0% [rehit: 1%]', '16-32(1-15/16-27) [rehit: 45]', '52', 'contact/erupt'),
+    ('side b, arsene', '1.0/2.0% [rehit: 1%]', '16-32 (1-15/16-27) [rehit: 45]', '52', 'contact/erupt'),
     ('up b (grappling hook)', '--', '20-26', '59/44', 'recovery'),
     ('up b (grappling attack)', '11.0/5.0%', '5', '28', 'grounded/air');
     -- ('down b', '--', '3+', '52/33',  'minimal/additional endlag'),
@@ -127,17 +159,21 @@ INSERT INTO public.moves AS "joker"
 
 DO $$
   BEGIN
-    FOR "id" in 1..21 LOOP
-    INSERT INTO public.characterData ("id")
+    FOR "characterId" in 1..21 LOOP
+    INSERT INTO public.characterData ("characterId")
       VALUES (1);
     END LOOP;
-    FOR "id" in 22..42 LOOP
-    INSERT INTO public.characterData ("id")
+    FOR "characterId" in 22..48 LOOP
+    INSERT INTO public.characterData ("characterId")
       VALUES (2);
     END LOOP;
-    FOR "id" in 43..64 LOOP
-    INSERT INTO public.characterData ("id")
+    FOR "characterId" in 49..69 LOOP
+    INSERT INTO public.characterData ("characterId")
       VALUES (3);
+    END LOOP;
+    FOR "characterId" in 70..91 LOOP
+    INSERT INTO public.characterData ("characterId")
+      VALUES (4);
     END LOOP;
   END;
 $$;
