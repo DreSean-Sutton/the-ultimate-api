@@ -27,10 +27,7 @@ CREATE TABLE public.moves(
   PRIMARY KEY("moveId")
 );
 
-CREATE TABLE public.characterData(
+CREATE TABLE public."characterMoves"(
   "characterId" int NOT NULL,
-  -- "throwId" SERIAL REFERENCES public.throws,
-  -- "attributeid" SERIAL REFERENCES public.attributes,
-  -- "miscellaneousId" SERIAL REFERENCES public.miscellaneous,
   "moveId" SERIAL REFERENCES public.moves
 );

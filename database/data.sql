@@ -120,19 +120,19 @@ INSERT INTO public.moves AS "joker"
 DO $$
   BEGIN
     FOR "characterId" in 1..21 LOOP
-    INSERT INTO public.characterData ("characterId")
+    INSERT INTO public."characterMoves" ("characterId")
       VALUES (1);
     END LOOP;
     FOR "characterId" in 22..48 LOOP
-    INSERT INTO public.characterData ("characterId")
+    INSERT INTO public."characterMoves" ("characterId")
       VALUES (2);
     END LOOP;
     FOR "characterId" in 49..69 LOOP
-    INSERT INTO public.characterData ("characterId")
+    INSERT INTO public."characterMoves" ("characterId")
       VALUES (3);
     END LOOP;
     FOR "characterId" in 70..91 LOOP
-    INSERT INTO public.characterData ("characterId")
+    INSERT INTO public."characterMoves" ("characterId")
       VALUES (4);
     END LOOP;
   END;
