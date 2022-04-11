@@ -6,18 +6,19 @@ drop schema "public" cascade;
 
 create schema "public";
 
-CREATE TABLE public.characters(
-  "characterId" SERIAL NOT NULL,
-  "character" VARCHAR(500) NOT NULL,
+CREATE TABLE public.fighters(
+  "fighterId" SERIAL NOT NULL,
+  "fighter" VARCHAR(500) NOT NULL,
   "rosterId" VARCHAR NOT NULL,
   "displayName" VARCHAR(500) NOT NULL,
   "createdAt" TIMESTAMPTZ(6) NOT NULL DEFAULT NOW(),
-  PRIMARY KEY("characterId")
+  PRIMARY KEY("fighterId")
 );
 
 
 CREATE TABLE public.moves(
   "moveId" SERIAL NOT NULL,
+  "fighterId" INT REFERENCES public.fighters,
   "name" VARCHAR(50) NOT NULL,
   "damage" VARCHAR(50) NOT NULL,
   "activeFrames" VARCHAR(50) NOT NULL,
@@ -25,9 +26,4 @@ CREATE TABLE public.moves(
   "hitboxType" VARCHAR(50) NOT NULL,
   "createdAt" TIMESTAMPTZ(6) NOT NULL DEFAULT NOW(),
   PRIMARY KEY("moveId")
-);
-
-CREATE TABLE public."characterMoves"(
-  "characterId" int NOT NULL,
-  "moveId" SERIAL REFERENCES public.moves
 );
