@@ -227,4 +227,4 @@ INSERT INTO public.hitboxes AS "joker"
     -- (null, '3+', '52/33'),
     -- (null, '3+', '52/33'),
     -- (null, '3+', '52/33'),
-    -- (null, '3+', '52/33'),
+    -- (null, '3+', '52/33')
