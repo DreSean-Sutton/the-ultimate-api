@@ -1,48 +1,10 @@
-set client_min_messages to warning;
-
--- DANGER: this is NOT how to do it in the real world.
--- `drop schema` INSTANTLY ERASES EVERYTHING.
-drop schema "public" cascade;
-
-create schema "public";
-
-CREATE TABLE public.fighters(
-  "fighterId" SERIAL NOT NULL,
-  "fighter" TEXT NOT NULL,
-  "rosterId" VARCHAR NOT NULL,
-  "displayName" TEXT NOT NULL,
-  "createdAt" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
-  PRIMARY KEY("fighterId")
-);
-
-
-CREATE TABLE public.moves(
-  "moveId" SERIAL NOT NULL,
-  "fighterId" INT REFERENCES public.fighters,
-  "name" TEXT NOT NULL,
-  "moveType" TEXT,
-  "createdAt" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
-  PRIMARY KEY("moveId")
-);
-
-CREATE TABLE public.hitboxes(
-  "moveId" SERIAL REFERENCES public.moves,
-  "damage" TEXT,
-  "activeFrames" TEXT,
-  "totalFrames" TEXT,
-  "createdAt" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
-  PRIMARY KEY("moveId")
-);
-
-
-
--- INSERT INTO/DATA SECTION
-
-INSINSERT INTO public.fighters ("fighter", "rosterId", "displayName")
+INSERT INTO public.fighters ("fighter", "rosterId", "displayName")
   VALUES
     ('banjo', 73, 'banjo & kazooie'),
     ('bayonetta', 63, 'bayonetta'),
     ('bowser', 14, 'bowser'),
+    ('bowserJr', 58, 'bowser jr'),
+    ('byleth', 75, 'byleth'),
     ('inkling', 64, 'inkling'),
     ('joker', 71, 'joker');
 
@@ -54,9 +16,9 @@ INSERT INTO public.moves AS "banjo"
     (1, 'jab 3', 'single'),
     (1, 'rapid jab', 'multi'),
     (1, 'rapid jab finisher', 'single'),
-    (1, 'forward tilt', 'tipper/close'),
+    (1, 'forward tilt', 'sweet/close'),
     (1, 'up tilt', 'single'),
-    (1, 'down tilt', 'tipper/close/late'),
+    (1, 'down tilt', 'sweet/close/late'),
     (1, 'dash attack', 'early/late'),
     (1, 'forward smash', 'single'),
     (1, 'up smash', 'first/multi/final'),
@@ -66,11 +28,174 @@ INSERT INTO public.moves AS "banjo"
     (1, 'back air', 'multi/final'),
     (1, 'up air', 'first/second'),
     (1, 'down air', 'falling/landing'),
-    (1, 'neutral special', 'early/late/latest'),
-    (1, 'side special', 'early/late'),
-    (1, 'up special', '(charged)'),
-    (1, 'down special', 'contact/explosion');
+    (1, 'neutral b', 'early/late/latest'),
+    (1, 'side b', 'early/late'),
+    (1, 'up b', '(charged)'),
+    (1, 'down b', 'contact/explosion');
 
+INSERT INTO public.moves AS "bayonetta"
+  ("fighterId", "name", "moveType")
+  VALUES
+    (2, 'jab 1', 'single'),
+    (2, 'jab 2', 'single'),
+    (2, 'jab 3', 'single'),
+    (2, 'rapid jab', 'single/multi'),
+    (2, 'rapid jab finisher', 'single'),
+    (2, 'forward tilt 1', 'single'),
+    (2, 'forward tilt 2', 'single'),
+    (2, 'forward tilt 3', 'single'),
+    (2, 'up tilt', 'single/single/final'),
+    (2, 'down tilt', 'close/sweet'),
+    (2, 'dash attack', 'early/late'),
+    (2, 'forward smash', 'sweet/close'),
+    (2, 'up smash', 'early/late/latest'),
+    (2, 'down smash', 'stomp/early/late'),
+    (2, 'neutral air', 'early/late/(extended)'),
+    (2, 'forward air 1', 'single'),
+    (2, 'forward air 2', 'single'),
+    (2, 'forward air 3', 'single'),
+    (2, 'back air', 'sweet/close'),
+    (2, 'up air', 'single/(extended)'),
+    (2, 'down air', 'closest/close/sweet/landing'),
+    (2, 'neutral b', 'multi'),
+    (2, 'neutral b (charged)', 'multi'),
+    -- (2, 'side b (ground)', 'early/late'),
+    (2, 'afterburner kick, up', 'early/late/latest'),
+    (2, 'afterburner kick, down', 'normal/landing'),
+    (2, 'up b', 'first/multi/final'),
+    (2, 'down b', 'counter');
+
+INSERT INTO public.moves AS "bowser"
+  ("fighterId", "name", "moveType")
+  VALUES
+    (3, 'jab 1', 'single'),
+    (3, 'jab 2', 'single'),
+    (3, 'rapid jab', null),
+    (3, 'rapid jab finisher', null),
+    (3, 'forward tilt', 'first'),
+    (3, 'up tilt', 'single'),
+    (3, 'down tilt', 'first/second'),
+    (3, 'dash attack', 'early/late'),
+    (3, 'forward smash', 'early/late'),
+    (3, 'up smash', 'sweet/sour/landing'),
+    (3, 'down smash', 'front/back'),
+    (3, 'neutral air', 'multis'),
+    (3, 'forward air', 'sweet/close'),
+    (3, 'back air', 'single'),
+    (3, 'up air', 'single'),
+    (3, 'down air', 'normal/landing'),
+    (3, 'neutral b', 'multi'),
+    (3, 'side b', 'command grab'),
+    (3, 'up b, grounded', 'multi/final'),
+    (3, 'up b, air', 'first/multi/final'),
+    (3, 'down b, grounded', 'rising/falling/landing'),
+    (3, 'down b, air', 'falling/landing');
+
+INSERT INTO public.moves AS "bowserJr"
+  ("fighterId", "name", "moveType")
+  VALUES
+    (4, 'jab 1', 'single'),
+    (4, 'jab 2', 'single'),
+    (4, 'rapid jab', 'multi'),
+    (4, 'rapid jab finisher', 'single'),
+    (4, 'forward tilt', 'close/sweet'),
+    (4, 'up tilt', 'single'),
+    (4, 'down tilt', 'multi/final'),
+    (4, 'dash attack', 'multi/final'),
+    (4, 'forward smash', 'multi/final'),
+    (4, 'up smash', 'first/multi/final'),
+    (4, 'down smash', 'single'),
+    (4, 'neutral air', 'close (early/late/latest/far)(early/late/later)'),
+    (4, 'forward air', 'early far/early close (mid far/mid close)(late fair/late close)/landiing'),
+    (4, 'back air', 'early far/late far/close'),
+    (4, 'up air', 'early/late'),
+    (4, 'down air', 'multi/final/landing'),
+    (4, 'neutral b', 'early/late'),
+    (4, 'side b, dash', 'single'),
+    (4, 'side b, spinout', 'early-latest'),
+    (4, 'up b, recovery', 'contact/explosion'),
+    (4, 'up b, hammer', 'front/back'),
+    (4, 'down b', 'explosion');
+
+INSERT INTO public.moves AS "byleth"
+  ("fighterId", "name", "moveType")
+  VALUES
+    (5, 'jab 1', 'single'),
+    (5, 'jab 2', 'single'),
+    (5, 'jab 3', 'single'),
+    (5, 'rapid jab', 'multi'),
+    (5, 'rapid jab finisher', 'single'),
+    (5, 'forward tilt', 'single'),
+    (5, 'up tilt', 'single'),
+    (5, 'down tilt', 'single'),
+    (5, 'dash attack', 'close/sweet'),
+    (5, 'forward smash', 'close/sweet (normal)(down)(up)'),
+    (5, 'up smash', 'first/multi/final'),
+    (5, 'down smash', 'front/back'),
+    (5, 'neutral air', 'multi/final/landing'),
+    (5, 'forward air', 'sweet/close'),
+    (5, 'back air', 'early sweet/close (late sweet/close)'),
+    (5, 'up air', 'multi/final'),
+    (5, 'down air', 'single'),
+    (5, 'neutral b', 'normal/charged'),
+    (5, 'side b', 'sweet/close (air)'),
+    (5, 'up b', 'hit/grab/final (air)'),
+    (5, 'down b', 'single/shockwave (air)');
+
+INSERT INTO public.moves AS "inkling"
+  ("fighterId", "name", "moveType")
+  VALUES
+    (6, 'jab 1', 'single'),
+    (6, 'jab 2', 'single'),
+    (6, 'jab 3', 'single'),
+    (6, 'rapid jab', 'multi'),
+    (6, 'rapid jab finisher', 'single'),
+    (6, 'forward tilt', 'single'),
+    (6, 'up tilt', 'single'),
+    (6, 'down tilt', 'first/second'),
+    (6, 'dash attack', 'early/late'),
+    (6, 'forward smash', 'close/sweet'),
+    (6, 'up smash', 'first/close/far'),
+    (6, 'down smash', '(front)(back)'),
+    (6, 'neutral air', 'single'),
+    (6, 'forward air', 'sweet/early/late'),
+    (6, 'back air', 'sweet/close'),
+    (6, 'up air', 'first/second'),
+    (6, 'down air', 'sweet/close'),
+    (6, 'neutral b', 'multi'),
+    (6, 'side b', 'air/grounded'),
+    (6, 'up b', 'grounded/air/landing'),
+    (6, 'down b', 'charge');
+
+INSERT INTO public.moves AS "joker"
+  ("fighterId", "name", "moveType")
+  VALUES
+    (7, 'jab 1', 'single (arsene)'),
+    (7, 'jab 2', 'single (arsene)'),
+    (7, 'jab 3', 'single (arsene)'),
+    (7, 'rapid jab', null),
+    (7, 'rapid jab finisher', null),
+    (7, 'forward tilt', 'first/second (arsene)'),
+    (7, 'up tilt', 'first/multi/final'),
+    (7, 'down tilt', 'late/early'),
+    (7, 'dash attack', 'first/second'),
+    (7, 'forward smash', 'single'),
+    (7, 'up smash', 'single'),
+    (7, 'down smash', 'front/back'),
+    (7, 'neutral air', 'single (front/back)'),
+    (7, 'forward air', 'first/second'),
+    (7, 'back air', 'single'),
+    (7, 'up air', 'multi/final'),
+    (7, 'down air', 'single (Arsene: first/second'),
+    (7, 'neutral b', 'close/med/far'),
+    (7, 'side b', 'contact/erupt'),
+    (7, 'side b, arsene', 'contact/erupt'),
+    (7, 'up b (grappling hook)', 'recovery'),
+    (7, 'up b (grappling attack)', 'grounded/air');
+--     ('down b', 'minimal/additional endlag'),
+--     ('down b', 'minimal/additional endlag'),
+--     ('down b', 'minimal/additional endlag'),
+--     ('down b', 'minimal/additional endlag');
 INSERT INTO public.hitboxes AS "banjo"
   ("damage", "activeFrames", "totalFrames")
   VALUES
@@ -95,38 +220,6 @@ INSERT INTO public.hitboxes AS "banjo"
     ('22.0/16.0%', '18-35/36-53', '82'),
     ('3.0%', '15(31)', '58'),
     ('0.5/8.5%', '10-143', '44');
-
-INSERT INTO public.moves AS "bayonetta"
-  ("fighterId", "name", "moveType")
-  VALUES
-    (2, 'jab 1', 'single'),
-    (2, 'jab 2', 'single'),
-    (2, 'jab 3', 'single'),
-    (2, 'rapid jab', 'single/multi'),
-    (2, 'rapid jab finisher', 'single'),
-    (2, 'forward tilt 1', 'single'),
-    (2, 'forward tilt 2', 'single'),
-    (2, 'forward tilt 3', 'single'),
-    (2, 'up tilt', 'single/single/final'),
-    (2, 'down tilt', 'close/tipper'),
-    (2, 'dash attack', 'early/late'),
-    (2, 'forward smash', 'tipper/close'),
-    (2, 'up smash', 'early/late/latest'),
-    (2, 'down smash', 'stomp/early/late'),
-    (2, 'neutral air', 'early/late/(extended)'),
-    (2, 'forward air 1', 'single'),
-    (2, 'forward air 2', 'single'),
-    (2, 'forward air 3', 'single'),
-    (2, 'back air', 'tipper/close'),
-    (2, 'up air', 'single/(extended)'),
-    (2, 'down air', 'closest/close/tipper/landing'),
-    (2, 'neutral special', 'multi'),
-    (2, 'neutral special (charged)', 'multi'),
-    -- (2, 'side special (ground)', 'early/late'),
-    (2, 'afterburner kick, up', 'early/late/latest'),
-    (2, 'afterburner kick, down', 'normal/landing'),
-    (2, 'up special', 'first/multi/final'),
-    (2, 'down special', 'counter');
 
 INSERT INTO public.hitboxes AS "bayonetta"
   ("damage", "activeFrames", "totalFrames")
@@ -160,138 +253,6 @@ INSERT INTO public.hitboxes AS "bayonetta"
     ('3.0/0.2/3.0%', '6/11-25 [rehit: 3]/27-28', '31'),
     (null, '8-27', '66');
 
-INSERT INTO public.moves AS "bowser"
-  ("fighterId", "name", "moveType")
-  VALUES
-    (3, 'jab 1', 'single'),
-    (3, 'jab 2', 'single'),
-    (3, 'rapid jab', null),
-    (3, 'rapid jab finisher', null),
-    (3, 'forward tilt', 'first'),
-    (3, 'up tilt', 'single'),
-    (3, 'down tilt', 'first/second'),
-    (3, 'dash attack', 'early/late'),
-    (3, 'forward smash', 'early/late'),
-    (3, 'up smash', 'sweet/sour/landing'),
-    (3, 'down smash', 'front/back'),
-    (3, 'neutral air', 'multis'),
-    (3, 'forward air', 'sweet/close'),
-    (3, 'back air', 'single'),
-    (3, 'up air', 'single'),
-    (3, 'down air', 'normal/landing'),
-    (3, 'neutral b', 'multi'),
-    (3, 'side b', 'command grab'),
-    (3, 'up b, grounded', 'multi/final'),
-    (3, 'up b, air', 'first/multi/final'),
-    (3, 'down b, grounded', 'rising/falling/landing'),
-    (3, 'down b, air', 'falling/landing');
-
-INSERT INTO public.hitboxes AS "bowser"
-  ("damage", "activeFrames", "totalFrames")
-  VALUES
-    ('2.0 (2.7)%', '4-5(4-5)', '23'),
-    ('1.5 (2.2)%', '3-4(3-4)', '23'),
-    ('4.0 (7.1)%', '3-4', '34'),
-    (null, null, null),
-    (null, null, null),
-    ('3.0/5.0 (3.0/10.0)%', '8-9/13-15(8-9/13-19)', '34'),
-    ('4.0/1.0/1.0 (4.0/1.7/3.9)%', '8-9/11-19/20-23', '40'),
-    ('6.0/(13.0)%', '8-9/10-11/12-14', '37'),
-    ('2.0/6.0 (2.0/12.0)%', '6-7/15-21', '45'),
-    ('14.0 (22.0)%', '16-18(16-19)', '47'),
-    ('12.0 (17.0)%', '10-14', '51'),
-    ('12.0 (18.0)%', '12-13/16-17', '51'),
-    ('7.0 (7.0/4.0)%', '12-27', '54'),
-    ('2.0/5.0 (2.0/13.0)%', '7-8/12-14', '47'),
-    ('9.0 (16.0)%', '7-8', '31'),
-    ('0.7/3.0 (0.7/10.0)%', '5-18 [rehit: 3]/20-21', '39'),
-    ('8.0 (8.0/8.0)%', '13-16 (13-16/15-16)', '46'),
-    ('5.0/3.0/1.0%', '12/37/65..', '36/61/92'),
-    ('1.0/2.0% [rehit: 1%]', '16-42/1-19 [rehit: 45]', '52'),
-    ('1.0/2.0% [rehit: 1%]', '16-32 (1-15/16-27) [rehit: 45]', '52'),
-    (null, '20-26', '59/44'),
-    ('11.0/5.0%', '5', '28');
-
-INSERT INTO public.moves AS "inkling"
-  ("fighterId", "name", "moveType")
-  VALUES
-    (4, 'jab 1', 'single'),
-    (4, 'jab 2', 'single'),
-    (4, 'jab 3', 'single'),
-    (4, 'rapid jab', 'multi'),
-    (4, 'rapid jab finisher', 'single'),
-    (4, 'forward tilt', 'single'),
-    (4, 'up tilt', 'single'),
-    (4, 'down tilt', 'first/second'),
-    (4, 'dash attack', 'early/late'),
-    (4, 'forward smash', 'close/tipper'),
-    (4, 'up smash', 'first/close/far'),
-    (4, 'down smash', '(front)(back)'),
-    (4, 'neutral air', 'single'),
-    (4, 'forward air', 'tipper/early/late'),
-    (4, 'back air', 'tipper/close'),
-    (4, 'up air', 'first/second'),
-    (4, 'down air', 'tipper/close'),
-    (4, 'neutral special', 'multi'),
-    (4, 'side special', 'air/grounded'),
-    (4, 'up special', 'grounded/air/landing'),
-    (4, 'down special', 'charge');
-
-INSERT INTO public.hitboxes AS "inkling"
-  ("damage", "activeFrames", "totalFrames")
-  VALUES
-    ('2.0%', '3-4', '19'),
-    ('2.0%', '2-3', '21'),
-    ('3.5%', '4-5', '29'),
-    ('0.4%', '4 [rehit: 3]', null),
-    ('9.0%', '6', '48'),
-    ('6.0%', '8-10', '34'),
-    ('6.0%', '7-12', '29'),
-    ('3.0/6.0%', '5-8/12-15', '31'),
-    ('8.9/6.0%', '6', '48'),
-    ('14.0/16.0%', '16-17', '51'),
-    ('4.0/15.0/10.0%', '9-10/18-20', '57'),
-    ('12.5/11.0%', '(11-12/13-15)(20-21/22-24)', '49'),
-    ('7.0%', '6-9', '31'),
-    ('12.0/10.0/7.0%', '10-11/12-21', '41'),
-    ('10.0/7.5%', '7-11', '36'),
-    ('4.5/6.5%', '12-15/17-20', '43'),
-    ('12.0/10.0%', '16-17', '61'),
-    ('0.3%', '16 [rehit: 4]', '36'),
-    ('4.0-11.0%', '16+', '17/35'),
-    ('8.0/6.0%', '12/15-21/1-10', '40'),
-    ('9.4-15.0%', '20-159', '47-65');
-
-INSERT INTO public.moves AS "joker"
-  ("fighterId", "name", "moveType")
-  VALUES
-    (5, 'jab 1', 'single (arsene)'),
-    (5, 'jab 2', 'single (arsene)'),
-    (5, 'jab 3', 'single (arsene)'),
-    (5, 'rapid jab', null),
-    (5, 'rapid jab finisher', null),
-    (5, 'forward tilt', 'first/second (arsene)'),
-    (5, 'up tilt', 'first/multi/final'),
-    (5, 'down tilt', 'late/early'),
-    (5, 'dash attack', 'first/second'),
-    (5, 'forward smash', 'single'),
-    (5, 'up smash', 'single'),
-    (5, 'down smash', 'front/back'),
-    (5, 'neutral air', 'single (front/back)'),
-    (5, 'forward air', 'first/second'),
-    (5, 'back air', 'single'),
-    (5, 'up air', 'multi/final'),
-    (5, 'down air', 'single (Arsene: first/second'),
-    (5, 'neutral b', 'close/med/far'),
-    (5, 'side b', 'contact/erupt'),
-    (5, 'side b, arsene', 'contact/erupt'),
-    (5, 'up b (grappling hook)', 'recovery'),
-    (5, 'up b (grappling attack)', 'grounded/air');
---     ('down b', 'minimal/additional endlag'),
---     ('down b', 'minimal/additional endlag'),
---     ('down b', 'minimal/additional endlag'),
---     ('down b', 'minimal/additional endlag');
-
 INSERT INTO public.hitboxes AS "bowser"
   ("damage", "activeFrames", "totalFrames")
   VALUES
@@ -317,7 +278,109 @@ INSERT INTO public.hitboxes AS "bowser"
     ('7.0/1.0/2.0%', '6-7/8-11/12-15/16-19../48-51', null),
     ('4.0/20.0/11.0%', '11/37../1-2', '66'),
     ('20.0/11.0%', '31../1-2', null);
+
+INSERT INTO public.hitboxes AS "bowserJr"
+  ("damage", "activeFrames", "totalFrames")
+  VALUES
+    ('2.0%', '3-4', '19'),
+    ('2.0%', '2-3', '21'),
+    ('0.5%', '4 [rehit: 3]', null),
+    ('3.0%', '6-7', '42'),
+    ('6.0/8.0%', '7-9', '31'),
+    ('6.0%', '7-14', '30'),
+    ('2.0/6.0%', '4-6/12-14/23-25', '40'),
+    ('1.8/4.0%', '8/11/14/17/20/25-26', '47'),
+    ('1.0/11.0%', '18/21/24/27/30/35-37', '55'),
+    ('1.0/1.7/1.4/6.0%', '7-8/9/12/15/18/22-23', '53'),
+    ('18.0%', '12-14', '59'),
+    ('6.5/5.5/3.5/8.0/7.0/5.0%', '7-8/(9-13)(14-19)', '43'),
+    ('11.0/9.0/7.0/5.0/2.0%', '10-13(14-17)(18-23)/2', '43'),
+    ('14.0/10.0/8.0%', '12-13(14-18)', '45'),
+    ('10.0/6.5%', '6-9/10-13', '25'),
+    ('1.5/2.5/2.0%', '15-38 [rehit: 3]/39', '56'),
+    ('10.0-20.0/7.0-14.0%', '37-97', '72-132'),
+    ('4.0-7.3%', null, null),
+    ('16.3/10.0%', '3-14', '58'),
+    ('5.0/13.0%', null, null),
+    ('15.0/10.0%', '8-9/13-14', '39'),
+    ('4.0%', '48', '67');
+
+INSERT INTO public.hitboxes AS "byleth"
+  ("damage", "activeFrames", "totalFrames")
+  VALUES
+    ('1.5%', '4-5', '22'),
+    ('2.0%', '4-5', '24'),
+    ('4.5%', '5-7', '34'),
+    ('0.4%', '11 [rehit: 3]', null),
+    ('3.5%', '6-7', '48'),
+    ('11.0%', '8-10', '34'),
+    ('10.0%', '9-15', '34'),
+    ('8.0%', '13-15', '35'),
+    ('9.0/13.0%', '9-11', '44'),
+    ('(12.0/18.0)(11.5/17.25)(13.0/19.5)%', '23-25', '63'),
+    ('2.0/2.0/2.0/10.0%', '13-16/17/21/25-27/28-29', '56'),
+    ('23.0/23.0%', '19-21/29-31', '74'),
+    ('2.5/3.0/1.0%', '6-26 [rehit: 7]/28/2', '51'),
+    ('12.75/8.5%', '12-13', '39'),
+    ('15.0/10.0 (7.5/5.0)%', '13-14 (15-17)', '46'),
+    ('3.0/5.5%', '10-19 [rehit: 5]/20-23', '48'),
+    ('19.0%', '22-24', '59'),
+    ('12.0/29.0%', '45-61/114', '80/160'),
+    ('17.25/11.5%', '20/21/22-24 (21-24)', '65(61)'),
+    ('1.0/3.0/6.5%', '9/10-17/46 (10-17/46)', '46'),
+    ('30.0/8.0 (25.0/6.0)%', '62-67/2-5', '133');
+
+INSERT INTO public.hitboxes AS "inkling"
+  ("damage", "activeFrames", "totalFrames")
+  VALUES
+    ('2.0%', '3-4', '19'),
+    ('2.0%', '2-3', '21'),
+    ('3.5%', '4-5', '29'),
+    ('0.4%', '4 [rehit: 3]', null),
+    ('2.5%', '6', '48'),
+    ('9.0%', '8-10', '34'),
+    ('6.0%', '7-12', '29'),
+    ('3.0/6.0%', '5-8/12-15', '31'),
+    ('8.9/6.0%', '6', '48'),
+    ('14.0/16.0%', '16-17', '51'),
+    ('4.0/15.0/10.0%', '9-10/18-20', '57'),
+    ('12.5/11.0%', '(11-12/13-15)(20-21/22-24)', '49'),
+    ('7.0%', '6-9', '31'),
+    ('12.0/10.0/7.0%', '10-11/12-21', '41'),
+    ('10.0/7.5%', '7-11', '36'),
+    ('4.5/6.5%', '12-15/17-20', '43'),
+    ('12.0/10.0%', '16-17', '61'),
+    ('0.3%', '16 [rehit: 4]', '36'),
+    ('4.0-11.0%', '16+', '17/35'),
+    ('8.0/6.0%', '12/15-21/1-10', '40'),
+    ('9.4-15.0%', '20-159', '47-65');
+
+INSERT INTO public.hitboxes AS "joker"
+  ("damage", "activeFrames", "totalFrames")
+  VALUES
+    ('2.0 (2.7)%', '4-5(4-5)', '23'),
+    ('1.5 (2.2)%', '3-4(3-4)', '23'),
+    ('4.0 (7.1)%', '3-4', '34'),
+    (null, null, null),
+    (null, null, null),
+    ('3.0/5.0 (3.0/10.0)%', '8-9/13-15(8-9/13-19)', '34'),
+    ('4.0/1.0/1.0 (4.0/1.7/3.9)%', '8-9/11-19/20-23', '40'),
+    ('6.0/(13.0)%', '8-9/10-11/12-14', '37'),
+    ('2.0/6.0 (2.0/12.0)%', '6-7/15-21', '45'),
+    ('14.0 (22.0)%', '16-18(16-19)', '47'),
+    ('12.0 (17.0)%', '10-14', '51'),
+    ('12.0 (18.0)%', '12-13/16-17', '51'),
+    ('7.0 (7.0/4.0)%', '12-27', '54'),
+    ('2.0/5.0 (2.0/13.0)%', '7-8/12-14', '47'),
+    ('9.0 (16.0)%', '7-8', '31'),
+    ('0.7/3.0 (0.7/10.0)%', '5-18 [rehit: 3]/20-21', '39'),
+    ('8.0 (8.0/8.0)%', '13-16 (13-16/15-16)', '46'),
+    ('5.0/3.0/1.0%', '12/37/65..', '36/61/92'),
+    ('1.0/2.0% [rehit: 1%]', '16-42/1-19 [rehit: 45]', '52'),
+    ('1.0/2.0% [rehit: 1%]', '16-32 (1-15/16-27) [rehit: 45]', '52'),
+    (null, '20-26', '59/44'),
+    ('11.0/5.0%', '5', '28');
     -- (null, '3+', '52/33'),
     -- (null, '3+', '52/33'),
     -- (null, '3+', '52/33'),
-    -- (null, '3+', '52/33')
+    -- (null, '3+', '52/33');

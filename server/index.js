@@ -1,6 +1,7 @@
 require('dotenv/config');
 const express = require('express');
 const pg = require('pg');
+// eslint-disable-next-line no-unused-vars
 const ClientError = require('./client-error');
 const errorMiddleware = require('./error-middleware');
 const staticMiddleware = require('./static-middleware');
