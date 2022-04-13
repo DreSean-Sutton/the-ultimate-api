@@ -3,6 +3,7 @@ INSERT INTO public.fighters ("fighter", "rosterId", "displayName")
     ('banjo', 73, 'banjo & kazooie'),
     ('bayonetta', 63, 'bayonetta'),
     ('bowser', 14, 'bowser'),
+    ('bowserJr', 58, 'bowser jr'),
     ('inkling', 64, 'inkling'),
     ('joker', 71, 'joker');
 
@@ -14,9 +15,9 @@ INSERT INTO public.moves AS "banjo"
     (1, 'jab 3', 'single'),
     (1, 'rapid jab', 'multi'),
     (1, 'rapid jab finisher', 'single'),
-    (1, 'forward tilt', 'tipper/close'),
+    (1, 'forward tilt', 'sweet/close'),
     (1, 'up tilt', 'single'),
-    (1, 'down tilt', 'tipper/close/late'),
+    (1, 'down tilt', 'sweet/close/late'),
     (1, 'dash attack', 'early/late'),
     (1, 'forward smash', 'single'),
     (1, 'up smash', 'first/multi/final'),
@@ -26,10 +27,10 @@ INSERT INTO public.moves AS "banjo"
     (1, 'back air', 'multi/final'),
     (1, 'up air', 'first/second'),
     (1, 'down air', 'falling/landing'),
-    (1, 'neutral special', 'early/late/latest'),
-    (1, 'side special', 'early/late'),
-    (1, 'up special', '(charged)'),
-    (1, 'down special', 'contact/explosion');
+    (1, 'neutral b', 'early/late/latest'),
+    (1, 'side b', 'early/late'),
+    (1, 'up b', '(charged)'),
+    (1, 'down b', 'contact/explosion');
 
 INSERT INTO public.hitboxes AS "banjo"
   ("damage", "activeFrames", "totalFrames")
@@ -68,25 +69,25 @@ INSERT INTO public.moves AS "bayonetta"
     (2, 'forward tilt 2', 'single'),
     (2, 'forward tilt 3', 'single'),
     (2, 'up tilt', 'single/single/final'),
-    (2, 'down tilt', 'close/tipper'),
+    (2, 'down tilt', 'close/sweet'),
     (2, 'dash attack', 'early/late'),
-    (2, 'forward smash', 'tipper/close'),
+    (2, 'forward smash', 'sweet/close'),
     (2, 'up smash', 'early/late/latest'),
     (2, 'down smash', 'stomp/early/late'),
     (2, 'neutral air', 'early/late/(extended)'),
     (2, 'forward air 1', 'single'),
     (2, 'forward air 2', 'single'),
     (2, 'forward air 3', 'single'),
-    (2, 'back air', 'tipper/close'),
+    (2, 'back air', 'sweet/close'),
     (2, 'up air', 'single/(extended)'),
-    (2, 'down air', 'closest/close/tipper/landing'),
-    (2, 'neutral special', 'multi'),
-    (2, 'neutral special (charged)', 'multi'),
-    -- (2, 'side special (ground)', 'early/late'),
+    (2, 'down air', 'closest/close/sweet/landing'),
+    (2, 'neutral b', 'multi'),
+    (2, 'neutral b (charged)', 'multi'),
+    -- (2, 'side b (ground)', 'early/late'),
     (2, 'afterburner kick, up', 'early/late/latest'),
     (2, 'afterburner kick, down', 'normal/landing'),
-    (2, 'up special', 'first/multi/final'),
-    (2, 'down special', 'counter');
+    (2, 'up b', 'first/multi/final'),
+    (2, 'down b', 'counter');
 
 INSERT INTO public.hitboxes AS "bayonetta"
   ("damage", "activeFrames", "totalFrames")
@@ -172,30 +173,82 @@ INSERT INTO public.hitboxes AS "bowser"
     (null, '20-26', '59/44'),
     ('11.0/5.0%', '5', '28');
 
-INSERT INTO public.moves AS "inkling"
+INSERT INTO public.moves AS "bowserJr"
   ("fighterId", "name", "moveType")
   VALUES
     (4, 'jab 1', 'single'),
     (4, 'jab 2', 'single'),
-    (4, 'jab 3', 'single'),
     (4, 'rapid jab', 'multi'),
     (4, 'rapid jab finisher', 'single'),
-    (4, 'forward tilt', 'single'),
+    (4, 'forward tilt', 'close/sweet'),
     (4, 'up tilt', 'single'),
-    (4, 'down tilt', 'first/second'),
-    (4, 'dash attack', 'early/late'),
-    (4, 'forward smash', 'close/tipper'),
-    (4, 'up smash', 'first/close/far'),
-    (4, 'down smash', '(front)(back)'),
-    (4, 'neutral air', 'single'),
-    (4, 'forward air', 'tipper/early/late'),
-    (4, 'back air', 'tipper/close'),
-    (4, 'up air', 'first/second'),
-    (4, 'down air', 'tipper/close'),
-    (4, 'neutral special', 'multi'),
-    (4, 'side special', 'air/grounded'),
-    (4, 'up special', 'grounded/air/landing'),
-    (4, 'down special', 'charge');
+    (4, 'down tilt', 'multi/final'),
+    (4, 'dash attack', 'multi/final'),
+    (4, 'forward smash', 'multi/final'),
+    (4, 'up smash', 'first/multi/final'),
+    (4, 'down smash', 'single'),
+    (4, 'neutral air', 'close (early/late/latest/far)(early/late/later)'),
+    (4, 'forward air', 'early far/early close (mid far/mid close)(late fair/late close)/landiing'),
+    (4, 'back air', 'early far/late far/close'),
+    (4, 'up air', 'early/late'),
+    (4, 'down air', 'multi/final/landing'),
+    (4, 'neutral b', 'early/late'),
+    (4, 'side b, dash', 'single'),
+    (4, 'side b, spinout', 'early-latest'),
+    (4, 'up b, recovery', 'contact/explosion'),
+    (4, 'up b, hammer', 'front/back'),
+    (4, 'down b', 'explosion');
+
+INSERT INTO public.hitboxes AS "bowserJr"
+  ("damage", "activeFrames", "totalFrames")
+  VALUES
+    ('2.0%', '3-4', '19'),
+    ('2.0%', '2-3', '21'),
+    ('0.5%', '4 [rehit: 3]', null),
+    ('3.0%', '6-7', '42'),
+    ('6.0/8.0%', '7-9', '31'),
+    ('6.0%', '7-14', '30'),
+    ('2.0/6.0%', '4-6/12-14/23-25', '40'),
+    ('1.8/4.0%', '8/11/14/17/20/25-26', '47'),
+    ('1.0/11.0%', '18/21/24/27/30/35-37', '55'),
+    ('1.0/1.7/1.4/6.0%', '7-8/9/12/15/18/22-23', '53'),
+    ('18.0%', '12-14', '59'),
+    ('6.5/5.5/3.5/8.0/7.0/5.0%', '7-8/(9-13)(14-19)', '43'),
+    ('11.0/9.0/7.0/5.0/2.0%', '10-13(14-17)(18-23)/2', '43'),
+    ('14.0/10.0/8.0%', '12-13(14-18)', '45'),
+    ('10.0/6.5%', '6-9/10-13', '25'),
+    ('1.5/2.5/2.0%', '15-38 [rehit: 3]/39', '56'),
+    ('10.0-20.0/7.0-14.0%', '37-97', '72-132'),
+    ('4.0-7.3%', null, null),
+    ('16.3/10.0%', '3-14', '58'),
+    ('5.0/13.0%', null, null),
+    ('15.0/10.0%', '8-9/13-14', '39'),
+    ('4.0%', '48', '67');
+
+INSERT INTO public.moves AS "inkling"
+  ("fighterId", "name", "moveType")
+  VALUES
+    (5, 'jab 1', 'single'),
+    (5, 'jab 2', 'single'),
+    (5, 'jab 3', 'single'),
+    (5, 'rapid jab', 'multi'),
+    (5, 'rapid jab finisher', 'single'),
+    (5, 'forward tilt', 'single'),
+    (5, 'up tilt', 'single'),
+    (5, 'down tilt', 'first/second'),
+    (5, 'dash attack', 'early/late'),
+    (5, 'forward smash', 'close/sweet'),
+    (5, 'up smash', 'first/close/far'),
+    (5, 'down smash', '(front)(back)'),
+    (5, 'neutral air', 'single'),
+    (5, 'forward air', 'sweet/early/late'),
+    (5, 'back air', 'sweet/close'),
+    (5, 'up air', 'first/second'),
+    (5, 'down air', 'sweet/close'),
+    (5, 'neutral b', 'multi'),
+    (5, 'side b', 'air/grounded'),
+    (5, 'up b', 'grounded/air/landing'),
+    (5, 'down b', 'charge');
 
 INSERT INTO public.hitboxes AS "inkling"
   ("damage", "activeFrames", "totalFrames")
@@ -225,28 +278,28 @@ INSERT INTO public.hitboxes AS "inkling"
 INSERT INTO public.moves AS "joker"
   ("fighterId", "name", "moveType")
   VALUES
-    (5, 'jab 1', 'single (arsene)'),
-    (5, 'jab 2', 'single (arsene)'),
-    (5, 'jab 3', 'single (arsene)'),
-    (5, 'rapid jab', null),
-    (5, 'rapid jab finisher', null),
-    (5, 'forward tilt', 'first/second (arsene)'),
-    (5, 'up tilt', 'first/multi/final'),
-    (5, 'down tilt', 'late/early'),
-    (5, 'dash attack', 'first/second'),
-    (5, 'forward smash', 'single'),
-    (5, 'up smash', 'single'),
-    (5, 'down smash', 'front/back'),
-    (5, 'neutral air', 'single (front/back)'),
-    (5, 'forward air', 'first/second'),
-    (5, 'back air', 'single'),
-    (5, 'up air', 'multi/final'),
-    (5, 'down air', 'single (Arsene: first/second'),
-    (5, 'neutral b', 'close/med/far'),
-    (5, 'side b', 'contact/erupt'),
-    (5, 'side b, arsene', 'contact/erupt'),
-    (5, 'up b (grappling hook)', 'recovery'),
-    (5, 'up b (grappling attack)', 'grounded/air');
+    (6, 'jab 1', 'single (arsene)'),
+    (6, 'jab 2', 'single (arsene)'),
+    (6, 'jab 3', 'single (arsene)'),
+    (6, 'rapid jab', null),
+    (6, 'rapid jab finisher', null),
+    (6, 'forward tilt', 'first/second (arsene)'),
+    (6, 'up tilt', 'first/multi/final'),
+    (6, 'down tilt', 'late/early'),
+    (6, 'dash attack', 'first/second'),
+    (6, 'forward smash', 'single'),
+    (6, 'up smash', 'single'),
+    (6, 'down smash', 'front/back'),
+    (6, 'neutral air', 'single (front/back)'),
+    (6, 'forward air', 'first/second'),
+    (6, 'back air', 'single'),
+    (6, 'up air', 'multi/final'),
+    (6, 'down air', 'single (Arsene: first/second'),
+    (6, 'neutral b', 'close/med/far'),
+    (6, 'side b', 'contact/erupt'),
+    (6, 'side b, arsene', 'contact/erupt'),
+    (6, 'up b (grappling hook)', 'recovery'),
+    (6, 'up b (grappling attack)', 'grounded/air');
 --     ('down b', 'minimal/additional endlag'),
 --     ('down b', 'minimal/additional endlag'),
 --     ('down b', 'minimal/additional endlag'),
