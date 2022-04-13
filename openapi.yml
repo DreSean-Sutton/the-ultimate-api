@@ -1,0 +1,55 @@
+# shift+alt+P to preview swagger
+openapi: 3.0.0
+info:
+  title: Dre Sean Sutton's Smash Ultimate API
+  description: >
+    This is *the* Smash Ultimate restful API that offers extensive
+    frame data information on the cast. Values separated by
+     `/`, `()`, and `[]` indicate different hitboxes that are mirrored
+     by the `hitboxType` property. All frame data is copied from the
+     fantastic [Ultimate Frame Data](https://ultimateframedata.com)
+     website, occasionally modified for clarity, and manually input
+     into my database. If you see any mistakes, please let me know on GitHub!
+    </br>
+    </br>
+    [Gitub](https://github.com/DreSean-Sutton/Final-Project)
+  version: v1
+
+servers:
+  - url: http://localhost:3001
+
+paths:
+  /api/fighters:
+    get:
+      tags:
+        - Fighters
+      summary: Returns a list of fighters and their basic information
+      responses:
+        '200':
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    figherId:
+                      type: integer
+                    fighter:
+                      type: string
+                    rosterId:
+                      type: integer
+                    displayName:
+                      type: string
+                example:
+                -
+                  fighterId: 1
+                  fighter: banjo
+                  rosterId: 73
+                  displayName: banjo & kazooie
+                -
+                  fighterId: 2
+                  fighter: bayonetta
+                  rosterId: 63
+                  displayName: bayonetta
