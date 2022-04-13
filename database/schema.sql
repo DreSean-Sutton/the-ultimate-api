@@ -9,7 +9,7 @@ create schema "public";
 CREATE TABLE public.fighters(
   "fighterId" SERIAL NOT NULL,
   "fighter" TEXT NOT NULL,
-  "rosterId" VARCHAR NOT NULL,
+  "rosterId" INT NOT NULL,
   "displayName" TEXT NOT NULL,
   "createdAt" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
   PRIMARY KEY("fighterId")

@@ -5,6 +5,7 @@ const ClientError = require('./client-error');
 const errorMiddleware = require('./error-middleware');
 const staticMiddleware = require('./static-middleware');
 const pathToSwaggerUi = require('swagger-ui-dist').absolutePath();
+const cors = require('cors');
 const db = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: {
@@ -17,6 +18,7 @@ const JSONMiddleware = express.json();
 
 app.use(JSONMiddleware);
 app.use(staticMiddleware);
+app.use(cors());
 app.use(express.static(pathToSwaggerUi));
 
 app.get('/api/fighters', (req, res, next) => {
