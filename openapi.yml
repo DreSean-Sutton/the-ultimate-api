@@ -2,18 +2,18 @@
 openapi: 3.0.0
 info:
   title: Dre Sean Sutton's Smash Ultimate API
-  description:
+  description: >
     This is *the* Smash Ultimate restful API that offers extensive
     frame data information on the cast. Values separated by
      `/`, `()`, and `[]` indicate different hitboxes that are mirrored
      by the `hitboxType` property. All frame data is copied from the
-     fantastic [Ultimate Frame Data](https://ultimateframedata.com),
-     occasionally modified for clarity, and manually input into my database.
-     If you see any mistakes, please let me know on GitHub!
+     fantastic [Ultimate Frame Data](https://ultimateframedata.com)
+     website, occasionally modified for clarity, and manually input
+     into my database. If you see any mistakes, please let me know on GitHub!
     </br>
     </br>
     [Gitub](https://github.com/DreSean-Sutton/Final-Project)
-  version: 1.0.0
+  version: v1
 
 servers:
   - url: http://localhost:3001

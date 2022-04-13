@@ -49,7 +49,7 @@ INSERT INTO public.moves AS "bayonetta"
     (2, 'down air', 'closest/close/sweet/landing'),
     (2, 'neutral b', 'multi'),
     (2, 'neutral b (charged)', 'multi'),
-    -- (2, 'side b (ground)', 'early/late'),
+    (2, 'side b, grounded', 'early/late (second)'),
     (2, 'afterburner kick, up', 'early/late/latest'),
     (2, 'afterburner kick, down', 'normal/landing'),
     (2, 'up b', 'first/multi/final'),
@@ -181,8 +181,7 @@ INSERT INTO public.moves AS "joker"
     (7, 'side b', 'contact/erupt'),
     (7, 'side b, arsene', 'contact/erupt'),
     (7, 'up b (grappling hook)', 'recovery'),
-    (7, 'up b (grappling attack)', 'grounded/air');
---     ('down b', 'minimal/additional endlag'),
---     ('down b', 'minimal/additional endlag'),
---     ('down b', 'minimal/additional endlag'),
---     ('down b', 'minimal/additional endlag');
+    (7, 'up b (grappling attack)', 'grounded/air'),
+    (7, 'down b, rebel''s guard', 'minimal/additional endlag'),
+    (7, 'down b, counterattack', 'counter'),
+    (7, 'down b, arsene', 'multiplier (minimum/maximum)');

@@ -1,12 +1,12 @@
 INSERT INTO public.fighters ("fighter", "rosterId", "displayName")
   VALUES
-    ('banjo', 73, 'banjo & kazooie'),
-    ('bayonetta', 63, 'bayonetta'),
-    ('bowser', 14, 'bowser'),
-    ('bowserJr', 58, 'bowser jr'),
-    ('byleth', 75, 'byleth'),
-    ('inkling', 64, 'inkling'),
-    ('joker', 71, 'joker');
+    ('banjo', 73, 'Banjo & Kazooie'),
+    ('bayonetta', 63, 'Bayonetta'),
+    ('bowser', 14, 'Bowser'),
+    ('bowserJr', 58, 'Bowser Jr'),
+    ('byleth', 75, 'Byleth'),
+    ('inkling', 64, 'Inkling'),
+    ('joker', 71, 'Joker');
 
 INSERT INTO public.moves AS "banjo"
   ("fighterId", "name", "moveType")
@@ -59,7 +59,7 @@ INSERT INTO public.moves AS "bayonetta"
     (2, 'down air', 'closest/close/sweet/landing'),
     (2, 'neutral b', 'multi'),
     (2, 'neutral b (charged)', 'multi'),
-    -- (2, 'side b (ground)', 'early/late'),
+    (2, 'side b, grounded', 'early/late (second)'),
     (2, 'afterburner kick, up', 'early/late/latest'),
     (2, 'afterburner kick, down', 'normal/landing'),
     (2, 'up b', 'first/multi/final'),
@@ -191,11 +191,11 @@ INSERT INTO public.moves AS "joker"
     (7, 'side b', 'contact/erupt'),
     (7, 'side b, arsene', 'contact/erupt'),
     (7, 'up b (grappling hook)', 'recovery'),
-    (7, 'up b (grappling attack)', 'grounded/air');
---     ('down b', 'minimal/additional endlag'),
---     ('down b', 'minimal/additional endlag'),
---     ('down b', 'minimal/additional endlag'),
---     ('down b', 'minimal/additional endlag');
+    (7, 'up b (grappling attack)', 'grounded/air'),
+    (7, 'down b, rebel''s guard', 'minimal/additional endlag'),
+    (7, 'down b, counterattack', 'counter'),
+    (7, 'down b, arsene', 'multiplier (minimum/maximum)');
+
 INSERT INTO public.hitboxes AS "banjo"
   ("damage", "activeFrames", "totalFrames")
   VALUES
@@ -247,7 +247,7 @@ INSERT INTO public.hitboxes AS "bayonetta"
     ('7.0/8.0/9.0/5.0%', '18-35/1-2', '52'),
     ('1.3%', '17-26/22-31/32-41/37-46..', '75'),
     ('2.7%', '42/47/57/62..', '100'),
-    -- ('8.0/7.0/5.0%', '15-16', '82'),
+    ('8.0/7.0 (5.0)%', '15-18/19-39 (1-11/20-24)', '66 (67)'),
     ('6.0/7.0/6.0%', '7-9/10-14/15-19', '31'),
     ('6.5/5.0%', '8-25/1', '43'),
     ('3.0/0.2/3.0%', '6/11-25 [rehit: 3]/27-28', '31'),
@@ -273,7 +273,7 @@ INSERT INTO public.hitboxes AS "bowser"
     ('15.0%', '9-13', '44'),
     ('16.0/2.0%', '17-49/1-6', '77'),
     ('1.8%', '23 [rehit: 7]', '77/31'),
-    ('--', '6', '52'),
+    (null, '6', '52'),
     ('1.0/6/0%', '6-38 [rehit: 5]/39', '81'),
     ('7.0/1.0/2.0%', '6-7/8-11/12-15/16-19../48-51', null),
     ('4.0/20.0/11.0%', '11/37../1-2', '66'),
@@ -379,8 +379,7 @@ INSERT INTO public.hitboxes AS "joker"
     ('1.0/2.0% [rehit: 1%]', '16-42/1-19 [rehit: 45]', '52'),
     ('1.0/2.0% [rehit: 1%]', '16-32 (1-15/16-27) [rehit: 45]', '52'),
     (null, '20-26', '59/44'),
-    ('11.0/5.0%', '5', '28');
-    -- (null, '3+', '52/33'),
-    -- (null, '3+', '52/33'),
-    -- (null, '3+', '52/33'),
-    -- (null, '3+', '52/33');
+    ('11.0/5.0%', '5', '28'),
+    (null, '3+', '52/33'),
+    ('2.4%', '8-9', '30'),
+    ('1.6x (12%/50%)', '4-31', '57');

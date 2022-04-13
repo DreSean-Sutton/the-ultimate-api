@@ -1,9 +1,9 @@
 require('dotenv/config');
 const express = require('express');
 const pg = require('pg');
+const swaggerUi = require('swagger-ui-express');
+const YAML = require('yamljs');
 const db = new pg.Pool({
-  const swaggerUi = require('swagger-ui-express');
-  const YAML = require('yamljs');
   connectionString: process.env.DATABASE_URL,
   ssl: {
     rejectUnauthorized: false
@@ -11,7 +11,7 @@ const db = new pg.Pool({
 });
 
 const app = express();
-const swaggerDocument = YAML.load('./swagger.yaml');
+const swaggerDocument = YAML.load('./openapi.yml');
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.get('/api/fighters', (req, res, next) => {
