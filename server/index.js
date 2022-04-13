@@ -1,8 +1,10 @@
 require('dotenv/config');
 const express = require('express');
 const pg = require('pg');
+const errorMiddleware = require('./error-middleware')
 const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
+
 const db = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: {
@@ -29,6 +31,7 @@ app.get('/api/fighters', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.use(errorMiddleware)
 app.listen(process.env.PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`express server listening on port ${process.env.PORT}`);

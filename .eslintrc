@@ -8,11 +8,6 @@
     "eslint:recommended",
     "standard"
   ],
-  "settings": {
-    "react": {
-      "version": "detect"
-    }
-  },
   "rules": {
     "semi": [
       "error",
