@@ -16,19 +16,44 @@ const app = express();
 const swaggerDocument = YAML.load('./openapi.yml');
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 app.get('/api/fighters', (req, res, next) => {
+  const sql = `
+  SELECT
+  "fighterId", "fighter",
+  "rosterId", "displayName"
+  FROM
+  "fighters"
+  `;
+  db.query(sql)
+  .then(result => {
+    res.status(200).send(result.rows);
+  })
+  .catch(err => next(err));
+});
+
+app.get('/api/fighters/:identifier', (req, res, next) => {
+  console.error('hello!');
+  console.error(req.params.identifier);
   const sql = `
   SELECT
     "fighterId", "fighter",
     "rosterId", "displayName"
   FROM
     "fighters"
+  WHERE
+    "fighter"=$1
+  OR
+    "fighterId"=$1
+  OR
+    "rosterId"=$1
   `;
-  db.query(sql)
+  const params = [req.params.identifier]
+  db.query(sql, params)
     .then(result => {
-      res.status(200).json(result.rows);
+      res.status(200).send(result.rows)
     })
-    .catch(err => next(err));
+    .catch(err => next(err))
 });
 
 app.use(errorMiddleware)
