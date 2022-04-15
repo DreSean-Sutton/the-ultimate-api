@@ -33,7 +33,7 @@ app.get('/api/fighters', (req, res, next) => {
     `;
     const params = [queryStr.fighter];
     if (/\d/g.test(params)) {
-      throw new ClientError(400, `query value can't have a number`);
+      throw new ClientError(400, `fighter name can't have a number`);
     }
     return db.query(sql, params)
     .then(result => {
