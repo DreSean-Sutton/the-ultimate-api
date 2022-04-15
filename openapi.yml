@@ -3,7 +3,7 @@ openapi: 3.0.0
 info:
   title: Dre Sean Sutton's Smash Ultimate API
   description: >
-    This is *the* Smash Ultimate restful API that offers extensive
+    This is *the* Smash Ultimate restful API that offers indepth
     frame data information on the cast. Values separated by
      `/`, `()`, and `[]` indicate different hitboxes that are mirrored
      by the `hitboxType` property. All frame data is copied from the
@@ -23,7 +23,26 @@ paths:
     get:
       tags:
         - Fighters
-      summary: Returns a list of fighters and their basic information
+      summary: Returns one or all fighters and their basic information
+      parameters:
+      - in: query
+        name: rosterId
+        schema:
+          type: integer
+        required: false
+        description: Not required.
+      - in: query
+        name: fighterId
+        schema:
+          type: integer
+        required: false
+        description: Not required.
+      - in: query
+        name: fighter
+        schema:
+          type: string
+        required: false
+        description: Not required.
       responses:
         '200':
           description: ok

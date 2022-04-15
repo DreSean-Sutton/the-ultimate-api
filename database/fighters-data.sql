@@ -1,9 +1,12 @@
 INSERT INTO public.fighters ("fighter", "rosterId", "displayName")
   VALUES
-    ('banjo', 73, 'Banjo & Kazooie'),
-    ('bayonetta', 63, 'Bayonetta'),
-    ('bowser', 14, 'Bowser'),
-    ('bowserJr', 58, 'Bowser Jr'),
-    ('byleth', 75, 'Byleth'),
-    ('inkling', 64, 'Inkling'),
-    ('joker', 71, 'Joker');
+    ('banjo', 80, 'Banjo & Kazooie'),
+    ('bayonetta', 69, 'Bayonetta'),
+    ('bowser', 16, 'Bowser'),
+    ('bowserJr', 63, 'Bowser Jr'),
+    ('byleth', 82, 'Byleth'),
+    ('captainFalcon', 12, 'Captain Falcon'),
+    ('chrom', 29, 'Chrom'),
+    ('cloud', 67, 'Cloud'),
+    ('inkling', 70, 'Inkling'),
+    ('joker', 78, 'Joker');

@@ -43,14 +43,6 @@
   "overrides": [
     {
       "files": [
-        "**/*.jsx"
-      ],
-      "rules": {
-        "react/prop-types": 0
-      }
-    },
-    {
-      "files": [
         "**/*.html"
       ],
       "plugins": [
