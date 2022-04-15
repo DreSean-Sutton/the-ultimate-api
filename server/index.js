@@ -36,7 +36,7 @@ app.get('/api/fighters', (req, res, next) => {
     return db.query(sql, params)
     .then(result => {
     if (result.rows.length === 0)
-    throw new ClientError(401, `${params} doesn't exist in the database`)
+    throw new ClientError(404, `${queryKey} ${params} doesn't exist in the database`)
       res.status(200).send(result.rows[0]);
     })
     .catch(err => next(err));
@@ -56,7 +56,7 @@ app.get('/api/fighters', (req, res, next) => {
     return db.query(sql, params)
       .then(result => {
       if (result.rows.length === 0)
-        throw new ClientError(401, `${params} doesn't exist in the database`)
+        throw new ClientError(404, `${queryKey} ${params} doesn't exist in the database`)
         res.status(200).send(result.rows[0]);
       })
       .catch(err => next(err));
@@ -76,10 +76,14 @@ app.get('/api/fighters', (req, res, next) => {
     return db.query(sql, params)
       .then(result => {
       if (result.rows.length === 0)
-        throw new ClientError(401, `${params} doesn't exist in the database`)
+        throw new ClientError(404, `${queryKey} ${params} doesn't exist in the database`)
         res.status(200).send(result.rows[0]);
       })
       .catch(err => next(err));
+  }
+  console.error(queryKey)
+  if (queryKey.length > 0) {
+    throw new ClientError(400, `${queryKey} is not a valid query key`)
   }
   const sql = `
     SELECT
