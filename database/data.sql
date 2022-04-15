@@ -7,6 +7,7 @@ INSERT INTO public.fighters ("fighter", "rosterId", "displayName")
     ('byleth', 82, 'Byleth'),
     ('captainFalcon', 12, 'Captain Falcon'),
     ('chrom', 29, 'Chrom'),
+    ('cloud', 67, 'Cloud'),
     ('inkling', 70, 'Inkling'),
     ('joker', 78, 'Joker');
 
@@ -185,7 +186,7 @@ INSERT INTO public.moves AS "chrom"
     (7, 'back air', 'single'),
     (7, 'up air', 'single'),
     (7, 'down air', 'sweet/sour'),
-    -- (7, 'neutral b', 'multi'),
+    (7, 'neutral b', '(earliest/latest'),
     (7, 'side b: 1', 'single'),
     (7, 'side b: 2, neutral', 'single'),
     (7, 'side b: 3, neutral', 'single'),
@@ -198,6 +199,35 @@ INSERT INTO public.moves AS "chrom"
     (7, 'up b', 'first/multi/falling/landing'),
     (7, 'down b, counter', 'counter'),
     (7, 'down b, attack', 'counter attack');
+
+INSERT INTO public.moves AS "cloud"
+  ("fighterId", "name", "moveType")
+  VALUES
+    (8, 'jab 1', 'single'),
+    (8, 'jab 2', 'single'),
+    (8, 'jab 3', 'single'),
+    (8, 'forward tilt', 'single'),
+    (8, 'up tilt', 'single'),
+    (8, 'down tilt', 'first/second'),
+    (8, 'dash attack', 'early/late'),
+    (8, 'forward smash', 'first/second/(final close/far'),
+    (8, 'up smash', 'early/late'),
+    (8, 'down smash', 'front/back'),
+    (8, 'neutral air', 'single'),
+    (8, 'forward air', 'early/tipper/late'),
+    (8, 'back air', 'single'),
+    (8, 'up air', 'early/late'),
+    (8, 'down air', 'early/late'),
+    (8, 'neutral b', 'early/late (air early/late)'),
+    (8, 'neutral b, limit', 'first/multi/final'),
+    (8, 'side b, hit 1', 'single'),
+    (8, 'side b, hit 2', 'single'),
+    (8, 'side b, hit 3', 'first/second/third'),
+    (8, 'side b, limit', 'hits 1-2/3-4/final'),
+    (8, 'up b, rising', 'first/second'),
+    (8, 'up b, falling', 'first/landing'),
+    (8, 'up b, limit', 'falling/landing'),
+    (8, 'down b, charged', 'ground (air)');
 
 INSERT INTO public.moves AS "inkling"
   ("fighterId", "name", "moveType")
@@ -426,7 +456,7 @@ INSERT INTO public.hitboxes AS "chrom"
     ('10.9%', '8-10', '35'),
     ('7.6%', '5-12', '41'),
     ('14.2/11.875%', '16-17', '51'),
-    -- ('8.0-50.0%', '11', '44-283'),
+    ('8.0-50.0%', '(21/260) 10-14 after release', '44-283'),
     ('2.8%', '9-11', '39/29'),
     ('2.8%', '5-7', '38'),
     ('3.8%', '4-6', '43'),
@@ -439,6 +469,35 @@ INSERT INTO public.hitboxes AS "chrom"
     ('6.0/1.5/6.0/6.0%', '10-11/39-47 [rehit: 7]/54+/1-4', null),
     (null, '8-29', '67'),
     (null, '4-5', '40');
+
+INSERT INTO public.hitboxes AS "cloud"
+  ("damage", "activeFrames", "totalFrames")
+  VALUES
+    ('2.5%', '4-5', '29'),
+    ('2.0%', '5-6', '32'),
+    ('3.5%', '6-7', '37'),
+    ('11.0%', '8-10', '34'),
+    ('8.0%', '6-9', '32'),
+    ('7.0%', '7-17', '40'),
+    ('11.0/8.0%', '9-13/14-18', '45'),
+    ('3.0/2.0/(13.0/12.0)%', '19/24/28', '66'),
+    ('13.0/8.0%', '12-14/15-16', '45'),
+    ('3.0/11.0%', '8-9/21-23', '49'),
+    ('8.0%', '5-15', '38'),
+    ('13.0/14.0/11.0%', '18-19/(20-25)', '53'),
+    ('13.0%', '11-12', '42'),
+    ('11.0/8.0%', '8-9/10-13', '44'),
+    ('13.0/8.0%', '11-13/14-39', '64'),
+    ('8.0/6.0 (6.4/4.8)%', '18-68', '53 (60)'),
+    ('6.0/2.0/3.0 (4.8/1.6/2.4)%', '16-63 [impact: 1/7/13/19/25/28-29]', '60'),
+    ('4.0%', '10-11', '40'),
+    ('3.0%', '2-3', '31'),
+    ('3.0/3.0/6.0%', '2-3/11-12/25-26', '55'),
+    ('5.0/3.0/10.0%', '10-11/15-16/21-22/28/38-39', '60'),
+    ('3.0/4.0%', '7/10-15', null),
+    ('6.0/7.0%', '12..', null),
+    ('4.5/3.5%', '7-16/1-3', null),
+    ('1.0%', '12-14/22-26 (14-17/25-29)', '84 (87)');
 
 INSERT INTO public.hitboxes AS "inkling"
   ("damage", "activeFrames", "totalFrames")
