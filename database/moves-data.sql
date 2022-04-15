@@ -1,5 +1,5 @@
 INSERT INTO public.moves AS "banjo"
-  ("fighter_id", "name", "move_type")
+  ("fighterId", "name", "moveType")
   VALUES
     (1, 'jab 1', 'single'),
     (1, 'jab 2', 'single'),
@@ -24,7 +24,7 @@ INSERT INTO public.moves AS "banjo"
     (1, 'down b', 'contact/explosion');
 
 INSERT INTO public.moves AS "bayonetta"
-  ("fighter_id", "name", "move_type")
+  ("fighterId", "name", "moveType")
   VALUES
     (2, 'jab 1', 'single'),
     (2, 'jab 2', 'single'),
@@ -56,7 +56,7 @@ INSERT INTO public.moves AS "bayonetta"
     (2, 'down b', 'counter');
 
 INSERT INTO public.moves AS "bowser"
-  ("fighter_id", "name", "move_type")
+  ("fighterId", "name", "moveType")
   VALUES
     (3, 'jab 1', 'single'),
     (3, 'jab 2', 'single'),
@@ -80,7 +80,7 @@ INSERT INTO public.moves AS "bowser"
     (3, 'down b, air', 'falling/landing');
 
 INSERT INTO public.moves AS "bowserJr"
-  ("fighter_id", "name", "move_type")
+  ("fighterId", "name", "moveType")
   VALUES
     (4, 'jab 1', 'single'),
     (4, 'jab 2', 'single'),
@@ -106,7 +106,7 @@ INSERT INTO public.moves AS "bowserJr"
     (4, 'down b', 'explosion');
 
 INSERT INTO public.moves AS "byleth"
-  ("fighter_id", "name", "move_type")
+  ("fighterId", "name", "moveType")
   VALUES
     (5, 'jab 1', 'single'),
     (5, 'jab 2', 'single'),
@@ -131,7 +131,7 @@ INSERT INTO public.moves AS "byleth"
     (5, 'down b', 'single/shockwave (air)');
 
 INSERT INTO public.moves AS "captainFalcon"
-  ("fighter_id", "name", "move_type")
+  ("fighterId", "name", "moveType")
   VALUES
     (6, 'jab 1', 'single'),
     (6, 'jab 2', 'single'),
@@ -158,7 +158,7 @@ INSERT INTO public.moves AS "captainFalcon"
     (6, 'down b', 'early/late/latest/landing');
 
 INSERT INTO public.moves AS "chrom"
-  ("fighter_id", "name", "move_type")
+  ("fighterId", "name", "moveType")
   VALUES
     (7, 'jab', 'single'),
     (7, 'forward tilt', 'single'),
@@ -188,7 +188,7 @@ INSERT INTO public.moves AS "chrom"
     (7, 'down b, attack', 'counter attack');
 
 INSERT INTO public.moves AS "inkling"
-  ("fighter_id", "name", "move_type")
+  ("fighterId", "name", "moveType")
   VALUES
     (8, 'jab 1', 'single'),
     (8, 'jab 2', 'single'),
@@ -213,7 +213,7 @@ INSERT INTO public.moves AS "inkling"
     (8, 'down b', 'charge');
 
 INSERT INTO public.moves AS "joker"
-  ("fighter_id", "name", "move_type")
+  ("fighterId", "name", "moveType")
   VALUES
     (9, 'jab 1', 'single (arsene)'),
     (9, 'jab 2', 'single (arsene)'),

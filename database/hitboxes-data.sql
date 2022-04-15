@@ -1,5 +1,5 @@
 INSERT INTO public.hitboxes AS "banjo"
-  ("damage", "active_frames", "total_frames")
+  ("damage", "activeFrames", "totalFrames")
   VALUES
     ('2.2%', '4-6', '27'),
     ('2.2%', '4-6', '24'),
@@ -24,7 +24,7 @@ INSERT INTO public.hitboxes AS "banjo"
     ('0.5/8.5%', '10-143', '44');
 
 INSERT INTO public.hitboxes AS "bayonetta"
-  ("damage", "active_frames", "total_frames")
+  ("damage", "activeFrames", "totalFrames")
   VALUES
     ('1.4%', '9-12', '31'),
     ('1.4%', '7-8', '31'),
@@ -56,7 +56,7 @@ INSERT INTO public.hitboxes AS "bayonetta"
     (null, '8-27', '66');
 
 INSERT INTO public.hitboxes AS "bowser"
-  ("damage", "active_frames", "total_frames")
+  ("damage", "activeFrames", "totalFrames")
   VALUES
     ('4.0%', '7-8', '25'),
     ('7.0%', '9-11', '25'),
@@ -80,7 +80,7 @@ INSERT INTO public.hitboxes AS "bowser"
     ('20.0/11.0%', '31../1-2', null);
 
 INSERT INTO public.hitboxes AS "bowserJr"
-  ("damage", "active_frames", "total_frames")
+  ("damage", "activeFrames", "totalFrames")
   VALUES
     ('2.0%', '3-4', '19'),
     ('2.0%', '2-3', '21'),
@@ -106,7 +106,7 @@ INSERT INTO public.hitboxes AS "bowserJr"
     ('4.0%', '48', '67');
 
 INSERT INTO public.hitboxes AS "byleth"
-  ("damage", "active_frames", "total_frames")
+  ("damage", "activeFrames", "totalFrames")
   VALUES
     ('1.5%', '4-5', '22'),
     ('2.0%', '4-5', '24'),
@@ -131,7 +131,7 @@ INSERT INTO public.hitboxes AS "byleth"
     ('30.0/8.0 (25.0/6.0)%', '62-67/2-5', '133');
 
 INSERT INTO public.hitboxes AS "captainFalcon"
-  ("damage", "active_frames", "total_frames")
+  ("damage", "activeFrames", "totalFrames")
   VALUES
     ('1.5%', '3', '17'),
     ('1.5%', '5', '18'),
@@ -158,7 +158,7 @@ INSERT INTO public.hitboxes AS "captainFalcon"
     ('15.0/12.0/9/0/9.0%', '14-18/19-24/25-27/1-2', '56');
 
 INSERT INTO public.hitboxes AS "chrom"
-  ("damage", "active_frames", "total_frames")
+  ("damage", "activeFrames", "totalFrames")
   VALUES
     ('6.5%', '3-4', '19'),
     ('10.9%', '8-10', '33'),
@@ -188,7 +188,7 @@ INSERT INTO public.hitboxes AS "chrom"
     (null, '4-5', '40');
 
 INSERT INTO public.hitboxes AS "inkling"
-  ("damage", "active_frames", "total_frames")
+  ("damage", "activeFrames", "totalFrames")
   VALUES
     ('2.0%', '3-4', '19'),
     ('2.0%', '2-3', '21'),
@@ -213,7 +213,7 @@ INSERT INTO public.hitboxes AS "inkling"
     ('9.4-15.0%', '20-159', '47-65');
 
 INSERT INTO public.hitboxes AS "joker"
-  ("damage", "active_frames", "total_frames")
+  ("damage", "activeFrames", "totalFrames")
   VALUES
     ('2.0 (2.7)%', '4-5(4-5)', '23'),
     ('1.5 (2.2)%', '3-4(3-4)', '23'),

@@ -24,35 +24,39 @@ app.get('/api/fighters', (req, res, next) => {
   if (queryStr.fighter) {
     const sql = `
     SELECT
-      fighter_id, fighter,
-      roster_id, display_name
+      "fighterId", fighter,
+      "rosterId", "displayName"
     FROM
       fighters
     WHERE
       fighter=$1
     `;
     const params = [queryStr.fighter];
-    console.log(params);
+    if (/\d/g.test(params)) {
+      throw new ClientError(400, `query value can't have a number`);
+    }
     return db.query(sql, params)
     .then(result => {
     if (result.rows.length === 0)
-    throw new ClientError(404, `${queryKey} ${params} doesn't exist in the database`)
+    throw new ClientError(404, `${queryKey} named ${params} doesn't exist in the database`)
       res.status(200).send(result.rows[0]);
     })
     .catch(err => next(err));
   }
-  if (queryStr.fighter_id) {
+  if (queryStr.fighterId) {
     const sql = `
     SELECT
-      fighter_id, fighter,
-      roster_id, display_name
+      "fighterId", fighter,
+      "rosterId", "displayName"
     FROM
       fighters
     WHERE
-      fighter_id=$1
+      "fighterId"=$1
     `;
-    const params = [queryStr.fighter_id];
-    console.log(params);
+    const params = [queryStr.fighterId];
+    if (/[A-Za-z]/gi.test(params)) {
+      throw new ClientError(400, `fighterId can't contain any letters`);
+    }
     return db.query(sql, params)
       .then(result => {
       if (result.rows.length === 0)
@@ -61,18 +65,20 @@ app.get('/api/fighters', (req, res, next) => {
       })
       .catch(err => next(err));
   }
-  if (queryStr.roster_id) {
+  if (queryStr.rosterId) {
     const sql = `
     SELECT
-      fighter_id, fighter,
-      roster_id, display_name
+      "fighterId", fighter,
+      "rosterId", "displayName"
     FROM
       fighters
     WHERE
-      roster_id=$1
+      "rosterId"=$1
     `;
-    const params = [queryStr.roster_id];
-    console.log(params);
+    const params = [queryStr.rosterId];
+    if (/[A-Za-z]/gi.test(params)) {
+      throw new ClientError(400, `rosterId can't contain any letters`);
+    }
     return db.query(sql, params)
       .then(result => {
       if (result.rows.length === 0)
@@ -81,14 +87,13 @@ app.get('/api/fighters', (req, res, next) => {
       })
       .catch(err => next(err));
   }
-  console.error(queryKey)
   if (queryKey.length > 0) {
     throw new ClientError(400, `${queryKey} is not a valid query key`)
   }
   const sql = `
     SELECT
-      fighter_id, fighter,
-      roster_id, display_name
+      "fighterId", fighter,
+      "rosterId", "displayName"
     FROM
       fighters
     `;
