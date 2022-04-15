@@ -104,6 +104,24 @@ app.get('/api/fighters', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/fighters/data', (req, res, next) => {
+  const sql = `
+  SELECT
+    "activeFrames", "damage", "displayName",
+    fighter, "fighterId", "moveType",
+    "name", "rosterId",
+    "totalFrames"
+  FROM
+    fighters
+  JOIN "moves" USING ("fighterId")
+  JOIN "hitboxes" USING ("moveId")
+  ORDER BY "moveId"
+  `;
+  return db.query(sql)
+  .then(result => res.status(200).send(result.rows))
+  .catch(err => next(err));
+});
+
 app.use(errorMiddleware)
 app.listen(process.env.PORT, () => {
   // eslint-disable-next-line no-console
