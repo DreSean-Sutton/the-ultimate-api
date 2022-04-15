@@ -5,15 +5,9 @@
     "browser": true
   },
   "extends": [
-    "plugin:react/recommended",
     "eslint:recommended",
     "standard"
   ],
-  "settings": {
-    "react": {
-      "version": "detect"
-    }
-  },
   "rules": {
     "semi": [
       "error",
@@ -47,14 +41,6 @@
     ]
   },
   "overrides": [
-    {
-      "files": [
-        "**/*.jsx"
-      ],
-      "rules": {
-        "react/prop-types": 0
-      }
-    },
     {
       "files": [
         "**/*.html"

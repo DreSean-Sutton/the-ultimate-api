@@ -1,7 +1,8 @@
 require('dotenv/config');
 const express = require('express');
 const pg = require('pg');
-const errorMiddleware = require('./error-middleware')
+const ClientError = require('./client-error');
+const errorMiddleware = require('./error-middleware');
 const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
 
@@ -18,42 +19,80 @@ const swaggerDocument = YAML.load('./openapi.yml');
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.get('/api/fighters', (req, res, next) => {
-  const sql = `
-  SELECT
-  "fighterId", "fighter",
-  "rosterId", "displayName"
-  FROM
-  "fighters"
-  `;
-  db.query(sql)
-  .then(result => {
-    res.status(200).send(result.rows);
-  })
-  .catch(err => next(err));
-});
-
-app.get('/api/fighters/:identifier', (req, res, next) => {
-  console.error('hello!');
-  console.error(req.params.identifier);
-  const sql = `
-  SELECT
-    "fighterId", "fighter",
-    "rosterId", "displayName"
-  FROM
-    "fighters"
-  WHERE
-    "fighter"=$1
-  OR
-    "fighterId"=$1
-  OR
-    "rosterId"=$1
-  `;
-  const params = [req.params.identifier]
-  db.query(sql, params)
+  const queryStr = req.query;
+  const queryKey = Object.keys(queryStr)
+  if (queryStr.fighter) {
+    const sql = `
+    SELECT
+      fighter_id, fighter,
+      roster_id, display_name
+    FROM
+      fighters
+    WHERE
+      fighter=$1
+    `;
+    const params = [queryStr.fighter];
+    console.log(params);
+    return db.query(sql, params)
     .then(result => {
-      res.status(200).send(result.rows)
+    if (result.rows.length === 0)
+    throw new ClientError(401, `${params} doesn't exist in the database`)
+      res.status(200).send(result.rows[0]);
     })
-    .catch(err => next(err))
+    .catch(err => next(err));
+  }
+  if (queryStr.fighter_id) {
+    const sql = `
+    SELECT
+      fighter_id, fighter,
+      roster_id, display_name
+    FROM
+      fighters
+    WHERE
+      fighter_id=$1
+    `;
+    const params = [queryStr.fighter_id];
+    console.log(params);
+    return db.query(sql, params)
+      .then(result => {
+      if (result.rows.length === 0)
+        throw new ClientError(401, `${params} doesn't exist in the database`)
+        res.status(200).send(result.rows[0]);
+      })
+      .catch(err => next(err));
+  }
+  if (queryStr.roster_id) {
+    const sql = `
+    SELECT
+      fighter_id, fighter,
+      roster_id, display_name
+    FROM
+      fighters
+    WHERE
+      roster_id=$1
+    `;
+    const params = [queryStr.roster_id];
+    console.log(params);
+    return db.query(sql, params)
+      .then(result => {
+      if (result.rows.length === 0)
+        throw new ClientError(401, `${params} doesn't exist in the database`)
+        res.status(200).send(result.rows[0]);
+      })
+      .catch(err => next(err));
+  }
+  const sql = `
+    SELECT
+      fighter_id, fighter,
+      roster_id, display_name
+    FROM
+      fighters
+    `;
+  return db.query(sql)
+    .then(result => {
+      res.status(200).send(result.rows);
+    })
+    .catch(err => next(err));
 });
 
 app.use(errorMiddleware)

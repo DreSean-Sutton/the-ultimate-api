@@ -1,4 +1,4 @@
-INSERT INTO public.fighters ("fighter", "rosterId", "displayName")
+INSERT INTO public.fighters ("fighter", "roster_id", "display_name")
   VALUES
     ('banjo', 80, 'Banjo & Kazooie'),
     ('bayonetta', 69, 'Bayonetta'),
