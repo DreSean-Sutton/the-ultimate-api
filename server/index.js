@@ -3,6 +3,7 @@ const express = require('express');
 const pg = require('pg');
 const ClientError = require('./client-error');
 const errorMiddleware = require('./error-middleware');
+const sqlQueries = require('./sql-queries');
 const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
 
@@ -23,11 +24,7 @@ app.get('/api/fighters', (req, res, next) => {
   const queryKey = Object.keys(queryStr)
   if (queryStr.fighter) {
     const sql = `
-    SELECT
-      "fighterId", fighter,
-      "rosterId", "displayName"
-    FROM
-      fighters
+    ${sqlQueries.getFighters()}
     WHERE
       fighter=$1
     `;
@@ -45,11 +42,7 @@ app.get('/api/fighters', (req, res, next) => {
   }
   if (queryStr.fighterId) {
     const sql = `
-    SELECT
-      "fighterId", fighter,
-      "rosterId", "displayName"
-    FROM
-      fighters
+    ${sqlQueries.getFighters()}
     WHERE
       "fighterId"=$1
     `;
@@ -67,11 +60,7 @@ app.get('/api/fighters', (req, res, next) => {
   }
   if (queryStr.rosterId) {
     const sql = `
-    SELECT
-      "fighterId", fighter,
-      "rosterId", "displayName"
-    FROM
-      fighters
+    ${sqlQueries.getFighters()}
     WHERE
       "rosterId"=$1
     `;
@@ -87,16 +76,22 @@ app.get('/api/fighters', (req, res, next) => {
       })
       .catch(err => next(err));
   }
+  if (queryStr.orderBy) {
+    const sql = `
+    ${sqlQueries.getFighters()}
+    ORDER BY
+    "rosterId"
+    `;
+    return db.query(sql)
+    .then(result => {
+      res.status(200).send(result.rows);
+    })
+    .catch(err => next(err));
+  }
   if (queryKey.length > 0) {
     throw new ClientError(400, `${queryKey} is not a valid query key`)
   }
-  const sql = `
-    SELECT
-      "fighterId", fighter,
-      "rosterId", "displayName"
-    FROM
-      fighters
-    `;
+  const sql = `${sqlQueries.getFighters()}`;
   return db.query(sql)
     .then(result => {
       res.status(200).send(result.rows);
@@ -105,21 +100,87 @@ app.get('/api/fighters', (req, res, next) => {
 });
 
 app.get('/api/fighters/data', (req, res, next) => {
+  const queryStr = req.query;
+  const queryKey = Object.keys(queryStr);
+  if (queryStr.fighter) {
+    const sql = `
+    ${sqlQueries.getFightersData()}
+    WHERE
+      fighter=$1
+    ORDER BY "moveId"
+    `;
+    const params = [queryStr.fighter];
+    if (/\d/g.test(params)) {
+      throw new ClientError(400, `fighter name can't have a number`);
+    }
+    return db.query(sql, params)
+      .then(result => {
+        if (result.rows.length === 0)
+          throw new ClientError(404, `${queryKey} named ${params} doesn't exist in the database`)
+        res.status(200).send(result.rows);
+      })
+      .catch(err => next(err));
+  }
+  if (queryStr.fighterId) {
+    const sql = `
+    ${sqlQueries.getFightersData()}
+    WHERE
+      "fighterId"=$1
+    ORDER BY "moveId"
+    `;
+    const params = [queryStr.fighterId];
+    if (/[A-Za-z]/gi.test(params)) {
+      throw new ClientError(400, `fighterId can't contain any letters`);
+    }
+    return db.query(sql, params)
+      .then(result => {
+        if (result.rows.length === 0)
+          throw new ClientError(404, `${queryKey} ${params} doesn't exist in the database`)
+        res.status(200).send(result.rows);
+      })
+      .catch(err => next(err));
+  }
+  if (queryStr.rosterId) {
+    const sql = `
+    ${sqlQueries.getFightersData()}
+    WHERE
+      "rosterId"=$1
+    ORDER BY "moveId"
+    `;
+    const params = [queryStr.rosterId];
+    if (/[A-Za-z]/gi.test(params)) {
+      throw new ClientError(400, `rosterId can't contain any letters`);
+    }
+    return db.query(sql, params)
+      .then(result => {
+        if (result.rows.length === 0)
+          throw new ClientError(404, `${queryKey} ${params} doesn't exist in the database`)
+        res.status(200).send(result.rows);
+      })
+      .catch(err => next(err));
+  }
+  if (queryStr.orderBy) {
+    const sql = `
+    ${sqlQueries.getFightersData()}
+    ORDER BY
+    "rosterId", "moveId"
+    `;
+    return db.query(sql)
+      .then(result => {
+        res.status(200).send(result.rows);
+      })
+      .catch(err => next(err));
+  }
+  if (queryKey.length > 0) {
+    throw new ClientError(400, `${queryKey} is not a valid query key`)
+  }
   const sql = `
-  SELECT
-    "activeFrames", "damage", "displayName",
-    fighter, "fighterId", "moveType",
-    "name", "rosterId",
-    "totalFrames"
-  FROM
-    fighters
-  JOIN "moves" USING ("fighterId")
-  JOIN "hitboxes" USING ("moveId")
+  ${sqlQueries.getFightersData()}
   ORDER BY "moveId"
   `;
   return db.query(sql)
-  .then(result => res.status(200).send(result.rows))
-  .catch(err => next(err));
+    .then(result => res.status(200).send(result.rows))
+    .catch(err => next(err));
 });
 
 app.use(errorMiddleware)

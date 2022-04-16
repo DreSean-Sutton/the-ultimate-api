@@ -13,36 +13,35 @@ info:
     </br>
     </br>
     [Gitub](https://github.com/DreSean-Sutton/Final-Project)
-  version: v1
-
-servers:
-  - url: http://localhost:3001
+  version: v2
 
 paths:
   /api/fighters:
     get:
       tags:
         - Fighters
-      summary: Returns one or all fighters and their basic information
+      summary: Returns all fighters and their basic information. Use a parameter to specify a single character
       parameters:
-      - in: query
-        name: rosterId
-        schema:
-          type: integer
-        required: false
-        description: Not required.
-      - in: query
-        name: fighterId
-        schema:
-          type: integer
-        required: false
-        description: Not required.
       - in: query
         name: fighter
         schema:
           type: string
         required: false
-        description: Not required.
+      - in: query
+        name: fighterId
+        schema:
+          type: integer
+        required: false
+      - in: query
+        name: rosterId
+        schema:
+          type: integer
+        required: false
+      - in: query
+        name: orderBy
+        schema:
+          type: string
+        required: false
       responses:
         '200':
           description: OK
@@ -76,7 +75,28 @@ paths:
     get:
       tags:
         - Fighters
-      summary: Returns all frame data for all characters
+      summary: Returns frame data for all characters. Use a parameter to specify a single characters
+      parameters:
+      - in: query
+        name: fighter
+        schema:
+          type: string
+        required: false
+      - in: query
+        name: fighterId
+        schema:
+          type: integer
+        required: false
+      - in: query
+        name: rosterId
+        schema:
+          type: integer
+        required: false
+      - in: query
+        name: orderBy
+        schema:
+          type: string
+        required: false
       responses:
         '200':
           description:
@@ -98,7 +118,7 @@ paths:
                       type: string
                     fighterId:
                       type: integer
-                    moveType:
+                    hitboxType:
                       type: string
                     name:
                       type: string
@@ -123,7 +143,7 @@ paths:
                   displayName: Bayonetta
                   fighter: bayonetta
                   fighterId: 2
-                  moveType: "counter"
+                  hitboxType: "counter"
                   name: "down b"
                   rosterId: 69
                   totalFrames: "66"
