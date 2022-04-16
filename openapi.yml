@@ -45,7 +45,7 @@ paths:
         description: Not required.
       responses:
         '200':
-          description: ok
+          description: OK
           content:
             application/json:
               schema:
@@ -72,3 +72,58 @@ paths:
                   fighter: bayonetta
                   rosterId: 63
                   displayName: bayonetta
+  /api/fighters/data:
+    get:
+      tags:
+        - Fighters
+      summary: Returns all frame data for all characters
+      responses:
+        '200':
+          description:
+            OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    activeFrames:
+                      type: string
+                    damage:
+                      type: string
+                    displayName:
+                      type: string
+                    fighter:
+                      type: string
+                    fighterId:
+                      type: integer
+                    moveType:
+                      type: string
+                    name:
+                      type: string
+                    rosterId:
+                      type: integer
+                    totalFrames:
+                      type: string
+                example:
+                -
+                  activeFrames: "6/11-25 [rehit: 3]/27-28"
+                  damage: "3.0/0.2/3.0%"
+                  displayName: Bayonetta
+                  fighter: bayonetta
+                  fighterId: 2
+                  moveType: "first/multi/final"
+                  name: "up b"
+                  rosterId: 69
+                  totalFrames: "31"
+                -
+                  activeFrames: "8-27"
+                  damage: null
+                  displayName: Bayonetta
+                  fighter: bayonetta
+                  fighterId: 2
+                  moveType: "counter"
+                  name: "down b"
+                  rosterId: 69
+                  totalFrames: "66"
