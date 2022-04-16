@@ -15,9 +15,6 @@ info:
     [Gitub](https://github.com/DreSean-Sutton/Final-Project)
   version: v1
 
-servers:
-  - url: http://localhost:3001
-
 paths:
   /api/fighters:
     get:
@@ -30,19 +27,16 @@ paths:
         schema:
           type: string
         required: false
-        description: Not required.
       - in: query
         name: fighterId
         schema:
           type: integer
         required: false
-        description: Not required.
       - in: query
         name: rosterId
         schema:
           type: integer
         required: false
-        description: Not required.
       responses:
         '200':
           description: OK
@@ -83,19 +77,16 @@ paths:
         schema:
           type: string
         required: false
-        description: Not required.
       - in: query
         name: fighterId
         schema:
           type: integer
         required: false
-        description: Not required.
       - in: query
         name: rosterId
         schema:
           type: integer
         required: false
-        description: Not required.
       responses:
         '200':
           description:
