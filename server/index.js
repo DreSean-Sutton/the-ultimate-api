@@ -3,6 +3,7 @@ const express = require('express');
 const pg = require('pg');
 const ClientError = require('./client-error');
 const errorMiddleware = require('./error-middleware');
+const sqlQueries = require('./sql-queries')
 const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
 
@@ -20,18 +21,15 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.get('/api/fighters', (req, res, next) => {
   const queryStr = req.query;
-  const queryKey = Object.keys(queryStr);
+  const queryKey = Object.keys(queryStr)
   if (queryStr.fighter) {
     const sql = `
-    SELECT
-      "fighterId", fighter,
-      "rosterId", "displayName"
-    FROM
-      fighters
+    ${sqlQueries.getFighters()}
     WHERE
       fighter=$1
     `;
     const params = [queryStr.fighter];
+    console.error(params)
     if (/\d/g.test(params)) {
       throw new ClientError(400, `fighter name can't have a number`);
     }
@@ -45,11 +43,7 @@ app.get('/api/fighters', (req, res, next) => {
   }
   if (queryStr.fighterId) {
     const sql = `
-    SELECT
-      "fighterId", fighter,
-      "rosterId", "displayName"
-    FROM
-      fighters
+    ${sqlQueries.getFighters()}
     WHERE
       "fighterId"=$1
     `;
@@ -67,11 +61,7 @@ app.get('/api/fighters', (req, res, next) => {
   }
   if (queryStr.rosterId) {
     const sql = `
-    SELECT
-      "fighterId", fighter,
-      "rosterId", "displayName"
-    FROM
-      fighters
+    ${sqlQueries.getFighters()}
     WHERE
       "rosterId"=$1
     `;
@@ -90,13 +80,7 @@ app.get('/api/fighters', (req, res, next) => {
   if (queryKey.length > 0) {
     throw new ClientError(400, `${queryKey} is not a valid query key`)
   }
-  const sql = `
-    SELECT
-      "fighterId", fighter,
-      "rosterId", "displayName"
-    FROM
-      fighters
-    `;
+  const sql = `${sqlQueries.getFighters()}`;
   return db.query(sql)
     .then(result => {
       res.status(200).send(result.rows);
@@ -109,15 +93,7 @@ app.get('/api/fighters/data', (req, res, next) => {
   const queryKey = Object.keys(queryStr);
   if (queryStr.fighter) {
     const sql = `
-    SELECT
-    "activeFrames", "damage", "displayName",
-    fighter, "fighterId", "moveType",
-    "name", "rosterId",
-    "totalFrames"
-    FROM
-      fighters
-    JOIN "moves" USING ("fighterId")
-    JOIN "hitboxes" USING ("moveId")
+    ${sqlQueries.getFightersData()}
     WHERE
       fighter=$1
     ORDER BY "moveId"
@@ -136,15 +112,7 @@ app.get('/api/fighters/data', (req, res, next) => {
   }
   if (queryStr.fighterId) {
     const sql = `
-    SELECT
-    "activeFrames", "damage", "displayName",
-    fighter, "fighterId", "moveType",
-    "name", "rosterId",
-    "totalFrames"
-    FROM
-      fighters
-    JOIN "moves" USING ("fighterId")
-    JOIN "hitboxes" USING ("moveId")
+    ${sqlQueries.getFightersData()}
     WHERE
       "fighterId"=$1
     ORDER BY "moveId"
@@ -163,15 +131,7 @@ app.get('/api/fighters/data', (req, res, next) => {
   }
   if (queryStr.rosterId) {
     const sql = `
-    SELECT
-    "activeFrames", "damage", "displayName",
-    fighter, "fighterId", "moveType",
-    "name", "rosterId",
-    "totalFrames"
-    FROM
-      fighters
-    JOIN "moves" USING ("fighterId")
-    JOIN "hitboxes" USING ("moveId")
+    ${sqlQueries.getFightersData()}
     WHERE
       "rosterId"=$1
     ORDER BY "moveId"
@@ -192,20 +152,12 @@ app.get('/api/fighters/data', (req, res, next) => {
     throw new ClientError(400, `${queryKey} is not a valid query key`)
   }
   const sql = `
-  SELECT
-    "activeFrames", "damage", "displayName",
-    fighter, "fighterId", "moveType",
-    "name", "rosterId",
-    "totalFrames"
-  FROM
-    fighters
-  JOIN "moves" USING ("fighterId")
-  JOIN "hitboxes" USING ("moveId")
+  ${sqlQueries.getFightersData()}
   ORDER BY "moveId"
   `;
   return db.query(sql)
-  .then(result => res.status(200).send(result.rows))
-  .catch(err => next(err));
+    .then(result => res.status(200).send(result.rows))
+    .catch(err => next(err));
 });
 
 app.use(errorMiddleware)
