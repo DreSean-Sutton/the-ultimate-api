@@ -8,5 +8,6 @@ INSERT INTO public.fighters ("fighter", "rosterId", "displayName")
     ('captainFalcon', 12, 'Captain Falcon'),
     ('chrom', 29, 'Chrom'),
     ('cloud', 67, 'Cloud'),
+    ('corrin', 68, 'Corrin'),
     ('inkling', 70, 'Inkling'),
     ('joker', 78, 'Joker');
