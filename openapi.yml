@@ -13,7 +13,7 @@ info:
     </br>
     </br>
     [Gitub](https://github.com/DreSean-Sutton/Final-Project)
-  version: v1
+  version: v2
 
 paths:
   /api/fighters:
@@ -36,6 +36,11 @@ paths:
         name: rosterId
         schema:
           type: integer
+        required: false
+      - in: query
+        name: orderBy
+        schema:
+          type: string
         required: false
       responses:
         '200':
@@ -87,6 +92,11 @@ paths:
         schema:
           type: integer
         required: false
+      - in: query
+        name: orderBy
+        schema:
+          type: string
+        required: false
       responses:
         '200':
           description:
@@ -108,7 +118,7 @@ paths:
                       type: string
                     fighterId:
                       type: integer
-                    moveType:
+                    hitboxType:
                       type: string
                     name:
                       type: string
@@ -123,7 +133,7 @@ paths:
                   displayName: Bayonetta
                   fighter: bayonetta
                   fighterId: 2
-                  moveType: "first/multi/final"
+                  hitboxType: "first/multi/final"
                   name: "up b"
                   rosterId: 69
                   totalFrames: "31"
@@ -133,7 +143,7 @@ paths:
                   displayName: Bayonetta
                   fighter: bayonetta
                   fighterId: 2
-                  moveType: "counter"
+                  hitboxType: "counter"
                   name: "down b"
                   rosterId: 69
                   totalFrames: "66"

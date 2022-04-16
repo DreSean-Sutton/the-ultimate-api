@@ -3,7 +3,7 @@ const express = require('express');
 const pg = require('pg');
 const ClientError = require('./client-error');
 const errorMiddleware = require('./error-middleware');
-const sqlQueries = require('./sql-queries')
+const sqlQueries = require('./sql-queries');
 const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
 
@@ -77,6 +77,18 @@ app.get('/api/fighters', (req, res, next) => {
       })
       .catch(err => next(err));
   }
+  if (queryStr.orderBy) {
+    const sql = `
+    ${sqlQueries.getFighters()}
+    ORDER BY
+    "rosterId"
+    `;
+    return db.query(sql)
+    .then(result => {
+      res.status(200).send(result.rows);
+    })
+    .catch(err => next(err));
+  }
   if (queryKey.length > 0) {
     throw new ClientError(400, `${queryKey} is not a valid query key`)
   }
@@ -144,6 +156,18 @@ app.get('/api/fighters/data', (req, res, next) => {
       .then(result => {
         if (result.rows.length === 0)
           throw new ClientError(404, `${queryKey} ${params} doesn't exist in the database`)
+        res.status(200).send(result.rows);
+      })
+      .catch(err => next(err));
+  }
+  if (queryStr.orderBy) {
+    const sql = `
+    ${sqlQueries.getFightersData()}
+    ORDER BY
+    "rosterId", "moveId"
+    `;
+    return db.query(sql)
+      .then(result => {
         res.status(200).send(result.rows);
       })
       .catch(err => next(err));
