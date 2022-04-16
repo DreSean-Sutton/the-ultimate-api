@@ -23,12 +23,12 @@ paths:
     get:
       tags:
         - Fighters
-      summary: Returns one or all fighters and their basic information
+      summary: Returns all fighters and their basic information. Use a parameter to specify a single character
       parameters:
       - in: query
-        name: rosterId
+        name: fighter
         schema:
-          type: integer
+          type: string
         required: false
         description: Not required.
       - in: query
@@ -38,9 +38,9 @@ paths:
         required: false
         description: Not required.
       - in: query
-        name: fighter
+        name: rosterId
         schema:
-          type: string
+          type: integer
         required: false
         description: Not required.
       responses:
@@ -76,7 +76,26 @@ paths:
     get:
       tags:
         - Fighters
-      summary: Returns all frame data for all characters
+      summary: Returns frame data for all characters. Use a parameter to specify a single characters
+      parameters:
+      - in: query
+        name: fighter
+        schema:
+          type: string
+        required: false
+        description: Not required.
+      - in: query
+        name: fighterId
+        schema:
+          type: integer
+        required: false
+        description: Not required.
+      - in: query
+        name: rosterId
+        schema:
+          type: integer
+        required: false
+        description: Not required.
       responses:
         '200':
           description:
