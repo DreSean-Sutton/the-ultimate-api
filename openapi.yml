@@ -133,7 +133,7 @@ paths:
                   displayName: Bayonetta
                   fighter: bayonetta
                   fighterId: 2
-                  hitboxType: "first/multi/final"
+                  moveType: "first/multi/final"
                   name: "up b"
                   rosterId: 69
                   totalFrames: "31"

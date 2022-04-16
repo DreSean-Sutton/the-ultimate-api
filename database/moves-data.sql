@@ -173,7 +173,7 @@ INSERT INTO public.moves AS "chrom"
     (7, 'back air', 'single'),
     (7, 'up air', 'single'),
     (7, 'down air', 'sweet/sour'),
-    (7, 'neutral b', '(earliest/latest'),
+    (7, 'neutral b', '(earliest/latest)'),
     (7, 'side b: 1', 'single'),
     (7, 'side b: 2, neutral', 'single'),
     (7, 'side b: 3, neutral', 'single'),
