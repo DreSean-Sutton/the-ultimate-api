@@ -118,6 +118,18 @@ INSERT INTO public.throws AS "daisy"
     (10, 'up throw', 'throw'),
     (10, 'down throw', 'throw');
 
+INSERT INTO public.throws AS "darkPit"
+  ("fighterId", "name", "type")
+  VALUES
+    (11, 'grab', 'throw'),
+    (11, 'dash grab', 'throw'),
+    (11, 'pivot grab', 'throw'),
+    (11, 'pummel', 'throw'),
+    (11, 'forward throw', 'throw'),
+    (11, 'backward throw', 'throw'),
+    (11, 'up throw', 'throw'),
+    (11, 'down throw', 'throw');
+
 INSERT INTO public.throws AS "inkling"
   ("fighterId", "name", "type")
   VALUES

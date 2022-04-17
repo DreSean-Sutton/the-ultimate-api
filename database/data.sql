@@ -82,6 +82,8 @@ ALTER TABLE public.throws ADD CONSTRAINT "throws_fk0" FOREIGN KEY ("fighterId") 
 
 ALTER TABLE public.grappling ADD CONSTRAINT "grappling_fk0" FOREIGN KEY ("throwId") REFERENCES "throws"("throwId");
 
+-- FightersData
+
 INSERT INTO public.fighters ("fighter", "rosterId", "displayName")
   VALUES
     ('banjo', 80, 'Banjo & Kazooie'),
@@ -94,8 +96,11 @@ INSERT INTO public.fighters ("fighter", "rosterId", "displayName")
     ('cloud', 67, 'Cloud'),
     ('corrin', 68, 'Corrin'),
     ('daisy', 15, 'Daisy'),
+    ('darkPit', 33, 'Dark Pit'),
     ('inkling', 70, 'Inkling'),
     ('joker', 78, 'Joker');
+
+-- MovesData
 
 INSERT INTO public.moves AS "banjo"
   ("fighterId", "name", "moveType", "type")
@@ -370,6 +375,32 @@ INSERT INTO public.moves AS "daisy"
     (10, 'side b, air', '(endlag on hit)', 'move'),
     (10, 'up b', 'first/multi/final', 'move'),
     (10, 'down b', 'slot machine', 'move');
+
+INSERT INTO public.moves AS "darkPit"
+  ("fighterId", "name", "moveType", "type")
+  VALUES
+    (11, 'jab 1', 'single', 'move'),
+    (11, 'jab 2', 'single', 'move'),
+    (11, 'jab 3', 'single', 'move'),
+    (11, 'rapid jab', 'multi', 'move'),
+    (11, 'rapid jab finisher', 'single', 'move'),
+    (11, 'forward tilt', 'close/tipper', 'move'),
+    (11, 'up tilt', 'first/second', 'move'),
+    (11, 'down tilt', 'single', 'move'),
+    (11, 'dash attack', 'single', 'move'),
+    (11, 'forward smash', 'first/second', 'move'),
+    (11, 'up smash', 'first/second/third', 'move'),
+    (11, 'down smash', 'front/back', 'move'),
+    (11, 'neutral air', 'multi/final', 'move'),
+    (11, 'forward air', 'multi/final', 'move'),
+    (11, 'back air', 'close/tipper', 'move'),
+    (11, 'up air', 'multi/final', 'move'),
+    (11, 'down air', 'early/late', 'move'),
+    (11, 'neutral b', 'ground/ground up/air/air up', 'move'),
+    (11, 'side b', 'air/grounded', 'move'),
+    (11, 'side b', 'air/grounded', 'move'),
+    (11, 'up b', 'recovery', 'move'),
+    (11, 'down b', 'shield (endlag)', 'move');
 
 INSERT INTO public.moves AS "inkling"
   ("fighterId", "name", "moveType", "type")
@@ -697,6 +728,32 @@ INSERT INTO public.hitboxes AS "Daisy"
     ('3.0/1.0/4.0%', '7/11/16/21/26/31', null),
     ('8.3-27.6%', null, '39');
 
+INSERT INTO public.hitboxes AS "darkPit"
+  ("damage", "activeFrames", "totalFrames")
+  VALUES
+    ('2.0%', '4-5', '25'),
+    ('2.0%', '5-6', '29'),
+    ('4.0%', '3', '31'),
+    ('0.5%', '6 [rehit: 2]', null),
+    ('2.0%', '4', '47'),
+    ('7.0/10.0%', '10-14', '39'),
+    ('4.0/5.0%', '6-8/15-16', '32'),
+    ('6.0%', '6-7', '25'),
+    ('11.0%', '7-9', '38'),
+    ('5.0/10.0%', '10/21-22', '54'),
+    ('3.0/2.0/8.0%', '6-7/10/18', '51'),
+    ('12.0/10.0%', '5-6/18-20', '40'),
+    ('0.7/4.5%', '4-23 [rehit: 2/3]/25', '54'),
+    ('2.5/6.0%', '11-12/14-15/18-19', '46'),
+    ('8.0/12.0%', '10-12', '40'),
+    ('1.5/5.0%', '10-12/13-15/16-18/19-21/22-23', '40'),
+    ('10.0%', '10/11-12', '36'),
+    ('5.5-14.0%', '16-55 (17-56)', '46/43/42/40'),
+    ('12.0%', '16-35', '79/49'),
+    ('9.5%', '16-35', '104/51'),
+    (null, 'i-frames: (9-19/15-19)', '40'),
+    (null, '7 (+18)', '43-124');
+
 INSERT INTO public.hitboxes AS "inkling"
   ("damage", "activeFrames", "totalFrames")
   VALUES
@@ -869,6 +926,18 @@ INSERT INTO public.throws AS "daisy"
     (10, 'up throw', 'throw'),
     (10, 'down throw', 'throw');
 
+INSERT INTO public.throws AS "darkPit"
+  ("fighterId", "name", "type")
+  VALUES
+    (11, 'grab', 'throw'),
+    (11, 'dash grab', 'throw'),
+    (11, 'pivot grab', 'throw'),
+    (11, 'pummel', 'throw'),
+    (11, 'forward throw', 'throw'),
+    (11, 'backward throw', 'throw'),
+    (11, 'up throw', 'throw'),
+    (11, 'down throw', 'throw');
+
 INSERT INTO public.throws AS "inkling"
   ("fighterId", "name", "type")
   VALUES
@@ -1012,6 +1081,18 @@ INSERT INTO public.grappling AS "daisy"
     ('2.0/9.0%', '20/21', '49'),
     ('2.0/6.0%', '19/26', '49'),
     ('1.0/7.0%', '34/43', '64');
+
+INSERT INTO public.grappling AS "darkPit"
+  ("damage", "activeFrames", "totalFrames")
+  VALUES
+    (null, '6-7', '34'),
+    (null, '9-10', '42'),
+    (null, '10-11', '37'),
+    ('1.3%', '1', '19'),
+    ('6.0/4.0%', '12/14', '27'),
+    ('8.0%', '29', '38'),
+    ('4.0/7.0%', '13/15', '37'),
+    ('2.0/4.0%', '13/16', '31');
 
 INSERT INTO public.grappling AS "inkling"
   ("damage", "activeFrames", "totalFrames")
