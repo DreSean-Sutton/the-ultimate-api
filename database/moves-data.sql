@@ -298,6 +298,32 @@ INSERT INTO public.moves AS "darkPit"
     (11, 'up b', 'recovery', 'move'),
     (11, 'down b', 'shield (endlag)', 'move');
 
+INSERT INTO public.moves AS "darkSamus"
+  ("fighterId", "name", "moveType", "type")
+  VALUES
+    (12, 'jab 1', 'single', 'move'),
+    (12, 'jab 2', 'single', 'move'),
+    (12, 'forward tilt', 'close/middle/far', 'move'),
+    (12, 'up tilt', 'late/early', 'move'),
+    (12, 'down tilt', 'single', 'move'),
+    (12, 'dash attack', 'early/late/latest', 'move'),
+    (12, 'forward smash', 'close/far', 'move'),
+    (12, 'up smash', 'multi/final', 'move'),
+    (12, 'down smash', 'front/back', 'move'),
+    (12, 'neutral air', 'hit 1/early hit 2/late', 'move'),
+    (12, 'forward air', 'first/multi/final', 'move'),
+    (12, 'back air', 'early close/early far/late', 'move'),
+    (12, 'up air', 'first/multi/final', 'move'),
+    (12, 'down air', 'early/meteor/late', 'move'),
+    (12, 'z air', 'first/second', 'move'),
+    (12, 'neutral b', '(charge time)', 'move'),
+    (12, 'neutral b, full charge', 'single', 'move'),
+    (12, 'side b, homing', 'single', 'move'),
+    (12, 'side b, super', 'single', 'move'),
+    (12, 'up b, ground', 'first/multi/final', 'move'),
+    (12, 'up b, air', 'multi', 'move'),
+    (12, 'down b', '(total frames: holding down/air)', 'move');
+
 INSERT INTO public.moves AS "inkling"
   ("fighterId", "name", "moveType", "type")
   VALUES

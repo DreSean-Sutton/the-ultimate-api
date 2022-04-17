@@ -130,6 +130,18 @@ INSERT INTO public.grappling AS "darkPit"
     ('4.0/7.0%', '13/15', '37'),
     ('2.0/4.0%', '13/16', '31');
 
+INSERT INTO public.grappling AS "darkSamus"
+  ("damage", "activeFrames", "totalFrames")
+  VALUES
+    (null, '15-22', '59'),
+    (null, '17-24', '67'),
+    (null, '18-25', '62'),
+    ('1.3%', '1', '19'),
+    ('10.0%', '16', '41'),
+    ('10.0%', '12', '49'),
+    ('5.0/7.0%', '15/16', '41'),
+    ('8.0%', '21', '37');
+
 INSERT INTO public.grappling AS "inkling"
   ("damage", "activeFrames", "totalFrames")
   VALUES
