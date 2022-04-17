@@ -76,7 +76,7 @@ app.get('/api/fighters', (req, res, next) => {
       })
       .catch(err => next(err));
   }
-  if (queryStr.orderBy) {
+  if (queryStr.orderByRosterId) {
     const sql = `
     ${sqlQueries.getFighters()}
     ORDER BY
@@ -174,7 +174,7 @@ app.get('/api/fighters/data', (req, res, next) => {
       })
       .catch(err => next(err));
     }
-    if (queryStr.orderBy) {
+    if (queryStr.orderByRosterId) {
       const sql = `
       ${sqlQueries.getFightersData(dataTypes[index])}
       ORDER BY

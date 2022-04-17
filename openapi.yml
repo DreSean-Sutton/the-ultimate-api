@@ -39,9 +39,9 @@ paths:
           type: integer
         required: false
       - in: query
-        name: orderBy
+        name: orderByRosterId
         schema:
-          type: string
+          type: boolean
         required: false
       responses:
         '200':
@@ -94,9 +94,9 @@ paths:
           type: integer
         required: false
       - in: query
-        name: orderBy
+        name: orderByRosterId
         schema:
-          type: string
+          type: boolean
         required: false
       responses:
         '200':
