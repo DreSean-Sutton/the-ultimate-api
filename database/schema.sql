@@ -73,6 +73,30 @@ CREATE TABLE public.grappling (
 
 
 
+CREATE TABLE public.movements (
+	"movementId" serial NOT NULL,
+	"fighterId" int NOT NULL,
+	"name" TEXT NOT NULL,
+	"type" TEXT NOT NULL,
+	"createAt" timestamp with time zone,
+	CONSTRAINT "movements_pk" PRIMARY KEY ("movementId")
+) WITH (
+  OIDS=FALSE
+);
+
+
+
+CREATE TABLE public.dodging (
+	"movementId" serial NOT NULL,
+	"activeFrames" TEXT NOT NULL,
+	"totalFrames" TEXT NOT NULL,
+	"createdAt" timestamp with time zone,
+	CONSTRAINT "dodging_pk" PRIMARY KEY ("movementId")
+) WITH (
+  OIDS=FALSE
+);
+
+
 
 ALTER TABLE public.moves ADD CONSTRAINT "moves_fk0" FOREIGN KEY ("fighterId") REFERENCES "fighters"("fighterId");
 
@@ -81,3 +105,7 @@ ALTER TABLE public.hitboxes ADD CONSTRAINT "hitboxes_fk0" FOREIGN KEY ("moveId")
 ALTER TABLE public.throws ADD CONSTRAINT "throws_fk0" FOREIGN KEY ("fighterId") REFERENCES "fighters"("fighterId");
 
 ALTER TABLE public.grappling ADD CONSTRAINT "grappling_fk0" FOREIGN KEY ("throwId") REFERENCES "throws"("throwId");
+
+ALTER TABLE public.movements ADD CONSTRAINT "movements_fk0" FOREIGN KEY ("fighterId") REFERENCES "fighters"("fighterId");
+
+ALTER TABLE public.dodging ADD CONSTRAINT "dodging_fk0" FOREIGN KEY ("movementId") REFERENCES "movements"("movementId");
