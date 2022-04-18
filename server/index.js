@@ -109,8 +109,8 @@ app.get('/api/fighters/data', (req, res, next) => {
   // and responds with a single array of all data.
 
   function renderAllData (index, fullResult) {
-    const dataTypes = ['moves', 'throws'];
-    const dataTypeIds = ["moveId", "throwId"];
+    const dataTypes = ['moves', 'throws', 'movements'];
+    const dataTypeIds = ["moveId", "throwId", "movementId"];
 
     if (dataTypes.length === index) {
       return res.status(200).send(fullResult.flat(1));
