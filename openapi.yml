@@ -4,8 +4,9 @@ info:
   title: Dre Sean Sutton's Smash Ultimate API
   description: >
     This is *the* Smash Ultimate restful API that offers indepth
-    frame data information on the cast. Values separated by
-     `/`, `()`, and `[]` indicate different hitboxes that are mirrored
+    frame data information on the cast. Use a parameter to specify
+    a single characters. Values separated by `/`, `()`, and `[]`
+     indicate different hitboxes that are mirrored
      by the `moveType` property. All frame data is copied from the
      fantastic [Ultimate Frame Data](https://ultimateframedata.com)
      website, occasionally modified for clarity, and manually input
@@ -21,8 +22,13 @@ paths:
     get:
       tags:
         - Fighters
-      summary: Returns all fighters and their basic information. Use a parameter to specify a single character
+      summary: Returns all fighters and their basic information.
       parameters:
+      - in: query
+        name: orderByRosterId
+        schema:
+          type: boolean
+        required: false
       - in: query
         name: fighter
         schema:
@@ -37,11 +43,6 @@ paths:
         name: rosterId
         schema:
           type: integer
-        required: false
-      - in: query
-        name: orderByRosterId
-        schema:
-          type: boolean
         required: false
       responses:
         '200':
@@ -76,8 +77,107 @@ paths:
     get:
       tags:
         - Fighters
-      summary: Returns frame data for all characters. Use a parameter to specify a single characters
+      summary: Returns all frame data for all characters
       parameters:
+      - in: query
+        name: orderByRosterId
+        schema:
+          type: boolean
+        required: false
+      - in: query
+        name: fighter
+        schema:
+          type: string
+        required: false
+      - in: query
+        name: fighterId
+        schema:
+          type: integer
+        required: false
+      - in: query
+        name: rosterId
+        schema:
+          type: integer
+        required: false
+      responses:
+        '200':
+          description:
+            OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    activeFrames:
+                      type: string
+                    damage:
+                      type: string
+                    displayName:
+                      type: string
+                    fighter:
+                      type: string
+                    fighterId:
+                      type: integer
+                    moveType:
+                      type: string
+                    name:
+                      type: string
+                    rosterId:
+                      type: integer
+                    totalFrames:
+                      type: string
+                    type:
+                      type: string
+                example:
+                -
+                  activeFrames: "6/11-25 [rehit: 3]/27-28"
+                  damage: "3.0/0.2/3.0%"
+                  displayName: Bayonetta
+                  fighter: bayonetta
+                  fighterId: 2
+                  moveType: "first/multi/final"
+                  name: "up b"
+                  rosterId: 69
+                  totalFrames: "31"
+                  type: move
+                -
+                  activeFrames: "8-27"
+                  damage: null
+                  displayName: Bayonetta
+                  fighter: bayonetta
+                  fighterId: 2
+                  moveType: "counter"
+                  name: "down b"
+                  rosterId: 69
+                  totalFrames: "66"
+                  type: move
+                -
+                  activeFrames: "7-8"
+                  damage: null
+                  displayName: Bayonetta
+                  fighter: bayonetta
+                  fighterId: 2
+                  name: "grab"
+                  rosterId: 69
+                  totalFrames: "37"
+                  type: throw
+
+  /api/fighters/data/{type}:
+    get:
+      tags:
+      - Fighters
+      summary: Returns specific frame data for all Fighters
+      description: >
+       Specify the type of frame data you desire
+      parameters:
+      - in: path
+        name: type
+        schema:
+          type: string
+        description: Can be 'moves' or 'throws'
+        required: true
       - in: query
         name: fighter
         schema:
@@ -152,13 +252,3 @@ paths:
                   rosterId: 69
                   totalFrames: "66"
                   type: move
-                -
-                  activeFrames: "7-8"
-                  damage: null
-                  displayName: Bayonetta
-                  fighter: bayonetta
-                  fighterId: 2
-                  name: "grab"
-                  rosterId: 69
-                  totalFrames: "37"
-                  type: throw

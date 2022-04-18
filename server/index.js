@@ -273,7 +273,7 @@ app.get('/api/fighters/data/:type', (req, res, next) => {
     `;
   return db.query(sql)
     .then(result => {
-      res.status(200).send(result)
+      res.status(200).send(result.rows)
     })
     .catch(err => next(err));
 
