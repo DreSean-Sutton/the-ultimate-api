@@ -252,6 +252,25 @@ app.get('/api/fighters/data/:type', (req, res, next) => {
       })
       .catch(err => next(err));
   }
+  if (queryStr.rosterId) {
+    const sql = `
+      ${sqlQueries.getFightersData(dataTypes[index])}
+      WHERE
+      "rosterId"=$1
+      ORDER BY ${JSON.stringify(dataTypeIds[index])}
+      `;
+    const params = [queryStr.rosterId];
+    if (/[A-Za-z]/gi.test(params)) {
+      throw new ClientError(400, `rosterId can't contain any letters`);
+    }
+    return db.query(sql, params)
+      .then(result => {
+        if (result.rows.length === 0)
+          throw new ClientError(404, `${queryKey} ${params} doesn't exist in the database`)
+        res.status(200).send(result.rows);
+      })
+      .catch(err => next(err));
+  }
   if (queryStr.orderByRosterId) {
     const sql = `
       ${sqlQueries.getFightersData(dataTypes[index])}
