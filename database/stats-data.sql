@@ -10,9 +10,9 @@ INSERT INTO public.stats AS "banjo"
     (1, 'total air acceleration', 'stat'),
     (1, 'sh/fh/shff/fhff', 'stat'),
     (1, 'fall speed/fast fall speed', 'stat'),
-    (1, 'out of shield, ', 'stat'),
-    (1, 'out of shield, ', 'stat'),
-    (1, 'out of shield, ', 'stat'),
+    (1, 'out of shield, up smash', 'stat'),
+    (1, 'out of shield, up air ', 'stat'),
+    (1, 'out of shield, back air', 'stat'),
     (1, 'shield grab (post-shieldstun)', 'stat');
 
 INSERT INTO public.stats AS "bayonetta"
@@ -27,9 +27,9 @@ INSERT INTO public.stats AS "bayonetta"
     (2, 'total air acceleration', 'stat'),
     (2, 'sh/fh/shff/fhff', 'stat'),
     (2, 'fall speed/fast fall speed', 'stat'),
-    (2, 'out of shield, ', 'stat'),
-    (2, 'out of shield, ', 'stat'),
-    (2, 'out of shield, ', 'stat'),
+    (2, 'out of shield, up b', 'stat'),
+    (2, 'out of shield, forward air/side b', 'stat'),
+    (2, 'out of shield, neutral air/up air', 'stat'),
     (2, 'shield grab (post-shieldstun)', 'stat');
 
 INSERT INTO public.stats AS "bowser"
@@ -44,9 +44,9 @@ INSERT INTO public.stats AS "bowser"
     (3, 'total air acceleration', 'stat'),
     (3, 'sh/fh/shff/fhff', 'stat'),
     (3, 'fall speed/fast fall speed', 'stat'),
-    (3, 'out of shield, ', 'stat'),
-    (3, 'out of shield, ', 'stat'),
-    (3, 'out of shield, ', 'stat'),
+    (3, 'out of shield, up b', 'stat'),
+    (3, 'out of shield, side b (air)', 'stat'),
+    (3, 'out of shield, neutral air', 'stat'),
     (3, 'shield grab (post-shieldstun)', 'stat');
 
 INSERT INTO public.stats AS "bowserJr"
@@ -61,9 +61,9 @@ INSERT INTO public.stats AS "bowserJr"
     (4, 'total air acceleration', 'stat'),
     (4, 'sh/fh/shff/fhff', 'stat'),
     (4, 'fall speed/fast fall speed', 'stat'),
-    (3, 'out of shield, ', 'stat'),
-    (3, 'out of shield, ', 'stat'),
-    (3, 'out of shield, ', 'stat'),
+    (3, 'out of shield, up smash', 'stat'),
+    (3, 'out of shield, up air', 'stat'),
+    (3, 'out of shield, neutral air', 'stat'),
     (3, 'shield grab (post-shieldstun)', 'stat');
 
 INSERT INTO public.stats AS "byleth"
@@ -78,9 +78,9 @@ INSERT INTO public.stats AS "byleth"
     (5, 'total air acceleration', 'stat'),
     (5, 'sh/fh/shff/fhff', 'stat'),
     (5, 'fall speed/fast fall speed', 'stat'),
-    (5, 'out of shield, ', 'stat'),
-    (5, 'out of shield, ', 'stat'),
-    (5, 'out of shield, ', 'stat'),
+    (5, 'out of shield, neutral air', 'stat'),
+    (5, 'out of shield, up b', 'stat'),
+    (5, 'out of shield, up air/up smash', 'stat'),
     (5, 'shield grab (post-shieldstun)', 'stat');
 
 INSERT INTO public.stats AS "captainFalcon"
@@ -95,9 +95,9 @@ INSERT INTO public.stats AS "captainFalcon"
     (6, 'total air acceleration', 'stat'),
     (6, 'sh/fh/shff/fhff', 'stat'),
     (6, 'fall speed/fast fall speed', 'stat'),
-    (6, 'out of shield, ', 'stat'),
-    (6, 'out of shield, ', 'stat'),
-    (6, 'out of shield, ', 'stat'),
+    (6, 'out of shield, neutral air/up air', 'stat'),
+    (6, 'out of shield, back air', 'stat'),
+    (6, 'out of shield, up b/jab', 'stat'),
     (6, 'shield grab (post-shieldstun)', 'stat');
 
 INSERT INTO public.stats AS "chrom"
@@ -112,9 +112,9 @@ INSERT INTO public.stats AS "chrom"
     (7, 'total air acceleration', 'stat'),
     (7, 'sh/fh/shff/fhff', 'stat'),
     (7, 'fall speed/fast fall speed', 'stat'),
-    (7, 'out of shield, ', 'stat'),
-    (7, 'out of shield, ', 'stat'),
-    (7, 'out of shield, ', 'stat'),
+    (7, 'out of shield, up air', 'stat'),
+    (7, 'out of shield, neutral air', 'stat'),
+    (7, 'out of shield, up b', 'stat'),
     (7, 'shield grab (post-shieldstun)', 'stat');
 
 INSERT INTO public.stats AS "cloud"
@@ -129,9 +129,9 @@ INSERT INTO public.stats AS "cloud"
     (8, 'total air acceleration', 'stat'),
     (8, 'sh/fh/shff/fhff', 'stat'),
     (8, 'fall speed/fast fall speed', 'stat'),
-    (8, 'out of shield, ', 'stat'),
-    (8, 'out of shield, ', 'stat'),
-    (8, 'out of shield, ', 'stat'),
+    (8, 'out of shield, up b', 'stat'),
+    (8, 'out of shield, neutral air', 'stat'),
+    (8, 'out of shield, up air', 'stat'),
     (8, 'shield grab (post-shieldstun)', 'stat');
 
 INSERT INTO public.stats AS "corrin"
@@ -146,9 +146,9 @@ INSERT INTO public.stats AS "corrin"
     (9, 'total air acceleration', 'stat'),
     (9, 'sh/fh/shff/fhff', 'stat'),
     (9, 'fall speed/fast fall speed', 'stat'),
-    (9, 'out of shield, ', 'stat'),
-    (9, 'out of shield, ', 'stat'),
-    (9, 'out of shield, ', 'stat'),
+    (9, 'out of shield, neutral air', 'stat'),
+    (9, 'out of shield, up air', 'stat'),
+    (9, 'out of shield, forward air', 'stat'),
     (9, 'shield grab (post-shieldstun)', 'stat');
 
 INSERT INTO public.stats AS "daisy"
@@ -163,9 +163,9 @@ INSERT INTO public.stats AS "daisy"
     (10, 'total air acceleration', 'stat'),
     (10, 'sh/fh/shff/fhff', 'stat'),
     (10, 'fall speed/fast fall speed', 'stat'),
-    (10, 'out of shield, ', 'stat'),
-    (10, 'out of shield, ', 'stat'),
-    (10, 'out of shield, ', 'stat'),
+    (10, 'out of shield, up b', 'stat'),
+    (10, 'out of shield, neutral air', 'stat'),
+    (10, 'out of shield, back air', 'stat'),
     (10, 'shield grab (post-shieldstun)', 'stat');
 
 INSERT INTO public.stats AS "darkPit"
@@ -180,9 +180,9 @@ INSERT INTO public.stats AS "darkPit"
     (11, 'total air acceleration', 'stat'),
     (11, 'sh/fh/shff/fhff', 'stat'),
     (11, 'fall speed/fast fall speed', 'stat'),
-    (11, 'out of shield, ', 'stat'),
-    (11, 'out of shield, ', 'stat'),
-    (11, 'out of shield, ', 'stat'),
+    (11, 'out of shield, up smash', 'stat'),
+    (11, 'out of shield, neutral air', 'stat'),
+    (11, 'out of shield, down air', 'stat'),
     (11, 'shield grab (post-shieldstun)', 'stat');
 
 INSERT INTO public.stats AS "darkSamus"
@@ -197,9 +197,9 @@ INSERT INTO public.stats AS "darkSamus"
     (12, 'total air acceleration', 'stat'),
     (12, 'sh/fh/shff/fhff', 'stat'),
     (12, 'fall speed/fast fall speed', 'stat'),
-    (12, 'out of shield, ', 'stat'),
-    (12, 'out of shield, ', 'stat'),
-    (12, 'out of shield, ', 'stat'),
+    (12, 'out of shield, up b', 'stat'),
+    (12, 'out of shield, up air', 'stat'),
+    (12, 'out of shield, neutral air/z air/up smash', 'stat'),
     (12, 'shield grab (post-shieldstun)', 'stat');
 
 INSERT INTO public.stats AS "inkling"
@@ -214,9 +214,9 @@ INSERT INTO public.stats AS "inkling"
     (13, 'total air acceleration', 'stat'),
     (13, 'sh/fh/shff/fhff', 'stat'),
     (13, 'fall speed/fast fall speed', 'stat'),
-    (13, 'out of shield, ', 'stat'),
-    (13, 'out of shield, ', 'stat'),
-    (13, 'out of shield, ', 'stat'),
+    (13, 'out of shield, neutral air/up smash', 'stat'),
+    (13, 'out of shield, back air', 'stat'),
+    (13, 'out of shield, up b', 'stat'),
     (13, 'shield grab (post-shieldstun)', 'stat');
 
 INSERT INTO public.stats AS "joker"
@@ -231,7 +231,8 @@ INSERT INTO public.stats AS "joker"
     (14, 'total air acceleration', 'stat'),
     (14, 'sh/fh/shff/fhff', 'stat'),
     (14, 'fall speed/fast fall speed', 'stat'),
-    (14, 'out of shield, ', 'stat'),
-    (14, 'out of shield, ', 'stat'),
-    (14, 'out of shield, ', 'stat'),
+    (14, 'out of shield, up air', 'stat'),
+    (14, 'out of shield, forward air/back air/up smash', 'stat'),
+    (14, 'out of shield, neutral air/gun/jab', 'stat'),
+    (14, 'out of shield (counters), jump: rebel''s guard/tetrakarn', 'stat'),
     (14, 'shield grab (post-shieldstun)', 'stat');
