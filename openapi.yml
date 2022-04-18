@@ -175,7 +175,7 @@ paths:
                   type: movement
                 -
                   displayName: Inkling
-                  fighter: Inkling
+                  fighter: inkling
                   fightrId: 13
                   name: out of shield, neutral air/up smash
                   rosterId: 70
@@ -283,7 +283,7 @@ paths:
                   type: movement
                 -
                   displayName: Inkling
-                  fighter: Inkling
+                  fighter: inkling
                   fightrId: 13
                   name: out of shield, neutral air/up smash
                   rosterId: 70
