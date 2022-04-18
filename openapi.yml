@@ -4,7 +4,7 @@ info:
   title: Dre Sean Sutton's Smash Ultimate API
   description: >
     This is *the* Smash Ultimate restful API that offers indepth
-    frame data information on the cast. Use a parameter to specify
+    frame data information on the cast. Use a query parameter to specify
     a single Fighter. Values separated by `/`, `()`, and `[]`
     indicate different hitboxes that are mirrored
     by the `moveType` property. All frame data is copied from the
@@ -19,7 +19,7 @@ info:
     [Gitub](https://github.com/DreSean-Sutton/Final-Project)
     [LinkedIn](https://www.linkedin.com/in/dre-sean-sutton-6343b5222)
 
-  version: v5
+  version: v6
 
 paths:
   /api/fighters:
@@ -74,12 +74,12 @@ paths:
                   fighterId: 1
                   fighter: banjo
                   rosterId: 73
-                  displayName: banjo & kazooie
+                  displayName: Banjo & Kazooie
                 -
                   fighterId: 2
                   fighter: bayonetta
                   rosterId: 63
-                  displayName: bayonetta
+                  displayName: Bayonetta
   /api/fighters/data:
     get:
       tags:
@@ -136,6 +136,8 @@ paths:
                       type: string
                     rosterId:
                       type: integer
+                    statValue:
+                      type: string
                     totalFrames:
                       type: string
                     type:
@@ -143,14 +145,14 @@ paths:
                 example:
                 -
                   activeFrames: "6/11-25 [rehit: 3]/27-28"
-                  damage: "3.0/0.2/3.0%"
+                  damage: 3.0/0.2/3.0%
                   displayName: Bayonetta
                   fighter: bayonetta
                   fighterId: 2
-                  moveType: "first/multi/final"
-                  name: "up b"
+                  moveType: first/multi/final
+                  name: up b
                   rosterId: 69
-                  totalFrames: "31"
+                  totalFrames: 31
                   type: move
                 -
                   activeFrames: 7-8
@@ -158,19 +160,27 @@ paths:
                   displayName: Bayonetta
                   fighter: bayonetta
                   fighterId: 2
-                  name: "grab"
+                  name: grab
                   rosterId: 69
-                  totalFrames: "37"
+                  totalFrames: 37
                   type: throw
                 -
-                  "activeFrames": "3-29"
-                  "displayName": "Inkling"
-                  "fighter": "inkling"
-                  "fighterId": 13
-                  "name": "neutral air dodge"
-                  "rosterId": 70
-                  "totalFrames": "50"
-                  "type": "movement"
+                  activeFrames: 3-29
+                  displayName: Inkling
+                  fighter: inkling
+                  fighterId: 13
+                  name: neutral air dodge
+                  rosterId: 70
+                  totalFrames: 50
+                  type: movement
+                -
+                  displayName: Inkling
+                  fighter: inkling
+                  fightrId: 13
+                  name: out of shield, neutral air/up smash
+                  rosterId: 70
+                  statValue: 9 frames
+                  type: stat
 
   /api/fighters/data/{type}:
     get:
@@ -186,7 +196,7 @@ paths:
         schema:
           type: string
         required: true
-        description: Must be `moves`, `throws`, or `movements`
+        description: Must be `moves`, `throws`, `movements` or `stats`
       - in: query
         name: fighter
         schema:
@@ -234,6 +244,8 @@ paths:
                       type: string
                     rosterId:
                       type: integer
+                    statValue:
+                      type: string
                     totalFrames:
                       type: string
                     type:
@@ -241,31 +253,39 @@ paths:
                 example:
                 -
                   activeFrames: "6/11-25 [rehit: 3]/27-28"
-                  damage: "3.0/0.2/3.0%"
+                  damage: 3.0/0.2/3.0%
                   displayName: Bayonetta
                   fighter: bayonetta
                   fighterId: 2
-                  moveType: "first/multi/final"
-                  name: "up b"
+                  moveType: first/multi/final
+                  name: up b
                   rosterId: 69
-                  totalFrames: "31"
+                  totalFrames: 31
                   type: move
                 -
-                  activeFrames: "7-8"
+                  activeFrames: 7-8
                   damage: null
                   displayName: Bayonetta
                   fighter: bayonetta
                   fighterId: 2
-                  name: "grab"
+                  name: grab
                   rosterId: 69
-                  totalFrames: "37"
+                  totalFrames: 37
                   type: throw
                 -
-                  "activeFrames": "3-29"
-                  "displayName": "Inkling"
-                  "fighter": "inkling"
-                  "fighterId": 13
-                  "name": "neutral air dodge"
-                  "rosterId": 70
-                  "totalFrames": "50"
-                  "type": "movement"
+                  activeFrames: 3-29
+                  displayName: Inkling
+                  fighter: inkling
+                  fighterId: 13
+                  name: neutral air dodge
+                  rosterId: 70
+                  totalFrames: 50
+                  type: movement
+                -
+                  displayName: Inkling
+                  fighter: inkling
+                  fightrId: 13
+                  name: out of shield, neutral air/up smash
+                  rosterId: 70
+                  statValue: 9 frames
+                  type: stat

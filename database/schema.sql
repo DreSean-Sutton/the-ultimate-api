@@ -78,7 +78,7 @@ CREATE TABLE public.movements (
 	"fighterId" int NOT NULL,
 	"name" TEXT NOT NULL,
 	"type" TEXT NOT NULL,
-	"createAt" timestamp with time zone,
+	"createAt" timestamp with time zone DEFAULT NOW(),
 	CONSTRAINT "movements_pk" PRIMARY KEY ("movementId")
 ) WITH (
   OIDS=FALSE
@@ -90,8 +90,32 @@ CREATE TABLE public.dodging (
 	"movementId" serial NOT NULL,
 	"activeFrames" TEXT NOT NULL,
 	"totalFrames" TEXT NOT NULL,
-	"createdAt" timestamp with time zone,
+	"createdAt" timestamp with time zone DEFAULT NOW(),
 	CONSTRAINT "dodging_pk" PRIMARY KEY ("movementId")
+) WITH (
+  OIDS=FALSE
+);
+
+
+
+CREATE TABLE public.stats (
+	"statId" serial NOT NULL,
+	"fighterId" int NOT NULL,
+	"name" TEXT NOT NULL,
+	"type" TEXT NOT NULL,
+	"createdAt" timestamp with time zone DEFAULT NOW(),
+	CONSTRAINT "stats_pk" PRIMARY KEY ("statId")
+) WITH (
+  OIDS=FALSE
+);
+
+
+
+CREATE TABLE public.miscellaneous (
+	"statId" serial NOT NULL,
+	"statValue" TEXT NOT NULL,
+	"createdAt" timestamp with time zone DEFAULT NOW(),
+	CONSTRAINT "miscellaneous_pk" PRIMARY KEY ("statId")
 ) WITH (
   OIDS=FALSE
 );
@@ -109,3 +133,7 @@ ALTER TABLE public.grappling ADD CONSTRAINT "grappling_fk0" FOREIGN KEY ("throwI
 ALTER TABLE public.movements ADD CONSTRAINT "movements_fk0" FOREIGN KEY ("fighterId") REFERENCES "fighters"("fighterId");
 
 ALTER TABLE public.dodging ADD CONSTRAINT "dodging_fk0" FOREIGN KEY ("movementId") REFERENCES "movements"("movementId");
+
+ALTER TABLE public.stats ADD CONSTRAINT "stats_fk0" FOREIGN KEY ("fighterId") REFERENCES "fighters"("fighterId");
+
+ALTER TABLE public.miscellaneous ADD CONSTRAINT "miscellaneous_fk0" FOREIGN KEY ("statId") REFERENCES "stats"("statId");

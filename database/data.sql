@@ -1560,3 +1560,481 @@ INSERT INTO public.dodging AS "joker"
     ('3-21', '83'),
     ('3-21', '90'),
     ('3-21', '100');
+
+INSERT INTO public.stats AS "banjo"
+  ("fighterId", "name", "type")
+  VALUES
+    (1, 'weight', 'stat'),
+    (1, 'gravity', 'stat'),
+    (1, 'walk speed', 'stat'),
+    (1, 'run speed', 'stat'),
+    (1, 'initial dash', 'stat'),
+    (1, 'air speed', 'stat'),
+    (1, 'total air acceleration', 'stat'),
+    (1, 'sh/fh/shff/fhff', 'stat'),
+    (1, 'fall speed/fast fall speed', 'stat'),
+    (1, 'out of shield, up smash', 'stat'),
+    (1, 'out of shield, up air ', 'stat'),
+    (1, 'out of shield, back air', 'stat'),
+    (1, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.stats AS "bayonetta"
+  ("fighterId", "name", "type")
+  VALUES
+    (2, 'weight', 'stat'),
+    (2, 'gravity', 'stat'),
+    (2, 'walk speed', 'stat'),
+    (2, 'run speed', 'stat'),
+    (2, 'initial dash', 'stat'),
+    (2, 'air speed', 'stat'),
+    (2, 'total air acceleration', 'stat'),
+    (2, 'sh/fh/shff/fhff', 'stat'),
+    (2, 'fall speed/fast fall speed', 'stat'),
+    (2, 'out of shield, up b', 'stat'),
+    (2, 'out of shield, forward air/side b', 'stat'),
+    (2, 'out of shield, neutral air/up air', 'stat'),
+    (2, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.stats AS "bowser"
+  ("fighterId", "name", "type")
+  VALUES
+    (3, 'weight', 'stat'),
+    (3, 'gravity', 'stat'),
+    (3, 'walk speed', 'stat'),
+    (3, 'run speed', 'stat'),
+    (3, 'initial dash', 'stat'),
+    (3, 'air speed', 'stat'),
+    (3, 'total air acceleration', 'stat'),
+    (3, 'sh/fh/shff/fhff', 'stat'),
+    (3, 'fall speed/fast fall speed', 'stat'),
+    (3, 'out of shield, up b', 'stat'),
+    (3, 'out of shield, side b (air)', 'stat'),
+    (3, 'out of shield, neutral air', 'stat'),
+    (3, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.stats AS "bowserJr"
+  ("fighterId", "name", "type")
+  VALUES
+    (4, 'weight', 'stat'),
+    (4, 'gravity', 'stat'),
+    (4, 'walk speed', 'stat'),
+    (4, 'run speed', 'stat'),
+    (4, 'initial dash', 'stat'),
+    (4, 'air speed', 'stat'),
+    (4, 'total air acceleration', 'stat'),
+    (4, 'sh/fh/shff/fhff', 'stat'),
+    (4, 'fall speed/fast fall speed', 'stat'),
+    (3, 'out of shield, up smash', 'stat'),
+    (3, 'out of shield, up air', 'stat'),
+    (3, 'out of shield, neutral air', 'stat'),
+    (3, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.stats AS "byleth"
+  ("fighterId", "name", "type")
+  VALUES
+    (5, 'weight', 'stat'),
+    (5, 'gravity', 'stat'),
+    (5, 'walk speed', 'stat'),
+    (5, 'run speed', 'stat'),
+    (5, 'initial dash', 'stat'),
+    (5, 'air speed', 'stat'),
+    (5, 'total air acceleration', 'stat'),
+    (5, 'sh/fh/shff/fhff', 'stat'),
+    (5, 'fall speed/fast fall speed', 'stat'),
+    (5, 'out of shield, neutral air', 'stat'),
+    (5, 'out of shield, up b', 'stat'),
+    (5, 'out of shield, up air/up smash', 'stat'),
+    (5, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.stats AS "captainFalcon"
+  ("fighterId", "name", "type")
+  VALUES
+    (6, 'weight', 'stat'),
+    (6, 'gravity', 'stat'),
+    (6, 'walk speed', 'stat'),
+    (6, 'run speed', 'stat'),
+    (6, 'initial dash', 'stat'),
+    (6, 'air speed', 'stat'),
+    (6, 'total air acceleration', 'stat'),
+    (6, 'sh/fh/shff/fhff', 'stat'),
+    (6, 'fall speed/fast fall speed', 'stat'),
+    (6, 'out of shield, neutral air/up air', 'stat'),
+    (6, 'out of shield, back air', 'stat'),
+    (6, 'out of shield, up b/jab', 'stat'),
+    (6, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.stats AS "chrom"
+  ("fighterId", "name", "type")
+  VALUES
+    (7, 'weight', 'stat'),
+    (7, 'gravity', 'stat'),
+    (7, 'walk speed', 'stat'),
+    (7, 'run speed', 'stat'),
+    (7, 'initial dash', 'stat'),
+    (7, 'air speed', 'stat'),
+    (7, 'total air acceleration', 'stat'),
+    (7, 'sh/fh/shff/fhff', 'stat'),
+    (7, 'fall speed/fast fall speed', 'stat'),
+    (7, 'out of shield, up air', 'stat'),
+    (7, 'out of shield, neutral air', 'stat'),
+    (7, 'out of shield, up b', 'stat'),
+    (7, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.stats AS "cloud"
+  ("fighterId", "name", "type")
+  VALUES
+    (8, 'weight', 'stat'),
+    (8, 'gravity', 'stat'),
+    (8, 'walk speed', 'stat'),
+    (8, 'run speed', 'stat'),
+    (8, 'initial dash', 'stat'),
+    (8, 'air speed', 'stat'),
+    (8, 'total air acceleration', 'stat'),
+    (8, 'sh/fh/shff/fhff', 'stat'),
+    (8, 'fall speed/fast fall speed', 'stat'),
+    (8, 'out of shield, up b', 'stat'),
+    (8, 'out of shield, neutral air', 'stat'),
+    (8, 'out of shield, up air', 'stat'),
+    (8, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.stats AS "corrin"
+  ("fighterId", "name", "type")
+  VALUES
+    (9, 'weight', 'stat'),
+    (9, 'gravity', 'stat'),
+    (9, 'walk speed', 'stat'),
+    (9, 'run speed', 'stat'),
+    (9, 'initial dash', 'stat'),
+    (9, 'air speed', 'stat'),
+    (9, 'total air acceleration', 'stat'),
+    (9, 'sh/fh/shff/fhff', 'stat'),
+    (9, 'fall speed/fast fall speed', 'stat'),
+    (9, 'out of shield, neutral air', 'stat'),
+    (9, 'out of shield, up air', 'stat'),
+    (9, 'out of shield, forward air', 'stat'),
+    (9, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.stats AS "daisy"
+  ("fighterId", "name", "type")
+  VALUES
+    (10, 'weight', 'stat'),
+    (10, 'gravity', 'stat'),
+    (10, 'walk speed', 'stat'),
+    (10, 'run speed', 'stat'),
+    (10, 'initial dash', 'stat'),
+    (10, 'air speed', 'stat'),
+    (10, 'total air acceleration', 'stat'),
+    (10, 'sh/fh/shff/fhff', 'stat'),
+    (10, 'fall speed/fast fall speed', 'stat'),
+    (10, 'out of shield, up b', 'stat'),
+    (10, 'out of shield, neutral air', 'stat'),
+    (10, 'out of shield, back air', 'stat'),
+    (10, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.stats AS "darkPit"
+  ("fighterId", "name", "type")
+  VALUES
+    (11, 'weight', 'stat'),
+    (11, 'gravity', 'stat'),
+    (11, 'walk speed', 'stat'),
+    (11, 'run speed', 'stat'),
+    (11, 'initial dash', 'stat'),
+    (11, 'air speed', 'stat'),
+    (11, 'total air acceleration', 'stat'),
+    (11, 'sh/fh/shff/fhff', 'stat'),
+    (11, 'fall speed/fast fall speed', 'stat'),
+    (11, 'out of shield, up smash', 'stat'),
+    (11, 'out of shield, neutral air', 'stat'),
+    (11, 'out of shield, down air', 'stat'),
+    (11, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.stats AS "darkSamus"
+  ("fighterId", "name", "type")
+  VALUES
+    (12, 'weight', 'stat'),
+    (12, 'gravity', 'stat'),
+    (12, 'walk speed', 'stat'),
+    (12, 'run speed', 'stat'),
+    (12, 'initial dash', 'stat'),
+    (12, 'air speed', 'stat'),
+    (12, 'total air acceleration', 'stat'),
+    (12, 'sh/fh/shff/fhff', 'stat'),
+    (12, 'fall speed/fast fall speed', 'stat'),
+    (12, 'out of shield, up b', 'stat'),
+    (12, 'out of shield, up air', 'stat'),
+    (12, 'out of shield, neutral air/z air/up smash', 'stat'),
+    (12, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.stats AS "inkling"
+  ("fighterId", "name", "type")
+  VALUES
+    (13, 'weight', 'stat'),
+    (13, 'gravity', 'stat'),
+    (13, 'walk speed', 'stat'),
+    (13, 'run speed', 'stat'),
+    (13, 'initial dash', 'stat'),
+    (13, 'air speed', 'stat'),
+    (13, 'total air acceleration', 'stat'),
+    (13, 'sh/fh/shff/fhff', 'stat'),
+    (13, 'fall speed/fast fall speed', 'stat'),
+    (13, 'out of shield, neutral air/up smash', 'stat'),
+    (13, 'out of shield, back air', 'stat'),
+    (13, 'out of shield, up b', 'stat'),
+    (13, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.stats AS "joker"
+  ("fighterId", "name", "type")
+  VALUES
+    (14, 'weight', 'stat'),
+    (14, 'gravity', 'stat'),
+    (14, 'walk speed', 'stat'),
+    (14, 'run speed', 'stat'),
+    (14, 'initial dash', 'stat'),
+    (14, 'air speed', 'stat'),
+    (14, 'total air acceleration', 'stat'),
+    (14, 'sh/fh/shff/fhff', 'stat'),
+    (14, 'fall speed/fast fall speed', 'stat'),
+    (14, 'out of shield, up air', 'stat'),
+    (14, 'out of shield, forward air/back air/up smash', 'stat'),
+    (14, 'out of shield, neutral air/gun/jab', 'stat'),
+    (14, 'out of shield (counters), jump: rebel''s guard/tetrakarn', 'stat'),
+    (14, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.miscellaneous AS "banjo"
+  ("statValue")
+  VALUES
+    ('106'),
+    ('0.11'),
+    ('1.06'),
+    ('2.18'),
+    ('1.68'),
+    ('0.92'),
+    ('0.07'),
+    ('36/44/25/31'),
+    ('1.76/2.816'),
+    ('9 frames'),
+    ('10 frames'),
+    ('11 frames'),
+    ('11 frames');
+
+INSERT INTO public.miscellaneous AS "bayonetta"
+  ("statValue")
+  VALUES
+    ('81'),
+    ('.120'),
+    ('0.945'),
+    ('1.76'),
+    ('1.936'),
+    ('1.019'),
+    ('0.095'),
+    ('38/50/27/35'),
+    ('1.77/2.832'),
+    ('6 frames'),
+    ('10 frames'),
+    ('12 frames'),
+    ('11 frames');
+
+INSERT INTO public.miscellaneous AS "bowser"
+  ("statValue")
+  VALUES
+    ('135'),
+    ('0.125'),
+    ('0.901'),
+    ('1.971'),
+    ('2.255'),
+    ('1.155'),
+    ('0.05'),
+    ('31/45/22/31'),
+    ('1.77/2.832'),
+    ('6 frames'),
+    ('9 frames'),
+    ('11 frames'),
+    ('12 frames');
+
+INSERT INTO public.miscellaneous AS "bowserJr"
+  ("statValue")
+  VALUES
+    ('108'),
+    ('0.092'),
+    ('0.924'),
+    ('1.566'),
+    ('1.76'),
+    ('1.134'),
+    ('0.08'),
+    ('38/52/26/36'),
+    ('1.65/2.64'),
+    ('7 frames'),
+    ('9 frames'),
+    ('10 frames'),
+    ('15 frames');
+
+INSERT INTO public.miscellaneous AS "byleth"
+  ("statValue")
+  VALUES
+    ('97'),
+    ('0.089'),
+    ('0.97'),
+    ('1.43'),
+    ('1.8'),
+    ('0.89'),
+    ('0.053'),
+    ('35/45/24/31'),
+    ('1.6/2.56'),
+    ('9 frames'),
+    ('9 frames'),
+    ('13 frames'),
+    ('10 frames');
+
+INSERT INTO public.miscellaneous AS "captainFalcon"
+  ("statValue")
+  VALUES
+    ('104'),
+    ('0.120'),
+    ('0.987'),
+    ('2.552'),
+    ('1.98'),
+    ('1.218'),
+    ('0.075'),
+    ('34/48/24/34'),
+    ('1.865/2.984'),
+    ('10 frames'),
+    ('13 frames'),
+    ('14 frames'),
+    ('10 frames');
+
+INSERT INTO public.miscellaneous AS "chrom"
+  ("statValue")
+  VALUES
+    ('95'),
+    ('0.114'),
+    ('1.208'),
+    ('2.145'),
+    ('2.2'),
+    ('1.302'),
+    ('0.05'),
+    ('30/44/20/31'),
+    ('1.8/2.88'),
+    ('8 frames'),
+    ('9 frames'),
+    ('10 frames'),
+    ('11 frames');
+
+INSERT INTO public.miscellaneous AS "cloud"
+  ("statValue")
+  VALUES
+    ('100'),
+    ('0.098 (limit: 0.1078'),
+    ('1.155 (limit: 1.32825'),
+    ('2.167 (limit: 2.3837'),
+    ('2.145 (limit: 2.3595'),
+    ('1.155 (limit: 1.386'),
+    ('0.07 (limit: 0.084'),
+    ('37/49/26/34'),
+    ('1.68/2.688 (limit: 1.848/2.9568'),
+    ('7 frames'),
+    ('8 frames'),
+    ('11 frames'),
+    ('13 frames');
+
+INSERT INTO public.miscellaneous AS "corrin"
+  ("statValue")
+  VALUES
+    ('98'),
+    ('0.092'),
+    ('1.208'),
+    ('1.595'),
+    ('1.892'),
+    ('1.019'),
+    ('0.05'),
+    ('37/50/26/35'),
+    ('1.65/2.64'),
+    ('9 frames'),
+    ('10 frames'),
+    ('12 frames'),
+    ('11 frames');
+
+INSERT INTO public.miscellaneous AS "daisy"
+  ("statValue")
+  VALUES
+    ('89'),
+    ('0.070'),
+    ('0.924'),
+    ('1.595'),
+    ('1.826'),
+    ('1.029'),
+    ('0.12'),
+    ('41/57/28/40'),
+    ('1.19/1.904'),
+    ('7 frames'),
+    ('8 frames'),
+    ('9 frames'),
+    ('10 frames');
+
+INSERT INTO public.miscellaneous AS "darkPit"
+  ("statValue")
+  VALUES
+    ('96'),
+    ('0.081'),
+    ('1.259'),
+    ('1.828'),
+    ('2.09'),
+    ('0.935'),
+    ('0.075'),
+    ('38/52/26/37'),
+    ('1.48/2.368'),
+    ('6 frames'),
+    ('7 frames'),
+    ('13 frames'),
+    ('10 frames');
+
+INSERT INTO public.miscellaneous AS "darkSamus"
+  ("statValue")
+  VALUES
+    ('108'),
+    ('0.075'),
+    ('1.115'),
+    ('1.654'),
+    ('1.87'),
+    ('1.103'),
+    ('0.09'),
+    ('44/61/31/3l/43'),
+    ('1.33/2.168'),
+    ('4 frames'),
+    ('8 frames'),
+    ('11 frames'),
+    ('19 frames');
+
+INSERT INTO public.miscellaneous AS "inkling"
+  ("statValue")
+  VALUES
+    ('94'),
+    ('0.087'),
+    ('1.134'),
+    ('1.925'),
+    ('2.118'),
+    ('1.208'),
+    ('0.08'),
+    ('40/52/27/36'),
+    ('1.58/2.528'),
+    ('9 frames'),
+    ('10 frames'),
+    ('12 frames'),
+    ('12 frames');
+
+INSERT INTO public.miscellaneous AS "joker"
+  ("statValue")
+  VALUES
+    ('93'),
+    ('0.127'),
+    ('1.12'),
+    ('2.06'),
+    ('1.9'),
+    ('1.1'),
+    ('0.08'),
+    ('30/45/210/30'),
+    ('1.63/3.097'),
+    ('8 frames'),
+    ('10 frames'),
+    ('15 frames'),
+    ('6 frames/7 frames'),
+    ('10 frames');

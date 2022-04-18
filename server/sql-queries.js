@@ -48,6 +48,19 @@ const sqlQueries = {
         JOIN "dodging" USING ("movementId")
       `;
     }
+    if (type === 'stats') {
+      return `
+        SELECT
+          "displayName",
+          fighter, "fighterId",
+          "name", "rosterId",
+          "statValue", "type"
+        FROM
+          fighters
+        JOIN "stats" USING ("fighterId")
+        JOIN "miscellaneous" USING ("statId")
+      `;
+    }
   }
 }
 
