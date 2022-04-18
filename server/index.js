@@ -214,6 +214,44 @@ app.get('/api/fighters/data/:type', (req, res, next) => {
   if (!checkValidType()) {
     throw new ClientError(400, `${currentType} is not a valid parameter`);
   }
+  if (queryStr.fighter) {
+    const sql = `
+      ${sqlQueries.getFightersData(dataTypes[index])}
+      WHERE
+      fighter=$1
+      ORDER BY ${JSON.stringify(dataTypeIds[index])}
+      `;
+    const params = [queryStr.fighter];
+    if (/\d/g.test(params)) {
+      throw new ClientError(400, `fighter name can't have a number`);
+    }
+    return db.query(sql, params)
+      .then(result => {
+        if (result.rows.length === 0)
+          throw new ClientError(404, `${queryKey} named ${params} doesn't exist in the database`)
+        res.status(200).send(result.rows);
+      })
+      .catch(err => next(err));
+  }
+  if (queryStr.fighterId) {
+    const sql = `
+      ${sqlQueries.getFightersData(dataTypes[index])}
+      WHERE
+      "fighterId"=$1
+      ORDER BY ${JSON.stringify(dataTypeIds[index])}
+      `;
+    const params = [queryStr.fighterId];
+    if (/[A-Za-z]/gi.test(params)) {
+      throw new ClientError(400, `fighterId can't contain any letters`);
+    }
+    return db.query(sql, params)
+      .then(result => {
+        if (result.rows.length === 0)
+          throw new ClientError(404, `${queryKey} ${params} doesn't exist in the database`)
+        res.status(200).send(result.rows);
+      })
+      .catch(err => next(err));
+  }
   if (queryStr.orderByRosterId) {
     const sql = `
       ${sqlQueries.getFightersData(dataTypes[index])}
@@ -222,7 +260,7 @@ app.get('/api/fighters/data/:type', (req, res, next) => {
       `;
     return db.query(sql)
       .then(result => {
-        res.status(200).send(result.rows)
+        res.status(200).send(result.rows);
       })
       .catch(err => next(err));
   }
