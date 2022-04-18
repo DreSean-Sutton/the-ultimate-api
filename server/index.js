@@ -109,8 +109,8 @@ app.get('/api/fighters/data', (req, res, next) => {
   // and responds with a single array of all data.
 
   function renderAllData (index, fullResult) {
-    const dataTypes = ['moves', 'throws', 'movements'];
-    const dataTypeIds = ["moveId", "throwId", "movementId"];
+    const dataTypes = ['moves', 'throws', 'movements', 'stats'];
+    const dataTypeIds = ['moveId', 'throwId', 'movementId', 'statId'];
 
     if (dataTypes.length === index) {
       return res.status(200).send(fullResult.flat(1));
@@ -214,8 +214,8 @@ app.get('/api/fighters/data/:type', (req, res, next) => {
   const queryKey = Object.keys(queryStr);
   const currentType = req.params.type;
   let index = null
-  const dataTypes = ['moves', 'throws', 'movements'];
-  const dataTypeIds = ['moveId', 'throwId', 'movementId'];
+  const dataTypes = ['moves', 'throws', 'movements', 'stats'];
+  const dataTypeIds = ['moveId', 'throwId', 'movementId', 'statId'];
 
   if (!checkValidType()) {
     throw new ClientError(400, `${currentType} is not a valid parameter`);
