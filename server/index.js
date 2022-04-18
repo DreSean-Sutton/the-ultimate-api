@@ -107,7 +107,7 @@ app.get('/api/fighters/data', (req, res, next) => {
 
   function renderAllData (index, fullResult) {
     const dataTypes = ['moves', 'throws'];
-    const dataTypesId = ["moveId", "throwId"];
+    const dataTypeIds = ["moveId", "throwId"];
 
     if (dataTypes.length === index) {
       return res.status(200).send(fullResult.flat(1));
@@ -119,7 +119,7 @@ app.get('/api/fighters/data', (req, res, next) => {
       ${sqlQueries.getFightersData(dataTypes[index])}
       WHERE
       fighter=$1
-      ORDER BY ${JSON.stringify(dataTypesId[index])}
+      ORDER BY ${JSON.stringify(dataTypeIds[index])}
       `;
       const params = [queryStr.fighter];
       if (/\d/g.test(params)) {
@@ -139,7 +139,7 @@ app.get('/api/fighters/data', (req, res, next) => {
       ${sqlQueries.getFightersData(dataTypes[index])}
       WHERE
       "fighterId"=$1
-      ORDER BY ${JSON.stringify(dataTypesId[index])}
+      ORDER BY ${JSON.stringify(dataTypeIds[index])}
       `;
       const params = [queryStr.fighterId];
       if (/[A-Za-z]/gi.test(params)) {
@@ -159,7 +159,7 @@ app.get('/api/fighters/data', (req, res, next) => {
       ${sqlQueries.getFightersData(dataTypes[index])}
       WHERE
       "rosterId"=$1
-      ORDER BY ${JSON.stringify(dataTypesId[index])}
+      ORDER BY ${JSON.stringify(dataTypeIds[index])}
       `;
       const params = [queryStr.rosterId];
       if (/[A-Za-z]/gi.test(params)) {
@@ -178,7 +178,7 @@ app.get('/api/fighters/data', (req, res, next) => {
       const sql = `
       ${sqlQueries.getFightersData(dataTypes[index])}
       ORDER BY
-      "rosterId", ${JSON.stringify(dataTypesId[index])}
+      "rosterId", ${JSON.stringify(dataTypeIds[index])}
       `;
       return db.query(sql)
       .then(result => {
@@ -192,7 +192,7 @@ app.get('/api/fighters/data', (req, res, next) => {
     }
     const sql = `
     ${sqlQueries.getFightersData(dataTypes[index])}
-    ORDER BY ${JSON.stringify(dataTypesId[index])}
+    ORDER BY ${JSON.stringify(dataTypeIds[index])}
     `;
     return db.query(sql)
       .then(result => {
@@ -203,7 +203,41 @@ app.get('/api/fighters/data', (req, res, next) => {
   }
 });
 
+app.get('/api/fighters/data/:type', (req, res, next) => {
+  const currentType = req.params.type;
+  let index = null
+  const dataTypes = ['moves', 'throws'];
+  const dataTypeIds = ['moveId', 'throwId']
+  console.log(dataTypeIds);
+  if (!checkValidType()) {
+    throw new ClientError(400, `${currentType} is not a valid parameter`);
+  }
+  // if (queryKey.length > 0) {
+  //   throw new ClientError(400, `${queryKey} is not a valid query key`)
+  // }
+  const sql = `
+    ${sqlQueries.getFightersData(dataTypes[index])}
+    ORDER BY ${JSON.stringify(dataTypeIds[index])}
+    `;
+  return db.query(sql)
+    .then(result => {
+      res.status(200).send(result)
+    })
+    .catch(err => next(err));
+
+  function checkValidType() {
+    for (let i = 0; i < dataTypes.length; i++) {
+      if (currentType === dataTypes[i]) {
+        index = i
+        return true;
+      }
+    }
+    return false;
+  }
+});
+
 app.use(errorMiddleware)
+
 app.listen(process.env.PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`express server listening on port ${process.env.PORT}`);
