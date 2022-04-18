@@ -74,12 +74,12 @@ paths:
                   fighterId: 1
                   fighter: banjo
                   rosterId: 73
-                  displayName: banjo & kazooie
+                  displayName: Banjo & Kazooie
                 -
                   fighterId: 2
                   fighter: bayonetta
                   rosterId: 63
-                  displayName: bayonetta
+                  displayName: Bayonetta
   /api/fighters/data:
     get:
       tags:
