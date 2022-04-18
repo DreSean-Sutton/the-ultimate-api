@@ -35,6 +35,19 @@ const sqlQueries = {
         JOIN "grappling" USING ("throwId")
       `
     }
+    if (type === 'movements') {
+      return `
+        SELECT
+          "activeFrames", "displayName",
+          fighter, "fighterId",
+          "name", "rosterId",
+          "totalFrames", "type"
+        FROM
+          fighters
+        JOIN "movements" USING ("fighterId")
+        JOIN "dodging" USING ("movementId")
+      `
+    }
   }
 }
 

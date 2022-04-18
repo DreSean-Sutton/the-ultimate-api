@@ -208,8 +208,8 @@ app.get('/api/fighters/data/:type', (req, res, next) => {
   const queryKey = Object.keys(queryStr);
   const currentType = req.params.type;
   let index = null
-  const dataTypes = ['moves', 'throws'];
-  const dataTypeIds = ['moveId', 'throwId'];
+  const dataTypes = ['moves', 'throws', 'movements'];
+  const dataTypeIds = ['moveId', 'throwId', 'movementId'];
 
   if (!checkValidType()) {
     throw new ClientError(400, `${currentType} is not a valid parameter`);
