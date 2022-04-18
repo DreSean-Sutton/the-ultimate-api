@@ -6,13 +6,14 @@ info:
     This is *the* Smash Ultimate restful API that offers indepth
     frame data information on the cast. Values separated by
      `/`, `()`, and `[]` indicate different hitboxes that are mirrored
-     by the `hitboxType` property. All frame data is copied from the
+     by the `moveType` property. All frame data is copied from the
      fantastic [Ultimate Frame Data](https://ultimateframedata.com)
      website, occasionally modified for clarity, and manually input
      into my database. If you see any mistakes, please let me know on GitHub!
     </br>
     </br>
     [Gitub](https://github.com/DreSean-Sutton/Final-Project)
+    [LinkedIn](https://www.linkedin.com/in/dre-sean-sutton-6343b5222)
   version: v2
 
 paths:
@@ -38,9 +39,9 @@ paths:
           type: integer
         required: false
       - in: query
-        name: orderBy
+        name: orderByRosterId
         schema:
-          type: string
+          type: boolean
         required: false
       responses:
         '200':
@@ -93,9 +94,9 @@ paths:
           type: integer
         required: false
       - in: query
-        name: orderBy
+        name: orderByRosterId
         schema:
-          type: string
+          type: boolean
         required: false
       responses:
         '200':
@@ -118,13 +119,15 @@ paths:
                       type: string
                     fighterId:
                       type: integer
-                    hitboxType:
+                    moveType:
                       type: string
                     name:
                       type: string
                     rosterId:
                       type: integer
                     totalFrames:
+                      type: string
+                    type:
                       type: string
                 example:
                 -
@@ -137,13 +140,25 @@ paths:
                   name: "up b"
                   rosterId: 69
                   totalFrames: "31"
+                  type: move
                 -
                   activeFrames: "8-27"
                   damage: null
                   displayName: Bayonetta
                   fighter: bayonetta
                   fighterId: 2
-                  hitboxType: "counter"
+                  moveType: "counter"
                   name: "down b"
                   rosterId: 69
                   totalFrames: "66"
+                  type: move
+                -
+                  activeFrames: "7-8"
+                  damage: null
+                  displayName: Bayonetta
+                  fighter: bayonetta
+                  fighterId: 2
+                  name: "grab"
+                  rosterId: 69
+                  totalFrames: "37"
+                  type: throw

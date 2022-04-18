@@ -76,7 +76,7 @@ app.get('/api/fighters', (req, res, next) => {
       })
       .catch(err => next(err));
   }
-  if (queryStr.orderBy) {
+  if (queryStr.orderByRosterId) {
     const sql = `
     ${sqlQueries.getFighters()}
     ORDER BY
@@ -100,87 +100,107 @@ app.get('/api/fighters', (req, res, next) => {
 });
 
 app.get('/api/fighters/data', (req, res, next) => {
-  const queryStr = req.query;
-  const queryKey = Object.keys(queryStr);
-  if (queryStr.fighter) {
-    const sql = `
-    ${sqlQueries.getFightersData()}
-    WHERE
+  const fullResult = [];
+  return renderAllData(0, fullResult)
+  // This sends a sql query for each data type in the database
+  // and responds with a single array of all data.
+
+  function renderAllData (index, fullResult) {
+    const dataTypes = ['moves', 'throws'];
+    const dataTypesId = ["moveId", "throwId"];
+
+    if (dataTypes.length === index) {
+      return res.status(200).send(fullResult.flat(1));
+    }
+    const queryStr = req.query;
+    const queryKey = Object.keys(queryStr);
+    if (queryStr.fighter) {
+      const sql = `
+      ${sqlQueries.getFightersData(dataTypes[index])}
+      WHERE
       fighter=$1
-    ORDER BY "moveId"
-    `;
-    const params = [queryStr.fighter];
-    if (/\d/g.test(params)) {
-      throw new ClientError(400, `fighter name can't have a number`);
-    }
-    return db.query(sql, params)
+      ORDER BY ${JSON.stringify(dataTypesId[index])}
+      `;
+      const params = [queryStr.fighter];
+      if (/\d/g.test(params)) {
+        throw new ClientError(400, `fighter name can't have a number`);
+      }
+      return db.query(sql, params)
       .then(result => {
         if (result.rows.length === 0)
-          throw new ClientError(404, `${queryKey} named ${params} doesn't exist in the database`)
-        res.status(200).send(result.rows);
+        throw new ClientError(404, `${queryKey} named ${params} doesn't exist in the database`)
+        fullResult.push(result.rows)
+        renderAllData(index + 1, fullResult)
       })
       .catch(err => next(err));
-  }
-  if (queryStr.fighterId) {
-    const sql = `
-    ${sqlQueries.getFightersData()}
-    WHERE
+    }
+    if (queryStr.fighterId) {
+      const sql = `
+      ${sqlQueries.getFightersData(dataTypes[index])}
+      WHERE
       "fighterId"=$1
-    ORDER BY "moveId"
-    `;
-    const params = [queryStr.fighterId];
-    if (/[A-Za-z]/gi.test(params)) {
-      throw new ClientError(400, `fighterId can't contain any letters`);
-    }
-    return db.query(sql, params)
+      ORDER BY ${JSON.stringify(dataTypesId[index])}
+      `;
+      const params = [queryStr.fighterId];
+      if (/[A-Za-z]/gi.test(params)) {
+        throw new ClientError(400, `fighterId can't contain any letters`);
+      }
+      return db.query(sql, params)
       .then(result => {
         if (result.rows.length === 0)
-          throw new ClientError(404, `${queryKey} ${params} doesn't exist in the database`)
-        res.status(200).send(result.rows);
+        throw new ClientError(404, `${queryKey} ${params} doesn't exist in the database`)
+        fullResult.push(result.rows);
+        renderAllData(index + 1, fullResult);
       })
       .catch(err => next(err));
-  }
-  if (queryStr.rosterId) {
-    const sql = `
-    ${sqlQueries.getFightersData()}
-    WHERE
+    }
+    if (queryStr.rosterId) {
+      const sql = `
+      ${sqlQueries.getFightersData(dataTypes[index])}
+      WHERE
       "rosterId"=$1
-    ORDER BY "moveId"
-    `;
-    const params = [queryStr.rosterId];
-    if (/[A-Za-z]/gi.test(params)) {
-      throw new ClientError(400, `rosterId can't contain any letters`);
-    }
-    return db.query(sql, params)
+      ORDER BY ${JSON.stringify(dataTypesId[index])}
+      `;
+      const params = [queryStr.rosterId];
+      if (/[A-Za-z]/gi.test(params)) {
+        throw new ClientError(400, `rosterId can't contain any letters`);
+      }
+      return db.query(sql, params)
       .then(result => {
         if (result.rows.length === 0)
-          throw new ClientError(404, `${queryKey} ${params} doesn't exist in the database`)
-        res.status(200).send(result.rows);
+        throw new ClientError(404, `${queryKey} ${params} doesn't exist in the database`)
+        fullResult.push(result.rows);
+        renderAllData(index + 1, fullResult);
       })
       .catch(err => next(err));
-  }
-  if (queryStr.orderBy) {
+    }
+    if (queryStr.orderByRosterId) {
+      const sql = `
+      ${sqlQueries.getFightersData(dataTypes[index])}
+      ORDER BY
+      "rosterId", ${JSON.stringify(dataTypesId[index])}
+      `;
+      return db.query(sql)
+      .then(result => {
+        fullResult.push(result.rows);
+        renderAllData(index + 1, fullResult);
+      })
+      .catch(err => next(err));
+    }
+    if (queryKey.length > 0) {
+      throw new ClientError(400, `${queryKey} is not a valid query key`)
+    }
     const sql = `
-    ${sqlQueries.getFightersData()}
-    ORDER BY
-    "rosterId", "moveId"
+    ${sqlQueries.getFightersData(dataTypes[index])}
+    ORDER BY ${JSON.stringify(dataTypesId[index])}
     `;
     return db.query(sql)
       .then(result => {
-        res.status(200).send(result.rows);
+        fullResult.push(result.rows);
+        renderAllData(index + 1, fullResult);
       })
-      .catch(err => next(err));
-  }
-  if (queryKey.length > 0) {
-    throw new ClientError(400, `${queryKey} is not a valid query key`)
-  }
-  const sql = `
-  ${sqlQueries.getFightersData()}
-  ORDER BY "moveId"
-  `;
-  return db.query(sql)
-    .then(result => res.status(200).send(result.rows))
     .catch(err => next(err));
+  }
 });
 
 app.use(errorMiddleware)
