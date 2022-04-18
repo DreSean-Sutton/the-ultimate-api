@@ -34,8 +34,9 @@ app.get('/api/fighters', (req, res, next) => {
     }
     return db.query(sql, params)
     .then(result => {
-    if (result.rows.length === 0)
-    throw new ClientError(404, `${queryKey} named ${params} doesn't exist in the database`)
+    if (result.rows.length === 0) {
+      throw new ClientError(404, `${queryKey} named ${params} doesn't exist in the database`)
+    }
       res.status(200).send(result.rows[0]);
     })
     .catch(err => next(err));
@@ -52,8 +53,9 @@ app.get('/api/fighters', (req, res, next) => {
     }
     return db.query(sql, params)
       .then(result => {
-      if (result.rows.length === 0)
+      if (result.rows.length === 0) {
         throw new ClientError(404, `${queryKey} ${params} doesn't exist in the database`)
+      }
         res.status(200).send(result.rows[0]);
       })
       .catch(err => next(err));
@@ -70,8 +72,9 @@ app.get('/api/fighters', (req, res, next) => {
     }
     return db.query(sql, params)
       .then(result => {
-      if (result.rows.length === 0)
+      if (result.rows.length === 0) {
         throw new ClientError(404, `${queryKey} ${params} doesn't exist in the database`)
+      }
         res.status(200).send(result.rows[0]);
       })
       .catch(err => next(err));
@@ -106,8 +109,8 @@ app.get('/api/fighters/data', (req, res, next) => {
   // and responds with a single array of all data.
 
   function renderAllData (index, fullResult) {
-    const dataTypes = ['moves', 'throws'];
-    const dataTypeIds = ["moveId", "throwId"];
+    const dataTypes = ['moves', 'throws', 'movements'];
+    const dataTypeIds = ["moveId", "throwId", "movementId"];
 
     if (dataTypes.length === index) {
       return res.status(200).send(fullResult.flat(1));
@@ -127,8 +130,9 @@ app.get('/api/fighters/data', (req, res, next) => {
       }
       return db.query(sql, params)
       .then(result => {
-        if (result.rows.length === 0)
-        throw new ClientError(404, `${queryKey} named ${params} doesn't exist in the database`)
+        if (result.rows.length === 0) {
+          throw new ClientError(404, `${queryKey} named ${params} doesn't exist in the database`)
+        }
         fullResult.push(result.rows)
         renderAllData(index + 1, fullResult)
       })
@@ -147,8 +151,9 @@ app.get('/api/fighters/data', (req, res, next) => {
       }
       return db.query(sql, params)
       .then(result => {
-        if (result.rows.length === 0)
-        throw new ClientError(404, `${queryKey} ${params} doesn't exist in the database`)
+        if (result.rows.length === 0) {
+          throw new ClientError(404, `${queryKey} ${params} doesn't exist in the database`)
+        }
         fullResult.push(result.rows);
         renderAllData(index + 1, fullResult);
       })
@@ -167,8 +172,9 @@ app.get('/api/fighters/data', (req, res, next) => {
       }
       return db.query(sql, params)
       .then(result => {
-        if (result.rows.length === 0)
-        throw new ClientError(404, `${queryKey} ${params} doesn't exist in the database`)
+        if (result.rows.length === 0) {
+          throw new ClientError(404, `${queryKey} ${params} doesn't exist in the database`)
+        }
         fullResult.push(result.rows);
         renderAllData(index + 1, fullResult);
       })
@@ -208,8 +214,8 @@ app.get('/api/fighters/data/:type', (req, res, next) => {
   const queryKey = Object.keys(queryStr);
   const currentType = req.params.type;
   let index = null
-  const dataTypes = ['moves', 'throws'];
-  const dataTypeIds = ['moveId', 'throwId'];
+  const dataTypes = ['moves', 'throws', 'movements'];
+  const dataTypeIds = ['moveId', 'throwId', 'movementId'];
 
   if (!checkValidType()) {
     throw new ClientError(400, `${currentType} is not a valid parameter`);
@@ -227,8 +233,9 @@ app.get('/api/fighters/data/:type', (req, res, next) => {
     }
     return db.query(sql, params)
       .then(result => {
-        if (result.rows.length === 0)
+        if (result.rows.length === 0) {
           throw new ClientError(404, `${queryKey} named ${params} doesn't exist in the database`)
+        }
         res.status(200).send(result.rows);
       })
       .catch(err => next(err));
@@ -246,8 +253,9 @@ app.get('/api/fighters/data/:type', (req, res, next) => {
     }
     return db.query(sql, params)
       .then(result => {
-        if (result.rows.length === 0)
+        if (result.rows.length === 0) {
           throw new ClientError(404, `${queryKey} ${params} doesn't exist in the database`)
+        }
         res.status(200).send(result.rows);
       })
       .catch(err => next(err));
@@ -265,8 +273,9 @@ app.get('/api/fighters/data/:type', (req, res, next) => {
     }
     return db.query(sql, params)
       .then(result => {
-        if (result.rows.length === 0)
+        if (result.rows.length === 0) {
           throw new ClientError(404, `${queryKey} ${params} doesn't exist in the database`)
+        }
         res.status(200).send(result.rows);
       })
       .catch(err => next(err));

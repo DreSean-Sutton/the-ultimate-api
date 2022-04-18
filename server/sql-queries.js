@@ -20,7 +20,7 @@ const sqlQueries = {
           fighters
         JOIN "moves" AS "mo" USING ("fighterId")
         JOIN "hitboxes" AS "hit" USING ("moveId")
-      `
+      `;
     }
     if (type === 'throws') {
       return `
@@ -33,7 +33,20 @@ const sqlQueries = {
           fighters
         JOIN "throws" USING ("fighterId")
         JOIN "grappling" USING ("throwId")
-      `
+      `;
+    }
+    if (type === 'movements') {
+      return `
+        SELECT
+          "activeFrames", "displayName",
+          fighter, "fighterId",
+          "name", "rosterId",
+          "totalFrames", "type"
+        FROM
+          fighters
+        JOIN "movements" USING ("fighterId")
+        JOIN "dodging" USING ("movementId")
+      `;
     }
   }
 }

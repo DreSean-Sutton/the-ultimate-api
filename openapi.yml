@@ -13,9 +13,13 @@ info:
     into my database. If you see any mistakes, please let me know on GitHub!
     </br>
     </br>
+    14 Fighters, so far, and at least 1 is added daily!
+    </br>
+    </br>
     [Gitub](https://github.com/DreSean-Sutton/Final-Project)
     [LinkedIn](https://www.linkedin.com/in/dre-sean-sutton-6343b5222)
-  version: v4
+
+  version: v5
 
 paths:
   /api/fighters:
@@ -149,18 +153,7 @@ paths:
                   totalFrames: "31"
                   type: move
                 -
-                  activeFrames: "8-27"
-                  damage: null
-                  displayName: Bayonetta
-                  fighter: bayonetta
-                  fighterId: 2
-                  moveType: "counter"
-                  name: "down b"
-                  rosterId: 69
-                  totalFrames: "66"
-                  type: move
-                -
-                  activeFrames: "7-8"
+                  activeFrames: 7-8
                   damage: null
                   displayName: Bayonetta
                   fighter: bayonetta
@@ -169,12 +162,21 @@ paths:
                   rosterId: 69
                   totalFrames: "37"
                   type: throw
+                -
+                  "activeFrames": "3-29"
+                  "displayName": "Inkling"
+                  "fighter": "inkling"
+                  "fighterId": 13
+                  "name": "neutral air dodge"
+                  "rosterId": 70
+                  "totalFrames": "50"
+                  "type": "movement"
 
   /api/fighters/data/{type}:
     get:
       tags:
       - Fighters
-      summary: Returns specific frame data for all Fighters
+      summary: Returns a specific type of frame data for all Fighters
       description: >
        Use `fighter`, `fighterId`, and `rosterId`
        to specify a single fighter
@@ -184,7 +186,7 @@ paths:
         schema:
           type: string
         required: true
-        description: Must be `moves` or `throws`
+        description: Must be `moves`, `throws`, or `movements`
       - in: query
         name: fighter
         schema:
@@ -249,13 +251,21 @@ paths:
                   totalFrames: "31"
                   type: move
                 -
-                  activeFrames: "8-27"
+                  activeFrames: "7-8"
                   damage: null
                   displayName: Bayonetta
                   fighter: bayonetta
                   fighterId: 2
-                  moveType: "counter"
-                  name: "down b"
+                  name: "grab"
                   rosterId: 69
-                  totalFrames: "66"
-                  type: move
+                  totalFrames: "37"
+                  type: throw
+                -
+                  "activeFrames": "3-29"
+                  "displayName": "Inkling"
+                  "fighter": "inkling"
+                  "fighterId": 13
+                  "name": "neutral air dodge"
+                  "rosterId": 70
+                  "totalFrames": "50"
+                  "type": "movement"
