@@ -5,30 +5,28 @@ info:
   description: >
     This is *the* Smash Ultimate restful API that offers indepth
     frame data information on the cast. Use a parameter to specify
-    a single characters. Values separated by `/`, `()`, and `[]`
-     indicate different hitboxes that are mirrored
-     by the `moveType` property. All frame data is copied from the
-     fantastic [Ultimate Frame Data](https://ultimateframedata.com)
-     website, occasionally modified for clarity, and manually input
-     into my database. If you see any mistakes, please let me know on GitHub!
+    a single Fighter. Values separated by `/`, `()`, and `[]`
+    indicate different hitboxes that are mirrored
+    by the `moveType` property. All frame data is copied from the
+    fantastic [Ultimate Frame Data](https://ultimateframedata.com)
+    website, occasionally modified for clarity, and manually input
+    into my database. If you see any mistakes, please let me know on GitHub!
     </br>
     </br>
     [Gitub](https://github.com/DreSean-Sutton/Final-Project)
     [LinkedIn](https://www.linkedin.com/in/dre-sean-sutton-6343b5222)
-  version: v2
+  version: v4
 
 paths:
   /api/fighters:
     get:
       tags:
         - Fighters
-      summary: Returns all fighters and their basic information.
+      summary: Returns basic information for all fighters
+      description: >
+       Use `fighter`, `fighterId`, and `rosterId`
+       to specify a single fighter
       parameters:
-      - in: query
-        name: orderByRosterId
-        schema:
-          type: boolean
-        required: false
       - in: query
         name: fighter
         schema:
@@ -43,6 +41,11 @@ paths:
         name: rosterId
         schema:
           type: integer
+        required: false
+      - in: query
+        name: orderByRosterId
+        schema:
+          type: boolean
         required: false
       responses:
         '200':
@@ -77,13 +80,11 @@ paths:
     get:
       tags:
         - Fighters
-      summary: Returns all frame data for all characters
+      summary: Returns all frame data for all Fighters
+      description: >
+       Use `fighter`, `fighterId`, and `rosterId`
+       to specify a single fighter
       parameters:
-      - in: query
-        name: orderByRosterId
-        schema:
-          type: boolean
-        required: false
       - in: query
         name: fighter
         schema:
@@ -98,6 +99,11 @@ paths:
         name: rosterId
         schema:
           type: integer
+        required: false
+      - in: query
+        name: orderByRosterId
+        schema:
+          type: boolean
         required: false
       responses:
         '200':
@@ -170,14 +176,15 @@ paths:
       - Fighters
       summary: Returns specific frame data for all Fighters
       description: >
-       Specify the type of frame data you desire
+       Use `fighter`, `fighterId`, and `rosterId`
+       to specify a single fighter
       parameters:
       - in: path
         name: type
         schema:
           type: string
-        description: Can be 'moves' or 'throws'
         required: true
+        description: Must be `moves` or `throws`
       - in: query
         name: fighter
         schema:
