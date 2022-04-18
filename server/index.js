@@ -204,17 +204,31 @@ app.get('/api/fighters/data', (req, res, next) => {
 });
 
 app.get('/api/fighters/data/:type', (req, res, next) => {
+  const queryStr = req.query;
+  const queryKey = Object.keys(queryStr);
   const currentType = req.params.type;
   let index = null
   const dataTypes = ['moves', 'throws'];
-  const dataTypeIds = ['moveId', 'throwId']
-  console.log(dataTypeIds);
+  const dataTypeIds = ['moveId', 'throwId'];
+
   if (!checkValidType()) {
     throw new ClientError(400, `${currentType} is not a valid parameter`);
   }
-  // if (queryKey.length > 0) {
-  //   throw new ClientError(400, `${queryKey} is not a valid query key`)
-  // }
+  if (queryStr.orderByRosterId) {
+    const sql = `
+      ${sqlQueries.getFightersData(dataTypes[index])}
+      ORDER BY
+      "rosterId", ${JSON.stringify(dataTypeIds[index])}
+      `;
+    return db.query(sql)
+      .then(result => {
+        res.status(200).send(result.rows)
+      })
+      .catch(err => next(err));
+  }
+  if (queryKey.length > 0) {
+    throw new ClientError(400, `${queryKey} is not a valid query key`)
+  }
   const sql = `
     ${sqlQueries.getFightersData(dataTypes[index])}
     ORDER BY ${JSON.stringify(dataTypeIds[index])}
