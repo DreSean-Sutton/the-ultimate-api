@@ -98,6 +98,30 @@ CREATE TABLE public.dodging (
 
 
 
+CREATE TABLE public.stats (
+	"statId" serial NOT NULL,
+	"fighterId" int NOT NULL,
+	"name" TEXT NOT NULL,
+	"type" TEXT NOT NULL,
+	"createdAt" timestamp with time zone,
+	CONSTRAINT "stats_pk" PRIMARY KEY ("statId")
+) WITH (
+  OIDS=FALSE
+);
+
+
+
+CREATE TABLE public.miscellaneous (
+	"statId" serial NOT NULL,
+	"statValue" TEXT NOT NULL,
+	"createdAt" timestamp with time zone NOT NULL,
+	CONSTRAINT "miscellaneous_pk" PRIMARY KEY ("statId")
+) WITH (
+  OIDS=FALSE
+);
+
+
+
 ALTER TABLE public.moves ADD CONSTRAINT "moves_fk0" FOREIGN KEY ("fighterId") REFERENCES "fighters"("fighterId");
 
 ALTER TABLE public.hitboxes ADD CONSTRAINT "hitboxes_fk0" FOREIGN KEY ("moveId") REFERENCES "moves"("moveId");
@@ -109,3 +133,7 @@ ALTER TABLE public.grappling ADD CONSTRAINT "grappling_fk0" FOREIGN KEY ("throwI
 ALTER TABLE public.movements ADD CONSTRAINT "movements_fk0" FOREIGN KEY ("fighterId") REFERENCES "fighters"("fighterId");
 
 ALTER TABLE public.dodging ADD CONSTRAINT "dodging_fk0" FOREIGN KEY ("movementId") REFERENCES "movements"("movementId");
+
+ALTER TABLE public.stats ADD CONSTRAINT "stats_fk0" FOREIGN KEY ("fighterId") REFERENCES "fighters"("fighterId");
+
+ALTER TABLE public.miscellaneous ADD CONSTRAINT "miscellaneous_fk0" FOREIGN KEY ("statId") REFERENCES "stats"("statId");
