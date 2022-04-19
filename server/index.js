@@ -328,14 +328,15 @@ app.get('/api/fighters/data/:type', (req, res, next) => {
 app.post('/api/fighters/data/add', (req, res, next) => {
   const { fighterId, fighter, rosterId, displayName, name } = req.body;
   const { moveType, type, damage, activeFrames, totalFrames } = req.body;
+
   if (fighter !== undefined
     & rosterId !== undefined
     & displayName !== undefined) {
       const sql = `
-      INSERT INTO public.fighters
-      ("fighter", "rosterId", "displayName")
-      VALUES ($1, $2, $3)
-      RETURNING *;
+        INSERT INTO public.fighters
+        ("fighter", "rosterId", "displayName")
+        VALUES ($1, $2, $3)
+        RETURNING *;
       `;
     const params = [fighter, rosterId, displayName];
       console.error(params);
@@ -345,14 +346,67 @@ app.post('/api/fighters/data/add', (req, res, next) => {
           console.log(result.rows[0]);
           })
         .catch(err => {
-          if (err.detail.match(/already exists/g)) {
+          if (/already exists/g.test(err.detail)) {
             res.status(400).json({ error: `${err.detail}`});
           } else {
             next(err);
           }
         });
   }
-  // if ()
+  if (fighterId !== undefined
+    & name !== undefined
+    & moveType !== undefined
+    & damage !== undefined
+    & activeFrames !== undefined
+    & totalFrames !== undefined) {
+      const fullResult = {};
+      return handleMoves(1)
+      function handleMoves (counter) {
+        if (counter === 1) {
+          const sql = `
+          INSERT INTO public.moves
+          ("fighterId", "name", "moveType", "type")
+          VALUES ($1, $2, $3, 'moves')
+          RETURNING *;
+          `;
+          const params = [fighterId, name, moveType];
+          db.query(sql, params)
+            .then(result => {
+              Object.assign(fullResult, result.rows[0]);
+              return handleMoves(counter + 1)
+            })
+            .catch(err => {
+              if (/already exists/g.test(err.detail)
+              || /not present/g.test(err.detail)) {
+                res.status(400).json({ error: `${err.detail}` });
+              } else {
+                next(err);
+              }
+            });
+        } else {
+          const sql2 = `
+            INSERT INTO public.hitboxes
+              ("damage", "activeFrames", "totalFrames")
+            VALUES ($1, $2, $3)
+            RETURNING *;
+          `;
+          const params2 = [damage, activeFrames, totalFrames];
+          db.query(sql2, params2)
+            .then(result => {
+              Object.assign(fullResult, result.rows[0]);
+              res.status(201).json(fullResult);
+            })
+            .catch(err => {
+              if ((/already exists/g.test(err.detail))
+              || (/not present/g.test(err.detail))) {
+                res.status(400).json({ error: `${err.detail}` });
+              } else {
+                next(err);
+              }
+            });
+        }
+      }
+  }
 });
 app.use(errorMiddleware)
 
