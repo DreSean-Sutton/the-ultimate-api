@@ -7,3 +7,5 @@ const fighters = {
     `;
   }
 }
+
+module.exports = fighters

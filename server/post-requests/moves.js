@@ -8,9 +8,9 @@ const moves = {
   }
   hitboxesPost() {
     return `
-    INSERT INTO
-      "damage", "activeFrames",
-      "totalFrames"
+      INSERT INTO
+        "damage", "activeFrames",
+        "totalFrames"
     `;
   }
 }
