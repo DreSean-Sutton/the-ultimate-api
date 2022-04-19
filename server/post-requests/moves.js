@@ -1,14 +1,14 @@
 const moves = {
   movesPost() {
     return `
-      INSERT INTO
+      INSERT INTO public.moves
         "fighterid", "name",
         "moveType", "type"
     `;
   }
   hitboxesPost() {
     return `
-      INSERT INTO
+      INSERT INTO public.hitboxes
         "damage", "activeFrames",
         "totalFrames"
     `;
