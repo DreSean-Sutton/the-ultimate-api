@@ -5,7 +5,7 @@ const movements = {
         "fighterId", "name",
         "type"
     `;
-  }
+  },
   dodgingPost() {
     return `
       INSERT INTO public.dodging
@@ -14,4 +14,4 @@ const movements = {
   }
 }
 
-module.export = movements
+module.exports = movements

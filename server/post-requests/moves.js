@@ -5,7 +5,7 @@ const moves = {
         "fighterid", "name",
         "moveType", "type"
     `;
-  }
+  },
   hitboxesPost() {
     return `
       INSERT INTO public.hitboxes
@@ -15,4 +15,4 @@ const moves = {
   }
 }
 
-module.export = moves
+module.exports = moves

@@ -5,7 +5,7 @@ const throws = {
         "fighterId", "name",
         "type"
     `;
-  }
+  },
   grapplingPost() {
     return `
       INSERT INTO public.grappling
@@ -15,4 +15,4 @@ const throws = {
   }
 }
 
-module.export = throws
+module.exports = throws

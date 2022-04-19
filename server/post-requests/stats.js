@@ -5,7 +5,7 @@ const stats = {
         "fighterId", "name",
         "type"
     `;
-  }
+  },
   miscellaneousPost() {
     return `
       INSERT INTO public.miscellaneous
@@ -14,4 +14,4 @@ const stats = {
   }
 }
 
-module.export = stats
+module.exports = stats

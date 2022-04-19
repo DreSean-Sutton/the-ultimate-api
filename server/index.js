@@ -1,9 +1,14 @@
 require('dotenv/config');
 const express = require('express');
+const expressJSON = express.json();
 const pg = require('pg');
 const ClientError = require('./client-error');
 const errorMiddleware = require('./error-middleware');
 const sqlQueries = require('./sql-queries');
+const fightersOutsource = require('./post-requests/fighters');
+const movesOutsource = require('./post-requests/moves');
+const movementsOutsource = require('./post-requests/movements');
+const statsOutsource = require('./post-requests/stats');
 const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
 
@@ -15,6 +20,10 @@ const db = new pg.Pool({
 });
 
 const app = express();
+app.use('/api/fighters', expressJSON);
+app.use('/api/fighters/data', expressJSON);
+app.use('/api/fighters/data/:type', expressJSON);
+app.use('/api/fighters/data/add', expressJSON);
 const swaggerDocument = YAML.load('./openapi.yml');
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
@@ -316,6 +325,35 @@ app.get('/api/fighters/data/:type', (req, res, next) => {
   }
 });
 
+app.post('/api/fighters/data/add', (req, res, next) => {
+  const { fighterId, fighter, rosterId, displayName, name } = req.body;
+  const { moveType, type, damage, activeFrames, totalFrames } = req.body;
+  if (fighter !== undefined
+    & rosterId !== undefined
+    & displayName !== undefined) {
+      const sql = `
+      INSERT INTO public.fighters
+      ("fighter", "rosterId", "displayName")
+      VALUES ($1, $2, $3)
+      RETURNING *;
+      `;
+    const params = [fighter, rosterId, displayName];
+      console.error(params);
+      return db.query(sql, params)
+        .then(result => {
+          res.status(201).json(result.rows[0]);
+          console.log(result.rows[0]);
+          })
+        .catch(err => {
+          if (err.detail.match(/already exists/g)) {
+            res.status(400).json({ error: `${err.detail}`});
+          } else {
+            next(err);
+          }
+        });
+  }
+  // if ()
+});
 app.use(errorMiddleware)
 
 app.listen(process.env.PORT, () => {

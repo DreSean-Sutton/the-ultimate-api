@@ -2,8 +2,8 @@ const fighters = {
   post() {
     return `
       INSERT INTO public.fighters
-        "fighter", "rosterId",
-        "displayName"
+        ("fighter", "rosterId",
+        "displayName")
     `;
   }
 }
