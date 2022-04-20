@@ -464,23 +464,22 @@ app.post('/api/fighters/data/add', (req, res, next) => {
     }
     if (typeof fighterId === 'number'
     & typeof name === 'string'
-    & typeof damage === 'string'
     & typeof activeFrames === 'string'
     & typeof totalFrames === 'string') {
-      return handleThrows(1)
-      function handleThrows(counter) {
+      return handleMovements(1)
+      function handleMovements(counter) {
         if (counter === 1) {
           const sql = `
-          INSERT INTO public.throws
+          INSERT INTO public.movements
             ("fighterId", "name", "type")
-          VALUES ($1, $2, 'throw')
+          VALUES ($1, $2, 'movement')
           RETURNING *;
           `;
           const params = [fighterId, name]
           return db.query(sql, params)
           .then(result => {
             Object.assign(fullResult, result.rows[0]);
-            handleThrows(counter + 1)
+            handleMovements(counter + 1)
           })
             .catch(err => {
               if (/already exists/g.test(err.detail)
@@ -492,12 +491,12 @@ app.post('/api/fighters/data/add', (req, res, next) => {
             });
         } else {
           const sql2 = `
-          INSERT INTO public.grappling
-            ("damage", "activeFrames", "totalFrames")
-          VALUES ($1, $2, $3)
+          INSERT INTO public.dodging
+            ("activeFrames", "totalFrames")
+          VALUES ($1, $2)
           RETURNING *;
           `;
-          const params2 = [damage, activeFrames, totalFrames];
+          const params2 = [activeFrames, totalFrames];
           return db.query(sql2, params2)
             .then(result => {
               Object.assign(fullResult, result.rows[0]);
