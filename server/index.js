@@ -126,6 +126,7 @@ app.get('/api/fighters/data', (req, res, next) => {
     }
     const queryStr = req.query;
     const queryKey = Object.keys(queryStr);
+
     if (queryStr.fighter) {
       const sql = `
       ${sqlQueries.getFightersData(dataTypes[index])}
@@ -328,10 +329,11 @@ app.get('/api/fighters/data/:type', (req, res, next) => {
 app.post('/api/fighters/data/add', (req, res, next) => {
   const { fighterId, fighter, rosterId, displayName, name } = req.body;
   const { moveType, type, damage, activeFrames, totalFrames } = req.body;
+  const fullResult = {};
 
-  if (fighter !== undefined
-    & rosterId !== undefined
-    & displayName !== undefined) {
+  if (typeof fighter === 'string'
+    & typeof rosterId === 'number'
+    & typeof displayName === 'string') {
       const sql = `
         INSERT INTO public.fighters
         ("fighter", "rosterId", "displayName")
@@ -353,24 +355,23 @@ app.post('/api/fighters/data/add', (req, res, next) => {
           }
         });
   }
-  if (fighterId !== undefined
-    & name !== undefined
-    & moveType !== undefined
-    & damage !== undefined
-    & activeFrames !== undefined
-    & totalFrames !== undefined) {
-      const fullResult = {};
+  if (typeof fighterId === 'number'
+    & typeof name === 'string'
+    & typeof moveType === 'string'
+    & typeof damage === 'string'
+    & typeof activeFrames === 'string'
+    & typeof totalFrames === 'string') {
       return handleMoves(1)
       function handleMoves (counter) {
         if (counter === 1) {
           const sql = `
           INSERT INTO public.moves
           ("fighterId", "name", "moveType", "type")
-          VALUES ($1, $2, $3, 'moves')
+          VALUES ($1, $2, $3, 'move')
           RETURNING *;
           `;
           const params = [fighterId, name, moveType];
-          db.query(sql, params)
+          return db.query(sql, params)
             .then(result => {
               Object.assign(fullResult, result.rows[0]);
               return handleMoves(counter + 1)
@@ -391,7 +392,7 @@ app.post('/api/fighters/data/add', (req, res, next) => {
             RETURNING *;
           `;
           const params2 = [damage, activeFrames, totalFrames];
-          db.query(sql2, params2)
+          return db.query(sql2, params2)
             .then(result => {
               Object.assign(fullResult, result.rows[0]);
               res.status(201).json(fullResult);
@@ -406,7 +407,61 @@ app.post('/api/fighters/data/add', (req, res, next) => {
             });
         }
       }
-  }
+    }
+  if (fighterId !== 'number'
+    & name !== 'string'
+    & type !== 'string'
+    & damage !== 'string'
+    & activeFrames !== 'string'
+    & totalFrames !== 'string') {
+      return handleThrows(1)
+      function handleThrows(counter) {
+        if (counter === 1) {
+          const sql = `
+          INSERT INTO public.throws
+            ("fighterId", "name", "type")
+          VALUES ($1, $2, 'throw')
+          RETURNING *;
+          `;
+          const params = [fighterId, name]
+          return db.query(sql, params)
+          .then(result => {
+            Object.assign(fullResult, result.rows[0]);
+            handleThrows(counter + 1)
+          })
+            .catch(err => {
+              if (/already exists/g.test(err.detail)
+                || /not present/g.test(err.detail)) {
+                res.status(400).json({ error: `${err.detail}` });
+              } else {
+                next(err);
+              }
+            });
+        } else {
+          const sql2 = `
+          INSERT INTO public.grappling
+            ("damage", "activeFrames", "totalFrames")
+          VALUES ($1, $2, $3)
+          RETURNING *;
+          `;
+          const params2 = [damage, activeFrames, totalFrames];
+          return db.query(sql2, params2)
+            .then(result => {
+              Object.assign(fullResult, result.rows[0]);
+              res.status(201).json(fullResult)
+            })
+            .catch(err => {
+              if (/already exists/g.test(err.detail)
+                || /not present/g.test(err.detail)) {
+                res.status(400).json({ error: `${err.detail}` });
+              } else {
+                next(err);
+              }
+            });
+        }
+      }
+      res.status(500).json({ error: ':(' });
+    }
 });
 app.use(errorMiddleware)
 
