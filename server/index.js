@@ -20,10 +20,11 @@ const db = new pg.Pool({
 });
 
 const app = express();
-app.use('/api/fighters', expressJSON);
-app.use('/api/fighters/data', expressJSON);
-app.use('/api/fighters/data/:type', expressJSON);
-app.use('/api/fighters/data/add', expressJSON);
+app.use('/api', expressJSON);
+// app.use('/api/fighters/data', expressJSON);
+// app.use('/api/fighters/data/:type', expressJSON);
+// app.use('/api/add/fighters', expressJSON);
+// app.use('/api/add/moves', expressJSON);
 const swaggerDocument = YAML.load('./openapi.yml');
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
@@ -325,13 +326,16 @@ app.get('/api/fighters/data/:type', (req, res, next) => {
     return false;
   }
 });
+// const { fighter, displayName, name, moveType, type, damage, activeFrames, totalFrames } = req.body;
+// let { fighterId, rosterId } = req.body;
+// rosterId = Number(rosterId);
+// fighterId = Number(fighterId);
 
-app.post('/api/fighters/data/add', (req, res, next) => {
-  let { fighterId, rosterId } = req.body;
-  const { fighter, displayName, name, moveType, type, damage, activeFrames, totalFrames } = req.body;
-  const fullResult = {};
+app.post('/api/add/fighters', (req, res, next) => {
+
+  const { fighter, displayName } = req.body;
+  let { rosterId } = req.body;
   rosterId = Number(rosterId);
-  fighterId = Number(fighterId);
 
   if (typeof fighter === 'string'
     & typeof rosterId === 'number'
@@ -343,7 +347,6 @@ app.post('/api/fighters/data/add', (req, res, next) => {
         RETURNING *;
       `;
     const params = [fighter, rosterId, displayName];
-      console.error(params);
       return db.query(sql, params)
         .then(result => {
           res.status(201).json(result.rows[0]);
@@ -356,6 +359,19 @@ app.post('/api/fighters/data/add', (req, res, next) => {
             next(err);
           }
         });
+  }
+  res.status(500).json({ error: ':(' });
+});
+
+app.post('/api/add/moves', (req, res, next) => {
+  // Check if they are undefined
+  const { name, moveType, damage, activeFrames, totalFrames } = req.body;
+  let { fighterId } = req.body;
+  fighterId = Number(fighterId);
+  const fullResult = {};
+  if (!fighterId) {
+    res.status(400).json({ error: 'fighterId must be a number'});
+    return;
   }
   if (typeof fighterId === 'number'
     & typeof name === 'string'
@@ -410,6 +426,17 @@ app.post('/api/fighters/data/add', (req, res, next) => {
         }
       }
   }
+});
+
+app.post('/api/add/throws', (req, res, next) => {
+  const { name, damage, activeFrames, totalFrames } = req.body;
+  let { fighterId } = req.body;
+  fighterId = Number(fighterId);
+  const fullResult = {};
+  if (!fighterId) {
+    res.status(400).json({ error: 'fighterId must be a number' });
+    return;
+  }
   if (typeof fighterId === 'number'
     & typeof name === 'string'
     & typeof damage === 'string'
@@ -462,6 +489,17 @@ app.post('/api/fighters/data/add', (req, res, next) => {
         }
       }
     }
+});
+
+app.post('/api/add/movements', (req, res, next) => {
+  const { name, activeFrames, totalFrames } = req.body;
+  let { fighterId } = req.body;
+  fighterId = Number(fighterId);
+  const fullResult = {};
+  if (!fighterId) {
+    res.status(400).json({ error: 'fighterId must be a number' });
+    return;
+  }
     if (typeof fighterId === 'number'
     & typeof name === 'string'
     & typeof activeFrames === 'string'
@@ -513,8 +551,8 @@ app.post('/api/fighters/data/add', (req, res, next) => {
         }
       }
     }
-    res.status(500).json({ error: ':(' });
 });
+
 app.use(errorMiddleware)
 
 app.listen(process.env.PORT, () => {
