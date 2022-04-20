@@ -19,7 +19,7 @@ info:
     [Gitub](https://github.com/DreSean-Sutton/Final-Project)
     [LinkedIn](https://www.linkedin.com/in/dre-sean-sutton-6343b5222)
 
-  version: v6
+  version: v7
 
 paths:
   /api/fighters:
@@ -289,3 +289,288 @@ paths:
                   rosterId: 70
                   statValue: 9 frames
                   type: stat
+
+  /api/add/fighters:
+    post:
+      tags:
+      - Add
+      summary: Add a Fighter and their basic data
+      requestBody:
+        description: Click `Try it out` and edit your request!
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                displayName:
+                  type: string
+                fighter:
+                  type: string
+                rosterId:
+                  type: integer
+              required:
+              - fighter
+              - displayName
+              - rosterId
+      responses:
+        '201':
+          description:
+            created
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  type: object
+                  properties:
+                    displayName:
+                      type: string
+                    fighter:
+                      type: string
+                    fighterId:
+                      type: integer
+                    rosterId:
+                      type: integer
+                example:
+                  displayName: Son goku
+                  fighter: goku
+                  fighterId: 1
+                  rosterId: 100
+                  createdAt: 2020-02-20etc
+  /api/add/moves:
+    post:
+      tags:
+      - Add
+      summary: Add move data to a Fighter
+      requestBody:
+        description: Click `Try it out` and edit your request!
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                activeFrames:
+                  type: string
+                damage:
+                  type: string
+                fighterId:
+                  type: integer
+                moveId:
+                  type: integer
+                moveType:
+                  type: string
+                name:
+                  type: string
+                totalFrames:
+                  type: string
+                type:
+                  type: string
+              required:
+                - fighterId
+                - name
+                - moveType
+                - damage
+                - activeFrames
+                - totalFrames
+      responses:
+        '201':
+          description:
+            created
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  type: object
+                  properties:
+                    activeFrames:
+                      type: string
+                    damage:
+                      type: string
+                    fighterId:
+                      type: integer
+                    moveId:
+                      type: integer
+                    moveType:
+                      type: string
+                    name:
+                      type: string
+                    totalFrames:
+                      type: string
+                    type:
+                      type: string
+                example:
+                  activeFrames: 1-100
+                  damage: 9001%
+                  fighterId: 1
+                  moveId: 150
+                  movetype: multi
+                  name: kamehameha
+                  totalFrames: '105'
+                  type: move
+                  createdAt: 2020-02-20etc
+  /api/add/throws:
+    post:
+      tags:
+      - Add
+      summary: Add throw data to a Fighter
+      requestBody:
+        description: Click `Try it out` and edit your request!
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                activeFrames:
+                  type: string
+                damage:
+                  type: string
+                fighterId:
+                  type: integer
+                throwId:
+                  type: integer
+                name:
+                  type: string
+                totalFrames:
+                  type: string
+      responses:
+        '201':
+          description:
+            created
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  type: object
+                  properties:
+                    activeFrames:
+                      type: string
+                    damage:
+                      type: string
+                    fighterId:
+                      type: integer
+                    throwId:
+                      type: integer
+                    name:
+                      type: string
+                    totalFrames:
+                      type: string
+                    type:
+                      type: string
+                example:
+                  activeFrames: '1/5/10'
+                  damage: '10.0/5.0/40.5%'
+                  fighterId: 1
+                  throwId: 203
+                  name: down throw
+                  totalFrames: '15'
+                  type: throw
+                  createdAt: 2020-02-20etc
+
+  /api/add/movements:
+    post:
+      tags:
+      - Add
+      summary: Add movement data to a Fighter
+      requestBody:
+        description: Click `Try it out` and edit your request!
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                activeFrames:
+                    type: string
+                fighterId:
+                  type: integer
+                name:
+                  type: string
+                totalFrames:
+                  type: string
+      responses:
+        '201':
+          description:
+            created
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  type: object
+                  properties:
+                    activeFrames:
+                      type: string
+                    damage:
+                      type: string
+                    fighterId:
+                      type: integer
+                    moveId:
+                      type: integer
+                    moveType:
+                      type: string
+                    name:
+                      type: string
+                    totalFrames:
+                      type: string
+                    type:
+                      type: string
+                example:
+                  activeFrames: '1-5'
+                  fighterId: 1
+                  movementId: 30
+                  name: spot dodge
+                  totalFrames: '6'
+                  type: movement
+                  createdAt: 2020-02-20etc
+  /api/add/stats:
+    post:
+      tags:
+      - Add
+      summary: Add stat data to a Fighter
+      requestBody:
+        description: Click `Try it out` and edit your request!
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fighterId:
+                  type: integer
+                name:
+                  type: string
+                statValue:
+                    type: string
+      responses:
+        '201':
+          description:
+            created
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  type: object
+                  properties:
+                    fighterId:
+                      type: integer
+                    name:
+                      type: string
+                    statId:
+                      type: integer
+                    statValue:
+                      type: string
+                    type:
+                      type: string
+                example:
+                  fighterId: 1
+                  name: weight
+                  statId: 30
+                  statValue: 120
+                  type: stat
+                  createdAt: 2020-02-20etc

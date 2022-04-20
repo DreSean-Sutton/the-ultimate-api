@@ -326,10 +326,6 @@ app.get('/api/fighters/data/:type', (req, res, next) => {
     return false;
   }
 });
-// const { fighter, displayName, name, moveType, type, damage, activeFrames, totalFrames } = req.body;
-// let { fighterId, rosterId } = req.body;
-// rosterId = Number(rosterId);
-// fighterId = Number(fighterId);
 
 app.post('/api/add/fighters', (req, res, next) => {
 
