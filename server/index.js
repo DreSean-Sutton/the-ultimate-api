@@ -327,9 +327,11 @@ app.get('/api/fighters/data/:type', (req, res, next) => {
 });
 
 app.post('/api/fighters/data/add', (req, res, next) => {
-  const { fighterId, fighter, rosterId, displayName, name } = req.body;
-  const { moveType, type, damage, activeFrames, totalFrames } = req.body;
+  let { fighterId, rosterId } = req.body;
+  const { fighter, displayName, name, moveType, type, damage, activeFrames, totalFrames } = req.body;
   const fullResult = {};
+  rosterId = Number(rosterId);
+  fighterId = Number(fighterId);
 
   if (typeof fighter === 'string'
     & typeof rosterId === 'number'
@@ -407,13 +409,12 @@ app.post('/api/fighters/data/add', (req, res, next) => {
             });
         }
       }
-    }
-  if (fighterId !== 'number'
-    & name !== 'string'
-    & type !== 'string'
-    & damage !== 'string'
-    & activeFrames !== 'string'
-    & totalFrames !== 'string') {
+  }
+  if (typeof fighterId === 'number'
+    & typeof name === 'string'
+    & typeof damage === 'string'
+    & typeof activeFrames === 'string'
+    & typeof totalFrames === 'string') {
       return handleThrows(1)
       function handleThrows(counter) {
         if (counter === 1) {
@@ -460,8 +461,60 @@ app.post('/api/fighters/data/add', (req, res, next) => {
             });
         }
       }
-      res.status(500).json({ error: ':(' });
     }
+    if (typeof fighterId === 'number'
+    & typeof name === 'string'
+    & typeof damage === 'string'
+    & typeof activeFrames === 'string'
+    & typeof totalFrames === 'string') {
+      return handleThrows(1)
+      function handleThrows(counter) {
+        if (counter === 1) {
+          const sql = `
+          INSERT INTO public.throws
+            ("fighterId", "name", "type")
+          VALUES ($1, $2, 'throw')
+          RETURNING *;
+          `;
+          const params = [fighterId, name]
+          return db.query(sql, params)
+          .then(result => {
+            Object.assign(fullResult, result.rows[0]);
+            handleThrows(counter + 1)
+          })
+            .catch(err => {
+              if (/already exists/g.test(err.detail)
+                || /not present/g.test(err.detail)) {
+                res.status(400).json({ error: `${err.detail}` });
+              } else {
+                next(err);
+              }
+            });
+        } else {
+          const sql2 = `
+          INSERT INTO public.grappling
+            ("damage", "activeFrames", "totalFrames")
+          VALUES ($1, $2, $3)
+          RETURNING *;
+          `;
+          const params2 = [damage, activeFrames, totalFrames];
+          return db.query(sql2, params2)
+            .then(result => {
+              Object.assign(fullResult, result.rows[0]);
+              res.status(201).json(fullResult)
+            })
+            .catch(err => {
+              if (/already exists/g.test(err.detail)
+                || /not present/g.test(err.detail)) {
+                res.status(400).json({ error: `${err.detail}` });
+              } else {
+                next(err);
+              }
+            });
+        }
+      }
+    }
+    res.status(500).json({ error: ':(' });
 });
 app.use(errorMiddleware)
 
