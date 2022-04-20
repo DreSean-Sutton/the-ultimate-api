@@ -4,11 +4,9 @@ const expressJSON = express.json();
 const pg = require('pg');
 const ClientError = require('./client-error');
 const errorMiddleware = require('./error-middleware');
+const checkValidity = require('./check-validity');
 const sqlQueries = require('./sql-queries');
-const fightersOutsource = require('./post-requests/fighters');
-const movesOutsource = require('./post-requests/moves');
-const movementsOutsource = require('./post-requests/movements');
-const statsOutsource = require('./post-requests/stats');
+
 const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
 
@@ -332,7 +330,10 @@ app.post('/api/add/fighters', (req, res, next) => {
   const { fighter, displayName } = req.body;
   let { rosterId } = req.body;
   rosterId = Number(rosterId);
-
+  if (!checkValidity([fighter, displayName, rosterId])) {
+    throw new ClientError(400, 'must have (fighter), (displayName), and (rosterId) as parameters');
+    return;
+  }
   if (typeof fighter === 'string'
     & typeof rosterId === 'number'
     & typeof displayName === 'string') {
@@ -346,11 +347,10 @@ app.post('/api/add/fighters', (req, res, next) => {
       return db.query(sql, params)
         .then(result => {
           res.status(201).json(result.rows[0]);
-          console.log(result.rows[0]);
           })
         .catch(err => {
           if (/already exists/g.test(err.detail)) {
-            res.status(400).json({ error: `${err.detail}`});
+            throw new ClientError(400, `${err.detail}`);
           } else {
             next(err);
           }
@@ -360,13 +360,16 @@ app.post('/api/add/fighters', (req, res, next) => {
 });
 
 app.post('/api/add/moves', (req, res, next) => {
-  // Check if they are undefined
   const { name, moveType, damage, activeFrames, totalFrames } = req.body;
   let { fighterId } = req.body;
   fighterId = Number(fighterId);
   const fullResult = {};
   if (!fighterId) {
-    res.status(400).json({ error: 'fighterId must be a number'});
+    throw new ClientError(400, 'fighterId must be a number');
+    return;
+  }
+  if (!checkValidity([name, moveType, damage, activeFrames, totalFrames])) {
+    throw new ClientError(400, 'must have (fighterId), (name), (moveType), (damage), (activeFrames), and (totalFrames) as parameters');
     return;
   }
   if (typeof fighterId === 'number'
@@ -393,7 +396,7 @@ app.post('/api/add/moves', (req, res, next) => {
             .catch(err => {
               if (/already exists/g.test(err.detail)
               || /not present/g.test(err.detail)) {
-                res.status(400).json({ error: `${err.detail}` });
+                throw new ClientError(400, `${err.detail}` );
               } else {
                 next(err);
               }
@@ -414,7 +417,7 @@ app.post('/api/add/moves', (req, res, next) => {
             .catch(err => {
               if ((/already exists/g.test(err.detail))
               || (/not present/g.test(err.detail))) {
-                res.status(400).json({ error: `${err.detail}` });
+                throw new ClientError(400, `${err.detail}`);
               } else {
                 next(err);
               }
@@ -430,7 +433,11 @@ app.post('/api/add/throws', (req, res, next) => {
   fighterId = Number(fighterId);
   const fullResult = {};
   if (!fighterId) {
-    res.status(400).json({ error: 'fighterId must be a number' });
+    throw new ClientError(400, 'fighterId must be a number');
+    return;
+  }
+  if (!checkValidity([name, damage, activeFrames, totalFrames])) {
+    throw new ClientError(400, 'must have (fighterId), (name), (damage), (activeFrames), and (totalFrames) as parameters');
     return;
   }
   if (typeof fighterId === 'number'
@@ -456,7 +463,7 @@ app.post('/api/add/throws', (req, res, next) => {
             .catch(err => {
               if (/already exists/g.test(err.detail)
                 || /not present/g.test(err.detail)) {
-                res.status(400).json({ error: `${err.detail}` });
+                throw new ClientError(400, `${err.detail}`);
               } else {
                 next(err);
               }
@@ -477,7 +484,7 @@ app.post('/api/add/throws', (req, res, next) => {
             .catch(err => {
               if (/already exists/g.test(err.detail)
                 || /not present/g.test(err.detail)) {
-                res.status(400).json({ error: `${err.detail}` });
+                throw new ClientError(400, `${err.detail}`);
               } else {
                 next(err);
               }
@@ -493,7 +500,11 @@ app.post('/api/add/movements', (req, res, next) => {
   fighterId = Number(fighterId);
   const fullResult = {};
   if (!fighterId) {
-    res.status(400).json({ error: 'fighterId must be a number' });
+    throw new ClientError(400, 'fighterId must be a number');
+    return;
+  }
+  if (!checkValidity([name, activeFrames, totalFrames])) {
+    throw new ClientError(400, 'must have (fighterId), (name), (activeFrames), and (totalFrames) as parameters');
     return;
   }
     if (typeof fighterId === 'number'
@@ -518,7 +529,7 @@ app.post('/api/add/movements', (req, res, next) => {
             .catch(err => {
               if (/already exists/g.test(err.detail)
                 || /not present/g.test(err.detail)) {
-                res.status(400).json({ error: `${err.detail}` });
+                throw new ClientError(400, `${err.detail}`);
               } else {
                 next(err);
               }
@@ -539,7 +550,7 @@ app.post('/api/add/movements', (req, res, next) => {
             .catch(err => {
               if (/already exists/g.test(err.detail)
                 || /not present/g.test(err.detail)) {
-                res.status(400).json({ error: `${err.detail}` });
+                throw new ClientError(400, `${err.detail}`);
               } else {
                 next(err);
               }
@@ -555,7 +566,11 @@ app.post('/api/add/stats', (req, res, next) => {
   fighterId = Number(fighterId);
   const fullResult = {};
   if (!fighterId) {
-    res.status(400).json({ error: 'fighterId must be a number' });
+    throw new ClientError(400, 'fighterId must be a number');
+    return;
+  }
+  if (!checkValidity([name, statValue])) {
+    throw new ClientError(400, 'must have (fighterId), (name), and (statValue) as parameters');
     return;
   }
   if (typeof fighterId === 'number'
@@ -579,7 +594,7 @@ app.post('/api/add/stats', (req, res, next) => {
           .catch(err => {
             if (/already exists/g.test(err.detail)
               || /not present/g.test(err.detail)) {
-              res.status(400).json({ error: `${err.detail}` });
+              throw new ClientError(400, `${err.detail}`);
             } else {
               next(err);
             }
@@ -600,7 +615,7 @@ app.post('/api/add/stats', (req, res, next) => {
           .catch(err => {
             if (/already exists/g.test(err.detail)
               || /not present/g.test(err.detail)) {
-              res.status(400).json({ error: `${err.detail}` });
+              throw new ClientError(400, `${err.detail}`);
             } else {
               next(err);
             }
