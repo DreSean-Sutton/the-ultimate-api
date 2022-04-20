@@ -553,6 +553,66 @@ app.post('/api/add/movements', (req, res, next) => {
     }
 });
 
+app.post('/api/add/stats', (req, res, next) => {
+  const { name, statValue } = req.body;
+  let { fighterId } = req.body;
+  fighterId = Number(fighterId);
+  const fullResult = {};
+  if (!fighterId) {
+    res.status(400).json({ error: 'fighterId must be a number' });
+    return;
+  }
+  if (typeof fighterId === 'number'
+    & typeof name === 'string'
+    & typeof statValue === 'string') {
+    return handleStats(1)
+    function handleStats(counter) {
+      if (counter === 1) {
+        const sql = `
+          INSERT INTO public.stats
+            ("fighterId", "name", "type")
+          VALUES ($1, $2, 'stat')
+          RETURNING *;
+          `;
+        const params = [fighterId, name]
+        return db.query(sql, params)
+          .then(result => {
+            Object.assign(fullResult, result.rows[0]);
+            handleStats(counter + 1)
+          })
+          .catch(err => {
+            if (/already exists/g.test(err.detail)
+              || /not present/g.test(err.detail)) {
+              res.status(400).json({ error: `${err.detail}` });
+            } else {
+              next(err);
+            }
+          });
+      } else {
+        const sql2 = `
+          INSERT INTO public.miscellaneous
+            ("statValue")
+          VALUES ($1)
+          RETURNING *;
+          `;
+        const params2 = [statValue];
+        return db.query(sql2, params2)
+          .then(result => {
+            Object.assign(fullResult, result.rows[0]);
+            res.status(201).json(fullResult)
+          })
+          .catch(err => {
+            if (/already exists/g.test(err.detail)
+              || /not present/g.test(err.detail)) {
+              res.status(400).json({ error: `${err.detail}` });
+            } else {
+              next(err);
+            }
+          });
+      }
+    }
+  }
+});
 app.use(errorMiddleware)
 
 app.listen(process.env.PORT, () => {
