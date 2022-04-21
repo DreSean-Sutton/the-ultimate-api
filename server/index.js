@@ -51,8 +51,8 @@ app.get('/api/fighters', (req, res, next) => {
       "fighterId"=$1
     `;
     const params = [queryStr.fighterId];
-    if (/[A-Za-z]/gi.test(params)) {
-      throw new ClientError(400, `fighterId can't contain any letters`);
+    if (!Number(params)) {
+      throw new ClientError(400, `fighterId must be an integer`);
     }
     return db.query(sql, params)
       .then(result => {
@@ -70,8 +70,8 @@ app.get('/api/fighters', (req, res, next) => {
       "rosterId"=$1
     `;
     const params = [queryStr.rosterId];
-    if (/[A-Za-z]/gi.test(params)) {
-      throw new ClientError(400, `rosterId can't contain any letters`);
+    if (!Number(params)) {
+      throw new ClientError(400, `rosterId must be an integer`);
     }
     return db.query(sql, params)
       .then(result => {
@@ -150,8 +150,8 @@ app.get('/api/fighters/data', (req, res, next) => {
       ORDER BY ${JSON.stringify(dataTypeIds[index])}
       `;
       const params = [queryStr.fighterId];
-      if (/[A-Za-z]/gi.test(params)) {
-        throw new ClientError(400, `fighterId can't contain any letters`);
+      if (!Number(params)) {
+        throw new ClientError(400, `fighterId must be an integer`);
       }
       return db.query(sql, params)
       .then(result => {
@@ -171,8 +171,8 @@ app.get('/api/fighters/data', (req, res, next) => {
       ORDER BY ${JSON.stringify(dataTypeIds[index])}
       `;
       const params = [queryStr.rosterId];
-      if (/[A-Za-z]/gi.test(params)) {
-        throw new ClientError(400, `rosterId can't contain any letters`);
+      if (!Number(params)) {
+        throw new ClientError(400, `rosterId must be an integer`);
       }
       return db.query(sql, params)
       .then(result => {
@@ -252,8 +252,8 @@ app.get('/api/fighters/data/:type', (req, res, next) => {
       ORDER BY ${JSON.stringify(dataTypeIds[index])}
       `;
     const params = [queryStr.fighterId];
-    if (/[A-Za-z]/gi.test(params)) {
-      throw new ClientError(400, `fighterId can't contain any letters`);
+    if (!Number(params)) {
+      throw new ClientError(400, `fighterId must be an integer`);
     }
     return db.query(sql, params)
       .then(result => {
@@ -272,8 +272,8 @@ app.get('/api/fighters/data/:type', (req, res, next) => {
       ORDER BY ${JSON.stringify(dataTypeIds[index])}
       `;
     const params = [queryStr.rosterId];
-    if (/[A-Za-z]/gi.test(params)) {
-      throw new ClientError(400, `rosterId can't contain any letters`);
+    if (!Number(params)) {
+      throw new ClientError(400, `rosterId must be an integer`);
     }
     return db.query(sql, params)
       .then(result => {
@@ -359,254 +359,216 @@ app.post('/api/add/moves', (req, res, next) => {
   const { name, moveType, damage, activeFrames, totalFrames } = req.body;
   let { fighterId } = req.body;
   fighterId = Number(fighterId);
+  if(!fighterId) {
+    throw new ClientError(400, 'FighterId must be an integer')
+  }
   const fullResult = {};
   const reqParams = [fighterId, name, moveType, damage, activeFrames, totalFrames]
   const isValid = reqParams.every(param => !!param);
   if(!isValid) {
     throw new ClientError(400, 'must have (fighterId), (name), (moveType), (damage), (activeFrames), (totalFrames) as parameters');
   }
-  if (typeof fighterId === 'number'
-    & typeof name === 'string'
-    & typeof moveType === 'string'
-    & typeof damage === 'string'
-    & typeof activeFrames === 'string'
-    & typeof totalFrames === 'string') {
-      return handleMoves(1)
-      function handleMoves (counter) {
-        if (counter === 1) {
-          const sql = `
-          INSERT INTO public.moves
-          ("fighterId", "name", "moveType", "type")
-          VALUES ($1, $2, $3, 'move')
-          RETURNING *;
-          `;
-          const params = [fighterId, name, moveType];
-          return db.query(sql, params)
-            .then(result => {
-              Object.assign(fullResult, result.rows[0]);
-              return handleMoves(counter + 1)
-            })
-            .catch(err => {
-              if (/already exists/g.test(err.detail)
-              || /not present/g.test(err.detail)) {
-                throw new ClientError(400, `${err.detail}` );
-              } else {
-                next(err);
-              }
-            });
-        } else {
-          const sql2 = `
-            INSERT INTO public.hitboxes
-              ("damage", "activeFrames", "totalFrames")
-            VALUES ($1, $2, $3)
-            RETURNING *;
-          `;
-          const params2 = [damage, activeFrames, totalFrames];
-          return db.query(sql2, params2)
-            .then(result => {
-              Object.assign(fullResult, result.rows[0]);
-              res.status(201).json(fullResult);
-            })
-            .catch(err => {
-              if ((/already exists/g.test(err.detail))
-              || (/not present/g.test(err.detail))) {
-                throw new ClientError(400, `${err.detail}`);
-              } else {
-                next(err);
-              }
-            });
-        }
+  const sql = `
+  INSERT INTO public.moves
+  ("fighterId", "name", "moveType", "type")
+  VALUES ($1, $2, $3, 'move')
+  RETURNING *;
+  `;
+  const params = [fighterId, name, moveType];
+  return db.query(sql, params)
+  .then(result => {
+    Object.assign(fullResult, result.rows[0]);
+    const sql2 = `
+      INSERT INTO public.hitboxes
+        ("damage", "activeFrames", "totalFrames")
+      VALUES ($1, $2, $3)
+      RETURNING *;
+    `;
+    const params2 = [damage, activeFrames, totalFrames];
+      return db.query(sql2, params2)
+        .then(result => {
+          Object.assign(fullResult, result.rows[0]);
+          res.status(201).json(fullResult);
+        })
+        .catch(err => {
+          if ((/already exists/g.test(err.detail))
+          || (/not present/g.test(err.detail))) {
+            throw new ClientError(400, `${err.detail}`);
+          } else {
+            next(err);
+          }
+        });
+    })
+    .catch(err => {
+      if (/already exists/g.test(err.detail)
+      || /not present/g.test(err.detail)) {
+        throw new ClientError(400, `${err.detail}` );
+      } else {
+        next(err);
       }
-  }
+    });
 });
 
 app.post('/api/add/throws', (req, res, next) => {
   const { name, damage, activeFrames, totalFrames } = req.body;
   let { fighterId } = req.body;
   fighterId = Number(fighterId);
+  if(!fighterId) {
+    throw new ClientError(400, 'FighterId must be an integer')
+  }
   const fullResult = {};
   const reqParams = [fighterId, name, damage, activeFrames, totalFrames]
   const isValid = reqParams.every(param => !!param);
   if(!isValid) {
     throw new ClientError(400, 'must have (fighterId), (name), (damage), (activeFrames), (totalFrames) as parameters');
   }
-  if (typeof fighterId === 'number'
-    & typeof name === 'string'
-    & typeof damage === 'string'
-    & typeof activeFrames === 'string'
-    & typeof totalFrames === 'string') {
-      return handleThrows(1)
-      function handleThrows(counter) {
-        if (counter === 1) {
-          const sql = `
-          INSERT INTO public.throws
-            ("fighterId", "name", "type")
-          VALUES ($1, $2, 'throw')
-          RETURNING *;
-          `;
-          const params = [fighterId, name]
-          return db.query(sql, params)
-          .then(result => {
-            Object.assign(fullResult, result.rows[0]);
-            handleThrows(counter + 1)
-          })
-            .catch(err => {
-              if (/already exists/g.test(err.detail)
-                || /not present/g.test(err.detail)) {
-                throw new ClientError(400, `${err.detail}`);
-              } else {
-                next(err);
-              }
-            });
+  const sql = `
+  INSERT INTO public.throws
+    ("fighterId", "name", "type")
+  VALUES ($1, $2, 'throw')
+  RETURNING *;
+  `;
+  const params = [fighterId, name]
+  return db.query(sql, params)
+  .then(result => {
+    Object.assign(fullResult, result.rows[0]);
+    const sql2 = `
+    INSERT INTO public.grappling
+      ("damage", "activeFrames", "totalFrames")
+    VALUES ($1, $2, $3)
+    RETURNING *;
+    `;
+    const params2 = [damage, activeFrames, totalFrames];
+    return db.query(sql2, params2)
+      .then(result => {
+        Object.assign(fullResult, result.rows[0]);
+        res.status(201).json(fullResult)
+      })
+      .catch(err => {
+        if (/already exists/g.test(err.detail)
+          || /not present/g.test(err.detail)) {
+          throw new ClientError(400, `${err.detail}`);
         } else {
-          const sql2 = `
-          INSERT INTO public.grappling
-            ("damage", "activeFrames", "totalFrames")
-          VALUES ($1, $2, $3)
-          RETURNING *;
-          `;
-          const params2 = [damage, activeFrames, totalFrames];
-          return db.query(sql2, params2)
-            .then(result => {
-              Object.assign(fullResult, result.rows[0]);
-              res.status(201).json(fullResult)
-            })
-            .catch(err => {
-              if (/already exists/g.test(err.detail)
-                || /not present/g.test(err.detail)) {
-                throw new ClientError(400, `${err.detail}`);
-              } else {
-                next(err);
-              }
-            });
+          next(err);
         }
+      });
+  })
+    .catch(err => {
+      if (/already exists/g.test(err.detail)
+        || /not present/g.test(err.detail)) {
+        throw new ClientError(400, `${err.detail}`);
+      } else {
+        next(err);
       }
-    }
+    });
 });
 
 app.post('/api/add/movements', (req, res, next) => {
   const { name, activeFrames, totalFrames } = req.body;
   let { fighterId } = req.body;
   fighterId = Number(fighterId);
+  if(!fighterId) {
+    throw new ClientError(400, 'FighterId must be an integer')
+  }
   const fullResult = {};
   const reqParams = [fighterId, name, activeFrames, totalFrames]
   const isValid = reqParams.every(param => !!param);
   if(!isValid) {
     throw new ClientError(400, 'must have (fighterId), (name), (activeFrames), and (totalFrames) as parameters');
   }
-    if (typeof fighterId === 'number'
-    & typeof name === 'string'
-    & typeof activeFrames === 'string'
-    & typeof totalFrames === 'string') {
-      return handleMovements(1)
-      function handleMovements(counter) {
-        if (counter === 1) {
-          const sql = `
-          INSERT INTO public.movements
-            ("fighterId", "name", "type")
-          VALUES ($1, $2, 'movement')
-          RETURNING *;
-          `;
-          const params = [fighterId, name]
-          return db.query(sql, params)
-          .then(result => {
-            Object.assign(fullResult, result.rows[0]);
-            handleMovements(counter + 1)
-          })
-            .catch(err => {
-              if (/already exists/g.test(err.detail)
-                || /not present/g.test(err.detail)) {
-                throw new ClientError(400, `${err.detail}`);
-              } else {
-                next(err);
-              }
-            });
+  const sql = `
+  INSERT INTO public.movements
+    ("fighterId", "name", "type")
+  VALUES ($1, $2, 'movement')
+  RETURNING *;
+  `;
+  const params = [fighterId, name]
+  return db.query(sql, params)
+  .then(result => {
+    Object.assign(fullResult, result.rows[0]);
+    const sql2 = `
+    INSERT INTO public.dodging
+      ("activeFrames", "totalFrames")
+    VALUES ($1, $2)
+    RETURNING *;
+    `;
+    const params2 = [activeFrames, totalFrames];
+    return db.query(sql2, params2)
+      .then(result => {
+        Object.assign(fullResult, result.rows[0]);
+        res.status(201).json(fullResult)
+      })
+      .catch(err => {
+        if (/already exists/g.test(err.detail)
+          || /not present/g.test(err.detail)) {
+          throw new ClientError(400, `${err.detail}`);
         } else {
-          const sql2 = `
-          INSERT INTO public.dodging
-            ("activeFrames", "totalFrames")
-          VALUES ($1, $2)
-          RETURNING *;
-          `;
-          const params2 = [activeFrames, totalFrames];
-          return db.query(sql2, params2)
-            .then(result => {
-              Object.assign(fullResult, result.rows[0]);
-              res.status(201).json(fullResult)
-            })
-            .catch(err => {
-              if (/already exists/g.test(err.detail)
-                || /not present/g.test(err.detail)) {
-                throw new ClientError(400, `${err.detail}`);
-              } else {
-                next(err);
-              }
-            });
+          next(err);
         }
+      });
+  })
+    .catch(err => {
+      if (/already exists/g.test(err.detail)
+        || /not present/g.test(err.detail)) {
+        throw new ClientError(400, `${err.detail}`);
+      } else {
+        next(err);
       }
-    }
+    });
 });
 
 app.post('/api/add/stats', (req, res, next) => {
   const { name, statValue } = req.body;
   let { fighterId } = req.body;
   fighterId = Number(fighterId);
+  if(!fighterId) {
+    throw new ClientError(400, 'FighterId must be an integer')
+  }
   const fullResult = {};
   const reqParams = [fighterId, name, statValue]
   const isValid = reqParams.every(param => !!param);
   if(!isValid) {
     throw new ClientError(400, 'must have (fighterId), (name), and (statValue) as parameters');
   }
-  if (typeof fighterId === 'number'
-    & typeof name === 'string'
-    & typeof statValue === 'string') {
-    return handleStats(1)
-    function handleStats(counter) {
-      if (counter === 1) {
-        const sql = `
-          INSERT INTO public.stats
-            ("fighterId", "name", "type")
-          VALUES ($1, $2, 'stat')
-          RETURNING *;
-          `;
-        const params = [fighterId, name]
-        return db.query(sql, params)
-          .then(result => {
-            Object.assign(fullResult, result.rows[0]);
-            handleStats(counter + 1)
-          })
-          .catch(err => {
-            if (/already exists/g.test(err.detail)
-              || /not present/g.test(err.detail)) {
-              throw new ClientError(400, `${err.detail}`);
-            } else {
-              next(err);
-            }
-          });
+  const sql = `
+    INSERT INTO public.stats
+      ("fighterId", "name", "type")
+    VALUES ($1, $2, 'stat')
+    RETURNING *;
+    `;
+  const params = [fighterId, name]
+  return db.query(sql, params)
+    .then(result => {
+      Object.assign(fullResult, result.rows[0]);
+      const sql2 = `
+        INSERT INTO public.miscellaneous
+          ("statValue")
+        VALUES ($1)
+        RETURNING *;
+        `;
+      const params2 = [statValue];
+      return db.query(sql2, params2)
+        .then(result => {
+          Object.assign(fullResult, result.rows[0]);
+          res.status(201).json(fullResult)
+        })
+        .catch(err => {
+          if (/already exists/g.test(err.detail)
+            || /not present/g.test(err.detail)) {
+            throw new ClientError(400, `${err.detail}`);
+          } else {
+            next(err);
+          }
+        });
+    })
+    .catch(err => {
+      if (/already exists/g.test(err.detail)
+        || /not present/g.test(err.detail)) {
+        throw new ClientError(400, `${err.detail}`);
       } else {
-        const sql2 = `
-          INSERT INTO public.miscellaneous
-            ("statValue")
-          VALUES ($1)
-          RETURNING *;
-          `;
-        const params2 = [statValue];
-        return db.query(sql2, params2)
-          .then(result => {
-            Object.assign(fullResult, result.rows[0]);
-            res.status(201).json(fullResult)
-          })
-          .catch(err => {
-            if (/already exists/g.test(err.detail)
-              || /not present/g.test(err.detail)) {
-              throw new ClientError(400, `${err.detail}`);
-            } else {
-              next(err);
-            }
-          });
+        next(err);
       }
-    }
-  }
+    });
 });
 app.use(errorMiddleware)
 
