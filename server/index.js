@@ -4,7 +4,6 @@ const expressJSON = express.json();
 const pg = require('pg');
 const ClientError = require('./client-error');
 const errorMiddleware = require('./error-middleware');
-const checkValidity = require('./check-validity');
 const sqlQueries = require('./sql-queries');
 
 const swaggerUi = require('swagger-ui-express');
@@ -19,10 +18,6 @@ const db = new pg.Pool({
 
 const app = express();
 app.use('/api', expressJSON);
-// app.use('/api/fighters/data', expressJSON);
-// app.use('/api/fighters/data/:type', expressJSON);
-// app.use('/api/add/fighters', expressJSON);
-// app.use('/api/add/moves', expressJSON);
 const swaggerDocument = YAML.load('./openapi.yml');
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
@@ -330,9 +325,10 @@ app.post('/api/add/fighters', (req, res, next) => {
   const { fighter, displayName } = req.body;
   let { rosterId } = req.body;
   rosterId = Number(rosterId);
-  if (!checkValidity([fighter, displayName, rosterId])) {
+  const reqParams = [fighter, displayName, rosterId]
+  const isValid = reqParams.every(param => !!param);
+  if(!isValid) {
     throw new ClientError(400, 'must have (fighter), (displayName), and (rosterId) as parameters');
-    return;
   }
   if (typeof fighter === 'string'
     & typeof rosterId === 'number'
@@ -364,13 +360,10 @@ app.post('/api/add/moves', (req, res, next) => {
   let { fighterId } = req.body;
   fighterId = Number(fighterId);
   const fullResult = {};
-  if (!fighterId) {
-    throw new ClientError(400, 'fighterId must be a number');
-    return;
-  }
-  if (!checkValidity([name, moveType, damage, activeFrames, totalFrames])) {
-    throw new ClientError(400, 'must have (fighterId), (name), (moveType), (damage), (activeFrames), and (totalFrames) as parameters');
-    return;
+  const reqParams = [fighterId, name, moveType, damage, activeFrames, totalFrames]
+  const isValid = reqParams.every(param => !!param);
+  if(!isValid) {
+    throw new ClientError(400, 'must have (fighterId), (name), (moveType), (damage), (activeFrames), (totalFrames) as parameters');
   }
   if (typeof fighterId === 'number'
     & typeof name === 'string'
@@ -432,13 +425,10 @@ app.post('/api/add/throws', (req, res, next) => {
   let { fighterId } = req.body;
   fighterId = Number(fighterId);
   const fullResult = {};
-  if (!fighterId) {
-    throw new ClientError(400, 'fighterId must be a number');
-    return;
-  }
-  if (!checkValidity([name, damage, activeFrames, totalFrames])) {
-    throw new ClientError(400, 'must have (fighterId), (name), (damage), (activeFrames), and (totalFrames) as parameters');
-    return;
+  const reqParams = [fighterId, name, damage, activeFrames, totalFrames]
+  const isValid = reqParams.every(param => !!param);
+  if(!isValid) {
+    throw new ClientError(400, 'must have (fighterId), (name), (damage), (activeFrames), (totalFrames) as parameters');
   }
   if (typeof fighterId === 'number'
     & typeof name === 'string'
@@ -499,13 +489,10 @@ app.post('/api/add/movements', (req, res, next) => {
   let { fighterId } = req.body;
   fighterId = Number(fighterId);
   const fullResult = {};
-  if (!fighterId) {
-    throw new ClientError(400, 'fighterId must be a number');
-    return;
-  }
-  if (!checkValidity([name, activeFrames, totalFrames])) {
+  const reqParams = [fighterId, name, activeFrames, totalFrames]
+  const isValid = reqParams.every(param => !!param);
+  if(!isValid) {
     throw new ClientError(400, 'must have (fighterId), (name), (activeFrames), and (totalFrames) as parameters');
-    return;
   }
     if (typeof fighterId === 'number'
     & typeof name === 'string'
@@ -565,13 +552,10 @@ app.post('/api/add/stats', (req, res, next) => {
   let { fighterId } = req.body;
   fighterId = Number(fighterId);
   const fullResult = {};
-  if (!fighterId) {
-    throw new ClientError(400, 'fighterId must be a number');
-    return;
-  }
-  if (!checkValidity([name, statValue])) {
+  const reqParams = [fighterId, name, statValue]
+  const isValid = reqParams.every(param => !!param);
+  if(!isValid) {
     throw new ClientError(400, 'must have (fighterId), (name), and (statValue) as parameters');
-    return;
   }
   if (typeof fighterId === 'number'
     & typeof name === 'string'
