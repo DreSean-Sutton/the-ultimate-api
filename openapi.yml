@@ -319,27 +319,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                items:
-                  type: object
-                  properties:
-                    fighterId:
-                      type: integer
-                    name:
-                      type: string
-                    statId:
-                      type: integer
-                    statValue:
-                      type: string
-                    type:
-                      type: string
-                example:
-                  fighterId: 1
-                  name: weight
-                  statId: 30
-                  statValue: 120
-                  type: stat
-                  createdAt: 2020-02-20etc
+                $ref: '#/components/schemas/statsResponse'
 
   /api/update/fighters/{fighterId}:
     put:
@@ -462,6 +442,38 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/movementsResponse'
+
+  /api/update/stats/{statId}:
+    put:
+      tags:
+      - Update
+      summary: update a fighter's stats
+      parameters:
+      - in: path
+        name: statId
+        schema:
+          type: integer
+        required: true
+      requestBody:
+        description: Click `Try it out` and edit your request!
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                statValue:
+                  type: string
+      responses:
+        '201':
+          description:
+            created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/statsResponse'
 
 components:
   schemas:
@@ -661,4 +673,26 @@ components:
         name: spot dodge
         totalFrames: '6'
         type: movement
+        createdAt: 2020-02-20etc
+    statsResponse:
+      type: object
+      items:
+        type: object
+        properties:
+          fighterId:
+            type: integer
+          name:
+            type: string
+          statId:
+            type: integer
+          statValue:
+            type: string
+          type:
+            type: string
+      example:
+        fighterId: 1
+        name: weight
+        statId: 30
+        statValue: 120
+        type: stat
         createdAt: 2020-02-20etc
