@@ -287,30 +287,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                items:
-                  type: object
-                  properties:
-                    activeFrames:
-                      type: string
-                    fighterId:
-                      type: integer
-                    movementId:
-                      type: integer
-                    name:
-                      type: string
-                    totalFrames:
-                      type: string
-                    type:
-                      type: string
-                example:
-                  activeFrames: '1-5'
-                  fighterId: 1
-                  movementId: 30
-                  name: spot dodge
-                  totalFrames: '6'
-                  type: movement
-                  createdAt: 2020-02-20etc
+                $ref: '#/components/schemas/movementsResponse'
 
   /api/add/stats/{fighterId}:
     post:
@@ -452,6 +429,39 @@ paths:
               schema:
                 $ref: '#/components/schemas/throwsResponse'
 
+  /api/update/movements/{movementId}:
+    put:
+      tags:
+      - Update
+      summary: Update a fighter's movements
+      parameters:
+      - in: path
+        name: movementId
+        schema:
+          type: integer
+        required: true
+      requestBody:
+        description: Click `Try it out` and edit your request!
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                activeFrames:
+                  type: string
+                name:
+                  type: string
+                totalFrames:
+                  type: string
+      responses:
+        '201':
+          description:
+            created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/movementsResponse'
 
 components:
   schemas:
@@ -625,4 +635,30 @@ components:
         name: down throw
         totalFrames: '15'
         type: throw
+        createdAt: 2020-02-20etc
+
+    movementsResponse:
+      type: object
+      items:
+        type: object
+        properties:
+          activeFrames:
+            type: string
+          fighterId:
+            type: integer
+          movementId:
+            type: integer
+          name:
+            type: string
+          totalFrames:
+            type: string
+          type:
+            type: string
+      example:
+        activeFrames: '1-5'
+        fighterId: 1
+        movementId: 30
+        name: spot dodge
+        totalFrames: '6'
+        type: movement
         createdAt: 2020-02-20etc
