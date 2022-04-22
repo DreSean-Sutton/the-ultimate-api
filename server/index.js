@@ -595,6 +595,106 @@ app.put('/api/update/fighters', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.put('/api/update/moves/:id', (req, res, next) => {
+  const { name, moveType, damage, activeFrames, totalFrames } = req.body;
+  const id = req.params.id
+  if (/[A-Z]/gi.test(id)
+  & id !== undefined) {
+    throw new ClientError(400, 'moveId must be a number');
+    return;
+  }
+  fullResult = {};
+  const sql = `
+    UPDATE
+      public.moves
+    SET
+      "name" = coalesce($2, "name"),
+      "moveType" = coalesce($3, "moveType")
+      WHERE
+      "moveId"=$1
+      RETURNING *;
+    `;
+    const params = [id, name, moveType];
+    return db.query(sql, params)
+      .then(result => {
+        if (result.rows.length === 0) {
+          throw new ClientError(404, `moveId ${id} does not exist`);
+          return;
+        }
+        Object.assign(fullResult, result.rows[0]);
+        const sql = `
+          UPDATE
+            public.hitboxes
+          SET
+            "damage" = coalesce($2, "damage"),
+            "activeFrames" = coalesce($3, "activeFrames"),
+            "totalFrames" = coalesce($4, "totalFrames")
+          WHERE
+            "moveId"=$1
+          RETURNING *;
+        `;
+        const params = [id, damage, activeFrames, totalFrames];
+        return db.query(sql, params)
+          .then(result => {
+            Object.assign(fullResult, result.rows[0]);
+            res.status(200).json(fullResult);
+          })
+          .catch(err => next(err));
+      })
+      .catch(err => next(err))
+});
+
+app.put('/api/update/throws/:id', (req, res, next) => {
+  const { name, damage, activeFrames, totalFrames } = req.body;
+  const id = req.params.id
+  if (/[A-Z]/gi.test(id)
+    & id !== undefined) {
+    throw new ClientError(400, 'throwId must be a number');
+    return;
+  }
+  fullResult = {};
+  const sql = `
+    UPDATE
+      public.throws
+    SET
+      "name" = coalesce($2, "name")
+    WHERE
+      "throwId"=$1
+    RETURNING *;
+  `;
+  const params = [id, name];
+  return db.query(sql, params)
+    .then(result => {
+      if (result.rows.length === 0) {
+        throw new ClientError(404, `throwId ${id} does not exist`);
+        return;
+      }
+      Object.assign(fullResult, result.rows[0]);
+      const sql = `
+        UPDATE
+            public.grappling
+        SET
+          "damage" = coalesce($2, "damage"),
+          "activeFrames" = coalesce($3, "activeFrames"),
+          "totalFrames" = coalesce($4, "totalFrames")
+        WHERE
+          "throwId"=$1
+        RETURNING *;
+      `;
+      const params = [id, damage, activeFrames, totalFrames];
+      return db.query(sql, params)
+        .then(result => {
+          if (result.rows.length === 0) {
+            throw new ClientError(404, `throwId ${id} does not exist`);
+            return;
+          }
+          Object.assign(fullResult, result.rows[0]);
+          res.status(200).json(fullResult);
+        })
+        .catch(err => next(err));
+    })
+    .catch(err => next(err));
+});
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {
