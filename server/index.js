@@ -555,7 +555,47 @@ app.post('/api/add/stats', (req, res, next) => {
     })
     .catch(err => next(err));
 });
-app.use(errorMiddleware)
+
+app.put('/api/update/fighters', (req, res, next) => {
+
+  const { fighter, displayName } = req.body;
+  let { fighterId, rosterId } = req.body;
+  if (/[A-Z]/gi.test(fighterId)
+  & fighterId !== undefined) {
+    throw new ClientError(400, 'fighterId must be a number');
+    return;
+  }
+  if (/[A-Z]/gi.test(rosterId)
+  & rosterId !== undefined) {
+    throw new ClientError(400, 'rosterId must be a number');
+    return;
+  }
+  const sql = `
+    UPDATE
+      public.fighters
+    SET
+      "fighter" = coalesce($2, "fighter"),
+      "rosterId" = coalesce($3, "rosterId"),
+      "displayName" = coalesce($4, "displayName")
+    WHERE
+      "fighterId"=$1
+    RETURNING *;
+  `;
+  const params = [fighterId, fighter, rosterId, displayName];
+  console.error(params);
+  return db.query(sql, params)
+    .then(result => {
+      if (result.rows.length === 0) {
+        throw new ClientError(404, `fighterId ${fighterId} does not exist`);
+        return;
+      }
+      console.error(result.rows[0]);
+      res.status(200).json(result.rows[0]);
+    })
+    .catch(err => next(err));
+});
+
+app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {
   // eslint-disable-next-line no-console
