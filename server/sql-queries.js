@@ -18,8 +18,8 @@ const sqlQueries = {
           "totalFrames", "type"
         FROM
           fighters
-        JOIN "moves" AS "mo" USING ("fighterId")
-        JOIN "hitboxes" AS "hit" USING ("moveId")
+        JOIN "moves" USING ("fighterId")
+        JOIN "hitboxes" USING ("moveId")
       `;
     }
     if (type === 'throws') {

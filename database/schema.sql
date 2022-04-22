@@ -78,7 +78,7 @@ CREATE TABLE public.movements (
 	"fighterId" int NOT NULL,
 	"name" TEXT NOT NULL,
 	"type" TEXT NOT NULL,
-	"createAt" timestamp with time zone DEFAULT NOW(),
+	"createdAt" timestamp with time zone DEFAULT NOW(),
 	CONSTRAINT "movements_pk" PRIMARY KEY ("movementId")
 ) WITH (
   OIDS=FALSE
