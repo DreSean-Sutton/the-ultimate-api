@@ -695,6 +695,58 @@ app.put('/api/update/throws/:id', (req, res, next) => {
     })
     .catch(err => next(err));
 });
+
+app.put('/api/update/movements/:id', (req, res, next) => {
+  const { name, activeFrames, totalFrames } = req.body;
+  const id = req.params.id
+  if (/[A-Z]/gi.test(id)
+    & id !== undefined) {
+    throw new ClientError(400, 'movementId must be a number');
+    return;
+  }
+  fullResult = {};
+  const sql = `
+    UPDATE
+      public.movements
+    SET
+      "name" = coalesce($2, "name")
+    WHERE
+      "movementId"=$1
+    RETURNING *;
+  `;
+  const params = [id, name];
+  return db.query(sql, params)
+    .then(result => {
+      if (result.rows.length === 0) {
+        throw new ClientError(404, `movementId ${id} does not exist`);
+        return;
+      }
+      Object.assign(fullResult, result.rows[0]);
+      const sql = `
+        UPDATE
+            public.dodging
+        SET
+          "activeFrames" = coalesce($2, "activeFrames"),
+          "totalFrames" = coalesce($3, "totalFrames")
+        WHERE
+          "movementId"=$1
+        RETURNING *;
+      `;
+      const params = [id, activeFrames, totalFrames];
+      return db.query(sql, params)
+        .then(result => {
+          if (result.rows.length === 0) {
+            throw new ClientError(404, `movementId ${id} does not exist`);
+            return;
+          }
+          Object.assign(fullResult, result.rows[0]);
+          res.status(200).json(fullResult);
+        })
+        .catch(err => next(err));
+    })
+    .catch(err => next(err));
+});
+
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {
