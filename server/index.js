@@ -747,6 +747,56 @@ app.put('/api/update/movements/:id', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.put('/api/update/stats/:id', (req, res, next) => {
+  const { name, statValue } = req.body;
+  const id = req.params.id
+  if (/[A-Z]/gi.test(id)
+    & id !== undefined) {
+    throw new ClientError(400, 'statId must be a number');
+    return;
+  }
+  fullResult = {};
+  const sql = `
+    UPDATE
+      public.stats
+    SET
+      "name" = coalesce($2, "name")
+    WHERE
+      "statId"=$1
+    RETURNING *;
+  `;
+  const params = [id, name];
+  return db.query(sql, params)
+    .then(result => {
+      if (result.rows.length === 0) {
+        throw new ClientError(404, `statId ${id} does not exist`);
+        return;
+      }
+      Object.assign(fullResult, result.rows[0]);
+      const sql = `
+        UPDATE
+            public.miscellaneous
+        SET
+          "statValue" = coalesce($2, "statValue")
+        WHERE
+          "statId"=$1
+        RETURNING *;
+      `;
+      const params = [id, statValue];
+      return db.query(sql, params)
+        .then(result => {
+          if (result.rows.length === 0) {
+            throw new ClientError(404, `statId ${id} does not exist`);
+            return;
+          }
+          Object.assign(fullResult, result.rows[0]);
+          res.status(200).json(fullResult);
+        })
+        .catch(err => next(err));
+    })
+    .catch(err => next(err));
+});
+
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {
