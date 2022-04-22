@@ -356,12 +356,13 @@ app.post('/api/add/fighters', (req, res, next) => {
       .catch(err => next(err));
 });
 
-app.post('/api/add/moves', (req, res, next) => {
+app.post('/api/add/moves/:id', (req, res, next) => {
   const { name, moveType, damage, activeFrames, totalFrames } = req.body;
-  let { fighterId } = req.body;
-  fighterId = Number(fighterId);
-  if(!fighterId) {
-    throw new ClientError(400, 'FighterId must be an integer')
+  const fighterId = req.params.id
+  if (/[A-Z]/gi.test(fighterId)
+    & fighterId !== undefined) {
+    throw new ClientError(400, 'fighterId must be a number');
+    return;
   }
   const fullResult = {};
   const reqParams = [fighterId, name, moveType, damage, activeFrames, totalFrames]
@@ -406,12 +407,13 @@ app.post('/api/add/moves', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.post('/api/add/throws', (req, res, next) => {
+app.post('/api/add/throws/:id', (req, res, next) => {
   const { name, damage, activeFrames, totalFrames } = req.body;
-  let { fighterId } = req.body;
-  fighterId = Number(fighterId);
-  if(!fighterId) {
-    throw new ClientError(400, 'FighterId must be an integer')
+  const fighterId = req.params.id;
+  if (/[A-Z]/gi.test(fighterId)
+    & fighterId !== undefined) {
+    throw new ClientError(400, 'fighterId must be a number');
+    return;
   }
   const fullResult = {};
   const reqParams = [fighterId, name, damage, activeFrames, totalFrames]
@@ -456,12 +458,13 @@ app.post('/api/add/throws', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.post('/api/add/movements', (req, res, next) => {
+app.post('/api/add/movements/:id', (req, res, next) => {
   const { name, activeFrames, totalFrames } = req.body;
-  let { fighterId } = req.body;
-  fighterId = Number(fighterId);
-  if(!fighterId) {
-    throw new ClientError(400, 'FighterId must be an integer')
+  const fighterId = req.params.id;
+  if (/[A-Z]/gi.test(fighterId)
+    & fighterId !== undefined) {
+    throw new ClientError(400, 'fighterId must be a number');
+    return;
   }
   const fullResult = {};
   const reqParams = [fighterId, name, activeFrames, totalFrames]
@@ -506,12 +509,13 @@ app.post('/api/add/movements', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.post('/api/add/stats', (req, res, next) => {
+app.post('/api/add/stats/:id', (req, res, next) => {
   const { name, statValue } = req.body;
-  let { fighterId } = req.body;
-  fighterId = Number(fighterId);
-  if(!fighterId) {
-    throw new ClientError(400, 'FighterId must be an integer')
+  const fighterId = req.params.id;
+  if (/[A-Z]/gi.test(fighterId)
+    & fighterId !== undefined) {
+    throw new ClientError(400, 'fighterId must be a number');
+    return;
   }
   const fullResult = {};
   const reqParams = [fighterId, name, statValue]
@@ -775,7 +779,7 @@ app.put('/api/update/stats/:id', (req, res, next) => {
       Object.assign(fullResult, result.rows[0]);
       const sql = `
         UPDATE
-            public.miscellaneous
+          public.miscellaneous
         SET
           "statValue" = coalesce($2, "statValue")
         WHERE
