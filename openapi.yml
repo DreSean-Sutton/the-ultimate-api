@@ -338,11 +338,18 @@ paths:
                   fighterId: 1
                   rosterId: 100
                   createdAt: 2020-02-20etc
-  /api/add/moves:
+
+  /api/add/moves/{fighterId}:
     post:
       tags:
       - Add
       summary: Add move data to a Fighter
+      parameters:
+      - in: path
+        name: fighterId
+        schema:
+          type: integer
+        required: true
       requestBody:
         description: Click `Try it out` and edit your request!
         required: true
@@ -355,17 +362,11 @@ paths:
                   type: string
                 damage:
                   type: string
-                fighterId:
-                  type: integer
-                moveId:
-                  type: integer
                 moveType:
                   type: string
                 name:
                   type: string
                 totalFrames:
-                  type: string
-                type:
                   type: string
               required:
                 - fighterId
@@ -411,11 +412,18 @@ paths:
                   totalFrames: '105'
                   type: move
                   createdAt: 2020-02-20etc
-  /api/add/throws:
+
+  /api/add/throws/{fighterId}:
     post:
       tags:
       - Add
       summary: Add throw data to a Fighter
+      parameters:
+      - in: path
+        name: fighterId
+        schema:
+          type: integer
+        required: true
       requestBody:
         description: Click `Try it out` and edit your request!
         required: true
@@ -428,10 +436,6 @@ paths:
                   type: string
                 damage:
                   type: string
-                fighterId:
-                  type: integer
-                throwId:
-                  type: integer
                 name:
                   type: string
                 totalFrames:
@@ -471,11 +475,17 @@ paths:
                   type: throw
                   createdAt: 2020-02-20etc
 
-  /api/add/movements:
+  /api/add/movements/{fighterId}:
     post:
       tags:
       - Add
       summary: Add movement data to a Fighter
+      parameters:
+      - in: path
+        name: fighterId
+        schema:
+          type: integer
+        required: true
       requestBody:
         description: Click `Try it out` and edit your request!
         required: true
@@ -485,9 +495,7 @@ paths:
               type: object
               properties:
                 activeFrames:
-                    type: string
-                fighterId:
-                  type: integer
+                  type: string
                 name:
                   type: string
                 totalFrames:
@@ -505,14 +513,10 @@ paths:
                   properties:
                     activeFrames:
                       type: string
-                    damage:
-                      type: string
                     fighterId:
                       type: integer
-                    moveId:
+                    movementId:
                       type: integer
-                    moveType:
-                      type: string
                     name:
                       type: string
                     totalFrames:
@@ -527,11 +531,18 @@ paths:
                   totalFrames: '6'
                   type: movement
                   createdAt: 2020-02-20etc
-  /api/add/stats:
+
+  /api/add/stats/{fighterId}:
     post:
       tags:
       - Add
       summary: Add stat data to a Fighter
+      parameters:
+      - in: path
+        name: fighterId
+        schema:
+          type: integer
+        required: true
       requestBody:
         description: Click `Try it out` and edit your request!
         required: true
@@ -540,12 +551,10 @@ paths:
             schema:
               type: object
               properties:
-                fighterId:
-                  type: integer
                 name:
                   type: string
                 statValue:
-                    type: string
+                  type: string
       responses:
         '201':
           description:
