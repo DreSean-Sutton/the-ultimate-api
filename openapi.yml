@@ -245,16 +245,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                activeFrames:
-                  type: string
-                damage:
-                  type: string
-                name:
-                  type: string
-                totalFrames:
-                  type: string
+              $ref: '#/components/schemas/throwsRequestBody'
       responses:
         '201':
           description:
@@ -262,33 +253,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                items:
-                  type: object
-                  properties:
-                    activeFrames:
-                      type: string
-                    damage:
-                      type: string
-                    fighterId:
-                      type: integer
-                    throwId:
-                      type: integer
-                    name:
-                      type: string
-                    totalFrames:
-                      type: string
-                    type:
-                      type: string
-                example:
-                  activeFrames: '1/5/10'
-                  damage: '10.0/5.0/40.5%'
-                  fighterId: 1
-                  throwId: 203
-                  name: down throw
-                  totalFrames: '15'
-                  type: throw
-                  createdAt: 2020-02-20etc
+                $ref: '#/components/schemas/throwsResponse'
 
   /api/add/movements/{fighterId}:
     post:
@@ -460,6 +425,33 @@ paths:
               schema:
                 $ref: '#/components/schemas/movesResponse'
 
+  /api/update/throws/{throwId}:
+    put:
+      tags:
+      - Update
+      summary: Update a fighter's throws
+      parameters:
+      - in: path
+        name: throwId
+        schema:
+          type: integer
+        required: true
+      requestBody:
+        description: Click `Try it out` and edit your request!
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/throwsRequestBody'
+      responses:
+        '200':
+          description:
+            OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/throwsResponse'
+
 
 components:
   schemas:
@@ -594,4 +586,43 @@ components:
         name: kamehameha
         totalFrames: '105'
         type: move
+        createdAt: 2020-02-20etc
+    throwsRequestBody:
+      type: object
+      properties:
+        activeFrames:
+          type: string
+        damage:
+          type: string
+        name:
+          type: string
+        totalFrames:
+          type: string
+    throwsResponse:
+      type: object
+      items:
+        type: object
+        properties:
+          activeFrames:
+            type: string
+          damage:
+            type: string
+          fighterId:
+            type: integer
+          throwId:
+            type: integer
+          name:
+            type: string
+          totalFrames:
+            type: string
+          type:
+            type: string
+      example:
+        activeFrames: '1/5/10'
+        damage: '10.0/5.0/40.5%'
+        fighterId: 1
+        throwId: 203
+        name: down throw
+        totalFrames: '15'
+        type: throw
         createdAt: 2020-02-20etc
