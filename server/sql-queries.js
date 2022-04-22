@@ -13,7 +13,7 @@ const sqlQueries = {
       return `
         SELECT
           "activeFrames", "damage", "displayName",
-          fighter, "fighterId", "moveType",
+          fighter, "fighterId", "moveId", "moveType",
           "name", "rosterId",
           "totalFrames", "type"
         FROM
@@ -28,7 +28,7 @@ const sqlQueries = {
           "activeFrames", "damage", "displayName",
           fighter, "fighterId",
           "name", "rosterId",
-          "totalFrames", "type"
+          "totalFrames", "throwId", "type"
         FROM
           fighters
         JOIN "throws" USING ("fighterId")
@@ -40,7 +40,7 @@ const sqlQueries = {
         SELECT
           "activeFrames", "displayName",
           fighter, "fighterId",
-          "name", "rosterId",
+          "movementId", "name", "rosterId",
           "totalFrames", "type"
         FROM
           fighters
@@ -54,7 +54,7 @@ const sqlQueries = {
           "displayName",
           fighter, "fighterId",
           "name", "rosterId",
-          "statValue", "type"
+          "statId", "statValue", "type"
         FROM
           fighters
         JOIN "stats" USING ("fighterId")
