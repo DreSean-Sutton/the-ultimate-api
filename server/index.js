@@ -369,27 +369,17 @@ app.post('/api/add/moves', (req, res, next) => {
   if(!isValid) {
     throw new ClientError(400, 'must have (fighterId), (name), (moveType), (damage), (activeFrames), (totalFrames) as parameters');
   }
-  // IF EXISTS (
-  //   SELECT "fighterId"
-  //   FROM public.moves
-  //   WHERE "fighterId"=$1
-  //   BEGIN
-  // END
-  // INSERT INTO public.moves
-  // ("fighterId", "name", "moveType", "type")
-  // VALUES ($1 , $2, $3, 'move')
-  // RETURNING *;
   const sql = `
-  INSERT INTO public.moves (
-    "fighterId", "name", "moveType", type
-  )
-  SELECT $1, $2, $3, 'moves'
-  WHERE EXISTS (
-      SELECT 1
-        FROM "fighters"
-      WHERE "fighterId"=$1
-  )
-  RETURNING *;
+    INSERT INTO public.moves (
+      "fighterId", "name", "moveType", type
+    )
+    SELECT $1, $2, $3, 'moves'
+    WHERE EXISTS (
+        SELECT 1
+          FROM "fighters"
+        WHERE "fighterId"=$1
+    )
+    RETURNING *;
   `;
   const params = [fighterId, name, moveType];
   return db.query(sql, params)
@@ -430,17 +420,16 @@ app.post('/api/add/throws', (req, res, next) => {
     throw new ClientError(400, 'must have (fighterId), (name), (damage), (activeFrames), (totalFrames) as parameters');
   }
   const sql = `
-  INSERT INTO public.throws
-    (
+    INSERT INTO public.throws (
       "fighterId", "name", "type"
-      )
-  SELECT $1, $2, 'throw'
-  WHERE EXISTS (
-    SELECT 1
-    FROM "fighters"
-    WHERE "fighterId"=$1
-  )
-  RETURNING *;
+    )
+    SELECT $1, $2, 'throw'
+    WHERE EXISTS (
+      SELECT 1
+      FROM "fighters"
+      WHERE "fighterId"=$1
+    )
+    RETURNING *;
   `;
   const params = [fighterId, name]
   return db.query(sql, params)
@@ -451,10 +440,10 @@ app.post('/api/add/throws', (req, res, next) => {
     }
     Object.assign(fullResult, result.rows[0]);
     const sql2 = `
-    INSERT INTO public.grappling
-      ("damage", "activeFrames", "totalFrames")
-    VALUES ($1, $2, $3)
-    RETURNING *;
+      INSERT INTO public.grappling
+        ("damage", "activeFrames", "totalFrames")
+      VALUES ($1, $2, $3)
+      RETURNING *;
     `;
     const params2 = [damage, activeFrames, totalFrames];
     return db.query(sql2, params2)
@@ -481,16 +470,16 @@ app.post('/api/add/movements', (req, res, next) => {
     throw new ClientError(400, 'must have (fighterId), (name), (activeFrames), and (totalFrames) as parameters');
   }
   const sql = `
-  INSERT INTO public.movements (
-    "fighterId", "name", "type"
-  )
-  SELECT $1, $2, 'movement'
-  WHERE EXISTS (
-    SELECT 1
-    FROM "fighters"
-    WHERE "fighterId"=$1
-  )
-  RETURNING *;
+    INSERT INTO public.movements (
+      "fighterId", "name", "type"
+    )
+    SELECT $1, $2, 'movement'
+    WHERE EXISTS (
+      SELECT 1
+      FROM "fighters"
+      WHERE "fighterId"=$1
+    )
+    RETURNING *;
   `;
   const params = [fighterId, name]
   return db.query(sql, params)
@@ -501,10 +490,10 @@ app.post('/api/add/movements', (req, res, next) => {
     }
     Object.assign(fullResult, result.rows[0]);
     const sql2 = `
-    INSERT INTO public.dodging
-      ("activeFrames", "totalFrames")
-    VALUES ($1, $2)
-    RETURNING *;
+      INSERT INTO public.dodging
+        ("activeFrames", "totalFrames")
+      VALUES ($1, $2)
+      RETURNING *;
     `;
     const params2 = [activeFrames, totalFrames];
     return db.query(sql2, params2)
@@ -531,8 +520,9 @@ app.post('/api/add/stats', (req, res, next) => {
     throw new ClientError(400, 'must have (fighterId), (name), and (statValue) as parameters');
   }
   const sql = `
-    INSERT INTO public.stats
-      ("fighterId", "name", "type")
+    INSERT INTO public.stats (
+      "fighterId", "name", "type"
+    )
     SELECT $1, $2, 'stat'
     WHERE EXISTS (
       SELECT 1
