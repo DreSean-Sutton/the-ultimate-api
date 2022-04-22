@@ -587,14 +587,12 @@ app.put('/api/update/fighters/:fighterId', (req, res, next) => {
     RETURNING *;
   `;
   const params = [fighterId, fighter, rosterId, displayName];
-  console.error(params);
   return db.query(sql, params)
     .then(result => {
       if (result.rows.length === 0) {
         throw new ClientError(404, `fighterId ${fighterId} does not exist`);
         return;
       }
-      console.error(result.rows[0]);
       res.status(200).json(result.rows[0]);
     })
     .catch(err => next(err));

@@ -320,24 +320,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                items:
-                  type: object
-                  properties:
-                    displayName:
-                      type: string
-                    fighter:
-                      type: string
-                    fighterId:
-                      type: integer
-                    rosterId:
-                      type: integer
-                example:
-                  displayName: Son goku
-                  fighter: goku
-                  fighterId: 1
-                  rosterId: 100
-                  createdAt: 2020-02-20etc
+                $ref: '#/components/schemas/fightersResponse'
 
   /api/add/moves/{fighterId}:
     post:
@@ -583,3 +566,60 @@ paths:
                   statValue: 120
                   type: stat
                   createdAt: 2020-02-20etc
+
+  /api/update/fighters/{fighterId}:
+    put:
+      tags:
+      - Update
+      summary: Update a fighter's basic information
+      parameters:
+      - in: path
+        name: fighterId
+        schema:
+          type: integer
+        required: true
+      requestBody:
+        description: Click `Try it out` and edit your request!
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                displayName:
+                  type: string
+                fighter:
+                  type: string
+                rosterId:
+                  type: integer
+      responses:
+        '200':
+          description:
+            OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fightersResponse'
+
+
+components:
+  schemas:
+    fightersResponse:
+      type: object
+      items:
+        type: object
+        properties:
+          displayName:
+            type: string
+          fighter:
+            type: string
+          fighterId:
+            type: integer
+          rosterId:
+            type: integer
+      example:
+        displayName: Son goku
+        fighter: goku
+        fighterId: 1
+        rosterId: 100
+        createdAt: 2020-02-20etc
