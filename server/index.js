@@ -800,6 +800,47 @@ app.put('/api/update/stats/:statId', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.delete('/api/delete/fighters/:fighterId', (req, res, next) => {
+  // Set it up so that you only have one delete route that conditionally
+  // goes through each group of tables and deletes them conditionally
+
+  if (/[A-Z]/gi.test(req.params.fighterId)
+    & req.params.fighterId !== undefined) {
+    throw new ClientError(400, 'fighterId must be a number');
+    return;
+  }
+  const id = Number(req.params.fighterId);
+  fullResult = {};
+  const sql = `
+    DELETE FROM
+      public.fighters
+    WHERE
+      "fighterId"=$1
+      RETURNING "fighterId";
+  `;
+  const params = [id]
+  return db.query(sql, params)
+    .then(result => {
+      res.status(204).json(result.rows[0]);
+    })
+    .catch(err => next(err));
+});
+
+app.delete('/api/delete/moves/:moveId', (req, res, next) => {
+  if (/[A-Z]/gi.test(req.params.moveId)
+    & req.params.moveId !== undefined) {
+    throw new ClientError(400, 'moveId must be a number');
+    return;
+  }
+  const id = Number(req.params.moveId);
+  fullResult = {};
+  const sql = `
+  DELETE FROM
+    public.moves
+  WHERE
+    "fighter
+  `
+});
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {
