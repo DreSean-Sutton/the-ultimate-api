@@ -116,71 +116,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    activeFrames:
-                      type: string
-                    damage:
-                      type: string
-                    displayName:
-                      type: string
-                    fighter:
-                      type: string
-                    fighterId:
-                      type: integer
-                    moveType:
-                      type: string
-                    name:
-                      type: string
-                    rosterId:
-                      type: integer
-                    statValue:
-                      type: string
-                    totalFrames:
-                      type: string
-                    type:
-                      type: string
-                example:
-                -
-                  activeFrames: "6/11-25 [rehit: 3]/27-28"
-                  damage: 3.0/0.2/3.0%
-                  displayName: Bayonetta
-                  fighter: bayonetta
-                  fighterId: 2
-                  moveType: first/multi/final
-                  name: up b
-                  rosterId: 69
-                  totalFrames: 31
-                  type: move
-                -
-                  activeFrames: 7-8
-                  damage: null
-                  displayName: Bayonetta
-                  fighter: bayonetta
-                  fighterId: 2
-                  name: grab
-                  rosterId: 69
-                  totalFrames: 37
-                  type: throw
-                -
-                  activeFrames: 3-29
-                  displayName: Inkling
-                  fighter: inkling
-                  fighterId: 13
-                  name: neutral air dodge
-                  rosterId: 70
-                  totalFrames: 50
-                  type: movement
-                -
-                  displayName: Inkling
-                  fighter: inkling
-                  fightrId: 13
-                  name: out of shield, neutral air/up smash
-                  rosterId: 70
-                  statValue: 9 frames
-                  type: stat
+                $ref: '#/components/schemas/allData'
 
   /api/fighters/data/{type}:
     get:
@@ -224,71 +160,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    activeFrames:
-                      type: string
-                    damage:
-                      type: string
-                    displayName:
-                      type: string
-                    fighter:
-                      type: string
-                    fighterId:
-                      type: integer
-                    moveType:
-                      type: string
-                    name:
-                      type: string
-                    rosterId:
-                      type: integer
-                    statValue:
-                      type: string
-                    totalFrames:
-                      type: string
-                    type:
-                      type: string
-                example:
-                -
-                  activeFrames: "6/11-25 [rehit: 3]/27-28"
-                  damage: 3.0/0.2/3.0%
-                  displayName: Bayonetta
-                  fighter: bayonetta
-                  fighterId: 2
-                  moveType: first/multi/final
-                  name: up b
-                  rosterId: 69
-                  totalFrames: 31
-                  type: move
-                -
-                  activeFrames: 7-8
-                  damage: null
-                  displayName: Bayonetta
-                  fighter: bayonetta
-                  fighterId: 2
-                  name: grab
-                  rosterId: 69
-                  totalFrames: 37
-                  type: throw
-                -
-                  activeFrames: 3-29
-                  displayName: Inkling
-                  fighter: inkling
-                  fighterId: 13
-                  name: neutral air dodge
-                  rosterId: 70
-                  totalFrames: 50
-                  type: movement
-                -
-                  displayName: Inkling
-                  fighter: inkling
-                  fightrId: 13
-                  name: out of shield, neutral air/up smash
-                  rosterId: 70
-                  statValue: 9 frames
-                  type: stat
+                $ref: '#/components/schemas/allData'
 
   /api/add/fighters:
     post:
@@ -320,60 +192,33 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                items:
-                  type: object
-                  properties:
-                    displayName:
-                      type: string
-                    fighter:
-                      type: string
-                    fighterId:
-                      type: integer
-                    rosterId:
-                      type: integer
-                example:
-                  displayName: Son goku
-                  fighter: goku
-                  fighterId: 1
-                  rosterId: 100
-                  createdAt: 2020-02-20etc
-  /api/add/moves:
+                $ref: '#/components/schemas/fightersResponse'
+
+  /api/add/moves/{fighterId}:
     post:
       tags:
       - Add
       summary: Add move data to a Fighter
+      parameters:
+      - in: path
+        name: fighterId
+        schema:
+          type: integer
+        required: true
       requestBody:
         description: Click `Try it out` and edit your request!
         required: true
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                activeFrames:
-                  type: string
-                damage:
-                  type: string
-                fighterId:
-                  type: integer
-                moveId:
-                  type: integer
-                moveType:
-                  type: string
-                name:
-                  type: string
-                totalFrames:
-                  type: string
-                type:
-                  type: string
-              required:
-                - fighterId
-                - name
-                - moveType
-                - damage
-                - activeFrames
-                - totalFrames
+             $ref: '#/components/schemas/movesRequestBody'
+             required:
+              - fighterId
+              - name
+              - moveType
+              - damage
+              - activeFrames
+              - totalFrames
       responses:
         '201':
           description:
@@ -381,61 +226,26 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                items:
-                  type: object
-                  properties:
-                    activeFrames:
-                      type: string
-                    damage:
-                      type: string
-                    fighterId:
-                      type: integer
-                    moveId:
-                      type: integer
-                    moveType:
-                      type: string
-                    name:
-                      type: string
-                    totalFrames:
-                      type: string
-                    type:
-                      type: string
-                example:
-                  activeFrames: 1-100
-                  damage: 9001%
-                  fighterId: 1
-                  moveId: 150
-                  movetype: multi
-                  name: kamehameha
-                  totalFrames: '105'
-                  type: move
-                  createdAt: 2020-02-20etc
-  /api/add/throws:
+                $ref: '#/components/schemas/movesResponse'
+
+  /api/add/throws/{fighterId}:
     post:
       tags:
       - Add
       summary: Add throw data to a Fighter
+      parameters:
+      - in: path
+        name: fighterId
+        schema:
+          type: integer
+        required: true
       requestBody:
         description: Click `Try it out` and edit your request!
         required: true
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                activeFrames:
-                  type: string
-                damage:
-                  type: string
-                fighterId:
-                  type: integer
-                throwId:
-                  type: integer
-                name:
-                  type: string
-                totalFrames:
-                  type: string
+              $ref: '#/components/schemas/throwsRequestBody'
       responses:
         '201':
           description:
@@ -443,39 +253,19 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                items:
-                  type: object
-                  properties:
-                    activeFrames:
-                      type: string
-                    damage:
-                      type: string
-                    fighterId:
-                      type: integer
-                    throwId:
-                      type: integer
-                    name:
-                      type: string
-                    totalFrames:
-                      type: string
-                    type:
-                      type: string
-                example:
-                  activeFrames: '1/5/10'
-                  damage: '10.0/5.0/40.5%'
-                  fighterId: 1
-                  throwId: 203
-                  name: down throw
-                  totalFrames: '15'
-                  type: throw
-                  createdAt: 2020-02-20etc
+                $ref: '#/components/schemas/throwsResponse'
 
-  /api/add/movements:
+  /api/add/movements/{fighterId}:
     post:
       tags:
       - Add
       summary: Add movement data to a Fighter
+      parameters:
+      - in: path
+        name: fighterId
+        schema:
+          type: integer
+        required: true
       requestBody:
         description: Click `Try it out` and edit your request!
         required: true
@@ -485,9 +275,7 @@ paths:
               type: object
               properties:
                 activeFrames:
-                    type: string
-                fighterId:
-                  type: integer
+                  type: string
                 name:
                   type: string
                 totalFrames:
@@ -499,39 +287,19 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                items:
-                  type: object
-                  properties:
-                    activeFrames:
-                      type: string
-                    damage:
-                      type: string
-                    fighterId:
-                      type: integer
-                    moveId:
-                      type: integer
-                    moveType:
-                      type: string
-                    name:
-                      type: string
-                    totalFrames:
-                      type: string
-                    type:
-                      type: string
-                example:
-                  activeFrames: '1-5'
-                  fighterId: 1
-                  movementId: 30
-                  name: spot dodge
-                  totalFrames: '6'
-                  type: movement
-                  createdAt: 2020-02-20etc
-  /api/add/stats:
+                $ref: '#/components/schemas/movementsResponse'
+
+  /api/add/stats/{fighterId}:
     post:
       tags:
       - Add
       summary: Add stat data to a Fighter
+      parameters:
+      - in: path
+        name: fighterId
+        schema:
+          type: integer
+        required: true
       requestBody:
         description: Click `Try it out` and edit your request!
         required: true
@@ -540,12 +308,10 @@ paths:
             schema:
               type: object
               properties:
-                fighterId:
-                  type: integer
                 name:
                   type: string
                 statValue:
-                    type: string
+                  type: string
       responses:
         '201':
           description:
@@ -553,24 +319,380 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                items:
-                  type: object
-                  properties:
-                    fighterId:
-                      type: integer
-                    name:
-                      type: string
-                    statId:
-                      type: integer
-                    statValue:
-                      type: string
-                    type:
-                      type: string
-                example:
-                  fighterId: 1
-                  name: weight
-                  statId: 30
-                  statValue: 120
-                  type: stat
-                  createdAt: 2020-02-20etc
+                $ref: '#/components/schemas/statsResponse'
+
+  /api/update/fighters/{fighterId}:
+    put:
+      tags:
+      - Update
+      summary: Update a fighter's basic information
+      parameters:
+      - in: path
+        name: fighterId
+        schema:
+          type: integer
+        required: true
+      requestBody:
+        description: Click `Try it out` and edit your request!
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                displayName:
+                  type: string
+                fighter:
+                  type: string
+                rosterId:
+                  type: integer
+      responses:
+        '200':
+          description:
+            OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/fightersResponse'
+
+  /api/update/moves/{moveId}:
+    put:
+      tags:
+      - Update
+      summary: Update a fighter's moves
+      parameters:
+      - in: path
+        name: moveId
+        schema:
+          type: integer
+        required: true
+      requestBody:
+        description: Click `Try it out` and edit your request!
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/movesRequestBody'
+      responses:
+        '200':
+          description:
+            OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/movesResponse'
+
+  /api/update/throws/{throwId}:
+    put:
+      tags:
+      - Update
+      summary: Update a fighter's throws
+      parameters:
+      - in: path
+        name: throwId
+        schema:
+          type: integer
+        required: true
+      requestBody:
+        description: Click `Try it out` and edit your request!
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/throwsRequestBody'
+      responses:
+        '200':
+          description:
+            OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/throwsResponse'
+
+  /api/update/movements/{movementId}:
+    put:
+      tags:
+      - Update
+      summary: Update a fighter's movements
+      parameters:
+      - in: path
+        name: movementId
+        schema:
+          type: integer
+        required: true
+      requestBody:
+        description: Click `Try it out` and edit your request!
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                activeFrames:
+                  type: string
+                name:
+                  type: string
+                totalFrames:
+                  type: string
+      responses:
+        '201':
+          description:
+            created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/movementsResponse'
+
+  /api/update/stats/{statId}:
+    put:
+      tags:
+      - Update
+      summary: update a fighter's stats
+      parameters:
+      - in: path
+        name: statId
+        schema:
+          type: integer
+        required: true
+      requestBody:
+        description: Click `Try it out` and edit your request!
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                statValue:
+                  type: string
+      responses:
+        '201':
+          description:
+            created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/statsResponse'
+
+components:
+  schemas:
+    fightersResponse:
+      type: object
+      items:
+        type: object
+        properties:
+          displayName:
+            type: string
+          fighter:
+            type: string
+          fighterId:
+            type: integer
+          rosterId:
+            type: integer
+      example:
+        displayName: Son goku
+        fighter: goku
+        fighterId: 1
+        rosterId: 100
+        createdAt: 2020-02-20etc
+
+    allData:
+      type: array
+      items:
+        type: object
+        properties:
+          activeFrames:
+            type: string
+          damage:
+            type: string
+          displayName:
+            type: string
+          fighter:
+            type: string
+          fighterId:
+            type: integer
+          moveType:
+            type: string
+          name:
+            type: string
+          rosterId:
+            type: integer
+          statValue:
+            type: string
+          totalFrames:
+            type: string
+          type:
+            type: string
+      example:
+      -
+        activeFrames: "6/11-25 [rehit: 3]/27-28"
+        damage: 3.0/0.2/3.0%
+        displayName: Bayonetta
+        fighter: bayonetta
+        fighterId: 2
+        moveType: first/multi/final
+        name: up b
+        rosterId: 69
+        totalFrames: 31
+        type: move
+      -
+        activeFrames: 7-8
+        damage: null
+        displayName: Bayonetta
+        fighter: bayonetta
+        fighterId: 2
+        name: grab
+        rosterId: 69
+        totalFrames: 37
+        type: throw
+      -
+        activeFrames: 3-29
+        displayName: Inkling
+        fighter: inkling
+        fighterId: 13
+        name: neutral air dodge
+        rosterId: 70
+        totalFrames: 50
+        type: movement
+      -
+        displayName: Inkling
+        fighter: inkling
+        fightrId: 13
+        name: out of shield, neutral air/up smash
+        rosterId: 70
+        statValue: 9 frames
+        type: stat
+
+    movesRequestBody:
+      type: object
+      properties:
+        activeFrames:
+          type: string
+        damage:
+          type: string
+        moveType:
+          type: string
+        name:
+          type: string
+        totalFrames:
+          type: string
+
+    movesResponse:
+      type: object
+      items:
+        type: object
+        properties:
+          activeFrames:
+            type: string
+          damage:
+            type: string
+          fighterId:
+            type: integer
+          moveId:
+            type: integer
+          moveType:
+            type: string
+          name:
+            type: string
+          totalFrames:
+            type: string
+          type:
+            type: string
+      example:
+        activeFrames: 1-100
+        damage: 9001%
+        fighterId: 1
+        moveId: 150
+        movetype: multi
+        name: kamehameha
+        totalFrames: '105'
+        type: move
+        createdAt: 2020-02-20etc
+    throwsRequestBody:
+      type: object
+      properties:
+        activeFrames:
+          type: string
+        damage:
+          type: string
+        name:
+          type: string
+        totalFrames:
+          type: string
+    throwsResponse:
+      type: object
+      items:
+        type: object
+        properties:
+          activeFrames:
+            type: string
+          damage:
+            type: string
+          fighterId:
+            type: integer
+          throwId:
+            type: integer
+          name:
+            type: string
+          totalFrames:
+            type: string
+          type:
+            type: string
+      example:
+        activeFrames: '1/5/10'
+        damage: '10.0/5.0/40.5%'
+        fighterId: 1
+        throwId: 203
+        name: down throw
+        totalFrames: '15'
+        type: throw
+        createdAt: 2020-02-20etc
+
+    movementsResponse:
+      type: object
+      items:
+        type: object
+        properties:
+          activeFrames:
+            type: string
+          fighterId:
+            type: integer
+          movementId:
+            type: integer
+          name:
+            type: string
+          totalFrames:
+            type: string
+          type:
+            type: string
+      example:
+        activeFrames: '1-5'
+        fighterId: 1
+        movementId: 30
+        name: spot dodge
+        totalFrames: '6'
+        type: movement
+        createdAt: 2020-02-20etc
+    statsResponse:
+      type: object
+      items:
+        type: object
+        properties:
+          fighterId:
+            type: integer
+          name:
+            type: string
+          statId:
+            type: integer
+          statValue:
+            type: string
+          type:
+            type: string
+      example:
+        fighterId: 1
+        name: weight
+        statId: 30
+        statValue: 120
+        type: stat
+        createdAt: 2020-02-20etc

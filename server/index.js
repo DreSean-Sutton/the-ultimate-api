@@ -356,18 +356,19 @@ app.post('/api/add/fighters', (req, res, next) => {
       .catch(err => next(err));
 });
 
-app.post('/api/add/moves', (req, res, next) => {
+app.post('/api/add/moves/:fighterId', (req, res, next) => {
   const { name, moveType, damage, activeFrames, totalFrames } = req.body;
-  let { fighterId } = req.body;
-  fighterId = Number(fighterId);
-  if(!fighterId) {
-    throw new ClientError(400, 'FighterId must be an integer')
+  if (/[A-Z]/gi.test(req.params.fighterId)
+  & req.params.fighterId !== undefined) {
+    throw new ClientError(400, 'fighterId must be a number');
+    return;
   }
+  const fighterId = Number(req.params.fighterId);
   const fullResult = {};
-  const reqParams = [fighterId, name, moveType, damage, activeFrames, totalFrames]
+  const reqParams = [name, moveType, damage, activeFrames, totalFrames]
   const isValid = reqParams.every(param => !!param);
   if(!isValid) {
-    throw new ClientError(400, 'must have (fighterId), (name), (moveType), (damage), (activeFrames), (totalFrames) as parameters');
+    throw new ClientError(400, 'must have (name), (moveType), (damage), (activeFrames), (totalFrames) as parameters');
   }
   const sql = `
     INSERT INTO public.moves (
@@ -406,18 +407,19 @@ app.post('/api/add/moves', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.post('/api/add/throws', (req, res, next) => {
+app.post('/api/add/throws/:fighterId', (req, res, next) => {
   const { name, damage, activeFrames, totalFrames } = req.body;
-  let { fighterId } = req.body;
-  fighterId = Number(fighterId);
-  if(!fighterId) {
-    throw new ClientError(400, 'FighterId must be an integer')
+  if (/[A-Z]/gi.test(req.params.fighterId)
+  & req.params.fighterId !== undefined) {
+    throw new ClientError(400, 'fighterId must be a number');
+    return;
   }
+  const fighterId = Number(req.params.fighterId);
   const fullResult = {};
-  const reqParams = [fighterId, name, damage, activeFrames, totalFrames]
+  const reqParams = [name, damage, activeFrames, totalFrames]
   const isValid = reqParams.every(param => !!param);
   if(!isValid) {
-    throw new ClientError(400, 'must have (fighterId), (name), (damage), (activeFrames), (totalFrames) as parameters');
+    throw new ClientError(400, 'must have (name), (damage), (activeFrames), (totalFrames) as parameters');
   }
   const sql = `
     INSERT INTO public.throws (
@@ -456,18 +458,19 @@ app.post('/api/add/throws', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.post('/api/add/movements', (req, res, next) => {
+app.post('/api/add/movements/:fighterId', (req, res, next) => {
   const { name, activeFrames, totalFrames } = req.body;
-  let { fighterId } = req.body;
-  fighterId = Number(fighterId);
-  if(!fighterId) {
-    throw new ClientError(400, 'FighterId must be an integer')
+  if (/[A-Z]/gi.test(req.params.fighterId)
+  & req.params.fighterId !== undefined) {
+    throw new ClientError(400, 'fighterId must be a number');
+    return;
   }
+  const fighterId = Number(req.params.fighterId);
   const fullResult = {};
-  const reqParams = [fighterId, name, activeFrames, totalFrames]
+  const reqParams = [name, activeFrames, totalFrames]
   const isValid = reqParams.every(param => !!param);
   if(!isValid) {
-    throw new ClientError(400, 'must have (fighterId), (name), (activeFrames), and (totalFrames) as parameters');
+    throw new ClientError(400, 'must have (name), (activeFrames), and (totalFrames) as parameters');
   }
   const sql = `
     INSERT INTO public.movements (
@@ -506,18 +509,19 @@ app.post('/api/add/movements', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.post('/api/add/stats', (req, res, next) => {
+app.post('/api/add/stats/:fighterId', (req, res, next) => {
   const { name, statValue } = req.body;
-  let { fighterId } = req.body;
-  fighterId = Number(fighterId);
-  if(!fighterId) {
-    throw new ClientError(400, 'FighterId must be an integer')
+  if (/[A-Z]/gi.test(req.params.fighterId)
+  & req.params.fighterId !== undefined) {
+    throw new ClientError(400, 'fighterId must be a number');
+    return;
   }
+  const fighterId = Number(req.params.fighterId);
   const fullResult = {};
-  const reqParams = [fighterId, name, statValue]
+  const reqParams = [name, statValue]
   const isValid = reqParams.every(param => !!param);
   if(!isValid) {
-    throw new ClientError(400, 'must have (fighterId), (name), and (statValue) as parameters');
+    throw new ClientError(400, 'must have (name), and (statValue) as parameters');
   }
   const sql = `
     INSERT INTO public.stats (
@@ -555,7 +559,248 @@ app.post('/api/add/stats', (req, res, next) => {
     })
     .catch(err => next(err));
 });
-app.use(errorMiddleware)
+
+app.put('/api/update/fighters/:fighterId', (req, res, next) => {
+
+  const { fighter, displayName } = req.body;
+  let { rosterId } = req.body;
+  if (/[A-Z]/gi.test(req.params.fighterId)
+    & req.params.fighterId !== undefined) {
+    throw new ClientError(400, 'fighterId must be a number');
+    return;
+  }
+  if (/[A-Z]/gi.test(rosterId)
+  & rosterId !== undefined) {
+    throw new ClientError(400, 'rosterId must be a number');
+    return;
+  }
+  const fighterId = Number(req.params.fighterId);
+  const sql = `
+    UPDATE
+      public.fighters
+    SET
+      "fighter" = coalesce($2, "fighter"),
+      "rosterId" = coalesce($3, "rosterId"),
+      "displayName" = coalesce($4, "displayName")
+    WHERE
+      "fighterId"=$1
+    RETURNING *;
+  `;
+  const params = [fighterId, fighter, rosterId, displayName];
+  return db.query(sql, params)
+    .then(result => {
+      if (result.rows.length === 0) {
+        throw new ClientError(404, `fighterId ${fighterId} does not exist`);
+        return;
+      }
+      res.status(200).json(result.rows[0]);
+    })
+    .catch(err => next(err));
+});
+
+app.put('/api/update/moves/:moveId', (req, res, next) => {
+  const { name, moveType, damage, activeFrames, totalFrames } = req.body;
+  if (/[A-Z]/gi.test(req.params.moveId)
+    & req.params.moveId !== undefined) {
+    throw new ClientError(400, 'moveId must be a number');
+    return;
+  }
+  const id = Number(req.params.moveId);
+  fullResult = {};
+  const sql = `
+    UPDATE
+      public.moves
+    SET
+      "name" = coalesce($2, "name"),
+      "moveType" = coalesce($3, "moveType")
+      WHERE
+      "moveId"=$1
+      RETURNING *;
+    `;
+    const params = [id, name, moveType];
+    return db.query(sql, params)
+      .then(result => {
+        if (result.rows.length === 0) {
+          throw new ClientError(404, `moveId ${id} does not exist`);
+          return;
+        }
+        Object.assign(fullResult, result.rows[0]);
+        const sql = `
+          UPDATE
+            public.hitboxes
+          SET
+            "damage" = coalesce($2, "damage"),
+            "activeFrames" = coalesce($3, "activeFrames"),
+            "totalFrames" = coalesce($4, "totalFrames")
+          WHERE
+            "moveId"=$1
+          RETURNING *;
+        `;
+        const params = [id, damage, activeFrames, totalFrames];
+        return db.query(sql, params)
+          .then(result => {
+            Object.assign(fullResult, result.rows[0]);
+            res.status(200).json(fullResult);
+          })
+          .catch(err => next(err));
+      })
+      .catch(err => next(err))
+});
+
+app.put('/api/update/throws/:throwId', (req, res, next) => {
+  const { name, damage, activeFrames, totalFrames } = req.body;
+  if (/[A-Z]/gi.test(req.params.throwId)
+    & req.params.throwId !== undefined) {
+    throw new ClientError(400, 'throwId must be a number');
+    return;
+  }
+  const id = Number(req.params.throwId);
+  fullResult = {};
+  const sql = `
+    UPDATE
+      public.throws
+    SET
+      "name" = coalesce($2, "name")
+    WHERE
+      "throwId"=$1
+    RETURNING *;
+  `;
+  const params = [id, name];
+  return db.query(sql, params)
+    .then(result => {
+      if (result.rows.length === 0) {
+        throw new ClientError(404, `throwId ${id} does not exist`);
+        return;
+      }
+      Object.assign(fullResult, result.rows[0]);
+      const sql = `
+        UPDATE
+            public.grappling
+        SET
+          "damage" = coalesce($2, "damage"),
+          "activeFrames" = coalesce($3, "activeFrames"),
+          "totalFrames" = coalesce($4, "totalFrames")
+        WHERE
+          "throwId"=$1
+        RETURNING *;
+      `;
+      const params = [id, damage, activeFrames, totalFrames];
+      return db.query(sql, params)
+        .then(result => {
+          if (result.rows.length === 0) {
+            throw new ClientError(404, `throwId ${id} does not exist`);
+            return;
+          }
+          Object.assign(fullResult, result.rows[0]);
+          res.status(200).json(fullResult);
+        })
+        .catch(err => next(err));
+    })
+    .catch(err => next(err));
+});
+
+app.put('/api/update/movements/:movementsId', (req, res, next) => {
+  const { name, activeFrames, totalFrames } = req.body;
+  if (/[A-Z]/gi.test(req.params.movementsId)
+    & req.params.movementsId !== undefined) {
+    throw new ClientError(400, 'movementId must be a number');
+    return;
+  }
+  const id = Number(req.params.movementsId);
+  fullResult = {};
+  const sql = `
+    UPDATE
+      public.movements
+    SET
+      "name" = coalesce($2, "name")
+    WHERE
+      "movementId"=$1
+    RETURNING *;
+  `;
+  const params = [id, name];
+  return db.query(sql, params)
+    .then(result => {
+      if (result.rows.length === 0) {
+        throw new ClientError(404, `movementId ${id} does not exist`);
+        return;
+      }
+      Object.assign(fullResult, result.rows[0]);
+      const sql = `
+        UPDATE
+            public.dodging
+        SET
+          "activeFrames" = coalesce($2, "activeFrames"),
+          "totalFrames" = coalesce($3, "totalFrames")
+        WHERE
+          "movementId"=$1
+        RETURNING *;
+      `;
+      const params = [id, activeFrames, totalFrames];
+      return db.query(sql, params)
+        .then(result => {
+          if (result.rows.length === 0) {
+            throw new ClientError(404, `movementId ${id} does not exist`);
+            return;
+          }
+          Object.assign(fullResult, result.rows[0]);
+          res.status(200).json(fullResult);
+        })
+        .catch(err => next(err));
+    })
+    .catch(err => next(err));
+});
+
+app.put('/api/update/stats/:statId', (req, res, next) => {
+  const { name, statValue } = req.body;
+  if (/[A-Z]/gi.test(req.params.statId)
+    & req.params.statId !== undefined) {
+    throw new ClientError(400, 'statId must be a number');
+    return;
+  }
+  const id = Number(req.params.statId);
+  fullResult = {};
+  const sql = `
+    UPDATE
+      public.stats
+    SET
+      "name" = coalesce($2, "name")
+    WHERE
+      "statId"=$1
+    RETURNING *;
+  `;
+  const params = [id, name];
+  return db.query(sql, params)
+    .then(result => {
+      if (result.rows.length === 0) {
+        throw new ClientError(404, `statId ${id} does not exist`);
+        return;
+      }
+      Object.assign(fullResult, result.rows[0]);
+      const sql = `
+        UPDATE
+          public.miscellaneous
+        SET
+          "statValue" = coalesce($2, "statValue")
+        WHERE
+          "statId"=$1
+        RETURNING *;
+      `;
+      const params = [id, statValue];
+      return db.query(sql, params)
+        .then(result => {
+          if (result.rows.length === 0) {
+            throw new ClientError(404, `statId ${id} does not exist`);
+            return;
+          }
+          Object.assign(fullResult, result.rows[0]);
+          res.status(200).json(fullResult);
+        })
+        .catch(err => next(err));
+    })
+    .catch(err => next(err));
+});
+
+app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {
   // eslint-disable-next-line no-console
