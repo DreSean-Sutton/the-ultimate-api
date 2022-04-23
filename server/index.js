@@ -888,6 +888,25 @@ app.delete('/api/delete/:table/:id', (req, res, next) => {
       })
       .catch(err => next(err));
   }
+  if (req.params.table === 'stats') {
+    const sql = `
+      DELETE FROM
+        public.stats
+      WHERE
+        "statId"=$1
+      RETURNING *;
+    `;
+    const params = [id];
+    return db.query(sql, params)
+      .then(result => {
+        if (result.rowCount === 0) {
+          throw new ClientError(404, `statId ${id} doesn't exist`)
+          return
+        }
+        res.status(204).json(result.rowCount);
+      })
+      .catch(err => next(err));
+  }
   throw new ClientError(400, `${req.params.table} is not a valid path parameter`)
 });
 
