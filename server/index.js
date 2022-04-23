@@ -800,47 +800,59 @@ app.put('/api/update/stats/:statId', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.delete('/api/delete/fighters/:fighterId', (req, res, next) => {
+app.delete('/api/delete/:table/:id', (req, res, next) => {
   // Set it up so that you only have one delete route that conditionally
   // goes through each group of tables and deletes them conditionally
 
-  if (/[A-Z]/gi.test(req.params.fighterId)
-    & req.params.fighterId !== undefined) {
-    throw new ClientError(400, 'fighterId must be a number');
+  if (/[A-Z]/gi.test(req.params.id)
+    & req.params.id !== undefined) {
+    throw new ClientError(400, 'id must be a number');
     return;
   }
-  const id = Number(req.params.fighterId);
-  fullResult = {};
-  const sql = `
-    DELETE FROM
-      public.fighters
-    WHERE
-      "fighterId"=$1
-      RETURNING "fighterId";
-  `;
-  const params = [id]
-  return db.query(sql, params)
-    .then(result => {
-      res.status(204).json(result.rows[0]);
-    })
-    .catch(err => next(err));
+  const id = Number(req.params.id);
+
+  if (req.params.table === 'fighters') {
+    const sql = `
+      DELETE FROM
+        public.fighters
+      WHERE
+        "fighterId"=$1
+      RETURNING *;
+    `;
+    const params = [id];
+    return db.query(sql, params)
+      .then(result => {
+        console.error(result.rowCount);
+        if (result.rowCount === 0) {
+          throw new ClientError(404, `fighterId ${id} doesn't exist`);
+          return;
+        }
+        res.status(204).json(result.rowCount);
+      })
+      .catch(err => next(err));
+  }
+  if (req.params.table === 'moves') {
+    const sql = `
+      DELETE FROM
+        public.moves
+      WHERE
+        "moveId"=$1
+      RETURNING *;
+    `;
+    const params = [id];
+    return db.query(sql, params)
+      .then(result => {
+        if (result.rowCount === 0) {
+          throw new ClientError(404, `moveId ${id} doesn't exist`)
+          return
+        }
+        res.status(204).json(result.rowCount);
+      })
+      .catch(err => next(err));
+  }
+  throw new ClientError(400, `${req.params.table} is not a valid path parameter`)
 });
 
-app.delete('/api/delete/moves/:moveId', (req, res, next) => {
-  if (/[A-Z]/gi.test(req.params.moveId)
-    & req.params.moveId !== undefined) {
-    throw new ClientError(400, 'moveId must be a number');
-    return;
-  }
-  const id = Number(req.params.moveId);
-  fullResult = {};
-  const sql = `
-  DELETE FROM
-    public.moves
-  WHERE
-    "fighter
-  `
-});
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {
