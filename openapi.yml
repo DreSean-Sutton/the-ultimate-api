@@ -19,7 +19,7 @@ info:
     [Gitub](https://github.com/DreSean-Sutton/Final-Project)
     [LinkedIn](https://www.linkedin.com/in/dre-sean-sutton-6343b5222)
 
-  version: v7
+  version: v9
 
 paths:
   /api/fighters:
@@ -474,6 +474,81 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/statsResponse'
+  /api/delete/fighters/{id}:
+    delete:
+      tags:
+      - Delete
+      summary: Delete a fighter and all of their data
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      responses:
+        '204':
+          description:
+            no content
+  /api/delete/moves/{id}:
+    delete:
+      tags:
+      - Delete
+      summary: Delete a fighter's move data
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      responses:
+        '204':
+          description:
+            no content
+  /api/delete/throws/{id}:
+    delete:
+      tags:
+      - Delete
+      summary: Delete a fighter's throw data
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      responses:
+        '204':
+          description:
+            no content
+  /api/delete/movements/{id}:
+    delete:
+      tags:
+      - Delete
+      summary: Delete a fighter's movement data
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      responses:
+        '204':
+          description:
+            no content
+  /api/delete/stats/{id}:
+    delete:
+      tags:
+      - Delete
+      summary: Delete a fighter's stat data
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      responses:
+        '204':
+          description:
+            no content
 
 components:
   schemas:
