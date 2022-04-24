@@ -801,8 +801,6 @@ app.put('/api/update/stats/:statId', (req, res, next) => {
 });
 
 app.delete('/api/delete/:table/:id', (req, res, next) => {
-  // Set it up so that you only have one delete route that conditionally
-  // goes through each group of tables and deletes them conditionally
 
   if (/[A-Z]/gi.test(req.params.id)
     & req.params.id !== undefined) {
@@ -810,104 +808,62 @@ app.delete('/api/delete/:table/:id', (req, res, next) => {
     return;
   }
   const id = Number(req.params.id);
+  let sql = '';
+  const notFoundError = `${req.params.table.slice(0, req.params.table.length - 1)}Id ${id} doesn't exist`
+  const params = [id];
 
   if (req.params.table === 'fighters') {
-    const sql = `
+    sql = `
       DELETE FROM
         public.fighters
       WHERE
         "fighterId"=$1
       RETURNING *;
     `;
-    const params = [id];
-    return db.query(sql, params)
-      .then(result => {
-        console.error(result.rowCount);
-        if (result.rowCount === 0) {
-          throw new ClientError(404, `fighterId ${id} doesn't exist`);
-          return;
-        }
-        res.status(204).json(result.rowCount);
-      })
-      .catch(err => next(err));
-  }
-  if (req.params.table === 'moves') {
-    const sql = `
+  } else if (req.params.table === 'moves') {
+    sql = `
       DELETE FROM
         public.moves
       WHERE
         "moveId"=$1
       RETURNING *;
     `;
-    const params = [id];
-    return db.query(sql, params)
-      .then(result => {
-        if (result.rowCount === 0) {
-          throw new ClientError(404, `moveId ${id} doesn't exist`)
-          return
-        }
-        res.status(204).json(result.rowCount);
-      })
-      .catch(err => next(err));
-  }
-  if (req.params.table === 'throws') {
-    const sql = `
+  } else if (req.params.table === 'throws') {
+    sql = `
       DELETE FROM
         public.throws
       WHERE
         "throwId"=$1
       RETURNING *;
     `;
-    const params = [id];
-    return db.query(sql, params)
-      .then(result => {
-        if (result.rowCount === 0) {
-          throw new ClientError(404, `throwId ${id} doesn't exist`)
-          return
-        }
-        res.status(204).json(result.rowCount);
-      })
-      .catch(err => next(err));
-  }
-  if (req.params.table === 'movements') {
-    const sql = `
+  } else if (req.params.table === 'movements') {
+    sql = `
       DELETE FROM
         public.movements
       WHERE
         "movementId"=$1
       RETURNING *;
     `;
-    const params = [id];
-    return db.query(sql, params)
-      .then(result => {
-        if (result.rowCount === 0) {
-          throw new ClientError(404, `movementId ${id} doesn't exist`)
-          return
-        }
-        res.status(204).json(result.rowCount);
-      })
-      .catch(err => next(err));
-  }
-  if (req.params.table === 'stats') {
-    const sql = `
+  } else if (req.params.table === 'stats') {
+    sql = `
       DELETE FROM
         public.stats
       WHERE
         "statId"=$1
       RETURNING *;
     `;
-    const params = [id];
-    return db.query(sql, params)
-      .then(result => {
-        if (result.rowCount === 0) {
-          throw new ClientError(404, `statId ${id} doesn't exist`)
-          return
-        }
-        res.status(204).json(result.rowCount);
-      })
-      .catch(err => next(err));
+  } else {
+    throw new ClientError(400, `${req.params.table} is not a valid path parameter`)
   }
-  throw new ClientError(400, `${req.params.table} is not a valid path parameter`)
+  return db.query(sql, params)
+    .then(result => {
+      if (result.rowCount === 0) {
+        throw new ClientError(404, notFoundError);
+        return
+      }
+      res.status(204).json(result.rowCount);
+    })
+    .catch(err => next(err));
 });
 
 app.use(errorMiddleware);
