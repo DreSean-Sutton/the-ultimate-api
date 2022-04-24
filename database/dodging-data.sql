@@ -155,6 +155,19 @@ INSERT INTO public.dodging AS "darkSamus"
     ('3-21', '110'),
     ('3-21', '119');
 
+INSERT INTO public.dodging AS "diddy"
+  ("activeFrames", "totalFrames")
+  VALUES
+    ('3-16', '19/24'),
+    ('4-14', '28'),
+    ('4-15', '33'),
+    ('2-27', '44'),
+    ('2-19', '62'),
+    ('2-19', '68'),
+    ('2-19', '74'),
+    ('2-19', '86'),
+    ('2-19', '96');
+
 INSERT INTO public.dodging AS "inkling"
   ("activeFrames", "totalFrames")
   VALUES

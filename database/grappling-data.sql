@@ -142,6 +142,18 @@ INSERT INTO public.grappling AS "darkSamus"
     ('5.0/7.0%', '15/16', '41'),
     ('8.0%', '21', '37');
 
+INSERT INTO public.grappling AS "diddy"
+  ("damage", "activeFrames", "totalFrames")
+  VALUES
+    (null, '7-8', '36'),
+    (null, '10-11', '44'),
+    (null, '11-12', '39'),
+    ('1.0%', '1', '16'),
+    ('9.0%', '21', '31'),
+    ('12.0%', '18', '51'),
+    ('1.0/4.0%', '17/19', '26'),
+    ('7.0%', '22', '31');
+
 INSERT INTO public.grappling AS "inkling"
   ("damage", "activeFrames", "totalFrames")
   VALUES

@@ -122,18 +122,18 @@ CREATE TABLE public.miscellaneous (
 
 
 
-ALTER TABLE public.moves ADD CONSTRAINT "moves_fk0" FOREIGN KEY ("fighterId") REFERENCES "fighters"("fighterId");
+ALTER TABLE public.moves ADD CONSTRAINT "moves_fk0" FOREIGN KEY ("fighterId") REFERENCES "fighters"("fighterId") ON DELETE CASCADE;
 
-ALTER TABLE public.hitboxes ADD CONSTRAINT "hitboxes_fk0" FOREIGN KEY ("moveId") REFERENCES "moves"("moveId");
+ALTER TABLE public.hitboxes ADD CONSTRAINT "hitboxes_fk0" FOREIGN KEY ("moveId") REFERENCES "moves"("moveId") ON DELETE CASCADE;
 
-ALTER TABLE public.throws ADD CONSTRAINT "throws_fk0" FOREIGN KEY ("fighterId") REFERENCES "fighters"("fighterId");
+ALTER TABLE public.throws ADD CONSTRAINT "throws_fk0" FOREIGN KEY ("fighterId") REFERENCES "fighters"("fighterId") ON DELETE CASCADE;
 
-ALTER TABLE public.grappling ADD CONSTRAINT "grappling_fk0" FOREIGN KEY ("throwId") REFERENCES "throws"("throwId");
+ALTER TABLE public.grappling ADD CONSTRAINT "grappling_fk0" FOREIGN KEY ("throwId") REFERENCES "throws"("throwId") ON DELETE CASCADE;
 
-ALTER TABLE public.movements ADD CONSTRAINT "movements_fk0" FOREIGN KEY ("fighterId") REFERENCES "fighters"("fighterId");
+ALTER TABLE public.movements ADD CONSTRAINT "movements_fk0" FOREIGN KEY ("fighterId") REFERENCES "fighters"("fighterId") ON DELETE CASCADE;
 
-ALTER TABLE public.dodging ADD CONSTRAINT "dodging_fk0" FOREIGN KEY ("movementId") REFERENCES "movements"("movementId");
+ALTER TABLE public.dodging ADD CONSTRAINT "dodging_fk0" FOREIGN KEY ("movementId") REFERENCES "movements"("movementId") ON DELETE CASCADE;
 
-ALTER TABLE public.stats ADD CONSTRAINT "stats_fk0" FOREIGN KEY ("fighterId") REFERENCES "fighters"("fighterId");
+ALTER TABLE public.stats ADD CONSTRAINT "stats_fk0" FOREIGN KEY ("fighterId") REFERENCES "fighters"("fighterId") ON DELETE CASCADE;
 
-ALTER TABLE public.miscellaneous ADD CONSTRAINT "miscellaneous_fk0" FOREIGN KEY ("statId") REFERENCES "stats"("statId");
+ALTER TABLE public.miscellaneous ADD CONSTRAINT "miscellaneous_fk0" FOREIGN KEY ("statId") REFERENCES "stats"("statId") ON DELETE CASCADE;

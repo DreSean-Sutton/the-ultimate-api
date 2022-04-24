@@ -4,7 +4,7 @@ info:
   title: Dre Sean Sutton's Smash Ultimate API
   description: >
     This is *the* Smash Ultimate restful API that offers indepth
-    frame data information on the cast. Use a query parameter to specify
+    frame data information on the cast. In GET requests, use a query parameter to specify
     a single Fighter. Values separated by `/`, `()`, and `[]`
     indicate different hitboxes that are mirrored
     by the `moveType` property. All frame data is copied from the
@@ -13,19 +13,19 @@ info:
     into my database. If you see any mistakes, please let me know on GitHub!
     </br>
     </br>
-    14 Fighters, so far, and at least 1 is added daily!
+    15 Fighters, so far, and at least 1 is added daily!
     </br>
     </br>
-    [Gitub](https://github.com/DreSean-Sutton/Final-Project)
+    [GitHub](https://github.com/DreSean-Sutton/Final-Project)
     [LinkedIn](https://www.linkedin.com/in/dre-sean-sutton-6343b5222)
 
-  version: v7
+  version: v9
 
 paths:
   /api/fighters:
     get:
       tags:
-        - Fighters
+        - fighters
       summary: Returns basic information for all fighters
       description: >
        Use `fighter`, `fighterId`, and `rosterId`
@@ -80,10 +80,11 @@ paths:
                   fighter: bayonetta
                   rosterId: 63
                   displayName: Bayonetta
+
   /api/fighters/data:
     get:
       tags:
-        - Fighters
+        - fighters
       summary: Returns all frame data for all Fighters
       description: >
        Use `fighter`, `fighterId`, and `rosterId`
@@ -121,7 +122,7 @@ paths:
   /api/fighters/data/{type}:
     get:
       tags:
-      - Fighters
+      - fighters
       summary: Returns a specific type of frame data for all Fighters
       description: >
        Use `fighter`, `fighterId`, and `rosterId`
@@ -165,7 +166,7 @@ paths:
   /api/add/fighters:
     post:
       tags:
-      - Add
+      - add
       summary: Add a Fighter and their basic data
       requestBody:
         description: Click `Try it out` and edit your request!
@@ -197,7 +198,7 @@ paths:
   /api/add/moves/{fighterId}:
     post:
       tags:
-      - Add
+      - add
       summary: Add move data to a Fighter
       parameters:
       - in: path
@@ -228,10 +229,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/movesResponse'
 
+
   /api/add/throws/{fighterId}:
     post:
       tags:
-      - Add
+      - add
       summary: Add throw data to a Fighter
       parameters:
       - in: path
@@ -258,7 +260,7 @@ paths:
   /api/add/movements/{fighterId}:
     post:
       tags:
-      - Add
+      - add
       summary: Add movement data to a Fighter
       parameters:
       - in: path
@@ -292,7 +294,7 @@ paths:
   /api/add/stats/{fighterId}:
     post:
       tags:
-      - Add
+      - add
       summary: Add stat data to a Fighter
       parameters:
       - in: path
@@ -324,7 +326,7 @@ paths:
   /api/update/fighters/{fighterId}:
     put:
       tags:
-      - Update
+      - update
       summary: Update a fighter's basic information
       parameters:
       - in: path
@@ -358,7 +360,7 @@ paths:
   /api/update/moves/{moveId}:
     put:
       tags:
-      - Update
+      - update
       summary: Update a fighter's moves
       parameters:
       - in: path
@@ -385,7 +387,7 @@ paths:
   /api/update/throws/{throwId}:
     put:
       tags:
-      - Update
+      - update
       summary: Update a fighter's throws
       parameters:
       - in: path
@@ -412,7 +414,7 @@ paths:
   /api/update/movements/{movementId}:
     put:
       tags:
-      - Update
+      - update
       summary: Update a fighter's movements
       parameters:
       - in: path
@@ -446,8 +448,8 @@ paths:
   /api/update/stats/{statId}:
     put:
       tags:
-      - Update
-      summary: update a fighter's stats
+      - update
+      summary: Update a fighter's stats
       parameters:
       - in: path
         name: statId
@@ -475,6 +477,86 @@ paths:
               schema:
                 $ref: '#/components/schemas/statsResponse'
 
+  /api/delete/fighters/{id}:
+    delete:
+      tags:
+      - delete
+      summary: Delete a fighter and all of their data
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      responses:
+        '204':
+          description:
+            no content
+
+  /api/delete/moves/{id}:
+    delete:
+      tags:
+      - delete
+      summary: Delete a fighter's move data
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      responses:
+        '204':
+          description:
+            no content
+
+  /api/delete/throws/{id}:
+    delete:
+      tags:
+      - delete
+      summary: Delete a fighter's throw data
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      responses:
+        '204':
+          description:
+            no content
+
+  /api/delete/movements/{id}:
+    delete:
+      tags:
+      - delete
+      summary: Delete a fighter's movement data
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      responses:
+        '204':
+          description:
+            no content
+
+  /api/delete/stats/{id}:
+    delete:
+      tags:
+      - delete
+      summary: Delete a fighter's stat data
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      responses:
+        '204':
+          description:
+            no content
+
 components:
   schemas:
     fightersResponse:
@@ -491,7 +573,7 @@ components:
           rosterId:
             type: integer
       example:
-        displayName: Son goku
+        displayName: Son Goku
         fighter: goku
         fighterId: 1
         rosterId: 100
@@ -609,6 +691,7 @@ components:
         totalFrames: '105'
         type: move
         createdAt: 2020-02-20etc
+
     throwsRequestBody:
       type: object
       properties:
@@ -620,6 +703,7 @@ components:
           type: string
         totalFrames:
           type: string
+
     throwsResponse:
       type: object
       items:
@@ -674,6 +758,7 @@ components:
         totalFrames: '6'
         type: movement
         createdAt: 2020-02-20etc
+
     statsResponse:
       type: object
       items:
