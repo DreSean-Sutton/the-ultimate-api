@@ -320,6 +320,7 @@ app.get('/api/fighters/data/:type', (req, res, next) => {
 
 app.post('/api/add/fighters', (req, res, next) => {
 
+  const fullResult = {};
   const { fighter, displayName } = req.body;
   let { rosterId } = req.body;
   rosterId = Number(rosterId);
@@ -354,47 +355,137 @@ app.post('/api/add/fighters', (req, res, next) => {
       .catch(err => next(err));
 });
 
-app.post('/api/add/moves/:fighterId', (req, res, next) => {
-  const { name, moveType, damage, activeFrames, totalFrames } = req.body;
-  if (/[A-Z]/gi.test(req.params.fighterId)
-  & req.params.fighterId !== undefined) {
+app.post('/api/add/:table/:id', (req, res, next) => {
+  const fullResult = {};
+  const { name, moveType, damage, activeFrames, totalFrames, statValue } = req.body;
+  if (/[A-Z]/gi.test(req.params.id)
+    & req.params.id !== undefined) {
     throw new ClientError(400, 'fighterId must be a number');
     return;
   }
-  const fighterId = Number(req.params.fighterId);
-  const fullResult = {};
-  const reqParams = [name, moveType, damage, activeFrames, totalFrames]
-  const isValid = reqParams.every(param => !!param);
-  if(!isValid) {
-    throw new ClientError(400, 'must have (name), (moveType), (damage), (activeFrames), (totalFrames) as parameters');
-  }
-  const sql = `
-    INSERT INTO public.moves (
-      "fighterId", "name", "moveType", type
-    )
-    SELECT $1, $2, $3, 'moves'
-    WHERE EXISTS (
-        SELECT 1
-          FROM "fighters"
-        WHERE "fighterId"=$1
-    )
-    RETURNING *;
-  `;
-  const params = [fighterId, name, moveType];
-  return db.query(sql, params)
-  .then(result => {
-    if (result.rows.length === 0) {
-      throw new ClientError(404, `fighterId ${fighterId} doesn't exist`);
-      return;
+  const id = Number(req.params.id);
+  let sql = '';
+  let sql2 = '';
+  let params = [];
+  let params2 = [];
+
+  if (req.params.table === 'moves') {
+    const reqParams = [name, moveType, damage, activeFrames, totalFrames]
+    const isValid = reqParams.every(param => !!param);
+    if(!isValid) {
+      throw new ClientError(400, 'must have (name), (moveType), (damage), (activeFrames), (totalFrames) as parameters');
     }
-    Object.assign(fullResult, result.rows[0]);
-    const sql2 = `
+    sql = `
+      INSERT INTO public.moves (
+        "fighterId", "name", "moveType", type
+      )
+      SELECT $1, $2, $3, 'moves'
+      WHERE EXISTS (
+          SELECT 1
+            FROM "fighters"
+          WHERE "fighterId"=$1
+      )
+      RETURNING *;
+    `;
+    params = [id, name, moveType];
+    sql2 = `
       INSERT INTO public.hitboxes
         ("damage", "activeFrames", "totalFrames")
       VALUES ($1, $2, $3)
       RETURNING *;
     `;
-    const params2 = [damage, activeFrames, totalFrames];
+    params2 = [damage, activeFrames, totalFrames];
+
+  } else if (req.params.table === 'throws') {
+    const reqParams = [name, damage, activeFrames, totalFrames]
+    const isValid = reqParams.every(param => !!param);
+    if(!isValid) {
+      throw new ClientError(400, 'must have (name), (damage), (activeFrames), (totalFrames) as parameters');
+    }
+    sql = `
+      INSERT INTO public.throws (
+        "fighterId", "name", "type"
+      )
+      SELECT $1, $2, 'throw'
+      WHERE EXISTS (
+        SELECT 1
+        FROM "fighters"
+        WHERE "fighterId"=$1
+      )
+      RETURNING *;
+    `;
+    params = [id, name];
+      sql2 = `
+        INSERT INTO public.grappling
+          ("damage", "activeFrames", "totalFrames")
+        VALUES ($1, $2, $3)
+        RETURNING *;
+      `;
+      params2 = [damage, activeFrames, totalFrames];
+
+  } else if (req.params.table === 'movements') {
+    const reqParams = [name, activeFrames, totalFrames]
+    const isValid = reqParams.every(param => !!param);
+    if(!isValid) {
+      throw new ClientError(400, 'must have (name), (activeFrames), and (totalFrames) as parameters');
+    }
+    sql = `
+      INSERT INTO public.movements (
+        "fighterId", "name", "type"
+      )
+      SELECT $1, $2, 'movement'
+      WHERE EXISTS (
+        SELECT 1
+        FROM "fighters"
+        WHERE "fighterId"=$1
+      )
+      RETURNING *;
+    `;
+    params = [id, name]
+      sql2 = `
+        INSERT INTO public.dodging
+          ("activeFrames", "totalFrames")
+        VALUES ($1, $2)
+        RETURNING *;
+      `;
+      params2 = [activeFrames, totalFrames];
+
+  } else if (req.params.table === 'stats') {
+    const reqParams = [name, statValue]
+    const isValid = reqParams.every(param => !!param);
+    if(!isValid) {
+      throw new ClientError(400, 'must have (name), and (statValue) as parameters');
+    }
+    sql = `
+      INSERT INTO public.stats (
+        "fighterId", "name", "type"
+      )
+      SELECT $1, $2, 'stat'
+      WHERE EXISTS (
+        SELECT 1
+        FROM "fighters"
+        WHERE "fighterId"=$1
+      )
+      RETURNING *;
+      `;
+    params = [id, name]
+        sql2 = `
+          INSERT INTO public.miscellaneous
+            ("statValue")
+          VALUES ($1)
+          RETURNING *;
+          `;
+        params2 = [statValue];
+  } else {
+    throw new ClientError(400, `${req.params.table} is not a valid path parameter`)
+  }
+  return db.query(sql, params)
+  .then(result => {
+    if (result.rows.length === 0) {
+      throw new ClientError(404, `fighterId ${id} doesn't exist`);
+      return;
+    }
+    Object.assign(fullResult, result.rows[0]);
       return db.query(sql2, params2)
         .then(result => {
           Object.assign(fullResult, result.rows[0]);
@@ -405,158 +496,6 @@ app.post('/api/add/moves/:fighterId', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.post('/api/add/throws/:fighterId', (req, res, next) => {
-  const { name, damage, activeFrames, totalFrames } = req.body;
-  if (/[A-Z]/gi.test(req.params.fighterId)
-  & req.params.fighterId !== undefined) {
-    throw new ClientError(400, 'fighterId must be a number');
-    return;
-  }
-  const fighterId = Number(req.params.fighterId);
-  const fullResult = {};
-  const reqParams = [name, damage, activeFrames, totalFrames]
-  const isValid = reqParams.every(param => !!param);
-  if(!isValid) {
-    throw new ClientError(400, 'must have (name), (damage), (activeFrames), (totalFrames) as parameters');
-  }
-  const sql = `
-    INSERT INTO public.throws (
-      "fighterId", "name", "type"
-    )
-    SELECT $1, $2, 'throw'
-    WHERE EXISTS (
-      SELECT 1
-      FROM "fighters"
-      WHERE "fighterId"=$1
-    )
-    RETURNING *;
-  `;
-  const params = [fighterId, name]
-  return db.query(sql, params)
-  .then(result => {
-    if (result.rows.length === 0) {
-      throw new ClientError(404, `fighterId ${fighterId} doesn't exist`);
-      return;
-    }
-    Object.assign(fullResult, result.rows[0]);
-    const sql2 = `
-      INSERT INTO public.grappling
-        ("damage", "activeFrames", "totalFrames")
-      VALUES ($1, $2, $3)
-      RETURNING *;
-    `;
-    const params2 = [damage, activeFrames, totalFrames];
-    return db.query(sql2, params2)
-      .then(result => {
-        Object.assign(fullResult, result.rows[0]);
-        res.status(201).json(fullResult)
-      })
-      .catch(err => next(err));
-  })
-    .catch(err => next(err));
-});
-
-app.post('/api/add/movements/:fighterId', (req, res, next) => {
-  const { name, activeFrames, totalFrames } = req.body;
-  if (/[A-Z]/gi.test(req.params.fighterId)
-  & req.params.fighterId !== undefined) {
-    throw new ClientError(400, 'fighterId must be a number');
-    return;
-  }
-  const fighterId = Number(req.params.fighterId);
-  const fullResult = {};
-  const reqParams = [name, activeFrames, totalFrames]
-  const isValid = reqParams.every(param => !!param);
-  if(!isValid) {
-    throw new ClientError(400, 'must have (name), (activeFrames), and (totalFrames) as parameters');
-  }
-  const sql = `
-    INSERT INTO public.movements (
-      "fighterId", "name", "type"
-    )
-    SELECT $1, $2, 'movement'
-    WHERE EXISTS (
-      SELECT 1
-      FROM "fighters"
-      WHERE "fighterId"=$1
-    )
-    RETURNING *;
-  `;
-  const params = [fighterId, name]
-  return db.query(sql, params)
-  .then(result => {
-    if (result.rows.length === 0) {
-      throw new ClientError(404, `fighterId ${fighterId} doesn't exist`);
-      return;
-    }
-    Object.assign(fullResult, result.rows[0]);
-    const sql2 = `
-      INSERT INTO public.dodging
-        ("activeFrames", "totalFrames")
-      VALUES ($1, $2)
-      RETURNING *;
-    `;
-    const params2 = [activeFrames, totalFrames];
-    return db.query(sql2, params2)
-      .then(result => {
-        Object.assign(fullResult, result.rows[0]);
-        res.status(201).json(fullResult)
-      })
-      .catch(err => next(err));
-  })
-    .catch(err => next(err));
-});
-
-app.post('/api/add/stats/:fighterId', (req, res, next) => {
-  const { name, statValue } = req.body;
-  if (/[A-Z]/gi.test(req.params.fighterId)
-  & req.params.fighterId !== undefined) {
-    throw new ClientError(400, 'fighterId must be a number');
-    return;
-  }
-  const fighterId = Number(req.params.fighterId);
-  const fullResult = {};
-  const reqParams = [name, statValue]
-  const isValid = reqParams.every(param => !!param);
-  if(!isValid) {
-    throw new ClientError(400, 'must have (name), and (statValue) as parameters');
-  }
-  const sql = `
-    INSERT INTO public.stats (
-      "fighterId", "name", "type"
-    )
-    SELECT $1, $2, 'stat'
-    WHERE EXISTS (
-      SELECT 1
-      FROM "fighters"
-      WHERE "fighterId"=$1
-    )
-    RETURNING *;
-    `;
-  const params = [fighterId, name]
-  return db.query(sql, params)
-    .then(result => {
-      if (result.rows.length === 0) {
-        throw new ClientError(404, `fighterId ${fighterId} doesn't exist`);
-        return;
-      }
-      Object.assign(fullResult, result.rows[0]);
-      const sql2 = `
-        INSERT INTO public.miscellaneous
-          ("statValue")
-        VALUES ($1)
-        RETURNING *;
-        `;
-      const params2 = [statValue];
-      return db.query(sql2, params2)
-        .then(result => {
-          Object.assign(fullResult, result.rows[0]);
-          res.status(201).json(fullResult)
-        })
-        .catch(err => next(err));
-    })
-    .catch(err => next(err));
-});
 
 app.put('/api/update/:table/:id', (req, res, next) => {
   const fullResult = {};
@@ -762,6 +701,8 @@ app.put('/api/update/:table/:id', (req, res, next) => {
           .catch(err => next(err));
       })
       .catch(err => next(err));
+  } else {
+    throw new ClientError(400, `${req.params.table} is not a valid path parameter`)
   }
 });
 
