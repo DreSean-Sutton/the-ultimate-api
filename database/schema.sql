@@ -39,6 +39,7 @@ CREATE TABLE public.hitboxes (
 	"damage" TEXT,
 	"activeFrames" TEXT,
 	"totalFrames" TEXT,
+  "firstFrame" TEXT,
 	"createdAt" timestamp with time zone DEFAULT NOW(),
 	CONSTRAINT "hitboxes_pk" PRIMARY KEY ("moveId")
 ) WITH (
