@@ -14,7 +14,7 @@ const sqlQueries = {
         SELECT
           "activeFrames", "damage", "displayName",
           fighter, "fighterId", "moveId", "moveType",
-          "name", "rosterId",
+          "name", "rosterId", "firstFrame",
           "totalFrames", "type"
         FROM
           fighters

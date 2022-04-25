@@ -357,7 +357,7 @@ app.post('/api/add/fighters', (req, res, next) => {
 
 app.post('/api/add/:table/:id', (req, res, next) => {
   const fullResult = {};
-  const { name, moveType, damage, activeFrames, totalFrames, statValue } = req.body;
+  const { name, moveType, damage, activeFrames, totalFrames, firstFrame, statValue } = req.body;
   if (/[A-Z]/gi.test(req.params.id)
     & req.params.id !== undefined) {
     throw new ClientError(400, 'fighterId must be a number');
@@ -370,10 +370,10 @@ app.post('/api/add/:table/:id', (req, res, next) => {
   let params2 = [];
 
   if (req.params.table === 'moves') {
-    const reqParams = [name, moveType, damage, activeFrames, totalFrames]
+    const reqParams = [name, moveType, damage, activeFrames, totalFrames, firstFrame]
     const isValid = reqParams.every(param => !!param);
     if(!isValid) {
-      throw new ClientError(400, 'must have (name), (moveType), (damage), (activeFrames), (totalFrames) as parameters');
+      throw new ClientError(400, 'must have (name), (moveType), (damage), (activeFrames), (totalFrames), and (firstFrame) as parameters');
     }
     sql = `
       INSERT INTO public.moves (
@@ -390,11 +390,11 @@ app.post('/api/add/:table/:id', (req, res, next) => {
     params = [id, name, moveType];
     sql2 = `
       INSERT INTO public.hitboxes
-        ("damage", "activeFrames", "totalFrames")
-      VALUES ($1, $2, $3)
+        ("damage", "activeFrames", "totalFrames", "firstFrame")
+      VALUES ($1, $2, $3, $4)
       RETURNING *;
     `;
-    params2 = [damage, activeFrames, totalFrames];
+    params2 = [damage, activeFrames, totalFrames, firstFrame];
 
   } else if (req.params.table === 'throws') {
     const reqParams = [name, damage, activeFrames, totalFrames]
@@ -499,7 +499,7 @@ app.post('/api/add/:table/:id', (req, res, next) => {
 
 app.put('/api/update/:table/:id', (req, res, next) => {
   const fullResult = {};
-  const { fighter, displayName, name, moveType, damage, activeFrames, totalFrames, statValue } = req.body;
+  const { fighter, displayName, name, moveType, damage, activeFrames, totalFrames, firstFrame, statValue } = req.body;
   let { rosterId } = req.body;
   if (/[A-Z]/gi.test(req.params.id)
     & req.params.id !== undefined) {
@@ -561,12 +561,13 @@ app.put('/api/update/:table/:id', (req, res, next) => {
             SET
               "damage" = coalesce($2, "damage"),
               "activeFrames" = coalesce($3, "activeFrames"),
-              "totalFrames" = coalesce($4, "totalFrames")
+              "totalFrames" = coalesce($4, "totalFrames"),
+              "firstFrame" = coalesce($5, "firstFrame")
             WHERE
               "moveId"=$1
             RETURNING *;
           `;
-          const params = [id, damage, activeFrames, totalFrames];
+          const params = [id, damage, activeFrames, totalFrames, firstFrame];
           return db.query(sql, params)
             .then(result => {
               Object.assign(fullResult, result.rows[0]);
