@@ -154,19 +154,22 @@ INSERT INTO public.throws AS "diddy"
     (13, 'up throw', 'throw'),
     (13, 'down throw', 'throw');
 
-INSERT INTO public.throws AS "inkling"
+INSERT INTO public.throws AS "donkey"
   ("fighterId", "name", "type")
   VALUES
     (14, 'grab', 'throw'),
     (14, 'dash grab', 'throw'),
     (14, 'pivot grab', 'throw'),
     (14, 'pummel', 'throw'),
-    (14, 'forward throw', 'throw'),
+    (14, 'cargo forward throw', 'throw'),
+    (14, 'cargo backward throw', 'throw'),
+    (14, 'cargo up throw', 'throw'),
+    (14, 'cargo down throw', 'throw'),
     (14, 'backward throw', 'throw'),
     (14, 'up throw', 'throw'),
     (14, 'down throw', 'throw');
 
-INSERT INTO public.throws AS "joker"
+INSERT INTO public.throws AS "inkling"
   ("fighterId", "name", "type")
   VALUES
     (15, 'grab', 'throw'),
@@ -177,3 +180,15 @@ INSERT INTO public.throws AS "joker"
     (15, 'backward throw', 'throw'),
     (15, 'up throw', 'throw'),
     (15, 'down throw', 'throw');
+
+INSERT INTO public.throws AS "joker"
+  ("fighterId", "name", "type")
+  VALUES
+    (16, 'grab', 'throw'),
+    (16, 'dash grab', 'throw'),
+    (16, 'pivot grab', 'throw'),
+    (16, 'pummel', 'throw'),
+    (16, 'forward throw', 'throw'),
+    (16, 'backward throw', 'throw'),
+    (16, 'up throw', 'throw'),
+    (16, 'down throw', 'throw');

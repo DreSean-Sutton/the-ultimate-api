@@ -154,6 +154,21 @@ INSERT INTO public.grappling AS "diddy"
     ('1.0/4.0%', '17/19', '26'),
     ('7.0%', '22', '31');
 
+INSERT INTO public.grappling AS "donkey"
+  ("damage", "activeFrames", "totalFrames")
+  VALUES
+    (null, '8', '38'),
+    (null, '11-13', '46'),
+    (null, '12-14', '41'),
+    ('1.6%', '2', '21'),
+    ('12.0%', '15', '45'),
+    ('13.0%', '16', '42'),
+    ('12.0%', '15', '29'),
+    ('11.0%', '17', '44'),
+    ('11.0%', '15', '39'),
+    ('9.0%', '14', '43'),
+    ('7.0%', '54', '19');
+
 INSERT INTO public.grappling AS "inkling"
   ("damage", "activeFrames", "totalFrames")
   VALUES

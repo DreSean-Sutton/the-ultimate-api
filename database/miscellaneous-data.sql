@@ -220,6 +220,23 @@ INSERT INTO public.miscellaneous AS "diddy"
     ('9 frames'),
     ('11 frames');
 
+INSERT INTO public.miscellaneous AS "donkey"
+  ("statValue")
+  VALUES
+    ('127'),
+    ('0.085'),
+    ('1.365'),
+    ('1.873'),
+    ('2.09'),
+    ('1.208'),
+    ('0.06'),
+    ('40/53/27/37'),
+    ('1.63/2.608'),
+    ('7 frames'),
+    ('9 frames'),
+    ('10 frames'),
+    ('12 frames');
+
 INSERT INTO public.miscellaneous AS "inkling"
   ("statValue")
   VALUES
