@@ -236,8 +236,7 @@ INSERT INTO public.stats AS "donkey"
     (14, 'out of shield, back air', 'stat'),
     (14, 'out of shield, up b', 'stat'),
     (14, 'shield grab (post-shieldstun)', 'stat');
-
-INSERT INTO public.stats AS "inkling"
+INSERT INTO public.stats AS "template"
   ("fighterId", "name", "type")
   VALUES
     (15, 'weight', 'stat'),
@@ -254,7 +253,7 @@ INSERT INTO public.stats AS "inkling"
     (15, 'out of shield, up b', 'stat'),
     (15, 'shield grab (post-shieldstun)', 'stat');
 
-INSERT INTO public.stats AS "joker"
+INSERT INTO public.stats AS "inkling"
   ("fighterId", "name", "type")
   VALUES
     (16, 'weight', 'stat'),
@@ -266,8 +265,25 @@ INSERT INTO public.stats AS "joker"
     (16, 'total air acceleration', 'stat'),
     (16, 'sh/fh/shff/fhff', 'stat'),
     (16, 'fall speed/fast fall speed', 'stat'),
-    (16, 'out of shield, up air', 'stat'),
-    (16, 'out of shield, forward air/back air/up smash', 'stat'),
-    (16, 'out of shield, neutral air/gun/jab', 'stat'),
-    (16, 'out of shield (counters), jump: rebel''s guard/tetrakarn', 'stat'),
+    (16, 'out of shield, neutral air/up smash', 'stat'),
+    (16, 'out of shield, back air', 'stat'),
+    (16, 'out of shield, up b', 'stat'),
     (16, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.stats AS "joker"
+  ("fighterId", "name", "type")
+  VALUES
+    (17, 'weight', 'stat'),
+    (17, 'gravity', 'stat'),
+    (17, 'walk speed', 'stat'),
+    (17, 'run speed', 'stat'),
+    (17, 'initial dash', 'stat'),
+    (17, 'air speed', 'stat'),
+    (17, 'total air acceleration', 'stat'),
+    (17, 'sh/fh/shff/fhff', 'stat'),
+    (17, 'fall speed/fast fall speed', 'stat'),
+    (17, 'out of shield, up air', 'stat'),
+    (17, 'out of shield, forward air/back air/up smash', 'stat'),
+    (17, 'out of shield, neutral air/gun/jab', 'stat'),
+    (17, 'out of shield (counters), jump: rebel''s guard/tetrakarn', 'stat'),
+    (17, 'shield grab (post-shieldstun)', 'stat');
