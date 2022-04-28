@@ -236,7 +236,8 @@ INSERT INTO public.stats AS "donkey"
     (14, 'out of shield, back air', 'stat'),
     (14, 'out of shield, up b', 'stat'),
     (14, 'shield grab (post-shieldstun)', 'stat');
-INSERT INTO public.stats AS "template"
+
+INSERT INTO public.stats AS "drMario"
   ("fighterId", "name", "type")
   VALUES
     (15, 'weight', 'stat'),
