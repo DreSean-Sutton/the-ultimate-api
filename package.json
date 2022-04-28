@@ -5,6 +5,7 @@
   "description": "A full stack JavaScript solo project.",
   "main": "server/index.js",
   "scripts": {
+    "build": "webpack --mode=production",
     "start": "node server/index.js",
     "dev": "nodemon server/index.js",
     "db:import": "bash scripts/db-import.sh",
