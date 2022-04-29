@@ -4,8 +4,8 @@ const expressJSON = express.json();
 const pg = require('pg');
 const ClientError = require('./client-error');
 const errorMiddleware = require('./error-middleware');
+const staticMiddleware = require('./static-middleware');
 const sqlQueries = require('./sql-queries');
-
 const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
 
@@ -20,6 +20,7 @@ const app = express();
 app.use('/api', expressJSON);
 const swaggerDocument = YAML.load('./openapi.yml');
 
+app.use(staticMiddleware);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.get('/api/fighters', (req, res, next) => {
