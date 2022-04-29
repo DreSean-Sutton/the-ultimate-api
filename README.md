@@ -12,6 +12,7 @@ Test out my endpoints here at: https://the-ultimate-api.herokuapp.com/
 
 ## Technologies Used
 
+- HTML5
 - JavaScript (es5/es6)
 - Node.js
 - express.js
