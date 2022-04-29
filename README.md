@@ -56,10 +56,26 @@ postgreSQL 14+
     git clone https://github.com/DreSean-Sutton/the-ultimate-api
     cd the-ultimate-api
     ```
-
 2. Install all dependencies with NPM
     ```shell
     npm install
     ```
-
 3. Copy example .env file
+    ```shell
+    cp .env.example .env
+    ```
+4. Change `DATABASE_URL=postgres://dev:dev@localhost/changeMe` in your .env file to the database name you desire. ex. `DATABASE_URL=postgres://dev:dev@localhost/my-example-name`
+
+6. Create the database and set it's name to the previous name you chose
+    ```shell
+    createdb my-example-name
+    ```
+6. Import SQL code into database
+    ```shell
+    db:import
+    ```
+7. Start the server
+    ```shell
+    npm run dev
+    ```
+ 
