@@ -4,7 +4,7 @@ A full stack web application for Smash Ultimate loving devs who want to incorpor
 
 ## Why build this?
 
-Well, Smash Ultimate is an excellent contender for my favorite game, so I made a frame data viewing app for it. I pulled my data from the best Smash API on the market, the [KuroganeHammer API](https://github.com/Frannsoft/FrannHammer). However, it is outdated and unmaintained for Smash Ultimate. In an effort to fill the gap for me and other developers, I decided to build my own RESTful API and give back to the Smash community.
+Smash Ultimate is an excellent contender for my favorite game, so I made a [frame data viewing app](https://dresean-sutton.github.io/smashmate/) for it. I pulled my data from the best Smash API on the market, the [KuroganeHammer API](https://github.com/Frannsoft/FrannHammer). However, it is outdated and unmaintained for Smash Ultimate. In an effort to fill the gap for me and other developers, I decided to build my own RESTful API and give back to the Smash community.
 
 ## Live Demo and API documentation
 
@@ -38,16 +38,24 @@ Test out my endpoints here at: https://the-ultimate-api.herokuapp.com/
 - User can `delete` Fighters and their basic information from the database.
 - User can `delete` moves, throws, movements, and stat type data from any existing Fighters.
 
+## Preview
+
+![the-ultimate-api-readme](https://user-images.githubusercontent.com/90172283/166004672-0a806c1a-5bda-4f76-a2f0-89f5a510f725.gif)
+
+</br>
+
+![the-ultimate-api-readme2](https://user-images.githubusercontent.com/90172283/166005685-8c59f6b8-6a26-4ce1-9e48-850369b3ec51.gif)
+
 ## Future Features
 
-- A authorization system so only administrators can manipulate the database
-- A GUI so `add`, `put`, and `delete` requests aren't required to use the CLI
-- The ability for users to sign in and have their own independent version of the master database
+- A authorization system so only administrators can manipulate the database.
+- A GUI so it's easier for users to send `add`, `put`, and `delete` requests.
+- The ability for users to sign in and have their own independent version of the master database.
 
 ## System Requirements
-node.js 16+
-npm 8+
-postgreSQL 14+
+- node.js 16+
+- npm 8+
+- postgreSQL 14+
 
 ### Getting Started
 
