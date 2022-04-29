@@ -20,7 +20,7 @@ const app = express();
 app.use('/api', expressJSON);
 const swaggerDocument = YAML.load('./openapi.yml');
 
-app.use('/api', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.get('/api/fighters', (req, res, next) => {
   const queryStr = req.query;
