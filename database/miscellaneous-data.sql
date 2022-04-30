@@ -254,6 +254,23 @@ INSERT INTO public.miscellaneous AS "drMario"
     ('7 frames'),
     ('10 frames');
 
+INSERT INTO public.miscellaneous AS "duckHunt"
+  ("statValue")
+  VALUES
+    ('86'),
+    ('0.076'),
+    ('1.213'),
+    ('1.793'),
+    ('1.76'),
+    ('1.155'),
+    ('0.08'),
+    ('41/55/28/37'),
+    ('1.65/2.64'),
+    ('9 frames'),
+    ('10 frames'),
+    ('12 frames'),
+    ('10 frames');
+
 INSERT INTO public.miscellaneous AS "inkling"
   ("statValue")
   VALUES

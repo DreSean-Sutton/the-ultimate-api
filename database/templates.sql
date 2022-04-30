@@ -1,11 +1,11 @@
 INSERT INTO public.moves AS "template"
   ("fighterId", "name", "moveType", "type")
   VALUES
-    (, 'jab 1', '', 'move'),
-    (, 'jab 2', '', 'move'),
-    (, 'jab 3', '', 'move'),
-    (, 'rapid jab', '', 'move'),
-    (, 'rapid jab finisher', '', 'move'),
+    (, 'jab 1', 'single', 'move'),
+    (, 'jab 2', 'single', 'move'),
+    (, 'jab 3', 'single', 'move'),
+    (, 'rapid jab', 'multi', 'move'),
+    (, 'rapid jab finisher', 'single', 'move'),
     (, 'forward tilt', '', 'move'),
     (, 'up tilt', '', 'move'),
     (, 'down tilt', '', 'move'),
@@ -29,7 +29,7 @@ INSERT INTO public.hitboxes AS "template"
     ('.0%', '', '', ''),
     ('.0%', '', '', ''),
     ('.0%', '', '', ''),
-    ('.0%', '', null, ''),
+    ('0.%', '', null, ''),
     ('.0%', '', '', ''),
     ('.0%', '', '', ''),
     ('.0%', '', '', ''),
