@@ -398,7 +398,7 @@ INSERT INTO public.hitboxes AS "drMario"
     ('14.1/7.0%', '3-5/6-19', '30', '3'),
     ('1.8/3.5%', '10/14/18/22/26/30/40-41', '74', '10');
 
-INSERT INTO public.hitboxes AS "template"
+INSERT INTO public.hitboxes AS "duckHunt"
   ("damage", "activeFrames", "totalFrames", "firstFrame")
   VALUES
     ('1.5%', '4', '25', '4'),
