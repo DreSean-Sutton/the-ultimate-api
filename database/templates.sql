@@ -110,9 +110,9 @@ INSERT INTO public.stats AS "template"
     (, 'total air acceleration', 'stat'),
     (, 'sh/fh/shff/fhff', 'stat'),
     (, 'fall speed/fast fall speed', 'stat'),
-    (, 'out of shield, neutral air/up smash', 'stat'),
-    (, 'out of shield, back air', 'stat'),
-    (, 'out of shield, up b', 'stat'),
+    (, 'out of shield, ', 'stat'),
+    (, 'out of shield, ', 'stat'),
+    (, 'out of shield, ', 'stat'),
     (, 'shield grab (post-shieldstun)', 'stat');
 
 INSERT INTO public.miscellaneous AS "template"
