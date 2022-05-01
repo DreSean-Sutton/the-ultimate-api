@@ -315,7 +315,7 @@ INSERT INTO public.miscellaneous AS "joker"
     ('1.9'),
     ('1.1'),
     ('0.08'),
-    ('30/45/210/30'),
+    ('30/45/20/30'),
     ('1.63/3.097'),
     ('8 frames'),
     ('10 frames'),
