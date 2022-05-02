@@ -2369,9 +2369,9 @@ INSERT INTO public.stats AS "donkey"
     (14, 'total air acceleration', 'stat'),
     (14, 'sh/fh/shff/fhff', 'stat'),
     (14, 'fall speed/fast fall speed', 'stat'),
-    (14, 'out of shield, neutral air/up smash', 'stat'),
-    (14, 'out of shield, back air', 'stat'),
     (14, 'out of shield, up b', 'stat'),
+    (14, 'out of shield, up air', 'stat'),
+    (14, 'out of shield, back air', 'stat'),
     (14, 'shield grab (post-shieldstun)', 'stat');
 
 INSERT INTO public.stats AS "drMario"
@@ -2386,9 +2386,9 @@ INSERT INTO public.stats AS "drMario"
     (15, 'total air acceleration', 'stat'),
     (15, 'sh/fh/shff/fhff', 'stat'),
     (15, 'fall speed/fast fall speed', 'stat'),
-    (15, 'out of shield, neutral air/up smash', 'stat'),
-    (15, 'out of shield, back air', 'stat'),
     (15, 'out of shield, up b', 'stat'),
+    (15, 'out of shield, neutral air', 'stat'),
+    (15, 'out of shield, up air', 'stat'),
     (15, 'shield grab (post-shieldstun)', 'stat');
 
 INSERT INTO public.stats AS "duckHunt"
@@ -2403,9 +2403,9 @@ INSERT INTO public.stats AS "duckHunt"
     (16, 'total air acceleration', 'stat'),
     (16, 'sh/fh/shff/fhff', 'stat'),
     (16, 'fall speed/fast fall speed', 'stat'),
-    (16, 'out of shield, neutral air/up smash', 'stat'),
-    (16, 'out of shield, back air', 'stat'),
-    (16, 'out of shield, up b', 'stat'),
+    (16, 'out of shield, neutral air/up air', 'stat'),
+    (16, 'out of shield, foward air/back air', 'stat'),
+    (16, 'out of shield, up smash', 'stat'),
     (16, 'shield grab (post-shieldstun)', 'stat');
 
 INSERT INTO public.stats AS "falco"
