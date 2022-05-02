@@ -17,5 +17,6 @@ INSERT INTO public.fighters ("fighter", "rosterId", "displayName")
     ('drMario', 18, 'Dr. Mario'),
     ('duckHunt', 59, 'Duck Hunt'),
     ('falco', 20, 'Falco'),
+    ('fox', 7, 'fox'),
     ('inkling', 70, 'Inkling'),
     ('joker', 78, 'Joker');

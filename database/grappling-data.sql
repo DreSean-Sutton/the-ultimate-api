@@ -205,6 +205,18 @@ INSERT INTO public.grappling AS "falco"
     ('4.0/4.0%', '7', '38'),
     ('2.0/3.0%', '26/33', '43');
 
+INSERT INTO public.grappling AS "fox"
+  ("damage", "activeFrames", "totalFrames")
+  VALUES
+    (null, '6-7', '36'),
+    (null, '10-11', '44'),
+    (null, '11-12', '39'),
+    ('1.0%', '1', '15'),
+    ('4.0/3.0%', '10/11', '33'),
+    ('2.0/2.0/2.0/2.0%', '10/16/19/22', '49'),
+    ('2.0/2.0/2.0/2.0%', '7/18/21/24', '49'),
+    ('2.0/1.0/1.0/1.0%', '26/29/32/34', '54');
+
 INSERT INTO public.grappling AS "inkling"
   ("damage", "activeFrames", "totalFrames")
   VALUES

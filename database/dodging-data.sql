@@ -220,6 +220,19 @@ INSERT INTO public.dodging AS "falco"
     ('2-20', '85'),
     ('2-20', '94');
 
+INSERT INTO public.dodging AS "fox"
+  ("activeFrames", "totalFrames")
+  VALUES
+    ('3-14', '18/23'),
+    ('4-12', '26'),
+    ('4-14', '32'),
+    ('2-26', '38'),
+    ('2-19', '54'),
+    ('2-19', '59'),
+    ('2-19', '64'),
+    ('2-19', '70'),
+    ('2-19', '75');
+
 INSERT INTO public.dodging AS "inkling"
   ("activeFrames", "totalFrames")
   VALUES

@@ -220,7 +220,7 @@ INSERT INTO public.movements AS "falco"
     (17, 'air dodge, side + up', 'movement'),
     (17, 'air dodge up', 'movement');
 
-INSERT INTO public.movements AS "inkling"
+INSERT INTO public.movements AS "fox"
   ("fighterId", "name", "type")
   VALUES
     (18, 'spot dodge', 'movement'),
@@ -233,7 +233,7 @@ INSERT INTO public.movements AS "inkling"
     (18, 'air dodge, side + up', 'movement'),
     (18, 'air dodge up', 'movement');
 
-INSERT INTO public.movements AS "joker"
+INSERT INTO public.movements AS "inkling"
   ("fighterId", "name", "type")
   VALUES
     (19, 'spot dodge', 'movement'),
@@ -245,3 +245,16 @@ INSERT INTO public.movements AS "joker"
     (19, 'air dodge, left/right', 'movement'),
     (19, 'air dodge, side + up', 'movement'),
     (19, 'air dodge up', 'movement');
+
+INSERT INTO public.movements AS "joker"
+  ("fighterId", "name", "type")
+  VALUES
+    (20, 'spot dodge', 'movement'),
+    (20, 'forward roll', 'movement'),
+    (20, 'backwards roll', 'movement'),
+    (20, 'neutral air dodge', 'movement'),
+    (20, 'air dodge, down', 'movement'),
+    (20, 'air dodge, side + down', 'movement'),
+    (20, 'air dodge, left/right', 'movement'),
+    (20, 'air dodge, side + up', 'movement'),
+    (20, 'air dodge up', 'movement');
