@@ -67,7 +67,7 @@ INSERT INTO public.dodging AS "byleth"
 INSERT INTO public.dodging AS "captainFalcon"
   ("activeFrames", "totalFrames")
   VALUES
-    ('21/26', '21/26'),
+    ('3-17', '21/26'),
     ('4-15', '30'),
     ('5-16', '35'),
     ('3-30', '42'),
@@ -93,7 +93,7 @@ INSERT INTO public.dodging AS "chrom"
 INSERT INTO public.dodging AS "cloud"
   ("activeFrames", "totalFrames")
   VALUES
-    ('9-10', '20/25'),
+    ('3-17', '20/25'),
     ('4-15', '29'),
     ('5-16', '34'),
     ('3-30', '47'),
@@ -232,6 +232,19 @@ INSERT INTO public.dodging AS "fox"
     ('2-19', '64'),
     ('2-19', '70'),
     ('2-19', '75');
+
+INSERT INTO public.dodging AS "ganon"
+  ("activeFrames", "totalFrames")
+  VALUES
+    ('3-18', '23/28'),
+    ('4-16', '32'),
+    ('5-17', '37'),
+    ('4-32', '46'),
+    ('4-22', '66'),
+    ('4-22', '73'),
+    ('4-22', '79'),
+    ('4-22', '91'),
+    ('4-22', '103');
 
 INSERT INTO public.dodging AS "inkling"
   ("activeFrames", "totalFrames")

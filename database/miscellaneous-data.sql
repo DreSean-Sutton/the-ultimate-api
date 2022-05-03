@@ -305,6 +305,23 @@ INSERT INTO public.miscellaneous AS "fox"
     ('8 frames'),
     ('10 frames');
 
+INSERT INTO public.miscellaneous AS "ganon"
+  ("statValue")
+  VALUES
+    ('118'),
+    ('0.108'),
+    ('0.767'),
+    ('1.34'),
+    ('1.87'),
+    ('0.83'),
+    ('0.04'),
+    ('30/41/20/29'),
+    ('1.65/2.64'),
+    ('10 frames'),
+    ('11 frames'),
+    ('13 frames'),
+    ('12 frames');
+
 INSERT INTO public.miscellaneous AS "inkling"
   ("statValue")
   VALUES
