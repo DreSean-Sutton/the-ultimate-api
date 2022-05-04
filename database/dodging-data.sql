@@ -246,6 +246,19 @@ INSERT INTO public.dodging AS "ganon"
     ('4-22', '91'),
     ('4-22', '103');
 
+INSERT INTO public.dodging AS "greninja"
+  ("activeFrames", "totalFrames")
+  VALUES
+    ('3-16', '19/24'),
+    ('4-14', '28'),
+    ('4-15', '33'),
+    ('2-27', '41'),
+    ('2-19', '60'),
+    ('2-19', '67'),
+    ('2-19', '71'),
+    ('2-19', '78'),
+    ('2-19', '85');
+
 INSERT INTO public.dodging AS "inkling"
   ("activeFrames", "totalFrames")
   VALUES
