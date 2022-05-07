@@ -90,7 +90,7 @@ CREATE TABLE public.movements (
 CREATE TABLE public.dodging (
 	"movementId" serial NOT NULL,
 	"activeFrames" TEXT NOT NULL,
-	"totalFrames" TEXT NOT NULL,
+	"totalFrames" TEXT,
 	"createdAt" timestamp with time zone DEFAULT NOW(),
 	CONSTRAINT "dodging_pk" PRIMARY KEY ("movementId")
 ) WITH (
