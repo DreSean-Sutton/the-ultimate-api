@@ -156,16 +156,18 @@ INSERT INTO public.fighters ("fighter", "rosterId", "displayName")
     ('daisy', 15, 'Daisy'),
     ('darkPit', 33, 'Dark Pit'),
     ('darkSamus', 5, 'Dark Samus'),
-    ('diddy', 36, 'Diddy Kong'),
+    ('diddy', 39, 'Diddy Kong'),
     ('donkey', 2, 'Donkey Kong'),
-    ('drMario', 18, 'Dr. Mario'),
-    ('duckHunt', 59, 'Duck Hunt'),
-    ('falco', 20, 'Falco'),
-    ('fox', 7, 'fox'),
-    ('ganon', 23, 'Ganondorf'),
-    ('greninja', 50, 'Greninja'),
+    ('drMario', 20, 'Dr. Mario'),
+    ('duckHunt', 64, 'Duck Hunt'),
+    ('falco', 22, 'Falco'),
+    ('fox', 8, 'fox'),
+    ('ganon', 26, 'Ganondorf'),
+    ('greninja', 55, 'Greninja'),
+    ('hero', 79, 'Hero'),
     ('inkling', 70, 'Inkling'),
     ('joker', 78, 'Joker');
+
 
 -- MovesData
 
