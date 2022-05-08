@@ -259,6 +259,19 @@ INSERT INTO public.dodging AS "greninja"
     ('2-19', '78'),
     ('2-19', '85');
 
+INSERT INTO public.dodging AS "hero"
+  ("activeFrames", "totalFrames")
+  VALUES
+    ('3-17', '20/25'),
+    ('4-15', '29'),
+    ('5-16', '34'),
+    ('3-30', '50'),
+    ('3-21', '69'),
+    ('3-21', null),
+    ('3-21', '83'),
+    ('3-21', null),
+    ('3-21', '109');
+
 INSERT INTO public.dodging AS "inkling"
   ("activeFrames", "totalFrames")
   VALUES

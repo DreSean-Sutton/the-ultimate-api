@@ -259,7 +259,7 @@ INSERT INTO public.movements AS "greninja"
     (20, 'air dodge, side + up', 'movement'),
     (20, 'air dodge up', 'movement');
 
-INSERT INTO public.movements AS "inkling"
+INSERT INTO public.movements AS "hero"
   ("fighterId", "name", "type")
   VALUES
     (21, 'spot dodge', 'movement'),
@@ -272,7 +272,7 @@ INSERT INTO public.movements AS "inkling"
     (21, 'air dodge, side + up', 'movement'),
     (21, 'air dodge up', 'movement');
 
-INSERT INTO public.movements AS "joker"
+INSERT INTO public.movements AS "inkling"
   ("fighterId", "name", "type")
   VALUES
     (22, 'spot dodge', 'movement'),
@@ -284,3 +284,16 @@ INSERT INTO public.movements AS "joker"
     (22, 'air dodge, left/right', 'movement'),
     (22, 'air dodge, side + up', 'movement'),
     (22, 'air dodge up', 'movement');
+
+INSERT INTO public.movements AS "joker"
+  ("fighterId", "name", "type")
+  VALUES
+    (23, 'spot dodge', 'movement'),
+    (23, 'forward roll', 'movement'),
+    (23, 'backwards roll', 'movement'),
+    (23, 'neutral air dodge', 'movement'),
+    (23, 'air dodge, down', 'movement'),
+    (23, 'air dodge, side + down', 'movement'),
+    (23, 'air dodge, left/right', 'movement'),
+    (23, 'air dodge, side + up', 'movement'),
+    (23, 'air dodge up', 'movement');

@@ -241,6 +241,18 @@ INSERT INTO public.grappling AS "greninja"
     ('5.0%', '16', '42'),
     ('5.0%', '16', '37');
 
+INSERT INTO public.grappling AS "hero"
+  ("damage", "activeFrames", "totalFrames")
+  VALUES
+    (null, '6-7', '34'),
+    (null, '9-10', '42'),
+    (null, '10-11', '37'),
+    (null, '1', null),
+    ('7.0%', '16', '44'),
+    ('9.0%', '18', '43'),
+    ('7.0%', '17', '35'),
+    ('6.0%', '19', '38');
+
 INSERT INTO public.grappling AS "inkling"
   ("damage", "activeFrames", "totalFrames")
   VALUES
