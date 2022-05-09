@@ -755,57 +755,80 @@ INSERT INTO public.moves AS "hero"
     (21, 'down b, metal slash(6MP)', 'OHKO metal enemies', 'move'),
     (21, 'down b, pysche up(14MP)', 'buff', 'move');
 
-INSERT INTO public.moves AS "inkling"
+INSERT INTO public.moves AS "iceClimbers"
   ("fighterId", "name", "moveType", "type")
   VALUES
     (22, 'jab 1', 'single', 'move'),
     (22, 'jab 2', 'single', 'move'),
-    (22, 'jab 3', 'single', 'move'),
-    (22, 'rapid jab', 'multi', 'move'),
-    (22, 'rapid jab finisher', 'single', 'move'),
-    (22, 'forward tilt', 'single', 'move'),
-    (22, 'up tilt', 'single', 'move'),
-    (22, 'down tilt', 'first/second', 'move'),
-    (22, 'dash attack', 'early/late', 'move'),
-    (22, 'forward smash', 'close/sweet', 'move'),
-    (22, 'up smash', 'first/close/far', 'move'),
-    (22, 'down smash', '(front)(back)', 'move'),
-    (22, 'neutral air', 'single', 'move'),
-    (22, 'forward air', 'sweet/early/late', 'move'),
-    (22, 'back air', 'sweet/close', 'move'),
-    (22, 'up air', 'first/second', 'move'),
-    (22, 'down air', 'sweet/close', 'move'),
-    (22, 'neutral b', 'multi', 'move'),
-    (22, 'side b', 'air/grounded', 'move'),
-    (22, 'up b', 'grounded/air/landing', 'move'),
-    (22, 'down b', 'charge', 'move');
+    (22, 'forward tilt', 'single(nana)', 'move'),
+    (22, 'up tilt', 'multi/final(nana)', 'move'),
+    (22, 'down tilt', 'single(nana)', 'move'),
+    (22, 'dash attack', 'single(nana)', 'move'),
+    (22, 'forward smash', 'single(nana)', 'move'),
+    (22, 'up smash', 'single(nana)', 'move'),
+    (22, 'down smash', 'front/(nana: back)', 'move'),
+    (22, 'neutral air', 'single(nana)', 'move'),
+    (22, 'forward air', 'single(nana)', 'move'),
+    (22, 'back air', 'single(nana)', 'move'),
+    (22, 'up air', 'single(nana)', 'move'),
+    (22, 'down air', 'single(nana)', 'move'),
+    (22, 'neutral b', 'projectile(nana)', 'move'),
+    (22, 'side b', 'multi/final(nana)', 'move'),
+    (22, 'side b, alone', 'multi/final', 'move'),
+    (22, 'up b', 'single', 'move'),
+    (22, 'down b', 'multi(nana)', 'move');
+
+INSERT INTO public.moves AS "inkling"
+  ("fighterId", "name", "moveType", "type")
+  VALUES
+    (23, 'jab 1', 'single', 'move'),
+    (23, 'jab 2', 'single', 'move'),
+    (23, 'jab 3', 'single', 'move'),
+    (23, 'rapid jab', 'multi', 'move'),
+    (23, 'rapid jab finisher', 'single', 'move'),
+    (23, 'forward tilt', 'single', 'move'),
+    (23, 'up tilt', 'single', 'move'),
+    (23, 'down tilt', 'first/second', 'move'),
+    (23, 'dash attack', 'early/late', 'move'),
+    (23, 'forward smash', 'close/sweet', 'move'),
+    (23, 'up smash', 'first/close/far', 'move'),
+    (23, 'down smash', '(front)(back)', 'move'),
+    (23, 'neutral air', 'single', 'move'),
+    (23, 'forward air', 'sweet/early/late', 'move'),
+    (23, 'back air', 'sweet/close', 'move'),
+    (23, 'up air', 'first/second', 'move'),
+    (23, 'down air', 'sweet/close', 'move'),
+    (23, 'neutral b', 'multi', 'move'),
+    (23, 'side b', 'air/grounded', 'move'),
+    (23, 'up b', 'grounded/air/landing', 'move'),
+    (23, 'down b', 'charge', 'move');
 
 INSERT INTO public.moves AS "joker"
   ("fighterId", "name", "moveType", "type")
   VALUES
-    (23, 'jab 1', 'single (arsene)', 'move'),
-    (23, 'jab 2', 'single (arsene)', 'move'),
-    (23, 'jab 3', 'single (arsene)', 'move'),
-    (23, 'forward tilt', 'first/second (arsene)', 'move'),
-    (23, 'up tilt', 'first/multi/final', 'move'),
-    (23, 'down tilt', 'late/early', 'move'),
-    (23, 'dash attack', 'first/second', 'move'),
-    (23, 'forward smash', 'single', 'move'),
-    (23, 'up smash', 'single', 'move'),
-    (23, 'down smash', 'front/back', 'move'),
-    (23, 'neutral air', 'single (front/back)', 'move'),
-    (23, 'forward air', 'first/second', 'move'),
-    (23, 'back air', 'single', 'move'),
-    (23, 'up air', 'multi/final', 'move'),
-    (23, 'down air', 'single (Arsene: first/second', 'move'),
-    (23, 'neutral b', 'close/med/far', 'move'),
-    (23, 'side b', 'contact/erupt', 'move'),
-    (23, 'side b, arsene', 'contact/erupt', 'move'),
-    (23, 'up b (grappling hook)', 'recovery', 'move'),
-    (23, 'up b (grappling attack)', 'grounded/air', 'move'),
-    (23, 'down b, rebel''s guard', 'minimal/additional endlag', 'move'),
-    (23, 'down b, counterattack', 'counter', 'move'),
-    (23, 'down b, arsene', 'multiplier (minimum/maximum)', 'move');
+    (24, 'jab 1', 'single (arsene)', 'move'),
+    (24, 'jab 2', 'single (arsene)', 'move'),
+    (24, 'jab 3', 'single (arsene)', 'move'),
+    (24, 'forward tilt', 'first/second (arsene)', 'move'),
+    (24, 'up tilt', 'first/multi/final', 'move'),
+    (24, 'down tilt', 'late/early', 'move'),
+    (24, 'dash attack', 'first/second', 'move'),
+    (24, 'forward smash', 'single', 'move'),
+    (24, 'up smash', 'single', 'move'),
+    (24, 'down smash', 'front/back', 'move'),
+    (24, 'neutral air', 'single (front/back)', 'move'),
+    (24, 'forward air', 'first/second', 'move'),
+    (24, 'back air', 'single', 'move'),
+    (24, 'up air', 'multi/final', 'move'),
+    (24, 'down air', 'single (Arsene: first/second', 'move'),
+    (24, 'neutral b', 'close/med/far', 'move'),
+    (24, 'side b', 'contact/erupt', 'move'),
+    (24, 'side b, arsene', 'contact/erupt', 'move'),
+    (24, 'up b (grappling hook)', 'recovery', 'move'),
+    (24, 'up b (grappling attack)', 'grounded/air', 'move'),
+    (24, 'down b, rebel''s guard', 'minimal/additional endlag', 'move'),
+    (24, 'down b, counterattack', 'counter', 'move'),
+    (24, 'down b, arsene', 'multiplier (minimum/maximum)', 'move');
 
 INSERT INTO public.hitboxes AS "banjo"
   ("damage", "activeFrames", "totalFrames", "firstFrame")
@@ -1389,6 +1412,29 @@ INSERT INTO public.hitboxes AS "hero"
     ('1.0%', '11-12', '39', '11'),
     (null, null, '45', null);
 
+INSERT INTO public.hitboxes AS "iceClimber"
+  ("damage", "activeFrames", "totalFrames", "firstFrame")
+  VALUES
+    ('2.0(1.5)%', '4-5(+7)', '27', '4(+7)'),
+    ('3.5(2.6)%', '4-5(+7)', '29', '4(+7)'),
+    ('9.0(6.7)%', '9-10(+7)', '29', '9(+7)'),
+    ('0.8/4.5(0.6/3.0)%', '8-24 [rehit: 2/3](+7)', '48', '8(+7)'),
+    ('6.0(4.5)%', '8-11(+7)', '30', '8(+7)'),
+    ('6.0(4.5)%', '9-12', '39', '9(+7)'),
+    ('12.0(9.0)%', '11-13(+7)', '46', '11(+7)'),
+    ('11.0(8.2)%', '12-17', '49', '12(+7)'),
+    ('13.0(9.7)%', '9-11(16)', '40', '9(16)'),
+    ('7.0(5.2)%', '6-23(+7)', '45', '(+7)'),
+    ('12.0(9.0)%', '19-20(+7)', '56', '19(+7)'),
+    ('10.0(7.5)%', '8-11(+7)', '35', '8(+7)'),
+    ('9.0(6.7)%', '7-11(+7)', '35', '7(+7)'),
+    ('8.0(6.0)%', '12-51(+7)', '63', '12(+7)'),
+    ('3.5(3.5)%', '18+(+7)', '55', '18'),
+    ('2.0/4.0%', '10/14/18/23/28/34/40/51-52', '77', '10'),
+    ('1.2/2.0%', '10/13/15/18/21/24/28/32/37/42/49-50', '77', '10'),
+    ('16.0%', '16-33', null, '16'),
+    ('1.7(1.7)%', '16+ [rehit: 5]', '84', '16');
+
 INSERT INTO public.hitboxes AS "inkling"
   ("damage", "activeFrames", "totalFrames", "firstFrame")
   VALUES
@@ -1699,7 +1745,7 @@ INSERT INTO public.throws AS "hero"
     (21, 'up throw', 'throw'),
     (21, 'down throw', 'throw');
 
-INSERT INTO public.throws AS "inkling"
+INSERT INTO public.throws AS "iceClimbers"
   ("fighterId", "name", "type")
   VALUES
     (22, 'grab', 'throw'),
@@ -1711,7 +1757,7 @@ INSERT INTO public.throws AS "inkling"
     (22, 'up throw', 'throw'),
     (22, 'down throw', 'throw');
 
-INSERT INTO public.throws AS "joker"
+INSERT INTO public.throws AS "inkling"
   ("fighterId", "name", "type")
   VALUES
     (23, 'grab', 'throw'),
@@ -1722,6 +1768,18 @@ INSERT INTO public.throws AS "joker"
     (23, 'backward throw', 'throw'),
     (23, 'up throw', 'throw'),
     (23, 'down throw', 'throw');
+
+INSERT INTO public.throws AS "joker"
+  ("fighterId", "name", "type")
+  VALUES
+    (24, 'grab', 'throw'),
+    (24, 'dash grab', 'throw'),
+    (24, 'pivot grab', 'throw'),
+    (24, 'pummel', 'throw'),
+    (24, 'forward throw', 'throw'),
+    (24, 'backward throw', 'throw'),
+    (24, 'up throw', 'throw'),
+    (24, 'down throw', 'throw');
 
 INSERT INTO public.grappling AS "banjo"
   ("damage", "activeFrames", "totalFrames")
@@ -1977,6 +2035,18 @@ INSERT INTO public.grappling AS "hero"
     ('9.0%', '18', '43'),
     ('7.0%', '17', '35'),
     ('6.0%', '19', '38');
+
+INSERT INTO public.grappling AS "iceClimbers"
+  ("damage", "activeFrames", "totalFrames")
+  VALUES
+    (null, '8-9', '39'),
+    (null, '10-11', '47'),
+    (null, '10-11', '40'),
+    ('1.0%', '1', '16'),
+    ('3.0/5.0%', '24/25', '49'),
+    ('6.0%', '18', '39'),
+    ('3.0/5.0%', '25/27', '52'),
+    ('6.0%', '37', '49');
 
 INSERT INTO public.grappling AS "inkling"
   ("damage", "activeFrames", "totalFrames")
@@ -2276,7 +2346,7 @@ INSERT INTO public.movements AS "hero"
     (21, 'air dodge, side + up', 'movement'),
     (21, 'air dodge up', 'movement');
 
-INSERT INTO public.movements AS "inkling"
+INSERT INTO public.movements AS "iceClimbers"
   ("fighterId", "name", "type")
   VALUES
     (22, 'spot dodge', 'movement'),
@@ -2289,7 +2359,7 @@ INSERT INTO public.movements AS "inkling"
     (22, 'air dodge, side + up', 'movement'),
     (22, 'air dodge up', 'movement');
 
-INSERT INTO public.movements AS "joker"
+INSERT INTO public.movements AS "inkling"
   ("fighterId", "name", "type")
   VALUES
     (23, 'spot dodge', 'movement'),
@@ -2301,6 +2371,19 @@ INSERT INTO public.movements AS "joker"
     (23, 'air dodge, left/right', 'movement'),
     (23, 'air dodge, side + up', 'movement'),
     (23, 'air dodge up', 'movement');
+
+INSERT INTO public.movements AS "joker"
+  ("fighterId", "name", "type")
+  VALUES
+    (24, 'spot dodge', 'movement'),
+    (24, 'forward roll', 'movement'),
+    (24, 'backwards roll', 'movement'),
+    (24, 'neutral air dodge', 'movement'),
+    (24, 'air dodge, down', 'movement'),
+    (24, 'air dodge, side + down', 'movement'),
+    (24, 'air dodge, left/right', 'movement'),
+    (24, 'air dodge, side + up', 'movement'),
+    (24, 'air dodge up', 'movement');
 
 INSERT INTO public.dodging AS "banjo"
   ("activeFrames", "totalFrames")
@@ -2575,6 +2658,19 @@ INSERT INTO public.dodging AS "hero"
     ('3-21', '83'),
     ('3-21', null),
     ('3-21', '109');
+
+INSERT INTO public.dodging AS "iceClimbers"
+  ("activeFrames", "totalFrames")
+  VALUES
+    ('3-17', '20/25'),
+    ('4-15', '29'),
+    ('5-16', '34'),
+    ('3-28', '58'),
+    ('3-21', '81'),
+    ('3-21', '86'),
+    ('3-21', '96'),
+    ('3-21', '115'),
+    ('3-21', '129');
 
 INSERT INTO public.dodging AS "inkling"
   ("activeFrames", "totalFrames")
@@ -2960,7 +3056,7 @@ INSERT INTO public.stats AS "hero"
     (21, 'out of shield, neutral air', 'stat'),
     (21, 'shield grab (post-shieldstun)', 'stat');
 
-INSERT INTO public.stats AS "inkling"
+INSERT INTO public.stats AS "iceClimbers"
   ("fighterId", "name", "type")
   VALUES
     (22, 'weight', 'stat'),
@@ -2972,12 +3068,12 @@ INSERT INTO public.stats AS "inkling"
     (22, 'total air acceleration', 'stat'),
     (22, 'sh/fh/shff/fhff', 'stat'),
     (22, 'fall speed/fast fall speed', 'stat'),
-    (22, 'out of shield, neutral air/up smash', 'stat'),
+    (22, 'out of shield, neutral air', 'stat'),
+    (22, 'out of shield, up air', 'stat'),
     (22, 'out of shield, back air', 'stat'),
-    (22, 'out of shield, up b', 'stat'),
     (22, 'shield grab (post-shieldstun)', 'stat');
 
-INSERT INTO public.stats AS "joker"
+INSERT INTO public.stats AS "inkling"
   ("fighterId", "name", "type")
   VALUES
     (23, 'weight', 'stat'),
@@ -2989,11 +3085,28 @@ INSERT INTO public.stats AS "joker"
     (23, 'total air acceleration', 'stat'),
     (23, 'sh/fh/shff/fhff', 'stat'),
     (23, 'fall speed/fast fall speed', 'stat'),
-    (23, 'out of shield, up air', 'stat'),
-    (23, 'out of shield, forward air/back air/up smash', 'stat'),
-    (23, 'out of shield, neutral air/gun/jab', 'stat'),
-    (23, 'out of shield (counters), jump: rebel''s guard/tetrakarn', 'stat'),
+    (23, 'out of shield, neutral air/up smash', 'stat'),
+    (23, 'out of shield, back air', 'stat'),
+    (23, 'out of shield, up b', 'stat'),
     (23, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.stats AS "joker"
+  ("fighterId", "name", "type")
+  VALUES
+    (24, 'weight', 'stat'),
+    (24, 'gravity', 'stat'),
+    (24, 'walk speed', 'stat'),
+    (24, 'run speed', 'stat'),
+    (24, 'initial dash', 'stat'),
+    (24, 'air speed', 'stat'),
+    (24, 'total air acceleration', 'stat'),
+    (24, 'sh/fh/shff/fhff', 'stat'),
+    (24, 'fall speed/fast fall speed', 'stat'),
+    (24, 'out of shield, up air', 'stat'),
+    (24, 'out of shield, forward air/back air/up smash', 'stat'),
+    (24, 'out of shield, neutral air/gun/jab', 'stat'),
+    (24, 'out of shield (counters), jump: rebel''s guard/tetrakarn', 'stat'),
+    (24, 'shield grab (post-shieldstun)', 'stat');
 
 INSERT INTO public.miscellaneous AS "banjo"
   ("statValue")
@@ -3352,6 +3465,23 @@ INSERT INTO public.miscellaneous AS "hero"
     ('9 frames'),
     ('11 frames'),
     ('10 frames');
+
+INSERT INTO public.miscellaneous AS "iceClimbers"
+  ("statValue")
+  VALUES
+    ('92'),
+    ('0.082'),
+    ('1.008(1.1088)'),
+    ('1.53 (1.683)'),
+    ('1.68'),
+    ('0.83 (0.8715)'),
+    ('0.09 (0.0945'),
+    ('41/62/29/44'),
+    ('1.3/2.08'),
+    ('9 frames'),
+    ('10 frames'),
+    ('11 frames'),
+    ('12 frames');
 
 INSERT INTO public.miscellaneous AS "inkling"
   ("statValue")
