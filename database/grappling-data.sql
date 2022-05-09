@@ -253,6 +253,18 @@ INSERT INTO public.grappling AS "hero"
     ('7.0%', '17', '35'),
     ('6.0%', '19', '38');
 
+INSERT INTO public.grappling AS "iceClimbers"
+  ("damage", "activeFrames", "totalFrames")
+  VALUES
+    (null, '8-9', '39'),
+    (null, '10-11', '47'),
+    (null, '10-11', '40'),
+    ('1.0%', '1', '16'),
+    ('3.0/5.0%', '24/25', '49'),
+    ('6.0%', '18', '39'),
+    ('3.0/5.0%', '25/27', '52'),
+    ('6.0%', '37', '49');
+
 INSERT INTO public.grappling AS "inkling"
   ("damage", "activeFrames", "totalFrames")
   VALUES

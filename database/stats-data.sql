@@ -356,7 +356,7 @@ INSERT INTO public.stats AS "hero"
     (21, 'out of shield, neutral air', 'stat'),
     (21, 'shield grab (post-shieldstun)', 'stat');
 
-INSERT INTO public.stats AS "inkling"
+INSERT INTO public.stats AS "iceClimbers"
   ("fighterId", "name", "type")
   VALUES
     (22, 'weight', 'stat'),
@@ -368,12 +368,12 @@ INSERT INTO public.stats AS "inkling"
     (22, 'total air acceleration', 'stat'),
     (22, 'sh/fh/shff/fhff', 'stat'),
     (22, 'fall speed/fast fall speed', 'stat'),
-    (22, 'out of shield, neutral air/up smash', 'stat'),
+    (22, 'out of shield, neutral air', 'stat'),
+    (22, 'out of shield, up air', 'stat'),
     (22, 'out of shield, back air', 'stat'),
-    (22, 'out of shield, up b', 'stat'),
     (22, 'shield grab (post-shieldstun)', 'stat');
 
-INSERT INTO public.stats AS "joker"
+INSERT INTO public.stats AS "inkling"
   ("fighterId", "name", "type")
   VALUES
     (23, 'weight', 'stat'),
@@ -385,8 +385,25 @@ INSERT INTO public.stats AS "joker"
     (23, 'total air acceleration', 'stat'),
     (23, 'sh/fh/shff/fhff', 'stat'),
     (23, 'fall speed/fast fall speed', 'stat'),
-    (23, 'out of shield, up air', 'stat'),
-    (23, 'out of shield, forward air/back air/up smash', 'stat'),
-    (23, 'out of shield, neutral air/gun/jab', 'stat'),
-    (23, 'out of shield (counters), jump: rebel''s guard/tetrakarn', 'stat'),
+    (23, 'out of shield, neutral air/up smash', 'stat'),
+    (23, 'out of shield, back air', 'stat'),
+    (23, 'out of shield, up b', 'stat'),
     (23, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.stats AS "joker"
+  ("fighterId", "name", "type")
+  VALUES
+    (24, 'weight', 'stat'),
+    (24, 'gravity', 'stat'),
+    (24, 'walk speed', 'stat'),
+    (24, 'run speed', 'stat'),
+    (24, 'initial dash', 'stat'),
+    (24, 'air speed', 'stat'),
+    (24, 'total air acceleration', 'stat'),
+    (24, 'sh/fh/shff/fhff', 'stat'),
+    (24, 'fall speed/fast fall speed', 'stat'),
+    (24, 'out of shield, up air', 'stat'),
+    (24, 'out of shield, forward air/back air/up smash', 'stat'),
+    (24, 'out of shield, neutral air/gun/jab', 'stat'),
+    (24, 'out of shield (counters), jump: rebel''s guard/tetrakarn', 'stat'),
+    (24, 'shield grab (post-shieldstun)', 'stat');
