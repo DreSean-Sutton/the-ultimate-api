@@ -373,6 +373,24 @@ INSERT INTO public.miscellaneous AS "iceClimbers"
     ('11 frames'),
     ('12 frames');
 
+INSERT INTO public.miscellaneous AS "ike"
+  ("statValue")
+  VALUES
+    ('107'),
+    ('0.092'),
+    ('0.912'),
+    ('1.507'),
+    ('1.815'),
+    ('1.134'),
+    ('0.05'),
+    ('37/48/26/33'),
+    ('1.65/2.64'),
+    ('10 frames'),
+    ('13 frames'),
+    ('14 frames'),
+    ('15 frames'),
+    ('11 frames');
+
 INSERT INTO public.miscellaneous AS "inkling"
   ("statValue")
   VALUES

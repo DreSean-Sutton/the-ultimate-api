@@ -285,6 +285,19 @@ INSERT INTO public.dodging AS "iceClimbers"
     ('3-21', '115'),
     ('3-21', '129');
 
+INSERT INTO public.dodging AS "ike"
+  ("activeFrames", "totalFrames")
+  VALUES
+    ('3-17', '21/26'),
+    ('4-15', '30'),
+    ('5-16', '35'),
+    ('4-31', '49'),
+    ('4-22', '66'),
+    ('4-22', '76'),
+    ('4-22', '82'),
+    ('4-22', '96'),
+    ('4-22', '108');
+
 INSERT INTO public.dodging AS "inkling"
   ("activeFrames", "totalFrames")
   VALUES

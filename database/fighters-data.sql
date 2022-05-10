@@ -22,5 +22,6 @@ INSERT INTO public.fighters ("fighter", "rosterId", "displayName")
     ('greninja', 55, 'Greninja'),
     ('hero', 79, 'Hero'),
     ('iceClimbers', 17, 'Ice Climbers'),
+    ('ike', 35, 'Ike'),
     ('inkling', 70, 'Inkling'),
     ('joker', 78, 'Joker');
