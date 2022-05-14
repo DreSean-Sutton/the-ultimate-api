@@ -8,6 +8,7 @@ const staticMiddleware = require('./static-middleware');
 const sqlQueries = require('./sql-queries');
 const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
+const cors = require('cors')
 
 const db = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
@@ -17,6 +18,7 @@ const db = new pg.Pool({
 });
 
 const app = express();
+app.use(cors());
 app.use('/api', expressJSON);
 const swaggerDocument = YAML.load('./openapi.yml');
 
