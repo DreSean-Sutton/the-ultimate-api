@@ -50,8 +50,8 @@ INSERT INTO public.moves AS "bayonetta"
     (2, 'neutral b', 'multi', 'move'),
     (2, 'neutral b (charged)', 'multi', 'move'),
     (2, 'side b, grounded', 'early/late (second)', 'move'),
-    (2, 'afterburner kick, up', 'early/late/latest', 'move'),
-    (2, 'afterburner kick, down', 'normal/landing', 'move'),
+    (2, 'side b, angled up', 'early/late/latest', 'move'),
+    (2, 'side b, angled down', 'normal/landing', 'move'),
     (2, 'up b', 'first/multi/final', 'move'),
     (2, 'down b', 'counter', 'move');
 
@@ -670,8 +670,8 @@ INSERT INTO public.moves AS "inkling"
     (25, 'up smash', 'first/close/far', 'move'),
     (25, 'down smash', '(front)(back)', 'move'),
     (25, 'neutral air', 'single', 'move'),
-    (25, 'forward air', 'sweet/early/late', 'move'),
-    (25, 'back air', 'sweet/close', 'move'),
+    (25, 'forward air', 'tipper/early/late', 'move'),
+    (25, 'back air', 'tipper/close', 'move'),
     (25, 'up air', 'first/second', 'move'),
     (25, 'down air', 'sweet/close', 'move'),
     (25, 'neutral b', 'multi', 'move'),
