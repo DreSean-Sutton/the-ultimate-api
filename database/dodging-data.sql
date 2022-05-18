@@ -298,6 +298,19 @@ INSERT INTO public.dodging AS "ike"
     ('4-22', '96'),
     ('4-22', '108');
 
+INSERT INTO public.dodging AS "incineroar"
+  ("activeFrames", "totalFrames")
+  VALUES
+    ('3-17', '21/26'),
+    ('4-15', '30'),
+    ('5-16', '35'),
+    ('3-29', '44'),
+    ('3-21', '63'),
+    ('3-21', '72'),
+    ('3-21', '76'),
+    ('3-21', '86'),
+    ('3-21', '96');
+
 INSERT INTO public.dodging AS "inkling"
   ("activeFrames", "totalFrames")
   VALUES

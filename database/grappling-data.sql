@@ -277,6 +277,18 @@ INSERT INTO public.grappling AS "ike"
     ('3.5/4.0%', '18/20', '42'),
     ('3.0/4.0%', '35/40', '57');
 
+INSERT INTO public.grappling AS "incineroar"
+  ("damage", "activeFrames", "totalFrames")
+  VALUES
+    (null, '7-9', '37'),
+    (null, '11-13', '45'),
+    (null, '12-14', '43'),
+    ('1.6%', '1', '20'),
+    ('12.0%', '58', '81'),
+    ('14.0%', '28', '51'),
+    ('12.0%', '27', '55'),
+    ('9.0%', '22', '35');
+
 INSERT INTO public.grappling AS "inkling"
   ("damage", "activeFrames", "totalFrames")
   VALUES
