@@ -425,7 +425,7 @@ INSERT INTO public.stats AS "inkling"
     (25, 'out of shield, up b', 'stat'),
     (25, 'shield grab (post-shieldstun)', 'stat');
 
-INSERT INTO public.stats AS "joker"
+INSERT INTO public.stats AS "isabelle"
   ("fighterId", "name", "type")
   VALUES
     (26, 'weight', 'stat'),
@@ -437,8 +437,25 @@ INSERT INTO public.stats AS "joker"
     (26, 'total air acceleration', 'stat'),
     (26, 'sh/fh/shff/fhff', 'stat'),
     (26, 'fall speed/fast fall speed', 'stat'),
-    (26, 'out of shield, up air', 'stat'),
-    (26, 'out of shield, forward air/back air/up smash', 'stat'),
-    (26, 'out of shield, neutral air/gun/jab', 'stat'),
-    (26, 'out of shield (counters), jump: rebel''s guard/tetrakarn', 'stat'),
+    (26, 'out of shield, ', 'stat'),
+    (26, 'out of shield, ', 'stat'),
+    (26, 'out of shield, ', 'stat'),
     (26, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.stats AS "joker"
+  ("fighterId", "name", "type")
+  VALUES
+    (27, 'weight', 'stat'),
+    (27, 'gravity', 'stat'),
+    (27, 'walk speed', 'stat'),
+    (27, 'run speed', 'stat'),
+    (27, 'initial dash', 'stat'),
+    (27, 'air speed', 'stat'),
+    (27, 'total air acceleration', 'stat'),
+    (27, 'sh/fh/shff/fhff', 'stat'),
+    (27, 'fall speed/fast fall speed', 'stat'),
+    (27, 'out of shield, up air', 'stat'),
+    (27, 'out of shield, forward air/back air/up smash', 'stat'),
+    (27, 'out of shield, neutral air/gun/jab', 'stat'),
+    (27, 'out of shield (counters), jump: rebel''s guard/tetrakarn', 'stat'),
+    (27, 'shield grab (post-shieldstun)', 'stat');

@@ -301,6 +301,18 @@ INSERT INTO public.grappling AS "inkling"
     ('3.0/3.0%', '21/22', '36'),
     ('7.0%', '20', '34');
 
+INSERT INTO public.grappling AS "isabelle"
+  ("damage", "activeFrames", "totalFrames")
+  VALUES
+    (null, '14-16', '43'),
+    (null, '16-17', '46'),
+    (null, '17-19', '44'),
+    (null, '1', '19'),
+    (null, '15', '45'),
+    (null, '14', '49'),
+    (null, '20', '52'),
+    (null, '18', '35');
+
 INSERT INTO public.grappling AS "joker"
   ("damage", "activeFrames", "totalFrames")
   VALUES

@@ -425,6 +425,23 @@ INSERT INTO public.miscellaneous AS "inkling"
     ('12 frames'),
     ('12 frames');
 
+INSERT INTO public.miscellaneous AS "isabelle"
+  ("statValue")
+  VALUES
+    ('88'),
+    ('0.07'),
+    ('1.14'),
+    ('1.48'),
+    ('1.815'),
+    ('1.02'),
+    ('0.06'),
+    ('42/58/29/40'),
+    ('1.3/2.08'),
+    ('8 frames'),
+    ('9 frames'),
+    ('13 frames'),
+    ('18 frames');
+
 INSERT INTO public.miscellaneous AS "joker"
   ("statValue")
   VALUES
