@@ -442,6 +442,23 @@ INSERT INTO public.miscellaneous AS "isabelle"
     ('13 frames'),
     ('18 frames');
 
+INSERT INTO public.miscellaneous AS "jigglypuff"
+  ("statValue")
+  VALUES
+    ('68'),
+    ('0.053'),
+    ('0.735'),
+    ('1.271'),
+    ('1.65'),
+    ('1.332'),
+    ('0.13'),
+    ('41/51/29/35'),
+    ('0.98/1.568'),
+    ('5 frames'),
+    ('9 frames'),
+    ('10 frames'),
+    ('10 frames');
+
 INSERT INTO public.miscellaneous AS "joker"
   ("statValue")
   VALUES

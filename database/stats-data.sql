@@ -437,12 +437,12 @@ INSERT INTO public.stats AS "isabelle"
     (26, 'total air acceleration', 'stat'),
     (26, 'sh/fh/shff/fhff', 'stat'),
     (26, 'fall speed/fast fall speed', 'stat'),
-    (26, 'out of shield, ', 'stat'),
-    (26, 'out of shield, ', 'stat'),
-    (26, 'out of shield, ', 'stat'),
+    (26, 'out of shield, neutral air', 'stat'),
+    (26, 'out of shield, up air/up smash', 'stat'),
+    (26, 'out of shield, forward air', 'stat'),
     (26, 'shield grab (post-shieldstun)', 'stat');
 
-INSERT INTO public.stats AS "joker"
+INSERT INTO public.stats AS "jigglypuff"
   ("fighterId", "name", "type")
   VALUES
     (27, 'weight', 'stat'),
@@ -454,8 +454,25 @@ INSERT INTO public.stats AS "joker"
     (27, 'total air acceleration', 'stat'),
     (27, 'sh/fh/shff/fhff', 'stat'),
     (27, 'fall speed/fast fall speed', 'stat'),
-    (27, 'out of shield, up air', 'stat'),
-    (27, 'out of shield, forward air/back air/up smash', 'stat'),
-    (27, 'out of shield, neutral air/gun/jab', 'stat'),
-    (27, 'out of shield (counters), jump: rebel''s guard/tetrakarn', 'stat'),
+    (27, 'out of shield, down b', 'stat'),
+    (27, 'out of shield, neutral air', 'stat'),
+    (27, 'out of shield, down air', 'stat'),
     (27, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.stats AS "joker"
+  ("fighterId", "name", "type")
+  VALUES
+    (28, 'weight', 'stat'),
+    (28, 'gravity', 'stat'),
+    (28, 'walk speed', 'stat'),
+    (28, 'run speed', 'stat'),
+    (28, 'initial dash', 'stat'),
+    (28, 'air speed', 'stat'),
+    (28, 'total air acceleration', 'stat'),
+    (28, 'sh/fh/shff/fhff', 'stat'),
+    (28, 'fall speed/fast fall speed', 'stat'),
+    (28, 'out of shield, up air', 'stat'),
+    (28, 'out of shield, forward air/back air/up smash', 'stat'),
+    (28, 'out of shield, neutral air/gun/jab', 'stat'),
+    (28, 'out of shield (counters), jump: rebel''s guard/tetrakarn', 'stat'),
+    (28, 'shield grab (post-shieldstun)', 'stat');

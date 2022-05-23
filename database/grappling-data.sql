@@ -313,6 +313,18 @@ INSERT INTO public.grappling AS "isabelle"
     (null, '20', '52'),
     (null, '18', '35');
 
+INSERT INTO public.grappling AS "jigglypuff"
+  ("damage", "activeFrames", "totalFrames")
+  VALUES
+    (null, '6-7', '32'),
+    (null, '9-10', '39'),
+    (null, '10-11', '34'),
+    ('1.3%', '1', '19'),
+    ('5.0/5.0%', '10/12', '35'),
+    ('10.0%', '26', '49'),
+    ('8.0%', '9', '37'),
+    ('6.0/6.0%', '60/62', '83');
+
 INSERT INTO public.grappling AS "joker"
   ("damage", "activeFrames", "totalFrames")
   VALUES
