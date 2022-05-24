@@ -749,10 +749,12 @@ INSERT INTO public.moves AS "joker"
     (28, 'up air', 'multi/final', 'move'),
     (28, 'down air', 'single (Arsene: first/second', 'move'),
     (28, 'neutral b', 'close/med/far', 'move'),
+    (28, 'neutral b, arsene', 'close/med/far', 'move'),
     (28, 'side b', 'contact/erupt', 'move'),
     (28, 'side b, arsene', 'contact/erupt', 'move'),
     (28, 'up b (grappling hook)', 'recovery', 'move'),
     (28, 'up b (grappling attack)', 'grounded/air', 'move'),
+    (28, 'up b, arsene', 'ground/air', 'move'),
     (28, 'down b, rebel''s guard', 'minimal/additional endlag', 'move'),
     (28, 'down b, counterattack', 'counter', 'move'),
     (28, 'down b, arsene', 'multiplier (minimum/maximum)', 'move');
