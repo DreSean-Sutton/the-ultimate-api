@@ -362,3 +362,17 @@ INSERT INTO public.movements AS "joker"
     (28, 'air dodge, left/right', 'movement'),
     (28, 'air dodge, side + up', 'movement'),
     (28, 'air dodge up', 'movement');
+
+INSERT INTO public.movements AS "kazuya"
+  ("fighterId", "name", "type")
+  VALUES
+    (29, 'crouch dash', 'movement'),
+    (29, 'spot dodge', 'movement'),
+    (29, 'forward roll', 'movement'),
+    (29, 'backwards roll', 'movement'),
+    (29, 'neutral air dodge', 'movement'),
+    (29, 'air dodge, down', 'movement'),
+    (29, 'air dodge, side + down', 'movement'),
+    (29, 'air dodge, left/right', 'movement'),
+    (29, 'air dodge, side + up', 'movement'),
+    (29, 'air dodge up', 'movement');

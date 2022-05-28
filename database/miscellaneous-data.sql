@@ -476,3 +476,20 @@ INSERT INTO public.miscellaneous AS "joker"
     ('15 frames'),
     ('6 frames/7 frames'),
     ('10 frames');
+
+INSERT INTO public.miscellaneous AS "kazuya"
+  ("statValue")
+  VALUES
+    ('113'),
+    ('0.108'),
+    ('0.66'),
+    ('1.55'),
+    ('1.58'),
+    ('0.89'),
+    (null),
+    ('29/34/21/24'),
+    ('1.7/2.72'),
+    ('11 frames'),
+    ('12 frames'),
+    ('15 frames'),
+    ('11 frames');

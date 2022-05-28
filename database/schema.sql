@@ -114,7 +114,7 @@ CREATE TABLE public.stats (
 
 CREATE TABLE public.miscellaneous (
 	"statId" serial NOT NULL,
-	"statValue" TEXT NOT NULL,
+	"statValue" TEXT,
 	"createdAt" timestamp with time zone DEFAULT NOW(),
 	CONSTRAINT "miscellaneous_pk" PRIMARY KEY ("statId")
 ) WITH (

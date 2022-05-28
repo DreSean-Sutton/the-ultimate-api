@@ -476,3 +476,20 @@ INSERT INTO public.stats AS "joker"
     (28, 'out of shield, neutral air/gun/jab', 'stat'),
     (28, 'out of shield (counters), jump: rebel''s guard/tetrakarn', 'stat'),
     (28, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.stats AS "kazuya"
+  ("fighterId", "name", "type")
+  VALUES
+    (29, 'weight', 'stat'),
+    (29, 'gravity', 'stat'),
+    (29, 'walk speed', 'stat'),
+    (29, 'run speed', 'stat'),
+    (29, 'initial dash', 'stat'),
+    (29, 'air speed', 'stat'),
+    (29, 'total air acceleration', 'stat'),
+    (29, 'sh/fh/shff/fhff', 'stat'),
+    (29, 'fall speed/fast fall speed', 'stat'),
+    (29, 'out of shield, ', 'stat'),
+    (29, 'out of shield, ', 'stat'),
+    (29, 'out of shield, ', 'stat'),
+    (29, 'shield grab (post-shieldstun)', 'stat');
