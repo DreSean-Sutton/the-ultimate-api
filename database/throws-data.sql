@@ -350,3 +350,15 @@ INSERT INTO public.throws AS "kazuya"
     (29, 'backward throw', 'throw'),
     (29, 'up throw', 'throw'),
     (29, 'down throw', 'throw');
+
+INSERT INTO public.throws AS "ken"
+  ("fighterId", "name", "type")
+  VALUES
+    (30, 'grab', 'throw'),
+    (30, 'dash grab', 'throw'),
+    (30, 'pivot grab', 'throw'),
+    (30, 'pummel', 'throw'),
+    (30, 'forward throw', 'throw'),
+    (30, 'backward throw', 'throw'),
+    (30, 'up throw', 'throw'),
+    (30, 'down throw', 'throw');

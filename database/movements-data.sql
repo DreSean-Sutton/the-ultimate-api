@@ -376,3 +376,16 @@ INSERT INTO public.movements AS "kazuya"
     (29, 'air dodge, left/right', 'movement'),
     (29, 'air dodge, side + up', 'movement'),
     (29, 'air dodge up', 'movement');
+
+INSERT INTO public.movements AS "ken"
+  ("fighterId", "name", "type")
+  VALUES
+    (30, 'spot dodge', 'movement'),
+    (30, 'forward roll', 'movement'),
+    (30, 'backwards roll', 'movement'),
+    (30, 'neutral air dodge', 'movement'),
+    (30, 'air dodge, down', 'movement'),
+    (30, 'air dodge, side + down', 'movement'),
+    (30, 'air dodge, left/right', 'movement'),
+    (30, 'air dodge, side + up', 'movement'),
+    (30, 'air dodge up', 'movement');

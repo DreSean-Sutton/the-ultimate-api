@@ -350,3 +350,15 @@ INSERT INTO public.grappling AS "kazuya"
     ('14.0%', '46', '83'),
     ('2.0/10.0%', '14', '65'),
     ('7.0/1.0%', '34/35', '54');
+
+INSERT INTO public.grappling AS "ken"
+  ("damage", "activeFrames", "totalFrames")
+  VALUES
+    (null, '6-7', '34'),
+    (null, '9-10', '42'),
+    (null, '10-11', '37'),
+    ('1.3%', '1', '16'),
+    (null, '16', '41'),
+    (null, '41', '69'),
+    (null, '18/27', '46'),
+    (null, '18/19', '44');

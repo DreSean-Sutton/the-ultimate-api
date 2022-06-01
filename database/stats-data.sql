@@ -493,3 +493,20 @@ INSERT INTO public.stats AS "kazuya"
     (29, 'out of shield, ', 'stat'),
     (29, 'out of shield, ', 'stat'),
     (29, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.stats AS "ken"
+  ("fighterId", "name", "type")
+  VALUES
+    (30, 'weight', 'stat'),
+    (30, 'gravity', 'stat'),
+    (30, 'walk speed', 'stat'),
+    (30, 'run speed', 'stat'),
+    (30, 'initial dash', 'stat'),
+    (30, 'air speed', 'stat'),
+    (30, 'total air acceleration', 'stat'),
+    (30, 'sh/fh/shff/fhff', 'stat'),
+    (30, 'fall speed/fast fall speed', 'stat'),
+    (30, 'out of shield, ', 'stat'),
+    (30, 'out of shield, ', 'stat'),
+    (30, 'out of shield, ', 'stat'),
+    (30, 'shield grab (post-shieldstun)', 'stat');
