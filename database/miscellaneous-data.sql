@@ -510,3 +510,20 @@ INSERT INTO public.miscellaneous AS "ken"
     ('8 frames'),
     ('9 frames'),
     ('10 frames');
+
+INSERT INTO public.miscellaneous AS "dedede"
+  ("statValue")
+  VALUES
+    ('127'),
+    ('0.097'),
+    ('1.029'),
+    ('1.496'),
+    ('1.815'),
+    ('0.735'),
+    ('0.05'),
+    ('36/48/24/32'),
+    ('1.95/3.12'),
+    ('10 frames'),
+    ('13 frames'),
+    ('16 frames'),
+    ('12 frames');

@@ -847,3 +847,29 @@ INSERT INTO public.moves AS "ken"
     (30, 'nata otoshi geri (held input)', 'first/second', 'move'),
     (30, 'oosoto mawashi geri (input)', 'single', 'move'),
     (30, 'oosoto mawashi geri (held input)', 'first/second', 'move');
+
+INSERT INTO public.moves AS "dedede"
+  ("fighterId", "name", "moveType", "type")
+  VALUES
+    (31, 'jab 1', 'single', 'move'),
+    (31, 'jab 2', 'single', 'move'),
+    (31, 'rapid jab', 'multi', 'move'),
+    (31, 'rapid jab finisher', 'single', 'move'),
+    (31, 'forward tilt', 'multi/final', 'move'),
+    (31, 'up tilt', 'close/far', 'move'),
+    (31, 'down tilt', 'early/late', 'move'),
+    (31, 'dash attack', 'early/late', 'move'),
+    (31, 'forward smash', 'early/close/far/shockwave', 'move'),
+    (31, 'up smash', 'single', 'move'),
+    (31, 'down smash', 'single', 'move'),
+    (31, 'neutral air', 'early/late', 'move'),
+    (31, 'forward air', 'single', 'move'),
+    (31, 'back air', 'single', 'move'),
+    (31, 'up air', 'multi/final', 'move'),
+    (31, 'down air', 'meteor/late', 'move'),
+    (31, 'neutral b, inhale', 'held', 'move'),
+    (31, 'neutral b, spit', 'single', 'move'),
+    (31, 'side b', 'hammer/gordo', 'move'),
+    (31, 'up b', 'falling/landing/stars', 'move'),
+    (31, 'down b, partial charge', 'single', 'move'),
+    (31, 'down b, full charge', 'single', 'move');

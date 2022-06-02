@@ -362,3 +362,15 @@ INSERT INTO public.grappling AS "ken"
     (null, '41', '69'),
     (null, '18/27', '46'),
     (null, '18/19', '44');
+
+INSERT INTO public.grappling AS "dedede"
+  ("damage", "activeFrames", "totalFrames")
+  VALUES
+    (null, '8-10', '39'),
+    (null, '11-13', '47'),
+    (null, '12-14', '42'),
+    ('1.6%', '2', '21'),
+    ('4.0/6.0/0.0%', '12/13/14', '37'),
+    ('4.0/9.0%', '16-18/19', '41'),
+    ('4.0/5.0%', '16-18/19', '39'),
+    ('6.0%', '26', '41');

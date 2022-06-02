@@ -389,3 +389,16 @@ INSERT INTO public.movements AS "ken"
     (30, 'air dodge, left/right', 'movement'),
     (30, 'air dodge, side + up', 'movement'),
     (30, 'air dodge up', 'movement');
+
+INSERT INTO public.movements AS "dedede"
+  ("fighterId", "name", "type")
+  VALUES
+    (31, 'spot dodge', 'movement'),
+    (31, 'forward roll', 'movement'),
+    (31, 'backwards roll', 'movement'),
+    (31, 'neutral air dodge', 'movement'),
+    (31, 'air dodge, down', 'movement'),
+    (31, 'air dodge, side + down', 'movement'),
+    (31, 'air dodge, left/right', 'movement'),
+    (31, 'air dodge, side + up', 'movement'),
+    (31, 'air dodge up', 'movement');

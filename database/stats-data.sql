@@ -510,3 +510,20 @@ INSERT INTO public.stats AS "ken"
     (30, 'out of shield, ', 'stat'),
     (30, 'out of shield, ', 'stat'),
     (30, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.stats AS "dedede"
+  ("fighterId", "name", "type")
+  VALUES
+    (31, 'weight', 'stat'),
+    (31, 'gravity', 'stat'),
+    (31, 'walk speed', 'stat'),
+    (31, 'run speed', 'stat'),
+    (31, 'initial dash', 'stat'),
+    (31, 'air speed', 'stat'),
+    (31, 'total air acceleration', 'stat'),
+    (31, 'sh/fh/shff/fhff', 'stat'),
+    (31, 'fall speed/fast fall speed', 'stat'),
+    (31, 'out of shield, ', 'stat'),
+    (31, 'out of shield, ', 'stat'),
+    (31, 'out of shield, ', 'stat'),
+    (31, 'shield grab (post-shieldstun)', 'stat');
