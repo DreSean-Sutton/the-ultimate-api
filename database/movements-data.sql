@@ -402,3 +402,16 @@ INSERT INTO public.movements AS "dedede"
     (31, 'air dodge, left/right', 'movement'),
     (31, 'air dodge, side + up', 'movement'),
     (31, 'air dodge up', 'movement');
+
+INSERT INTO public.movements AS "krool"
+  ("fighterId", "name", "type")
+  VALUES
+    (32, 'spot dodge', 'movement'),
+    (32, 'forward roll', 'movement'),
+    (32, 'backwards roll', 'movement'),
+    (32, 'neutral air dodge', 'movement'),
+    (32, 'air dodge, down', 'movement'),
+    (32, 'air dodge, side + down', 'movement'),
+    (32, 'air dodge, left/right', 'movement'),
+    (32, 'air dodge, side + up', 'movement'),
+    (32, 'air dodge up', 'movement');

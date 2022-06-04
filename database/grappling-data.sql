@@ -374,3 +374,15 @@ INSERT INTO public.grappling AS "dedede"
     ('4.0/9.0%', '16-18/19', '41'),
     ('4.0/5.0%', '16-18/19', '39'),
     ('6.0%', '26', '41');
+
+INSERT INTO public.grappling AS "krool"
+  ("damage", "activeFrames", "totalFrames")
+  VALUES
+    (null, '8-10', '40'),
+    (null, '11-13', '48'),
+    (null, '12-14', '43'),
+    (null, null, null),
+    (null, '28', '39'),
+    (null, '32', '62'),
+    (null, '67', '103'),
+    (null, '40', '73');

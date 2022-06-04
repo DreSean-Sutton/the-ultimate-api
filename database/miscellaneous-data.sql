@@ -527,3 +527,20 @@ INSERT INTO public.miscellaneous AS "dedede"
     ('13 frames'),
     ('16 frames'),
     ('12 frames');
+
+INSERT INTO public.miscellaneous AS "krool"
+  ("statValue")
+  VALUES
+    ('133'),
+    ('0.105'),
+    ('0.903'),
+    ('1.485'),
+    ('1.936'),
+    ('0.945'),
+    ('0.05'),
+    ('32/48/21/34'),
+    ('1.7/2.72'),
+    ('6 frames'),
+    ('10 frames'),
+    ('11 frames'),
+    ('12 frames');

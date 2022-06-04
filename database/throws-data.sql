@@ -374,3 +374,15 @@ INSERT INTO public.throws AS "dedede"
     (31, 'backward throw', 'throw'),
     (31, 'up throw', 'throw'),
     (31, 'down throw', 'throw');
+
+INSERT INTO public.throws AS "krool"
+  ("fighterId", "name", "type")
+  VALUES
+    (32, 'grab', 'throw'),
+    (32, 'dash grab', 'throw'),
+    (32, 'pivot grab', 'throw'),
+    (32, 'pummel', 'throw'),
+    (32, 'forward throw', 'throw'),
+    (32, 'backward throw', 'throw'),
+    (32, 'up throw', 'throw'),
+    (32, 'down throw', 'throw');

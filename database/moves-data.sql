@@ -873,3 +873,28 @@ INSERT INTO public.moves AS "dedede"
     (31, 'up b', 'falling/landing/stars', 'move'),
     (31, 'down b, partial charge', 'single', 'move'),
     (31, 'down b, full charge', 'single', 'move');
+
+INSERT INTO public.moves AS "krool"
+  ("fighterId", "name", "moveType", "type")
+  VALUES
+    (32, 'jab 1', 'single', 'move'),
+    (32, 'jab 2', 'single', 'move'),
+    (32, 'jab 3', 'single', 'move'),
+    (32, 'forward tilt', 'close/far', 'move'),
+    (32, 'up tilt', 'early/late far/close', 'move'),
+    (32, 'down tilt', 'frame 13/close/far', 'move'),
+    (32, 'dash attack', 'early/late', 'move'),
+    (32, 'forward smash', '(neutral: far/close)/(down: far/close)/(up: far/close)', 'move'),
+    (32, 'up smash', 'hit: 1/2/3', 'move'),
+    (32, 'down smash', 'body/shockwave', 'move'),
+    (32, 'neutral air', 'early/late', 'move'),
+    (32, 'forward air', '(early: far/close)/(late: far/close)', 'move'),
+    (32, 'back air', 'far/close', 'move'),
+    (32, 'up air', 'early/late', 'move'),
+    (32, 'down air', 'meteor/late', 'move'),
+    (32, 'neutral b', 'projectile', 'move'),
+    (32, 'neutral b, second shot', 'projectile', 'move'),
+    (32, 'side b', 'throw/return', 'move'),
+    (32, 'up b', 'multi', 'move'),
+    (32, 'down b, counter', 'counter', 'move'),
+    (32, 'down b, counter attack', 'front/reverse', 'move');
