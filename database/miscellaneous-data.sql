@@ -561,3 +561,20 @@ INSERT INTO public.miscellaneous AS "kirby"
     ('11 frames'),
     ('12 frames'),
     ('10 frames');
+
+INSERT INTO public.miscellaneous AS "link"
+  ("statValue")
+  VALUES
+    ('104'),
+    ('0.096'),
+    ('1.247'),
+    ('1.534'),
+    ('1.98'),
+    ('0.924'),
+    ('0.05'),
+    ('33/45/22/30'),
+    ('1.6/3.04'),
+    ('7 frames (front only)'),
+    ('9 frames'),
+    ('10 frames'),
+    ('10 frames');

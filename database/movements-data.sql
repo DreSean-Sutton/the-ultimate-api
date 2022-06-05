@@ -428,3 +428,16 @@ INSERT INTO public.movements AS "kirby"
     (33, 'air dodge, left/right', 'movement'),
     (33, 'air dodge, side + up', 'movement'),
     (33, 'air dodge up', 'movement');
+
+INSERT INTO public.movements AS "link"
+  ("fighterId", "name", "type")
+  VALUES
+    (34, 'spot dodge', 'movement'),
+    (34, 'forward roll', 'movement'),
+    (34, 'backwards roll', 'movement'),
+    (34, 'neutral air dodge', 'movement'),
+    (34, 'air dodge, down', 'movement'),
+    (34, 'air dodge, side + down', 'movement'),
+    (34, 'air dodge, left/right', 'movement'),
+    (34, 'air dodge, side + up', 'movement'),
+    (34, 'air dodge up', 'movement');

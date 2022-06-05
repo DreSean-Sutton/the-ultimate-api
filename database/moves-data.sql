@@ -926,3 +926,29 @@ INSERT INTO public.moves AS "kirby"
     (33, 'up b', 'rising/falling/landing/projectile', 'move'),
     (33, 'down b', 'single', 'move'),
     (33, 'down b, air', 'single', 'move');
+
+INSERT INTO public.moves AS "link"
+  ("fighterId", "name", "moveType", "type")
+  VALUES
+    (34, 'jab 1', 'single', 'move'),
+    (34, 'jab 2', 'single', 'move'),
+    (34, 'jab 3', 'single', 'move'),
+    (34, 'forward tilt', 'above/front', 'move'),
+    (34, 'up tilt', 'single', 'move'),
+    (34, 'down tilt', 'single', 'move'),
+    (34, 'dash attack', 'single', 'move'),
+    (34, 'forward smash, hit 1', 'close/tipper/projectile', 'move'),
+    (34, 'forward smash, hit 2', 'single', 'move'),
+    (34, 'up smash', 'first/second/third', 'move'),
+    (34, 'down smash', 'front/back', 'move'),
+    (34, 'neutral air', 'early/late', 'move'),
+    (34, 'forward air', 'first/second', 'move'),
+    (34, 'back air', 'first/second', 'move'),
+    (34, 'up air', 'early/late', 'move'),
+    (34, 'down air', 'early/late', 'move'),
+    (34, 'neutral b', 'uncharged-full charge', 'move'),
+    (34, 'side b', 'clean/late/returning', 'move'),
+    (34, 'up b, ground', 'single', 'move'),
+    (34, 'up b, air', 'first/multi/final', 'move'),
+    (34, 'down b, bomb pull', 'item', 'move'),
+    (34, 'down b, bomb detonation', 'explosion', 'move');

@@ -398,3 +398,15 @@ INSERT INTO public.throws AS "kirby"
     (33, 'backward throw', 'throw'),
     (33, 'up throw', 'throw'),
     (33, 'down throw', 'throw');
+
+INSERT INTO public.throws AS "link"
+  ("fighterId", "name", "type")
+  VALUES
+    (34, 'grab', 'throw'),
+    (34, 'dash grab', 'throw'),
+    (34, 'pivot grab', 'throw'),
+    (34, 'pummel', 'throw'),
+    (34, 'forward throw', 'throw'),
+    (34, 'backward throw', 'throw'),
+    (34, 'up throw', 'throw'),
+    (34, 'down throw', 'throw');
