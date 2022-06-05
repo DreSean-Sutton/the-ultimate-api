@@ -489,9 +489,9 @@ INSERT INTO public.stats AS "kazuya"
     (29, 'total air acceleration', 'stat'),
     (29, 'sh/fh/shff/fhff', 'stat'),
     (29, 'fall speed/fast fall speed', 'stat'),
-    (29, 'out of shield, ', 'stat'),
-    (29, 'out of shield, ', 'stat'),
-    (29, 'out of shield, ', 'stat'),
+    (29, 'out of shield, up air', 'stat'),
+    (29, 'out of shield, up smash/up b', 'stat'),
+    (29, 'out of shield, neutral air/forward air', 'stat'),
     (29, 'shield grab (post-shieldstun)', 'stat');
 
 INSERT INTO public.stats AS "ken"
@@ -506,9 +506,10 @@ INSERT INTO public.stats AS "ken"
     (30, 'total air acceleration', 'stat'),
     (30, 'sh/fh/shff/fhff', 'stat'),
     (30, 'fall speed/fast fall speed', 'stat'),
-    (30, 'out of shield, ', 'stat'),
-    (30, 'out of shield, ', 'stat'),
-    (30, 'out of shield, ', 'stat'),
+    (30, 'out of shield, up b (flame)', 'stat'),
+    (30, 'out of shield, up b (normal)', 'stat'),
+    (30, 'out of shield, up air', 'stat'),
+    (30, 'out of shield, neutral air/up smash', 'stat'),
     (30, 'shield grab (post-shieldstun)', 'stat');
 
 INSERT INTO public.stats AS "dedede"
@@ -523,9 +524,9 @@ INSERT INTO public.stats AS "dedede"
     (31, 'total air acceleration', 'stat'),
     (31, 'sh/fh/shff/fhff', 'stat'),
     (31, 'fall speed/fast fall speed', 'stat'),
-    (31, 'out of shield, ', 'stat'),
-    (31, 'out of shield, ', 'stat'),
-    (31, 'out of shield, ', 'stat'),
+    (31, 'out of shield, neutral air', 'stat'),
+    (31, 'out of shield, up air', 'stat'),
+    (31, 'out of shield, forward air', 'stat'),
     (31, 'shield grab (post-shieldstun)', 'stat');
 
 INSERT INTO public.stats AS "krool"
@@ -540,9 +541,9 @@ INSERT INTO public.stats AS "krool"
     (32, 'total air acceleration', 'stat'),
     (32, 'sh/fh/shff/fhff', 'stat'),
     (32, 'fall speed/fast fall speed', 'stat'),
-    (32, 'out of shield, ', 'stat'),
-    (32, 'out of shield, ', 'stat'),
-    (32, 'out of shield, ', 'stat'),
+    (32, 'out of shield, up smash', 'stat'),
+    (32, 'out of shield, neutral air/up air', 'stat'),
+    (32, 'out of shield, up b', 'stat'),
     (32, 'shield grab (post-shieldstun)', 'stat');
 
 INSERT INTO public.stats AS "kirby"
@@ -557,9 +558,9 @@ INSERT INTO public.stats AS "kirby"
     (33, 'total air acceleration', 'stat'),
     (33, 'sh/fh/shff/fhff', 'stat'),
     (33, 'fall speed/fast fall speed', 'stat'),
-    (33, 'out of shield, ', 'stat'),
-    (33, 'out of shield, ', 'stat'),
-    (33, 'out of shield, ', 'stat'),
+    (33, 'out of shield, back air', 'stat'),
+    (33, 'out of shield, neutral air/up air', 'stat'),
+    (33, 'out of shield, up smash', 'stat'),
     (33, 'shield grab (post-shieldstun)', 'stat');
 
 INSERT INTO public.stats AS "link"
@@ -574,7 +575,7 @@ INSERT INTO public.stats AS "link"
     (34, 'total air acceleration', 'stat'),
     (34, 'sh/fh/shff/fhff', 'stat'),
     (34, 'fall speed/fast fall speed', 'stat'),
-    (34, 'out of shield, ', 'stat'),
-    (34, 'out of shield, ', 'stat'),
-    (34, 'out of shield, ', 'stat'),
+    (34, 'out of shield, up b (front)', 'stat'),
+    (34, 'out of shield, back air', 'stat'),
+    (34, 'out of shield, neutral air/up smash', 'stat'),
     (34, 'shield grab (post-shieldstun)', 'stat');

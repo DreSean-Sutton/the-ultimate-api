@@ -507,6 +507,7 @@ INSERT INTO public.miscellaneous AS "ken"
     ('31/40/23/30'),
     ('1.6/2.24'),
     ('5 frames'),
+    ('6 frames'),
     ('8 frames'),
     ('9 frames'),
     ('10 frames');
@@ -574,7 +575,7 @@ INSERT INTO public.miscellaneous AS "link"
     ('0.05'),
     ('33/45/22/30'),
     ('1.6/3.04'),
-    ('7 frames (front only)'),
+    ('7 frames'),
     ('9 frames'),
     ('10 frames'),
     ('10 frames');
