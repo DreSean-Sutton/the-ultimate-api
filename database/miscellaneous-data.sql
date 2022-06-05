@@ -544,3 +544,20 @@ INSERT INTO public.miscellaneous AS "krool"
     ('10 frames'),
     ('11 frames'),
     ('12 frames');
+
+INSERT INTO public.miscellaneous AS "kirby"
+  ("statValue")
+  VALUES
+    ('79'),
+    ('0.064'),
+    ('0.977'),
+    ('1.727'),
+    ('1.9'),
+    ('0.84'),
+    ('0.095'),
+    ('39/53/26/36'),
+    ('1.23/1.968'),
+    ('9 frames'),
+    ('11 frames'),
+    ('12 frames'),
+    ('10 frames');

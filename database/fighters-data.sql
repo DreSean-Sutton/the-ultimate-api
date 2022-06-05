@@ -31,4 +31,5 @@ INSERT INTO public.fighters ("fighter", "rosterId", "displayName")
     ('kazuya', 87, 'Kazuya'),
     ('ken', 66, 'Ken'),
     ('dedede', 44, 'King Dedede'),
-    ('krool', 74, 'King K. Rool');
+    ('krool', 74, 'King K. Rool'),
+    ('kirby', 7, 'Kirby');

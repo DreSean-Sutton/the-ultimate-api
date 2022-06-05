@@ -544,3 +544,20 @@ INSERT INTO public.stats AS "krool"
     (32, 'out of shield, ', 'stat'),
     (32, 'out of shield, ', 'stat'),
     (32, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.stats AS "kirby"
+  ("fighterId", "name", "type")
+  VALUES
+    (33, 'weight', 'stat'),
+    (33, 'gravity', 'stat'),
+    (33, 'walk speed', 'stat'),
+    (33, 'run speed', 'stat'),
+    (33, 'initial dash', 'stat'),
+    (33, 'air speed', 'stat'),
+    (33, 'total air acceleration', 'stat'),
+    (33, 'sh/fh/shff/fhff', 'stat'),
+    (33, 'fall speed/fast fall speed', 'stat'),
+    (33, 'out of shield, ', 'stat'),
+    (33, 'out of shield, ', 'stat'),
+    (33, 'out of shield, ', 'stat'),
+    (33, 'shield grab (post-shieldstun)', 'stat');

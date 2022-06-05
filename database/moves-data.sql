@@ -898,3 +898,31 @@ INSERT INTO public.moves AS "krool"
     (32, 'up b', 'multi', 'move'),
     (32, 'down b, counter', 'counter', 'move'),
     (32, 'down b, counter attack', 'front/reverse', 'move');
+
+INSERT INTO public.moves AS "kirby"
+  ("fighterId", "name", "moveType", "type")
+  VALUES
+    (33, 'jab 1', 'single', 'move'),
+    (33, 'jab 2', 'single', 'move'),
+    (33, 'rapid jab', 'multi', 'move'),
+    (33, 'rapid jab finisher', 'single', 'move'),
+    (33, 'forward tilt', 'close/far', 'move'),
+    (33, 'up tilt', 'early/late', 'move'),
+    (33, 'down tilt', 'single', 'move'),
+    (33, 'dash attack', 'early/late/latest', 'move'),
+    (33, 'forward smash', 'early/late', 'move'),
+    (33, 'up smash', 'close/far/late', 'move'),
+    (33, 'down smash', 'early/late', 'move'),
+    (33, 'neutral air', 'early/late', 'move'),
+    (33, 'forward air', 'first/second/third', 'move'),
+    (33, 'back air', 'early/late', 'move'),
+    (33, 'up air', 'single', 'move'),
+    (33, 'down air', 'multi/final/landing', 'move'),
+    (33, 'neutral b, inhale', 'held', 'move'),
+    (33, 'neutral b, copy/spit', 'swallow/spit', 'move'),
+    (33, 'side b, hammer', 'charge', 'move'),
+    (33, 'side b, hammer (full charge)', 'full charge', 'move'),
+    (33, 'side b, air', 'first/second', 'move'),
+    (33, 'up b', 'rising/falling/landing/projectile', 'move'),
+    (33, 'down b', 'single', 'move'),
+    (33, 'down b, air', 'single', 'move');
