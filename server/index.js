@@ -388,7 +388,6 @@ app.post('/api/add/:table/:id', async (req, res, next) => {
     if (/[A-Z]/gi.test(req.params.id)
       & req.params.id !== undefined) {
       throw new ClientError(400, 'fighterId must be a number');
-      return;
     }
     const id = Number(req.params.id);
     let sql = '';
@@ -469,13 +468,13 @@ app.post('/api/add/:table/:id', async (req, res, next) => {
         RETURNING *;
       `;
       params = [id, name]
-        sql2 = `
-          INSERT INTO public.dodging
-            ("activeFrames", "totalFrames")
-          VALUES ($1, $2)
-          RETURNING *;
-        `;
-        params2 = [activeFrames, totalFrames];
+      sql2 = `
+        INSERT INTO public.dodging
+          ("activeFrames", "totalFrames")
+        VALUES ($1, $2)
+        RETURNING *;
+      `;
+      params2 = [activeFrames, totalFrames];
 
     } else if (req.params.table === 'stats') {
       const reqParams = [name, statValue]
@@ -496,20 +495,19 @@ app.post('/api/add/:table/:id', async (req, res, next) => {
         RETURNING *;
         `;
       params = [id, name]
-          sql2 = `
-            INSERT INTO public.miscellaneous
-              ("statValue")
-            VALUES ($1)
-            RETURNING *;
-            `;
-          params2 = [statValue];
+      sql2 = `
+        INSERT INTO public.miscellaneous
+          ("statValue")
+        VALUES ($1)
+        RETURNING *;
+        `;
+      params2 = [statValue];
     } else {
       throw new ClientError(400, `${req.params.table} is not a valid path parameter`)
     }
     let result = await db.query(sql, params);
     if (result.rows.length === 0) {
       throw new ClientError(404, `fighterId ${id} doesn't exist`);
-      return;
     }
     Object.assign(fullResult, result.rows[0]);
     result = await db.query(sql2, params2);
@@ -520,214 +518,180 @@ app.post('/api/add/:table/:id', async (req, res, next) => {
   }
 });
 
-
-app.put('/api/update/:table/:id', (req, res, next) => {
+app.put('/api/update/:table/:id', async (req, res, next) => {
   const fullResult = {};
   const { fighter, displayName, name, moveType, damage, activeFrames, totalFrames, firstFrame, statValue } = req.body;
   let { rosterId } = req.body;
-  if (/[A-Z]/gi.test(req.params.id)
-    & req.params.id !== undefined) {
-    throw new ClientError(400, 'fighterId must be a number');
-    return;
-  }
-  if (/[A-Z]/gi.test(rosterId)
-  & rosterId !== undefined) {
-    throw new ClientError(400, 'rosterId must be a number');
-    return;
-  }
-  const id = Number(req.params.id);
+  try {
+    if (/[A-Z]/gi.test(req.params.id)
+      & req.params.id !== undefined) {
+      throw new ClientError(400, 'fighterId must be a number');
+    }
+    if (/[A-Z]/gi.test(rosterId)
+    & rosterId !== undefined) {
+      throw new ClientError(400, 'rosterId must be a number');
+    }
+    const id = Number(req.params.id);
 
-  if (req.params.table === 'fighters') {
-    const sql = `
-      UPDATE
-        public.fighters
-      SET
-        "fighter" = coalesce($2, "fighter"),
-        "rosterId" = coalesce($3, "rosterId"),
-        "displayName" = coalesce($4, "displayName")
-      WHERE
-        "fighterId"=$1
-      RETURNING *;
-    `;
-    const params = [id, fighter, rosterId, displayName];
-    return db.query(sql, params)
-      .then(result => {
-        if (result.rows.length === 0) {
-          throw new ClientError(404, `fighterId ${id} does not exist`);
-          return;
-        }
-        res.status(200).json(result.rows[0]);
-      })
-      .catch(err => next(err));
-
-  } else if (req.params.table === 'moves') {
-    const sql = `
-      UPDATE
-        public.moves
-      SET
-        "name" = coalesce($2, "name"),
-        "moveType" = coalesce($3, "moveType")
+    if (req.params.table === 'fighters') {
+      const sql = `
+        UPDATE
+          public.fighters
+        SET
+          "fighter" = coalesce($2, "fighter"),
+          "rosterId" = coalesce($3, "rosterId"),
+          "displayName" = coalesce($4, "displayName")
         WHERE
-        "moveId"=$1
+          "fighterId"=$1
         RETURNING *;
       `;
-      const params = [id, name, moveType];
-      return db.query(sql, params)
-        .then(result => {
-          if (result.rows.length === 0) {
-            throw new ClientError(404, `moveId ${id} does not exist`);
-            return;
-          }
-          Object.assign(fullResult, result.rows[0]);
-          const sql = `
-            UPDATE
-              public.hitboxes
-            SET
-              "damage" = coalesce($2, "damage"),
-              "activeFrames" = coalesce($3, "activeFrames"),
-              "totalFrames" = coalesce($4, "totalFrames"),
-              "firstFrame" = coalesce($5, "firstFrame")
-            WHERE
-              "moveId"=$1
-            RETURNING *;
-          `;
-          const params = [id, damage, activeFrames, totalFrames, firstFrame];
-          return db.query(sql, params)
-            .then(result => {
-              Object.assign(fullResult, result.rows[0]);
-              res.status(200).json(fullResult);
-            })
-            .catch(err => next(err));
-        })
-        .catch(err => next(err));
+      const params = [id, fighter, rosterId, displayName];
+      const result = await db.query(sql, params);
+      if (result.rows.length === 0) {
+        throw new ClientError(404, `fighterId ${id} does not exist`);
+      }
+      return res.status(200).json(result.rows[0]);
 
-  } else if (req.params.table === 'throws') {
-    const sql = `
-      UPDATE
-        public.throws
-      SET
-        "name" = coalesce($2, "name")
-      WHERE
-        "throwId"=$1
-      RETURNING *;
-    `;
-    const params = [id, name];
-    return db.query(sql, params)
-      .then(result => {
-        if (result.rows.length === 0) {
-          throw new ClientError(404, `throwId ${id} does not exist`);
-          return;
-        }
-        Object.assign(fullResult, result.rows[0]);
-        const sql = `
-          UPDATE
-              public.grappling
-          SET
-            "damage" = coalesce($2, "damage"),
-            "activeFrames" = coalesce($3, "activeFrames"),
-            "totalFrames" = coalesce($4, "totalFrames")
+    } else if (req.params.table === 'moves') {
+      let sql = `
+        UPDATE
+          public.moves
+        SET
+          "name" = coalesce($2, "name"),
+          "moveType" = coalesce($3, "moveType")
           WHERE
-            "throwId"=$1
+          "moveId"=$1
           RETURNING *;
-        `;
-        const params = [id, damage, activeFrames, totalFrames];
-        return db.query(sql, params)
-          .then(result => {
-            if (result.rows.length === 0) {
-              throw new ClientError(404, `throwId ${id} does not exist`);
-              return;
-            }
-            Object.assign(fullResult, result.rows[0]);
-            res.status(200).json(fullResult);
-          })
-          .catch(err => next(err));
-      })
-      .catch(err => next(err));
+      `;
+      let params = [id, name, moveType];
+      let result = await db.query(sql, params);
+      if (result.rows.length === 0) {
+        throw new ClientError(404, `moveId ${id} does not exist`);
+      }
+      Object.assign(fullResult, result.rows[0]);
+      sql = `
+        UPDATE
+          public.hitboxes
+        SET
+          "damage" = coalesce($2, "damage"),
+          "activeFrames" = coalesce($3, "activeFrames"),
+          "totalFrames" = coalesce($4, "totalFrames"),
+          "firstFrame" = coalesce($5, "firstFrame")
+        WHERE
+          "moveId"=$1
+        RETURNING *;
+      `;
+      params = [id, damage, activeFrames, totalFrames, firstFrame];
+      result = await db.query(sql, params);
+      Object.assign(fullResult, result.rows[0]);
+      return res.status(200).json(fullResult);
 
-  } else if (req.params.table === 'movements') {
-    const sql = `
-      UPDATE
-        public.movements
-      SET
-        "name" = coalesce($2, "name")
-      WHERE
-        "movementId"=$1
-      RETURNING *;
-    `;
-    const params = [id, name];
-    return db.query(sql, params)
-      .then(result => {
-        if (result.rows.length === 0) {
-          throw new ClientError(404, `movementId ${id} does not exist`);
-          return;
-        }
-        Object.assign(fullResult, result.rows[0]);
-        const sql = `
-          UPDATE
-              public.dodging
-          SET
-            "activeFrames" = coalesce($2, "activeFrames"),
-            "totalFrames" = coalesce($3, "totalFrames")
-          WHERE
-            "movementId"=$1
-          RETURNING *;
-        `;
-        const params = [id, activeFrames, totalFrames];
-        return db.query(sql, params)
-          .then(result => {
-            if (result.rows.length === 0) {
-              throw new ClientError(404, `movementId ${id} does not exist`);
-              return;
-            }
-            Object.assign(fullResult, result.rows[0]);
-            res.status(200).json(fullResult);
-          })
-          .catch(err => next(err));
-      })
-      .catch(err => next(err));
+    } else if (req.params.table === 'throws') {
+      let sql = `
+        UPDATE
+          public.throws
+        SET
+          "name" = coalesce($2, "name")
+        WHERE
+          "throwId"=$1
+        RETURNING *;
+      `;
+      let params = [id, name];
+      let result = await db.query(sql, params);
+      if (result.rows.length === 0) {
+        throw new ClientError(404, `throwId ${id} does not exist`);
+      }
+      Object.assign(fullResult, result.rows[0]);
+      sql = `
+        UPDATE
+            public.grappling
+        SET
+          "damage" = coalesce($2, "damage"),
+          "activeFrames" = coalesce($3, "activeFrames"),
+          "totalFrames" = coalesce($4, "totalFrames")
+        WHERE
+          "throwId"=$1
+        RETURNING *;
+      `;
+      params = [id, damage, activeFrames, totalFrames];
+      result = await db.query(sql, params);
+      if (result.rows.length === 0) {
+        throw new ClientError(404, `throwId ${id} does not exist`);
+      }
+      Object.assign(fullResult, result.rows[0]);
+      return res.status(200).json(fullResult);
 
-  } else if (req.params.table === 'stats') {
-    const sql = `
-      UPDATE
-        public.stats
-      SET
-        "name" = coalesce($2, "name")
-      WHERE
-        "statId"=$1
-      RETURNING *;
-    `;
-    const params = [id, name];
-    return db.query(sql, params)
-      .then(result => {
-        if (result.rows.length === 0) {
-          throw new ClientError(404, `statId ${id} does not exist`);
-          return;
-        }
-        Object.assign(fullResult, result.rows[0]);
-        const sql = `
-          UPDATE
-            public.miscellaneous
-          SET
-            "statValue" = coalesce($2, "statValue")
-          WHERE
-            "statId"=$1
-          RETURNING *;
-        `;
-        const params = [id, statValue];
-        return db.query(sql, params)
-          .then(result => {
-            if (result.rows.length === 0) {
-              throw new ClientError(404, `statId ${id} does not exist`);
-              return;
-            }
-            Object.assign(fullResult, result.rows[0]);
-            res.status(200).json(fullResult);
-          })
-          .catch(err => next(err));
-      })
-      .catch(err => next(err));
-  } else {
-    throw new ClientError(400, `${req.params.table} is not a valid path parameter`)
+    } else if (req.params.table === 'movements') {
+      let sql = `
+        UPDATE
+          public.movements
+        SET
+          "name" = coalesce($2, "name")
+        WHERE
+          "movementId"=$1
+        RETURNING *;
+      `;
+      let params = [id, name];
+      let result = await db.query(sql, params);
+      if (result.rows.length === 0) {
+        throw new ClientError(404, `movementId ${id} does not exist`);
+      }
+      Object.assign(fullResult, result.rows[0]);
+      sql = `
+        UPDATE
+            public.dodging
+        SET
+          "activeFrames" = coalesce($2, "activeFrames"),
+          "totalFrames" = coalesce($3, "totalFrames")
+        WHERE
+          "movementId"=$1
+        RETURNING *;
+      `;
+      params = [id, activeFrames, totalFrames];
+      result = await db.query(sql, params);
+      if (result.rows.length === 0) {
+        throw new ClientError(404, `movementId ${id} does not exist`);
+      }
+      Object.assign(fullResult, result.rows[0]);
+      return res.status(200).json(fullResult);
+
+    } else if (req.params.table === 'stats') {
+      let sql = `
+        UPDATE
+          public.stats
+        SET
+          "name" = coalesce($2, "name")
+        WHERE
+          "statId"=$1
+        RETURNING *;
+      `;
+      let params = [id, name];
+      let result = await db.query(sql, params);
+      if (result.rows.length === 0) {
+        throw new ClientError(404, `statId ${id} does not exist`);
+      }
+      Object.assign(fullResult, result.rows[0]);
+      sql = `
+        UPDATE
+          public.miscellaneous
+        SET
+          "statValue" = coalesce($2, "statValue")
+        WHERE
+          "statId"=$1
+        RETURNING *;
+      `;
+      params = [id, statValue];
+      result = await db.query(sql, params);
+      if (result.rows.length === 0) {
+        throw new ClientError(404, `statId ${id} does not exist`);
+      }
+      Object.assign(fullResult, result.rows[0]);
+      return res.status(200).json(fullResult);
+    } else {
+      throw new ClientError(400, `${req.params.table} is not a valid path parameter`)
+    }
+  } catch (e) {
+    return next(e);
   }
 });
 
