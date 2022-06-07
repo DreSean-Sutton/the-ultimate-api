@@ -579,3 +579,20 @@ INSERT INTO public.miscellaneous AS "link"
     ('9 frames'),
     ('10 frames'),
     ('10 frames');
+
+INSERT INTO public.miscellaneous AS "littleMac"
+  ("statValue")
+  VALUES
+    ('87'),
+    ('0.090'),
+    ('1.386'),
+    ('2.464'),
+    ('2.365'),
+    ('1.208'),
+    ('0.04'),
+    ('33/44/21/29'),
+    ('1.95/3.12'),
+    ('3 frames'),
+    ('5 frames'),
+    ('8 frames'),
+    ('13 frames');

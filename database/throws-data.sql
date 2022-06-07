@@ -410,3 +410,15 @@ INSERT INTO public.throws AS "link"
     (34, 'backward throw', 'throw'),
     (34, 'up throw', 'throw'),
     (34, 'down throw', 'throw');
+
+INSERT INTO public.throws AS "littleMac"
+  ("fighterId", "name", "type")
+  VALUES
+    (35, 'grab', 'throw'),
+    (35, 'dash grab', 'throw'),
+    (35, 'pivot grab', 'throw'),
+    (35, 'pummel', 'throw'),
+    (35, 'forward throw', 'throw'),
+    (35, 'backward throw', 'throw'),
+    (35, 'up throw', 'throw'),
+    (35, 'down throw', 'throw');

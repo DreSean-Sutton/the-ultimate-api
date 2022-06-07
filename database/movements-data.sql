@@ -441,3 +441,16 @@ INSERT INTO public.movements AS "link"
     (34, 'air dodge, left/right', 'movement'),
     (34, 'air dodge, side + up', 'movement'),
     (34, 'air dodge up', 'movement');
+
+INSERT INTO public.movements AS "littleMac"
+  ("fighterId", "name", "type")
+  VALUES
+    (35, 'spot dodge', 'movement'),
+    (35, 'forward roll', 'movement'),
+    (35, 'backwards roll', 'movement'),
+    (35, 'neutral air dodge', 'movement'),
+    (35, 'air dodge, down', 'movement'),
+    (35, 'air dodge, side + down', 'movement'),
+    (35, 'air dodge, left/right', 'movement'),
+    (35, 'air dodge, side + up', 'movement'),
+    (35, 'air dodge up', 'movement');

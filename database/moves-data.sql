@@ -952,3 +952,32 @@ INSERT INTO public.moves AS "link"
     (34, 'up b, air', 'first/multi/final', 'move'),
     (34, 'down b, bomb pull', 'item', 'move'),
     (34, 'down b, bomb detonation', 'explosion', 'move');
+
+INSERT INTO public.moves AS "littleMac"
+  ("fighterId", "name", "moveType", "type")
+  VALUES
+    (35, 'jab 1', 'single', 'move'),
+    (35, 'jab 2', 'single', 'move'),
+    (35, 'jab 3', 'single', 'move'),
+    (35, 'rapid jab', 'multi', 'move'),
+    (35, 'rapid jab finisher', 'single', 'move'),
+    (35, 'forward tilt', 'first/second', 'move'),
+    (35, 'up tilt', 'single', 'move'),
+    (35, 'down tilt', 'single', 'move'),
+    (35, 'dash attack', 'single', 'move'),
+    (35, 'forward smash', 'normal/up/down', 'move'),
+    (35, 'up smash', 'early/late', 'move'),
+    (35, 'down smash', 'single', 'move'),
+    (35, 'neutral air', 'single', 'move'),
+    (35, 'forward air', 'single', 'move'),
+    (35, 'back air', 'single', 'move'),
+    (35, 'up air', 'single', 'move'),
+    (35, 'down air', 'meteor/sour', 'move'),
+    (35, 'neutral b, partial charge', 'uncharged-charged', 'move'),
+    (35, 'neutral b, full charge', 'single', 'move'),
+    (35, 'neutral b, K.O. punch', 'ground/air', 'move'),
+    (35, 'side b, ground', 'early/late', 'move'),
+    (35, 'side b, air', 'early/late', 'move'),
+    (35, 'up b', 'first/multi/final', 'move'),
+    (35, 'down b, counter', 'counter', 'move'),
+    (35, 'down b, counter attack', 'counter attack', 'move');

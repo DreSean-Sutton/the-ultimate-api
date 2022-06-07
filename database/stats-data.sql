@@ -579,3 +579,20 @@ INSERT INTO public.stats AS "link"
     (34, 'out of shield, back air', 'stat'),
     (34, 'out of shield, neutral air/up smash', 'stat'),
     (34, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.stats AS "littleMac"
+  ("fighterId", "name", "type")
+  VALUES
+    (35, 'weight', 'stat'),
+    (35, 'gravity', 'stat'),
+    (35, 'walk speed', 'stat'),
+    (35, 'run speed', 'stat'),
+    (35, 'initial dash', 'stat'),
+    (35, 'air speed', 'stat'),
+    (35, 'total air acceleration', 'stat'),
+    (35, 'sh/fh/shff/fhff', 'stat'),
+    (35, 'fall speed/fast fall speed', 'stat'),
+    (35, 'out of shield, ', 'stat'),
+    (35, 'out of shield, ', 'stat'),
+    (35, 'out of shield, ', 'stat'),
+    (35, 'shield grab (post-shieldstun)', 'stat');
