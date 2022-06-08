@@ -981,3 +981,30 @@ INSERT INTO public.moves AS "littleMac"
     (35, 'up b', 'first/multi/final', 'move'),
     (35, 'down b, counter', 'counter', 'move'),
     (35, 'down b, counter attack', 'counter attack', 'move');
+
+INSERT INTO public.moves AS "lucario"
+  ("fighterId", "name", "moveType", "type")
+  VALUES
+    (36, 'passive', 'damage when at: 0% | 65% | 190%', 'move'),
+    (36, 'jab 1', 'single', 'move'),
+    (36, 'jab 2', 'single', 'move'),
+    (36, 'jab 3', 'single', 'move'),
+    (36, 'forward tilt', 'first/second', 'move'),
+    (36, 'up tilt', 'close/far', 'move'),
+    (36, 'down tilt', 'single', 'move'),
+    (36, 'dash attack', 'early: close/far, late: close/far', 'move'),
+    (36, 'forward smash', 'close/far', 'move'),
+    (36, 'up smash', 'first/second far/second close', 'move'),
+    (36, 'down smash', 'single', 'move'),
+    (36, 'neutral air', 'early/late', 'move'),
+    (36, 'forward air', 'single', 'move'),
+    (36, 'back air', 'early/late', 'move'),
+    (36, 'up air', 'far/close', 'move'),
+    (36, 'down air', 'first/second', 'move'),
+    (36, 'neutral b, partial charge', 'uncharged-charging', 'move'),
+    (36, 'neutral b, full charge', 'full charge', 'move'),
+    (36, 'side b', 'close/far', 'move'),
+    (36, 'side b', 'single', 'move'),
+    (36, 'up b', 'on hit', 'move'),
+    (36, 'down b, counter', 'counter', 'move'),
+    (36, 'down b, counter attack', 'single', 'move');

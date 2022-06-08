@@ -596,3 +596,20 @@ INSERT INTO public.miscellaneous AS "littleMac"
     ('5 frames'),
     ('8 frames'),
     ('13 frames');
+
+INSERT INTO public.miscellaneous AS "lucario"
+  ("statValue")
+  VALUES
+    ('92'),
+    ('0.084'),
+    ('1.103'),
+    ('1.705'),
+    ('2.255'),
+    ('1.281'),
+    ('0.09'),
+    ('41/56/28/38'),
+    ('1.68/2.688'),
+    ('7 frames'),
+    ('10 frames'),
+    ('13 frames'),
+    ('11 frames');

@@ -592,7 +592,24 @@ INSERT INTO public.stats AS "littleMac"
     (35, 'total air acceleration', 'stat'),
     (35, 'sh/fh/shff/fhff', 'stat'),
     (35, 'fall speed/fast fall speed', 'stat'),
-    (35, 'out of shield, ', 'stat'),
-    (35, 'out of shield, ', 'stat'),
-    (35, 'out of shield, ', 'stat'),
+    (35, 'out of shield, up b', 'stat'),
+    (35, 'out of shield, neutral air', 'stat'),
+    (35, 'out of shield, up air', 'stat'),
     (35, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.stats AS "lucario"
+  ("fighterId", "name", "type")
+  VALUES
+    (36, 'weight', 'stat'),
+    (36, 'gravity', 'stat'),
+    (36, 'walk speed', 'stat'),
+    (36, 'run speed', 'stat'),
+    (36, 'initial dash', 'stat'),
+    (36, 'air speed', 'stat'),
+    (36, 'total air acceleration', 'stat'),
+    (36, 'sh/fh/shff/fhff', 'stat'),
+    (36, 'fall speed/fast fall speed', 'stat'),
+    (36, 'out of shield, down air', 'stat'),
+    (36, 'out of shield, forward air', 'stat'),
+    (36, 'out of shield, neutral air/up air', 'stat'),
+    (36, 'shield grab (post-shieldstun)', 'stat');

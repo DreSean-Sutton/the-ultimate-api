@@ -454,3 +454,16 @@ INSERT INTO public.dodging AS "littleMac"
     ('2-18', '72'),
     ('2-18', '81'),
     ('2-18', '89');
+
+INSERT INTO public.dodging AS "lucario"
+  ("activeFrames", "totalFrames")
+  VALUES
+    ('3-17', '20/25'),
+    ('4-15', '29'),
+    ('5-16', '34'),
+    ('3-28', '48'),
+    ('3-21', '65'),
+    ('3-21', '74'),
+    ('3-21', '91'),
+    ('3-21', '98'),
+    ('3-21', '108');
