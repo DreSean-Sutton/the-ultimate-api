@@ -4,7 +4,7 @@ require('dotenv/config');
 const express = require('express');
 const expressJSON = express.json();
 const pg = require('pg');
-// const ClientError = require('./client-error');
+const ClientError = require('./client-error');
 const errorMiddleware = require('./error-middleware');
 const staticMiddleware = require('./static-middleware');
 const sqlQueries = require('./sql-queries');

@@ -1,4 +1,4 @@
-class ClientError {
+export default class ClientError {
   status: number;
   message: string;
   constructor(status: number, message: string) {
@@ -6,5 +6,3 @@ class ClientError {
     this.message = message;
   }
 }
-
-module.exports = ClientError;
