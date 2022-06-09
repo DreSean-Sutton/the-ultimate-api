@@ -1,6 +1,6 @@
-const ClientError = require('./client-error');
+// ClientError = require('./client-error');
 
-function errorMiddleware(err, req, res, next) {
+function errorMiddleware(err: object, req: any, res: any, next: any) {
   if (err instanceof ClientError) {
     res.status(err.status).json({
       error: err.message

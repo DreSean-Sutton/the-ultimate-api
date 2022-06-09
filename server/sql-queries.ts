@@ -8,7 +8,7 @@ const sqlQueries = {
         fighters
       `;
   },
-  getFightersData(type) {
+  getFightersData(type: string) {
     if (type === 'moves') {
       return `
         SELECT
