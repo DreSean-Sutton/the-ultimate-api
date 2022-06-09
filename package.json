@@ -10,7 +10,7 @@
     "db:import": "bash scripts/db-import.sh",
     "prepare": "husky install",
     "tsc": "./node_modules/typescript/bin/tsc",
-    "postinstall": "npx tsc server/index.ts server/sql-queries.ts server/static-middleware.ts server/client-error.ts server/error-middleware.ts"
+    "postinstall": "tsc server/index.ts server/sql-queries.ts server/static-middleware.ts server/client-error.ts server/error-middleware.ts"
   },
   "dependencies": {
     "cors": "^2.8.5",
