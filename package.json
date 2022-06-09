@@ -9,10 +9,10 @@
     "dev:server": "nodemon server/index.js",
     "db:import": "bash scripts/db-import.sh",
     "prepare": "husky install",
-    "tsc": "./node_modules/typescript/bin/tsc",
     "postinstall": "postinstall"
   },
   "postinstall": {
+    "tsc": "./node_modules/typescript/bin/tsc",
     "server/index.ts": "tsc server/index.ts",
     "server/sql-queries.ts": "tsc server/sql-queries.ts",
     "server/static-middleware.ts": "tsc server/static-middleware.ts",
