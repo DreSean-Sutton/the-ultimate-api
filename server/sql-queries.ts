@@ -6,9 +6,9 @@ const sqlQueries = {
         "rosterId", "displayName"
       FROM
         fighters
-      `
+      `;
   },
-  getFightersData(type) {
+  getFightersData(type: string) {
     if (type === 'moves') {
       return `
         SELECT
@@ -62,6 +62,6 @@ const sqlQueries = {
       `;
     }
   }
-}
+};
 
-  module.exports = sqlQueries
+module.exports = sqlQueries;

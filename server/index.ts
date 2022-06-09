@@ -1,3 +1,5 @@
+import { type } from "os";
+
 require('dotenv/config');
 const express = require('express');
 const expressJSON = express.json();
@@ -8,7 +10,7 @@ const staticMiddleware = require('./static-middleware');
 const sqlQueries = require('./sql-queries');
 const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
-const cors = require('cors')
+const cors = require('cors');
 
 const db = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
@@ -25,23 +27,23 @@ const swaggerDocument = YAML.load('./openapi.yml');
 app.use(staticMiddleware);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-app.get('/api/fighters', async (req, res, next) => {
+app.get('/api/fighters', async (req: any, res: any, next: any) => {
   const queryStr = req.query;
-  const queryKey = Object.keys(queryStr)
+  const queryKey = Object.keys(queryStr);
   if (queryStr.fighter) {
     const sql = `
     ${sqlQueries.getFighters()}
     WHERE
       fighter=$1
     `;
-    const params = [queryStr.fighter];
+    const params: any = [queryStr.fighter];
     try {
       if (/\d/g.test(params)) {
-        throw new ClientError(400, `fighter name can't have a number`);
+        throw new ClientError(400, 'fighter name can\'t have a number');
       }
-      const result = await db.query(sql, params)
+      const result = await db.query(sql, params);
       if (result.rows.length === 0) {
-        throw new ClientError(404, `${queryKey} named ${params} doesn't exist in the database`)
+        throw new ClientError(404, `${queryKey} named ${params} doesn't exist in the database`);
       }
       return res.status(200).send(result.rows[0]);
     } catch (e) {
@@ -57,14 +59,14 @@ app.get('/api/fighters', async (req, res, next) => {
     try {
       const params = [queryStr.fighterId];
       if (!Number(params)) {
-        throw new ClientError(400, `fighterId must be an integer`);
+        throw new ClientError(400, 'fighterId must be an integer');
       }
       const result = await db.query(sql, params);
       if (result.rows.length === 0) {
-        throw new ClientError(404, `${queryKey} ${params} doesn't exist in the database`)
+        throw new ClientError(404, `${queryKey} ${params} doesn't exist in the database`);
       }
       return res.status(200).send(result.rows[0]);
-    } catch(e) {
+    } catch (e) {
       return next(e);
     }
   }
@@ -77,11 +79,11 @@ app.get('/api/fighters', async (req, res, next) => {
     const params = [queryStr.rosterId];
     try {
       if (!Number(params)) {
-        throw new ClientError(400, `rosterId must be an integer`);
+        throw new ClientError(400, 'rosterId must be an integer');
       }
       const result = await db.query(sql, params);
       if (result.rows.length === 0) {
-        throw new ClientError(404, `${queryKey} ${params} doesn't exist in the database`)
+        throw new ClientError(404, `${queryKey} ${params} doesn't exist in the database`);
       }
       return res.status(200).send(result.rows[0]);
     } catch (e) {
@@ -91,7 +93,7 @@ app.get('/api/fighters', async (req, res, next) => {
   if (queryStr.orderByRosterId) {
     try {
       if (queryStr.orderByRosterId !== 'true') {
-        throw new ClientError(400, 'orderByRosterId must be true')
+        throw new ClientError(400, 'orderByRosterId must be true');
       }
       const sql = `
       ${sqlQueries.getFighters()}
@@ -106,7 +108,7 @@ app.get('/api/fighters', async (req, res, next) => {
   }
   try {
     if (queryKey.length > 0) {
-      throw new ClientError(400, `${queryKey} is not a valid query key`)
+      throw new ClientError(400, `${queryKey} is not a valid query key`);
     }
     const sql = `${sqlQueries.getFighters()}`;
     const result = await db.query(sql);
@@ -116,11 +118,14 @@ app.get('/api/fighters', async (req, res, next) => {
   }
 });
 
-app.get('/api/fighters/data', async (req, res, next) => {
-  const fullResult = [];
+app.get('/api/fighters/data', async (req: any, res: any, next: any) => {
+  const fullResult: any = [];
   return renderAllData(0, fullResult);
 
-  async function renderAllData (index, fullResult) {
+  async function renderAllData(index: number, fullResult: any): Promise<any> {
+    type MyType = {
+      rows: any
+    }
     const dataTypes = ['moves', 'throws', 'movements', 'stats'];
     const dataTypeIds = ['moveId', 'throwId', 'movementId', 'statId'];
     if (dataTypes.length === index) {
@@ -136,16 +141,16 @@ app.get('/api/fighters/data', async (req, res, next) => {
       fighter=$1
       ORDER BY ${JSON.stringify(dataTypeIds[index])}
       `;
-      const params = [queryStr.fighter];
+      const params: any = [queryStr.fighter];
       try {
         if (/\d/g.test(params)) {
-          throw new ClientError(400, `fighter name can't have a number`);
+          throw new ClientError(400, 'fighter name can\'t have a number');
         }
-        const result = await db.query(sql, params);
+        const result: any = await db.query(sql, params);
         if (result.rows.length === 0) {
-          throw new ClientError(404, `${queryKey} named ${params} doesn't exist in the database`)
+          throw new ClientError(404, `${queryKey} named ${params} doesn't exist in the database`);
         }
-        fullResult.push(result.rows);
+          fullResult.push(result.rows);
         return renderAllData(index + 1, fullResult);
       } catch (e) {
         return next(e);
@@ -161,11 +166,11 @@ app.get('/api/fighters/data', async (req, res, next) => {
       const params = [queryStr.fighterId];
       try {
         if (!Number(params)) {
-          throw new ClientError(400, `fighterId must be an integer`);
+          throw new ClientError(400, 'fighterId must be an integer');
         }
         const result = await db.query(sql, params);
         if (result.rows.length === 0) {
-          throw new ClientError(404, `${queryKey} ${params} doesn't exist in the database`)
+          throw new ClientError(404, `${queryKey} ${params} doesn't exist in the database`);
         }
         fullResult.push(result.rows);
         return renderAllData(index + 1, fullResult);
@@ -183,11 +188,11 @@ app.get('/api/fighters/data', async (req, res, next) => {
       const params = [queryStr.rosterId];
       try {
         if (!Number(params)) {
-          throw new ClientError(400, `rosterId must be an integer`);
+          throw new ClientError(400, 'rosterId must be an integer');
         }
         const result = await db.query(sql, params);
         if (result.rows.length === 0) {
-          throw new ClientError(404, `${queryKey} ${params} doesn't exist in the database`)
+          throw new ClientError(404, `${queryKey} ${params} doesn't exist in the database`);
         }
         fullResult.push(result.rows);
         return renderAllData(index + 1, fullResult);
@@ -198,7 +203,7 @@ app.get('/api/fighters/data', async (req, res, next) => {
     if (queryStr.orderByRosterId) {
       try {
         if (queryStr.orderByRosterId !== 'true') {
-          throw new ClientError(400, 'orderByRosterId must be true')
+          throw new ClientError(400, 'orderByRosterId must be true');
         }
         const sql = `
         ${sqlQueries.getFightersData(dataTypes[index])}
@@ -214,7 +219,7 @@ app.get('/api/fighters/data', async (req, res, next) => {
     }
     try {
       if (queryKey.length > 0) {
-        throw new ClientError(400, `${queryKey} is not a valid query key`)
+        throw new ClientError(400, `${queryKey} is not a valid query key`);
       }
       const sql = `
       ${sqlQueries.getFightersData(dataTypes[index])}
@@ -229,11 +234,11 @@ app.get('/api/fighters/data', async (req, res, next) => {
   }
 });
 
-app.get('/api/fighters/data/:type', async (req, res, next) => {
+app.get('/api/fighters/data/:type', async (req: any, res: any, next: any) => {
   const queryStr = req.query;
   const queryKey = Object.keys(queryStr);
   const currentType = req.params.type;
-  let index = null
+  let index = 0;
   const dataTypes = ['moves', 'throws', 'movements', 'stats'];
   const dataTypeIds = ['moveId', 'throwId', 'movementId', 'statId'];
   try {
@@ -247,17 +252,17 @@ app.get('/api/fighters/data/:type', async (req, res, next) => {
       fighter=$1
       ORDER BY ${JSON.stringify(dataTypeIds[index])}
       `;
-      const params = [queryStr.fighter];
+      const params: any = [queryStr.fighter];
       if (/\d/g.test(params)) {
-        throw new ClientError(400, `fighter name can't have a number`);
+        throw new ClientError(400, 'fighter name can\'t have a number');
       }
       const result = await db.query(sql, params);
       if (result.rows.length === 0) {
-        throw new ClientError(404, `${queryKey} named ${params} doesn't exist in the database`)
+        throw new ClientError(404, `${queryKey} named ${params} doesn't exist in the database`);
       }
       return res.status(200).send(result.rows);
     }
-  } catch(e) {
+  } catch (e) {
     return next(e);
   }
   if (queryStr.fighterId) {
@@ -270,11 +275,11 @@ app.get('/api/fighters/data/:type', async (req, res, next) => {
     const params = [queryStr.fighterId];
     try {
       if (!Number(params)) {
-        throw new ClientError(400, `fighterId must be an integer`);
+        throw new ClientError(400, 'fighterId must be an integer');
       }
       const result = await db.query(sql, params);
       if (result.rows.length === 0) {
-        throw new ClientError(404, `${queryKey} ${params} doesn't exist in the database`)
+        throw new ClientError(404, `${queryKey} ${params} doesn't exist in the database`);
       }
       return res.status(200).send(result.rows);
     } catch (e) {
@@ -291,11 +296,11 @@ app.get('/api/fighters/data/:type', async (req, res, next) => {
     const params = [queryStr.rosterId];
     try {
       if (!Number(params)) {
-        throw new ClientError(400, `rosterId must be an integer`);
+        throw new ClientError(400, 'rosterId must be an integer');
       }
       const result = await db.query(sql, params);
       if (result.rows.length === 0) {
-        throw new ClientError(404, `${queryKey} ${params} doesn't exist in the database`)
+        throw new ClientError(404, `${queryKey} ${params} doesn't exist in the database`);
       }
       return res.status(200).send(result.rows);
     } catch (e) {
@@ -320,22 +325,22 @@ app.get('/api/fighters/data/:type', async (req, res, next) => {
   }
   try {
     if (queryKey.length > 0) {
-      throw new ClientError(400, `${queryKey} is not a valid query key`)
+      throw new ClientError(400, `${queryKey} is not a valid query key`);
     }
     const sql = `
     ${sqlQueries.getFightersData(dataTypes[index])}
     ORDER BY ${JSON.stringify(dataTypeIds[index])}
     `;
     const result = await db.query(sql);
-    return res.status(200).send(result.rows)
-  } catch(e) {
+    return res.status(200).send(result.rows);
+  } catch (e) {
     return next(e);
   }
 
   function checkValidType() {
     for (let i = 0; i < dataTypes.length; i++) {
       if (currentType === dataTypes[i]) {
-        index = i
+        index = i;
         return true;
       }
     }
@@ -343,18 +348,17 @@ app.get('/api/fighters/data/:type', async (req, res, next) => {
   }
 });
 
-app.post('/api/add/fighters', async (req, res, next) => {
+app.post('/api/add/fighters', async (req: any, res: any, next: any) => {
 
-  const fullResult = {};
   const { fighter, displayName } = req.body;
   let { rosterId } = req.body;
   rosterId = Number(rosterId);
-  const reqParams = [fighter, displayName, rosterId]
+  const reqParams = [fighter, displayName, rosterId];
   const isValid = reqParams.every(param => !!param);
   try {
-    if(!isValid) {
+    if (!isValid) {
       throw new ClientError(400, 'must have (fighter), (displayName), and (rosterId) as parameters');
-  }
+    }
     const sql = `
       INSERT INTO public.fighters (
         "fighter", "rosterId", "displayName"
@@ -372,21 +376,21 @@ app.post('/api/add/fighters', async (req, res, next) => {
     const params = [fighter, rosterId, displayName];
     const result = await db.query(sql, params);
     if (result.rows.length === 0) {
-      throw new ClientError(400, '(fighter), (rosterId), and (displayName) must all be unique')
+      throw new ClientError(400, '(fighter), (rosterId), and (displayName) must all be unique');
     } else {
       return res.status(201).json(result.rows[0]);
     }
-    } catch (e) {
-      return next(e);
-    }
+  } catch (e) {
+    return next(e);
+  }
 });
 
-app.post('/api/add/:table/:id', async (req, res, next) => {
+app.post('/api/add/:table/:id', async (req: any, res: any, next: any) => {
   const fullResult = {};
   const { name, moveType, damage, activeFrames, totalFrames, firstFrame, statValue } = req.body;
   try {
-    if (/[A-Z]/gi.test(req.params.id)
-      & req.params.id !== undefined) {
+    if (/[A-Z]/gi.test(req.params.id) &&
+      req.params.id !== undefined) {
       throw new ClientError(400, 'fighterId must be a number');
     }
     const id = Number(req.params.id);
@@ -396,9 +400,9 @@ app.post('/api/add/:table/:id', async (req, res, next) => {
     let params2 = [];
 
     if (req.params.table === 'moves') {
-      const reqParams = [name, moveType, damage, activeFrames, totalFrames, firstFrame]
+      const reqParams = [name, moveType, damage, activeFrames, totalFrames, firstFrame];
       const isValid = reqParams.every(param => !!param);
-      if(!isValid) {
+      if (!isValid) {
         throw new ClientError(400, 'must have (name), (moveType), (damage), (activeFrames), (totalFrames), and (firstFrame) as parameters');
       }
       sql = `
@@ -423,9 +427,9 @@ app.post('/api/add/:table/:id', async (req, res, next) => {
       params2 = [damage, activeFrames, totalFrames, firstFrame];
 
     } else if (req.params.table === 'throws') {
-      const reqParams = [name, damage, activeFrames, totalFrames]
+      const reqParams = [name, damage, activeFrames, totalFrames];
       const isValid = reqParams.every(param => !!param);
-      if(!isValid) {
+      if (!isValid) {
         throw new ClientError(400, 'must have (name), (damage), (activeFrames), (totalFrames) as parameters');
       }
       sql = `
@@ -441,18 +445,18 @@ app.post('/api/add/:table/:id', async (req, res, next) => {
         RETURNING *;
       `;
       params = [id, name];
-        sql2 = `
+      sql2 = `
           INSERT INTO public.grappling
             ("damage", "activeFrames", "totalFrames")
           VALUES ($1, $2, $3)
           RETURNING *;
         `;
-        params2 = [damage, activeFrames, totalFrames];
+      params2 = [damage, activeFrames, totalFrames];
 
     } else if (req.params.table === 'movements') {
-      const reqParams = [name, activeFrames, totalFrames]
+      const reqParams = [name, activeFrames, totalFrames];
       const isValid = reqParams.every(param => !!param);
-      if(!isValid) {
+      if (!isValid) {
         throw new ClientError(400, 'must have (name), (activeFrames), and (totalFrames) as parameters');
       }
       sql = `
@@ -467,7 +471,7 @@ app.post('/api/add/:table/:id', async (req, res, next) => {
         )
         RETURNING *;
       `;
-      params = [id, name]
+      params = [id, name];
       sql2 = `
         INSERT INTO public.dodging
           ("activeFrames", "totalFrames")
@@ -477,9 +481,9 @@ app.post('/api/add/:table/:id', async (req, res, next) => {
       params2 = [activeFrames, totalFrames];
 
     } else if (req.params.table === 'stats') {
-      const reqParams = [name, statValue]
+      const reqParams = [name, statValue];
       const isValid = reqParams.every(param => !!param);
-      if(!isValid) {
+      if (!isValid) {
         throw new ClientError(400, 'must have (name), and (statValue) as parameters');
       }
       sql = `
@@ -494,7 +498,7 @@ app.post('/api/add/:table/:id', async (req, res, next) => {
         )
         RETURNING *;
         `;
-      params = [id, name]
+      params = [id, name];
       sql2 = `
         INSERT INTO public.miscellaneous
           ("statValue")
@@ -503,7 +507,7 @@ app.post('/api/add/:table/:id', async (req, res, next) => {
         `;
       params2 = [statValue];
     } else {
-      throw new ClientError(400, `${req.params.table} is not a valid path parameter`)
+      throw new ClientError(400, `${req.params.table} is not a valid path parameter`);
     }
     let result = await db.query(sql, params);
     if (result.rows.length === 0) {
@@ -518,17 +522,17 @@ app.post('/api/add/:table/:id', async (req, res, next) => {
   }
 });
 
-app.put('/api/update/:table/:id', async (req, res, next) => {
+app.put('/api/update/:table/:id', async (req: any, res: any, next: any) => {
   const fullResult = {};
   const { fighter, displayName, name, moveType, damage, activeFrames, totalFrames, firstFrame, statValue } = req.body;
-  let { rosterId } = req.body;
+  const { rosterId } = req.body;
   try {
-    if (/[A-Z]/gi.test(req.params.id)
-      & req.params.id !== undefined) {
+    if (/[A-Z]/gi.test(req.params.id) &&
+      req.params.id !== undefined) {
       throw new ClientError(400, 'fighterId must be a number');
     }
-    if (/[A-Z]/gi.test(rosterId)
-    & rosterId !== undefined) {
+    if (/[A-Z]/gi.test(rosterId) &&
+    rosterId !== undefined) {
       throw new ClientError(400, 'rosterId must be a number');
     }
     const id = Number(req.params.id);
@@ -688,24 +692,23 @@ app.put('/api/update/:table/:id', async (req, res, next) => {
       Object.assign(fullResult, result.rows[0]);
       return res.status(200).json(fullResult);
     } else {
-      throw new ClientError(400, `${req.params.table} is not a valid path parameter`)
+      throw new ClientError(400, `${req.params.table} is not a valid path parameter`);
     }
   } catch (e) {
     return next(e);
   }
 });
 
-
-app.delete('/api/delete/:table/:id', async (req, res, next) => {
+app.delete('/api/delete/:table/:id', async (req: any, res: any, next: any) => {
 
   try {
-    if (/[A-Z]/gi.test(req.params.id)
-      & req.params.id !== undefined) {
+    if (/[A-Z]/gi.test(req.params.id) &&
+      req.params.id !== undefined) {
       throw new ClientError(400, 'id must be a number');
     }
     const id = Number(req.params.id);
     let sql = '';
-    const notFoundError = `${req.params.table.slice(0, req.params.table.length - 1)}Id ${id} doesn't exist`
+    const notFoundError = `${req.params.table.slice(0, req.params.table.length - 1)}Id ${id} doesn't exist`;
     const params = [id];
 
     if (req.params.table === 'fighters') {
@@ -749,14 +752,14 @@ app.delete('/api/delete/:table/:id', async (req, res, next) => {
         RETURNING *;
       `;
     } else {
-      throw new ClientError(400, `${req.params.table} is not a valid path parameter`)
+      throw new ClientError(400, `${req.params.table} is not a valid path parameter`);
     }
-    const result = await db.query(sql, params)
+    const result = await db.query(sql, params);
     if (result.rowCount === 0) {
       throw new ClientError(404, notFoundError);
     }
     return res.status(204).json(result.rowCount);
-  } catch(e) {
+  } catch (e) {
     return next(e);
   }
 });
