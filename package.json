@@ -5,19 +5,19 @@
   "description": "A full stack JavaScript solo project.",
   "main": "server/index.js",
   "scripts": {
-    "build": "postinstall",
     "start": "node server/js/index.js",
     "dev:server": "nodemon server/index.js",
     "db:import": "bash scripts/db-import.sh",
     "prepare": "husky install",
+    "tsc": "./node_modules/typescript/bin/tsc",
     "postinstall": "postinstall"
   },
   "postinstall": {
-    "server/index.ts": "npx tsc server/index.ts",
-    "server/sql-queries.ts": "npx tsc server/sql-queries.ts",
-    "server/static-middleware.ts": " npxtsc server/static-middleware.ts",
-    "server/client-error.ts": "npx tsc server/client-error.ts",
-    "server/error-middleware.ts": "npx tsc server/error-middleware.ts"
+    "server/index.ts": "tsc server/index.ts",
+    "server/sql-queries.ts": "tsc server/sql-queries.ts",
+    "server/static-middleware.ts": "tsc server/static-middleware.ts",
+    "server/client-error.ts": "tsc server/client-error.ts",
+    "server/error-middleware.ts": "tsc server/error-middleware.ts"
   },
   "dependencies": {
     "cors": "^2.8.5",
