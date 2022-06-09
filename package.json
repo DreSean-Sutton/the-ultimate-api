@@ -5,7 +5,7 @@
   "description": "A full stack JavaScript solo project.",
   "main": "server/index.js",
   "scripts": {
-    "start": "node server/js/index.js",
+    "start": "node server/index.js",
     "dev:server": "nodemon server/index.js",
     "db:import": "bash scripts/db-import.sh",
     "prepare": "husky install",
