@@ -13,11 +13,11 @@
     "postinstall": "postinstall"
   },
   "postinstall": {
-    "server/index.ts": "npx tsc server/index.ts",
-    "server/sql-queries.ts": "npx tsc server/sql-queries.ts",
-    "server/static-middleware.ts": "npx tsc server/static-middleware.ts",
-    "server/client-error.ts": "npx tsc server/client-error.ts",
-    "server/error-middleware.ts": "npx tsc server/error-middleware.ts"
+    "server/index.ts": "npm run tsc server/index.ts",
+    "server/sql-queries.ts": "npm run tsc server/sql-queries.ts",
+    "server/static-middleware.ts": "npm run tsc server/static-middleware.ts",
+    "server/client-error.ts": "npm run tsc server/client-error.ts",
+    "server/error-middleware.ts": "npm run tsc server/error-middleware.ts"
   },
   "dependencies": {
     "cors": "^2.8.5",
