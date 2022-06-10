@@ -613,3 +613,20 @@ INSERT INTO public.miscellaneous AS "lucario"
     ('10 frames'),
     ('13 frames'),
     ('11 frames');
+
+INSERT INTO public.miscellaneous AS "lucas"
+  ("statValue")
+  VALUES
+    ('94'),
+    ('0.09'),
+    ('0.893'),
+    ('1.65'),
+    ('1.815'),
+    ('1.155'),
+    ('0.095'),
+    ('34/50/23/35'),
+    ('1.37/2.192'),
+    ('10 frames'),
+    ('12 frames'),
+    ('13 frames'),
+    ('16 frames');

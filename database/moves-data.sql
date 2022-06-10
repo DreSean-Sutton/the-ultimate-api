@@ -1008,3 +1008,28 @@ INSERT INTO public.moves AS "lucario"
     (36, 'up b', 'on hit', 'move'),
     (36, 'down b, counter', 'counter', 'move'),
     (36, 'down b, counter attack', 'single', 'move');
+
+INSERT INTO public.moves AS "lucas"
+  ("fighterId", "name", "moveType", "type")
+  VALUES
+    (37, 'jab 1', 'single', 'move'),
+    (37, 'jab 2', 'single', 'move'),
+    (37, 'jab 3', 'single', 'move'),
+    (37, 'forward tilt', 'close/far', 'move'),
+    (37, 'up tilt', 'first/second/late', 'move'),
+    (37, 'down tilt', 'single', 'move'),
+    (37, 'dash attack', 'close/far', 'move'),
+    (37, 'forward smash', 'close/far', 'move'),
+    (37, 'up smash', 'first/main hit/[diminished over time]', 'move'),
+    (37, 'down smash', 'first/second/third', 'move'),
+    (37, 'neutral air', 'multi/final', 'move'),
+    (37, 'forward air', 'close/far', 'move'),
+    (37, 'back air', 'close/medium/far', 'move'),
+    (37, 'up air', 'single', 'move'),
+    (37, 'down air', 'multi/final', 'move'),
+    (37, 'z air', 'single', 'move'),
+    (37, 'neutral b', 'held', 'move'),
+    (37, 'side b', 'spark/burst: close/far', 'move'),
+    (37, 'up b', 'head/tail', 'move'),
+    (37, 'up b', 'first/multi/final', 'move'),
+    (37, 'down b', 'absorb', 'move');

@@ -122,10 +122,7 @@ app.get('/api/fighters/data', async (req: any, res: any, next: any) => {
   const fullResult: any = [];
   return renderAllData(0, fullResult);
 
-  async function renderAllData(index: number, fullResult: any): Promise<any> {
-    type MyType = {
-      rows: any
-    }
+  async function renderAllData(index: number, fullResult: any[]): Promise<any> {
     const dataTypes = ['moves', 'throws', 'movements', 'stats'];
     const dataTypeIds = ['moveId', 'throwId', 'movementId', 'statId'];
     if (dataTypes.length === index) {
