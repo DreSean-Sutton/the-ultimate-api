@@ -3,15 +3,15 @@
   "version": "1.0.0",
   "private": true,
   "description": "A full stack JavaScript solo project.",
-  "main": "server/index.js",
+  "main": "server/build/index.js",
   "scripts": {
-    "start": "node server/index.js",
-    "dev:server": "nodemon server/index.js",
+    "start": "node server/build/index.js",
+    "dev:server": "nodemon server/build/index.js",
     "db:import": "bash scripts/db-import.sh",
     "prepare": "husky install",
     "tsc": "./node_modules/typescript/bin/tsc",
-    "postinstall": "tsc server/index.ts server/sql-queries.ts server/static-middleware.ts server/client-error.ts server/error-middleware.ts",
-    "tsc:test": "tsc server/index.ts server/sql-queries.ts server/static-middleware.ts server/client-error.ts server/error-middleware.ts --w"
+    "postinstall": "tsc",
+    "tsc:test": "tsc --w"
   },
   "dependencies": {
     "cors": "^2.8.5",
