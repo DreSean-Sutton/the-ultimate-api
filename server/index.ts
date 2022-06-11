@@ -29,20 +29,28 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 type Req = {
   query: object,
-  params: any,
+  params: ReqParams,
   body: any
 }
-// type Res = {
-//   status: (param1: number) => object,
-//   send: ()
-// }
+type ReqParams = {
+  table: string,
+  id: string,
+  type: string
+}
+type Res = {
+  status: (param1: number) => ResStatus,
+}
+type ResStatus = {
+  send: (param1: object) => any
+  json: (param1: object) => any
+}
 type QueryString = {
   fighter?: string,
   fighterId?: string,
   orderByRosterId?: string,
   rosterId?: string
 }
-app.get('/api/fighters', async (req: Req, res: any, next: any) => {
+app.get('/api/fighters', async (req: Req, res: Res, next: (param1: any) => any) => {
   const queryStr: QueryString = req.query;
   const queryKey = Object.keys(queryStr);
   if (queryStr.fighter) {
@@ -133,7 +141,7 @@ app.get('/api/fighters', async (req: Req, res: any, next: any) => {
   }
 });
 
-app.get('/api/fighters/data', async (req: Req, res: any, next: any) => {
+app.get('/api/fighters/data', async (req: Req, res: Res, next: (param1: any) => any) => {
   const fullResult: any = [];
   return renderAllData(0, fullResult);
 
@@ -246,7 +254,7 @@ app.get('/api/fighters/data', async (req: Req, res: any, next: any) => {
   }
 });
 
-app.get('/api/fighters/data/:type', async (req: Req, res: any, next: any) => {
+app.get('/api/fighters/data/:type', async (req: Req, res: Res, next: (param1: any) => any) => {
   const queryStr: QueryString = req.query;
   const queryKey = Object.keys(queryStr);
   const currentParams = req.params
@@ -361,7 +369,7 @@ app.get('/api/fighters/data/:type', async (req: Req, res: any, next: any) => {
   }
 });
 
-app.post('/api/add/fighters', async (req: Req, res: any, next: any) => {
+app.post('/api/add/fighters', async (req: Req, res: Res, next: (param1: any) => any) => {
 
   const { fighter, displayName } = req.body;
   let { rosterId } = req.body;
@@ -398,7 +406,7 @@ app.post('/api/add/fighters', async (req: Req, res: any, next: any) => {
   }
 });
 
-app.post('/api/add/:table/:id', async (req: Req, res: any, next: any) => {
+app.post('/api/add/:table/:id', async (req: Req, res: Res, next: (param1: any) => any) => {
   const fullResult = {};
   const { name, moveType, damage, activeFrames, totalFrames, firstFrame, statValue } = req.body;
   try {
@@ -535,7 +543,7 @@ app.post('/api/add/:table/:id', async (req: Req, res: any, next: any) => {
   }
 });
 
-app.put('/api/update/:table/:id', async (req: Req, res: any, next: any) => {
+app.put('/api/update/:table/:id', async (req: Req, res: Res, next: (param1: any) => any) => {
   const fullResult = {};
   const { fighter, displayName, name, moveType, damage, activeFrames, totalFrames, firstFrame, statValue } = req.body;
   const { rosterId } = req.body;
@@ -712,7 +720,7 @@ app.put('/api/update/:table/:id', async (req: Req, res: any, next: any) => {
   }
 });
 
-app.delete('/api/delete/:table/:id', async (req: Req, res: any, next: any) => {
+app.delete('/api/delete/:table/:id', async (req: Req, res: Res, next: (param1: any) => any) => {
 
   try {
     if (/[A-Z]/gi.test(req.params.id) &&
