@@ -27,8 +27,23 @@ const swaggerDocument = YAML.load('./openapi.yml');
 app.use(staticMiddleware);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-app.get('/api/fighters', async (req: any, res: any, next: any) => {
-  const queryStr = req.query;
+type Req = {
+  query: object,
+  params: any,
+  body: any
+}
+// type Res = {
+//   status: (param1: number) => object,
+//   send: ()
+// }
+type QueryString = {
+  fighter?: string,
+  fighterId?: string,
+  orderByRosterId?: string,
+  rosterId?: string
+}
+app.get('/api/fighters', async (req: Req, res: any, next: any) => {
+  const queryStr: QueryString = req.query;
   const queryKey = Object.keys(queryStr);
   if (queryStr.fighter) {
     const sql = `
@@ -36,9 +51,9 @@ app.get('/api/fighters', async (req: any, res: any, next: any) => {
     WHERE
       fighter=$1
     `;
-    const params: any = [queryStr.fighter];
+    const params: string[] = [queryStr.fighter];
     try {
-      if (/\d/g.test(params)) {
+      if (/\d/g.test(params[0])) {
         throw new ClientError(400, 'fighter name can\'t have a number');
       }
       const result = await db.query(sql, params);
@@ -118,7 +133,7 @@ app.get('/api/fighters', async (req: any, res: any, next: any) => {
   }
 });
 
-app.get('/api/fighters/data', async (req: any, res: any, next: any) => {
+app.get('/api/fighters/data', async (req: Req, res: any, next: any) => {
   const fullResult: any = [];
   return renderAllData(0, fullResult);
 
@@ -128,7 +143,7 @@ app.get('/api/fighters/data', async (req: any, res: any, next: any) => {
     if (dataTypes.length === index) {
       return res.status(200).send(fullResult.flat(1));
     }
-    const queryStr = req.query;
+    const queryStr: QueryString = req.query;
     const queryKey = Object.keys(queryStr);
 
     if (queryStr.fighter) {
@@ -231,10 +246,11 @@ app.get('/api/fighters/data', async (req: any, res: any, next: any) => {
   }
 });
 
-app.get('/api/fighters/data/:type', async (req: any, res: any, next: any) => {
-  const queryStr = req.query;
+app.get('/api/fighters/data/:type', async (req: Req, res: any, next: any) => {
+  const queryStr: QueryString = req.query;
   const queryKey = Object.keys(queryStr);
-  const currentType = req.params.type;
+  const currentParams = req.params
+  const currentType = currentParams.type;
   let index = 0;
   const dataTypes = ['moves', 'throws', 'movements', 'stats'];
   const dataTypeIds = ['moveId', 'throwId', 'movementId', 'statId'];
@@ -334,7 +350,7 @@ app.get('/api/fighters/data/:type', async (req: any, res: any, next: any) => {
     return next(e);
   }
 
-  function checkValidType() {
+  function checkValidType(): boolean {
     for (let i = 0; i < dataTypes.length; i++) {
       if (currentType === dataTypes[i]) {
         index = i;
@@ -345,7 +361,7 @@ app.get('/api/fighters/data/:type', async (req: any, res: any, next: any) => {
   }
 });
 
-app.post('/api/add/fighters', async (req: any, res: any, next: any) => {
+app.post('/api/add/fighters', async (req: Req, res: any, next: any) => {
 
   const { fighter, displayName } = req.body;
   let { rosterId } = req.body;
@@ -382,7 +398,7 @@ app.post('/api/add/fighters', async (req: any, res: any, next: any) => {
   }
 });
 
-app.post('/api/add/:table/:id', async (req: any, res: any, next: any) => {
+app.post('/api/add/:table/:id', async (req: Req, res: any, next: any) => {
   const fullResult = {};
   const { name, moveType, damage, activeFrames, totalFrames, firstFrame, statValue } = req.body;
   try {
@@ -519,7 +535,7 @@ app.post('/api/add/:table/:id', async (req: any, res: any, next: any) => {
   }
 });
 
-app.put('/api/update/:table/:id', async (req: any, res: any, next: any) => {
+app.put('/api/update/:table/:id', async (req: Req, res: any, next: any) => {
   const fullResult = {};
   const { fighter, displayName, name, moveType, damage, activeFrames, totalFrames, firstFrame, statValue } = req.body;
   const { rosterId } = req.body;
@@ -696,7 +712,7 @@ app.put('/api/update/:table/:id', async (req: any, res: any, next: any) => {
   }
 });
 
-app.delete('/api/delete/:table/:id', async (req: any, res: any, next: any) => {
+app.delete('/api/delete/:table/:id', async (req: Req, res: any, next: any) => {
 
   try {
     if (/[A-Z]/gi.test(req.params.id) &&
