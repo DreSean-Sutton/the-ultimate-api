@@ -14,6 +14,7 @@ Test out my endpoints here at: https://the-ultimate-api.herokuapp.com/
 
 - HTML5
 - JavaScript (es5/es6)
+- Typescript
 - Node.js
 - express.js
 - postgreSQL
@@ -21,6 +22,7 @@ Test out my endpoints here at: https://the-ultimate-api.herokuapp.com/
 - yamljs
 - Swagger-ui-express
 - openapi
+- postinstall
 - dotenv
 - shell
 - Heroku
@@ -85,6 +87,6 @@ Test out my endpoints here at: https://the-ultimate-api.herokuapp.com/
     ```
 7. Start the server
     ```shell
-    npm run dev
+    npm run dev:server
     ```
  
