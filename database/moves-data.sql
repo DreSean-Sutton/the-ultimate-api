@@ -1033,3 +1033,35 @@ INSERT INTO public.moves AS "lucas"
     (37, 'up b', 'head/tail', 'move'),
     (37, 'up b', 'first/multi/final', 'move'),
     (37, 'down b', 'absorb', 'move');
+
+INSERT INTO public.moves AS "lucina"
+  ("fighterId", "name", "moveType", "type")
+  VALUES
+    (38, 'jab 1', 'single', 'move'),
+    (38, 'jab 2', 'single', 'move'),
+    (38, 'forward tilt', 'single', 'move'),
+    (38, 'up tilt', 'early/late', 'move'),
+    (38, 'down tilt', 'single', 'move'),
+    (38, 'dash attack', 'single', 'move'),
+    (38, 'forward smash', 'single', 'move'),
+    (38, 'up smash', 'body launcher/sword', 'move'),
+    (38, 'down smash', 'front/back', 'move'),
+    (38, 'neutral air', 'first/second', 'move'),
+    (38, 'forward air', 'single', 'move'),
+    (38, 'back air', 'single', 'move'),
+    (38, 'up air', 'single', 'move'),
+    (38, 'down air', 'sour/meteor', 'move'),
+    (38, 'neutral b', 'uncharged-full charge', 'move'),
+    (38, 'side b (hit 1)', 'single', 'move'),
+    (38, 'side b (hit 2), neutral', 'single', 'move'),
+    (38, 'side b (hit 3), neutral', 'single', 'move'),
+    (38, 'side b (hit 4), neutral', 'single', 'move'),
+    (38, 'side b (hit 2), up', 'single', 'move'),
+    (38, 'side b (hit 3), up', 'single', 'move'),
+    (38, 'side b (hit 4), up', 'single', 'move'),
+    (38, 'side b (hit 2), down', 'single', 'move'),
+    (38, 'side b (hit 3), down', 'single', 'move'),
+    (38, 'side b (hit 4), down', 'single', 'move'),
+    (38, 'up b', 'early/late', 'move'),
+    (38, 'down b, counter', 'counter', 'move'),
+    (38, 'down b, counter attack', 'single', 'move');
