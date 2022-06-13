@@ -458,3 +458,15 @@ INSERT INTO public.throws AS "lucina"
     (38, 'backward throw', 'throw'),
     (38, 'up throw', 'throw'),
     (38, 'down throw', 'throw');
+
+INSERT INTO public.throws AS "luigi"
+  ("fighterId", "name", "type")
+  VALUES
+    (39, 'grab', 'throw'),
+    (39, 'dash grab', 'throw'),
+    (39, 'pivot grab', 'throw'),
+    (39, 'pummel', 'throw'),
+    (39, 'forward throw', 'throw'),
+    (39, 'backward throw', 'throw'),
+    (39, 'up throw', 'throw'),
+    (39, 'down throw', 'throw');

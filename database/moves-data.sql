@@ -1059,9 +1059,34 @@ INSERT INTO public.moves AS "lucina"
     (38, 'side b (hit 2), up', 'single', 'move'),
     (38, 'side b (hit 3), up', 'single', 'move'),
     (38, 'side b (hit 4), up', 'single', 'move'),
-    (38, 'side b (hit 2), down', 'single', 'move'),
     (38, 'side b (hit 3), down', 'single', 'move'),
     (38, 'side b (hit 4), down', 'single', 'move'),
     (38, 'up b', 'early/late', 'move'),
     (38, 'down b, counter', 'counter', 'move'),
     (38, 'down b, counter attack', 'single', 'move');
+
+INSERT INTO public.moves AS "luigi"
+  ("fighterId", "name", "moveType", "type")
+  VALUES
+    (39, 'jab 1', 'single', 'move'),
+    (39, 'jab 2', 'single', 'move'),
+    (39, 'jab 3', 'single', 'move'),
+    (39, 'forward tilt', 'single', 'move'),
+    (39, 'up tilt', 'single', 'move'),
+    (39, 'down tilt', 'single', 'move'),
+    (39, 'dash attack', 'multi/final', 'move'),
+    (39, 'forward smash', 'single', 'move'),
+    (39, 'up smash', 'far/close', 'move'),
+    (39, 'down smash', 'close/far', 'move'),
+    (39, 'down taunt', 'meteor', 'move'),
+    (39, 'neutral air', 'early/late', 'move'),
+    (39, 'forward air', 'single', 'move'),
+    (39, 'back air', 'early/late', 'move'),
+    (39, 'up air', 'early/late', 'move'),
+    (39, 'down air', 'early/late', 'move'),
+    (39, 'z air', 'single', 'move'),
+    (39, 'neutral b', 'early/late', 'move'),
+    (39, 'side b', 'uncharged-charged/misfire', 'move'),
+    (39, 'up b, ground', 'sweet/sour', 'move'),
+    (39, 'up b, air', 'sweet/sour', 'move'),
+    (39, 'down b', 'multi/final', 'move');

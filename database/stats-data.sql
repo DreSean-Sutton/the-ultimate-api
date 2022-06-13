@@ -647,3 +647,20 @@ INSERT INTO public.stats AS "lucina"
     (38, 'out of shield, up air', 'stat'),
     (38, 'out of shield, neutral air/forward air', 'stat'),
     (38, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.stats AS "luigi"
+  ("fighterId", "name", "type")
+  VALUES
+    (39, 'weight', 'stat'),
+    (39, 'gravity', 'stat'),
+    (39, 'walk speed', 'stat'),
+    (39, 'run speed', 'stat'),
+    (39, 'initial dash', 'stat'),
+    (39, 'air speed', 'stat'),
+    (39, 'total air acceleration', 'stat'),
+    (39, 'sh/fh/shff/fhff', 'stat'),
+    (39, 'fall speed/fast fall speed', 'stat'),
+    (39, 'out of shield, neutral air', 'stat'),
+    (39, 'out of shield, up air/up b', 'stat'),
+    (39, 'out of shield, back air/up smash', 'stat'),
+    (39, 'shield grab (post-shieldstun)', 'stat');

@@ -647,3 +647,20 @@ INSERT INTO public.miscellaneous AS "lucina"
     ('8 frames'),
     ('9 frames'),
     ('10 frames');
+
+INSERT INTO public.miscellaneous AS "template"
+  ("statValue")
+  VALUES
+    ('97'),
+    ('0.083'),
+    ('1.134'),
+    ('1.65'),
+    ('1.815'),
+    ('0.77'),
+    ('0.075'),
+    ('45/67/32/47'),
+    ('1.32/2.112'),
+    ('6 frames'),
+    ('8 frames'),
+    ('9 frames'),
+    ('18 frames');
