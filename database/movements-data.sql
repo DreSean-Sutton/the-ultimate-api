@@ -506,3 +506,16 @@ INSERT INTO public.movements AS "luigi"
     (39, 'air dodge, left/right', 'movement'),
     (39, 'air dodge, side + up', 'movement'),
     (39, 'air dodge up', 'movement');
+
+INSERT INTO public.movements AS "mario"
+  ("fighterId", "name", "type")
+  VALUES
+    (40, 'spot dodge', 'movement'),
+    (40, 'forward roll', 'movement'),
+    (40, 'backwards roll', 'movement'),
+    (40, 'neutral air dodge', 'movement'),
+    (40, 'air dodge, down', 'movement'),
+    (40, 'air dodge, side + down', 'movement'),
+    (40, 'air dodge, left/right', 'movement'),
+    (40, 'air dodge, side + up', 'movement'),
+    (40, 'air dodge up', 'movement');

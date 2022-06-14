@@ -88,15 +88,15 @@ INSERT INTO public.movements AS "template"
 INSERT INTO public.dodging AS "template"
   ("activeFrames", "totalFrames")
   VALUES
-    ('', '20/25'),
-    ('', ''),
-    ('', ''),
-    ('', ''),
-    ('same', ''),
-    ('same', ''),
-    ('same', ''),
-    ('same', ''),
-    ('same', '');
+    ('3-17', '20/25'),
+    ('4-15', ''),
+    ('5-16', ''),
+    ('3-29', ''),
+    ('3-21', ''),
+    ('3-21', ''),
+    ('3-21', ''),
+    ('3-21', ''),
+    ('3-21', '');
 
 INSERT INTO public.stats AS "template"
   ("fighterId", "name", "type")

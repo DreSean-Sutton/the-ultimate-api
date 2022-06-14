@@ -664,3 +664,20 @@ INSERT INTO public.stats AS "luigi"
     (39, 'out of shield, up air / up b', 'stat'),
     (39, 'out of shield, back air / up smash', 'stat'),
     (39, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.stats AS "mario"
+  ("fighterId", "name", "type")
+  VALUES
+    (40, 'weight', 'stat'),
+    (40, 'gravity', 'stat'),
+    (40, 'walk speed', 'stat'),
+    (40, 'run speed', 'stat'),
+    (40, 'initial dash', 'stat'),
+    (40, 'air speed', 'stat'),
+    (40, 'total air acceleration', 'stat'),
+    (40, 'sh/fh/shff/fhff', 'stat'),
+    (40, 'fall speed/fast fall speed', 'stat'),
+    (40, 'out of shield, up b', 'stat'),
+    (40, 'out of shield, neutral air', 'stat'),
+    (40, 'out of shield, up air', 'stat'),
+    (40, 'shield grab (post-shieldstun)', 'stat');

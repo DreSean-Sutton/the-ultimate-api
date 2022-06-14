@@ -1090,3 +1090,27 @@ INSERT INTO public.moves AS "luigi"
     (39, 'up b, ground', 'sweet/sour', 'move'),
     (39, 'up b, air', 'sweet/sour', 'move'),
     (39, 'down b', 'multi/final', 'move');
+
+INSERT INTO public.moves AS "mario"
+  ("fighterId", "name", "moveType", "type")
+  VALUES
+    (40, 'jab 1', 'single', 'move'),
+    (40, 'jab 2', 'single', 'move'),
+    (40, 'jab 3', 'single', 'move'),
+    (40, 'forward tilt', 'single', 'move'),
+    (40, 'up tilt', 'single', 'move'),
+    (40, 'down tilt', 'close/far', 'move'),
+    (40, 'dash attack', 'early/late', 'move'),
+    (40, 'forward smash', 'far/close', 'move'),
+    (40, 'up smash', 'single', 'move'),
+    (40, 'down smash', 'first/second', 'move'),
+    (40, 'neutral air', 'early/late', 'move'),
+    (40, 'forward air', 'early/clean/late', 'move'),
+    (40, 'back air', 'early/late', 'move'),
+    (40, 'up air', 'single', 'move'),
+    (40, 'down air', 'multi/final/landing', 'move'),
+    (40, 'neutral b', 'early/late', 'move'),
+    (40, 'side b', 'single', 'move'),
+    (40, 'up b', 'first/multi/final', 'move'),
+    (40, 'down b, charging', 'pushback', 'move'),
+    (40, 'down b, fully charged', 'pushback', 'move');

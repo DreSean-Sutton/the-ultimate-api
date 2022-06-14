@@ -470,3 +470,15 @@ INSERT INTO public.grappling AS "luigi"
     ('10.0%', '15', '37'),
     ('8.0%', '18', '39'),
     ('3.0/3.0%', '18/29', '40');
+
+INSERT INTO public.grappling AS "mario"
+  ("damage", "activeFrames", "totalFrames")
+  VALUES
+    (null, '6-7', '34'),
+    (null, '9-10', '42'),
+    (null, '10-11', '36'),
+    ('1.3%', '1', '19'),
+    ('8.0%', '18', '39'),
+    ('11.0%', '44', '59'),
+    ('7.0%', '18', '39'),
+    ('5.0%', '18', '39');

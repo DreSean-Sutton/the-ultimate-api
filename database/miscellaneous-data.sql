@@ -664,3 +664,20 @@ INSERT INTO public.miscellaneous AS "template"
     ('8 frames'),
     ('9 frames'),
     ('18 frames');
+
+INSERT INTO public.miscellaneous AS "mario"
+  ("statValue")
+  VALUES
+    ('98'),
+    ('0.087'),
+    ('1.155'),
+    ('1.76'),
+    ('1.936'),
+    ('1.208'),
+    ('0.08'),
+    ('40 / 56 / 28 / 39'),
+    ('1.5 / 2.4'),
+    ('3 frames'),
+    ('6 frames'),
+    ('7 frames'),
+    ('10 frames');
