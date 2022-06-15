@@ -648,7 +648,7 @@ INSERT INTO public.miscellaneous AS "lucina"
     ('9 frames'),
     ('10 frames');
 
-INSERT INTO public.miscellaneous AS "template"
+INSERT INTO public.miscellaneous AS "luigi"
   ("statValue")
   VALUES
     ('97'),
@@ -680,4 +680,21 @@ INSERT INTO public.miscellaneous AS "mario"
     ('3 frames'),
     ('6 frames'),
     ('7 frames'),
+    ('10 frames');
+
+INSERT INTO public.miscellaneous AS "marth"
+  ("statValue")
+  VALUES
+    ('90'),
+    ('0.075'),
+    ('1.575'),
+    ('1.964'),
+    ('2.255'),
+    ('1.071'),
+    ('0.08'),
+    ('41 / 55 / 28 / 38'),
+    ('1.58 / 2.528'),
+    ('5 frames'),
+    ('8 frames'),
+    ('9 frames'),
     ('10 frames');

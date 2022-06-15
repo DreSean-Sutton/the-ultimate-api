@@ -11,7 +11,7 @@
     "prepare": "husky install",
     "tsc": "./node_modules/typescript/bin/tsc",
     "postinstall": "tsc",
-    "tsc:test": "tsc --w"
+    "tsc:watch": "tsc --w"
   },
   "dependencies": {
     "cors": "^2.8.5",

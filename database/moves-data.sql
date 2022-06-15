@@ -1060,7 +1060,7 @@ INSERT INTO public.moves AS "lucina"
     (38, 'side b (hit 3), up', 'single', 'move'),
     (38, 'side b (hit 4), up', 'single', 'move'),
     (38, 'side b (hit 3), down', 'single', 'move'),
-    (38, 'side b (hit 4), down', 'single', 'move'),
+    (38, 'side b (hit 4), down', 'multi/final', 'move'),
     (38, 'up b', 'early/late', 'move'),
     (38, 'down b, counter', 'counter', 'move'),
     (38, 'down b, counter attack', 'single', 'move');
@@ -1114,3 +1114,34 @@ INSERT INTO public.moves AS "mario"
     (40, 'up b', 'first/multi/final', 'move'),
     (40, 'down b, charging', 'pushback', 'move'),
     (40, 'down b, fully charged', 'pushback', 'move');
+
+INSERT INTO public.moves AS "marth"
+  ("fighterId", "name", "moveType", "type")
+  VALUES
+    (38, 'jab 1', 'close/tipper', 'move'),
+    (38, 'jab 2', 'close/tipper', 'move'),
+    (38, 'forward tilt', 'close/tipper', 'move'),
+    (38, 'up tilt', 'closest/close/tipper', 'move'),
+    (38, 'down tilt', 'close/tipper', 'move'),
+    (38, 'dash attack', 'closest/close/tipper', 'move'),
+    (38, 'forward smash', 'close/tipper', 'move'),
+    (38, 'up smash', 'body launcher/close/tipper', 'move'),
+    (38, 'down smash', 'front: close/tipper/back: close/tipper', 'move'),
+    (38, 'neutral air', 'first: close/tipper/second: close/tipper', 'move'),
+    (38, 'forward air', 'close/tipper', 'move'),
+    (38, 'back air', 'close/tipper', 'move'),
+    (38, 'up air', 'close/tipper', 'move'),
+    (38, 'down air', 'close/tipper/meteor', 'move'),
+    (38, 'neutral b', 'uncharged-full charge', 'move'),
+    (38, 'side b (hit 1)', 'close/tipper', 'move'),
+    (38, 'side b (hit 2), neutral', 'close/tipper', 'move'),
+    (38, 'side b (hit 3), neutral', 'close/tipper', 'move'),
+    (38, 'side b (hit 4), neutral', 'close/tipper', 'move'),
+    (38, 'side b (hit 2), up', 'close/tipper', 'move'),
+    (38, 'side b (hit 3), up', 'close/tipper', 'move'),
+    (38, 'side b (hit 4), up', 'close/tipper', 'move'),
+    (38, 'side b (hit 3), down', 'close/tipper', 'move'),
+    (38, 'side b (hit 4), down', 'multi/final: close/final: tipper', 'move'),
+    (38, 'up b', 'early/late', 'move'),
+    (38, 'down b, counter', 'counter', 'move'),
+    (38, 'down b, counter attack', 'single', 'move');

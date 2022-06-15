@@ -482,3 +482,15 @@ INSERT INTO public.grappling AS "mario"
     ('11.0%', '44', '59'),
     ('7.0%', '18', '39'),
     ('5.0%', '18', '39');
+
+INSERT INTO public.grappling AS "marth"
+  ("damage", "activeFrames", "totalFrames")
+  VALUES
+    (null, '6-7', '34'),
+    (null, '9-10', '42'),
+    (null, '10-11', '37'),
+    ('1.3%', '1', '19'),
+    ('4.0%', '18', '34'),
+    ('4.0%', '19', '44'),
+    ('5.0%', '13', '44'),
+    ('4.0%', '20', '46');

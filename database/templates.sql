@@ -1,29 +1,29 @@
-INSERT INTO public.moves AS "template"
+INSERT INTO public.moves AS "megaMan"
   ("fighterId", "name", "moveType", "type")
   VALUES
-    (, 'jab 1', 'single', 'move'),
-    (, 'jab 2', 'single', 'move'),
-    (, 'jab 3', 'single', 'move'),
-    (, 'rapid jab', 'multi', 'move'),
-    (, 'rapid jab finisher', 'single', 'move'),
-    (, 'forward tilt', '', 'move'),
-    (, 'up tilt', '', 'move'),
-    (, 'down tilt', '', 'move'),
-    (, 'dash attack', '', 'move'),
-    (, 'forward smash', '', 'move'),
-    (, 'up smash', '', 'move'),
-    (, 'down smash', '', 'move'),
-    (, 'neutral air', '', 'move'),
-    (, 'forward air', '', 'move'),
-    (, 'back air', '', 'move'),
-    (, 'up air', '', 'move'),
-    (, 'down air', '', 'move'),
-    (, 'neutral b', '', 'move'),
-    (, 'side b', '', 'move'),
-    (, 'up b', '', 'move'),
-    (, 'down b', '', 'move');
+    (42, 'jab 1', 'single', 'move'),
+    (42, 'jab 2', 'single', 'move'),
+    (42, 'jab 3', 'single', 'move'),
+    (42, 'rapid jab', 'multi', 'move'),
+    (42, 'rapid jab finisher', 'single', 'move'),
+    (42, 'forward tilt', '', 'move'),
+    (42, 'up tilt', '', 'move'),
+    (42, 'down tilt', '', 'move'),
+    (42, 'dash attack', '', 'move'),
+    (42, 'forward smash', '', 'move'),
+    (42, 'up smash', '', 'move'),
+    (42, 'down smash', '', 'move'),
+    (42, 'neutral air', '', 'move'),
+    (42, 'forward air', '', 'move'),
+    (42, 'back air', '', 'move'),
+    (42, 'up air', '', 'move'),
+    (42, 'down air', '', 'move'),
+    (42, 'neutral b', '', 'move'),
+    (42, 'side b', '', 'move'),
+    (42, 'up b', '', 'move'),
+    (42, 'down b', '', 'move');
 
-INSERT INTO public.hitboxes AS "template"
+INSERT INTO public.hitboxes AS "megaMan"
   ("damage", "activeFrames", "totalFrames", "firstFrame")
   VALUES
     ('.0%', '', '', ''),
@@ -48,19 +48,19 @@ INSERT INTO public.hitboxes AS "template"
     ('.0%', '', '', ''),
     ('.0%', '', '', '');
 
-INSERT INTO public.throws AS "template"
+INSERT INTO public.throws AS "megaMan"
   ("fighterId", "name", "type")
   VALUES
-    (, 'grab', 'throw'),
-    (, 'dash grab', 'throw'),
-    (, 'pivot grab', 'throw'),
-    (, 'pummel', 'throw'),
-    (, 'forward throw', 'throw'),
-    (, 'backward throw', 'throw'),
-    (, 'up throw', 'throw'),
-    (, 'down throw', 'throw');
+    (42, 'grab', 'throw'),
+    (42, 'dash grab', 'throw'),
+    (42, 'pivot grab', 'throw'),
+    (42, 'pummel', 'throw'),
+    (42, 'forward throw', 'throw'),
+    (42, 'backward throw', 'throw'),
+    (42, 'up throw', 'throw'),
+    (42, 'down throw', 'throw');
 
-INSERT INTO public.grappling AS "template"
+INSERT INTO public.grappling AS "megaMan"
   ("damage", "activeFrames", "totalFrames")
   VALUES
     (null, '', ''),
@@ -72,20 +72,20 @@ INSERT INTO public.grappling AS "template"
     ('.0%', '', ''),
     ('.0%', '', '');
 
-INSERT INTO public.movements AS "template"
+INSERT INTO public.movements AS "megaMan"
   ("fighterId", "name", "type")
   VALUES
-    (, 'spot dodge', 'movement'),
-    (, 'forward roll', 'movement'),
-    (, 'backwards roll', 'movement'),
-    (, 'neutral air dodge', 'movement'),
-    (, 'air dodge, down', 'movement'),
-    (, 'air dodge, side + down', 'movement'),
-    (, 'air dodge, left/right', 'movement'),
-    (, 'air dodge, side + up', 'movement'),
-    (, 'air dodge up', 'movement');
+    (42, 'spot dodge', 'movement'),
+    (42, 'forward roll', 'movement'),
+    (42, 'backwards roll', 'movement'),
+    (42, 'neutral air dodge', 'movement'),
+    (42, 'air dodge, down', 'movement'),
+    (42, 'air dodge, side + down', 'movement'),
+    (42, 'air dodge, left/right', 'movement'),
+    (42, 'air dodge, side + up', 'movement'),
+    (42, 'air dodge up', 'movement');
 
-INSERT INTO public.dodging AS "template"
+INSERT INTO public.dodging AS "megaMan"
   ("activeFrames", "totalFrames")
   VALUES
     ('3-17', '20/25'),
@@ -98,24 +98,24 @@ INSERT INTO public.dodging AS "template"
     ('3-21', ''),
     ('3-21', '');
 
-INSERT INTO public.stats AS "template"
+INSERT INTO public.stats AS "megaMan"
   ("fighterId", "name", "type")
   VALUES
-    (, 'weight', 'stat'),
-    (, 'gravity', 'stat'),
-    (, 'walk speed', 'stat'),
-    (, 'run speed', 'stat'),
-    (, 'initial dash', 'stat'),
-    (, 'air speed', 'stat'),
-    (, 'total air acceleration', 'stat'),
-    (, 'sh/fh/shff/fhff', 'stat'),
-    (, 'fall speed/fast fall speed', 'stat'),
-    (, 'out of shield, ', 'stat'),
-    (, 'out of shield, ', 'stat'),
-    (, 'out of shield, ', 'stat'),
-    (, 'shield grab (post-shieldstun)', 'stat');
+    (42, 'weight', 'stat'),
+    (42, 'gravity', 'stat'),
+    (42, 'walk speed', 'stat'),
+    (42, 'run speed', 'stat'),
+    (42, 'initial dash', 'stat'),
+    (42, 'air speed', 'stat'),
+    (42, 'total air acceleration', 'stat'),
+    (42, 'sh / fh / shff / fhff', 'stat'),
+    (42, 'fall speed/fast fall speed', 'stat'),
+    (42, 'out of shield, ', 'stat'),
+    (42, 'out of shield, ', 'stat'),
+    (42, 'out of shield, ', 'stat'),
+    (42, 'shield grab (post-shieldstun)', 'stat');
 
-INSERT INTO public.miscellaneous AS "template"
+INSERT INTO public.miscellaneous AS "megaMan"
   ("statValue")
   VALUES
     (''),
