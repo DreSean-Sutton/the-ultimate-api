@@ -1145,3 +1145,31 @@ INSERT INTO public.moves AS "marth"
     (41, 'up b', 'early/late', 'move'),
     (41, 'down b, counter', 'counter', 'move'),
     (41, 'down b, counter attack', 'single', 'move');
+
+INSERT INTO public.moves AS "megaMan"
+  ("fighterId", "name", "moveType", "type")
+  VALUES
+    (42, 'jab, projectile 1', 'canon/projectile early/late', 'move'),
+    (42, 'jab, projectile 2', 'canon/projectile early/late', 'move'),
+    (42, 'jab, projectile 3', 'canon/projectile early/late', 'move'),
+    (42, 'forward tilt, projectile 1', 'canon/projectile early/late', 'move'),
+    (42, 'forward tilt, projectile 2', 'canon/projectile early/late', 'move'),
+    (42, 'forward tilt, projectile 3', 'canon/projectile early/late', 'move'),
+    (42, 'up tilt', 'early/late/later', 'move'),
+    (42, 'down tilt', 'early/late', 'move'),
+    (42, 'dash attack', 'multi/final', 'move'),
+    (42, 'forward smash', 'projectile', 'move'),
+    (42, 'up smash', 'firts/multi/final', 'move'),
+    (42, 'down smash', 'single', 'move'),
+    (42, 'neutral air, projectile 1', 'canon/projectile early/late', 'move'),
+    (42, 'neutral air, projectile 2', 'canon/projectile early/late', 'move'),
+    (42, 'neutral air, projectile 3', 'canon/projectile early/late', 'move'),
+    (42, 'forward air', 'far/close/late', 'move'),
+    (42, 'back air', 'first/second/third', 'move'),
+    (42, 'up air', 'early/late/final', 'move'),
+    (42, 'down air', 'early/meteor', 'move'),
+    (42, 'neutral b', 'projectile', 'move'),
+    (42, 'side b', 'multi/final', 'move'),
+    (42, 'up b', 'recovery', 'move'),
+    (42, 'down b, leaf shield', 'multi', 'move'),
+    (42, 'down b, throw', 'projectile', 'move');

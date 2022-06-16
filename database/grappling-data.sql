@@ -494,3 +494,15 @@ INSERT INTO public.grappling AS "marth"
     ('4.0%', '19', '44'),
     ('5.0%', '13', '44'),
     ('4.0%', '20', '46');
+
+INSERT INTO public.grappling AS "megaMan"
+  ("damage", "activeFrames", "totalFrames")
+  VALUES
+    (null, '6-7', '37'),
+    (null, '9-10', '45'),
+    (null, '10-11', '40'),
+    ('1.3%', '1', '19'),
+    ('8.0%', '10', '32'),
+    ('11.0%', '18', '43'),
+    ('7.0%', '12', '39'),
+    ('4.5%', '17', '39');

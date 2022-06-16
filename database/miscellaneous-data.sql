@@ -698,3 +698,20 @@ INSERT INTO public.miscellaneous AS "marth"
     ('8 frames'),
     ('9 frames'),
     ('10 frames');
+
+INSERT INTO public.miscellaneous AS "megaMan"
+  ("statValue")
+  VALUES
+    ('102'),
+    ('0.107'),
+    ('1.132'),
+    ('1.602'),
+    ('1.958'),
+    ('1.155'),
+    ('0.11'),
+    ('29 / 47 / 19 / 33'),
+    ('1.8 / 2.88'),
+    ('7 frames'),
+    ('8 frames'),
+    ('10 frames'),
+    ('10 frames');

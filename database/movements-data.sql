@@ -532,3 +532,16 @@ INSERT INTO public.movements AS "marth"
     (41, 'air dodge, left/right', 'movement'),
     (41, 'air dodge, side + up', 'movement'),
     (41, 'air dodge up', 'movement');
+
+INSERT INTO public.movements AS "megaMan"
+  ("fighterId", "name", "type")
+  VALUES
+    (42, 'spot dodge', 'movement'),
+    (42, 'forward roll', 'movement'),
+    (42, 'backwards roll', 'movement'),
+    (42, 'neutral air dodge', 'movement'),
+    (42, 'air dodge, down', 'movement'),
+    (42, 'air dodge, side + down', 'movement'),
+    (42, 'air dodge, left/right', 'movement'),
+    (42, 'air dodge, side + up', 'movement'),
+    (42, 'air dodge up', 'movement');

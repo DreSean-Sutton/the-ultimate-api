@@ -698,3 +698,20 @@ INSERT INTO public.stats AS "marth"
     (41, 'out of shield, up air', 'stat'),
     (41, 'out of shield, neutral air / forward air', 'stat'),
     (41, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.stats AS "megaMan"
+  ("fighterId", "name", "type")
+  VALUES
+    (42, 'weight', 'stat'),
+    (42, 'gravity', 'stat'),
+    (42, 'walk speed', 'stat'),
+    (42, 'run speed', 'stat'),
+    (42, 'initial dash', 'stat'),
+    (42, 'air speed', 'stat'),
+    (42, 'total air acceleration', 'stat'),
+    (42, 'sh / fh / shff / fhff', 'stat'),
+    (42, 'fall speed/fast fall speed', 'stat'),
+    (42, 'out of shield, back air', 'stat'),
+    (42, 'out of shield, up smash', 'stat'),
+    (42, 'out of shield, neutral air', 'stat'),
+    (42, 'shield grab (post-shieldstun)', 'stat');
