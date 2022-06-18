@@ -545,3 +545,29 @@ INSERT INTO public.movements AS "megaMan"
     (42, 'air dodge, left/right', 'movement'),
     (42, 'air dodge, side + up', 'movement'),
     (42, 'air dodge up', 'movement');
+
+INSERT INTO public.movements AS "metaKnight"
+  ("fighterId", "name", "type")
+  VALUES
+    (43, 'spot dodge', 'movement'),
+    (43, 'forward roll', 'movement'),
+    (43, 'backwards roll', 'movement'),
+    (43, 'neutral air dodge', 'movement'),
+    (43, 'air dodge, down', 'movement'),
+    (43, 'air dodge, side + down', 'movement'),
+    (43, 'air dodge, left/right', 'movement'),
+    (43, 'air dodge, side + up', 'movement'),
+    (43, 'air dodge up', 'movement');
+
+INSERT INTO public.movements AS "mewtwo"
+  ("fighterId", "name", "type")
+  VALUES
+    (44, 'spot dodge', 'movement'),
+    (44, 'forward roll', 'movement'),
+    (44, 'backwards roll', 'movement'),
+    (44, 'neutral air dodge', 'movement'),
+    (44, 'air dodge, down', 'movement'),
+    (44, 'air dodge, side + down', 'movement'),
+    (44, 'air dodge, left/right', 'movement'),
+    (44, 'air dodge, side + up', 'movement'),
+    (44, 'air dodge up', 'movement');

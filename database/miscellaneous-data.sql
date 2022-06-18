@@ -715,3 +715,37 @@ INSERT INTO public.miscellaneous AS "megaMan"
     ('8 frames'),
     ('10 frames'),
     ('10 frames');
+
+INSERT INTO public.miscellaneous AS "metaKnight"
+  ("statValue")
+  VALUES
+    ('80'),
+    ('0.11'),
+    ('1.239'),
+    ('2.09'),
+    ('2.211'),
+    ('1.04'),
+    ('0.075'),
+    ('31 / 47 / 22 / 33'),
+    ('1.66 / 2.656'),
+    ('7 frames'),
+    ('8 frames'),
+    ('9 frames'),
+    ('11 frames');
+
+INSERT INTO public.miscellaneous AS "mewtwo"
+  ("statValue")
+  VALUES
+    ('79'),
+    ('0.082'),
+    ('1.26'),
+    ('2.255'),
+    ('2.255'),
+    ('1.313'),
+    ('0.07'),
+    ('41 / 52 / 29 / 35'),
+    ('1.55 / 2.48'),
+    ('9 frames'),
+    ('10 frames'),
+    ('13 frames'),
+    ('11 frames');

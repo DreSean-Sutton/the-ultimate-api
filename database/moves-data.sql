@@ -1173,3 +1173,53 @@ INSERT INTO public.moves AS "megaMan"
     (42, 'up b', 'recovery', 'move'),
     (42, 'down b, leaf shield', 'multi', 'move'),
     (42, 'down b, throw', 'projectile', 'move');
+
+INSERT INTO public.moves AS "metaKnight"
+  ("fighterId", "name", "moveType", "type")
+  VALUES
+    (43, 'rapid jab', 'multi', 'move'),
+    (43, 'rapid jab finisher', 'single', 'move'),
+    (43, 'forward tilt 1', 'single', 'move'),
+    (43, 'forward tilt 2', 'single', 'move'),
+    (43, 'forward tilt 3', 'single', 'move'),
+    (43, 'up tilt', 'close/tipper', 'move'),
+    (43, 'down tilt', 'single', 'move'),
+    (43, 'dash attack', 'early/late', 'move'),
+    (43, 'forward smash', 'single', 'move'),
+    (43, 'up smash', 'first/second/third', 'move'),
+    (43, 'down smash', 'front/back', 'move'),
+    (43, 'neutral air', 'early/late', 'move'),
+    (43, 'forward air', 'first/second/third', 'move'),
+    (43, 'back air', 'first/second/third', 'move'),
+    (43, 'up air', 'single', 'move'),
+    (43, 'down air', 'single', 'move'),
+    (43, 'neutral b', 'early/late', 'move'),
+    (43, 'side b', 'multi/final', 'move'),
+    (43, 'up b, ground', 'early/late/second', 'move'),
+    (43, 'up b, air', 'first/second', 'move'),
+    (43, 'down b, dodge', 'i-frames', 'move'),
+    (43, 'down b, attack', 'single/i-frames', 'move');
+
+INSERT INTO public.moves AS "mewtwo"
+  ("fighterId", "name", "moveType", "type")
+  VALUES
+    (44, 'jab', 'single', 'move'),
+    (44, 'rapid jab', 'multi', 'move'),
+    (44, 'rapid jab finisher', 'single', 'move'),
+    (44, 'forward tilt', 'close/med/far', 'move'),
+    (44, 'up tilt', 'early: close/med/far late: med/far', 'move'),
+    (44, 'down tilt', 'close/med/far', 'move'),
+    (44, 'dash attack', 'early/late', 'move'),
+    (44, 'forward smash', 'close/far', 'move'),
+    (44, 'up smash', 'multi/final', 'move'),
+    (44, 'down smash', 'single', 'move'),
+    (44, 'neutral air', 'multi/final', 'move'),
+    (44, 'forward air', 'single', 'move'),
+    (44, 'back air', 'close/med/far', 'move'),
+    (44, 'up air', 'close/med/far', 'move'),
+    (44, 'down air', 'meteor', 'move'),
+    (44, 'neutral b, partial charge', 'uncharged-charged', 'move'),
+    (44, 'neutral b, full charge', 'fully charged', 'move'),
+    (44, 'side b', 'hit/miss', 'move'),
+    (44, 'up b', 'recovery', 'move'),
+    (44, 'down b', 'stun', 'move');

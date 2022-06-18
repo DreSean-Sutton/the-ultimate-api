@@ -715,3 +715,37 @@ INSERT INTO public.stats AS "megaMan"
     (42, 'out of shield, up smash', 'stat'),
     (42, 'out of shield, neutral air', 'stat'),
     (42, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.stats AS "metaKnight"
+  ("fighterId", "name", "type")
+  VALUES
+    (43, 'weight', 'stat'),
+    (43, 'gravity', 'stat'),
+    (43, 'walk speed', 'stat'),
+    (43, 'run speed', 'stat'),
+    (43, 'initial dash', 'stat'),
+    (43, 'air speed', 'stat'),
+    (43, 'total air acceleration', 'stat'),
+    (43, 'sh / fh / shff / fhff', 'stat'),
+    (43, 'fall speed/fast fall speed', 'stat'),
+    (43, 'out of shield, down air', 'stat'),
+    (43, 'out of shield, up smash / up b', 'stat'),
+    (43, 'out of shield, neutral air / up air', 'stat'),
+    (43, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.stats AS "mewtwo"
+  ("fighterId", "name", "type")
+  VALUES
+    (44, 'weight', 'stat'),
+    (44, 'gravity', 'stat'),
+    (44, 'walk speed', 'stat'),
+    (44, 'run speed', 'stat'),
+    (44, 'initial dash', 'stat'),
+    (44, 'air speed', 'stat'),
+    (44, 'total air acceleration', 'stat'),
+    (44, 'sh / fh / shff / fhff', 'stat'),
+    (44, 'fall speed/fast fall speed', 'stat'),
+    (44, 'out of shield, up smash', 'stat'),
+    (44, 'out of shield, neutral air / forward air', 'stat'),
+    (44, 'out of shield, up air', 'stat'),
+    (44, 'shield grab (post-shieldstun)', 'stat');

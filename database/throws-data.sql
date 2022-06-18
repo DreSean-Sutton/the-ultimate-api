@@ -506,3 +506,27 @@ INSERT INTO public.throws AS "megaMan"
     (42, 'backward throw', 'throw'),
     (42, 'up throw', 'throw'),
     (42, 'down throw', 'throw');
+
+INSERT INTO public.throws AS "metaKnight"
+  ("fighterId", "name", "type")
+  VALUES
+    (43, 'grab', 'throw'),
+    (43, 'dash grab', 'throw'),
+    (43, 'pivot grab', 'throw'),
+    (43, 'pummel', 'throw'),
+    (43, 'forward throw', 'throw'),
+    (43, 'backward throw', 'throw'),
+    (43, 'up throw', 'throw'),
+    (43, 'down throw', 'throw');
+
+INSERT INTO public.throws AS "mewtwo"
+  ("fighterId", "name", "type")
+  VALUES
+    (44, 'grab', 'throw'),
+    (44, 'dash grab', 'throw'),
+    (44, 'pivot grab', 'throw'),
+    (44, 'pummel', 'throw'),
+    (44, 'forward throw', 'throw'),
+    (44, 'backward throw', 'throw'),
+    (44, 'up throw', 'throw'),
+    (44, 'down throw', 'throw');
