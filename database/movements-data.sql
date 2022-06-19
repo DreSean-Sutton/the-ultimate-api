@@ -571,3 +571,16 @@ INSERT INTO public.movements AS "mewtwo"
     (44, 'air dodge, left/right', 'movement'),
     (44, 'air dodge, side + up', 'movement'),
     (44, 'air dodge up', 'movement');
+
+INSERT INTO public.movements AS "miiBrawler"
+  ("fighterId", "name", "type")
+  VALUES
+    (45, 'spot dodge', 'movement'),
+    (45, 'forward roll', 'movement'),
+    (45, 'backwards roll', 'movement'),
+    (45, 'neutral air dodge', 'movement'),
+    (45, 'air dodge, down', 'movement'),
+    (45, 'air dodge, side + down', 'movement'),
+    (45, 'air dodge, left/right', 'movement'),
+    (45, 'air dodge, side + up', 'movement'),
+    (45, 'air dodge up', 'movement');

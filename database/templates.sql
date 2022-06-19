@@ -1,29 +1,29 @@
-INSERT INTO public.moves AS "miiBrawler"
+INSERT INTO public.moves AS "miiGunner"
   ("fighterId", "name", "moveType", "type")
   VALUES
-    (45, 'jab 1', 'single', 'move'),
-    (45, 'jab 2', 'single', 'move'),
-    (45, 'jab 3', 'single', 'move'),
-    (45, 'rapid jab', 'multi', 'move'),
-    (45, 'rapid jab finisher', 'single', 'move'),
-    (45, 'forward tilt', '', 'move'),
-    (45, 'up tilt', '', 'move'),
-    (45, 'down tilt', '', 'move'),
-    (45, 'dash attack', '', 'move'),
-    (45, 'forward smash', '', 'move'),
-    (45, 'up smash', '', 'move'),
-    (45, 'down smash', '', 'move'),
-    (45, 'neutral air', '', 'move'),
-    (45, 'forward air', '', 'move'),
-    (45, 'back air', '', 'move'),
-    (45, 'up air', '', 'move'),
-    (45, 'down air', '', 'move'),
-    (45, 'neutral b', '', 'move'),
-    (45, 'side b', '', 'move'),
-    (45, 'up b', '', 'move'),
-    (45, 'down b', '', 'move');
+    (46, 'jab 1', 'single', 'move'),
+    (46, 'jab 2', 'single', 'move'),
+    (46, 'jab 3', 'single', 'move'),
+    (46, 'rapid jab', 'multi', 'move'),
+    (46, 'rapid jab finisher', 'single', 'move'),
+    (46, 'forward tilt', '', 'move'),
+    (46, 'up tilt', '', 'move'),
+    (46, 'down tilt', '', 'move'),
+    (46, 'dash attack', '', 'move'),
+    (46, 'forward smash', '', 'move'),
+    (46, 'up smash', '', 'move'),
+    (46, 'down smash', '', 'move'),
+    (46, 'neutral air', '', 'move'),
+    (46, 'forward air', '', 'move'),
+    (46, 'back air', '', 'move'),
+    (46, 'up air', '', 'move'),
+    (46, 'down air', '', 'move'),
+    (46, 'neutral b', '', 'move'),
+    (46, 'side b', '', 'move'),
+    (46, 'up b', '', 'move'),
+    (46, 'down b', '', 'move');
 
-INSERT INTO public.hitboxes AS "miiBrawler"
+INSERT INTO public.hitboxes AS "miiGunner"
   ("damage", "activeFrames", "totalFrames", "firstFrame")
   VALUES
     ('.0%', '', '', ''),
@@ -48,19 +48,19 @@ INSERT INTO public.hitboxes AS "miiBrawler"
     ('.0%', '', '', ''),
     ('.0%', '', '', '');
 
-INSERT INTO public.throws AS "miiBrawler"
+INSERT INTO public.throws AS "miiGunner"
   ("fighterId", "name", "type")
   VALUES
-    (45, 'grab', 'throw'),
-    (45, 'dash grab', 'throw'),
-    (45, 'pivot grab', 'throw'),
-    (45, 'pummel', 'throw'),
-    (45, 'forward throw', 'throw'),
-    (45, 'backward throw', 'throw'),
-    (45, 'up throw', 'throw'),
-    (45, 'down throw', 'throw');
+    (46, 'grab', 'throw'),
+    (46, 'dash grab', 'throw'),
+    (46, 'pivot grab', 'throw'),
+    (46, 'pummel', 'throw'),
+    (46, 'forward throw', 'throw'),
+    (46, 'backward throw', 'throw'),
+    (46, 'up throw', 'throw'),
+    (46, 'down throw', 'throw');
 
-INSERT INTO public.grappling AS "miiBrawler"
+INSERT INTO public.grappling AS "miiGunner"
   ("damage", "activeFrames", "totalFrames")
   VALUES
     (null, '', ''),
@@ -72,20 +72,20 @@ INSERT INTO public.grappling AS "miiBrawler"
     ('.0%', '', ''),
     ('.0%', '', '');
 
-INSERT INTO public.movements AS "miiBrawler"
+INSERT INTO public.movements AS "miiGunner"
   ("fighterId", "name", "type")
   VALUES
-    (45, 'spot dodge', 'movement'),
-    (45, 'forward roll', 'movement'),
-    (45, 'backwards roll', 'movement'),
-    (45, 'neutral air dodge', 'movement'),
-    (45, 'air dodge, down', 'movement'),
-    (45, 'air dodge, side + down', 'movement'),
-    (45, 'air dodge, left/right', 'movement'),
-    (45, 'air dodge, side + up', 'movement'),
-    (45, 'air dodge up', 'movement');
+    (46, 'spot dodge', 'movement'),
+    (46, 'forward roll', 'movement'),
+    (46, 'backwards roll', 'movement'),
+    (46, 'neutral air dodge', 'movement'),
+    (46, 'air dodge, down', 'movement'),
+    (46, 'air dodge, side + down', 'movement'),
+    (46, 'air dodge, left/right', 'movement'),
+    (46, 'air dodge, side + up', 'movement'),
+    (46, 'air dodge up', 'movement');
 
-INSERT INTO public.dodging AS "miiBrawler"
+INSERT INTO public.dodging AS "miiGunner"
   ("activeFrames", "totalFrames")
   VALUES
     ('3-17', '20/25'),
@@ -98,24 +98,24 @@ INSERT INTO public.dodging AS "miiBrawler"
     ('3-21', ''),
     ('3-21', '');
 
-INSERT INTO public.stats AS "miiBrawler"
+INSERT INTO public.stats AS "miiGunner"
   ("fighterId", "name", "type")
   VALUES
-    (45, 'weight', 'stat'),
-    (45, 'gravity', 'stat'),
-    (45, 'walk speed', 'stat'),
-    (45, 'run speed', 'stat'),
-    (45, 'initial dash', 'stat'),
-    (45, 'air speed', 'stat'),
-    (45, 'total air acceleration', 'stat'),
-    (45, 'sh / fh / shff / fhff', 'stat'),
-    (45, 'fall speed/fast fall speed', 'stat'),
-    (45, 'out of shield, ', 'stat'),
-    (45, 'out of shield, ', 'stat'),
-    (45, 'out of shield, ', 'stat'),
-    (45, 'shield grab (post-shieldstun)', 'stat');
+    (46, 'weight', 'stat'),
+    (46, 'gravity', 'stat'),
+    (46, 'walk speed', 'stat'),
+    (46, 'run speed', 'stat'),
+    (46, 'initial dash', 'stat'),
+    (46, 'air speed', 'stat'),
+    (46, 'total air acceleration', 'stat'),
+    (46, 'sh / fh / shff / fhff', 'stat'),
+    (46, 'fall speed/fast fall speed', 'stat'),
+    (46, 'out of shield, ', 'stat'),
+    (46, 'out of shield, ', 'stat'),
+    (46, 'out of shield, ', 'stat'),
+    (46, 'shield grab (post-shieldstun)', 'stat');
 
-INSERT INTO public.miscellaneous AS "miiBrawler"
+INSERT INTO public.miscellaneous AS "miiGunner"
   ("statValue")
   VALUES
     (''),

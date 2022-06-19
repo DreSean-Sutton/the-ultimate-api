@@ -43,4 +43,5 @@ INSERT INTO public.fighters ("fighter", "rosterId", "displayName")
     ('marth', 23, 'Marth'),
     ('megaMan', 51, 'Mega Man'),
     ('metaKnight', 31, 'Meta Knight'),
-    ('mewtwo', 27, 'Mewtwo');
+    ('mewtwo', 27, 'Mewtwo'),
+    ('miiBrawler', 56, 'Mii Brawler');

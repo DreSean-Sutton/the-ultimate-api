@@ -749,3 +749,20 @@ INSERT INTO public.miscellaneous AS "mewtwo"
     ('10 frames'),
     ('13 frames'),
     ('11 frames');
+
+INSERT INTO public.miscellaneous AS "miiBrawler"
+  ("statValue")
+  VALUES
+    ('94'),
+    ('0.192'),
+    ('1.26'),
+    ('1.92'),
+    ('1.87'),
+    ('1.15'),
+    ('0.068'),
+    ('28 / 41 / 20 / 30'),
+    ('1.92 / 3.072'),
+    ('3 frames'),
+    ('6 frames'),
+    ('8 frames'),
+    ('10 frames');

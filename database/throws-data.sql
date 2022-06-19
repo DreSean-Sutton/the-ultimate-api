@@ -530,3 +530,15 @@ INSERT INTO public.throws AS "mewtwo"
     (44, 'backward throw', 'throw'),
     (44, 'up throw', 'throw'),
     (44, 'down throw', 'throw');
+
+INSERT INTO public.throws AS "miiBrawler"
+  ("fighterId", "name", "type")
+  VALUES
+    (45, 'grab', 'throw'),
+    (45, 'dash grab', 'throw'),
+    (45, 'pivot grab', 'throw'),
+    (45, 'pummel', 'throw'),
+    (45, 'forward throw', 'throw'),
+    (45, 'backward throw', 'throw'),
+    (45, 'up throw', 'throw'),
+    (45, 'down throw', 'throw');

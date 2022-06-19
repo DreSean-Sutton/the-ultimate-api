@@ -571,3 +571,16 @@ INSERT INTO public.dodging AS "mewtwo"
     ('3-21', '85'),
     ('3-21', '101'),
     ('3-21', '114');
+
+ INSERT INTO public.dodging AS "miiBrawler"
+  ("activeFrames", "totalFrames")
+  VALUES
+    ('3-17', '20/25'),
+    ('4-15', '29'),
+    ('5-16', '34'),
+    ('3-29', '40'),
+    ('3-21', '58'),
+    ('3-21', '65'),
+    ('3-21', '70'),
+    ('3-21', '80'),
+    ('3-21', '86');

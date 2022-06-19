@@ -749,3 +749,20 @@ INSERT INTO public.stats AS "mewtwo"
     (44, 'out of shield, neutral air / forward air', 'stat'),
     (44, 'out of shield, up air', 'stat'),
     (44, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.stats AS "miiBrawler"
+  ("fighterId", "name", "type")
+  VALUES
+    (45, 'weight', 'stat'),
+    (45, 'gravity', 'stat'),
+    (45, 'walk speed', 'stat'),
+    (45, 'run speed', 'stat'),
+    (45, 'initial dash', 'stat'),
+    (45, 'air speed', 'stat'),
+    (45, 'total air acceleration', 'stat'),
+    (45, 'sh / fh / shff / fhff', 'stat'),
+    (45, 'fall speed/fast fall speed', 'stat'),
+    (45, 'out of shield, up b(#3)', 'stat'),
+    (45, 'out of shield, neutral air', 'stat'),
+    (45, 'out of shield, up smash / up b(#2)', 'stat'),
+    (45, 'shield grab (post-shieldstun)', 'stat');

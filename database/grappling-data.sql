@@ -530,3 +530,15 @@ INSERT INTO public.grappling AS "mewtwo"
     ('10.0%', '30', '54'),
     ('12.0%', '43', '79'),
     ('4.0/5.0%', '16/18', '41');
+
+INSERT INTO public.grappling AS "miiBrawler"
+  ("damage", "activeFrames", "totalFrames")
+  VALUES
+    (null, '6-7', '34'),
+    (null, '9-10', '42'),
+    (null, '10-11', '37'),
+    ('1.3%', '1', '19'),
+    ('9.0%', '14', '37'),
+    ('4.0/5.0%', '9/11', '42'),
+    ('11.0%', '16', '39'),
+    ('2.0/4.0%', '18/20', '35');
