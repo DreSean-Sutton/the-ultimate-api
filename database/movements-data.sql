@@ -584,3 +584,16 @@ INSERT INTO public.movements AS "miiBrawler"
     (45, 'air dodge, left/right', 'movement'),
     (45, 'air dodge, side + up', 'movement'),
     (45, 'air dodge up', 'movement');
+
+INSERT INTO public.movements AS "miiGunner"
+  ("fighterId", "name", "type")
+  VALUES
+    (46, 'spot dodge', 'movement'),
+    (46, 'forward roll', 'movement'),
+    (46, 'backwards roll', 'movement'),
+    (46, 'neutral air dodge', 'movement'),
+    (46, 'air dodge, down', 'movement'),
+    (46, 'air dodge, side + down', 'movement'),
+    (46, 'air dodge, left/right', 'movement'),
+    (46, 'air dodge, side + up', 'movement'),
+    (46, 'air dodge up', 'movement');

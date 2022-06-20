@@ -1262,3 +1262,34 @@ INSERT INTO public.moves AS "miiBrawler"
     (45, 'feint jump, kick', 'kick/landing', 'move'),
     (45, 'counter throw', 'counter', 'move'),
     (45, 'counter throw, activated', 'throw', 'move');
+
+INSERT INTO public.moves AS "miiGunner"
+  ("fighterId", "name", "moveType", "type")
+  VALUES
+    (46, 'jab 1', 'single', 'move'),
+    (46, 'jab 2', 'single', 'move'),
+    (46, 'jab 3', 'single', 'move'),
+    (46, 'forward tilt', 'early/late/latest', 'move'),
+    (46, 'up tilt', 'early: far/close/late: far', 'move'),
+    (46, 'down tilt', 'single', 'move'),
+    (46, 'dash attack', 'single', 'move'),
+    (46, 'forward smash', 'multi/final', 'move'),
+    (46, 'up smash', 'first/multi/final', 'move'),
+    (46, 'down smash', 'front/back', 'move'),
+    (46, 'neutral air', 'single', 'move'),
+    (46, 'forward air', 'early/late', 'move'),
+    (46, 'back air', 'early/late', 'move'),
+    (46, 'up air', 'multi/final', 'move'),
+    (46, 'down air', 'early: far/close/late: far/close', 'move'),
+    (46, 'charge blast', 'uncharged-charged', 'move'),
+    (46, 'laser blaze', 'single', 'move'),
+    (46, 'grenade launch', '(grenade) on hit: multi/final', 'move'),
+    (46, 'flame pillar', 'multi/final', 'move'),
+    (46, 'stealth burst', 'uncharged-charged', 'move'),
+    (46, 'gunner missle (homing)', 'projectile', 'move'),
+    (46, 'gunner missle (super)', 'projectile', 'move'),
+    (46, 'lunar launch', 'single', 'move'),
+    (46, 'cannon jump kick', 'first/second/late', 'move'),
+    (46, 'echo reflector', 'reflecter', 'move'),
+    (46, 'bomb drop', 'contact/explosion', 'move'),
+    (46, 'absorbing vortex', 'held', 'move');

@@ -766,3 +766,21 @@ INSERT INTO public.stats AS "miiBrawler"
     (45, 'out of shield, neutral air', 'stat'),
     (45, 'out of shield, up smash / up b(#2)', 'stat'),
     (45, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.stats AS "miiGunner"
+  ("fighterId", "name", "type")
+  VALUES
+    (46, 'weight', 'stat'),
+    (46, 'gravity', 'stat'),
+    (46, 'walk speed', 'stat'),
+    (46, 'run speed', 'stat'),
+    (46, 'initial dash', 'stat'),
+    (46, 'air speed', 'stat'),
+    (46, 'total air acceleration', 'stat'),
+    (46, 'sh / fh / shff / fhff', 'stat'),
+    (46, 'fall speed/fast fall speed', 'stat'),
+    (46, 'out of shield, up b(#2) / echo reflector(air)', 'stat'),
+    (46, 'out of shield, absorbing vortex(air)', 'stat'),
+    (46, 'out of shield, neutral air / up smash', 'stat'),
+    (46, 'out of shield, back air / up b(#1)', 'stat'),
+    (46, 'shield grab (post-shieldstun)', 'stat');

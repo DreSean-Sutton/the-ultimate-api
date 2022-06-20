@@ -542,3 +542,15 @@ INSERT INTO public.grappling AS "miiBrawler"
     ('4.0/5.0%', '9/11', '42'),
     ('11.0%', '16', '39'),
     ('2.0/4.0%', '18/20', '35');
+
+INSERT INTO public.grappling AS "miiGunner"
+  ("damage", "activeFrames", "totalFrames")
+  VALUES
+    (null, '6-7', '34'),
+    (null, '9-10', '42'),
+    (null, '10-11', '37'),
+    ('1.3%', '1', '19'),
+    ('4.0/3.0%', '10/12', '33'),
+    ('7.0/3.0%', '10', '49'),
+    ('7.0/3.0%', '7', '51'),
+    ('7.0%', '16', '40');
