@@ -784,3 +784,20 @@ INSERT INTO public.miscellaneous AS "miiGunner"
     ('11 frames'),
     ('12 frames'),
     ('10 frames');
+
+INSERT INTO public.miscellaneous AS "miiSwordfighter"
+  ("statValue")
+  VALUES
+    ('100'),
+    ('0.106'),
+    ('1.07'),
+    ('1.58'),
+    ('1.74'),
+    ('1.17'),
+    ('0.06'),
+    ('30 / 45 / 20 / 32'),
+    ('1.55 / 2.48'),
+    ('8 frames'),
+    ('11 frames'),
+    ('13 frames'),
+    ('10 frames');

@@ -1293,3 +1293,38 @@ INSERT INTO public.moves AS "miiGunner"
     (46, 'echo reflector', 'reflecter', 'move'),
     (46, 'bomb drop', 'contact/explosion', 'move'),
     (46, 'absorbing vortex', 'held', 'move');
+
+INSERT INTO public.moves AS "miiSwordfighter"
+  ("fighterId", "name", "moveType", "type")
+  VALUES
+    (47, 'jab 1', 'single', 'move'),
+    (47, 'jab 2', 'single', 'move'),
+    (47, 'jab 3', 'single', 'move'),
+    (47, 'forward tilt', '', 'move'),
+    (47, 'up tilt', '', 'move'),
+    (47, 'down tilt', '', 'move'),
+    (47, 'dash attack', '', 'move'),
+    (47, 'forward smash', '', 'move'),
+    (47, 'up smash', '', 'move'),
+    (47, 'down smash', '', 'move'),
+    (47, 'neutral air', '', 'move'),
+    (47, 'forward air', '', 'move'),
+    (47, 'back air', '', 'move'),
+    (47, 'up air', '', 'move'),
+    (47, 'down air', '', 'move'),
+    (47, 'gale strike', 'early/late/latest', 'move'),
+    (47, 'shuriken of light', 'early/late/later/latest', 'move'),
+    (47, 'blurring blade', 'multi/final', 'move'),
+    (47, 'airborne assault, ground', 'detection/on hit', 'move'),
+    (47, 'airborne assault, air', 'detection/on hit', 'move'),
+    (47, 'gale stab', 'uncharged-charged', 'move'),
+    (47, 'chakram', 'weak throw/strong throw', 'move'),
+    (47, 'stone scabbard', 'rising/falling/landing', 'move'),
+    (47, 'skyward slash dash', 'first/multi/final', 'move'),
+    (47, 'hero\s spin, ground', 'uncharged-charged | early/late', 'move'),
+    (47, 'hero\s spin, air', 'uncharged-charged | first/multi/final', 'move'),
+    (47, 'blade counter', 'counter', 'move'),
+    (47, 'blade counter, activated', 'counter attack', 'move'),
+    (47, 'reversal slash', 'single/reflector', 'move'),
+    (47, 'power thrust, ground', 'early/late/latest', 'move'),
+    (47, 'power thrust, air', 'falling/landing', 'move');

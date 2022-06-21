@@ -784,3 +784,20 @@ INSERT INTO public.stats AS "miiGunner"
     (46, 'out of shield, neutral air / up smash', 'stat'),
     (46, 'out of shield, back air / up b(#1)', 'stat'),
     (46, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.stats AS "miiSwordfighter"
+  ("fighterId", "name", "type")
+  VALUES
+    (47, 'weight', 'stat'),
+    (47, 'gravity', 'stat'),
+    (47, 'walk speed', 'stat'),
+    (47, 'run speed', 'stat'),
+    (47, 'initial dash', 'stat'),
+    (47, 'air speed', 'stat'),
+    (47, 'total air acceleration', 'stat'),
+    (47, 'sh / fh / shff / fhff', 'stat'),
+    (47, 'fall speed/fast fall speed', 'stat'),
+    (47, 'out of shield, up b(#3)', 'stat'),
+    (47, 'out of shield, up smash', 'stat'),
+    (47, 'out of shield, up b(#1)', 'stat'),
+    (47, 'shield grab (post-shieldstun)', 'stat');

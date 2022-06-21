@@ -597,3 +597,16 @@ INSERT INTO public.dodging AS "miiGunner"
     ('3-21', '87'),
     ('3-21', '103'),
     ('3-21', '114');
+
+INSERT INTO public.dodging AS "miiSwordfighter"
+  ("activeFrames", "totalFrames")
+  VALUES
+    ('3-17', '20/25'),
+    ('4-15', '29'),
+    ('5-16', '34'),
+    ('3-30', '50'),
+    ('3-21', '69'),
+    ('3-21', '77'),
+    ('3-21', '84'),
+    ('3-21', '99'),
+    ('3-21', '107');

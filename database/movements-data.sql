@@ -597,3 +597,16 @@ INSERT INTO public.movements AS "miiGunner"
     (46, 'air dodge, left/right', 'movement'),
     (46, 'air dodge, side + up', 'movement'),
     (46, 'air dodge up', 'movement');
+
+INSERT INTO public.movements AS "miiSwordfighter"
+  ("fighterId", "name", "type")
+  VALUES
+    (47, 'spot dodge', 'movement'),
+    (47, 'forward roll', 'movement'),
+    (47, 'backwards roll', 'movement'),
+    (47, 'neutral air dodge', 'movement'),
+    (47, 'air dodge, down', 'movement'),
+    (47, 'air dodge, side + down', 'movement'),
+    (47, 'air dodge, left/right', 'movement'),
+    (47, 'air dodge, side + up', 'movement'),
+    (47, 'air dodge up', 'movement');
