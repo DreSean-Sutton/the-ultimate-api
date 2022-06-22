@@ -801,3 +801,20 @@ INSERT INTO public.miscellaneous AS "miiSwordfighter"
     ('11 frames'),
     ('13 frames'),
     ('10 frames');
+
+INSERT INTO public.miscellaneous AS "minmin"
+  ("statValue")
+  VALUES
+    ('104'),
+    ('0.11'),
+    ('1.05'),
+    ('1.55'),
+    ('1.9'),
+    ('0.85'),
+    ('0.06'),
+    ('34 / 46 / 24 / 33'),
+    ('1.5 / 2.432'),
+    ('8 frames'),
+    ('10 frames'),
+    ('11 frames'),
+    ('22 frames');

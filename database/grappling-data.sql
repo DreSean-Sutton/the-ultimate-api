@@ -566,3 +566,15 @@ INSERT INTO public.grappling AS "miiSwordfighter"
     ('3.0/3.0%', '15/16', '46'),
     ('2.0/3.0%', '21/23', '49'),
     ('2.0/2.0%', '15/16', '32');
+
+INSERT INTO public.grappling AS "minmin"
+  ("damage", "activeFrames", "totalFrames")
+  VALUES
+    (null, '18-24', '56'),
+    (null, '18-24', '56'),
+    (null, '18-24', '56'),
+    ('1.5%', '1', '19'),
+    ('9.0%', '13', '29'),
+    ('14.0%', '31', '49'),
+    ('10.0%', '11', '54'),
+    ('8.0%', '16', '45');

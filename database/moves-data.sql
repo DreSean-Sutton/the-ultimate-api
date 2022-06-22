@@ -1328,3 +1328,37 @@ INSERT INTO public.moves AS "miiSwordfighter"
     (47, 'reversal slash', 'single/reflector', 'move'),
     (47, 'power thrust, ground', 'early/late/latest', 'move'),
     (47, 'power thrust, air', 'falling/landing', 'move');
+
+INSERT INTO public.moves AS "minmin"
+  ("fighterId", "name", "moveType", "type")
+  VALUES
+    (48, 'jab 1', 'single', 'move'),
+    (48, 'jab 2', 'single', 'move'),
+    (48, 'jab 3', 'single', 'move'),
+    (48, 'rapid jab', 'multi', 'move'),
+    (48, 'rapid jab finisher', 'single', 'move'),
+    (48, 'forward tilt, dragon', '(ground/air)', 'move'),
+    (48, 'forward tilt, power dragon', '(ground/air)', 'move'),
+    (48, 'forward tilt, ramram', '(ground/air)', 'move'),
+    (48, 'forward tilt, megawatt', '(ground/air)', 'move'),
+    (48, 'up tilt', 'left leg: early/close right leg: early/close ', 'move'),
+    (48, 'down tilt', 'early: close/far late: close/far', 'move'),
+    (48, 'dash attack', 'early/late', 'move'),
+    (48, 'forward smash, dragon [laser]', 'early/middle/late/[laser]', 'move'),
+    (48, 'forward smash, power dragon (ground)', 'early/middle/late/[laser]', 'move'),
+    (48, 'forward smash, power dragon (air)', 'early/middle/late/[laser]', 'move'),
+    (48, 'forward smash, ramram (ground)', 'normal/late/[chakram]', 'move'),
+    (48, 'forward smash, ramram (air)', 'normal/late/[chakram]', 'move'),
+    (48, 'forward smash, megawatt (ground)', 'early/middle/late', 'move'),
+    (48, 'forward smash, megawatt (air)', 'early/middle/late', 'move'),
+    (48, 'up smash', 'early: close/far late: close/far', 'move'),
+    (48, 'down smash', 'left leg/right leg', 'move'),
+    (48, 'neutral air, dragon', 'single', 'move'),
+    (48, 'neutral air, power dragon', 'single', 'move'),
+    (48, 'neutral air, ramram', 'single', 'move'),
+    (48, 'neutral air, megawatt', 'single', 'move'),
+    (48, 'up air', 'far/close', 'move'),
+    (48, 'down air', 'early/late/landing', 'move'),
+    (48, 'up b, arm jump', 'clicked/held', 'move'),
+    (48, 'up b, arm hook', 'recovery', 'move'),
+    (48, 'down b, arm change', 'instant', 'move');

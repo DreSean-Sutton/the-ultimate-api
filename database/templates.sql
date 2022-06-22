@@ -1,29 +1,29 @@
-INSERT INTO public.moves AS "minmin"
+INSERT INTO public.moves AS "mr.game&watch"
   ("fighterId", "name", "moveType", "type")
   VALUES
-    (48, 'jab 1', 'single', 'move'),
-    (48, 'jab 2', 'single', 'move'),
-    (48, 'jab 3', 'single', 'move'),
-    (48, 'rapid jab', 'multi', 'move'),
-    (48, 'rapid jab finisher', 'single', 'move'),
-    (48, 'forward tilt', '', 'move'),
-    (48, 'up tilt', '', 'move'),
-    (48, 'down tilt', '', 'move'),
-    (48, 'dash attack', '', 'move'),
-    (48, 'forward smash', '', 'move'),
-    (48, 'up smash', '', 'move'),
-    (48, 'down smash', '', 'move'),
-    (48, 'neutral air', '', 'move'),
-    (48, 'forward air', '', 'move'),
-    (48, 'back air', '', 'move'),
-    (48, 'up air', '', 'move'),
-    (48, 'down air', '', 'move'),
-    (48, 'neutral b', '', 'move'),
-    (48, 'side b', '', 'move'),
-    (48, 'up b', '', 'move'),
-    (48, 'down b', '', 'move');
+    (49, 'jab 1', 'single', 'move'),
+    (49, 'jab 2', 'single', 'move'),
+    (49, 'jab 3', 'single', 'move'),
+    (49, 'rapid jab', 'multi', 'move'),
+    (49, 'rapid jab finisher', 'single', 'move'),
+    (49, 'forward tilt', '', 'move'),
+    (49, 'up tilt', '', 'move'),
+    (49, 'down tilt', '', 'move'),
+    (49, 'dash attack', '', 'move'),
+    (49, 'forward smash', '', 'move'),
+    (49, 'up smash', '', 'move'),
+    (49, 'down smash', '', 'move'),
+    (49, 'neutral air', '', 'move'),
+    (49, 'forward air', '', 'move'),
+    (49, 'back air', '', 'move'),
+    (49, 'up air', '', 'move'),
+    (49, 'down air', '', 'move'),
+    (49, 'neutral b', '', 'move'),
+    (49, 'side b', '', 'move'),
+    (49, 'up b', '', 'move'),
+    (49, 'down b', '', 'move');
 
-INSERT INTO public.hitboxes AS "minmin"
+INSERT INTO public.hitboxes AS "mr.game&watch"
   ("damage", "activeFrames", "totalFrames", "firstFrame")
   VALUES
     ('.0%', '', '', ''),
@@ -48,19 +48,19 @@ INSERT INTO public.hitboxes AS "minmin"
     ('.0%', '', '', ''),
     ('.0%', '', '', '');
 
-INSERT INTO public.throws AS "minmin"
+INSERT INTO public.throws AS "mr.game&watch"
   ("fighterId", "name", "type")
   VALUES
-    (48, 'grab', 'throw'),
-    (48, 'dash grab', 'throw'),
-    (48, 'pivot grab', 'throw'),
-    (48, 'pummel', 'throw'),
-    (48, 'forward throw', 'throw'),
-    (48, 'backward throw', 'throw'),
-    (48, 'up throw', 'throw'),
-    (48, 'down throw', 'throw');
+    (49, 'grab', 'throw'),
+    (49, 'dash grab', 'throw'),
+    (49, 'pivot grab', 'throw'),
+    (49, 'pummel', 'throw'),
+    (49, 'forward throw', 'throw'),
+    (49, 'backward throw', 'throw'),
+    (49, 'up throw', 'throw'),
+    (49, 'down throw', 'throw');
 
-INSERT INTO public.grappling AS "minmin"
+INSERT INTO public.grappling AS "mr.game&watch"
   ("damage", "activeFrames", "totalFrames")
   VALUES
     (null, '6-7', '34'),
@@ -72,50 +72,50 @@ INSERT INTO public.grappling AS "minmin"
     ('.0%', '', ''),
     ('.0%', '', '');
 
-INSERT INTO public.movements AS "minmin"
+INSERT INTO public.movements AS "mr.game&watch"
   ("fighterId", "name", "type")
   VALUES
-    (48, 'spot dodge', 'movement'),
-    (48, 'forward roll', 'movement'),
-    (48, 'backwards roll', 'movement'),
-    (48, 'neutral air dodge', 'movement'),
-    (48, 'air dodge, down', 'movement'),
-    (48, 'air dodge, side + down', 'movement'),
-    (48, 'air dodge, left/right', 'movement'),
-    (48, 'air dodge, side + up', 'movement'),
-    (48, 'air dodge up', 'movement');
+    (49, 'spot dodge', 'movement'),
+    (49, 'forward roll', 'movement'),
+    (49, 'backwards roll', 'movement'),
+    (49, 'neutral air dodge', 'movement'),
+    (49, 'air dodge, down', 'movement'),
+    (49, 'air dodge, side + down', 'movement'),
+    (49, 'air dodge, left/right', 'movement'),
+    (49, 'air dodge, side + up', 'movement'),
+    (49, 'air dodge up', 'movement');
 
-INSERT INTO public.dodging AS "minmin"
+INSERT INTO public.dodging AS "mr.game&watch"
   ("activeFrames", "totalFrames")
   VALUES
     ('3-17', '20/25'),
-    ('4-15', ''),
-    ('5-16', ''),
-    ('3-29', ''),
+    ('4-15', '29'),
+    ('5-16', '34'),
+    ('3-29', '39'),
     ('3-21', ''),
     ('3-21', ''),
     ('3-21', ''),
     ('3-21', ''),
     ('3-21', '');
 
-INSERT INTO public.stats AS "minmin"
+INSERT INTO public.stats AS "mr.game&watch"
   ("fighterId", "name", "type")
   VALUES
-    (48, 'weight', 'stat'),
-    (48, 'gravity', 'stat'),
-    (48, 'walk speed', 'stat'),
-    (48, 'run speed', 'stat'),
-    (48, 'initial dash', 'stat'),
-    (48, 'air speed', 'stat'),
-    (48, 'total air acceleration', 'stat'),
-    (48, 'sh / fh / shff / fhff', 'stat'),
-    (48, 'fall speed/fast fall speed', 'stat'),
-    (48, 'out of shield, ', 'stat'),
-    (48, 'out of shield, ', 'stat'),
-    (48, 'out of shield, ', 'stat'),
-    (48, 'shield grab (post-shieldstun)', 'stat');
+    (49, 'weight', 'stat'),
+    (49, 'gravity', 'stat'),
+    (49, 'walk speed', 'stat'),
+    (49, 'run speed', 'stat'),
+    (49, 'initial dash', 'stat'),
+    (49, 'air speed', 'stat'),
+    (49, 'total air acceleration', 'stat'),
+    (49, 'sh / fh / shff / fhff', 'stat'),
+    (49, 'fall speed/fast fall speed', 'stat'),
+    (49, 'out of shield, ', 'stat'),
+    (49, 'out of shield, ', 'stat'),
+    (49, 'out of shield, ', 'stat'),
+    (49, 'shield grab (post-shieldstun)', 'stat');
 
-INSERT INTO public.miscellaneous AS "minmin"
+INSERT INTO public.miscellaneous AS "mr.game&watch"
   ("statValue")
   VALUES
     (''),
