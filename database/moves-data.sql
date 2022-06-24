@@ -1362,3 +1362,27 @@ INSERT INTO public.moves AS "minmin"
     (48, 'up b, arm jump', 'clicked/held', 'move'),
     (48, 'up b, arm hook', 'recovery', 'move'),
     (48, 'down b, arm change', 'instant', 'move');
+
+INSERT INTO public.moves AS "mr.game&watch"
+  ("fighterId", "name", "moveType", "type")
+  VALUES
+    (49, 'jab', 'single', 'move'),
+    (49, 'rapid jab', 'multi', 'move'),
+    (49, 'rapid jab finisher', 'single', 'move'),
+    (49, 'forward tilt', 'early: far/early: close/late', 'move'),
+    (49, 'up tilt', 'first/second', 'move'),
+    (49, 'down tilt', 'single', 'move'),
+    (49, 'dash attack', 'early/late', 'move'),
+    (49, 'forward smash', 'close/far', 'move'),
+    (49, 'up smash', 'single', 'move'),
+    (49, 'down smash', 'close/far', 'move'),
+    (49, 'neutral air', 'multi/final', 'move'),
+    (49, 'forward air', 'hit/bomb', 'move'),
+    (49, 'back air', 'multi/final/landing', 'move'),
+    (49, 'up air', 'multi/final', 'move'),
+    (49, 'down air', 'meteor/late/landing', 'move'),
+    (49, 'neutral b', 'pan/sausage', 'move'),
+    (49, 'side b', 'judges #''s: 1, 2, 3, 4, (5), 6, 7, 8, 9', 'move'),
+    (49, 'up b', 'early/late', 'move'),
+    (49, 'down b, oil panic', 'absorber and reflector', 'move'),
+    (49, 'down b, overload', 'early/late/latest', 'move');

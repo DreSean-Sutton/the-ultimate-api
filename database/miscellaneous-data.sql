@@ -818,3 +818,20 @@ INSERT INTO public.miscellaneous AS "minmin"
     ('10 frames'),
     ('11 frames'),
     ('22 frames');
+
+INSERT INTO public.miscellaneous AS "mr.game&watch"
+  ("statValue")
+  VALUES
+    ('75'),
+    ('0.08'),
+    ('1.18'),
+    ('1.679'),
+    ('1.98'),
+    ('1.176'),
+    ('0.1'),
+    ('36 / 51 / 25 / 36'),
+    ('1.24 / 1.984'),
+    ('3 frames'),
+    ('5 frames'),
+    ('10 frames'),
+    ('10 frames');

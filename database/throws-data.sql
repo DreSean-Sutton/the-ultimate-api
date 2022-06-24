@@ -578,3 +578,15 @@ INSERT INTO public.throws AS "minmin"
     (48, 'backward throw', 'throw'),
     (48, 'up throw', 'throw'),
     (48, 'down throw', 'throw');
+
+INSERT INTO public.throws AS "mr.game&watch"
+  ("fighterId", "name", "type")
+  VALUES
+    (49, 'grab', 'throw'),
+    (49, 'dash grab', 'throw'),
+    (49, 'pivot grab', 'throw'),
+    (49, 'pummel', 'throw'),
+    (49, 'forward throw', 'throw'),
+    (49, 'backward throw', 'throw'),
+    (49, 'up throw', 'throw'),
+    (49, 'down throw', 'throw');

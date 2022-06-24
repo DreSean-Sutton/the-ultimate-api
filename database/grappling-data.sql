@@ -578,3 +578,15 @@ INSERT INTO public.grappling AS "minmin"
     ('14.0%', '31', '49'),
     ('10.0%', '11', '54'),
     ('8.0%', '16', '45');
+
+INSERT INTO public.grappling AS "mr.game&watch"
+  ("damage", "activeFrames", "totalFrames")
+  VALUES
+    (null, '6-7', '34'),
+    (null, '9-10', '42'),
+    (null, '10-11', '37'),
+    ('1.3%', '1', '19'),
+    ('8.0%', '26', '40'),
+    ('4.0%', '35', '49'),
+    ('12.0%', '26', '40'),
+    ('4.0%', '35', '49');

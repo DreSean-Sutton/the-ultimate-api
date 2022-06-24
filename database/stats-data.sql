@@ -818,3 +818,20 @@ INSERT INTO public.stats AS "minmin"
     (48, 'out of shield, up air', 'stat'),
     (48, 'out of shield, neutral air', 'stat'),
     (48, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.stats AS "mr.game&watch"
+  ("fighterId", "name", "type")
+  VALUES
+    (49, 'weight', 'stat'),
+    (49, 'gravity', 'stat'),
+    (49, 'walk speed', 'stat'),
+    (49, 'run speed', 'stat'),
+    (49, 'initial dash', 'stat'),
+    (49, 'air speed', 'stat'),
+    (49, 'total air acceleration', 'stat'),
+    (49, 'sh / fh / shff / fhff', 'stat'),
+    (49, 'fall speed/fast fall speed', 'stat'),
+    (49, 'out of shield, up b', 'stat'),
+    (49, 'out of shield, down b(air)', 'stat'),
+    (49, 'out of shield, neutral air', 'stat'),
+    (49, 'shield grab (post-shieldstun)', 'stat');

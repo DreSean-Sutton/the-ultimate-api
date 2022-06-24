@@ -1,29 +1,29 @@
-INSERT INTO public.moves AS "mr.game&watch"
+INSERT INTO public.moves AS "mythra"
   ("fighterId", "name", "moveType", "type")
   VALUES
-    (49, 'jab 1', 'single', 'move'),
-    (49, 'jab 2', 'single', 'move'),
-    (49, 'jab 3', 'single', 'move'),
-    (49, 'rapid jab', 'multi', 'move'),
-    (49, 'rapid jab finisher', 'single', 'move'),
-    (49, 'forward tilt', '', 'move'),
-    (49, 'up tilt', '', 'move'),
-    (49, 'down tilt', '', 'move'),
-    (49, 'dash attack', '', 'move'),
-    (49, 'forward smash', '', 'move'),
-    (49, 'up smash', '', 'move'),
-    (49, 'down smash', '', 'move'),
-    (49, 'neutral air', '', 'move'),
-    (49, 'forward air', '', 'move'),
-    (49, 'back air', '', 'move'),
-    (49, 'up air', '', 'move'),
-    (49, 'down air', '', 'move'),
-    (49, 'neutral b', '', 'move'),
-    (49, 'side b', '', 'move'),
-    (49, 'up b', '', 'move'),
-    (49, 'down b', '', 'move');
+    (50, 'jab 1', 'single', 'move'),
+    (50, 'jab 2', 'single', 'move'),
+    (50, 'jab 3', 'single', 'move'),
+    (50, 'rapid jab', 'multi', 'move'),
+    (50, 'rapid jab finisher', 'single', 'move'),
+    (50, 'forward tilt', '', 'move'),
+    (50, 'up tilt', '', 'move'),
+    (50, 'down tilt', '', 'move'),
+    (50, 'dash attack', '', 'move'),
+    (50, 'forward smash', '', 'move'),
+    (50, 'up smash', '', 'move'),
+    (50, 'down smash', '', 'move'),
+    (50, 'neutral air', '', 'move'),
+    (50, 'forward air', '', 'move'),
+    (50, 'back air', '', 'move'),
+    (50, 'up air', '', 'move'),
+    (50, 'down air', '', 'move'),
+    (50, 'neutral b', '', 'move'),
+    (50, 'side b', '', 'move'),
+    (50, 'up b', '', 'move'),
+    (50, 'down b', '', 'move');
 
-INSERT INTO public.hitboxes AS "mr.game&watch"
+INSERT INTO public.hitboxes AS "mythra"
   ("damage", "activeFrames", "totalFrames", "firstFrame")
   VALUES
     ('.0%', '', '', ''),
@@ -48,19 +48,19 @@ INSERT INTO public.hitboxes AS "mr.game&watch"
     ('.0%', '', '', ''),
     ('.0%', '', '', '');
 
-INSERT INTO public.throws AS "mr.game&watch"
+INSERT INTO public.throws AS "mythra"
   ("fighterId", "name", "type")
   VALUES
-    (49, 'grab', 'throw'),
-    (49, 'dash grab', 'throw'),
-    (49, 'pivot grab', 'throw'),
-    (49, 'pummel', 'throw'),
-    (49, 'forward throw', 'throw'),
-    (49, 'backward throw', 'throw'),
-    (49, 'up throw', 'throw'),
-    (49, 'down throw', 'throw');
+    (50, 'grab', 'throw'),
+    (50, 'dash grab', 'throw'),
+    (50, 'pivot grab', 'throw'),
+    (50, 'pummel', 'throw'),
+    (50, 'forward throw', 'throw'),
+    (50, 'backward throw', 'throw'),
+    (50, 'up throw', 'throw'),
+    (50, 'down throw', 'throw');
 
-INSERT INTO public.grappling AS "mr.game&watch"
+INSERT INTO public.grappling AS "mythra"
   ("damage", "activeFrames", "totalFrames")
   VALUES
     (null, '6-7', '34'),
@@ -72,20 +72,20 @@ INSERT INTO public.grappling AS "mr.game&watch"
     ('.0%', '', ''),
     ('.0%', '', '');
 
-INSERT INTO public.movements AS "mr.game&watch"
+INSERT INTO public.movements AS "mythra"
   ("fighterId", "name", "type")
   VALUES
-    (49, 'spot dodge', 'movement'),
-    (49, 'forward roll', 'movement'),
-    (49, 'backwards roll', 'movement'),
-    (49, 'neutral air dodge', 'movement'),
-    (49, 'air dodge, down', 'movement'),
-    (49, 'air dodge, side + down', 'movement'),
-    (49, 'air dodge, left/right', 'movement'),
-    (49, 'air dodge, side + up', 'movement'),
-    (49, 'air dodge up', 'movement');
+    (50, 'spot dodge', 'movement'),
+    (50, 'forward roll', 'movement'),
+    (50, 'backwards roll', 'movement'),
+    (50, 'neutral air dodge', 'movement'),
+    (50, 'air dodge, down', 'movement'),
+    (50, 'air dodge, side + down', 'movement'),
+    (50, 'air dodge, left/right', 'movement'),
+    (50, 'air dodge, side + up', 'movement'),
+    (50, 'air dodge up', 'movement');
 
-INSERT INTO public.dodging AS "mr.game&watch"
+INSERT INTO public.dodging AS "mythra"
   ("activeFrames", "totalFrames")
   VALUES
     ('3-17', '20/25'),
@@ -98,24 +98,24 @@ INSERT INTO public.dodging AS "mr.game&watch"
     ('3-21', ''),
     ('3-21', '');
 
-INSERT INTO public.stats AS "mr.game&watch"
+INSERT INTO public.stats AS "mythra"
   ("fighterId", "name", "type")
   VALUES
-    (49, 'weight', 'stat'),
-    (49, 'gravity', 'stat'),
-    (49, 'walk speed', 'stat'),
-    (49, 'run speed', 'stat'),
-    (49, 'initial dash', 'stat'),
-    (49, 'air speed', 'stat'),
-    (49, 'total air acceleration', 'stat'),
-    (49, 'sh / fh / shff / fhff', 'stat'),
-    (49, 'fall speed/fast fall speed', 'stat'),
-    (49, 'out of shield, ', 'stat'),
-    (49, 'out of shield, ', 'stat'),
-    (49, 'out of shield, ', 'stat'),
-    (49, 'shield grab (post-shieldstun)', 'stat');
+    (50, 'weight', 'stat'),
+    (50, 'gravity', 'stat'),
+    (50, 'walk speed', 'stat'),
+    (50, 'run speed', 'stat'),
+    (50, 'initial dash', 'stat'),
+    (50, 'air speed', 'stat'),
+    (50, 'total air acceleration', 'stat'),
+    (50, 'sh / fh / shff / fhff', 'stat'),
+    (50, 'fall speed/fast fall speed', 'stat'),
+    (50, 'out of shield, ', 'stat'),
+    (50, 'out of shield, ', 'stat'),
+    (50, 'out of shield, ', 'stat'),
+    (50, 'shield grab (post-shieldstun)', 'stat');
 
-INSERT INTO public.miscellaneous AS "mr.game&watch"
+INSERT INTO public.miscellaneous AS "mythra"
   ("statValue")
   VALUES
     (''),

@@ -623,3 +623,16 @@ INSERT INTO public.movements AS "minmin"
     (48, 'air dodge, left/right', 'movement'),
     (48, 'air dodge, side + up', 'movement'),
     (48, 'air dodge up', 'movement');
+
+INSERT INTO public.movements AS "mr.game&watch"
+  ("fighterId", "name", "type")
+  VALUES
+    (49, 'spot dodge', 'movement'),
+    (49, 'forward roll', 'movement'),
+    (49, 'backwards roll', 'movement'),
+    (49, 'neutral air dodge', 'movement'),
+    (49, 'air dodge, down', 'movement'),
+    (49, 'air dodge, side + down', 'movement'),
+    (49, 'air dodge, left/right', 'movement'),
+    (49, 'air dodge, side + up', 'movement'),
+    (49, 'air dodge up', 'movement');

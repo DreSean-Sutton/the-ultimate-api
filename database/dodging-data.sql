@@ -623,3 +623,16 @@ INSERT INTO public.dodging AS "minmin"
     ('3-21', '85'),
     ('3-21', '97'),
     ('3-21', '107');
+
+INSERT INTO public.dodging AS "mr.game&watch"
+  ("activeFrames", "totalFrames")
+  VALUES
+    ('3-17', '21/26'),
+    ('4-15', '30'),
+    ('5-16', '35'),
+    ('3-28', '59'),
+    ('3-21', '84'),
+    ('3-21', '93'),
+    ('3-21', '100'),
+    ('3-21', '123'),
+    ('3-21', '132');

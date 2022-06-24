@@ -47,4 +47,5 @@ INSERT INTO public.fighters ("fighter", "rosterId", "displayName")
     ('miiBrawler', 56, 'Mii Brawler'),
     ('miiGunner', 57, 'Mii Gunner'),
     ('miiSwordfighter', 58, 'Mii Swordfighter'),
-    ('minmin', 83, 'Min Min');
+    ('minmin', 83, 'Min Min'),
+    ('mrGame&Watch', 30, 'Mr. Game & Watch');
