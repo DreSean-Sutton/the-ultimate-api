@@ -28,7 +28,7 @@ INSERT INTO public.fighters ("fighter", "rosterId", "displayName")
     ('isabelle', 75, 'Isabelle'),
     ('jigglypuff', 13, 'Jigglypuff'),
     ('joker', 78, 'Joker'),
-    ('kazuya', 87, 'Kazuya'),
+    ('kazuya', 88, 'Kazuya'),
     ('ken', 66, 'Ken'),
     ('dedede', 44, 'King Dedede'),
     ('krool', 74, 'King K. Rool'),
@@ -48,4 +48,5 @@ INSERT INTO public.fighters ("fighter", "rosterId", "displayName")
     ('miiGunner', 57, 'Mii Gunner'),
     ('miiSwordfighter', 58, 'Mii Swordfighter'),
     ('minmin', 83, 'Min Min'),
-    ('mrGame&Watch', 30, 'Mr. Game & Watch');
+    ('mrGame&Watch', 30, 'Mr. Game & Watch'),
+    ('mythra', 87, 'Mythra');

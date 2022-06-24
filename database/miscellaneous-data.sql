@@ -835,3 +835,20 @@ INSERT INTO public.miscellaneous AS "mr.game&watch"
     ('5 frames'),
     ('10 frames'),
     ('10 frames');
+
+INSERT INTO public.miscellaneous AS "mythra"
+  ("statValue")
+  VALUES
+    ('92'),
+    ('0.137'),
+    ('1.42'),
+    ('2.41'),
+    ('2.45'),
+    ('1.22'),
+    ('0.07'),
+    ('30 / 41 / 21 / 29'),
+    ('1.87 / 2.992'),
+    ('9 frames'),
+    ('10 frames'),
+    ('11 frames'),
+    ('10 frames');

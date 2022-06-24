@@ -636,3 +636,16 @@ INSERT INTO public.movements AS "mr.game&watch"
     (49, 'air dodge, left/right', 'movement'),
     (49, 'air dodge, side + up', 'movement'),
     (49, 'air dodge up', 'movement');
+
+INSERT INTO public.movements AS "mythra"
+  ("fighterId", "name", "type")
+  VALUES
+    (50, 'spot dodge', 'movement'),
+    (50, 'forward roll', 'movement'),
+    (50, 'backwards roll', 'movement'),
+    (50, 'neutral air dodge', 'movement'),
+    (50, 'air dodge, down', 'movement'),
+    (50, 'air dodge, side + down', 'movement'),
+    (50, 'air dodge, left/right', 'movement'),
+    (50, 'air dodge, side + up', 'movement'),
+    (50, 'air dodge up', 'movement');

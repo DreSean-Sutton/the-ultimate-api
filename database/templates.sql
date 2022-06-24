@@ -1,29 +1,29 @@
-INSERT INTO public.moves AS "mythra"
+INSERT INTO public.moves AS "ness"
   ("fighterId", "name", "moveType", "type")
   VALUES
-    (50, 'jab 1', 'single', 'move'),
-    (50, 'jab 2', 'single', 'move'),
-    (50, 'jab 3', 'single', 'move'),
-    (50, 'rapid jab', 'multi', 'move'),
-    (50, 'rapid jab finisher', 'single', 'move'),
-    (50, 'forward tilt', '', 'move'),
-    (50, 'up tilt', '', 'move'),
-    (50, 'down tilt', '', 'move'),
-    (50, 'dash attack', '', 'move'),
-    (50, 'forward smash', '', 'move'),
-    (50, 'up smash', '', 'move'),
-    (50, 'down smash', '', 'move'),
-    (50, 'neutral air', '', 'move'),
-    (50, 'forward air', '', 'move'),
-    (50, 'back air', '', 'move'),
-    (50, 'up air', '', 'move'),
-    (50, 'down air', '', 'move'),
-    (50, 'neutral b', '', 'move'),
-    (50, 'side b', '', 'move'),
-    (50, 'up b', '', 'move'),
-    (50, 'down b', '', 'move');
+    (51, 'jab 1', 'single', 'move'),
+    (51, 'jab 2', 'single', 'move'),
+    (51, 'jab 3', 'single', 'move'),
+    (51, 'rapid jab', 'multi', 'move'),
+    (51, 'rapid jab finisher', 'single', 'move'),
+    (51, 'forward tilt', '', 'move'),
+    (51, 'up tilt', '', 'move'),
+    (51, 'down tilt', '', 'move'),
+    (51, 'dash attack', '', 'move'),
+    (51, 'forward smash', '', 'move'),
+    (51, 'up smash', '', 'move'),
+    (51, 'down smash', '', 'move'),
+    (51, 'neutral air', '', 'move'),
+    (51, 'forward air', '', 'move'),
+    (51, 'back air', '', 'move'),
+    (51, 'up air', '', 'move'),
+    (51, 'down air', '', 'move'),
+    (51, 'neutral b', '', 'move'),
+    (51, 'side b', '', 'move'),
+    (51, 'up b', '', 'move'),
+    (51, 'down b', '', 'move');
 
-INSERT INTO public.hitboxes AS "mythra"
+INSERT INTO public.hitboxes AS "ness"
   ("damage", "activeFrames", "totalFrames", "firstFrame")
   VALUES
     ('.0%', '', '', ''),
@@ -48,19 +48,19 @@ INSERT INTO public.hitboxes AS "mythra"
     ('.0%', '', '', ''),
     ('.0%', '', '', '');
 
-INSERT INTO public.throws AS "mythra"
+INSERT INTO public.throws AS "ness"
   ("fighterId", "name", "type")
   VALUES
-    (50, 'grab', 'throw'),
-    (50, 'dash grab', 'throw'),
-    (50, 'pivot grab', 'throw'),
-    (50, 'pummel', 'throw'),
-    (50, 'forward throw', 'throw'),
-    (50, 'backward throw', 'throw'),
-    (50, 'up throw', 'throw'),
-    (50, 'down throw', 'throw');
+    (51, 'grab', 'throw'),
+    (51, 'dash grab', 'throw'),
+    (51, 'pivot grab', 'throw'),
+    (51, 'pummel', 'throw'),
+    (51, 'forward throw', 'throw'),
+    (51, 'backward throw', 'throw'),
+    (51, 'up throw', 'throw'),
+    (51, 'down throw', 'throw');
 
-INSERT INTO public.grappling AS "mythra"
+INSERT INTO public.grappling AS "ness"
   ("damage", "activeFrames", "totalFrames")
   VALUES
     (null, '6-7', '34'),
@@ -72,20 +72,20 @@ INSERT INTO public.grappling AS "mythra"
     ('.0%', '', ''),
     ('.0%', '', '');
 
-INSERT INTO public.movements AS "mythra"
+INSERT INTO public.movements AS "ness"
   ("fighterId", "name", "type")
   VALUES
-    (50, 'spot dodge', 'movement'),
-    (50, 'forward roll', 'movement'),
-    (50, 'backwards roll', 'movement'),
-    (50, 'neutral air dodge', 'movement'),
-    (50, 'air dodge, down', 'movement'),
-    (50, 'air dodge, side + down', 'movement'),
-    (50, 'air dodge, left/right', 'movement'),
-    (50, 'air dodge, side + up', 'movement'),
-    (50, 'air dodge up', 'movement');
+    (51, 'spot dodge', 'movement'),
+    (51, 'forward roll', 'movement'),
+    (51, 'backwards roll', 'movement'),
+    (51, 'neutral air dodge', 'movement'),
+    (51, 'air dodge, down', 'movement'),
+    (51, 'air dodge, side + down', 'movement'),
+    (51, 'air dodge, left/right', 'movement'),
+    (51, 'air dodge, side + up', 'movement'),
+    (51, 'air dodge up', 'movement');
 
-INSERT INTO public.dodging AS "mythra"
+INSERT INTO public.dodging AS "ness"
   ("activeFrames", "totalFrames")
   VALUES
     ('3-17', '20/25'),
@@ -98,24 +98,24 @@ INSERT INTO public.dodging AS "mythra"
     ('3-21', ''),
     ('3-21', '');
 
-INSERT INTO public.stats AS "mythra"
+INSERT INTO public.stats AS "ness"
   ("fighterId", "name", "type")
   VALUES
-    (50, 'weight', 'stat'),
-    (50, 'gravity', 'stat'),
-    (50, 'walk speed', 'stat'),
-    (50, 'run speed', 'stat'),
-    (50, 'initial dash', 'stat'),
-    (50, 'air speed', 'stat'),
-    (50, 'total air acceleration', 'stat'),
-    (50, 'sh / fh / shff / fhff', 'stat'),
-    (50, 'fall speed/fast fall speed', 'stat'),
-    (50, 'out of shield, ', 'stat'),
-    (50, 'out of shield, ', 'stat'),
-    (50, 'out of shield, ', 'stat'),
-    (50, 'shield grab (post-shieldstun)', 'stat');
+    (51, 'weight', 'stat'),
+    (51, 'gravity', 'stat'),
+    (51, 'walk speed', 'stat'),
+    (51, 'run speed', 'stat'),
+    (51, 'initial dash', 'stat'),
+    (51, 'air speed', 'stat'),
+    (51, 'total air acceleration', 'stat'),
+    (51, 'sh / fh / shff / fhff', 'stat'),
+    (51, 'fall speed/fast fall speed', 'stat'),
+    (51, 'out of shield, ', 'stat'),
+    (51, 'out of shield, ', 'stat'),
+    (51, 'out of shield, ', 'stat'),
+    (51, 'shield grab (post-shieldstun)', 'stat');
 
-INSERT INTO public.miscellaneous AS "mythra"
+INSERT INTO public.miscellaneous AS "ness"
   ("statValue")
   VALUES
     (''),

@@ -590,3 +590,15 @@ INSERT INTO public.grappling AS "mr.game&watch"
     ('4.0%', '35', '49'),
     ('12.0%', '26', '40'),
     ('4.0%', '35', '49');
+
+INSERT INTO public.grappling AS "mythra"
+  ("damage", "activeFrames", "totalFrames")
+  VALUES
+    (null, '6-7', '36'),
+    (null, '11-12', '43'),
+    (null, '12-13', '38'),
+    ('1.5%', '1', '19'),
+    ('3.0/2.5%', '10/11', '27'),
+    ('3.0/2.5%', '15/17', '35'),
+    ('4.0%', '9', '29'),
+    ('4.0/3.0%', '20/28', '48');

@@ -1386,3 +1386,28 @@ INSERT INTO public.moves AS "mr.game&watch"
     (49, 'up b', 'early/late', 'move'),
     (49, 'down b, oil panic', 'absorber and reflector', 'move'),
     (49, 'down b, overload', 'early/late/latest', 'move');
+
+INSERT INTO public.moves AS "mythra"
+  ("fighterId", "name", "moveType", "type")
+  VALUES
+    (50, 'jab 1', 'single', 'move'),
+    (50, 'jab 2', 'single', 'move'),
+    (50, 'jab 3', 'single', 'move'),
+    (50, 'rapid jab', 'multi', 'move'),
+    (50, 'rapid jab finisher', 'single', 'move'),
+    (50, 'forward tilt', 'single', 'move'),
+    (50, 'up tilt', 'single', 'move'),
+    (50, 'down tilt', 'single', 'move'),
+    (50, 'dash attack', 'single', 'move'),
+    (50, 'forward smash', 'single', 'move'),
+    (50, 'up smash', 'first/multi/final', 'move'),
+    (50, 'down smash', 'blade: close/far leg: close/far', 'move'),
+    (50, 'neutral air', 'multi/final/landing', 'move'),
+    (50, 'forward air', 'single', 'move'),
+    (50, 'back air', 'early/late', 'move'),
+    (50, 'up air', 'single', 'move'),
+    (50, 'down air', 'single', 'move'),
+    (50, 'side b', 'first/multi/final', 'move'),
+    (50, 'up b', 'slash/projectile/explosion', 'move'),
+    (50, 'up b, held', 'slash/projectiles', 'move'),
+    (50, 'down b', 'i-frames', 'move');

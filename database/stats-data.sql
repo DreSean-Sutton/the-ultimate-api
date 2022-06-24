@@ -835,3 +835,20 @@ INSERT INTO public.stats AS "mr.game&watch"
     (49, 'out of shield, down b(air)', 'stat'),
     (49, 'out of shield, neutral air', 'stat'),
     (49, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.stats AS "mythra"
+  ("fighterId", "name", "type")
+  VALUES
+    (50, 'weight', 'stat'),
+    (50, 'gravity', 'stat'),
+    (50, 'walk speed', 'stat'),
+    (50, 'run speed', 'stat'),
+    (50, 'initial dash', 'stat'),
+    (50, 'air speed', 'stat'),
+    (50, 'total air acceleration', 'stat'),
+    (50, 'sh / fh / shff / fhff', 'stat'),
+    (50, 'fall speed/fast fall speed', 'stat'),
+    (50, 'out of shield, up smash', 'stat'),
+    (50, 'out of shield, up b', 'stat'),
+    (50, 'out of shield, neutral air / forward air', 'stat'),
+    (50, 'shield grab (post-shieldstun)', 'stat');

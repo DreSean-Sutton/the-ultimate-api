@@ -636,3 +636,16 @@ INSERT INTO public.dodging AS "mr.game&watch"
     ('3-21', '100'),
     ('3-21', '123'),
     ('3-21', '132');
+
+INSERT INTO public.dodging AS "mythra"
+  ("activeFrames", "totalFrames")
+  VALUES
+    ('7-21 (foresight: 2-6)', '25/31'),
+    ('7-18 (foresight: 2-6)', '35'),
+    ('8-19 (foresight: 2-7)', '38'),
+    ('6-33 (foresight: 2-5)', '44'),
+    ('6-24 (foresight: 2-5)', '59'),
+    ('6-24 (foresight: 2-5)', '66'),
+    ('6-24 (foresight: 2-5)', '73'),
+    ('6-24 (foresight: 2-5)', '85'),
+    ('6-24 (foresight: 2-5)', '95');

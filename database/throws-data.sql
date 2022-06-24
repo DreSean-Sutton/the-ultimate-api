@@ -590,3 +590,15 @@ INSERT INTO public.throws AS "mr.game&watch"
     (49, 'backward throw', 'throw'),
     (49, 'up throw', 'throw'),
     (49, 'down throw', 'throw');
+
+INSERT INTO public.throws AS "mythra"
+  ("fighterId", "name", "type")
+  VALUES
+    (50, 'grab', 'throw'),
+    (50, 'dash grab', 'throw'),
+    (50, 'pivot grab', 'throw'),
+    (50, 'pummel', 'throw'),
+    (50, 'forward throw', 'throw'),
+    (50, 'backward throw', 'throw'),
+    (50, 'up throw', 'throw'),
+    (50, 'down throw', 'throw');
