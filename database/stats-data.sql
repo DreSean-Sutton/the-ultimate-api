@@ -852,3 +852,20 @@ INSERT INTO public.stats AS "mythra"
     (50, 'out of shield, up b', 'stat'),
     (50, 'out of shield, neutral air / forward air', 'stat'),
     (50, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.stats AS "ness"
+  ("fighterId", "name", "type")
+  VALUES
+    (51, 'weight', 'stat'),
+    (51, 'gravity', 'stat'),
+    (51, 'walk speed', 'stat'),
+    (51, 'run speed', 'stat'),
+    (51, 'initial dash', 'stat'),
+    (51, 'air speed', 'stat'),
+    (51, 'total air acceleration', 'stat'),
+    (51, 'sh / fh / shff / fhff', 'stat'),
+    (51, 'fall speed/fast fall speed', 'stat'),
+    (51, 'out of shield, neutral air', 'stat'),
+    (51, 'out of shield, up smash / down b(air)', 'stat'),
+    (51, 'out of shield, forward air / up air', 'stat'),
+    (51, 'shield grab (post-shieldstun)', 'stat');

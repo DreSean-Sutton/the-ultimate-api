@@ -649,3 +649,16 @@ INSERT INTO public.dodging AS "mythra"
     ('6-24 (foresight: 2-5)', '73'),
     ('6-24 (foresight: 2-5)', '85'),
     ('6-24 (foresight: 2-5)', '95');
+
+INSERT INTO public.dodging AS "ness"
+  ("activeFrames", "totalFrames")
+  VALUES
+    ('3-17', '20/25'),
+    ('4-15', '29'),
+    ('5-16', '34'),
+    ('3-30', '59'),
+    ('3-21', '77'),
+    ('3-21', '86'),
+    ('3-21', '99'),
+    ('3-21', '119'),
+    ('3-21', '134');

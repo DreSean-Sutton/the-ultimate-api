@@ -1411,3 +1411,27 @@ INSERT INTO public.moves AS "mythra"
     (50, 'up b', 'slash/projectile/explosion', 'move'),
     (50, 'up b, held', 'slash/projectiles', 'move'),
     (50, 'down b', 'i-frames', 'move');
+
+INSERT INTO public.moves AS "ness"
+  ("fighterId", "name", "moveType", "type")
+  VALUES
+    (51, 'jab 1', 'single', 'move'),
+    (51, 'jab 2', 'single', 'move'),
+    (51, 'jab 3', 'single', 'move'),
+    (51, 'forward tilt', 'single', 'move'),
+    (51, 'up tilt', 'close/far', 'move'),
+    (51, 'down tilt', 'close/far', 'move'),
+    (51, 'dash attack', 'first/second/third', 'move'),
+    (51, 'forward smash', 'close/med/far', 'move'),
+    (51, 'up smash', 'charging/launch', 'move'),
+    (51, 'down smash', 'weak/strong', 'move'),
+    (51, 'neutral air', 'early/late', 'move'),
+    (51, 'forward air', 'multi/final', 'move'),
+    (51, 'back air', 'early/late', 'move'),
+    (51, 'up air', 'multi/final', 'move'),
+    (51, 'down air', 'early/late', 'move'),
+    (51, 'neutral b', 'charge', 'move'),
+    (51, 'side b', 'projectile/pillar', 'move'),
+    (51, 'up b', 'direct/tail', 'move'),
+    (51, 'up b, pk rocket', 'early/late', 'move'),
+    (51, 'down b', 'held', 'move');

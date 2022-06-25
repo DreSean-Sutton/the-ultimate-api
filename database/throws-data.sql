@@ -602,3 +602,15 @@ INSERT INTO public.throws AS "mythra"
     (50, 'backward throw', 'throw'),
     (50, 'up throw', 'throw'),
     (50, 'down throw', 'throw');
+
+INSERT INTO public.throws AS "ness"
+  ("fighterId", "name", "type")
+  VALUES
+    (51, 'grab', 'throw'),
+    (51, 'dash grab', 'throw'),
+    (51, 'pivot grab', 'throw'),
+    (51, 'pummel', 'throw'),
+    (51, 'forward throw', 'throw'),
+    (51, 'backward throw', 'throw'),
+    (51, 'up throw', 'throw'),
+    (51, 'down throw', 'throw');

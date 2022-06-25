@@ -852,3 +852,20 @@ INSERT INTO public.miscellaneous AS "mythra"
     ('10 frames'),
     ('11 frames'),
     ('10 frames');
+
+INSERT INTO public.miscellaneous AS "ness"
+  ("statValue")
+  VALUES
+    ('94'),
+    ('0.077'),
+    ('0.907'),
+    ('1.609'),
+    ('1.826'),
+    ('1.007'),
+    ('0.1'),
+    ('42 / 58 / 29 / 41'),
+    ('1.31 / 2.096'),
+    ('8 frames'),
+    ('10 frames'),
+    ('11 frames'),
+    ('10 frames');

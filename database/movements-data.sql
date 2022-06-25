@@ -649,3 +649,16 @@ INSERT INTO public.movements AS "mythra"
     (50, 'air dodge, left/right', 'movement'),
     (50, 'air dodge, side + up', 'movement'),
     (50, 'air dodge up', 'movement');
+
+INSERT INTO public.movements AS "ness"
+  ("fighterId", "name", "type")
+  VALUES
+    (51, 'spot dodge', 'movement'),
+    (51, 'forward roll', 'movement'),
+    (51, 'backwards roll', 'movement'),
+    (51, 'neutral air dodge', 'movement'),
+    (51, 'air dodge, down', 'movement'),
+    (51, 'air dodge, side + down', 'movement'),
+    (51, 'air dodge, left/right', 'movement'),
+    (51, 'air dodge, side + up', 'movement'),
+    (51, 'air dodge up', 'movement');

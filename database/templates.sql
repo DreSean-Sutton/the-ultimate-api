@@ -1,29 +1,29 @@
-INSERT INTO public.moves AS "ness"
+INSERT INTO public.moves AS "olimar"
   ("fighterId", "name", "moveType", "type")
   VALUES
-    (51, 'jab 1', 'single', 'move'),
-    (51, 'jab 2', 'single', 'move'),
-    (51, 'jab 3', 'single', 'move'),
-    (51, 'rapid jab', 'multi', 'move'),
-    (51, 'rapid jab finisher', 'single', 'move'),
-    (51, 'forward tilt', '', 'move'),
-    (51, 'up tilt', '', 'move'),
-    (51, 'down tilt', '', 'move'),
-    (51, 'dash attack', '', 'move'),
-    (51, 'forward smash', '', 'move'),
-    (51, 'up smash', '', 'move'),
-    (51, 'down smash', '', 'move'),
-    (51, 'neutral air', '', 'move'),
-    (51, 'forward air', '', 'move'),
-    (51, 'back air', '', 'move'),
-    (51, 'up air', '', 'move'),
-    (51, 'down air', '', 'move'),
-    (51, 'neutral b', '', 'move'),
-    (51, 'side b', '', 'move'),
-    (51, 'up b', '', 'move'),
-    (51, 'down b', '', 'move');
+    (52, 'jab 1', 'single', 'move'),
+    (52, 'jab 2', 'single', 'move'),
+    (52, 'jab 3', 'single', 'move'),
+    (52, 'rapid jab', 'multi', 'move'),
+    (52, 'rapid jab finisher', 'single', 'move'),
+    (52, 'forward tilt', '', 'move'),
+    (52, 'up tilt', '', 'move'),
+    (52, 'down tilt', '', 'move'),
+    (52, 'dash attack', '', 'move'),
+    (52, 'forward smash', '', 'move'),
+    (52, 'up smash', '', 'move'),
+    (52, 'down smash', '', 'move'),
+    (52, 'neutral air', '', 'move'),
+    (52, 'forward air', '', 'move'),
+    (52, 'back air', '', 'move'),
+    (52, 'up air', '', 'move'),
+    (52, 'down air', '', 'move'),
+    (52, 'neutral b', '', 'move'),
+    (52, 'side b', '', 'move'),
+    (52, 'up b', '', 'move'),
+    (52, 'down b', '', 'move');
 
-INSERT INTO public.hitboxes AS "ness"
+INSERT INTO public.hitboxes AS "olimar"
   ("damage", "activeFrames", "totalFrames", "firstFrame")
   VALUES
     ('.0%', '', '', ''),
@@ -48,19 +48,19 @@ INSERT INTO public.hitboxes AS "ness"
     ('.0%', '', '', ''),
     ('.0%', '', '', '');
 
-INSERT INTO public.throws AS "ness"
+INSERT INTO public.throws AS "olimar"
   ("fighterId", "name", "type")
   VALUES
-    (51, 'grab', 'throw'),
-    (51, 'dash grab', 'throw'),
-    (51, 'pivot grab', 'throw'),
-    (51, 'pummel', 'throw'),
-    (51, 'forward throw', 'throw'),
-    (51, 'backward throw', 'throw'),
-    (51, 'up throw', 'throw'),
-    (51, 'down throw', 'throw');
+    (52, 'grab', 'throw'),
+    (52, 'dash grab', 'throw'),
+    (52, 'pivot grab', 'throw'),
+    (52, 'pummel', 'throw'),
+    (52, 'forward throw', 'throw'),
+    (52, 'backward throw', 'throw'),
+    (52, 'up throw', 'throw'),
+    (52, 'down throw', 'throw');
 
-INSERT INTO public.grappling AS "ness"
+INSERT INTO public.grappling AS "olimar"
   ("damage", "activeFrames", "totalFrames")
   VALUES
     (null, '6-7', '34'),
@@ -72,20 +72,20 @@ INSERT INTO public.grappling AS "ness"
     ('.0%', '', ''),
     ('.0%', '', '');
 
-INSERT INTO public.movements AS "ness"
+INSERT INTO public.movements AS "olimar"
   ("fighterId", "name", "type")
   VALUES
-    (51, 'spot dodge', 'movement'),
-    (51, 'forward roll', 'movement'),
-    (51, 'backwards roll', 'movement'),
-    (51, 'neutral air dodge', 'movement'),
-    (51, 'air dodge, down', 'movement'),
-    (51, 'air dodge, side + down', 'movement'),
-    (51, 'air dodge, left/right', 'movement'),
-    (51, 'air dodge, side + up', 'movement'),
-    (51, 'air dodge up', 'movement');
+    (52, 'spot dodge', 'movement'),
+    (52, 'forward roll', 'movement'),
+    (52, 'backwards roll', 'movement'),
+    (52, 'neutral air dodge', 'movement'),
+    (52, 'air dodge, down', 'movement'),
+    (52, 'air dodge, side + down', 'movement'),
+    (52, 'air dodge, left/right', 'movement'),
+    (52, 'air dodge, side + up', 'movement'),
+    (52, 'air dodge up', 'movement');
 
-INSERT INTO public.dodging AS "ness"
+INSERT INTO public.dodging AS "olimar"
   ("activeFrames", "totalFrames")
   VALUES
     ('3-17', '20/25'),
@@ -98,24 +98,24 @@ INSERT INTO public.dodging AS "ness"
     ('3-21', ''),
     ('3-21', '');
 
-INSERT INTO public.stats AS "ness"
+INSERT INTO public.stats AS "olimar"
   ("fighterId", "name", "type")
   VALUES
-    (51, 'weight', 'stat'),
-    (51, 'gravity', 'stat'),
-    (51, 'walk speed', 'stat'),
-    (51, 'run speed', 'stat'),
-    (51, 'initial dash', 'stat'),
-    (51, 'air speed', 'stat'),
-    (51, 'total air acceleration', 'stat'),
-    (51, 'sh / fh / shff / fhff', 'stat'),
-    (51, 'fall speed/fast fall speed', 'stat'),
-    (51, 'out of shield, ', 'stat'),
-    (51, 'out of shield, ', 'stat'),
-    (51, 'out of shield, ', 'stat'),
-    (51, 'shield grab (post-shieldstun)', 'stat');
+    (52, 'weight', 'stat'),
+    (52, 'gravity', 'stat'),
+    (52, 'walk speed', 'stat'),
+    (52, 'run speed', 'stat'),
+    (52, 'initial dash', 'stat'),
+    (52, 'air speed', 'stat'),
+    (52, 'total air acceleration', 'stat'),
+    (52, 'sh / fh / shff / fhff', 'stat'),
+    (52, 'fall speed/fast fall speed', 'stat'),
+    (52, 'out of shield, ', 'stat'),
+    (52, 'out of shield, ', 'stat'),
+    (52, 'out of shield, ', 'stat'),
+    (52, 'shield grab (post-shieldstun)', 'stat');
 
-INSERT INTO public.miscellaneous AS "ness"
+INSERT INTO public.miscellaneous AS "olimar"
   ("statValue")
   VALUES
     (''),
