@@ -662,3 +662,16 @@ INSERT INTO public.movements AS "ness"
     (51, 'air dodge, left/right', 'movement'),
     (51, 'air dodge, side + up', 'movement'),
     (51, 'air dodge up', 'movement');
+
+INSERT INTO public.movements AS "olimar"
+  ("fighterId", "name", "type")
+  VALUES
+    (52, 'spot dodge', 'movement'),
+    (52, 'forward roll', 'movement'),
+    (52, 'backwards roll', 'movement'),
+    (52, 'neutral air dodge', 'movement'),
+    (52, 'air dodge, down', 'movement'),
+    (52, 'air dodge, side + down', 'movement'),
+    (52, 'air dodge, left/right', 'movement'),
+    (52, 'air dodge, side + up', 'movement'),
+    (52, 'air dodge up', 'movement');

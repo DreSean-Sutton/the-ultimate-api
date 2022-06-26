@@ -869,3 +869,20 @@ INSERT INTO public.miscellaneous AS "ness"
     ('10 frames'),
     ('11 frames'),
     ('10 frames');
+
+INSERT INTO public.miscellaneous AS "olimar"
+  ("statValue")
+  VALUES
+    ('79'),
+    ('0.068'),
+    ('0.945'),
+    ('1.617'),
+    ('1.606'),
+    ('0.861'),
+    ('0.08'),
+    ('43 / 59 / 30 / 41'),
+    ('1.35 / 2.16'),
+    ('10 frames'),
+    ('11 frames'),
+    ('12 frames'),
+    ('16 frames');

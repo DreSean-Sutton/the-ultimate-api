@@ -614,3 +614,15 @@ INSERT INTO public.throws AS "ness"
     (51, 'backward throw', 'throw'),
     (51, 'up throw', 'throw'),
     (51, 'down throw', 'throw');
+
+INSERT INTO public.throws AS "olimar"
+  ("fighterId", "name", "type")
+  VALUES
+    (52, 'grab (pikman count: 1/2/3)', 'throw'),
+    (52, 'dash grab (pikman count: 1/2/3)', 'throw'),
+    (52, 'pivot grab (pikman count: 1/2/3)', 'throw'),
+    (52, 'pummel', 'throw'),
+    (52, 'forward throw', 'throw'),
+    (52, 'backward throw', 'throw'),
+    (52, 'up throw', 'throw'),
+    (52, 'down throw', 'throw');

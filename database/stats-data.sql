@@ -869,3 +869,20 @@ INSERT INTO public.stats AS "ness"
     (51, 'out of shield, up smash / down b(air)', 'stat'),
     (51, 'out of shield, forward air / up air', 'stat'),
     (51, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.stats AS "olimar"
+  ("fighterId", "name", "type")
+  VALUES
+    (52, 'weight', 'stat'),
+    (52, 'gravity', 'stat'),
+    (52, 'walk speed', 'stat'),
+    (52, 'run speed', 'stat'),
+    (52, 'initial dash', 'stat'),
+    (52, 'air speed', 'stat'),
+    (52, 'total air acceleration', 'stat'),
+    (52, 'sh / fh / shff / fhff', 'stat'),
+    (52, 'fall speed/fast fall speed', 'stat'),
+    (52, 'out of shield, neutral air / forward air', 'stat'),
+    (52, 'out of shield, up air', 'stat'),
+    (52, 'out of shield, down air / up smash', 'stat'),
+    (52, 'shield grab (post-shieldstun)', 'stat');
