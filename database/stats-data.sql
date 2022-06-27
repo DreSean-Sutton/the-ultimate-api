@@ -317,9 +317,9 @@ INSERT INTO public.stats AS "ganon"
     (19, 'total air acceleration', 'stat'),
     (19, 'sh / fh / shff / fhff', 'stat'),
     (19, 'fall speed / fast fall speed', 'stat'),
-    (19, 'out of sforward airhield, ', 'stat'),
-    (19, 'out of shield, ', 'stat'),
-    (19, 'out of shield, ', 'stat'),
+    (19, 'out of shield, neutral air', 'stat'),
+    (19, 'out of shield, up air', 'stat'),
+    (19, 'out of shield, back air', 'stat'),
     (19, 'shield grab (post-shieldstun)', 'stat');
 
 INSERT INTO public.stats AS "greninja"
@@ -334,9 +334,9 @@ INSERT INTO public.stats AS "greninja"
     (20, 'total air acceleration', 'stat'),
     (20, 'sh / fh / shff / fhff', 'stat'),
     (20, 'fall speed / fast fall speed', 'stat'),
-    (20, 'out of shield, ', 'stat'),
-    (20, 'out of shield, ', 'stat'),
-    (20, 'out of shield, ', 'stat'),
+    (20, 'out of shield, back air', 'stat'),
+    (20, 'out of shield, up air', 'stat'),
+    (20, 'out of shield, up smash', 'stat'),
     (20, 'shield grab (post-shieldstun)', 'stat');
 
 INSERT INTO public.stats AS "hero"
