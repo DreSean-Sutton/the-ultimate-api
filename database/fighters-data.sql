@@ -51,4 +51,5 @@ INSERT INTO public.fighters ("fighter", "rosterId", "displayName")
     ('mrGame&Watch', 30, 'Mr. Game & Watch'),
     ('mythra', 87, 'Mythra'),
     ('ness', 11, 'Ness'),
-    ('olimar', 45, 'Olimar');
+    ('olimar', 45, 'Olimar'),
+    ('pacMan', 60, 'Pac Man');

@@ -886,3 +886,20 @@ INSERT INTO public.stats AS "olimar"
     (52, 'out of shield, up air', 'stat'),
     (52, 'out of shield, down air / up smash', 'stat'),
     (52, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.stats AS "pacMan"
+  ("fighterId", "name", "type")
+  VALUES
+    (53, 'weight', 'stat'),
+    (53, 'gravity', 'stat'),
+    (53, 'walk speed', 'stat'),
+    (53, 'run speed', 'stat'),
+    (53, 'initial dash', 'stat'),
+    (53, 'air speed', 'stat'),
+    (53, 'total air acceleration', 'stat'),
+    (53, 'sh / fh / shff / fhff', 'stat'),
+    (53, 'fall speed/fast fall speed', 'stat'),
+    (53, 'out of shield, up b', 'stat'),
+    (53, 'out of shield, neutral air', 'stat'),
+    (53, 'out of shield, forward air', 'stat'),
+    (53, 'shield grab (post-shieldstun)', 'stat');

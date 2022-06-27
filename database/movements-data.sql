@@ -675,3 +675,16 @@ INSERT INTO public.movements AS "olimar"
     (52, 'air dodge, left/right', 'movement'),
     (52, 'air dodge, side + up', 'movement'),
     (52, 'air dodge up', 'movement');
+
+INSERT INTO public.movements AS "pacMan"
+  ("fighterId", "name", "type")
+  VALUES
+    (53, 'spot dodge', 'movement'),
+    (53, 'forward roll', 'movement'),
+    (53, 'backwards roll', 'movement'),
+    (53, 'neutral air dodge', 'movement'),
+    (53, 'air dodge, down', 'movement'),
+    (53, 'air dodge, side + down', 'movement'),
+    (53, 'air dodge, left/right', 'movement'),
+    (53, 'air dodge, side + up', 'movement'),
+    (53, 'air dodge up', 'movement');

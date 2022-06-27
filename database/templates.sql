@@ -1,29 +1,29 @@
-INSERT INTO public.moves AS "pacMan"
+INSERT INTO public.moves AS "palutena"
   ("fighterId", "name", "moveType", "type")
   VALUES
-    (53, 'jab 1', 'single', 'move'),
-    (53, 'jab 2', 'single', 'move'),
-    (53, 'jab 3', 'single', 'move'),
-    (53, 'rapid jab', 'multi', 'move'),
-    (53, 'rapid jab finisher', 'single', 'move'),
-    (53, 'forward tilt', '', 'move'),
-    (53, 'up tilt', '', 'move'),
-    (53, 'down tilt', '', 'move'),
-    (53, 'dash attack', '', 'move'),
-    (53, 'forward smash', '', 'move'),
-    (53, 'up smash', '', 'move'),
-    (53, 'down smash', '', 'move'),
-    (53, 'neutral air', '', 'move'),
-    (53, 'forward air', '', 'move'),
-    (53, 'back air', '', 'move'),
-    (53, 'up air', '', 'move'),
-    (53, 'down air', '', 'move'),
-    (53, 'neutral b', '', 'move'),
-    (53, 'side b', '', 'move'),
-    (53, 'up b', '', 'move'),
-    (53, 'down b', '', 'move');
+    (54, 'jab 1', 'single', 'move'),
+    (54, 'jab 2', 'single', 'move'),
+    (54, 'jab 3', 'single', 'move'),
+    (54, 'rapid jab', 'multi', 'move'),
+    (54, 'rapid jab finisher', 'single', 'move'),
+    (54, 'forward tilt', '', 'move'),
+    (54, 'up tilt', '', 'move'),
+    (54, 'down tilt', '', 'move'),
+    (54, 'dash attack', '', 'move'),
+    (54, 'forward smash', '', 'move'),
+    (54, 'up smash', '', 'move'),
+    (54, 'down smash', '', 'move'),
+    (54, 'neutral air', '', 'move'),
+    (54, 'forward air', '', 'move'),
+    (54, 'back air', '', 'move'),
+    (54, 'up air', '', 'move'),
+    (54, 'down air', '', 'move'),
+    (54, 'neutral b', '', 'move'),
+    (54, 'side b', '', 'move'),
+    (54, 'up b', '', 'move'),
+    (54, 'down b', '', 'move');
 
-INSERT INTO public.hitboxes AS "pacMan"
+INSERT INTO public.hitboxes AS "palutena"
   ("damage", "activeFrames", "totalFrames", "firstFrame")
   VALUES
     ('.0%', '', '', ''),
@@ -48,19 +48,19 @@ INSERT INTO public.hitboxes AS "pacMan"
     ('.0%', '', '', ''),
     ('.0%', '', '', '');
 
-INSERT INTO public.throws AS "pacMan"
+INSERT INTO public.throws AS "palutena"
   ("fighterId", "name", "type")
   VALUES
-    (53, 'grab', 'throw'),
-    (53, 'dash grab', 'throw'),
-    (53, 'pivot grab', 'throw'),
-    (53, 'pummel', 'throw'),
-    (53, 'forward throw', 'throw'),
-    (53, 'backward throw', 'throw'),
-    (53, 'up throw', 'throw'),
-    (53, 'down throw', 'throw');
+    (54, 'grab', 'throw'),
+    (54, 'dash grab', 'throw'),
+    (54, 'pivot grab', 'throw'),
+    (54, 'pummel', 'throw'),
+    (54, 'forward throw', 'throw'),
+    (54, 'backward throw', 'throw'),
+    (54, 'up throw', 'throw'),
+    (54, 'down throw', 'throw');
 
-INSERT INTO public.grappling AS "pacMan"
+INSERT INTO public.grappling AS "palutena"
   ("damage", "activeFrames", "totalFrames")
   VALUES
     (null, '6-7', '34'),
@@ -72,50 +72,50 @@ INSERT INTO public.grappling AS "pacMan"
     ('.0%', '', ''),
     ('.0%', '', '');
 
-INSERT INTO public.movements AS "pacMan"
+INSERT INTO public.movements AS "palutena"
   ("fighterId", "name", "type")
   VALUES
-    (53, 'spot dodge', 'movement'),
-    (53, 'forward roll', 'movement'),
-    (53, 'backwards roll', 'movement'),
-    (53, 'neutral air dodge', 'movement'),
-    (53, 'air dodge, down', 'movement'),
-    (53, 'air dodge, side + down', 'movement'),
-    (53, 'air dodge, left/right', 'movement'),
-    (53, 'air dodge, side + up', 'movement'),
-    (53, 'air dodge up', 'movement');
+    (54, 'spot dodge', 'movement'),
+    (54, 'forward roll', 'movement'),
+    (54, 'backwards roll', 'movement'),
+    (54, 'neutral air dodge', 'movement'),
+    (54, 'air dodge, down', 'movement'),
+    (54, 'air dodge, side + down', 'movement'),
+    (54, 'air dodge, left/right', 'movement'),
+    (54, 'air dodge, side + up', 'movement'),
+    (54, 'air dodge up', 'movement');
 
-INSERT INTO public.dodging AS "pacMan"
+INSERT INTO public.dodging AS "palutena"
   ("activeFrames", "totalFrames")
   VALUES
     ('3-17', '20/25'),
     ('4-15', '29'),
     ('5-16', '34'),
-    ('3-29', '39'),
+    ('3-29', ''),
     ('3-21', ''),
     ('3-21', ''),
     ('3-21', ''),
     ('3-21', ''),
     ('3-21', '');
 
-INSERT INTO public.stats AS "pacMan"
+INSERT INTO public.stats AS "palutena"
   ("fighterId", "name", "type")
   VALUES
-    (53, 'weight', 'stat'),
-    (53, 'gravity', 'stat'),
-    (53, 'walk speed', 'stat'),
-    (53, 'run speed', 'stat'),
-    (53, 'initial dash', 'stat'),
-    (53, 'air speed', 'stat'),
-    (53, 'total air acceleration', 'stat'),
-    (53, 'sh / fh / shff / fhff', 'stat'),
-    (53, 'fall speed/fast fall speed', 'stat'),
-    (53, 'out of shield, ', 'stat'),
-    (53, 'out of shield, ', 'stat'),
-    (53, 'out of shield, ', 'stat'),
-    (53, 'shield grab (post-shieldstun)', 'stat');
+    (54, 'weight', 'stat'),
+    (54, 'gravity', 'stat'),
+    (54, 'walk speed', 'stat'),
+    (54, 'run speed', 'stat'),
+    (54, 'initial dash', 'stat'),
+    (54, 'air speed', 'stat'),
+    (54, 'total air acceleration', 'stat'),
+    (54, 'sh / fh / shff / fhff', 'stat'),
+    (54, 'fall speed/fast fall speed', 'stat'),
+    (54, 'out of shield, ', 'stat'),
+    (54, 'out of shield, ', 'stat'),
+    (54, 'out of shield, ', 'stat'),
+    (54, 'shield grab (post-shieldstun)', 'stat');
 
-INSERT INTO public.miscellaneous AS "pacMan"
+INSERT INTO public.miscellaneous AS "palutena"
   ("statValue")
   VALUES
     (''),

@@ -886,3 +886,20 @@ INSERT INTO public.miscellaneous AS "olimar"
     ('11 frames'),
     ('12 frames'),
     ('16 frames');
+
+INSERT INTO public.miscellaneous AS "pacMan"
+  ("statValue")
+  VALUES
+    ('95'),
+    ('0.072'),
+    ('1.097'),
+    ('1.672'),
+    ('1.87'),
+    ('1.092'),
+    ('0.08'),
+    ('42 / 59 / 29 / 41'),
+    ('1.35 / 2.16'),
+    ('4 frames'),
+    ('6 frames'),
+    ('8 frames'),
+    ('16 frames');

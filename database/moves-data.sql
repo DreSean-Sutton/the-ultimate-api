@@ -1489,3 +1489,33 @@ INSERT INTO public.moves AS "olimar"
     (52, 'side b, purple', 'pikmin throw', 'move'),
     (52, 'up b', 'recovery', 'move'),
     (52, 'down b', 'pikmin recall', 'move');
+
+INSERT INTO public.moves AS "pacMan"
+  ("fighterId", "name", "moveType", "type")
+  VALUES
+    (53, 'jab 1', 'single', 'move'),
+    (53, 'jab 2', 'single', 'move'),
+    (53, 'jab 3', 'single', 'move'),
+    (53, 'forward tilt', 'single', 'move'),
+    (53, 'up tilt', 'single', 'move'),
+    (53, 'down tilt', 'single', 'move'),
+    (53, 'dash attack', 'multi/final', 'move'),
+    (53, 'forward smash', 'early/late', 'move'),
+    (53, 'up smash', 'first/second', 'move'),
+    (53, 'down smash', 'early/late', 'move'),
+    (53, 'neutral air', 'early/late', 'move'),
+    (53, 'forward air', 'single', 'move'),
+    (53, 'back air', 'early/late', 'move'),
+    (53, 'up air', 'single', 'move'),
+    (53, 'down air', 'multi/final', 'move'),
+    (53, 'neutral b, cherry', 'projectile', 'move'),
+    (53, 'neutral b, strawberry', 'projectile', 'move'),
+    (53, 'neutral b, lemon', 'projectile', 'move'),
+    (53, 'neutral b, apple', 'projectile', 'move'),
+    (53, 'neutral b, melon', 'projectile', 'move'),
+    (53, 'neutral b, galaga', 'projectile', 'move'),
+    (53, 'neutral b, bell', 'projectile', 'move'),
+    (53, 'neutral b, key', 'projectile', 'move'),
+    (53, 'side b', 'travel/dash', 'move'),
+    (53, 'up b', 'first/second/third', 'move'),
+    (53, 'down b', 'initial/launched', 'move');
