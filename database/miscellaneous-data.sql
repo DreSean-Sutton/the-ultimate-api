@@ -903,3 +903,20 @@ INSERT INTO public.miscellaneous AS "pacMan"
     ('6 frames'),
     ('8 frames'),
     ('16 frames');
+
+INSERT INTO public.miscellaneous AS "palutena"
+  ("statValue")
+  VALUES
+    ('91'),
+    ('0.12'),
+    ('1.271'),
+    ('2.077'),
+    ('2.035'),
+    ('1.0'),
+    ('0.115'),
+    ('34 / 50 / 24 / 35'),
+    ('1.55 / 2.48'),
+    ('8 frames'),
+    ('11 frames'),
+    ('12 frames'),
+    ('11 frames');

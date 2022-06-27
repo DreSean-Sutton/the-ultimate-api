@@ -638,3 +638,15 @@ INSERT INTO public.grappling AS "pacMan"
     ('11.0%', '25', '59'),
     ('5.0%', '18', '37'),
     ('1.5/1.5/1.5/6.0%', '15/24/32/34', '64');
+
+INSERT INTO public.grappling AS "palutena"
+  ("damage", "activeFrames", "totalFrames")
+  VALUES
+    (null, '7-8', '39'),
+    (null, '10-11', '47'),
+    (null, '11-12', '42'),
+    ('1.3%', '1', '19'),
+    ('9.0%', '20', '44'),
+    ('10.0%', '20', '54'),
+    ('8.0%', '17', '54'),
+    ('5.0%', '25', '45');

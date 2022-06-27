@@ -638,3 +638,15 @@ INSERT INTO public.throws AS "pacMan"
     (53, 'backward throw', 'throw'),
     (53, 'up throw', 'throw'),
     (53, 'down throw', 'throw');
+
+INSERT INTO public.throws AS "palutena"
+  ("fighterId", "name", "type")
+  VALUES
+    (54, 'grab', 'throw'),
+    (54, 'dash grab', 'throw'),
+    (54, 'pivot grab', 'throw'),
+    (54, 'pummel', 'throw'),
+    (54, 'forward throw', 'throw'),
+    (54, 'backward throw', 'throw'),
+    (54, 'up throw', 'throw'),
+    (54, 'down throw', 'throw');

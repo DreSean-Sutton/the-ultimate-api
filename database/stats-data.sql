@@ -317,7 +317,7 @@ INSERT INTO public.stats AS "ganon"
     (19, 'total air acceleration', 'stat'),
     (19, 'sh / fh / shff / fhff', 'stat'),
     (19, 'fall speed / fast fall speed', 'stat'),
-    (19, 'out of shield, ', 'stat'),
+    (19, 'out of sforward airhield, ', 'stat'),
     (19, 'out of shield, ', 'stat'),
     (19, 'out of shield, ', 'stat'),
     (19, 'shield grab (post-shieldstun)', 'stat');
@@ -903,3 +903,20 @@ INSERT INTO public.stats AS "pacMan"
     (53, 'out of shield, neutral air', 'stat'),
     (53, 'out of shield, forward air', 'stat'),
     (53, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.stats AS "palutena"
+  ("fighterId", "name", "type")
+  VALUES
+    (54, 'weight', 'stat'),
+    (54, 'gravity', 'stat'),
+    (54, 'walk speed', 'stat'),
+    (54, 'run speed', 'stat'),
+    (54, 'initial dash', 'stat'),
+    (54, 'air speed', 'stat'),
+    (54, 'total air acceleration', 'stat'),
+    (54, 'sh / fh / shff / fhff', 'stat'),
+    (54, 'fall speed/fast fall speed', 'stat'),
+    (54, 'out of shield, neutral air', 'stat'),
+    (54, 'out of shield, back air', 'stat'),
+    (54, 'out of shield, forward air', 'stat'),
+    (54, 'shield grab (post-shieldstun)', 'stat');

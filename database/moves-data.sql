@@ -1519,3 +1519,27 @@ INSERT INTO public.moves AS "pacMan"
     (53, 'side b', 'travel/dash', 'move'),
     (53, 'up b', 'first/second/third', 'move'),
     (53, 'down b', 'initial/launched', 'move');
+
+INSERT INTO public.moves AS "palutena"
+  ("fighterId", "name", "moveType", "type")
+  VALUES
+    (54, 'jab 1', 'single', 'move'),
+    (54, 'rapid jab', 'multi', 'move'),
+    (54, 'rapid jab finisher', 'single', 'move'),
+    (54, 'forward tilt', 'first/second', 'move'),
+    (54, 'up tilt', 'multi/final', 'move'),
+    (54, 'down tilt', 'enemies: grounded/aerial', 'move'),
+    (54, 'dash attack', 'early/late', 'move'),
+    (54, 'forward smash', 'close/far', 'move'),
+    (54, 'up smash', '(early: close/mid/far)(late: close/mid/far)', 'move'),
+    (54, 'down smash', 'close/far', 'move'),
+    (54, 'neutral air', 'multi/final', 'move'),
+    (54, 'forward air', 'single', 'move'),
+    (54, 'back air', 'single', 'move'),
+    (54, 'up air', 'multi/final', 'move'),
+    (54, 'down air', 'meteor', 'move'),
+    (54, 'neutral b', 'multi', 'move'),
+    (54, 'side b', 'multi/final', 'move'),
+    (54, 'up b', 'recovery', 'move'),
+    (54, 'down b, counter', '', 'move'),
+    (54, 'down b, attack/reflect', 'attack/reflection', 'move');
