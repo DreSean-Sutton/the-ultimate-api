@@ -1,29 +1,29 @@
-INSERT INTO public.moves AS "peach"
+INSERT INTO public.moves AS "pichu"
   ("fighterId", "name", "moveType", "type")
   VALUES
-    (55, 'jab 1', 'single', 'move'),
-    (55, 'jab 2', 'single', 'move'),
-    (55, 'jab 3', 'single', 'move'),
-    (55, 'rapid jab', 'multi', 'move'),
-    (55, 'rapid jab finisher', 'single', 'move'),
-    (55, 'forward tilt', '', 'move'),
-    (55, 'up tilt', '', 'move'),
-    (55, 'down tilt', '', 'move'),
-    (55, 'dash attack', '', 'move'),
-    (55, 'forward smash', '', 'move'),
-    (55, 'up smash', '', 'move'),
-    (55, 'down smash', '', 'move'),
-    (55, 'neutral air', '', 'move'),
-    (55, 'forward air', '', 'move'),
-    (55, 'back air', '', 'move'),
-    (55, 'up air', '', 'move'),
-    (55, 'down air', '', 'move'),
-    (55, 'neutral b', '', 'move'),
-    (55, 'side b', '', 'move'),
-    (55, 'up b', '', 'move'),
-    (55, 'down b', '', 'move');
+    (56, 'jab 1', 'single', 'move'),
+    (56, 'jab 2', 'single', 'move'),
+    (56, 'jab 3', 'single', 'move'),
+    (56, 'rapid jab', 'multi', 'move'),
+    (56, 'rapid jab finisher', 'single', 'move'),
+    (56, 'forward tilt', '', 'move'),
+    (56, 'up tilt', '', 'move'),
+    (56, 'down tilt', '', 'move'),
+    (56, 'dash attack', '', 'move'),
+    (56, 'forward smash', '', 'move'),
+    (56, 'up smash', '', 'move'),
+    (56, 'down smash', '', 'move'),
+    (56, 'neutral air', '', 'move'),
+    (56, 'forward air', '', 'move'),
+    (56, 'back air', '', 'move'),
+    (56, 'up air', '', 'move'),
+    (56, 'down air', '', 'move'),
+    (56, 'neutral b', '', 'move'),
+    (56, 'side b', '', 'move'),
+    (56, 'up b', '', 'move'),
+    (56, 'down b', '', 'move');
 
-INSERT INTO public.hitboxes AS "peach"
+INSERT INTO public.hitboxes AS "pichu"
   ("damage", "activeFrames", "totalFrames", "firstFrame")
   VALUES
     ('.0%', '', '', ''),
@@ -48,19 +48,19 @@ INSERT INTO public.hitboxes AS "peach"
     ('.0%', '', '', ''),
     ('.0%', '', '', '');
 
-INSERT INTO public.throws AS "peach"
+INSERT INTO public.throws AS "pichu"
   ("fighterId", "name", "type")
   VALUES
-    (55, 'grab', 'throw'),
-    (55, 'dash grab', 'throw'),
-    (55, 'pivot grab', 'throw'),
-    (55, 'pummel', 'throw'),
-    (55, 'forward throw', 'throw'),
-    (55, 'backward throw', 'throw'),
-    (55, 'up throw', 'throw'),
-    (55, 'down throw', 'throw');
+    (56, 'grab', 'throw'),
+    (56, 'dash grab', 'throw'),
+    (56, 'pivot grab', 'throw'),
+    (56, 'pummel', 'throw'),
+    (56, 'forward throw', 'throw'),
+    (56, 'backward throw', 'throw'),
+    (56, 'up throw', 'throw'),
+    (56, 'down throw', 'throw');
 
-INSERT INTO public.grappling AS "peach"
+INSERT INTO public.grappling AS "pichu"
   ("damage", "activeFrames", "totalFrames")
   VALUES
     (null, '6-7', '34'),
@@ -72,20 +72,20 @@ INSERT INTO public.grappling AS "peach"
     ('.0%', '', ''),
     ('.0%', '', '');
 
-INSERT INTO public.movements AS "peach"
+INSERT INTO public.movements AS "pichu"
   ("fighterId", "name", "type")
   VALUES
-    (55, 'spot dodge', 'movement'),
-    (55, 'forward roll', 'movement'),
-    (55, 'backwards roll', 'movement'),
-    (55, 'neutral air dodge', 'movement'),
-    (55, 'air dodge, down', 'movement'),
-    (55, 'air dodge, side + down', 'movement'),
-    (55, 'air dodge, left/right', 'movement'),
-    (55, 'air dodge, side + up', 'movement'),
-    (55, 'air dodge up', 'movement');
+    (56, 'spot dodge', 'movement'),
+    (56, 'forward roll', 'movement'),
+    (56, 'backwards roll', 'movement'),
+    (56, 'neutral air dodge', 'movement'),
+    (56, 'air dodge, down', 'movement'),
+    (56, 'air dodge, side + down', 'movement'),
+    (56, 'air dodge, left/right', 'movement'),
+    (56, 'air dodge, side + up', 'movement'),
+    (56, 'air dodge up', 'movement');
 
-INSERT INTO public.dodging AS "peach"
+INSERT INTO public.dodging AS "pichu"
   ("activeFrames", "totalFrames")
   VALUES
     ('3-17', '20/25'),
@@ -98,24 +98,24 @@ INSERT INTO public.dodging AS "peach"
     ('3-21', ''),
     ('3-21', '');
 
-INSERT INTO public.stats AS "peach"
+INSERT INTO public.stats AS "pichu"
   ("fighterId", "name", "type")
   VALUES
-    (55, 'weight', 'stat'),
-    (55, 'gravity', 'stat'),
-    (55, 'walk speed', 'stat'),
-    (55, 'run speed', 'stat'),
-    (55, 'initial dash', 'stat'),
-    (55, 'air speed', 'stat'),
-    (55, 'total air acceleration', 'stat'),
-    (55, 'sh / fh / shff / fhff', 'stat'),
-    (55, 'fall speed/fast fall speed', 'stat'),
-    (55, 'out of shield, ', 'stat'),
-    (55, 'out of shield, ', 'stat'),
-    (55, 'out of shield, ', 'stat'),
-    (55, 'shield grab (post-shieldstun)', 'stat');
+    (56, 'weight', 'stat'),
+    (56, 'gravity', 'stat'),
+    (56, 'walk speed', 'stat'),
+    (56, 'run speed', 'stat'),
+    (56, 'initial dash', 'stat'),
+    (56, 'air speed', 'stat'),
+    (56, 'total air acceleration', 'stat'),
+    (56, 'sh / fh / shff / fhff', 'stat'),
+    (56, 'fall speed/fast fall speed', 'stat'),
+    (56, 'out of shield, ', 'stat'),
+    (56, 'out of shield, ', 'stat'),
+    (56, 'out of shield, ', 'stat'),
+    (56, 'shield grab (post-shieldstun)', 'stat');
 
-INSERT INTO public.miscellaneous AS "peach"
+INSERT INTO public.miscellaneous AS "pichu"
   ("statValue")
   VALUES
     (''),

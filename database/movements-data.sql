@@ -701,3 +701,16 @@ INSERT INTO public.movements AS "palutena"
     (54, 'air dodge, left/right', 'movement'),
     (54, 'air dodge, side + up', 'movement'),
     (54, 'air dodge up', 'movement');
+
+INSERT INTO public.movements AS "peach"
+  ("fighterId", "name", "type")
+  VALUES
+    (55, 'spot dodge', 'movement'),
+    (55, 'forward roll', 'movement'),
+    (55, 'backwards roll', 'movement'),
+    (55, 'neutral air dodge', 'movement'),
+    (55, 'air dodge, down', 'movement'),
+    (55, 'air dodge, side + down', 'movement'),
+    (55, 'air dodge, left/right', 'movement'),
+    (55, 'air dodge, side + up', 'movement'),
+    (55, 'air dodge up', 'movement');

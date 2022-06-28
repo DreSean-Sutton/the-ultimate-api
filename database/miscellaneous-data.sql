@@ -155,7 +155,7 @@ INSERT INTO public.miscellaneous AS "daisy"
   ("statValue")
   VALUES
     ('89'),
-    ('0.070'),
+    ('0.07'),
     ('0.924'),
     ('1.595'),
     ('1.826'),
@@ -920,3 +920,20 @@ INSERT INTO public.miscellaneous AS "palutena"
     ('11 frames'),
     ('12 frames'),
     ('11 frames');
+
+INSERT INTO public.miscellaneous AS "peach"
+  ("statValue")
+  VALUES
+    ('89'),
+    ('0.07'),
+    ('0.924'),
+    ('1.595'),
+    ('1.826'),
+    ('1.029'),
+    ('0.12'),
+    ('41 / 57 / 28 / 40'),
+    ('1.19 / 1.904'),
+    ('7 frames'),
+    ('8 frames'),
+    ('9 frames'),
+    ('10 frames');

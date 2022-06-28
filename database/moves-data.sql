@@ -53,7 +53,7 @@ INSERT INTO public.moves AS "bayonetta"
     (2, 'side b, angled up', 'early/late/latest', 'move'),
     (2, 'side b, angled down', 'normal/landing', 'move'),
     (2, 'up b', 'first/multi/final', 'move'),
-    (2, 'down b', 'counter', 'move');
+    (2, 'down b', 'counter window', 'move');
 
 INSERT INTO public.moves AS "bowser"
   ("fighterId", "name", "moveType", "type")
@@ -184,7 +184,7 @@ INSERT INTO public.moves AS "chrom"
     (7, 'side b (hit 3), down', 'single', 'move'),
     (7, 'side b (hit 4), down', 'single', 'move'),
     (7, 'up b', 'first/multi/falling/landing', 'move'),
-    (7, 'down b, counter', 'counter', 'move'),
+    (7, 'down b, counter', 'counter window', 'move'),
     (7, 'down b, attack', 'counter attack', 'move');
 
 INSERT INTO public.moves AS "cloud"
@@ -245,7 +245,7 @@ INSERT INTO public.moves AS "corrin"
     (9, 'side b, pin kick', 'early/late (over edge)', 'move'),
     (9, 'side b, back kick', 'early/late (over edge)', 'move'),
     (9, 'up b', 'first/(multi)/final', 'move'),
-    (9, 'down b', 'counter', 'move'),
+    (9, 'down b', 'counter window', 'move'),
     (9, 'down b', 'counter attack', 'move');
 
 INSERT INTO public.moves AS "daisy"
@@ -253,24 +253,25 @@ INSERT INTO public.moves AS "daisy"
   VALUES
     (10, 'jab 1', 'single', 'move'),
     (10, 'jab 2', 'single', 'move'),
-    (10, 'forward tilt', 'close/mid hit/late', 'move'),
+    (10, 'forward tilt', 'close/far: early/far: late', 'move'),
     (10, 'up tilt', 'close/far', 'move'),
     (10, 'down tilt', 'single', 'move'),
     (10, 'dash attack', 'first/second', 'move'),
     (10, 'forward smash', 'golf/tennis/pan', 'move'),
-    (10, 'up smash', 'early tip/early hand/early sides/late tip/late hand', 'move'),
+    (10, 'up smash', 'early: tip/hand/sides/late: tip/hand', 'move'),
     (10, 'down smash', 'multi/final', 'move'),
     (10, 'neutral air', 'early/late hands/late hips', 'move'),
     (10, 'forward air', 'close/far', 'move'),
     (10, 'back air', 'early/late', 'move'),
-    (10, 'up air', 'first/second', 'move'),
+    (10, 'up air', '(hit 1: early/normal/late)(hit 2: early/normal', 'move'),
     (10, 'down air', 'multi far/multi close/final', 'move'),
-    (10, 'neutral b', 'counter', 'move'),
-    (10, 'neutral b', 'counter attack', 'move'),
-    (10, 'side b, ground', '(endlag on hit) normal/over edge', 'move'),
-    (10, 'side b, air', '(endlag on hit)', 'move'),
+    (10, 'neutral b, counter', 'counter window', 'move'),
+    (10, 'neutral b, attack', 'damage per spore', 'move'),
+    (10, 'side b, ground', 'detection/on hit', 'move'),
+    (10, 'side b, air', 'detection/on hit', 'move'),
     (10, 'up b', 'first/multi/final', 'move'),
-    (10, 'down b', 'slot machine', 'move');
+    (10, 'down b', 'normal/winking/dot eye/stitchface/bob-omb/mr. saturn', 'move');
+
 
 INSERT INTO public.moves AS "darkPit"
   ("fighterId", "name", "moveType", "type")
@@ -528,7 +529,7 @@ INSERT INTO public.moves AS "greninja"
     (20, 'neutral b', 'partial charge/full charge', 'move'),
     (20, 'side b', 'front/back kick', 'move'),
     (20, 'up b', 'recovery', 'move'),
-    (20, 'down b, counter', 'counter', 'move'),
+    (20, 'down b, counter', 'counter window', 'move'),
     (20, 'down b, attack', 'horizontal/vertical', 'move');
 
 INSERT INTO public.moves AS "hero"
@@ -625,7 +626,7 @@ INSERT INTO public.moves AS "ike"
     (23, 'neutral b', 'charge', 'move'),
     (23, 'side b', 'charge', 'move'),
     (23, 'up b', 'first/multi/falling/landing', 'move'),
-    (23, 'down b', 'counter', 'move');
+    (23, 'down b', 'counter window', 'move');
 
 INSERT INTO public.moves AS "incineroar"
   ("fighterId", "name", "moveType", "type")
@@ -651,7 +652,7 @@ INSERT INTO public.moves AS "incineroar"
     (24, 'side b, back body drop', 'hold', 'move'),
     (24, 'side b, chest bounce (fail)', 'fail', 'move'),
     (24, 'up b', 'rising/early falling/late falling/landing', 'move'),
-    (24, 'down b, counter', 'counter', 'move'),
+    (24, 'down b, counter', 'counter window', 'move'),
     (24, 'down b, attack', 'attack', 'move');
 
 INSERT INTO public.moves AS "inkling"
@@ -756,7 +757,7 @@ INSERT INTO public.moves AS "joker"
     (28, 'up b (grappling attack)', 'grounded/air', 'move'),
     (28, 'up b, arsene', 'ground/air', 'move'),
     (28, 'down b, rebel''s guard', 'minimal/additional endlag', 'move'),
-    (28, 'down b, counterattack', 'counter', 'move'),
+    (28, 'down b, counter attack', 'attack', 'move'),
     (28, 'down b, arsene', 'multiplier (minimum/maximum)', 'move');
 
 INSERT INTO public.moves AS "kazuya"
@@ -896,7 +897,7 @@ INSERT INTO public.moves AS "krool"
     (32, 'neutral b, second shot', 'projectile', 'move'),
     (32, 'side b', 'throw/return', 'move'),
     (32, 'up b', 'multi', 'move'),
-    (32, 'down b, counter', 'counter', 'move'),
+    (32, 'down b, counter', 'counter window', 'move'),
     (32, 'down b, counter attack', 'front/reverse', 'move');
 
 INSERT INTO public.moves AS "kirby"
@@ -979,7 +980,7 @@ INSERT INTO public.moves AS "littleMac"
     (35, 'side b, ground', 'early/late', 'move'),
     (35, 'side b, air', 'early/late', 'move'),
     (35, 'up b', 'first/multi/final', 'move'),
-    (35, 'down b, counter', 'counter', 'move'),
+    (35, 'down b, counter', 'counter window', 'move'),
     (35, 'down b, counter attack', 'counter attack', 'move');
 
 INSERT INTO public.moves AS "lucario"
@@ -1006,7 +1007,7 @@ INSERT INTO public.moves AS "lucario"
     (36, 'side b', 'close/far', 'move'),
     (36, 'side b', 'single', 'move'),
     (36, 'up b', 'on hit', 'move'),
-    (36, 'down b, counter', 'counter', 'move'),
+    (36, 'down b, counter', 'counter window', 'move'),
     (36, 'down b, counter attack', 'single', 'move');
 
 INSERT INTO public.moves AS "lucas"
@@ -1062,7 +1063,7 @@ INSERT INTO public.moves AS "lucina"
     (38, 'side b (hit 3), down', 'single', 'move'),
     (38, 'side b (hit 4), down', 'multi/final', 'move'),
     (38, 'up b', 'early/late', 'move'),
-    (38, 'down b, counter', 'counter', 'move'),
+    (38, 'down b, counter', 'counter window', 'move'),
     (38, 'down b, counter attack', 'single', 'move');
 
 INSERT INTO public.moves AS "luigi"
@@ -1143,7 +1144,7 @@ INSERT INTO public.moves AS "marth"
     (41, 'side b (hit 3), down', 'close/tipper', 'move'),
     (41, 'side b (hit 4), down', 'multi/final: close/final: tipper', 'move'),
     (41, 'up b', 'early/late', 'move'),
-    (41, 'down b, counter', 'counter', 'move'),
+    (41, 'down b, counter', 'counter window', 'move'),
     (41, 'down b, counter attack', 'single', 'move');
 
 INSERT INTO public.moves AS "megaMan"
@@ -1260,7 +1261,7 @@ INSERT INTO public.moves AS "miiBrawler"
     (45, 'head-on assault, ground', 'rising/falling/landing', 'move'),
     (45, 'feint jump', 'flip', 'move'),
     (45, 'feint jump, kick', 'kick/landing', 'move'),
-    (45, 'counter throw', 'counter', 'move'),
+    (45, 'counter throw', 'counter window', 'move'),
     (45, 'counter throw, activated', 'throw', 'move');
 
 INSERT INTO public.moves AS "miiGunner"
@@ -1323,7 +1324,7 @@ INSERT INTO public.moves AS "miiSwordfighter"
     (47, 'skyward slash dash', 'first/multi/final', 'move'),
     (47, 'hero''s spin, ground', 'uncharged-charged | early/late', 'move'),
     (47, 'hero''s spin, air', 'uncharged-charged | first/multi/final', 'move'),
-    (47, 'blade counter', 'counter', 'move'),
+    (47, 'blade counter', 'counter window', 'move'),
     (47, 'blade counter, activated', 'counter attack', 'move'),
     (47, 'reversal slash', 'single/reflector', 'move'),
     (47, 'power thrust, ground', 'early/late/latest', 'move'),
@@ -1541,5 +1542,29 @@ INSERT INTO public.moves AS "palutena"
     (54, 'neutral b', 'multi', 'move'),
     (54, 'side b', 'multi/final', 'move'),
     (54, 'up b', 'recovery', 'move'),
-    (54, 'down b, counter', '', 'move'),
+    (54, 'down b, counter', 'counter window', 'move'),
     (54, 'down b, attack/reflect', 'attack/reflection', 'move');
+
+INSERT INTO public.moves AS "peach"
+  ("fighterId", "name", "moveType", "type")
+  VALUES
+    (55, 'jab 1', 'single', 'move'),
+    (55, 'jab 2', 'single', 'move'),
+    (55, 'forward tilt', 'close/far: early/far: late', 'move'),
+    (55, 'up tilt', 'close/far', 'move'),
+    (55, 'down tilt', 'single', 'move'),
+    (55, 'dash attack', 'first/second', 'move'),
+    (55, 'forward smash', 'golf/tennis/pan', 'move'),
+    (55, 'up smash', 'early: tip/hand/sides/late: tip/hand', 'move'),
+    (55, 'down smash', 'multi/final', 'move'),
+    (55, 'neutral air', 'early/late hands/late hips', 'move'),
+    (55, 'forward air', 'close/far', 'move'),
+    (55, 'back air', 'early/late', 'move'),
+    (55, 'up air', '(hit 1: early/normal/late)(hit 2: early/normal', 'move'),
+    (55, 'down air', 'multi far/multi close/final', 'move'),
+    (55, 'neutral b, counter', 'counter window', 'move'),
+    (55, 'neutral b, attack', 'damage per spore', 'move'),
+    (55, 'side b, ground', 'detection/on hit', 'move'),
+    (55, 'side b, air', 'detection/on hit', 'move'),
+    (55, 'up b', 'first/multi/final', 'move'),
+    (55, 'down b', 'normal/winking/dot eye/stitchface/bob-omb/mr. saturn', 'move');
