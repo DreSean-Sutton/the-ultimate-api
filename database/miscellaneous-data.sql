@@ -937,3 +937,20 @@ INSERT INTO public.miscellaneous AS "peach"
     ('8 frames'),
     ('9 frames'),
     ('10 frames');
+
+INSERT INTO public.miscellaneous AS "pichu"
+  ("statValue")
+  VALUES
+    ('62'),
+    ('0.14'),
+    ('1.302'),
+    ('1.892'),
+    ('1.98'),
+    ('1.029'),
+    ('0.1'),
+    ('31 / 45 / 23 / 34'),
+    ('1.9 / 2.5'),
+    ('6 frames'),
+    ('7 frames'),
+    ('8 frames'),
+    ('10 frames');

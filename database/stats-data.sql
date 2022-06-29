@@ -937,3 +937,20 @@ INSERT INTO public.stats AS "peach"
     (55, 'out of shield, neutral air', 'stat'),
     (55, 'out of shield, back air', 'stat'),
     (55, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.stats AS "pichu"
+  ("fighterId", "name", "type")
+  VALUES
+    (56, 'weight', 'stat'),
+    (56, 'gravity', 'stat'),
+    (56, 'walk speed', 'stat'),
+    (56, 'run speed', 'stat'),
+    (56, 'initial dash', 'stat'),
+    (56, 'air speed', 'stat'),
+    (56, 'total air acceleration', 'stat'),
+    (56, 'sh / fh / shff / fhff', 'stat'),
+    (56, 'fall speed/fast fall speed', 'stat'),
+    (56, 'out of shield, neutral air', 'stat'),
+    (56, 'out of shield, up air', 'stat'),
+    (56, 'out of shield, back air', 'stat'),
+    (56, 'shield grab (post-shieldstun)', 'stat');

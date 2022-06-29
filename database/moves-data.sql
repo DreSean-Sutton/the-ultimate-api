@@ -272,7 +272,6 @@ INSERT INTO public.moves AS "daisy"
     (10, 'up b', 'first/multi/final', 'move'),
     (10, 'down b', 'normal/winking/dot eye/stitchface/bob-omb/mr. saturn', 'move');
 
-
 INSERT INTO public.moves AS "darkPit"
   ("fighterId", "name", "moveType", "type")
   VALUES
@@ -1568,3 +1567,24 @@ INSERT INTO public.moves AS "peach"
     (55, 'side b, air', 'detection/on hit', 'move'),
     (55, 'up b', 'first/multi/final', 'move'),
     (55, 'down b', 'normal/winking/dot eye/stitchface/bob-omb/mr. saturn', 'move');
+
+INSERT INTO public.moves AS "pichu"
+  ("fighterId", "name", "moveType", "type")
+  VALUES
+    (56, 'jab', 'single', 'move'),
+    (56, 'forward tilt', 'single | self-dmg |', 'move'),
+    (56, 'up tilt', 'single', 'move'),
+    (56, 'down tilt', 'single', 'move'),
+    (56, 'dash attack', 'early/late', 'move'),
+    (56, 'forward smash', 'multi/final | self-dmg |', 'move'),
+    (56, 'up smash', 'single', 'move'),
+    (56, 'down smash', 'multi/final | self-dmg |', 'move'),
+    (56, 'neutral air', 'early/late | self-dmg |', 'move'),
+    (56, 'forward air', 'multi/final | self-dmg |', 'move'),
+    (56, 'back air', 'multi/final | self-dmg |', 'move'),
+    (56, 'up air', 'single', 'move'),
+    (56, 'down air', 'meteor/late/landing | self-dmg: normal/landing |', 'move'),
+    (56, 'neutral b', 'projectile/arc | self-dmg |', 'move'),
+    (56, 'side b', 'uncharged-charged | self-dmg |', 'move'),
+    (56, 'up b', 'recovery | self-dmg: first dash/second dash |', 'move'),
+    (56, 'down b', '(spike)(late bolt)/self hit | self-dmg |', 'move');
