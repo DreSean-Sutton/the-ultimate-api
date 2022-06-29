@@ -1587,4 +1587,25 @@ INSERT INTO public.moves AS "pichu"
     (56, 'neutral b', 'projectile/arc | self-dmg |', 'move'),
     (56, 'side b', 'uncharged-charged | self-dmg |', 'move'),
     (56, 'up b', 'recovery | self-dmg: first dash/second dash |', 'move'),
-    (56, 'down b', '(spike)(late bolt)/self hit | self-dmg |', 'move');
+    (56, 'down b', '(early bolt)(late bolt)/self hit | self-dmg |', 'move');
+
+INSERT INTO public.moves AS "pikachu"
+  ("fighterId", "name", "moveType", "type")
+  VALUES
+    (57, 'jab', 'far/close', 'move'),
+    (57, 'forward tilt', 'neutral/down/up', 'move'),
+    (57, 'up tilt', 'single', 'move'),
+    (57, 'down tilt', 'single', 'move'),
+    (57, 'dash attack', 'early/late', 'move'),
+    (57, 'forward smash', 'early/late/latest', 'move'),
+    (57, 'up smash', 'close/far/late', 'move'),
+    (57, 'down smash', 'multi/final', 'move'),
+    (57, 'neutral air', 'multi/final', 'move'),
+    (57, 'forward air', 'multi/final', 'move'),
+    (57, 'back air', 'multi/final/landing', 'move'),
+    (57, 'up air', 'early/late', 'move'),
+    (57, 'down air', 'meteor/late/landing', 'move'),
+    (57, 'neutral b', 'projectile/arc', 'move'),
+    (57, 'side b', 'uncharged-charged', 'move'),
+    (57, 'up b', 'first/second', 'move'),
+    (57, 'down b', '(early bolt)(late bolt)/self hit', 'move');

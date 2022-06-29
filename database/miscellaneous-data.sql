@@ -954,3 +954,20 @@ INSERT INTO public.miscellaneous AS "pichu"
     ('7 frames'),
     ('8 frames'),
     ('10 frames');
+
+INSERT INTO public.miscellaneous AS "pikachu"
+  ("statValue")
+  VALUES
+    ('79'),
+    ('0.095'),
+    ('1.302'),
+    ('2.039'),
+    ('1.98'),
+    ('0.957'),
+    ('0.1'),
+    ('38 / 53 / 26 / 37'),
+    ('1.55 / 2.48'),
+    ('6 frames'),
+    ('7 frames'),
+    ('10 frames'),
+    ('11 frames');

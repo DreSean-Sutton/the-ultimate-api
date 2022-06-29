@@ -727,3 +727,16 @@ INSERT INTO public.movements AS "pichu"
     (56, 'air dodge, left/right', 'movement'),
     (56, 'air dodge, side + up', 'movement'),
     (56, 'air dodge up', 'movement');
+
+INSERT INTO public.movements AS "pikachu"
+  ("fighterId", "name", "type")
+  VALUES
+    (57, 'spot dodge', 'movement'),
+    (57, 'forward roll', 'movement'),
+    (57, 'backwards roll', 'movement'),
+    (57, 'neutral air dodge', 'movement'),
+    (57, 'air dodge, down', 'movement'),
+    (57, 'air dodge, side + down', 'movement'),
+    (57, 'air dodge, left/right', 'movement'),
+    (57, 'air dodge, side + up', 'movement'),
+    (57, 'air dodge up', 'movement');

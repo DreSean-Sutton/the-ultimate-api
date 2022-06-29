@@ -1,29 +1,29 @@
-INSERT INTO public.moves AS "pikachu"
+INSERT INTO public.moves AS "piranhaPlant"
   ("fighterId", "name", "moveType", "type")
   VALUES
-    (57, 'jab 1', 'single', 'move'),
-    (57, 'jab 2', 'single', 'move'),
-    (57, 'jab 3', 'single', 'move'),
-    (57, 'rapid jab', 'multi', 'move'),
-    (57, 'rapid jab finisher', 'single', 'move'),
-    (57, 'forward tilt', '', 'move'),
-    (57, 'up tilt', '', 'move'),
-    (57, 'down tilt', '', 'move'),
-    (57, 'dash attack', '', 'move'),
-    (57, 'forward smash', '', 'move'),
-    (57, 'up smash', '', 'move'),
-    (57, 'down smash', '', 'move'),
-    (57, 'neutral air', '', 'move'),
-    (57, 'forward air', '', 'move'),
-    (57, 'back air', '', 'move'),
-    (57, 'up air', '', 'move'),
-    (57, 'down air', '', 'move'),
-    (57, 'neutral b', '', 'move'),
-    (57, 'side b', '', 'move'),
-    (57, 'up b', '', 'move'),
-    (57, 'down b', '', 'move');
+    (58, 'jab 1', 'single', 'move'),
+    (58, 'jab 2', 'single', 'move'),
+    (58, 'jab 3', 'single', 'move'),
+    (58, 'rapid jab', 'multi', 'move'),
+    (58, 'rapid jab finisher', 'single', 'move'),
+    (58, 'forward tilt', '', 'move'),
+    (58, 'up tilt', '', 'move'),
+    (58, 'down tilt', '', 'move'),
+    (58, 'dash attack', '', 'move'),
+    (58, 'forward smash', '', 'move'),
+    (58, 'up smash', '', 'move'),
+    (58, 'down smash', '', 'move'),
+    (58, 'neutral air', '', 'move'),
+    (58, 'forward air', '', 'move'),
+    (58, 'back air', '', 'move'),
+    (58, 'up air', '', 'move'),
+    (58, 'down air', '', 'move'),
+    (58, 'neutral b', '', 'move'),
+    (58, 'side b', '', 'move'),
+    (58, 'up b', '', 'move'),
+    (58, 'down b', '', 'move');
 
-INSERT INTO public.hitboxes AS "pikachu"
+INSERT INTO public.hitboxes AS "piranhaPlant"
   ("damage", "activeFrames", "totalFrames", "firstFrame")
   VALUES
     ('.0%', '', '', ''),
@@ -48,19 +48,19 @@ INSERT INTO public.hitboxes AS "pikachu"
     ('.0%', '', '', ''),
     ('.0%', '', '', '');
 
-INSERT INTO public.throws AS "pikachu"
+INSERT INTO public.throws AS "piranhaPlant"
   ("fighterId", "name", "type")
   VALUES
-    (57, 'grab', 'throw'),
-    (57, 'dash grab', 'throw'),
-    (57, 'pivot grab', 'throw'),
-    (57, 'pummel', 'throw'),
-    (57, 'forward throw', 'throw'),
-    (57, 'backward throw', 'throw'),
-    (57, 'up throw', 'throw'),
-    (57, 'down throw', 'throw');
+    (58, 'grab', 'throw'),
+    (58, 'dash grab', 'throw'),
+    (58, 'pivot grab', 'throw'),
+    (58, 'pummel', 'throw'),
+    (58, 'forward throw', 'throw'),
+    (58, 'backward throw', 'throw'),
+    (58, 'up throw', 'throw'),
+    (58, 'down throw', 'throw');
 
-INSERT INTO public.grappling AS "pikachu"
+INSERT INTO public.grappling AS "piranhaPlant"
   ("damage", "activeFrames", "totalFrames")
   VALUES
     (null, '6-7', '34'),
@@ -72,20 +72,20 @@ INSERT INTO public.grappling AS "pikachu"
     ('.0%', '', ''),
     ('.0%', '', '');
 
-INSERT INTO public.movements AS "pikachu"
+INSERT INTO public.movements AS "piranhaPlant"
   ("fighterId", "name", "type")
   VALUES
-    (57, 'spot dodge', 'movement'),
-    (57, 'forward roll', 'movement'),
-    (57, 'backwards roll', 'movement'),
-    (57, 'neutral air dodge', 'movement'),
-    (57, 'air dodge, down', 'movement'),
-    (57, 'air dodge, side + down', 'movement'),
-    (57, 'air dodge, left/right', 'movement'),
-    (57, 'air dodge, side + up', 'movement'),
-    (57, 'air dodge up', 'movement');
+    (58, 'spot dodge', 'movement'),
+    (58, 'forward roll', 'movement'),
+    (58, 'backwards roll', 'movement'),
+    (58, 'neutral air dodge', 'movement'),
+    (58, 'air dodge, down', 'movement'),
+    (58, 'air dodge, side + down', 'movement'),
+    (58, 'air dodge, left/right', 'movement'),
+    (58, 'air dodge, side + up', 'movement'),
+    (58, 'air dodge up', 'movement');
 
-INSERT INTO public.dodging AS "pikachu"
+INSERT INTO public.dodging AS "piranhaPlant"
   ("activeFrames", "totalFrames")
   VALUES
     ('3-17', '20/25'),
@@ -98,24 +98,24 @@ INSERT INTO public.dodging AS "pikachu"
     ('3-21', ''),
     ('3-21', '');
 
-INSERT INTO public.stats AS "pikachu"
+INSERT INTO public.stats AS "piranhaPlant"
   ("fighterId", "name", "type")
   VALUES
-    (57, 'weight', 'stat'),
-    (57, 'gravity', 'stat'),
-    (57, 'walk speed', 'stat'),
-    (57, 'run speed', 'stat'),
-    (57, 'initial dash', 'stat'),
-    (57, 'air speed', 'stat'),
-    (57, 'total air acceleration', 'stat'),
-    (57, 'sh / fh / shff / fhff', 'stat'),
-    (57, 'fall speed/fast fall speed', 'stat'),
-    (57, 'out of shield, ', 'stat'),
-    (57, 'out of shield, ', 'stat'),
-    (57, 'out of shield, ', 'stat'),
-    (57, 'shield grab (post-shieldstun)', 'stat');
+    (58, 'weight', 'stat'),
+    (58, 'gravity', 'stat'),
+    (58, 'walk speed', 'stat'),
+    (58, 'run speed', 'stat'),
+    (58, 'initial dash', 'stat'),
+    (58, 'air speed', 'stat'),
+    (58, 'total air acceleration', 'stat'),
+    (58, 'sh / fh / shff / fhff', 'stat'),
+    (58, 'fall speed/fast fall speed', 'stat'),
+    (58, 'out of shield, ', 'stat'),
+    (58, 'out of shield, ', 'stat'),
+    (58, 'out of shield, ', 'stat'),
+    (58, 'shield grab (post-shieldstun)', 'stat');
 
-INSERT INTO public.miscellaneous AS "pikachu"
+INSERT INTO public.miscellaneous AS "piranhaPlant"
   ("statValue")
   VALUES
     (''),

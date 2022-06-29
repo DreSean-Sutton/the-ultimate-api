@@ -674,3 +674,15 @@ INSERT INTO public.throws AS "pichu"
     (56, 'backward throw', 'throw'),
     (56, 'up throw', 'throw'),
     (56, 'down throw', 'throw');
+
+INSERT INTO public.throws AS "pikachu"
+  ("fighterId", "name", "type")
+  VALUES
+    (57, 'grab', 'throw'),
+    (57, 'dash grab', 'throw'),
+    (57, 'pivot grab', 'throw'),
+    (57, 'pummel', 'throw'),
+    (57, 'forward throw', 'throw'),
+    (57, 'backward throw', 'throw'),
+    (57, 'up throw', 'throw'),
+    (57, 'down throw', 'throw');
