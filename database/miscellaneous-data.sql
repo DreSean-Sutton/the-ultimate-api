@@ -971,3 +971,20 @@ INSERT INTO public.miscellaneous AS "pikachu"
     ('7 frames'),
     ('10 frames'),
     ('11 frames');
+
+INSERT INTO public.miscellaneous AS "piranhaPlant"
+  ("statValue")
+  VALUES
+    ('112'),
+    ('0.14'),
+    ('0.76'),
+    ('1.72'),
+    ('1.82'),
+    ('1.0'),
+    ('0.06'),
+    ('31 / 45 / 23 / 34'),
+    ('1.95 / 2.73'),
+    ('10 frames'),
+    ('11 frames'),
+    ('12 frames'),
+    ('10 frames');

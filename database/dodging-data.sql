@@ -740,3 +740,16 @@ INSERT INTO public.dodging AS "pikachu"
     ('2-19', '85'),
     ('2-19', '97'),
     ('2-19', '109');
+
+INSERT INTO public.dodging AS "piranhaPlant"
+  ("activeFrames", "totalFrames")
+  VALUES
+    ('3-17', '20/25'),
+    ('4-15', '29'),
+    ('5-16', '34'),
+    ('3-30', '42'),
+    ('3-21', '58'),
+    ('3-21', '66'),
+    ('3-21', '69'),
+    ('3-21', '81'),
+    ('3-21', '88');

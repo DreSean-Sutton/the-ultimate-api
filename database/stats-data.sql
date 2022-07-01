@@ -971,3 +971,20 @@ INSERT INTO public.stats AS "pikachu"
     (57, 'out of shield, ', 'stat'),
     (57, 'out of shield, ', 'stat'),
     (57, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.stats AS "piranhaPlant"
+  ("fighterId", "name", "type")
+  VALUES
+    (58, 'weight', 'stat'),
+    (58, 'gravity', 'stat'),
+    (58, 'walk speed', 'stat'),
+    (58, 'run speed', 'stat'),
+    (58, 'initial dash', 'stat'),
+    (58, 'air speed', 'stat'),
+    (58, 'total air acceleration', 'stat'),
+    (58, 'sh / fh / shff / fhff', 'stat'),
+    (58, 'fall speed/fast fall speed', 'stat'),
+    (58, 'out of shield, up air / forward air', 'stat'),
+    (58, 'out of shield, neutral air', 'stat'),
+    (58, 'out of shield, down air / down smash / neutral b(air)', 'stat'),
+    (58, 'shield grab (post-shieldstun)', 'stat');

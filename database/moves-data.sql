@@ -1609,3 +1609,31 @@ INSERT INTO public.moves AS "pikachu"
     (57, 'side b', 'uncharged-charged', 'move'),
     (57, 'up b', 'first/second', 'move'),
     (57, 'down b', '(early bolt)(late bolt)/self hit', 'move');
+
+INSERT INTO public.moves AS "piranhaPlant"
+  ("fighterId", "name", "moveType", "type")
+  VALUES
+    (58, 'jab 1', 'single', 'move'),
+    (58, 'jab 2', 'single', 'move'),
+    (58, 'jab 3', 'single', 'move'),
+    (58, 'rapid jab', 'multi', 'move'),
+    (58, 'rapid jab finisher', 'single', 'move'),
+    (58, 'forward tilt 1', 'single', 'move'),
+    (58, 'forward tilt 2', 'single', 'move'),
+    (58, 'up tilt', 'head/body', 'move'),
+    (58, 'down tilt', 'close/far', 'move'),
+    (58, 'dash attack', 'early/late', 'move'),
+    (58, 'forward smash', 'close/far', 'move'),
+    (58, 'up smash', 'first/second', 'move'),
+    (58, 'down smash', 'front/back', 'move'),
+    (58, 'neutral air', 'multi/final', 'move'),
+    (58, 'forward air', 'close/far', 'move'),
+    (58, 'back air', 'single', 'move'),
+    (58, 'up air', 'single', 'move'),
+    (58, 'down air', 'early/late', 'move'),
+    (58, 'neutral b', 'initial/blown away/after bounce', 'move'),
+    (58, 'side b, partial charge', 'damge over time', 'move'),
+    (58, 'side b, full charge', 'damge over time', 'move'),
+    (58, 'up b', 'multi/final', 'move'),
+    (58, 'down b', 'uncharged-full charge', 'move'),
+    (58, 'footstool attack', 'while crouching', 'move');
