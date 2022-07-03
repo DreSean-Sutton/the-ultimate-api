@@ -753,3 +753,16 @@ INSERT INTO public.movements AS "piranhaPlant"
     (58, 'air dodge, left/right', 'movement'),
     (58, 'air dodge, side + up', 'movement'),
     (58, 'air dodge up', 'movement');
+
+INSERT INTO public.movements AS "pit"
+  ("fighterId", "name", "type")
+  VALUES
+    (59, 'spot dodge', 'movement'),
+    (59, 'forward roll', 'movement'),
+    (59, 'backwards roll', 'movement'),
+    (59, 'neutral air dodge', 'movement'),
+    (59, 'air dodge, down', 'movement'),
+    (59, 'air dodge, side + down', 'movement'),
+    (59, 'air dodge, left/right', 'movement'),
+    (59, 'air dodge, side + up', 'movement'),
+    (59, 'air dodge up', 'movement');

@@ -988,3 +988,20 @@ INSERT INTO public.miscellaneous AS "piranhaPlant"
     ('11 frames'),
     ('12 frames'),
     ('10 frames');
+
+INSERT INTO public.miscellaneous AS "pit"
+  ("statValue")
+  VALUES
+    ('96'),
+    ('0.081'),
+    ('1.259'),
+    ('1.828'),
+    ('2.09'),
+    ('0.935'),
+    ('0.075'),
+    ('38 / 52 / 26 / 37'),
+    ('1.48 / 2.368'),
+    ('6 frames'),
+    ('7 frames'),
+    ('13 frames'),
+    ('10 frames');

@@ -988,3 +988,20 @@ INSERT INTO public.stats AS "piranhaPlant"
     (58, 'out of shield, neutral air', 'stat'),
     (58, 'out of shield, down air / down smash / neutral b(air)', 'stat'),
     (58, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.stats AS "pit"
+  ("fighterId", "name", "type")
+  VALUES
+    (11, 'weight', 'stat'),
+    (11, 'gravity', 'stat'),
+    (11, 'walk speed', 'stat'),
+    (11, 'run speed', 'stat'),
+    (11, 'initial dash', 'stat'),
+    (11, 'air speed', 'stat'),
+    (11, 'total air acceleration', 'stat'),
+    (11, 'sh / fh / shff / fhff', 'stat'),
+    (11, 'fall speed / fast fall speed', 'stat'),
+    (11, 'out of shield, up smash', 'stat'),
+    (11, 'out of shield, neutral air', 'stat'),
+    (11, 'out of shield, down air', 'stat'),
+    (11, 'shield grab (post-shieldstun)', 'stat');

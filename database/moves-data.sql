@@ -1637,3 +1637,29 @@ INSERT INTO public.moves AS "piranhaPlant"
     (58, 'up b', 'multi/final', 'move'),
     (58, 'down b', 'uncharged-full charge', 'move'),
     (58, 'footstool attack', 'while crouching', 'move');
+
+INSERT INTO public.moves AS "pit"
+  ("fighterId", "name", "moveType", "type")
+  VALUES
+    (59, 'jab 1', 'single', 'move'),
+    (59, 'jab 2', 'single', 'move'),
+    (59, 'jab 3', 'single', 'move'),
+    (59, 'rapid jab', 'multi', 'move'),
+    (59, 'rapid jab finisher', 'single', 'move'),
+    (59, 'forward tilt', 'close/tipper', 'move'),
+    (59, 'up tilt', 'first/second', 'move'),
+    (59, 'down tilt', 'single', 'move'),
+    (59, 'dash attack', 'single', 'move'),
+    (59, 'forward smash', 'first/second', 'move'),
+    (59, 'up smash', 'first/second/third', 'move'),
+    (59, 'down smash', 'front/back', 'move'),
+    (59, 'neutral air', 'multi/final', 'move'),
+    (59, 'forward air', 'multi/final', 'move'),
+    (59, 'back air', 'close/tipper', 'move'),
+    (59, 'up air', 'multi/final', 'move'),
+    (59, 'down air', 'early/late', 'move'),
+    (59, 'neutral b', 'ground/ground up/air/air up', 'move'),
+    (59, 'side b, ground', 'air/grounded', 'move'),
+    (59, 'side b, air', 'air/grounded', 'move'),
+    (59, 'up b', 'recovery', 'move'),
+    (59, 'down b', 'shield (endlag)', 'move');

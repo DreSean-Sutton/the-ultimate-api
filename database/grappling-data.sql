@@ -698,3 +698,15 @@ INSERT INTO public.grappling AS "piranhaPlant"
     (null, '19', '34'),
     (null, '20', '49'),
     (null, '20/30/31', '47');
+
+INSERT INTO public.grappling AS "pit"
+  ("damage", "activeFrames", "totalFrames")
+  VALUES
+    (null, '6-7', '34'),
+    (null, '9-10', '42'),
+    (null, '10-11', '37'),
+    ('1.3%', '1', '19'),
+    ('6.0/4.0%', '12/14', '27'),
+    ('8.0%', '29', '38'),
+    ('4.0/7.0%', '13/15', '37'),
+    ('2.0/4.0%', '13/16', '31');
