@@ -1,27 +1,27 @@
 INSERT INTO public.moves AS "ivysaur"
-  ("fighterId", "name", "moveType", "type")
+  ("fighterId", "name", "moveType", "type", "category")
   VALUES
-    (61, 'jab 1', 'single', 'move'),
-    (61, 'jab 2', 'single', 'move'),
-    (61, 'jab 3', 'single', 'move'),
-    (61, 'rapid jab', 'multi', 'move'),
-    (61, 'rapid jab finisher', 'single', 'move'),
-    (61, 'forward tilt', '', 'move'),
-    (61, 'up tilt', '', 'move'),
-    (61, 'down tilt', '', 'move'),
-    (61, 'dash attack', '', 'move'),
-    (61, 'forward smash', '', 'move'),
-    (61, 'up smash', '', 'move'),
-    (61, 'down smash', '', 'move'),
-    (61, 'neutral air', '', 'move'),
-    (61, 'forward air', '', 'move'),
-    (61, 'back air', '', 'move'),
-    (61, 'up air', '', 'move'),
-    (61, 'down air', '', 'move'),
-    (61, 'neutral b', '', 'move'),
-    (61, 'side b', '', 'move'),
-    (61, 'up b', '', 'move'),
-    (61, 'down b', '', 'move');
+    (61, 'jab 1', 'single', 'move', 'ground'),
+    (61, 'jab 2', 'single', 'move', 'ground'),
+    (61, 'jab 3', 'single', 'move', 'ground'),
+    (61, 'rapid jab', 'multi', 'move', 'ground'),
+    (61, 'rapid jab finisher', 'single', 'move', 'ground'),
+    (61, 'forward tilt', '', 'move', 'ground'),
+    (61, 'up tilt', '', 'move', 'ground'),
+    (61, 'down tilt', '', 'move', 'ground'),
+    (61, 'dash attack', '', 'move', 'ground'),
+    (61, 'forward smash', '', 'move', 'ground'),
+    (61, 'up smash', '', 'move', 'ground'),
+    (61, 'down smash', '', 'move', 'ground'),
+    (61, 'neutral air', '', 'move', 'aerial'),
+    (61, 'forward air', '', 'move', 'aerial'),
+    (61, 'back air', '', 'move', 'aerial'),
+    (61, 'up air', '', 'move', 'aerial'),
+    (61, 'down air', '', 'move', 'aerial'),
+    (61, 'neutral b', '', 'move', 'special'),
+    (61, 'side b', '', 'move', 'special'),
+    (61, 'up b', '', 'move', 'special'),
+    (61, 'down b', '', 'move', 'special');
 
 INSERT INTO public.hitboxes AS "ivysaur"
   ("damage", "activeFrames", "totalFrames", "firstFrame")
