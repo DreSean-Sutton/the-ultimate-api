@@ -12,10 +12,10 @@ const sqlQueries = {
     if (type === 'moves') {
       return `
         SELECT
-          "activeFrames", "damage", "displayName",
-          fighter, "fighterId", "moveId", "moveType",
-          "name", "rosterId", "firstFrame",
-          "totalFrames", "type"
+          "activeFrames", "category", "damage",
+          "displayName", fighter, "fighterId", "moveId",
+          "moveType", "name", "rosterId",
+          "firstFrame", "totalFrames", "type"
         FROM
           fighters
         JOIN "moves" USING ("fighterId")

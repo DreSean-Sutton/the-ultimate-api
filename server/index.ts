@@ -407,7 +407,7 @@ app.post('/api/add/fighters', async (req: Req, res: Res, next: (param1: any) => 
 
 app.post('/api/add/:table/:id', async (req: Req, res: Res, next: (param1: any) => any) => {
   const fullResult = {};
-  const { name, moveType, damage, activeFrames, totalFrames, firstFrame, statValue } = req.body;
+  const { name, moveType, damage, category, activeFrames, totalFrames, firstFrame, statValue } = req.body;
   try {
     if (/[A-Z]/gi.test(req.params.id) &&
       req.params.id !== undefined) {
@@ -420,16 +420,16 @@ app.post('/api/add/:table/:id', async (req: Req, res: Res, next: (param1: any) =
     let params2 = [];
 
     if (req.params.table === 'moves') {
-      const reqParams = [name, moveType, damage, activeFrames, totalFrames, firstFrame];
+      const reqParams = [name, moveType, damage, category, activeFrames, totalFrames, firstFrame];
       const isValid = reqParams.every(param => !!param);
       if (!isValid) {
-        throw new ClientError(400, 'must have (name), (moveType), (damage), (activeFrames), (totalFrames), and (firstFrame) as parameters');
+        throw new ClientError(400, 'must have (name), (moveType), (damage), (category), (activeFrames), (totalFrames), and (firstFrame) as parameters');
       }
       sql = `
         INSERT INTO public.moves (
-          "fighterId", "name", "moveType", type
+          "fighterId", "name", "moveType", "category", "type"
         )
-        SELECT $1, $2, $3, 'moves'
+        SELECT $1, $2, $3, $4, 'moves'
         WHERE EXISTS (
             SELECT 1
               FROM "fighters"
@@ -437,7 +437,7 @@ app.post('/api/add/:table/:id', async (req: Req, res: Res, next: (param1: any) =
         )
         RETURNING *;
       `;
-      params = [id, name, moveType];
+      params = [id, name, moveType, category];
       sql2 = `
         INSERT INTO public.hitboxes
           ("damage", "activeFrames", "totalFrames", "firstFrame")
@@ -544,7 +544,7 @@ app.post('/api/add/:table/:id', async (req: Req, res: Res, next: (param1: any) =
 
 app.put('/api/update/:table/:id', async (req: Req, res: Res, next: (param1: any) => any) => {
   const fullResult = {};
-  const { fighter, displayName, name, moveType, damage, activeFrames, totalFrames, firstFrame, statValue } = req.body;
+  const { fighter, displayName, name, moveType, damage, category, activeFrames, totalFrames, firstFrame, statValue } = req.body;
   const { rosterId } = req.body;
   try {
     if (/[A-Z]/gi.test(req.params.id) &&
@@ -582,12 +582,13 @@ app.put('/api/update/:table/:id', async (req: Req, res: Res, next: (param1: any)
           public.moves
         SET
           "name" = coalesce($2, "name"),
-          "moveType" = coalesce($3, "moveType")
+          "moveType" = coalesce($3, "moveType"),
+          "category" = coalesce($4, "category")
           WHERE
           "moveId"=$1
           RETURNING *;
       `;
-      let params = [id, name, moveType];
+      let params = [id, name, moveType, category];
       let result = await db.query(sql, params);
       if (result.rows.length === 0) {
         throw new ClientError(404, `moveId ${id} does not exist`);

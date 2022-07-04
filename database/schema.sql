@@ -26,6 +26,7 @@ CREATE TABLE public.moves (
 	"name" TEXT NOT NULL,
 	"moveType" TEXT,
 	"type" TEXT NOT NULL,
+  "category" TEXT NOT NULL,
 	"createdAt" timestamp with time zone DEFAULT NOW(),
 	CONSTRAINT "moves_pk" PRIMARY KEY ("moveId")
 ) WITH (
