@@ -992,16 +992,33 @@ INSERT INTO public.stats AS "piranhaPlant"
 INSERT INTO public.stats AS "pit"
   ("fighterId", "name", "type")
   VALUES
-    (11, 'weight', 'stat'),
-    (11, 'gravity', 'stat'),
-    (11, 'walk speed', 'stat'),
-    (11, 'run speed', 'stat'),
-    (11, 'initial dash', 'stat'),
-    (11, 'air speed', 'stat'),
-    (11, 'total air acceleration', 'stat'),
-    (11, 'sh / fh / shff / fhff', 'stat'),
-    (11, 'fall speed / fast fall speed', 'stat'),
-    (11, 'out of shield, up smash', 'stat'),
-    (11, 'out of shield, neutral air', 'stat'),
-    (11, 'out of shield, down air', 'stat'),
-    (11, 'shield grab (post-shieldstun)', 'stat');
+    (59, 'weight', 'stat'),
+    (59, 'gravity', 'stat'),
+    (59, 'walk speed', 'stat'),
+    (59, 'run speed', 'stat'),
+    (59, 'initial dash', 'stat'),
+    (59, 'air speed', 'stat'),
+    (59, 'total air acceleration', 'stat'),
+    (59, 'sh / fh / shff / fhff', 'stat'),
+    (59, 'fall speed / fast fall speed', 'stat'),
+    (59, 'out of shield, up smash', 'stat'),
+    (59, 'out of shield, neutral air', 'stat'),
+    (59, 'out of shield, down air', 'stat'),
+    (59, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.stats AS "squirtle"
+  ("fighterId", "name", "type")
+  VALUES
+    (60, 'weight', 'stat'),
+    (60, 'gravity', 'stat'),
+    (60, 'walk speed', 'stat'),
+    (60, 'run speed', 'stat'),
+    (60, 'initial dash', 'stat'),
+    (60, 'air speed', 'stat'),
+    (60, 'total air acceleration', 'stat'),
+    (60, 'sh / fh / shff / fhff', 'stat'),
+    (60, 'fall speed/fast fall speed', 'stat'),
+    (60, 'out of shield, neutral air', 'stat'),
+    (60, 'out of shield, forward air / back air / up air', 'stat'),
+    (60, 'out of shield, up b / down air', 'stat'),
+    (60, 'shield grab (post-shieldstun)', 'stat');

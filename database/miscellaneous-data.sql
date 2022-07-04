@@ -1005,3 +1005,20 @@ INSERT INTO public.miscellaneous AS "pit"
     ('7 frames'),
     ('13 frames'),
     ('10 frames');
+
+INSERT INTO public.miscellaneous AS "squirtle"
+  ("statValue")
+  VALUES
+    ('75'),
+    ('0.128'),
+    ('1.281'),
+    ('1.76'),
+    ('1.936'),
+    ('1.01'),
+    ('0.105'),
+    ('34 / 51 / 24 / 37'),
+    ('1.35 / 2.16'),
+    ('7 frames'),
+    ('8 frames'),
+    ('9 frames'),
+    ('10 frames');

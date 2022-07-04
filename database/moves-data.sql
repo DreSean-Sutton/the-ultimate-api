@@ -1663,3 +1663,26 @@ INSERT INTO public.moves AS "pit"
     (59, 'side b, air', 'air/grounded', 'move'),
     (59, 'up b', 'recovery', 'move'),
     (59, 'down b', 'shield (endlag)', 'move');
+
+INSERT INTO public.moves AS "squirtle"
+  ("fighterId", "name", "moveType", "type")
+  VALUES
+    (60, 'jab 1', 'single', 'move'),
+    (60, 'jab 2', 'single', 'move'),
+    (60, 'jab 3', 'single', 'move'),
+    (60, 'forward tilt', 'single', 'move'),
+    (60, 'up tilt', 'single', 'move'),
+    (60, 'down tilt', 'single', 'move'),
+    (60, 'dash attack', 'early/late', 'move'),
+    (60, 'forward smash', 'single', 'move'),
+    (60, 'up smash', 'first/early/late', 'move'),
+    (60, 'down smash', 'front/back', 'move'),
+    (60, 'neutral air', 'early/lat;e', 'move'),
+    (60, 'forward air', 'early/lat;e', 'move'),
+    (60, 'back air', 'multi/final/landing', 'move'),
+    (60, 'up air', 'single', 'move'),
+    (60, 'down air', 'multi/final', 'move'),
+    (60, 'neutral b', 'pushback', 'move'),
+    (60, 'side b', 'single', 'move'),
+    (60, 'up b', 'multi/final', 'move'),
+    (60, 'down b', 'pokémon swap', 'move');

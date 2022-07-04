@@ -1,29 +1,29 @@
-INSERT INTO public.moves AS "squirtle"
+INSERT INTO public.moves AS "ivysaur"
   ("fighterId", "name", "moveType", "type")
   VALUES
-    (60, 'jab 1', 'single', 'move'),
-    (60, 'jab 2', 'single', 'move'),
-    (60, 'jab 3', 'single', 'move'),
-    (60, 'rapid jab', 'multi', 'move'),
-    (60, 'rapid jab finisher', 'single', 'move'),
-    (60, 'forward tilt', '', 'move'),
-    (60, 'up tilt', '', 'move'),
-    (60, 'down tilt', '', 'move'),
-    (60, 'dash attack', '', 'move'),
-    (60, 'forward smash', '', 'move'),
-    (60, 'up smash', '', 'move'),
-    (60, 'down smash', '', 'move'),
-    (60, 'neutral air', '', 'move'),
-    (60, 'forward air', '', 'move'),
-    (60, 'back air', '', 'move'),
-    (60, 'up air', '', 'move'),
-    (60, 'down air', '', 'move'),
-    (60, 'neutral b', '', 'move'),
-    (60, 'side b', '', 'move'),
-    (60, 'up b', '', 'move'),
-    (60, 'down b', '', 'move');
+    (61, 'jab 1', 'single', 'move'),
+    (61, 'jab 2', 'single', 'move'),
+    (61, 'jab 3', 'single', 'move'),
+    (61, 'rapid jab', 'multi', 'move'),
+    (61, 'rapid jab finisher', 'single', 'move'),
+    (61, 'forward tilt', '', 'move'),
+    (61, 'up tilt', '', 'move'),
+    (61, 'down tilt', '', 'move'),
+    (61, 'dash attack', '', 'move'),
+    (61, 'forward smash', '', 'move'),
+    (61, 'up smash', '', 'move'),
+    (61, 'down smash', '', 'move'),
+    (61, 'neutral air', '', 'move'),
+    (61, 'forward air', '', 'move'),
+    (61, 'back air', '', 'move'),
+    (61, 'up air', '', 'move'),
+    (61, 'down air', '', 'move'),
+    (61, 'neutral b', '', 'move'),
+    (61, 'side b', '', 'move'),
+    (61, 'up b', '', 'move'),
+    (61, 'down b', '', 'move');
 
-INSERT INTO public.hitboxes AS "squirtle"
+INSERT INTO public.hitboxes AS "ivysaur"
   ("damage", "activeFrames", "totalFrames", "firstFrame")
   VALUES
     ('.0%', '', '', ''),
@@ -48,19 +48,19 @@ INSERT INTO public.hitboxes AS "squirtle"
     ('.0%', '', '', ''),
     ('.0%', '', '', '');
 
-INSERT INTO public.throws AS "squirtle"
+INSERT INTO public.throws AS "ivysaur"
   ("fighterId", "name", "type")
   VALUES
-    (60, 'grab', 'throw'),
-    (60, 'dash grab', 'throw'),
-    (60, 'pivot grab', 'throw'),
-    (60, 'pummel', 'throw'),
-    (60, 'forward throw', 'throw'),
-    (60, 'backward throw', 'throw'),
-    (60, 'up throw', 'throw'),
-    (60, 'down throw', 'throw');
+    (61, 'grab', 'throw'),
+    (61, 'dash grab', 'throw'),
+    (61, 'pivot grab', 'throw'),
+    (61, 'pummel', 'throw'),
+    (61, 'forward throw', 'throw'),
+    (61, 'backward throw', 'throw'),
+    (61, 'up throw', 'throw'),
+    (61, 'down throw', 'throw');
 
-INSERT INTO public.grappling AS "squirtle"
+INSERT INTO public.grappling AS "ivysaur"
   ("damage", "activeFrames", "totalFrames")
   VALUES
     (null, '6-7', '34'),
@@ -72,20 +72,20 @@ INSERT INTO public.grappling AS "squirtle"
     ('.0%', '', ''),
     ('.0%', '', '');
 
-INSERT INTO public.movements AS "squirtle"
+INSERT INTO public.movements AS "ivysaur"
   ("fighterId", "name", "type")
   VALUES
-    (60, 'spot dodge', 'movement'),
-    (60, 'forward roll', 'movement'),
-    (60, 'backwards roll', 'movement'),
-    (60, 'neutral air dodge', 'movement'),
-    (60, 'air dodge, down', 'movement'),
-    (60, 'air dodge, side + down', 'movement'),
-    (60, 'air dodge, left/right', 'movement'),
-    (60, 'air dodge, side + up', 'movement'),
-    (60, 'air dodge up', 'movement');
+    (61, 'spot dodge', 'movement'),
+    (61, 'forward roll', 'movement'),
+    (61, 'backwards roll', 'movement'),
+    (61, 'neutral air dodge', 'movement'),
+    (61, 'air dodge, down', 'movement'),
+    (61, 'air dodge, side + down', 'movement'),
+    (61, 'air dodge, left/right', 'movement'),
+    (61, 'air dodge, side + up', 'movement'),
+    (61, 'air dodge up', 'movement');
 
-INSERT INTO public.dodging AS "squirtle"
+INSERT INTO public.dodging AS "ivysaur"
   ("activeFrames", "totalFrames")
   VALUES
     ('3-17', '20/25'),
@@ -98,24 +98,24 @@ INSERT INTO public.dodging AS "squirtle"
     ('3-21', ''),
     ('3-21', '');
 
-INSERT INTO public.stats AS "squirtle"
+INSERT INTO public.stats AS "ivysaur"
   ("fighterId", "name", "type")
   VALUES
-    (60, 'weight', 'stat'),
-    (60, 'gravity', 'stat'),
-    (60, 'walk speed', 'stat'),
-    (60, 'run speed', 'stat'),
-    (60, 'initial dash', 'stat'),
-    (60, 'air speed', 'stat'),
-    (60, 'total air acceleration', 'stat'),
-    (60, 'sh / fh / shff / fhff', 'stat'),
-    (60, 'fall speed/fast fall speed', 'stat'),
-    (60, 'out of shield, ', 'stat'),
-    (60, 'out of shield, ', 'stat'),
-    (60, 'out of shield, ', 'stat'),
-    (60, 'shield grab (post-shieldstun)', 'stat');
+    (61, 'weight', 'stat'),
+    (61, 'gravity', 'stat'),
+    (61, 'walk speed', 'stat'),
+    (61, 'run speed', 'stat'),
+    (61, 'initial dash', 'stat'),
+    (61, 'air speed', 'stat'),
+    (61, 'total air acceleration', 'stat'),
+    (61, 'sh / fh / shff / fhff', 'stat'),
+    (61, 'fall speed/fast fall speed', 'stat'),
+    (61, 'out of shield, ', 'stat'),
+    (61, 'out of shield, ', 'stat'),
+    (61, 'out of shield, ', 'stat'),
+    (61, 'shield grab (post-shieldstun)', 'stat');
 
-INSERT INTO public.miscellaneous AS "squirtle"
+INSERT INTO public.miscellaneous AS "ivysaur"
   ("statValue")
   VALUES
     (''),

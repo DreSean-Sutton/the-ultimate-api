@@ -766,3 +766,16 @@ INSERT INTO public.movements AS "pit"
     (59, 'air dodge, left/right', 'movement'),
     (59, 'air dodge, side + up', 'movement'),
     (59, 'air dodge up', 'movement');
+
+INSERT INTO public.movements AS "squirtle"
+  ("fighterId", "name", "type")
+  VALUES
+    (60, 'spot dodge', 'movement'),
+    (60, 'forward roll', 'movement'),
+    (60, 'backwards roll', 'movement'),
+    (60, 'neutral air dodge', 'movement'),
+    (60, 'air dodge, down', 'movement'),
+    (60, 'air dodge, side + down', 'movement'),
+    (60, 'air dodge, left/right', 'movement'),
+    (60, 'air dodge, side + up', 'movement'),
+    (60, 'air dodge up', 'movement');
