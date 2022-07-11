@@ -779,3 +779,16 @@ INSERT INTO public.dodging AS "squirtle"
     ('3-19', '90'),
     ('3-19', '105'),
     ('3-19', '114');
+
+INSERT INTO public.dodging AS "ivysaur"
+  ("activeFrames", "totalFrames")
+  VALUES
+    ('3-17', '21/26'),
+    ('4-15', '30'),
+    ('5-16', '35'),
+    ('3-29', '56'),
+    ('3-21', '76'),
+    ('3-21', '84'),
+    ('3-21', '93'),
+    ('3-21', '110'),
+    ('3-21', '124');

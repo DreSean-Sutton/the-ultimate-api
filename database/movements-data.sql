@@ -779,3 +779,16 @@ INSERT INTO public.movements AS "squirtle"
     (60, 'air dodge, left/right', 'movement'),
     (60, 'air dodge, side + up', 'movement'),
     (60, 'air dodge up', 'movement');
+
+INSERT INTO public.movements AS "ivysaur"
+  ("fighterId", "name", "type")
+  VALUES
+    (61, 'spot dodge', 'movement'),
+    (61, 'forward roll', 'movement'),
+    (61, 'backwards roll', 'movement'),
+    (61, 'neutral air dodge', 'movement'),
+    (61, 'air dodge, down', 'movement'),
+    (61, 'air dodge, side + down', 'movement'),
+    (61, 'air dodge, left/right', 'movement'),
+    (61, 'air dodge, side + up', 'movement'),
+    (61, 'air dodge up', 'movement');

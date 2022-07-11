@@ -1685,4 +1685,28 @@ INSERT INTO public.moves AS "squirtle"
     (60, 'neutral b', 'pushback', 'move', 'special'),
     (60, 'side b', 'single', 'move', 'special'),
     (60, 'up b', 'multi/final', 'move', 'special'),
-    (60, 'down b', 'pokémon swap', 'move', 'special');
+    (60, 'down b', 'pokémon swap (cooldown till next change)', 'move', 'special');
+
+INSERT INTO public.moves AS "ivysaur"
+  ("fighterId", "name", "moveType", "type", "category")
+  VALUES
+    (61, 'jab 1', 'single', 'move', 'ground'),
+    (61, 'jab 2', 'single', 'move', 'ground'),
+    (61, 'rapid jab', 'multi', 'move', 'ground'),
+    (61, 'rapid jab finisher', 'single', 'move', 'ground'),
+    (61, 'forward tilt', 'multi/final', 'move', 'ground'),
+    (61, 'up tilt', 'single', 'move', 'ground'),
+    (61, 'down tilt', 'single', 'move', 'ground'),
+    (61, 'dash attack', 'early/late', 'move', 'ground'),
+    (61, 'forward smash', 'early/late', 'move', 'ground'),
+    (61, 'up smash', 'single', 'move', 'ground'),
+    (61, 'down smash', 'close/far/farther', 'move', 'ground'),
+    (61, 'neutral air', 'multi/final', 'move', 'aerial'),
+    (61, 'forward air', 'single', 'move', 'aerial'),
+    (61, 'back air', 'first/second', 'move', 'aerial'),
+    (61, 'up air', 'single', 'move', 'aerial'),
+    (61, 'down air', 'meteor', 'move', 'aerial'),
+    (61, 'neutral b', 'first/multi/later multi/final', 'move', 'special'),
+    (61, 'side b', 'early/late/later', 'move', 'special'),
+    (61, 'up b', 'close/far', 'move', 'special'),
+    (61, 'down b', 'pokémon swap (cooldown till next change)', 'move', 'special');

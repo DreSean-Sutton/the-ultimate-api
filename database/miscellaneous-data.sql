@@ -1022,3 +1022,20 @@ INSERT INTO public.miscellaneous AS "squirtle"
     ('8 frames'),
     ('9 frames'),
     ('10 frames');
+
+INSERT INTO public.miscellaneous AS "ivysaur"
+  ("statValue")
+  VALUES
+    ('96'),
+    ('0.082'),
+    ('1.103'),
+    ('1.595'),
+    ('1.903'),
+    ('0.998'),
+    ('0.095'),
+    ('39 / 54 / 27 / 38'),
+    ('1.38 / 2.208'),
+    ('10 frames'),
+    ('14 frames'),
+    ('15 frames'),
+    ('17 frames');

@@ -1022,3 +1022,20 @@ INSERT INTO public.stats AS "squirtle"
     (60, 'out of shield, forward air / back air / up air', 'stat'),
     (60, 'out of shield, up b / down air', 'stat'),
     (60, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.stats AS "ivysaur"
+  ("fighterId", "name", "type")
+  VALUES
+    (61, 'weight', 'stat'),
+    (61, 'gravity', 'stat'),
+    (61, 'walk speed', 'stat'),
+    (61, 'run speed', 'stat'),
+    (61, 'initial dash', 'stat'),
+    (61, 'air speed', 'stat'),
+    (61, 'total air acceleration', 'stat'),
+    (61, 'sh / fh / shff / fhff', 'stat'),
+    (61, 'fall speed/fast fall speed', 'stat'),
+    (61, 'out of shield, neutral air / back air / neutral b(air)', 'stat'),
+    (61, 'out of shield, down air', 'stat'),
+    (61, 'out of shield, up air / up b / down tilt', 'stat'),
+    (61, 'shield grab (post-shieldstun)', 'stat');

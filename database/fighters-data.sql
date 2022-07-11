@@ -59,4 +59,5 @@ INSERT INTO public.fighters ("fighter", "rosterId", "displayName")
     ('pikachu', 9, 'Pikachu'),
     ('piranhaPlant', 77, 'Piranha Plant'),
     ('pit', 32, 'Pit'),
-    ('squirtle', 36, 'Squirtle');
+    ('squirtle', 36, 'Squirtle'),
+    ('ivysaur', 37, 'Ivysaur');
