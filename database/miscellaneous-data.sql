@@ -1039,3 +1039,20 @@ INSERT INTO public.miscellaneous AS "ivysaur"
     ('14 frames'),
     ('15 frames'),
     ('17 frames');
+
+INSERT INTO public.miscellaneous AS "charizard"
+  ("statValue")
+  VALUES
+    ('116'),
+    ('0.11'),
+    ('1.187'),
+    ('2.2'),
+    ('2.288'),
+    ('1.103'),
+    ('0.06'),
+    ('33 / 48 / 24 / 34'),
+    ('1.52 / 2.432'),
+    ('6 frames'),
+    ('9 frames'),
+    ('11 frames'),
+    ('12 frames');

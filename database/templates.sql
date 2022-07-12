@@ -1,29 +1,29 @@
-INSERT INTO public.moves AS "ivysaur"
+INSERT INTO public.moves AS "charizard"
   ("fighterId", "name", "moveType", "type", "category")
   VALUES
-    (61, 'jab 1', 'single', 'move', 'ground'),
-    (61, 'jab 2', 'single', 'move', 'ground'),
-    (61, 'jab 3', 'single', 'move', 'ground'),
-    (61, 'rapid jab', 'multi', 'move', 'ground'),
-    (61, 'rapid jab finisher', 'single', 'move', 'ground'),
-    (61, 'forward tilt', '', 'move', 'ground'),
-    (61, 'up tilt', '', 'move', 'ground'),
-    (61, 'down tilt', '', 'move', 'ground'),
-    (61, 'dash attack', '', 'move', 'ground'),
-    (61, 'forward smash', '', 'move', 'ground'),
-    (61, 'up smash', '', 'move', 'ground'),
-    (61, 'down smash', '', 'move', 'ground'),
-    (61, 'neutral air', '', 'move', 'aerial'),
-    (61, 'forward air', '', 'move', 'aerial'),
-    (61, 'back air', '', 'move', 'aerial'),
-    (61, 'up air', '', 'move', 'aerial'),
-    (61, 'down air', '', 'move', 'aerial'),
-    (61, 'neutral b', '', 'move', 'special'),
-    (61, 'side b', '', 'move', 'special'),
-    (61, 'up b', '', 'move', 'special'),
-    (61, 'down b', '', 'move', 'special');
+    (62, 'jab 1', 'single', 'move', 'ground'),
+    (62, 'jab 2', 'single', 'move', 'ground'),
+    (62, 'jab 3', 'single', 'move', 'ground'),
+    (62, 'rapid jab', 'multi', 'move', 'ground'),
+    (62, 'rapid jab finisher', 'single', 'move', 'ground'),
+    (62, 'forward tilt', '', 'move', 'ground'),
+    (62, 'up tilt', '', 'move', 'ground'),
+    (62, 'down tilt', '', 'move', 'ground'),
+    (62, 'dash attack', '', 'move', 'ground'),
+    (62, 'forward smash', '', 'move', 'ground'),
+    (62, 'up smash', '', 'move', 'ground'),
+    (62, 'down smash', '', 'move', 'ground'),
+    (62, 'neutral air', '', 'move', 'aerial'),
+    (62, 'forward air', '', 'move', 'aerial'),
+    (62, 'back air', '', 'move', 'aerial'),
+    (62, 'up air', '', 'move', 'aerial'),
+    (62, 'down air', '', 'move', 'aerial'),
+    (62, 'neutral b', '', 'move', 'special'),
+    (62, 'side b', '', 'move', 'special'),
+    (62, 'up b', '', 'move', 'special'),
+    (62, 'down b', '', 'move', 'special');
 
-INSERT INTO public.hitboxes AS "ivysaur"
+INSERT INTO public.hitboxes AS "charizard"
   ("damage", "activeFrames", "totalFrames", "firstFrame")
   VALUES
     ('.0%', '', '', ''),
@@ -48,19 +48,19 @@ INSERT INTO public.hitboxes AS "ivysaur"
     ('.0%', '', '', ''),
     ('.0%', '', '', '');
 
-INSERT INTO public.throws AS "ivysaur"
+INSERT INTO public.throws AS "charizard"
   ("fighterId", "name", "type")
   VALUES
-    (61, 'grab', 'throw'),
-    (61, 'dash grab', 'throw'),
-    (61, 'pivot grab', 'throw'),
-    (61, 'pummel', 'throw'),
-    (61, 'forward throw', 'throw'),
-    (61, 'backward throw', 'throw'),
-    (61, 'up throw', 'throw'),
-    (61, 'down throw', 'throw');
+    (62, 'grab', 'throw'),
+    (62, 'dash grab', 'throw'),
+    (62, 'pivot grab', 'throw'),
+    (62, 'pummel', 'throw'),
+    (62, 'forward throw', 'throw'),
+    (62, 'backward throw', 'throw'),
+    (62, 'up throw', 'throw'),
+    (62, 'down throw', 'throw');
 
-INSERT INTO public.grappling AS "ivysaur"
+INSERT INTO public.grappling AS "charizard"
   ("damage", "activeFrames", "totalFrames")
   VALUES
     (null, '6-7', '34'),
@@ -72,20 +72,20 @@ INSERT INTO public.grappling AS "ivysaur"
     ('.0%', '', ''),
     ('.0%', '', '');
 
-INSERT INTO public.movements AS "ivysaur"
+INSERT INTO public.movements AS "charizard"
   ("fighterId", "name", "type")
   VALUES
-    (61, 'spot dodge', 'movement'),
-    (61, 'forward roll', 'movement'),
-    (61, 'backwards roll', 'movement'),
-    (61, 'neutral air dodge', 'movement'),
-    (61, 'air dodge, down', 'movement'),
-    (61, 'air dodge, side + down', 'movement'),
-    (61, 'air dodge, left/right', 'movement'),
-    (61, 'air dodge, side + up', 'movement'),
-    (61, 'air dodge up', 'movement');
+    (62, 'spot dodge', 'movement'),
+    (62, 'forward roll', 'movement'),
+    (62, 'backwards roll', 'movement'),
+    (62, 'neutral air dodge', 'movement'),
+    (62, 'air dodge, down', 'movement'),
+    (62, 'air dodge, side + down', 'movement'),
+    (62, 'air dodge, left/right', 'movement'),
+    (62, 'air dodge, side + up', 'movement'),
+    (62, 'air dodge up', 'movement');
 
-INSERT INTO public.dodging AS "ivysaur"
+INSERT INTO public.dodging AS "charizard"
   ("activeFrames", "totalFrames")
   VALUES
     ('3-17', '20/25'),
@@ -98,24 +98,24 @@ INSERT INTO public.dodging AS "ivysaur"
     ('3-21', ''),
     ('3-21', '');
 
-INSERT INTO public.stats AS "ivysaur"
+INSERT INTO public.stats AS "charizard"
   ("fighterId", "name", "type")
   VALUES
-    (61, 'weight', 'stat'),
-    (61, 'gravity', 'stat'),
-    (61, 'walk speed', 'stat'),
-    (61, 'run speed', 'stat'),
-    (61, 'initial dash', 'stat'),
-    (61, 'air speed', 'stat'),
-    (61, 'total air acceleration', 'stat'),
-    (61, 'sh / fh / shff / fhff', 'stat'),
-    (61, 'fall speed/fast fall speed', 'stat'),
-    (61, 'out of shield, ', 'stat'),
-    (61, 'out of shield, ', 'stat'),
-    (61, 'out of shield, ', 'stat'),
-    (61, 'shield grab (post-shieldstun)', 'stat');
+    (62, 'weight', 'stat'),
+    (62, 'gravity', 'stat'),
+    (62, 'walk speed', 'stat'),
+    (62, 'run speed', 'stat'),
+    (62, 'initial dash', 'stat'),
+    (62, 'air speed', 'stat'),
+    (62, 'total air acceleration', 'stat'),
+    (62, 'sh / fh / shff / fhff', 'stat'),
+    (62, 'fall speed/fast fall speed', 'stat'),
+    (62, 'out of shield, ', 'stat'),
+    (62, 'out of shield, ', 'stat'),
+    (62, 'out of shield, ', 'stat'),
+    (62, 'shield grab (post-shieldstun)', 'stat');
 
-INSERT INTO public.miscellaneous AS "ivysaur"
+INSERT INTO public.miscellaneous AS "charizard"
   ("statValue")
   VALUES
     (''),

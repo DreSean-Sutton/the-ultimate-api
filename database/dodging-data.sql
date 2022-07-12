@@ -792,3 +792,16 @@ INSERT INTO public.dodging AS "ivysaur"
     ('3-21', '93'),
     ('3-21', '110'),
     ('3-21', '124');
+
+INSERT INTO public.dodging AS "charizard"
+  ("activeFrames", "totalFrames")
+  VALUES
+    ('3-18', '23/28'),
+    ('4-16', '32'),
+    ('5-17', '37'),
+    ('3-30', '49'),
+    ('3-22', '70'),
+    ('3-22', '78'),
+    ('3-22', '85'),
+    ('3-22', '99'),
+    ('3-22', '105');

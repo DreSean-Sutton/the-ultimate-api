@@ -792,3 +792,16 @@ INSERT INTO public.movements AS "ivysaur"
     (61, 'air dodge, left/right', 'movement'),
     (61, 'air dodge, side + up', 'movement'),
     (61, 'air dodge up', 'movement');
+
+INSERT INTO public.movements AS "charizard"
+  ("fighterId", "name", "type")
+  VALUES
+    (62, 'spot dodge', 'movement'),
+    (62, 'forward roll', 'movement'),
+    (62, 'backwards roll', 'movement'),
+    (62, 'neutral air dodge', 'movement'),
+    (62, 'air dodge, down', 'movement'),
+    (62, 'air dodge, side + down', 'movement'),
+    (62, 'air dodge, left/right', 'movement'),
+    (62, 'air dodge, side + up', 'movement'),
+    (62, 'air dodge up', 'movement');

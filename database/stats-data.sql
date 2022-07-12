@@ -1039,3 +1039,20 @@ INSERT INTO public.stats AS "ivysaur"
     (61, 'out of shield, down air', 'stat'),
     (61, 'out of shield, up air / up b / down tilt', 'stat'),
     (61, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.stats AS "charizard"
+  ("fighterId", "name", "type")
+  VALUES
+    (62, 'weight', 'stat'),
+    (62, 'gravity', 'stat'),
+    (62, 'walk speed', 'stat'),
+    (62, 'run speed', 'stat'),
+    (62, 'initial dash', 'stat'),
+    (62, 'air speed', 'stat'),
+    (62, 'total air acceleration', 'stat'),
+    (62, 'sh / fh / shff / fhff', 'stat'),
+    (62, 'fall speed/fast fall speed', 'stat'),
+    (62, 'out of shield, up smash', 'stat'),
+    (62, 'out of shield, up b', 'stat'),
+    (62, 'out of shield, neutral air / forward air', 'stat'),
+    (62, 'shield grab (post-shieldstun)', 'stat');

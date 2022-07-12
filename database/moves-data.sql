@@ -1710,3 +1710,26 @@ INSERT INTO public.moves AS "ivysaur"
     (61, 'side b', 'early/late/later', 'move', 'special'),
     (61, 'up b', 'close/far', 'move', 'special'),
     (61, 'down b', 'pokémon swap (cooldown till next change)', 'move', 'special');
+
+INSERT INTO public.moves AS "charizard"
+  ("fighterId", "name", "moveType", "type", "category")
+  VALUES
+    (62, 'jab 1', 'single', 'move', 'ground'),
+    (62, 'jab 2', 'single', 'move', 'ground'),
+    (62, 'jab 3', 'single', 'move', 'ground'),
+    (62, 'forward tilt', 'close/far', 'move', 'ground'),
+    (62, 'up tilt', 'single', 'move', 'ground'),
+    (62, 'down tilt', 'single', 'move', 'ground'),
+    (62, 'dash attack', 'early/late', 'move', 'ground'),
+    (62, 'forward smash', 'close/far', 'move', 'ground'),
+    (62, 'up smash', '(first: ground only/late)/(second)', 'move', 'ground'),
+    (62, 'down smash', 'single', 'move', 'ground'),
+    (62, 'neutral air', 'close/far', 'move', 'aerial'),
+    (62, 'forward air', 'close/far', 'move', 'aerial'),
+    (62, 'back air', 'close/far/farther', 'move', 'aerial'),
+    (62, 'up air', 'single', 'move', 'aerial'),
+    (62, 'down air', 'early/late', 'move', 'aerial'),
+    (62, 'neutral b', 'multi: close/far', 'move', 'special'),
+    (62, 'side b', 'single', 'move', 'special'),
+    (62, 'up b', 'first/multi/final', 'move', 'special'),
+    (62, 'down b', 'pokémon swap (cooldown till next change)', 'move', 'special');

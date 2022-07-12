@@ -734,3 +734,15 @@ INSERT INTO public.throws AS "ivysaur"
     (61, 'backward throw', 'throw'),
     (61, 'up throw', 'throw'),
     (61, 'down throw', 'throw');
+
+INSERT INTO public.throws AS "charizard"
+  ("fighterId", "name", "type")
+  VALUES
+    (62, 'grab', 'throw'),
+    (62, 'dash grab', 'throw'),
+    (62, 'pivot grab', 'throw'),
+    (62, 'pummel', 'throw'),
+    (62, 'forward throw', 'throw'),
+    (62, 'backward throw', 'throw'),
+    (62, 'up throw', 'throw'),
+    (62, 'down throw', 'throw');

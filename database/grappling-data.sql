@@ -734,3 +734,15 @@ INSERT INTO public.grappling AS "ivysaur"
     ('12.0%', '20', '35'),
     ('4.0/5.0%', '20/21', '39'),
     ('7.0%', '19', '34');
+
+INSERT INTO public.grappling AS "charizard"
+  ("damage", "activeFrames", "totalFrames")
+  VALUES
+    (null, '8-10', '39'),
+    (null, '11-13', '45'),
+    (null, '12-14', '42'),
+    ('1.6%', '2', '21'),
+    ('10.0%', '27', '59'),
+    ('10.0%', '26', '32'),
+    ('8.0/3.0%', '52/58', '79'),
+    ('1.0%(multi)', '24/30/36/42/48/55', '76');
