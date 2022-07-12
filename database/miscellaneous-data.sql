@@ -1056,3 +1056,20 @@ INSERT INTO public.miscellaneous AS "charizard"
     ('9 frames'),
     ('11 frames'),
     ('12 frames');
+
+INSERT INTO public.miscellaneous AS "pyra"
+  ("statValue")
+  VALUES
+    ('98'),
+    ('0.078'),
+    ('0.92'),
+    ('1.38'),
+    ('1.69'),
+    ('1.1'),
+    ('0.065'),
+    ('39 / 47 / 26 / 32'),
+    ('1.62 / 2.592'),
+    ('13 frames'),
+    ('14 frames'),
+    ('15 frames'),
+    ('11 frames');

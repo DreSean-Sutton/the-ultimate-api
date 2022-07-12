@@ -805,3 +805,16 @@ INSERT INTO public.movements AS "charizard"
     (62, 'air dodge, left/right', 'movement'),
     (62, 'air dodge, side + up', 'movement'),
     (62, 'air dodge up', 'movement');
+
+INSERT INTO public.movements AS "pyra"
+  ("fighterId", "name", "type")
+  VALUES
+    (63, 'spot dodge', 'movement'),
+    (63, 'forward roll', 'movement'),
+    (63, 'backwards roll', 'movement'),
+    (63, 'neutral air dodge', 'movement'),
+    (63, 'air dodge, down', 'movement'),
+    (63, 'air dodge, side + down', 'movement'),
+    (63, 'air dodge, left/right', 'movement'),
+    (63, 'air dodge, side + up', 'movement'),
+    (63, 'air dodge up', 'movement');

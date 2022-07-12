@@ -967,9 +967,9 @@ INSERT INTO public.stats AS "pikachu"
     (57, 'total air acceleration', 'stat'),
     (57, 'sh / fh / shff / fhff', 'stat'),
     (57, 'fall speed/fast fall speed', 'stat'),
-    (57, 'out of shield, ', 'stat'),
-    (57, 'out of shield, ', 'stat'),
-    (57, 'out of shield, ', 'stat'),
+    (57, 'out of shield, neutral air', 'stat'),
+    (57, 'out of shield, back air / up air', 'stat'),
+    (57, 'out of shield, up smash', 'stat'),
     (57, 'shield grab (post-shieldstun)', 'stat');
 
 INSERT INTO public.stats AS "piranhaPlant"
@@ -1056,3 +1056,20 @@ INSERT INTO public.stats AS "charizard"
     (62, 'out of shield, up b', 'stat'),
     (62, 'out of shield, neutral air / forward air', 'stat'),
     (62, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.stats AS "pyra"
+  ("fighterId", "name", "type")
+  VALUES
+    (63, 'weight', 'stat'),
+    (63, 'gravity', 'stat'),
+    (63, 'walk speed', 'stat'),
+    (63, 'run speed', 'stat'),
+    (63, 'initial dash', 'stat'),
+    (63, 'air speed', 'stat'),
+    (63, 'total air acceleration', 'stat'),
+    (63, 'sh / fh / shff / fhff', 'stat'),
+    (63, 'fall speed/fast fall speed', 'stat'),
+    (63, 'out of shield, up b', 'stat'),
+    (63, 'out of shield, neutral air / forward air / jab', 'stat'),
+    (63, 'out of shield, up smash', 'stat'),
+    (63, 'shield grab (post-shieldstun)', 'stat');

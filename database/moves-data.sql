@@ -1733,3 +1733,30 @@ INSERT INTO public.moves AS "charizard"
     (62, 'side b', 'single', 'move', 'special'),
     (62, 'up b', 'first/multi/final', 'move', 'special'),
     (62, 'down b', 'pokémon swap (cooldown till next change)', 'move', 'special');
+
+INSERT INTO public.moves AS "pyra"
+  ("fighterId", "name", "moveType", "type", "category")
+  VALUES
+    (63, 'jab 1', 'single', 'move', 'ground'),
+    (63, 'jab 2', 'single', 'move', 'ground'),
+    (63, 'jab 3', 'single', 'move', 'ground'),
+    (63, 'rapid jab', 'multi', 'move', 'ground'),
+    (63, 'rapid jab finisher', 'single', 'move', 'ground'),
+    (63, 'forward tilt', 'early/late', 'move', 'ground'),
+    (63, 'up tilt', 'single', 'move', 'ground'),
+    (63, 'down tilt', 'close/far', 'move', 'ground'),
+    (63, 'dash attack', 'close/far', 'move', 'ground'),
+    (63, 'forward smash', 'single', 'move', 'ground'),
+    (63, 'up smash', 'hit 1/ hit 2: early/late', 'move', 'ground'),
+    (63, 'down smash', 'blade: close/far/leg: close/far', 'move', 'ground'),
+    (63, 'neutral air', 'early/late', 'move', 'aerial'),
+    (63, 'forward air', 'single', 'move', 'aerial'),
+    (63, 'back air', 'early/late', 'move', 'aerial'),
+    (63, 'up air', 'single', 'move', 'aerial'),
+    (63, 'down air', 'early/clean/late', 'move', 'aerial'),
+    (63, 'neutral b, uncharged', 'multi/final', 'move', 'special'),
+    (63, 'neutral b, partial charge', 'multi/final', 'move', 'special'),
+    (63, 'neutral b, full charge', 'multi/final', 'move', 'special'),
+    (63, 'side b', 'wrist/early multi/late multi/final', 'move', 'special'),
+    (63, 'up b', 'rising/falling/landing/early: flame pillar/(late: low flame pillar/high flame pillar)', 'move', 'special'),
+    (63, 'down b', 'i-frames', 'move', 'special');

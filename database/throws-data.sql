@@ -746,3 +746,15 @@ INSERT INTO public.throws AS "charizard"
     (62, 'backward throw', 'throw'),
     (62, 'up throw', 'throw'),
     (62, 'down throw', 'throw');
+
+INSERT INTO public.throws AS "pyra"
+  ("fighterId", "name", "type")
+  VALUES
+    (63, 'grab', 'throw'),
+    (63, 'dash grab', 'throw'),
+    (63, 'pivot grab', 'throw'),
+    (63, 'pummel', 'throw'),
+    (63, 'forward throw', 'throw'),
+    (63, 'backward throw', 'throw'),
+    (63, 'up throw', 'throw'),
+    (63, 'down throw', 'throw');
