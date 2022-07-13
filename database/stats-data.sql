@@ -1090,3 +1090,20 @@ INSERT INTO public.stats AS "richter"
     (64, 'out of shield, neutral air', 'stat'),
     (64, 'out of shield, jab', 'stat'),
     (64, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.stats AS "ridley"
+  ("fighterId", "name", "type")
+  VALUES
+    (65, 'weight', 'stat'),
+    (65, 'gravity', 'stat'),
+    (65, 'walk speed', 'stat'),
+    (65, 'run speed', 'stat'),
+    (65, 'initial dash', 'stat'),
+    (65, 'air speed', 'stat'),
+    (65, 'total air acceleration', 'stat'),
+    (65, 'sh / fh / shff / fhff', 'stat'),
+    (65, 'fall speed/fast fall speed', 'stat'),
+    (65, 'out of shield, neutral air', 'stat'),
+    (65, 'out of shield, up smash', 'stat'),
+    (65, 'out of shield, foward air / back air', 'stat'),
+    (65, 'shield grab (post-shieldstun)', 'stat');

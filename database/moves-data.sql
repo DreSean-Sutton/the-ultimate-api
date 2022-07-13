@@ -1787,3 +1787,31 @@ INSERT INTO public.moves AS "richter"
     (64, 'up b', 'first/multi/final', 'move', 'special'),
     (64, 'down b', 'projectile', 'move', 'special'),
     (64, 'down b', 'multi', 'move', 'special');
+
+INSERT INTO public.moves AS "ridley"
+  ("fighterId", "name", "moveType", "type", "category")
+  VALUES
+    (65, 'jab 1', 'single', 'move', 'ground'),
+    (65, 'jab 2', 'single', 'move', 'ground'),
+    (65, 'jab 3', 'single', 'move', 'ground'),
+    (65, 'rapid jab', 'multi', 'move', 'ground'),
+    (65, 'rapid jab finisher', 'single', 'move', 'ground'),
+    (65, 'forward tilt', 'close/far', 'move', 'ground'),
+    (65, 'up tilt', 'single', 'move', 'ground'),
+    (65, 'down tilt', 'close/far', 'move', 'ground'),
+    (65, 'dash attack', 'single', 'move', 'ground'),
+    (65, 'forward smash', 'single', 'move', 'ground'),
+    (65, 'up smash', 'single', 'move', 'ground'),
+    (65, 'down smash', 'single', 'move', 'ground'),
+    (65, 'neutral air', 'early: tail/tip/late: tail/tip', 'move', 'aerial'),
+    (65, 'forward air', 'multi: close/far/final: close/far', 'move', 'aerial'),
+    (65, 'back air', 'single', 'move', 'aerial'),
+    (65, 'up air', 'far/close', 'move', 'aerial'),
+    (65, 'down air', 'early meteor/late', 'move', 'aerial'),
+    (65, 'neutral b', 'early/late | full charge: early/late', 'move', 'special'),
+    (65, 'side b, grab (ground)', 'grab', 'move', 'special'),
+    (65, 'side b, grab (air)', 'grab', 'move', 'special'),
+    (65, 'side b, grab success', 'intial grab/drag', 'move', 'special'),
+    (65, 'side b, grab release', 'ground/ledge/air', 'move', 'special'),
+    (65, 'up b', 'up/horizontal/down/landing', 'move', 'special'),
+    (65, 'down b', 'close/tip: first/second', 'move', 'special');

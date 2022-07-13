@@ -1090,3 +1090,20 @@ INSERT INTO public.miscellaneous AS "richter"
     ('11 frames'),
     ('16 frames'),
     ('14 frames');
+
+INSERT INTO public.miscellaneous AS "ridley"
+  ("statValue")
+  VALUES
+    ('107'),
+    ('0.09'),
+    ('1.1'),
+    ('2.2'),
+    ('1.8'),
+    ('1.05'),
+    ('0.07'),
+    ('35 / 51 / 23 / 34'),
+    ('1.78 / 2.848'),
+    ('11 frames'),
+    ('12 frames'),
+    ('13 frames'),
+    ('12 frames');

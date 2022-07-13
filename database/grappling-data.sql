@@ -770,3 +770,15 @@ INSERT INTO public.grappling AS "richter"
     ('7.0%', '18', '41'),
     ('6.0/4.0%', '25/26', '46'),
     ('8.0%', '33', '48');
+
+INSERT INTO public.grappling AS "ridley"
+  ("damage", "activeFrames", "totalFrames")
+  VALUES
+    (null, '8-10', '34'),
+    (null, '11-13', '42'),
+    (null, '12-14', '39'),
+    ('1.3%', '1', '19'),
+    (null, '13', '37'),
+    (null, '18', '45'),
+    (null, '14/19', '43'),
+    (null, '25', '35');
