@@ -1073,3 +1073,20 @@ INSERT INTO public.stats AS "pyra"
     (63, 'out of shield, neutral air / forward air / jab', 'stat'),
     (63, 'out of shield, up smash', 'stat'),
     (63, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.stats AS "richter"
+  ("fighterId", "name", "type")
+  VALUES
+    (64, 'weight', 'stat'),
+    (64, 'gravity', 'stat'),
+    (64, 'walk speed', 'stat'),
+    (64, 'run speed', 'stat'),
+    (64, 'initial dash', 'stat'),
+    (64, 'air speed', 'stat'),
+    (64, 'total air acceleration', 'stat'),
+    (64, 'sh / fh / shff / fhff', 'stat'),
+    (64, 'fall speed/fast fall speed', 'stat'),
+    (64, 'out of shield, up b', 'stat'),
+    (64, 'out of shield, neutral air', 'stat'),
+    (64, 'out of shield, jab', 'stat'),
+    (64, 'shield grab (post-shieldstun)', 'stat');

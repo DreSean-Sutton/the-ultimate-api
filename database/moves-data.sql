@@ -1760,3 +1760,30 @@ INSERT INTO public.moves AS "pyra"
     (63, 'side b', 'wrist/early multi/late multi/final', 'move', 'special'),
     (63, 'up b', 'rising/falling/landing/early: flame pillar/(late: low flame pillar/high flame pillar)', 'move', 'special'),
     (63, 'down b', 'i-frames', 'move', 'special');
+
+INSERT INTO public.moves AS "richter"
+  ("fighterId", "name", "moveType", "type", "category")
+  VALUES
+    (64, 'jab 1', 'single', 'move', 'ground'),
+    (64, 'jab 2', 'single', 'move', 'ground'),
+    (64, 'rapid jab', 'multi', 'move', 'ground'),
+    (64, 'rapid jab finisher', 'single', 'move', 'ground'),
+    (64, 'whip dangle', 'chain/ball', 'move', 'ground'),
+    (64, 'forward tilt', 'chain/ball/arm', 'move', 'ground'),
+    (64, 'up tilt', 'chain/ball', 'move', 'ground'),
+    (64, 'down tilt, 1', 'single', 'move', 'ground'),
+    (64, 'down tilt, 2', 'early/late', 'move', 'ground'),
+    (64, 'dash attack', 'multi/final', 'move', 'ground'),
+    (64, 'forward smash', 'hand/chain/ball', 'move', 'ground'),
+    (64, 'up smash', 'ball/chain', 'move', 'ground'),
+    (64, 'down smash', 'chain: close/mid/ball', 'move', 'ground'),
+    (64, 'neutral air', 'multi/final', 'move', 'aerial'),
+    (64, 'forward air', 'ball/chain/arm', 'move', 'aerial'),
+    (64, 'back air', 'ball/chain/arm', 'move', 'aerial'),
+    (64, 'up air', 'ball/chain/arm', 'move', 'aerial'),
+    (64, 'down air', 'early/late', 'move', 'aerial'),
+    (64, 'neutral b', 'projectile', 'move', 'special'),
+    (64, 'side b', 'smash/tilt/return', 'move', 'special'),
+    (64, 'up b', 'first/multi/final', 'move', 'special'),
+    (64, 'down b', 'projectile', 'move', 'special'),
+    (64, 'down b', 'multi', 'move', 'special');

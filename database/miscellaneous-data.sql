@@ -1073,3 +1073,20 @@ INSERT INTO public.miscellaneous AS "pyra"
     ('14 frames'),
     ('15 frames'),
     ('11 frames');
+
+INSERT INTO public.miscellaneous AS "richter"
+  ("statValue")
+  VALUES
+    ('107'),
+    ('0.085'),
+    ('0.76'),
+    ('1.52'),
+    ('1.73'),
+    ('0.94'),
+    ('0.03'),
+    ('41 / 51 / 29 / 36'),
+    ('1.85 / 2.96'),
+    ('6 frames'),
+    ('11 frames'),
+    ('16 frames'),
+    ('14 frames');

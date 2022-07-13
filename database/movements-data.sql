@@ -818,3 +818,16 @@ INSERT INTO public.movements AS "pyra"
     (63, 'air dodge, left/right', 'movement'),
     (63, 'air dodge, side + up', 'movement'),
     (63, 'air dodge up', 'movement');
+
+INSERT INTO public.movements AS "richter"
+  ("fighterId", "name", "type")
+  VALUES
+    (64, 'spot dodge', 'movement'),
+    (64, 'forward roll', 'movement'),
+    (64, 'backwards roll', 'movement'),
+    (64, 'neutral air dodge', 'movement'),
+    (64, 'air dodge, down', 'movement'),
+    (64, 'air dodge, side + down', 'movement'),
+    (64, 'air dodge, left/right', 'movement'),
+    (64, 'air dodge, side + up', 'movement'),
+    (64, 'air dodge up', 'movement');

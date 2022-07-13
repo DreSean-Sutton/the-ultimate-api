@@ -62,4 +62,5 @@ INSERT INTO public.fighters ("fighter", "rosterId", "displayName")
     ('squirtle', 36, 'Squirtle'),
     ('ivysaur', 37, 'Ivysaur'),
     ('charizard', 38, 'Charizard'),
-    ('pyra', 86, 'Pyra');
+    ('pyra', 86, 'Pyra'),
+    ('richter', 73, 'Richter');
