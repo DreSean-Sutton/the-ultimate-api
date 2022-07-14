@@ -214,11 +214,12 @@ paths:
             schema:
              $ref: '#/components/schemas/movesRequestBody'
              required:
-              - fighterId
-              - name
-              - moveType
-              - damage
               - activeFrames
+              - category
+              - damage
+              - fighterId
+              - moveType
+              - name
               - totalFrames
       responses:
         '201':
@@ -586,6 +587,8 @@ components:
         properties:
           activeFrames:
             type: string
+          category:
+            type: string
           damage:
             type: string
           displayName:
@@ -609,6 +612,7 @@ components:
       example:
       -
         activeFrames: "6/11-25 [rehit: 3]/27-28"
+        category: special
         damage: 3.0/0.2/3.0%
         displayName: Bayonetta
         fighter: bayonetta
@@ -651,6 +655,8 @@ components:
       properties:
         activeFrames:
           type: string
+        category:
+          type: string
         damage:
           type: string
         moveType:
@@ -666,6 +672,8 @@ components:
         type: object
         properties:
           activeFrames:
+            type: string
+          category:
             type: string
           damage:
             type: string
@@ -683,6 +691,7 @@ components:
             type: string
       example:
         activeFrames: 1-100
+        category: special
         damage: 9001%
         fighterId: 1
         moveId: 150
