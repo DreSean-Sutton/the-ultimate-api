@@ -1107,3 +1107,20 @@ INSERT INTO public.stats AS "ridley"
     (65, 'out of shield, up smash', 'stat'),
     (65, 'out of shield, foward air / back air', 'stat'),
     (65, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.stats AS "rob"
+  ("fighterId", "name", "type")
+  VALUES
+    (66, 'weight', 'stat'),
+    (66, 'gravity', 'stat'),
+    (66, 'walk speed', 'stat'),
+    (66, 'run speed', 'stat'),
+    (66, 'initial dash', 'stat'),
+    (66, 'air speed', 'stat'),
+    (66, 'total air acceleration', 'stat'),
+    (66, 'sh / fh / shff / fhff', 'stat'),
+    (66, 'fall speed/fast fall speed', 'stat'),
+    (66, 'out of shield, forward air', 'stat'),
+    (66, 'out of shield, up air / up smash', 'stat'),
+    (66, 'out of shield, jab / down tilt', 'stat'),
+    (66, 'shield grab (post-shieldstun)', 'stat');

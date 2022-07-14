@@ -1815,3 +1815,26 @@ INSERT INTO public.moves AS "ridley"
     (65, 'side b, grab release', 'ground/ledge/air', 'move', 'special'),
     (65, 'up b', 'up/horizontal/down/landing', 'move', 'special'),
     (65, 'down b', 'close/tip: first/second', 'move', 'special');
+
+INSERT INTO public.moves AS "rob"
+  ("fighterId", "name", "moveType", "type", "category")
+  VALUES
+    (66, 'jab 1', 'single', 'move', 'ground'),
+    (66, 'jab 2', 'single', 'move', 'ground'),
+    (66, 'forward tilt', 'close/mid/far', 'move', 'ground'),
+    (66, 'up tilt', 'first/second far/third close', 'move', 'ground'),
+    (66, 'down tilt', 'single', 'move', 'ground'),
+    (66, 'dash attack', 'single', 'move', 'ground'),
+    (66, 'forward smash', 'single', 'move', 'ground'),
+    (66, 'up smash', 'first/second close/second far', 'move', 'ground'),
+    (66, 'down smash', 'multi close/multi far/final', 'move', 'ground'),
+    (66, 'neutral air', 'close/final', 'move', 'aerial'),
+    (66, 'forward air', 'single', 'move', 'aerial'),
+    (66, 'back air', 'early: close/far/late: close/far', 'move', 'aerial'),
+    (66, 'up air', 'multi/final', 'move', 'aerial'),
+    (66, 'down air', 'early/late: (close/mid (aerial)/mid (ground)/far)', 'move', 'aerial'),
+    (66, 'neutral b', '(small beam: close/far/furthest)(large beam: melee/beam/both)', 'move', 'special'),
+    (66, 'side b', 'multi/final', 'move', 'special'),
+    (66, 'side b, mashing b', 'multi/final', 'move', 'special'),
+    (66, 'up b', 'recovery', 'move', 'special'),
+    (66, 'down b', 'uncharged-full charge', 'move', 'special');

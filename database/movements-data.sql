@@ -844,3 +844,16 @@ INSERT INTO public.movements AS "ridley"
     (65, 'air dodge, left/right', 'movement'),
     (65, 'air dodge, side + up', 'movement'),
     (65, 'air dodge up', 'movement');
+
+INSERT INTO public.movements AS "rob"
+  ("fighterId", "name", "type")
+  VALUES
+    (66, 'spot dodge', 'movement'),
+    (66, 'forward roll', 'movement'),
+    (66, 'backwards roll', 'movement'),
+    (66, 'neutral air dodge', 'movement'),
+    (66, 'air dodge, down', 'movement'),
+    (66, 'air dodge, side + down', 'movement'),
+    (66, 'air dodge, left/right', 'movement'),
+    (66, 'air dodge, side + up', 'movement'),
+    (66, 'air dodge up', 'movement');
