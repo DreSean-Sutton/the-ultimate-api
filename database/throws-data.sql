@@ -794,3 +794,15 @@ INSERT INTO public.throws AS "rob"
     (66, 'backward throw', 'throw'),
     (66, 'up throw', 'throw'),
     (66, 'down throw', 'throw');
+
+INSERT INTO public.throws AS "robin"
+  ("fighterId", "name", "type")
+  VALUES
+    (67, 'grab', 'throw'),
+    (67, 'dash grab', 'throw'),
+    (67, 'pivot grab', 'throw'),
+    (67, 'pummel', 'throw'),
+    (67, 'forward throw', 'throw'),
+    (67, 'backward throw', 'throw'),
+    (67, 'up throw', 'throw'),
+    (67, 'down throw', 'throw');

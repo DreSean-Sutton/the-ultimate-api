@@ -53,7 +53,7 @@ INSERT INTO public.fighters ("fighter", "rosterId", "displayName")
     ('ness', 11, 'Ness'),
     ('olimar', 45, 'Olimar'),
     ('pacMan', 60, 'Pac Man'),
-    ('palutena', 61, 'Palutena'),
+    ('palutena', 59, 'Palutena'),
     ('peach', 14, 'Peach'),
     ('pichu', 21, 'Pichu'),
     ('pikachu', 9, 'Pikachu'),
@@ -65,4 +65,5 @@ INSERT INTO public.fighters ("fighter", "rosterId", "displayName")
     ('pyra', 86, 'Pyra'),
     ('richter', 73, 'Richter'),
     ('ridley', 71, 'Ridley'),
-    ('rob', 47, 'Rob');
+    ('rob', 47, 'Rob'),
+    ('robin', 61, 'Robin');

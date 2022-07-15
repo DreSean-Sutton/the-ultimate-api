@@ -1838,3 +1838,30 @@ INSERT INTO public.moves AS "rob"
     (66, 'side b, mashing b', 'multi/final', 'move', 'special'),
     (66, 'up b', 'recovery', 'move', 'special'),
     (66, 'down b', 'uncharged-full charge', 'move', 'special');
+
+INSERT INTO public.moves AS "robin"
+  ("fighterId", "name", "moveType", "type", "category")
+  VALUES
+    (67, 'jab 1', 'single', 'move', 'ground'),
+    (67, 'jab 2', 'single', 'move', 'ground'),
+    (67, 'jab 3', 'single', 'move', 'ground'),
+    (67, 'rapid jab', 'multi', 'move', 'ground'),
+    (67, 'rapid jab finisher', 'single', 'move', 'ground'),
+    (67, 'forward tilt', 'single', 'move', 'ground'),
+    (67, 'up tilt', 'single', 'move', 'ground'),
+    (67, 'down tilt', 'single', 'move', 'ground'),
+    (67, 'dash attack', 'early/late', 'move', 'ground'),
+    (67, 'forward smash', 'early/late/bronze', 'move', 'ground'),
+    (67, 'up smash', 'close/far/bronze', 'move', 'ground'),
+    (67, 'down smash', 'sword/spark/bronze', 'move', 'ground'),
+    (67, 'neutral air', 'levin/bronze', 'move', 'aerial'),
+    (67, 'forward air', 'levin/bronze', 'move', 'aerial'),
+    (67, 'back air', 'early/late/bronze', 'move', 'aerial'),
+    (67, 'up air', 'early/late/bronze', 'move', 'aerial'),
+    (67, 'down air', 'levin: early/late/bronze: early/late', 'move', 'aerial'),
+    (67, 'neutral b', 'thunder/elthunder/arcthunder', 'move', 'special'),
+    (67, 'neutral b, arcthunder on hit', 'first/multi/final', 'move', 'special'),
+    (67, 'neutral b, thoron', 'multi/final', 'move', 'special'),
+    (67, 'side b', 'first/multi/final', 'move', 'special'),
+    (67, 'up b', 'early/late', 'move', 'special'),
+    (67, 'down b', 'life leech', 'move', 'special');

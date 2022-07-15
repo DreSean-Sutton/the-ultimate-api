@@ -1124,3 +1124,20 @@ INSERT INTO public.miscellaneous AS "rob"
     ('10 frames'),
     ('14 frames'),
     ('10 frames');
+
+INSERT INTO public.miscellaneous AS "robin"
+  ("statValue")
+  VALUES
+    ('95'),
+    ('0.089'),
+    ('0.936'),
+    ('1.265'),
+    ('1.815'),
+    ('1.05'),
+    ('0.08'),
+    ('38 / 52 / 26 / 36'),
+    ('1.5 / 2.4'),
+    ('8 frames'),
+    ('10 frames'),
+    ('12 frames'),
+    ('11 frames');
