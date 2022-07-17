@@ -870,3 +870,16 @@ INSERT INTO public.dodging AS "robin"
     ('3-21', '86'),
     ('3-21', '103'),
     ('3-21', '114');
+
+INSERT INTO public.dodging AS "rosalinaAndLuma"
+  ("activeFrames", "totalFrames")
+  VALUES
+    ('3-17', '21/26'),
+    ('4-15', '30'),
+    ('5-16', '35'),
+    ('3-29', '62'),
+    ('3-21', '86'),
+    ('3-21', '94'),
+    ('3-21', '105'),
+    ('3-21', '124'),
+    ('3-21', '144');

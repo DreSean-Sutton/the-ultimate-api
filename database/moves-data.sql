@@ -1865,3 +1865,29 @@ INSERT INTO public.moves AS "robin"
     (67, 'side b', 'first/multi/final', 'move', 'special'),
     (67, 'up b', 'early/late', 'move', 'special'),
     (67, 'down b', 'life leech', 'move', 'special');
+
+INSERT INTO public.moves AS "rosalinaAndLuma"
+  ("fighterId", "name", "moveType", "type", "category")
+  VALUES
+    (68, 'jab 1', 'single(luma: single)', 'move', 'ground'),
+    (68, 'jab 2', 'single(luma: single)', 'move', 'ground'),
+    (68, 'jab 3', 'single(luma: single)', 'move', 'ground'),
+    (68, 'rapid jab', 'multi(luma: multi)', 'move', 'ground'),
+    (68, 'rapid jab finisher', 'single(luma: single)', 'move', 'ground'),
+    (68, 'forward tilt', 'single(luma: single)', 'move', 'ground'),
+    (68, 'up tilt', 'early/late(luma: early/late/latest)', 'move', 'ground'),
+    (68, 'down tilt', 'single(luma: single)', 'move', 'ground'),
+    (68, 'dash attack', 'first/second(luma: single)', 'move', 'ground'),
+    (68, 'forward smash', 'normal/sour(luma: single)', 'move', 'ground'),
+    (68, 'up smash', 'single(luma: single)', 'move', 'ground'),
+    (68, 'down smash', 'front/back(luma: front/back)', 'move', 'ground'),
+    (68, 'neutral air', 'early/late(first/second)', 'move', 'aerial'),
+    (68, 'forward air', 'multi/final(luma: single)', 'move', 'aerial'),
+    (68, 'back air', 'single(luma: single)', 'move', 'aerial'),
+    (68, 'up air', 'early/late/latest(luma: single)', 'move', 'aerial'),
+    (68, 'down air', 'early/late/latest(luma: single)', 'move', 'aerial'),
+    (68, 'neutral b, luma shot', 'uncharged-charged', 'move', 'special'),
+    (68, 'neutral b, luma recall', 'ground/air', 'move', 'special'),
+    (68, 'side b', 'multi', 'move', 'special'),
+    (68, 'up b', 'recovery', 'move', 'special'),
+    (68, 'down b', 'projectile absorb', 'move', 'special');

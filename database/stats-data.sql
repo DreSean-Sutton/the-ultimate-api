@@ -1141,3 +1141,20 @@ INSERT INTO public.stats AS "robin"
     (67, 'out of shield, neutral air', 'stat'),
     (67, 'out of shield, back air / up smash', 'stat'),
     (67, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.stats AS "rosalinaAndLuma"
+  ("fighterId", "name", "type")
+  VALUES
+    (68, 'weight', 'stat'),
+    (68, 'gravity', 'stat'),
+    (68, 'walk speed', 'stat'),
+    (68, 'run speed', 'stat'),
+    (68, 'initial dash', 'stat'),
+    (68, 'air speed', 'stat'),
+    (68, 'total air acceleration', 'stat'),
+    (68, 'sh / fh / shff / fhff', 'stat'),
+    (68, 'fall speed/fast fall speed', 'stat'),
+    (68, 'out of shield, up smash', 'stat'),
+    (68, 'out of shield, up air', 'stat'),
+    (68, 'out of shield, neutral air', 'stat'),
+    (68, 'shield grab (post-shieldstun)', 'stat');
