@@ -67,4 +67,5 @@ INSERT INTO public.fighters ("fighter", "rosterId", "displayName")
     ('ridley', 71, 'Ridley'),
     ('rob', 47, 'Rob'),
     ('robin', 61, 'Robin'),
-    ('rosalinaAndLuma', 53, 'Rosalina & Luma');
+    ('rosalinaAndLuma', 53, 'Rosalina & Luma'),
+    ('roy', 28, 'Roy');

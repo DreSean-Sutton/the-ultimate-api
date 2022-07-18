@@ -1,29 +1,29 @@
-INSERT INTO public.moves AS "roy"
+INSERT INTO public.moves AS "ryu"
   ("fighterId", "name", "moveType", "type", "category")
   VALUES
-    (69, 'jab 1', 'single', 'move', 'ground'),
-    (69, 'jab 2', 'single', 'move', 'ground'),
-    (69, 'jab 3', 'single', 'move', 'ground'),
-    (69, 'rapid jab', 'multi', 'move', 'ground'),
-    (69, 'rapid jab finisher', 'single', 'move', 'ground'),
-    (69, 'forward tilt', '', 'move', 'ground'),
-    (69, 'up tilt', '', 'move', 'ground'),
-    (69, 'down tilt', '', 'move', 'ground'),
-    (69, 'dash attack', '', 'move', 'ground'),
-    (69, 'forward smash', '', 'move', 'ground'),
-    (69, 'up smash', '', 'move', 'ground'),
-    (69, 'down smash', '', 'move', 'ground'),
-    (69, 'neutral air', '', 'move', 'aerial'),
-    (69, 'forward air', '', 'move', 'aerial'),
-    (69, 'back air', '', 'move', 'aerial'),
-    (69, 'up air', '', 'move', 'aerial'),
-    (69, 'down air', '', 'move', 'aerial'),
-    (69, 'neutral b', '', 'move', 'special'),
-    (69, 'side b', '', 'move', 'special'),
-    (69, 'up b', '', 'move', 'special'),
-    (69, 'down b', '', 'move', 'special');
+    (70, 'jab 1', 'single', 'move', 'ground'),
+    (70, 'jab 2', 'single', 'move', 'ground'),
+    (70, 'jab 3', 'single', 'move', 'ground'),
+    (70, 'rapid jab', 'multi', 'move', 'ground'),
+    (70, 'rapid jab finisher', 'single', 'move', 'ground'),
+    (70, 'forward tilt', '', 'move', 'ground'),
+    (70, 'up tilt', '', 'move', 'ground'),
+    (70, 'down tilt', '', 'move', 'ground'),
+    (70, 'dash attack', '', 'move', 'ground'),
+    (70, 'forward smash', '', 'move', 'ground'),
+    (70, 'up smash', '', 'move', 'ground'),
+    (70, 'down smash', '', 'move', 'ground'),
+    (70, 'neutral air', '', 'move', 'aerial'),
+    (70, 'forward air', '', 'move', 'aerial'),
+    (70, 'back air', '', 'move', 'aerial'),
+    (70, 'up air', '', 'move', 'aerial'),
+    (70, 'down air', '', 'move', 'aerial'),
+    (70, 'neutral b', '', 'move', 'special'),
+    (70, 'side b', '', 'move', 'special'),
+    (70, 'up b', '', 'move', 'special'),
+    (70, 'down b', '', 'move', 'special');
 
-INSERT INTO public.hitboxes AS "roy"
+INSERT INTO public.hitboxes AS "ryu"
   ("damage", "activeFrames", "totalFrames", "firstFrame")
   VALUES
     ('.0%', '', '', ''),
@@ -48,19 +48,19 @@ INSERT INTO public.hitboxes AS "roy"
     ('.0%', '', '', ''),
     ('.0%', '', '', '');
 
-INSERT INTO public.throws AS "roy"
+INSERT INTO public.throws AS "ryu"
   ("fighterId", "name", "type")
   VALUES
-    (69, 'grab', 'throw'),
-    (69, 'dash grab', 'throw'),
-    (69, 'pivot grab', 'throw'),
-    (69, 'pummel', 'throw'),
-    (69, 'forward throw', 'throw'),
-    (69, 'backward throw', 'throw'),
-    (69, 'up throw', 'throw'),
-    (69, 'down throw', 'throw');
+    (70, 'grab', 'throw'),
+    (70, 'dash grab', 'throw'),
+    (70, 'pivot grab', 'throw'),
+    (70, 'pummel', 'throw'),
+    (70, 'forward throw', 'throw'),
+    (70, 'backward throw', 'throw'),
+    (70, 'up throw', 'throw'),
+    (70, 'down throw', 'throw');
 
-INSERT INTO public.grappling AS "roy"
+INSERT INTO public.grappling AS "ryu"
   ("damage", "activeFrames", "totalFrames")
   VALUES
     (null, '6-7', '34'),
@@ -72,20 +72,20 @@ INSERT INTO public.grappling AS "roy"
     ('.0%', '', ''),
     ('.0%', '', '');
 
-INSERT INTO public.movements AS "roy"
+INSERT INTO public.movements AS "ryu"
   ("fighterId", "name", "type")
   VALUES
-    (69, 'spot dodge', 'movement'),
-    (69, 'forward roll', 'movement'),
-    (69, 'backwards roll', 'movement'),
-    (69, 'neutral air dodge', 'movement'),
-    (69, 'air dodge, down', 'movement'),
-    (69, 'air dodge, side + down', 'movement'),
-    (69, 'air dodge, left/right', 'movement'),
-    (69, 'air dodge, side + up', 'movement'),
-    (69, 'air dodge up', 'movement');
+    (70, 'spot dodge', 'movement'),
+    (70, 'forward roll', 'movement'),
+    (70, 'backwards roll', 'movement'),
+    (70, 'neutral air dodge', 'movement'),
+    (70, 'air dodge, down', 'movement'),
+    (70, 'air dodge, side + down', 'movement'),
+    (70, 'air dodge, left/right', 'movement'),
+    (70, 'air dodge, side + up', 'movement'),
+    (70, 'air dodge up', 'movement');
 
-INSERT INTO public.dodging AS "roy"
+INSERT INTO public.dodging AS "ryu"
   ("activeFrames", "totalFrames")
   VALUES
     ('3-17', '20/25'),
@@ -98,24 +98,24 @@ INSERT INTO public.dodging AS "roy"
     ('3-21', ''),
     ('3-21', '');
 
-INSERT INTO public.stats AS "roy"
+INSERT INTO public.stats AS "ryu"
   ("fighterId", "name", "type")
   VALUES
-    (69, 'weight', 'stat'),
-    (69, 'gravity', 'stat'),
-    (69, 'walk speed', 'stat'),
-    (69, 'run speed', 'stat'),
-    (69, 'initial dash', 'stat'),
-    (69, 'air speed', 'stat'),
-    (69, 'total air acceleration', 'stat'),
-    (69, 'sh / fh / shff / fhff', 'stat'),
-    (69, 'fall speed/fast fall speed', 'stat'),
-    (69, 'out of shield, ', 'stat'),
-    (69, 'out of shield, ', 'stat'),
-    (69, 'out of shield, ', 'stat'),
-    (69, 'shield grab (post-shieldstun)', 'stat');
+    (70, 'weight', 'stat'),
+    (70, 'gravity', 'stat'),
+    (70, 'walk speed', 'stat'),
+    (70, 'run speed', 'stat'),
+    (70, 'initial dash', 'stat'),
+    (70, 'air speed', 'stat'),
+    (70, 'total air acceleration', 'stat'),
+    (70, 'sh / fh / shff / fhff', 'stat'),
+    (70, 'fall speed/fast fall speed', 'stat'),
+    (70, 'out of shield, ', 'stat'),
+    (70, 'out of shield, ', 'stat'),
+    (70, 'out of shield, ', 'stat'),
+    (70, 'shield grab (post-shieldstun)', 'stat');
 
-INSERT INTO public.miscellaneous AS "roy"
+INSERT INTO public.miscellaneous AS "ryu"
   ("statValue")
   VALUES
     (''),

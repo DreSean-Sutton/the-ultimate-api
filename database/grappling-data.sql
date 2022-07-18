@@ -818,3 +818,15 @@ INSERT INTO public.grappling AS "rosalinaAndLuma"
     ('11.0%', '30', '42'),
     ('7.0%', '13', '37'),
     ('9.0%', '13', '35');
+
+INSERT INTO public.grappling AS "roy"
+  ("damage", "activeFrames", "totalFrames")
+  VALUES
+    (null, '7-8', '36'),
+    (null, '10-11', '44'),
+    (null, '11-12', '39'),
+    ('1.3%', '1', '19'),
+    ('5.0%', '15', '31'),
+    ('5.0%', '8', '44'),
+    ('6.0%', '13', '44'),
+    ('5.0%', '16', '41');
