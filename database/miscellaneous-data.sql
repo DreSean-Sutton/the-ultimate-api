@@ -195,7 +195,7 @@ INSERT INTO public.miscellaneous AS "darkSamus"
     ('1.87'),
     ('1.103'),
     ('0.09'),
-    ('44 / 61 / 31 / 3l/43'),
+    ('44 / 61 / 31 / 43'),
     ('1.33 / 2.168'),
     ('4 frames'),
     ('8 frames'),
@@ -247,7 +247,7 @@ INSERT INTO public.miscellaneous AS "drMario"
     ('1.5375712'),
     ('0.9238784'),
     ('0.061184'),
-    ('3 / 51 / 23 / 35'),
+    ('34 / 51 / 23 / 35'),
     ('1.5 / 2.4'),
     ('3 frames'),
     ('6 frames'),
@@ -1192,3 +1192,20 @@ INSERT INTO public.miscellaneous AS "ryu"
     ('7 frames'),
     ('9 frames'),
     ('10 frames');
+
+INSERT INTO public.miscellaneous AS "samus"
+  ("statValue")
+  VALUES
+    ('108'),
+    ('0.075'),
+    ('1.115'),
+    ('1.654'),
+    ('1.87'),
+    ('1.103'),
+    ('0.09'),
+    ('44 / 61 / 31 / 43'),
+    ('1.33 / 2.168'),
+    ('4 frames'),
+    ('8 frames'),
+    ('11 frames'),
+    ('19 frames');

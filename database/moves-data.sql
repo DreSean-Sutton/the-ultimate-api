@@ -1955,3 +1955,29 @@ INSERT INTO public.moves AS "ryu"
     (70, 'up b, (normal)', 'light-medium-heavy/late', 'move', 'special'),
     (70, 'up b, (true)', 'light-medium-heavy/late', 'move', 'special'),
     (70, 'down b', 'stage: 1/2/3', 'move', 'special');
+
+INSERT INTO public.moves AS "samus"
+  ("fighterId", "name", "moveType", "type", "category")
+  VALUES
+    (71, 'jab 1', 'single', 'move', 'ground'),
+    (71, 'jab 2', 'single', 'move', 'ground'),
+    (71, 'forward tilt', 'close/middle/far', 'move', 'ground'),
+    (71, 'up tilt', 'late/early', 'move', 'ground'),
+    (71, 'down tilt', 'single', 'move', 'ground'),
+    (71, 'dash attack', 'early/late/latest', 'move', 'ground'),
+    (71, 'forward smash', 'close/far', 'move', 'ground'),
+    (71, 'up smash', 'multi/final', 'move', 'ground'),
+    (71, 'down smash', 'front/back', 'move', 'ground'),
+    (71, 'neutral air', 'hit 1/early hit 2/late', 'move', 'aerial'),
+    (71, 'forward air', 'first/multi/final', 'move', 'aerial'),
+    (71, 'back air', 'early close/early far/late', 'move', 'aerial'),
+    (71, 'up air', 'first/multi/final', 'move', 'aerial'),
+    (71, 'down air', 'early/meteor/late', 'move', 'aerial'),
+    (71, 'z air', 'first/second', 'move', 'ground'),
+    (71, 'neutral b', '(charge time)', 'move', 'special'),
+    (71, 'neutral b, full charge', 'single', 'move', 'special'),
+    (71, 'side b, homing', 'single', 'move', 'special'),
+    (71, 'side b, super', 'single', 'move', 'special'),
+    (71, 'up b, ground', 'first/multi/final', 'move', 'special'),
+    (71, 'up b, air', 'multi', 'move', 'special'),
+    (71, 'down b', '(total frames: holding down/air)', 'move', 'special');

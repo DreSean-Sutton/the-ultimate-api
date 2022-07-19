@@ -1,29 +1,29 @@
-INSERT INTO public.moves AS "samus"
+INSERT INTO public.moves AS "sephiroth"
   ("fighterId", "name", "moveType", "type", "category")
   VALUES
-    (71, 'jab 1', 'single', 'move', 'ground'),
-    (71, 'jab 2', 'single', 'move', 'ground'),
-    (71, 'jab 3', 'single', 'move', 'ground'),
-    (71, 'rapid jab', 'multi', 'move', 'ground'),
-    (71, 'rapid jab finisher', 'single', 'move', 'ground'),
-    (71, 'forward tilt', '', 'move', 'ground'),
-    (71, 'up tilt', '', 'move', 'ground'),
-    (71, 'down tilt', '', 'move', 'ground'),
-    (71, 'dash attack', '', 'move', 'ground'),
-    (71, 'forward smash', '', 'move', 'ground'),
-    (71, 'up smash', '', 'move', 'ground'),
-    (71, 'down smash', '', 'move', 'ground'),
-    (71, 'neutral air', '', 'move', 'aerial'),
-    (71, 'forward air', '', 'move', 'aerial'),
-    (71, 'back air', '', 'move', 'aerial'),
-    (71, 'up air', '', 'move', 'aerial'),
-    (71, 'down air', '', 'move', 'aerial'),
-    (71, 'neutral b', '', 'move', 'special'),
-    (71, 'side b', '', 'move', 'special'),
-    (71, 'up b', '', 'move', 'special'),
-    (71, 'down b', '', 'move', 'special');
+    (72, 'jab 1', 'single', 'move', 'ground'),
+    (72, 'jab 2', 'single', 'move', 'ground'),
+    (72, 'jab 3', 'single', 'move', 'ground'),
+    (72, 'rapid jab', 'multi', 'move', 'ground'),
+    (72, 'rapid jab finisher', 'single', 'move', 'ground'),
+    (72, 'forward tilt', '', 'move', 'ground'),
+    (72, 'up tilt', '', 'move', 'ground'),
+    (72, 'down tilt', '', 'move', 'ground'),
+    (72, 'dash attack', '', 'move', 'ground'),
+    (72, 'forward smash', '', 'move', 'ground'),
+    (72, 'up smash', '', 'move', 'ground'),
+    (72, 'down smash', '', 'move', 'ground'),
+    (72, 'neutral air', '', 'move', 'aerial'),
+    (72, 'forward air', '', 'move', 'aerial'),
+    (72, 'back air', '', 'move', 'aerial'),
+    (72, 'up air', '', 'move', 'aerial'),
+    (72, 'down air', '', 'move', 'aerial'),
+    (72, 'neutral b', '', 'move', 'special'),
+    (72, 'side b', '', 'move', 'special'),
+    (72, 'up b', '', 'move', 'special'),
+    (72, 'down b', '', 'move', 'special');
 
-INSERT INTO public.hitboxes AS "samus"
+INSERT INTO public.hitboxes AS "sephiroth"
   ("damage", "activeFrames", "totalFrames", "firstFrame")
   VALUES
     ('.0%', '', '', ''),
@@ -48,19 +48,19 @@ INSERT INTO public.hitboxes AS "samus"
     ('.0%', '', '', ''),
     ('.0%', '', '', '');
 
-INSERT INTO public.throws AS "samus"
+INSERT INTO public.throws AS "sephiroth"
   ("fighterId", "name", "type")
   VALUES
-    (71, 'grab', 'throw'),
-    (71, 'dash grab', 'throw'),
-    (71, 'pivot grab', 'throw'),
-    (71, 'pummel', 'throw'),
-    (71, 'forward throw', 'throw'),
-    (71, 'backward throw', 'throw'),
-    (71, 'up throw', 'throw'),
-    (71, 'down throw', 'throw');
+    (72, 'grab', 'throw'),
+    (72, 'dash grab', 'throw'),
+    (72, 'pivot grab', 'throw'),
+    (72, 'pummel', 'throw'),
+    (72, 'forward throw', 'throw'),
+    (72, 'backward throw', 'throw'),
+    (72, 'up throw', 'throw'),
+    (72, 'down throw', 'throw');
 
-INSERT INTO public.grappling AS "samus"
+INSERT INTO public.grappling AS "sephiroth"
   ("damage", "activeFrames", "totalFrames")
   VALUES
     (null, '6-7', '34'),
@@ -72,20 +72,20 @@ INSERT INTO public.grappling AS "samus"
     ('.0%', '', ''),
     ('.0%', '', '');
 
-INSERT INTO public.movements AS "samus"
+INSERT INTO public.movements AS "sephiroth"
   ("fighterId", "name", "type")
   VALUES
-    (71, 'spot dodge', 'movement'),
-    (71, 'forward roll', 'movement'),
-    (71, 'backwards roll', 'movement'),
-    (71, 'neutral air dodge', 'movement'),
-    (71, 'air dodge, down', 'movement'),
-    (71, 'air dodge, side + down', 'movement'),
-    (71, 'air dodge, left/right', 'movement'),
-    (71, 'air dodge, side + up', 'movement'),
-    (71, 'air dodge up', 'movement');
+    (72, 'spot dodge', 'movement'),
+    (72, 'forward roll', 'movement'),
+    (72, 'backwards roll', 'movement'),
+    (72, 'neutral air dodge', 'movement'),
+    (72, 'air dodge, down', 'movement'),
+    (72, 'air dodge, side + down', 'movement'),
+    (72, 'air dodge, left/right', 'movement'),
+    (72, 'air dodge, side + up', 'movement'),
+    (72, 'air dodge up', 'movement');
 
-INSERT INTO public.dodging AS "samus"
+INSERT INTO public.dodging AS "sephiroth"
   ("activeFrames", "totalFrames")
   VALUES
     ('3-17', '20/25'),
@@ -98,24 +98,24 @@ INSERT INTO public.dodging AS "samus"
     ('3-21', ''),
     ('3-21', '');
 
-INSERT INTO public.stats AS "samus"
+INSERT INTO public.stats AS "sephiroth"
   ("fighterId", "name", "type")
   VALUES
-    (71, 'weight', 'stat'),
-    (71, 'gravity', 'stat'),
-    (71, 'walk speed', 'stat'),
-    (71, 'run speed', 'stat'),
-    (71, 'initial dash', 'stat'),
-    (71, 'air speed', 'stat'),
-    (71, 'total air acceleration', 'stat'),
-    (71, 'sh / fh / shff / fhff', 'stat'),
-    (71, 'fall speed/fast fall speed', 'stat'),
-    (71, 'out of shield, ', 'stat'),
-    (71, 'out of shield, ', 'stat'),
-    (71, 'out of shield, ', 'stat'),
-    (71, 'shield grab (post-shieldstun)', 'stat');
+    (72, 'weight', 'stat'),
+    (72, 'gravity', 'stat'),
+    (72, 'walk speed', 'stat'),
+    (72, 'run speed', 'stat'),
+    (72, 'initial dash', 'stat'),
+    (72, 'air speed', 'stat'),
+    (72, 'total air acceleration', 'stat'),
+    (72, 'sh / fh / shff / fhff', 'stat'),
+    (72, 'fall speed/fast fall speed', 'stat'),
+    (72, 'out of shield, ', 'stat'),
+    (72, 'out of shield, ', 'stat'),
+    (72, 'out of shield, ', 'stat'),
+    (72, 'shield grab (post-shieldstun)', 'stat');
 
-INSERT INTO public.miscellaneous AS "samus"
+INSERT INTO public.miscellaneous AS "sephiroth"
   ("statValue")
   VALUES
     (''),

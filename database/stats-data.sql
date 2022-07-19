@@ -1192,3 +1192,20 @@ INSERT INTO public.stats AS "ryu"
     (70, 'out of shield, neutral air', 'stat'),
     (70, 'out of shield, up air / up smash', 'stat'),
     (70, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.stats AS "samus"
+  ("fighterId", "name", "type")
+  VALUES
+    (71, 'weight', 'stat'),
+    (71, 'gravity', 'stat'),
+    (71, 'walk speed', 'stat'),
+    (71, 'run speed', 'stat'),
+    (71, 'initial dash', 'stat'),
+    (71, 'air speed', 'stat'),
+    (71, 'total air acceleration', 'stat'),
+    (71, 'sh / fh / shff / fhff', 'stat'),
+    (71, 'fall speed/fast fall speed', 'stat'),
+    (71, 'out of shield, ', 'stat'),
+    (71, 'out of shield, ', 'stat'),
+    (71, 'out of shield, ', 'stat'),
+    (71, 'shield grab (post-shieldstun)', 'stat');

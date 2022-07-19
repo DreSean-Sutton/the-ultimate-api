@@ -909,3 +909,16 @@ INSERT INTO public.movements AS "ryu"
     (70, 'air dodge, left/right', 'movement'),
     (70, 'air dodge, side + up', 'movement'),
     (70, 'air dodge up', 'movement');
+
+INSERT INTO public.movements AS "samus"
+  ("fighterId", "name", "type")
+  VALUES
+    (71, 'spot dodge', 'movement'),
+    (71, 'forward roll', 'movement'),
+    (71, 'backwards roll', 'movement'),
+    (71, 'neutral air dodge', 'movement'),
+    (71, 'air dodge, down', 'movement'),
+    (71, 'air dodge, side + down', 'movement'),
+    (71, 'air dodge, left/right', 'movement'),
+    (71, 'air dodge, side + up', 'movement'),
+    (71, 'air dodge up', 'movement');
