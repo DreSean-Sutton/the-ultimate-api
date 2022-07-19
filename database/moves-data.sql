@@ -1921,3 +1921,37 @@ INSERT INTO public.moves AS "roy"
     (69, 'up b', 'first/multi/final', 'move', 'special'),
     (69, 'down b, counter', 'counter', 'move', 'special'),
     (69, 'down b, counter attack', 'counter attack', 'move', 'special');
+
+INSERT INTO public.moves AS "ryu"
+  ("fighterId", "name", "moveType", "type", "category")
+  VALUES
+    (70, 'jab 1 (light)', 'single', 'move', 'ground'),
+    (70, 'jab (heavy, close)', 'single', 'move', 'ground'),
+    (70, 'jab (heavy, far)', 'single', 'move', 'ground'),
+    (70, 'jab 2', 'single', 'move', 'ground'),
+    (70, 'jab 3', 'single', 'move', 'ground'),
+    (70, 'forward tilt, (light, close)', 'single', 'move', 'ground'),
+    (70, 'forward tilt, (light, far)', 'single', 'move', 'ground'),
+    (70, 'forward tilt, (heavy, heavy)', 'single', 'move', 'ground'),
+    (70, 'up tilt, (light)', 'single', 'move', 'ground'),
+    (70, 'up tilt, (heavy)', 'single', 'move', 'ground'),
+    (70, 'down tilt, (light)', 'single', 'move', 'ground'),
+    (70, 'down tilt, (heavy)', 'single', 'move', 'ground'),
+    (70, 'dash attack', 'early/late', 'move', 'ground'),
+    (70, 'forward smash', 'close/far', 'move', 'ground'),
+    (70, 'up smash', 'early/late', 'move', 'ground'),
+    (70, 'down smash', 'sweet/sour', 'move', 'ground'),
+    (70, 'neutral air', 'early/late', 'move', 'aerial'),
+    (70, 'forward air', 'early: foot/knee/late: foot/knee', 'move', 'aerial'),
+    (70, 'back air', 'close/far', 'move', 'aerial'),
+    (70, 'up air', 'first/second', 'move', 'aerial'),
+    (70, 'down air', 'single', 'move', 'aerial'),
+    (70, 'neutral b, (normal)', 'light/medium/heavy', 'move', 'special'),
+    (70, 'neutral b, (true)', 'light/medium/heavy', 'move', 'special'),
+    (70, 'side b, ground (normal)', 'initial/light/medium/heavy', 'move', 'special'),
+    (70, 'side b, ground (true)', 'initial/light/medium/heavy', 'move', 'special'),
+    (70, 'side b, air (normal)', 'initial/light/medium/heavy', 'move', 'special'),
+    (70, 'side b, air (true)', 'initial/light/medium/heavy', 'move', 'special'),
+    (70, 'up b, (normal)', 'light-medium-heavy/late', 'move', 'special'),
+    (70, 'up b, (true)', 'light-medium-heavy/late', 'move', 'special'),
+    (70, 'down b', 'stage: 1/2/3', 'move', 'special');
