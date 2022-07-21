@@ -922,3 +922,16 @@ INSERT INTO public.movements AS "samus"
     (71, 'air dodge, left/right', 'movement'),
     (71, 'air dodge, side + up', 'movement'),
     (71, 'air dodge up', 'movement');
+
+INSERT INTO public.movements AS "sephiroth"
+  ("fighterId", "name", "type")
+  VALUES
+    (72, 'spot dodge', 'movement'),
+    (72, 'forward roll', 'movement'),
+    (72, 'backwards roll', 'movement'),
+    (72, 'neutral air dodge', 'movement'),
+    (72, 'air dodge, down', 'movement'),
+    (72, 'air dodge, side + down', 'movement'),
+    (72, 'air dodge, left/right', 'movement'),
+    (72, 'air dodge, side + up', 'movement'),
+    (72, 'air dodge up', 'movement');

@@ -1209,3 +1209,20 @@ INSERT INTO public.stats AS "samus"
     (71, 'out of shield, ', 'stat'),
     (71, 'out of shield, ', 'stat'),
     (71, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.stats AS "sephiroth"
+  ("fighterId", "name", "type")
+  VALUES
+    (72, 'weight', 'stat'),
+    (72, 'gravity', 'stat'),
+    (72, 'walk speed', 'stat'),
+    (72, 'run speed', 'stat'),
+    (72, 'initial dash', 'stat'),
+    (72, 'air speed', 'stat'),
+    (72, 'total air acceleration', 'stat'),
+    (72, 'sh / fh / shff / fhff', 'stat'),
+    (72, 'fall speed/fast fall speed', 'stat'),
+    (72, 'out of shield, nair', 'stat'),
+    (72, 'out of shield, fair', 'stat'),
+    (72, 'out of shield, jab', 'stat'),
+    (72, 'shield grab (post-shieldstun)', 'stat');

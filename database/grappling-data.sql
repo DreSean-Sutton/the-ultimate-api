@@ -854,3 +854,15 @@ INSERT INTO public.grappling AS "samus"
     ('10.0%', '12', '49'),
     ('5.0/7.0%', '15/16', '41'),
     ('8.0%', '21', '37');
+
+INSERT INTO public.grappling AS "sephiroth"
+  ("damage", "activeFrames", "totalFrames")
+  VALUES
+    (null, '7-8', '36'),
+    (null, '10-11', '44'),
+    (null, '11-12', '39'),
+    ('1.3%', '1', '19'),
+    ('3.0/3.0%', '14', '34'),
+    ('3.0/3.5%', '18', '31'),
+    ('4.0/3.0%', '13/14', '32'),
+    ('4.0%', '40', '47');

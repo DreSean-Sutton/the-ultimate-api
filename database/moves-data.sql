@@ -1981,3 +1981,32 @@ INSERT INTO public.moves AS "samus"
     (71, 'up b, ground', 'first/multi/final', 'move', 'special'),
     (71, 'up b, air', 'multi', 'move', 'special'),
     (71, 'down b', '(total frames: holding down/air)', 'move', 'special');
+
+INSERT INTO public.moves AS "sephiroth"
+  ("fighterId", "name", "moveType", "type", "category")
+  VALUES
+    (72, 'jab 1', 'single', 'move', 'ground'),
+    (72, 'jab 2', 'single', 'move', 'ground'),
+    (72, 'jab 3', 'single', 'move', 'ground'),
+    (72, 'forward tilt', 'close/mid/tip', 'move', 'ground'),
+    (72, 'up tilt', 'launcher/(close/mid/tip)', 'move', 'ground'),
+    (72, 'down tilt', 'early/late', 'move', 'ground'),
+    (72, 'dash attack', 'early/late', 'move', 'ground'),
+    (72, 'forward smash', 'close/mid/tip', 'move', 'ground'),
+    (72, 'up smash', 'early/late: (close/mid/far)', 'move', 'ground'),
+    (72, 'down smash, ground hit', 'close/far', 'move', 'ground'),
+    (72, 'down smash, air hit', 'close/far', 'move', 'ground'),
+    (72, 'neutral air', 'single', 'move', 'aerial'),
+    (72, 'forward air', 'early/late: (close/mid/far)', 'move', 'aerial'),
+    (72, 'back air', 'close/mid/far', 'move', 'aerial'),
+    (72, 'up air', 'close/mid/far', 'move', 'aerial'),
+    (72, 'down air', 'normal/landing: (early/late/landing)', 'move', 'aerial'),
+    (72, 'neutral b, flare', 'initial/explode', 'move', 'special'),
+    (72, 'neutral b, megaflare', 'initial/multi/explode', 'move', 'special'),
+    (72, 'neutral b, gigaflare', 'initial/multi/explode', 'move', 'special'),
+    (72, 'side b', 'projectile/explode', 'move', 'special'),
+    (72, 'up b, no charge', 'single', 'move', 'special'),
+    (72, 'up b, charged', 'multi/final', 'move', 'special'),
+    (72, 'down b, counter', 'detection', 'move', 'special'),
+    (72, 'down b, miss', 'multi/final', 'move', 'special'),
+    (72, 'down b, success', 'multi/final (based on damage blocked)', 'move', 'special');
