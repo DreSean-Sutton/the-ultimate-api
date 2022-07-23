@@ -767,7 +767,7 @@ INSERT INTO public.movements AS "pit"
     (59, 'air dodge, side + up', 'movement'),
     (59, 'air dodge up', 'movement');
 
-INSERT INTO public.movements AS "squirtle"
+INSERT INTO public.movements AS "ptCharizard"
   ("fighterId", "name", "type")
   VALUES
     (60, 'spot dodge', 'movement'),
@@ -780,7 +780,7 @@ INSERT INTO public.movements AS "squirtle"
     (60, 'air dodge, side + up', 'movement'),
     (60, 'air dodge up', 'movement');
 
-INSERT INTO public.movements AS "ivysaur"
+INSERT INTO public.movements AS "ptIvysaur"
   ("fighterId", "name", "type")
   VALUES
     (61, 'spot dodge', 'movement'),
@@ -793,7 +793,7 @@ INSERT INTO public.movements AS "ivysaur"
     (61, 'air dodge, side + up', 'movement'),
     (61, 'air dodge up', 'movement');
 
-INSERT INTO public.movements AS "charizard"
+INSERT INTO public.movements AS "ptSquirtle"
   ("fighterId", "name", "type")
   VALUES
     (62, 'spot dodge', 'movement'),

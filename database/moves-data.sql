@@ -1664,30 +1664,30 @@ INSERT INTO public.moves AS "pit"
     (59, 'up b', 'recovery', 'move', 'special'),
     (59, 'down b', 'shield (endlag)', 'move', 'special');
 
-INSERT INTO public.moves AS "squirtle"
+INSERT INTO public.moves AS "ptCharizard"
   ("fighterId", "name", "moveType", "type", "category")
   VALUES
     (60, 'jab 1', 'single', 'move', 'ground'),
     (60, 'jab 2', 'single', 'move', 'ground'),
     (60, 'jab 3', 'single', 'move', 'ground'),
-    (60, 'forward tilt', 'single', 'move', 'ground'),
+    (60, 'forward tilt', 'close/far', 'move', 'ground'),
     (60, 'up tilt', 'single', 'move', 'ground'),
     (60, 'down tilt', 'single', 'move', 'ground'),
     (60, 'dash attack', 'early/late', 'move', 'ground'),
-    (60, 'forward smash', 'single', 'move', 'ground'),
-    (60, 'up smash', 'first/early/late', 'move', 'ground'),
-    (60, 'down smash', 'front/back', 'move', 'ground'),
-    (60, 'neutral air', 'early/lat;e', 'move', 'aerial'),
-    (60, 'forward air', 'early/lat;e', 'move', 'aerial'),
-    (60, 'back air', 'multi/final/landing', 'move', 'aerial'),
+    (60, 'forward smash', 'close/far', 'move', 'ground'),
+    (60, 'up smash', '(first: ground only/late)/(second)', 'move', 'ground'),
+    (60, 'down smash', 'single', 'move', 'ground'),
+    (60, 'neutral air', 'close/far', 'move', 'aerial'),
+    (60, 'forward air', 'close/far', 'move', 'aerial'),
+    (60, 'back air', 'close/far/farther', 'move', 'aerial'),
     (60, 'up air', 'single', 'move', 'aerial'),
-    (60, 'down air', 'multi/final', 'move', 'aerial'),
-    (60, 'neutral b', 'pushback', 'move', 'special'),
+    (60, 'down air', 'early/late', 'move', 'aerial'),
+    (60, 'neutral b', 'multi: close/far', 'move', 'special'),
     (60, 'side b', 'single', 'move', 'special'),
-    (60, 'up b', 'multi/final', 'move', 'special'),
+    (60, 'up b', 'first/multi/final', 'move', 'special'),
     (60, 'down b', 'pokémon swap (cooldown till next change)', 'move', 'special');
 
-INSERT INTO public.moves AS "ivysaur"
+INSERT INTO public.moves AS "ptIvysaur"
   ("fighterId", "name", "moveType", "type", "category")
   VALUES
     (61, 'jab 1', 'single', 'move', 'ground'),
@@ -1711,27 +1711,27 @@ INSERT INTO public.moves AS "ivysaur"
     (61, 'up b', 'close/far', 'move', 'special'),
     (61, 'down b', 'pokémon swap (cooldown till next change)', 'move', 'special');
 
-INSERT INTO public.moves AS "charizard"
+INSERT INTO public.moves AS "ptSquirtle"
   ("fighterId", "name", "moveType", "type", "category")
   VALUES
     (62, 'jab 1', 'single', 'move', 'ground'),
     (62, 'jab 2', 'single', 'move', 'ground'),
     (62, 'jab 3', 'single', 'move', 'ground'),
-    (62, 'forward tilt', 'close/far', 'move', 'ground'),
+    (62, 'forward tilt', 'single', 'move', 'ground'),
     (62, 'up tilt', 'single', 'move', 'ground'),
     (62, 'down tilt', 'single', 'move', 'ground'),
     (62, 'dash attack', 'early/late', 'move', 'ground'),
-    (62, 'forward smash', 'close/far', 'move', 'ground'),
-    (62, 'up smash', '(first: ground only/late)/(second)', 'move', 'ground'),
-    (62, 'down smash', 'single', 'move', 'ground'),
-    (62, 'neutral air', 'close/far', 'move', 'aerial'),
-    (62, 'forward air', 'close/far', 'move', 'aerial'),
-    (62, 'back air', 'close/far/farther', 'move', 'aerial'),
+    (62, 'forward smash', 'single', 'move', 'ground'),
+    (62, 'up smash', 'first/early/late', 'move', 'ground'),
+    (62, 'down smash', 'front/back', 'move', 'ground'),
+    (62, 'neutral air', 'early/lat;e', 'move', 'aerial'),
+    (62, 'forward air', 'early/lat;e', 'move', 'aerial'),
+    (62, 'back air', 'multi/final/landing', 'move', 'aerial'),
     (62, 'up air', 'single', 'move', 'aerial'),
-    (62, 'down air', 'early/late', 'move', 'aerial'),
-    (62, 'neutral b', 'multi: close/far', 'move', 'special'),
+    (62, 'down air', 'multi/final', 'move', 'aerial'),
+    (62, 'neutral b', 'pushback', 'move', 'special'),
     (62, 'side b', 'single', 'move', 'special'),
-    (62, 'up b', 'first/multi/final', 'move', 'special'),
+    (62, 'up b', 'multi/final', 'move', 'special'),
     (62, 'down b', 'pokémon swap (cooldown till next change)', 'move', 'special');
 
 INSERT INTO public.moves AS "pyra"

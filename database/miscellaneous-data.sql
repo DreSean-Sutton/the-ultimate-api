@@ -1006,24 +1006,24 @@ INSERT INTO public.miscellaneous AS "pit"
     ('13 frames'),
     ('10 frames');
 
-INSERT INTO public.miscellaneous AS "squirtle"
+INSERT INTO public.miscellaneous AS "ptCharizard"
   ("statValue")
   VALUES
-    ('75'),
-    ('0.128'),
-    ('1.281'),
-    ('1.76'),
-    ('1.936'),
-    ('1.01'),
-    ('0.105'),
-    ('34 / 51 / 24 / 37'),
-    ('1.35 / 2.16'),
-    ('7 frames'),
-    ('8 frames'),
+    ('116'),
+    ('0.11'),
+    ('1.187'),
+    ('2.2'),
+    ('2.288'),
+    ('1.103'),
+    ('0.06'),
+    ('33 / 48 / 24 / 34'),
+    ('1.52 / 2.432'),
+    ('6 frames'),
     ('9 frames'),
-    ('10 frames');
+    ('11 frames'),
+    ('12 frames');
 
-INSERT INTO public.miscellaneous AS "ivysaur"
+INSERT INTO public.miscellaneous AS "ptIvysaur"
   ("statValue")
   VALUES
     ('96'),
@@ -1040,22 +1040,22 @@ INSERT INTO public.miscellaneous AS "ivysaur"
     ('15 frames'),
     ('17 frames');
 
-INSERT INTO public.miscellaneous AS "charizard"
+INSERT INTO public.miscellaneous AS "ptSquirtle"
   ("statValue")
   VALUES
-    ('116'),
-    ('0.11'),
-    ('1.187'),
-    ('2.2'),
-    ('2.288'),
-    ('1.103'),
-    ('0.06'),
-    ('33 / 48 / 24 / 34'),
-    ('1.52 / 2.432'),
-    ('6 frames'),
+    ('75'),
+    ('0.128'),
+    ('1.281'),
+    ('1.76'),
+    ('1.936'),
+    ('1.01'),
+    ('0.105'),
+    ('34 / 51 / 24 / 37'),
+    ('1.35 / 2.16'),
+    ('7 frames'),
+    ('8 frames'),
     ('9 frames'),
-    ('11 frames'),
-    ('12 frames');
+    ('10 frames');
 
 INSERT INTO public.miscellaneous AS "pyra"
   ("statValue")

@@ -767,20 +767,20 @@ INSERT INTO public.dodging AS "pit"
     ('3-21', '110'),
     ('3-21', '119');
 
-INSERT INTO public.dodging AS "squirtle"
+INSERT INTO public.dodging AS "ptCharizard"
   ("activeFrames", "totalFrames")
   VALUES
-    ('3-16', '19/24'),
-    ('4-14', '28'),
-    ('4-15', '33'),
-    ('3-26', '53'),
-    ('3-19', '79'),
-    ('3-19', '87'),
-    ('3-19', '90'),
-    ('3-19', '105'),
-    ('3-19', '114');
+    ('3-18', '23/28'),
+    ('4-16', '32'),
+    ('5-17', '37'),
+    ('3-30', '49'),
+    ('3-22', '70'),
+    ('3-22', '78'),
+    ('3-22', '85'),
+    ('3-22', '99'),
+    ('3-22', '105');
 
-INSERT INTO public.dodging AS "ivysaur"
+INSERT INTO public.dodging AS "ptIvysaur"
   ("activeFrames", "totalFrames")
   VALUES
     ('3-17', '21/26'),
@@ -793,18 +793,18 @@ INSERT INTO public.dodging AS "ivysaur"
     ('3-21', '110'),
     ('3-21', '124');
 
-INSERT INTO public.dodging AS "charizard"
+INSERT INTO public.dodging AS "ptSquirtle"
   ("activeFrames", "totalFrames")
   VALUES
-    ('3-18', '23/28'),
-    ('4-16', '32'),
-    ('5-17', '37'),
-    ('3-30', '49'),
-    ('3-22', '70'),
-    ('3-22', '78'),
-    ('3-22', '85'),
-    ('3-22', '99'),
-    ('3-22', '105');
+    ('3-16', '19/24'),
+    ('4-14', '28'),
+    ('4-15', '33'),
+    ('3-26', '53'),
+    ('3-19', '79'),
+    ('3-19', '87'),
+    ('3-19', '90'),
+    ('3-19', '105'),
+    ('3-19', '114');
 
 INSERT INTO public.dodging AS "pyra"
   ("activeFrames", "totalFrames")

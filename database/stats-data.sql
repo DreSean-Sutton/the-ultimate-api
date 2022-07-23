@@ -1006,7 +1006,7 @@ INSERT INTO public.stats AS "pit"
     (59, 'out of shield, down air', 'stat'),
     (59, 'shield grab (post-shieldstun)', 'stat');
 
-INSERT INTO public.stats AS "squirtle"
+INSERT INTO public.stats AS "ptCharizard"
   ("fighterId", "name", "type")
   VALUES
     (60, 'weight', 'stat'),
@@ -1018,12 +1018,12 @@ INSERT INTO public.stats AS "squirtle"
     (60, 'total air acceleration', 'stat'),
     (60, 'sh / fh / shff / fhff', 'stat'),
     (60, 'fall speed/fast fall speed', 'stat'),
-    (60, 'out of shield, neutral air', 'stat'),
-    (60, 'out of shield, forward air / back air / up air', 'stat'),
-    (60, 'out of shield, up b / down air', 'stat'),
+    (60, 'out of shield, up smash', 'stat'),
+    (60, 'out of shield, up b', 'stat'),
+    (60, 'out of shield, neutral air / forward air', 'stat'),
     (60, 'shield grab (post-shieldstun)', 'stat');
 
-INSERT INTO public.stats AS "ivysaur"
+INSERT INTO public.stats AS "ptIvysaur"
   ("fighterId", "name", "type")
   VALUES
     (61, 'weight', 'stat'),
@@ -1040,7 +1040,7 @@ INSERT INTO public.stats AS "ivysaur"
     (61, 'out of shield, up air / up b / down tilt', 'stat'),
     (61, 'shield grab (post-shieldstun)', 'stat');
 
-INSERT INTO public.stats AS "charizard"
+INSERT INTO public.stats AS "ptSquirtle"
   ("fighterId", "name", "type")
   VALUES
     (62, 'weight', 'stat'),
@@ -1052,9 +1052,9 @@ INSERT INTO public.stats AS "charizard"
     (62, 'total air acceleration', 'stat'),
     (62, 'sh / fh / shff / fhff', 'stat'),
     (62, 'fall speed/fast fall speed', 'stat'),
-    (62, 'out of shield, up smash', 'stat'),
-    (62, 'out of shield, up b', 'stat'),
-    (62, 'out of shield, neutral air / forward air', 'stat'),
+    (62, 'out of shield, neutral air', 'stat'),
+    (62, 'out of shield, forward air / back air / up air', 'stat'),
+    (62, 'out of shield, up b / down air', 'stat'),
     (62, 'shield grab (post-shieldstun)', 'stat');
 
 INSERT INTO public.stats AS "pyra"

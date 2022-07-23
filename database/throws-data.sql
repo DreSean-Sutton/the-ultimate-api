@@ -711,7 +711,7 @@ INSERT INTO public.throws AS "pit"
     (59, 'up throw', 'throw'),
     (59, 'down throw', 'throw');
 
-INSERT INTO public.throws AS "squirtle"
+INSERT INTO public.throws AS "ptCharizard"
   ("fighterId", "name", "type")
   VALUES
     (60, 'grab', 'throw'),
@@ -723,7 +723,7 @@ INSERT INTO public.throws AS "squirtle"
     (60, 'up throw', 'throw'),
     (60, 'down throw', 'throw');
 
-INSERT INTO public.throws AS "ivysaur"
+INSERT INTO public.throws AS "ptIvysaur"
   ("fighterId", "name", "type")
   VALUES
     (61, 'grab', 'throw'),
@@ -735,7 +735,7 @@ INSERT INTO public.throws AS "ivysaur"
     (61, 'up throw', 'throw'),
     (61, 'down throw', 'throw');
 
-INSERT INTO public.throws AS "charizard"
+INSERT INTO public.throws AS "ptSquirtle"
   ("fighterId", "name", "type")
   VALUES
     (62, 'grab', 'throw'),

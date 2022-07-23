@@ -711,19 +711,19 @@ INSERT INTO public.grappling AS "pit"
     ('4.0/7.0%', '13/15', '37'),
     ('2.0/4.0%', '13/16', '31');
 
-INSERT INTO public.grappling AS "squirtle"
+INSERT INTO public.grappling AS "ptCharizard"
   ("damage", "activeFrames", "totalFrames")
   VALUES
-    (null, '6-7', '34'),
-    (null, '8-9', '39'),
-    (null, '9-10', '37'),
-    ('1.0%', '1', '15'),
-    ('2.0/6.0%', '11/13', '34'),
-    ('8.0%', '27', '44'),
-    ('2.0/5.0%', '16/18', '37'),
-    ('2.0/5.0%', '22/30', '46');
+    (null, '8-10', '39'),
+    (null, '11-13', '45'),
+    (null, '12-14', '42'),
+    ('1.6%', '2', '21'),
+    ('10.0%', '27', '59'),
+    ('10.0%', '26', '32'),
+    ('8.0/3.0%', '52/58', '79'),
+    ('1.0%(multi)', '24/30/36/42/48/55', '76');
 
-INSERT INTO public.grappling AS "ivysaur"
+INSERT INTO public.grappling AS "ptIvysaur"
   ("damage", "activeFrames", "totalFrames")
   VALUES
     (null, '13-14', '42'),
@@ -735,17 +735,17 @@ INSERT INTO public.grappling AS "ivysaur"
     ('4.0/5.0%', '20/21', '39'),
     ('7.0%', '19', '34');
 
-INSERT INTO public.grappling AS "charizard"
+INSERT INTO public.grappling AS "ptSquirtle"
   ("damage", "activeFrames", "totalFrames")
   VALUES
-    (null, '8-10', '39'),
-    (null, '11-13', '45'),
-    (null, '12-14', '42'),
-    ('1.6%', '2', '21'),
-    ('10.0%', '27', '59'),
-    ('10.0%', '26', '32'),
-    ('8.0/3.0%', '52/58', '79'),
-    ('1.0%(multi)', '24/30/36/42/48/55', '76');
+    (null, '6-7', '34'),
+    (null, '8-9', '39'),
+    (null, '9-10', '37'),
+    ('1.0%', '1', '15'),
+    ('2.0/6.0%', '11/13', '34'),
+    ('8.0%', '27', '44'),
+    ('2.0/5.0%', '16/18', '37'),
+    ('2.0/5.0%', '22/30', '46');
 
 INSERT INTO public.grappling AS "pyra"
   ("damage", "activeFrames", "totalFrames")
