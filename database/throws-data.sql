@@ -866,3 +866,15 @@ INSERT INTO public.throws AS "sephiroth"
     (72, 'backward throw', 'throw'),
     (72, 'up throw', 'throw'),
     (72, 'down throw', 'throw');
+
+INSERT INTO public.throws AS "sheik"
+  ("fighterId", "name", "type")
+  VALUES
+    (73, 'grab', 'throw'),
+    (73, 'dash grab', 'throw'),
+    (73, 'pivot grab', 'throw'),
+    (73, 'pummel', 'throw'),
+    (73, 'forward throw', 'throw'),
+    (73, 'backward throw', 'throw'),
+    (73, 'up throw', 'throw'),
+    (73, 'down throw', 'throw');

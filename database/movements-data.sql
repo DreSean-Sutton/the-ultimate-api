@@ -935,3 +935,16 @@ INSERT INTO public.movements AS "sephiroth"
     (72, 'air dodge, left/right', 'movement'),
     (72, 'air dodge, side + up', 'movement'),
     (72, 'air dodge up', 'movement');
+
+INSERT INTO public.movements AS "sheik"
+  ("fighterId", "name", "type")
+  VALUES
+    (73, 'spot dodge', 'movement'),
+    (73, 'forward roll', 'movement'),
+    (73, 'backwards roll', 'movement'),
+    (73, 'neutral air dodge', 'movement'),
+    (73, 'air dodge, down', 'movement'),
+    (73, 'air dodge, side + down', 'movement'),
+    (73, 'air dodge, left/right', 'movement'),
+    (73, 'air dodge, side + up', 'movement'),
+    (73, 'air dodge up', 'movement');

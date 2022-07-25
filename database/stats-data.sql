@@ -1226,3 +1226,20 @@ INSERT INTO public.stats AS "sephiroth"
     (72, 'out of shield, fair', 'stat'),
     (72, 'out of shield, jab', 'stat'),
     (72, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.stats AS "sheik"
+  ("fighterId", "name", "type")
+  VALUES
+    (73, 'weight', 'stat'),
+    (73, 'gravity', 'stat'),
+    (73, 'walk speed', 'stat'),
+    (73, 'run speed', 'stat'),
+    (73, 'initial dash', 'stat'),
+    (73, 'air speed', 'stat'),
+    (73, 'total air acceleration', 'stat'),
+    (73, 'sh / fh / shff / fhff', 'stat'),
+    (73, 'fall speed/fast fall speed', 'stat'),
+    (73, 'out of shield, neutral air', 'stat'),
+    (73, 'out of shield, back air / up air', 'stat'),
+    (73, 'out of shield, forward air', 'stat'),
+    (73, 'shield grab (post-shieldstun)', 'stat');

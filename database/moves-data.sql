@@ -2010,3 +2010,28 @@ INSERT INTO public.moves AS "sephiroth"
     (72, 'down b, counter', 'detection', 'move', 'special'),
     (72, 'down b, miss', 'multi/final', 'move', 'special'),
     (72, 'down b, success', 'multi/final (based on damage blocked)', 'move', 'special');
+
+INSERT INTO public.moves AS "sheik"
+  ("fighterId", "name", "moveType", "type", "category")
+  VALUES
+    (73, 'jab 1', 'single', 'move', 'ground'),
+    (73, 'jab 2', 'single', 'move', 'ground'),
+    (73, 'rapid jab', 'multi', 'move', 'ground'),
+    (73, 'rapid jab finisher', 'single', 'move', 'ground'),
+    (73, 'forward tilt', 'single', 'move', 'ground'),
+    (73, 'up tilt', 'first/second', 'move', 'ground'),
+    (73, 'down tilt', 'single', 'move', 'ground'),
+    (73, 'dash attack', 'single', 'move', 'ground'),
+    (73, 'forward smash', 'first/second', 'move', 'ground'),
+    (73, 'up smash', 'first/second', 'move', 'ground'),
+    (73, 'down smash', 'first/second', 'move', 'ground'),
+    (73, 'neutral air', 'early/late', 'move', 'aerial'),
+    (73, 'forward air', 'close/far', 'move', 'aerial'),
+    (73, 'back air', 'early/late', 'move', 'aerial'),
+    (73, 'up air', 'multi/final', 'move', 'aerial'),
+    (73, 'down air', 'meteor/falling/landing', 'move', 'aerial'),
+    (73, 'neutral b, uncharged', 'clsoe/far', 'move', 'special'),
+    (73, 'neutral b, charged', 'clsoe/far', 'move', 'special'),
+    (73, 'side b', 'contact/windboxes/explosion', 'move', 'special'),
+    (73, 'up b', 'intial explosion/reappearance', 'move', 'special'),
+    (73, 'down b', 'early attack/normal', 'move', 'special');

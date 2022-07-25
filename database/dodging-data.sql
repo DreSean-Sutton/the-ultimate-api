@@ -935,3 +935,16 @@ INSERT INTO public.dodging AS "sephiroth"
     ('3-21', '74'),
     ('3-21', '86'),
     ('3-21', '97');
+
+INSERT INTO public.dodging AS "sheik"
+  ("activeFrames", "totalFrames")
+  VALUES
+    ('3-14', '18/23'),
+    ('4-12', '26'),
+    ('4-14', '32'),
+    ('2-26', '44'),
+    ('2-19', '63'),
+    ('2-19', '67'),
+    ('2-19', '74'),
+    ('2-19', '85'),
+    ('2-19', '93');
