@@ -1,29 +1,29 @@
-INSERT INTO public.moves AS "shulk"
+INSERT INTO public.moves AS "simon"
   ("fighterId", "name", "moveType", "type", "category")
   VALUES
-    (74, 'jab 1', 'single', 'move', 'ground'),
-    (74, 'jab 2', 'single', 'move', 'ground'),
-    (74, 'jab 3', 'single', 'move', 'ground'),
-    (74, 'rapid jab', 'multi', 'move', 'ground'),
-    (74, 'rapid jab finisher', 'single', 'move', 'ground'),
-    (74, 'forward tilt', '', 'move', 'ground'),
-    (74, 'up tilt', '', 'move', 'ground'),
-    (74, 'down tilt', '', 'move', 'ground'),
-    (74, 'dash attack', '', 'move', 'ground'),
-    (74, 'forward smash', '', 'move', 'ground'),
-    (74, 'up smash', '', 'move', 'ground'),
-    (74, 'down smash', '', 'move', 'ground'),
-    (74, 'neutral air', '', 'move', 'aerial'),
-    (74, 'forward air', '', 'move', 'aerial'),
-    (74, 'back air', '', 'move', 'aerial'),
-    (74, 'up air', '', 'move', 'aerial'),
-    (74, 'down air', '', 'move', 'aerial'),
-    (74, 'neutral b', '', 'move', 'special'),
-    (74, 'side b', '', 'move', 'special'),
-    (74, 'up b', '', 'move', 'special'),
-    (74, 'down b', '', 'move', 'special');
+    (75, 'jab 1', 'single', 'move', 'ground'),
+    (75, 'jab 2', 'single', 'move', 'ground'),
+    (75, 'jab 3', 'single', 'move', 'ground'),
+    (75, 'rapid jab', 'multi', 'move', 'ground'),
+    (75, 'rapid jab finisher', 'single', 'move', 'ground'),
+    (75, 'forward tilt', '', 'move', 'ground'),
+    (75, 'up tilt', '', 'move', 'ground'),
+    (75, 'down tilt', '', 'move', 'ground'),
+    (75, 'dash attack', '', 'move', 'ground'),
+    (75, 'forward smash', '', 'move', 'ground'),
+    (75, 'up smash', '', 'move', 'ground'),
+    (75, 'down smash', '', 'move', 'ground'),
+    (75, 'neutral air', '', 'move', 'aerial'),
+    (75, 'forward air', '', 'move', 'aerial'),
+    (75, 'back air', '', 'move', 'aerial'),
+    (75, 'up air', '', 'move', 'aerial'),
+    (75, 'down air', '', 'move', 'aerial'),
+    (75, 'neutral b', '', 'move', 'special'),
+    (75, 'side b', '', 'move', 'special'),
+    (75, 'up b', '', 'move', 'special'),
+    (75, 'down b', '', 'move', 'special');
 
-INSERT INTO public.hitboxes AS "shulk"
+INSERT INTO public.hitboxes AS "simon"
   ("damage", "activeFrames", "totalFrames", "firstFrame")
   VALUES
     ('.0%', '', '', ''),
@@ -48,19 +48,19 @@ INSERT INTO public.hitboxes AS "shulk"
     ('.0%', '', '', ''),
     ('.0%', '', '', '');
 
-INSERT INTO public.throws AS "shulk"
+INSERT INTO public.throws AS "simon"
   ("fighterId", "name", "type")
   VALUES
-    (74, 'grab', 'throw'),
-    (74, 'dash grab', 'throw'),
-    (74, 'pivot grab', 'throw'),
-    (74, 'pummel', 'throw'),
-    (74, 'forward throw', 'throw'),
-    (74, 'backward throw', 'throw'),
-    (74, 'up throw', 'throw'),
-    (74, 'down throw', 'throw');
+    (75, 'grab', 'throw'),
+    (75, 'dash grab', 'throw'),
+    (75, 'pivot grab', 'throw'),
+    (75, 'pummel', 'throw'),
+    (75, 'forward throw', 'throw'),
+    (75, 'backward throw', 'throw'),
+    (75, 'up throw', 'throw'),
+    (75, 'down throw', 'throw');
 
-INSERT INTO public.grappling AS "shulk"
+INSERT INTO public.grappling AS "simon"
   ("damage", "activeFrames", "totalFrames")
   VALUES
     (null, '6-7', '34'),
@@ -72,20 +72,20 @@ INSERT INTO public.grappling AS "shulk"
     ('.0%', '', ''),
     ('.0%', '', '');
 
-INSERT INTO public.movements AS "shulk"
+INSERT INTO public.movements AS "simon"
   ("fighterId", "name", "type")
   VALUES
-    (74, 'spot dodge', 'movement'),
-    (74, 'forward roll', 'movement'),
-    (74, 'backwards roll', 'movement'),
-    (74, 'neutral air dodge', 'movement'),
-    (74, 'air dodge, down', 'movement'),
-    (74, 'air dodge, side + down', 'movement'),
-    (74, 'air dodge, left/right', 'movement'),
-    (74, 'air dodge, side + up', 'movement'),
-    (74, 'air dodge up', 'movement');
+    (75, 'spot dodge', 'movement'),
+    (75, 'forward roll', 'movement'),
+    (75, 'backwards roll', 'movement'),
+    (75, 'neutral air dodge', 'movement'),
+    (75, 'air dodge, down', 'movement'),
+    (75, 'air dodge, side + down', 'movement'),
+    (75, 'air dodge, left/right', 'movement'),
+    (75, 'air dodge, side + up', 'movement'),
+    (75, 'air dodge up', 'movement');
 
-INSERT INTO public.dodging AS "shulk"
+INSERT INTO public.dodging AS "simon"
   ("activeFrames", "totalFrames")
   VALUES
     ('3-17', '20/25'),
@@ -98,24 +98,24 @@ INSERT INTO public.dodging AS "shulk"
     ('3-21', ''),
     ('3-21', '');
 
-INSERT INTO public.stats AS "shulk"
+INSERT INTO public.stats AS "simon"
   ("fighterId", "name", "type")
   VALUES
-    (74, 'weight', 'stat'),
-    (74, 'gravity', 'stat'),
-    (74, 'walk speed', 'stat'),
-    (74, 'run speed', 'stat'),
-    (74, 'initial dash', 'stat'),
-    (74, 'air speed', 'stat'),
-    (74, 'total air acceleration', 'stat'),
-    (74, 'sh / fh / shff / fhff', 'stat'),
-    (74, 'fall speed/fast fall speed', 'stat'),
-    (74, 'out of shield, ', 'stat'),
-    (74, 'out of shield, ', 'stat'),
-    (74, 'out of shield, ', 'stat'),
-    (74, 'shield grab (post-shieldstun)', 'stat');
+    (75, 'weight', 'stat'),
+    (75, 'gravity', 'stat'),
+    (75, 'walk speed', 'stat'),
+    (75, 'run speed', 'stat'),
+    (75, 'initial dash', 'stat'),
+    (75, 'air speed', 'stat'),
+    (75, 'total air acceleration', 'stat'),
+    (75, 'sh / fh / shff / fhff', 'stat'),
+    (75, 'fall speed/fast fall speed', 'stat'),
+    (75, 'out of shield, ', 'stat'),
+    (75, 'out of shield, ', 'stat'),
+    (75, 'out of shield, ', 'stat'),
+    (75, 'shield grab (post-shieldstun)', 'stat');
 
-INSERT INTO public.miscellaneous AS "shulk"
+INSERT INTO public.miscellaneous AS "simon"
   ("statValue")
   VALUES
     (''),

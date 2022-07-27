@@ -2035,3 +2035,27 @@ INSERT INTO public.moves AS "sheik"
     (73, 'side b', 'contact/windboxes/explosion', 'move', 'special'),
     (73, 'up b', 'intial explosion/reappearance', 'move', 'special'),
     (73, 'down b', 'early attack/normal', 'move', 'special');
+
+INSERT INTO public.moves AS "shulk"
+  ("fighterId", "name", "moveType", "type", "category")
+  VALUES
+    (74, 'jab 1', 'single', 'move', 'ground'),
+    (74, 'jab 2', 'single', 'move', 'ground'),
+    (74, 'jab 3', 'early/late', 'move', 'ground'),
+    (74, 'forward tilt', 'blade/beam', 'move', 'ground'),
+    (74, 'up tilt', 'blade/beam', 'move', 'ground'),
+    (74, 'down tilt', 'blade/beam', 'move', 'ground'),
+    (74, 'dash attack', 'blade/beam', 'move', 'ground'),
+    (74, 'forward smash', 'first/blade/beam', 'move', 'ground'),
+    (74, 'up smash', 'first/second', 'move', 'ground'),
+    (74, 'down smash', '1st/2nd/3rd/4th/5th: blade/beam', 'move', 'ground'),
+    (74, 'neutral air', 'blade/beam', 'move', 'aerial'),
+    (74, 'forward air', 'blade/beam', 'move', 'aerial'),
+    (74, 'back air', 'blade/beam', 'move', 'aerial'),
+    (74, 'up air', 'first/blade/beam', 'move', 'aerial'),
+    (74, 'down air', 'first/blade/beam', 'move', 'aerial'),
+    (74, 'neutral b', 'stance change', 'move', 'special'),
+    (74, 'side b', 'front/back: blade/beam', 'move', 'special'),
+    (74, 'up b, 1st hit', 'blade/beam', 'move', 'special'),
+    (74, 'up b, 2nd hit', 'single', 'move', 'special'),
+    (74, 'down b', 'counter', 'move', 'special');

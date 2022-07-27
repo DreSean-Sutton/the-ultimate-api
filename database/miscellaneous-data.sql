@@ -1243,3 +1243,20 @@ INSERT INTO public.miscellaneous AS "sheik"
     ('7 frames'),
     ('8 frames'),
     ('10 frames');
+
+INSERT INTO public.miscellaneous AS "shulk"
+  ("statValue")
+  VALUES
+    ('97'),
+    ('0.098'),
+    ('1.155'),
+    ('1.782'),
+    ('1.87'),
+    ('1.113'),
+    ('0.05'),
+    ('37 / 50 / 26 / 36'),
+    ('1.58 / 2.528'),
+    ('10 frames'),
+    ('16 frames'),
+    ('17 frames'),
+    ('11 frames');
