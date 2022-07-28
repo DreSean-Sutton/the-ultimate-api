@@ -961,3 +961,16 @@ INSERT INTO public.movements AS "shulk"
     (74, 'air dodge, left/right', 'movement'),
     (74, 'air dodge, side + up', 'movement'),
     (74, 'air dodge up', 'movement');
+
+INSERT INTO public.movements AS "simon"
+  ("fighterId", "name", "type")
+  VALUES
+    (75, 'spot dodge', 'movement'),
+    (75, 'forward roll', 'movement'),
+    (75, 'backwards roll', 'movement'),
+    (75, 'neutral air dodge', 'movement'),
+    (75, 'air dodge, down', 'movement'),
+    (75, 'air dodge, side + down', 'movement'),
+    (75, 'air dodge, left/right', 'movement'),
+    (75, 'air dodge, side + up', 'movement'),
+    (75, 'air dodge up', 'movement');

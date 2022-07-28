@@ -1260,3 +1260,20 @@ INSERT INTO public.stats AS "shulk"
     (74, 'out of shield, neutral air / jab', 'stat'),
     (74, 'out of shield, forward air / up air / down air', 'stat'),
     (74, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.stats AS "simon"
+  ("fighterId", "name", "type")
+  VALUES
+    (75, 'weight', 'stat'),
+    (75, 'gravity', 'stat'),
+    (75, 'walk speed', 'stat'),
+    (75, 'run speed', 'stat'),
+    (75, 'initial dash', 'stat'),
+    (75, 'air speed', 'stat'),
+    (75, 'total air acceleration', 'stat'),
+    (75, 'sh / fh / shff / fhff', 'stat'),
+    (75, 'fall speed/fast fall speed', 'stat'),
+    (75, 'out of shield, up b', 'stat'),
+    (75, 'out of shield, neutral air', 'stat'),
+    (75, 'out of shield, jab', 'stat'),
+    (75, 'shield grab (post-shieldstun)', 'stat');

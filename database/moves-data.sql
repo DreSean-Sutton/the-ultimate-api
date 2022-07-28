@@ -2059,3 +2059,30 @@ INSERT INTO public.moves AS "shulk"
     (74, 'up b, 1st hit', 'blade/beam', 'move', 'special'),
     (74, 'up b, 2nd hit', 'single', 'move', 'special'),
     (74, 'down b', 'counter', 'move', 'special');
+
+INSERT INTO public.moves AS "simon"
+  ("fighterId", "name", "moveType", "type", "category")
+  VALUES
+    (75, 'jab 1', 'single', 'move', 'ground'),
+    (75, 'jab 2', 'single', 'move', 'ground'),
+    (75, 'rapid jab', 'multi', 'move', 'ground'),
+    (75, 'rapid jab finisher', 'single', 'move', 'ground'),
+    (75, 'whip dangle', 'chain/ball', 'move', 'ground'),
+    (75, 'forward tilt', 'chain/ball/arm', 'move', 'ground'),
+    (75, 'up tilt', 'chain/ball', 'move', 'ground'),
+    (75, 'down tilt, 1', 'single', 'move', 'ground'),
+    (75, 'down tilt, 2', 'early/late', 'move', 'ground'),
+    (75, 'dash attack', 'multi/final', 'move', 'ground'),
+    (75, 'forward smash', 'hand/chain/ball', 'move', 'ground'),
+    (75, 'up smash', 'ball/chain', 'move', 'ground'),
+    (75, 'down smash', 'chain: close/mid/ball', 'move', 'ground'),
+    (75, 'neutral air', 'multi/final', 'move', 'aerial'),
+    (75, 'forward air', 'ball/chain/arm', 'move', 'aerial'),
+    (75, 'back air', 'ball/chain/arm', 'move', 'aerial'),
+    (75, 'up air', 'ball/chain/arm', 'move', 'aerial'),
+    (75, 'down air', 'early/late', 'move', 'aerial'),
+    (75, 'neutral b', 'projectile', 'move', 'special'),
+    (75, 'side b', 'smash/tilt/return', 'move', 'special'),
+    (75, 'up b', 'first/multi/final', 'move', 'special'),
+    (75, 'down b', 'projectile', 'move', 'special'),
+    (75, 'down b', 'multi', 'move', 'special');
