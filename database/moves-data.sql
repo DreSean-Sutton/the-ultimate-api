@@ -2056,8 +2056,7 @@ INSERT INTO public.moves AS "shulk"
     (74, 'down air', 'first/blade/beam', 'move', 'aerial'),
     (74, 'neutral b', 'stance change', 'move', 'special'),
     (74, 'side b', 'front/back: blade/beam', 'move', 'special'),
-    (74, 'up b, 1st hit', 'blade/beam', 'move', 'special'),
-    (74, 'up b, 2nd hit', 'single', 'move', 'special'),
+    (74, 'up b', 'blade/beam(second hit)', 'move', 'special'),
     (74, 'down b', 'counter', 'move', 'special');
 
 INSERT INTO public.moves AS "simon"
@@ -2086,3 +2085,29 @@ INSERT INTO public.moves AS "simon"
     (75, 'up b', 'first/multi/final', 'move', 'special'),
     (75, 'down b', 'projectile', 'move', 'special'),
     (75, 'down b', 'multi', 'move', 'special');
+
+INSERT INTO public.moves AS "snake"
+  ("fighterId", "name", "moveType", "type", "category")
+  VALUES
+    (76, 'jab 1', 'single', 'move', 'ground'),
+    (76, 'jab 2', 'single', 'move', 'ground'),
+    (76, 'jab 3', 'single', 'move', 'ground'),
+    (76, 'forward tilt, 1', 'single', 'move', 'ground'),
+    (76, 'forward tilt, 2', 'close/far/farther', 'move', 'ground'),
+    (76, 'up tilt', 'early/late', 'move', 'ground'),
+    (76, 'down tilt', 'single', 'move', 'ground'),
+    (76, 'dash attack', 'early/late', 'move', 'ground'),
+    (76, 'forward smash', 'single', 'move', 'ground'),
+    (76, 'up smash', 'initial/projectile', 'move', 'ground'),
+    (76, 'down smash', 'front/back', 'move', 'ground'),
+    (76, 'neutral air', 'multi/final', 'move', 'aerial'),
+    (76, 'forward air', 'close/far', 'move', 'aerial'),
+    (76, 'back air', 'early/late: far/close', 'move', 'aerial'),
+    (76, 'up air', 'far/close', 'move', 'aerial'),
+    (76, 'down air', 'first/multi/final', 'move', 'aerial'),
+    (76, 'neutral b', '', 'move', 'special'),
+    (76, 'neutral b, grenade (neutral, smash, underhand) throw', '', 'move', 'special'),
+    (76, 'side b', 'slow-fast', 'move', 'special'),
+    (76, 'up b', 'recovery', 'move', 'special'),
+    (76, 'down b', 'remote bomb', 'move', 'special'),
+    (76, 'down b, detonate/explosion', 'sticky/non-sticky', 'move', 'special');

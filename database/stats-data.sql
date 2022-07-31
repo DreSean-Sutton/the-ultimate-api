@@ -1277,3 +1277,20 @@ INSERT INTO public.stats AS "simon"
     (75, 'out of shield, neutral air', 'stat'),
     (75, 'out of shield, jab', 'stat'),
     (75, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.stats AS "snake"
+  ("fighterId", "name", "type")
+  VALUES
+    (76, 'weight', 'stat'),
+    (76, 'gravity', 'stat'),
+    (76, 'walk speed', 'stat'),
+    (76, 'run speed', 'stat'),
+    (76, 'initial dash', 'stat'),
+    (76, 'air speed', 'stat'),
+    (76, 'total air acceleration', 'stat'),
+    (76, 'sh / fh / shff / fhff', 'stat'),
+    (76, 'fall speed/fast fall speed', 'stat'),
+    (76, 'out of shield, down air', 'stat'),
+    (76, 'out of shield, back air', 'stat'),
+    (76, 'out of shield, up smash', 'stat'),
+    (76, 'shield grab (post-shieldstun)', 'stat');
