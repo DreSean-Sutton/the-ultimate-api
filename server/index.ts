@@ -142,10 +142,10 @@ app.get('/api/fighters', async (req: Req, res: Res, next: (param1: any) => any) 
 });
 
 app.get('/api/fighters/data', async (req: Req, res: Res, next: (param1: any) => any) => {
-  const fullResult: any = [];
-  return renderAllData(0, fullResult);
+  const fullResult: any[] = [];
+  return renderAllData(0);
 
-  async function renderAllData(index: number, fullResult: any[]): Promise<any> {
+  async function renderAllData(index: number): Promise<any[]> {
     const dataTypes = ['moves', 'throws', 'movements', 'stats'];
     const dataTypeIds = ['moveId', 'throwId', 'movementId', 'statId'];
     if (dataTypes.length === index) {
@@ -171,7 +171,7 @@ app.get('/api/fighters/data', async (req: Req, res: Res, next: (param1: any) => 
           throw new ClientError(404, `${queryKey} named ${params} doesn't exist in the database`);
         }
           fullResult.push(result.rows);
-        return renderAllData(index + 1, fullResult);
+        return renderAllData(index + 1);
       } catch (e) {
         return next(e);
       }
@@ -193,7 +193,7 @@ app.get('/api/fighters/data', async (req: Req, res: Res, next: (param1: any) => 
           throw new ClientError(404, `${queryKey} ${params} doesn't exist in the database`);
         }
         fullResult.push(result.rows);
-        return renderAllData(index + 1, fullResult);
+        return renderAllData(index + 1);
       } catch (e) {
         return next(e);
       }
@@ -215,7 +215,7 @@ app.get('/api/fighters/data', async (req: Req, res: Res, next: (param1: any) => 
           throw new ClientError(404, `${queryKey} ${params} doesn't exist in the database`);
         }
         fullResult.push(result.rows);
-        return renderAllData(index + 1, fullResult);
+        return renderAllData(index + 1);
       } catch (e) {
         return next(e);
       }
@@ -232,7 +232,7 @@ app.get('/api/fighters/data', async (req: Req, res: Res, next: (param1: any) => 
         `;
         const result = await db.query(sql);
         fullResult.push(result.rows);
-        return renderAllData(index + 1, fullResult);
+        return renderAllData(index + 1);
       } catch (e) {
         return next(e);
       }
@@ -247,7 +247,7 @@ app.get('/api/fighters/data', async (req: Req, res: Res, next: (param1: any) => 
     `;
       const result = await db.query(sql);
       fullResult.push(result.rows);
-      return renderAllData(index + 1, fullResult);
+      return renderAllData(index + 1);
     } catch (e) {
       return next(e);
     }
