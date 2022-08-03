@@ -1294,3 +1294,21 @@ INSERT INTO public.miscellaneous AS "snake"
     ('10 frames'),
     ('11 frames'),
     ('12 frames');
+
+INSERT INTO public.miscellaneous AS "sonic"
+  ("statValue")
+  VALUES
+    ('86'),
+    ('0.09'),
+    ('1.444'),
+    ('3.85'),
+    ('2.31'),
+    ('1.208'),
+    ('0.05'),
+    ('38 / 53 / 26 / 37'),
+    ('1.65 / 2.64'),
+    ('4 frames'),
+    ('7 frames'),
+    ('8 frames'),
+    ('9 frames'),
+    ('11 frames');

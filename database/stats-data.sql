@@ -1294,3 +1294,21 @@ INSERT INTO public.stats AS "snake"
     (76, 'out of shield, back air', 'stat'),
     (76, 'out of shield, up smash', 'stat'),
     (76, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.stats AS "sonic"
+  ("fighterId", "name", "type")
+  VALUES
+    (77, 'weight', 'stat'),
+    (77, 'gravity', 'stat'),
+    (77, 'walk speed', 'stat'),
+    (77, 'run speed', 'stat'),
+    (77, 'initial dash', 'stat'),
+    (77, 'air speed', 'stat'),
+    (77, 'total air acceleration', 'stat'),
+    (77, 'sh / fh / shff / fhff', 'stat'),
+    (77, 'fall speed/fast fall speed', 'stat'),
+    (77, 'out of shield, up b (ground, no hitbox)', 'stat'),
+    (77, 'out of shield, up b (aerial, with hitbox)', 'stat'),
+    (77, 'out of shield, forward air / up air', 'stat'),
+    (77, 'out of shield, neutral air', 'stat'),
+    (77, 'shield grab (post-shieldstun)', 'stat');

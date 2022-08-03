@@ -2111,3 +2111,28 @@ INSERT INTO public.moves AS "snake"
     (76, 'up b', 'recovery', 'move', 'special'),
     (76, 'down b', 'remote bomb', 'move', 'special'),
     (76, 'down b, detonate/explosion', 'sticky/non-sticky', 'move', 'special');
+
+INSERT INTO public.moves AS "sonic"
+  ("fighterId", "name", "moveType", "type", "category")
+  VALUES
+    (77, 'jab 1', 'single', 'move', 'ground'),
+    (77, 'jab 2', 'single', 'move', 'ground'),
+    (77, 'jab 3', 'single', 'move', 'ground'),
+    (77, 'forward tilt', 'first/second', 'move', 'ground'),
+    (77, 'up tilt', 'firts/second', 'move', 'ground'),
+    (77, 'down tilt', 'single', 'move', 'ground'),
+    (77, 'dash attack', 'early/late', 'move', 'ground'),
+    (77, 'forward smash', 'single', 'move', 'ground'),
+    (77, 'up smash', 'first/multi/final', 'move', 'ground'),
+    (77, 'down smash', 'single', 'move', 'ground'),
+    (77, 'neutral air', 'early/late/latest', 'move', 'aerial'),
+    (77, 'forward air', 'multi/final', 'move', 'aerial'),
+    (77, 'back air', 'early/late', 'move', 'aerial'),
+    (77, 'up air', 'first/second', 'move', 'aerial'),
+    (77, 'down air', 'meteor/late', 'move', 'aerial'),
+    (77, 'neutral b', 'uncharged-charged', 'move', 'special'),
+    (77, 'side b', 'first/second: uncharged-charged', 'move', 'special'),
+    (77, 'up b', 'single', 'move', 'special'),
+    (77, 'down b, grounded', 'multi/final', 'move', 'special'),
+    (77, 'down b, jump', 'first/second', 'move', 'special'),
+    (77, 'down b, aerial', 'first/second', 'move', 'special');

@@ -1,29 +1,29 @@
-INSERT INTO public.moves AS "sonic"
+INSERT INTO public.moves AS "Sora"
   ("fighterId", "name", "moveType", "type", "category")
   VALUES
-    (77, 'jab 1', 'single', 'move', 'ground'),
-    (77, 'jab 2', 'single', 'move', 'ground'),
-    (77, 'jab 3', 'single', 'move', 'ground'),
-    (77, 'rapid jab', 'multi', 'move', 'ground'),
-    (77, 'rapid jab finisher', 'single', 'move', 'ground'),
-    (77, 'forward tilt', '', 'move', 'ground'),
-    (77, 'up tilt', '', 'move', 'ground'),
-    (77, 'down tilt', '', 'move', 'ground'),
-    (77, 'dash attack', '', 'move', 'ground'),
-    (77, 'forward smash', '', 'move', 'ground'),
-    (77, 'up smash', '', 'move', 'ground'),
-    (77, 'down smash', '', 'move', 'ground'),
-    (77, 'neutral air', '', 'move', 'aerial'),
-    (77, 'forward air', '', 'move', 'aerial'),
-    (77, 'back air', '', 'move', 'aerial'),
-    (77, 'up air', '', 'move', 'aerial'),
-    (77, 'down air', '', 'move', 'aerial'),
-    (77, 'neutral b', '', 'move', 'special'),
-    (77, 'side b', '', 'move', 'special'),
-    (77, 'up b', '', 'move', 'special'),
-    (77, 'down b', '', 'move', 'special');
+    (78, 'jab 1', 'single', 'move', 'ground'),
+    (78, 'jab 2', 'single', 'move', 'ground'),
+    (78, 'jab 3', 'single', 'move', 'ground'),
+    (78, 'rapid jab', 'multi', 'move', 'ground'),
+    (78, 'rapid jab finisher', 'single', 'move', 'ground'),
+    (78, 'forward tilt', '', 'move', 'ground'),
+    (78, 'up tilt', '', 'move', 'ground'),
+    (78, 'down tilt', '', 'move', 'ground'),
+    (78, 'dash attack', '', 'move', 'ground'),
+    (78, 'forward smash', '', 'move', 'ground'),
+    (78, 'up smash', '', 'move', 'ground'),
+    (78, 'down smash', '', 'move', 'ground'),
+    (78, 'neutral air', '', 'move', 'aerial'),
+    (78, 'forward air', '', 'move', 'aerial'),
+    (78, 'back air', '', 'move', 'aerial'),
+    (78, 'up air', '', 'move', 'aerial'),
+    (78, 'down air', '', 'move', 'aerial'),
+    (78, 'neutral b', '', 'move', 'special'),
+    (78, 'side b', '', 'move', 'special'),
+    (78, 'up b', '', 'move', 'special'),
+    (78, 'down b', '', 'move', 'special');
 
-INSERT INTO public.hitboxes AS "sonic"
+INSERT INTO public.hitboxes AS "Sora"
   ("damage", "activeFrames", "totalFrames", "firstFrame")
   VALUES
     ('.0%', '', '', ''),
@@ -48,19 +48,19 @@ INSERT INTO public.hitboxes AS "sonic"
     ('.0%', '', '', ''),
     ('.0%', '', '', '');
 
-INSERT INTO public.throws AS "sonic"
+INSERT INTO public.throws AS "Sora"
   ("fighterId", "name", "type")
   VALUES
-    (77, 'grab', 'throw'),
-    (77, 'dash grab', 'throw'),
-    (77, 'pivot grab', 'throw'),
-    (77, 'pummel', 'throw'),
-    (77, 'forward throw', 'throw'),
-    (77, 'backward throw', 'throw'),
-    (77, 'up throw', 'throw'),
-    (77, 'down throw', 'throw');
+    (78, 'grab', 'throw'),
+    (78, 'dash grab', 'throw'),
+    (78, 'pivot grab', 'throw'),
+    (78, 'pummel', 'throw'),
+    (78, 'forward throw', 'throw'),
+    (78, 'backward throw', 'throw'),
+    (78, 'up throw', 'throw'),
+    (78, 'down throw', 'throw');
 
-INSERT INTO public.grappling AS "sonic"
+INSERT INTO public.grappling AS "Sora"
   ("damage", "activeFrames", "totalFrames")
   VALUES
     (null, '6-7', '34'),
@@ -72,20 +72,20 @@ INSERT INTO public.grappling AS "sonic"
     ('.0%', '', ''),
     ('.0%', '', '');
 
-INSERT INTO public.movements AS "sonic"
+INSERT INTO public.movements AS "Sora"
   ("fighterId", "name", "type")
   VALUES
-    (77, 'spot dodge', 'movement'),
-    (77, 'forward roll', 'movement'),
-    (77, 'backwards roll', 'movement'),
-    (77, 'neutral air dodge', 'movement'),
-    (77, 'air dodge, down', 'movement'),
-    (77, 'air dodge, side + down', 'movement'),
-    (77, 'air dodge, left/right', 'movement'),
-    (77, 'air dodge, side + up', 'movement'),
-    (77, 'air dodge up', 'movement');
+    (78, 'spot dodge', 'movement'),
+    (78, 'forward roll', 'movement'),
+    (78, 'backwards roll', 'movement'),
+    (78, 'neutral air dodge', 'movement'),
+    (78, 'air dodge, down', 'movement'),
+    (78, 'air dodge, side + down', 'movement'),
+    (78, 'air dodge, left/right', 'movement'),
+    (78, 'air dodge, side + up', 'movement'),
+    (78, 'air dodge up', 'movement');
 
-INSERT INTO public.dodging AS "sonic"
+INSERT INTO public.dodging AS "Sora"
   ("activeFrames", "totalFrames")
   VALUES
     ('3-17', '20/25'),
@@ -98,24 +98,24 @@ INSERT INTO public.dodging AS "sonic"
     ('3-21', ''),
     ('3-21', '');
 
-INSERT INTO public.stats AS "sonic"
+INSERT INTO public.stats AS "Sora"
   ("fighterId", "name", "type")
   VALUES
-    (77, 'weight', 'stat'),
-    (77, 'gravity', 'stat'),
-    (77, 'walk speed', 'stat'),
-    (77, 'run speed', 'stat'),
-    (77, 'initial dash', 'stat'),
-    (77, 'air speed', 'stat'),
-    (77, 'total air acceleration', 'stat'),
-    (77, 'sh / fh / shff / fhff', 'stat'),
-    (77, 'fall speed/fast fall speed', 'stat'),
-    (77, 'out of shield, ', 'stat'),
-    (77, 'out of shield, ', 'stat'),
-    (77, 'out of shield, ', 'stat'),
-    (77, 'shield grab (post-shieldstun)', 'stat');
+    (78, 'weight', 'stat'),
+    (78, 'gravity', 'stat'),
+    (78, 'walk speed', 'stat'),
+    (78, 'run speed', 'stat'),
+    (78, 'initial dash', 'stat'),
+    (78, 'air speed', 'stat'),
+    (78, 'total air acceleration', 'stat'),
+    (78, 'sh / fh / shff / fhff', 'stat'),
+    (78, 'fall speed/fast fall speed', 'stat'),
+    (78, 'out of shield, ', 'stat'),
+    (78, 'out of shield, ', 'stat'),
+    (78, 'out of shield, ', 'stat'),
+    (78, 'shield grab (post-shieldstun)', 'stat');
 
-INSERT INTO public.miscellaneous AS "sonic"
+INSERT INTO public.miscellaneous AS "Sora"
   ("statValue")
   VALUES
     (''),

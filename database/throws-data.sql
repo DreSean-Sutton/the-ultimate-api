@@ -914,3 +914,15 @@ INSERT INTO public.throws AS "snake"
     (76, 'backward throw', 'throw'),
     (76, 'up throw', 'throw'),
     (76, 'down throw', 'throw');
+
+INSERT INTO public.throws AS "sonic"
+  ("fighterId", "name", "type")
+  VALUES
+    (77, 'grab', 'throw'),
+    (77, 'dash grab', 'throw'),
+    (77, 'pivot grab', 'throw'),
+    (77, 'pummel', 'throw'),
+    (77, 'forward throw', 'throw'),
+    (77, 'backward throw', 'throw'),
+    (77, 'up throw', 'throw'),
+    (77, 'down throw', 'throw');
