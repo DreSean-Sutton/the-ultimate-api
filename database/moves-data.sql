@@ -2136,3 +2136,36 @@ INSERT INTO public.moves AS "sonic"
     (77, 'down b, grounded', 'multi/final', 'move', 'special'),
     (77, 'down b, jump', 'first/second', 'move', 'special'),
     (77, 'down b, aerial', 'first/second', 'move', 'special');
+
+INSERT INTO public.moves AS "sora"
+  ("fighterId", "name", "moveType", "type", "category")
+  VALUES
+    (78, 'jab 1', 'single', 'move', 'ground'),
+    (78, 'jab 2', 'single', 'move', 'ground'),
+    (78, 'jab 3', 'single', 'move', 'ground'),
+    (78, 'forward tilt, strong/single', 'single', 'move', 'ground'),
+    (78, 'forward tilt, 1 > 2', 'first/second', 'move', 'ground'),
+    (78, 'forward tilt, 3', 'single', 'move', 'ground'),
+    (78, 'up tilt', 'first/multi/final', 'move', 'ground'),
+    (78, 'down tilt', 'single', 'move', 'ground'),
+    (78, 'dash attack', 'early/late', 'move', 'ground'),
+    (78, 'forward smash', 'early/late', 'move', 'ground'),
+    (78, 'up smash', 'first/second', 'move', 'ground'),
+    (78, 'down smash', 'close/far', 'move', 'ground'),
+    (78, 'neutral air, 1', 'single', 'move', 'aerial'),
+    (78, 'neutral air, 2', 'single', 'move', 'aerial'),
+    (78, 'neutral air, 3', 'single', 'move', 'aerial'),
+    (78, 'forward air, 1', 'single', 'move', 'aerial'),
+    (78, 'forward air, 2', 'single', 'move', 'aerial'),
+    (78, 'forward air, 3', 'single', 'move', 'aerial'),
+    (78, 'back air', 'single', 'move', 'aerial'),
+    (78, 'up air', 'single', 'move', 'aerial'),
+    (78, 'down air', 'single', 'move', 'aerial'),
+    (78, 'neutral b, firaga', 'early/late/latest', 'move', 'special'),
+    (78, 'neutral b, thundaga', 'first/second/third', 'move', 'special'),
+    (78, 'neutral b, thundaga (air)', 'first/second/third', 'move', 'special'),
+    (78, 'neutral b, blizzaga', 'shard/final shard/final', 'move', 'special'),
+    (78, 'side b', 'first/(second/third: homing/aiming)', 'move', 'special'),
+    (78, 'up b', 'first/multi/final', 'move', 'special'),
+    (78, 'down b, counter', 'counter', 'move', 'special'),
+    (78, 'down b, counter success', 'counter attack', 'move', 'special');

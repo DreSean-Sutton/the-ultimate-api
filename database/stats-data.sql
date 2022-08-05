@@ -1312,3 +1312,20 @@ INSERT INTO public.stats AS "sonic"
     (77, 'out of shield, forward air / up air', 'stat'),
     (77, 'out of shield, neutral air', 'stat'),
     (77, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.stats AS "sora"
+  ("fighterId", "name", "type")
+  VALUES
+    (78, 'weight', 'stat'),
+    (78, 'gravity', 'stat'),
+    (78, 'walk speed', 'stat'),
+    (78, 'run speed', 'stat'),
+    (78, 'initial dash', 'stat'),
+    (78, 'air speed', 'stat'),
+    (78, 'total air acceleration', 'stat'),
+    (78, 'sh / fh / shff / fhff', 'stat'),
+    (78, 'fall speed/fast fall speed', 'stat'),
+    (78, 'out of shield, up b', 'stat'),
+    (78, 'out of shield, neutral air / grab', 'stat'),
+    (78, 'out of shield, forward air', 'stat'),
+    (78, 'shield grab (post-shieldstun)', 'stat');

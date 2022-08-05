@@ -926,3 +926,15 @@ INSERT INTO public.throws AS "sonic"
     (77, 'backward throw', 'throw'),
     (77, 'up throw', 'throw'),
     (77, 'down throw', 'throw');
+
+INSERT INTO public.throws AS "sora"
+  ("fighterId", "name", "type")
+  VALUES
+    (78, 'grab', 'throw'),
+    (78, 'dash grab', 'throw'),
+    (78, 'pivot grab', 'throw'),
+    (78, 'pummel', 'throw'),
+    (78, 'forward throw', 'throw'),
+    (78, 'backward throw', 'throw'),
+    (78, 'up throw', 'throw'),
+    (78, 'down throw', 'throw');

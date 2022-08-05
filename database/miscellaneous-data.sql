@@ -1312,3 +1312,20 @@ INSERT INTO public.miscellaneous AS "sonic"
     ('8 frames'),
     ('9 frames'),
     ('11 frames');
+
+INSERT INTO public.miscellaneous AS "sora"
+  ("statValue")
+  VALUES
+    ('85'),
+    ('0.064'),
+    ('0.82'),
+    ('1.58'),
+    ('1.78'),
+    ('0.96'),
+    ('0.096'),
+    ('47 / 57 / 32 / 40'),
+    ('1.44 / 2.304'),
+    ('9 frames'),
+    ('11 frames'),
+    ('13 frames'),
+    ('11 frames');

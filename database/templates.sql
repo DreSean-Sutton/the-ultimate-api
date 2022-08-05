@@ -1,29 +1,29 @@
-INSERT INTO public.moves AS "Sora"
+INSERT INTO public.moves AS "steve"
   ("fighterId", "name", "moveType", "type", "category")
   VALUES
-    (78, 'jab 1', 'single', 'move', 'ground'),
-    (78, 'jab 2', 'single', 'move', 'ground'),
-    (78, 'jab 3', 'single', 'move', 'ground'),
-    (78, 'rapid jab', 'multi', 'move', 'ground'),
-    (78, 'rapid jab finisher', 'single', 'move', 'ground'),
-    (78, 'forward tilt', '', 'move', 'ground'),
-    (78, 'up tilt', '', 'move', 'ground'),
-    (78, 'down tilt', '', 'move', 'ground'),
-    (78, 'dash attack', '', 'move', 'ground'),
-    (78, 'forward smash', '', 'move', 'ground'),
-    (78, 'up smash', '', 'move', 'ground'),
-    (78, 'down smash', '', 'move', 'ground'),
-    (78, 'neutral air', '', 'move', 'aerial'),
-    (78, 'forward air', '', 'move', 'aerial'),
-    (78, 'back air', '', 'move', 'aerial'),
-    (78, 'up air', '', 'move', 'aerial'),
-    (78, 'down air', '', 'move', 'aerial'),
-    (78, 'neutral b', '', 'move', 'special'),
-    (78, 'side b', '', 'move', 'special'),
-    (78, 'up b', '', 'move', 'special'),
-    (78, 'down b', '', 'move', 'special');
+    (79, 'jab 1', 'single', 'move', 'ground'),
+    (79, 'jab 2', 'single', 'move', 'ground'),
+    (79, 'jab 3', 'single', 'move', 'ground'),
+    (79, 'rapid jab', 'multi', 'move', 'ground'),
+    (79, 'rapid jab finisher', 'single', 'move', 'ground'),
+    (79, 'forward tilt', '', 'move', 'ground'),
+    (79, 'up tilt', '', 'move', 'ground'),
+    (79, 'down tilt', '', 'move', 'ground'),
+    (79, 'dash attack', '', 'move', 'ground'),
+    (79, 'forward smash', '', 'move', 'ground'),
+    (79, 'up smash', '', 'move', 'ground'),
+    (79, 'down smash', '', 'move', 'ground'),
+    (79, 'neutral air', '', 'move', 'aerial'),
+    (79, 'forward air', '', 'move', 'aerial'),
+    (79, 'back air', '', 'move', 'aerial'),
+    (79, 'up air', '', 'move', 'aerial'),
+    (79, 'down air', '', 'move', 'aerial'),
+    (79, 'neutral b', '', 'move', 'special'),
+    (79, 'side b', '', 'move', 'special'),
+    (79, 'up b', '', 'move', 'special'),
+    (79, 'down b', '', 'move', 'special');
 
-INSERT INTO public.hitboxes AS "Sora"
+INSERT INTO public.hitboxes AS "steve"
   ("damage", "activeFrames", "totalFrames", "firstFrame")
   VALUES
     ('.0%', '', '', ''),
@@ -48,19 +48,19 @@ INSERT INTO public.hitboxes AS "Sora"
     ('.0%', '', '', ''),
     ('.0%', '', '', '');
 
-INSERT INTO public.throws AS "Sora"
+INSERT INTO public.throws AS "steve"
   ("fighterId", "name", "type")
   VALUES
-    (78, 'grab', 'throw'),
-    (78, 'dash grab', 'throw'),
-    (78, 'pivot grab', 'throw'),
-    (78, 'pummel', 'throw'),
-    (78, 'forward throw', 'throw'),
-    (78, 'backward throw', 'throw'),
-    (78, 'up throw', 'throw'),
-    (78, 'down throw', 'throw');
+    (79, 'grab', 'throw'),
+    (79, 'dash grab', 'throw'),
+    (79, 'pivot grab', 'throw'),
+    (79, 'pummel', 'throw'),
+    (79, 'forward throw', 'throw'),
+    (79, 'backward throw', 'throw'),
+    (79, 'up throw', 'throw'),
+    (79, 'down throw', 'throw');
 
-INSERT INTO public.grappling AS "Sora"
+INSERT INTO public.grappling AS "steve"
   ("damage", "activeFrames", "totalFrames")
   VALUES
     (null, '6-7', '34'),
@@ -72,20 +72,20 @@ INSERT INTO public.grappling AS "Sora"
     ('.0%', '', ''),
     ('.0%', '', '');
 
-INSERT INTO public.movements AS "Sora"
+INSERT INTO public.movements AS "steve"
   ("fighterId", "name", "type")
   VALUES
-    (78, 'spot dodge', 'movement'),
-    (78, 'forward roll', 'movement'),
-    (78, 'backwards roll', 'movement'),
-    (78, 'neutral air dodge', 'movement'),
-    (78, 'air dodge, down', 'movement'),
-    (78, 'air dodge, side + down', 'movement'),
-    (78, 'air dodge, left/right', 'movement'),
-    (78, 'air dodge, side + up', 'movement'),
-    (78, 'air dodge up', 'movement');
+    (79, 'spot dodge', 'movement'),
+    (79, 'forward roll', 'movement'),
+    (79, 'backwards roll', 'movement'),
+    (79, 'neutral air dodge', 'movement'),
+    (79, 'air dodge, down', 'movement'),
+    (79, 'air dodge, side + down', 'movement'),
+    (79, 'air dodge, left/right', 'movement'),
+    (79, 'air dodge, side + up', 'movement'),
+    (79, 'air dodge up', 'movement');
 
-INSERT INTO public.dodging AS "Sora"
+INSERT INTO public.dodging AS "steve"
   ("activeFrames", "totalFrames")
   VALUES
     ('3-17', '20/25'),
@@ -98,24 +98,24 @@ INSERT INTO public.dodging AS "Sora"
     ('3-21', ''),
     ('3-21', '');
 
-INSERT INTO public.stats AS "Sora"
+INSERT INTO public.stats AS "steve"
   ("fighterId", "name", "type")
   VALUES
-    (78, 'weight', 'stat'),
-    (78, 'gravity', 'stat'),
-    (78, 'walk speed', 'stat'),
-    (78, 'run speed', 'stat'),
-    (78, 'initial dash', 'stat'),
-    (78, 'air speed', 'stat'),
-    (78, 'total air acceleration', 'stat'),
-    (78, 'sh / fh / shff / fhff', 'stat'),
-    (78, 'fall speed/fast fall speed', 'stat'),
-    (78, 'out of shield, ', 'stat'),
-    (78, 'out of shield, ', 'stat'),
-    (78, 'out of shield, ', 'stat'),
-    (78, 'shield grab (post-shieldstun)', 'stat');
+    (79, 'weight', 'stat'),
+    (79, 'gravity', 'stat'),
+    (79, 'walk speed', 'stat'),
+    (79, 'run speed', 'stat'),
+    (79, 'initial dash', 'stat'),
+    (79, 'air speed', 'stat'),
+    (79, 'total air acceleration', 'stat'),
+    (79, 'sh / fh / shff / fhff', 'stat'),
+    (79, 'fall speed/fast fall speed', 'stat'),
+    (79, 'out of shield, ', 'stat'),
+    (79, 'out of shield, ', 'stat'),
+    (79, 'out of shield, ', 'stat'),
+    (79, 'shield grab (post-shieldstun)', 'stat');
 
-INSERT INTO public.miscellaneous AS "Sora"
+INSERT INTO public.miscellaneous AS "steve"
   ("statValue")
   VALUES
     (''),
