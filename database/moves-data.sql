@@ -2169,3 +2169,26 @@ INSERT INTO public.moves AS "sora"
     (78, 'up b', 'first/multi/final', 'move', 'special'),
     (78, 'down b, counter', 'counter', 'move', 'special'),
     (78, 'down b, counter success', 'counter attack', 'move', 'special');
+
+INSERT INTO public.moves AS "steve"
+  ("fighterId", "name", "moveType", "type", "category")
+  VALUES
+    (79, 'jab/forward tilt', 'fist/wood/stone/iron/diamond (gold)', 'move', 'ground'),
+    (79, 'up tilt', 'wood/stone/iron/diamond/fist (gold)', 'move', 'ground'),
+    (79, 'down tilt', 'multi/final', 'move', 'ground'),
+    (79, 'dash attack', 'early/late: wood/stone/iron/diamond/fist (gold)', 'move', 'ground'),
+    (79, 'forward smash', 'wood/stone/iron/diamond/fist (gold)', 'move', 'ground'),
+    (79, 'up smash', 'launcher/multi/final', 'move', 'ground'),
+    (79, 'down smash', 'front/back: first/second', 'move', 'ground'),
+    (79, 'neutral air', 'fist/wood/stone/iron/diamond (gold)', 'move', 'aerial'),
+    (79, 'forward air', 'early/late: wood/stone/iron/diamond/fist (gold)', 'move', 'aerial'),
+    (79, 'sword forward air', 'fist/wood/stone/iron/diamond (gold)', 'move', 'aerial'),
+    (79, 'back air', 'early/late: wood/stone/iron/diamond/fist (gold)', 'move', 'aerial'),
+    (79, 'sword back air', 'fist/wood/stone/iron/diamond (gold)', 'move', 'aerial'),
+    (79, 'up air', 'wood/stone/iron/diamond/fist (gold)', 'move', 'aerial'),
+    (79, 'down air', 'normal/projectile', 'move', 'aerial'),
+    (79, 'neutral b (place block)', 'single', 'move', 'special'),
+    (79, 'side b', 'earliest jumpout frame', 'move', 'special'),
+    (79, 'up b, ground', 'recovery', 'move', 'special'),
+    (79, 'up b, air', 'recovery', 'move', 'special'),
+    (79, 'down b', 'close/far', 'move', 'special');

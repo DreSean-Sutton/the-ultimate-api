@@ -1329,3 +1329,20 @@ INSERT INTO public.miscellaneous AS "sora"
     ('11 frames'),
     ('13 frames'),
     ('11 frames');
+
+INSERT INTO public.miscellaneous AS "steve"
+  ("statValue")
+  VALUES
+    ('92'),
+    ('0.07'),
+    ('0.85'),
+    ('1.45'),
+    ('1.45'),
+    ('0.86'),
+    ('0.5'),
+    ('33 / 40 / 22 / 27'),
+    ('1.42 / 2.272'),
+    ('7 frames'),
+    ('8 frames'),
+    ('11 frames'),
+    ('11 frames');

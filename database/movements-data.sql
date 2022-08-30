@@ -1013,3 +1013,16 @@ INSERT INTO public.movements AS "sora"
     (78, 'air dodge, left/right', 'movement'),
     (78, 'air dodge, side + up', 'movement'),
     (78, 'air dodge up', 'movement');
+
+INSERT INTO public.movements AS "steve"
+  ("fighterId", "name", "type")
+  VALUES
+    (79, 'spot dodge', 'movement'),
+    (79, 'forward roll', 'movement'),
+    (79, 'backwards roll', 'movement'),
+    (79, 'neutral air dodge', 'movement'),
+    (79, 'air dodge, down', 'movement'),
+    (79, 'air dodge, side + down', 'movement'),
+    (79, 'air dodge, left/right', 'movement'),
+    (79, 'air dodge, side + up', 'movement'),
+    (79, 'air dodge up', 'movement');

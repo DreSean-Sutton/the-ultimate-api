@@ -1329,3 +1329,20 @@ INSERT INTO public.stats AS "sora"
     (78, 'out of shield, neutral air / grab', 'stat'),
     (78, 'out of shield, forward air', 'stat'),
     (78, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.stats AS "steve"
+  ("fighterId", "name", "type")
+  VALUES
+    (79, 'weight', 'stat'),
+    (79, 'gravity', 'stat'),
+    (79, 'walk speed', 'stat'),
+    (79, 'run speed', 'stat'),
+    (79, 'initial dash', 'stat'),
+    (79, 'air speed', 'stat'),
+    (79, 'total air acceleration', 'stat'),
+    (79, 'sh / fh / shff / fhff', 'stat'),
+    (79, 'fall speed/fast fall speed', 'stat'),
+    (79, 'out of shield, neutral air / up air / SH forward air / SH back air', 'stat'),
+    (79, 'out of shield, up smash', 'stat'),
+    (79, 'out of shield, forward air', 'stat'),
+    (79, 'shield grab (post-shieldstun)', 'stat');
