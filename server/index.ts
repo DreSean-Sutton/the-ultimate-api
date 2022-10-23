@@ -1,5 +1,3 @@
-import { type } from "os";
-
 require('dotenv/config');
 const express = require('express');
 const expressJSON = express.json();
@@ -11,6 +9,8 @@ const sqlQueries = require('./sql-queries');
 const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
 const cors = require('cors');
+const port = process.env.PORT || 5001;
+console.log(port);
 
 const db = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
@@ -27,29 +27,34 @@ const swaggerDocument = YAML.load('./openapi.yml');
 app.use(staticMiddleware);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-type Req = {
+interface Req {
   query: object,
   params: ReqParams,
   body: any
 }
-type ReqParams = {
+
+interface ReqParams {
   table: string,
   id: string,
   type: string
 }
-type Res = {
+
+interface Res {
   status: (param1: number) => ResStatus,
 }
-type ResStatus = {
+
+interface ResStatus {
   send: (param1: object) => any
   json: (param1: object) => any
 }
-type QueryString = {
+
+interface QueryString {
   fighter?: string,
   fighterId?: string,
   orderByRosterId?: string,
   rosterId?: string
 }
+
 app.get('/api/fighters', async (req: Req, res: Res, next: (param1: any) => any) => {
   const queryStr: QueryString = req.query;
   const queryKey = Object.keys(queryStr);
@@ -787,7 +792,7 @@ app.delete('/api/delete/:table/:id', async (req: Req, res: Res, next: (param1: a
 
 app.use(errorMiddleware);
 
-app.listen(process.env.PORT, () => {
+app.listen(port, () => {
   // eslint-disable-next-line no-console
-  console.log(`express server listening on port ${process.env.PORT}`);
+  console.log(`express server listening on port ${port}`);
 });
