@@ -22,7 +22,7 @@ const getRoutes = express.Router();
  * Can use query strings to return a single fighter object
  * @return { object | [object] }
  */
-getRoutes.get('/', async (req: Req, res: Res, next: (param1: any) => any) => {
+getRoutes.get('/fighters', async (req: Req, res: Res, next: (param1: any) => any) => {
   const queryStr: QueryString = req.query;
   const queryKey = Object.keys(queryStr);
   if (queryStr.fighter) {
@@ -118,7 +118,7 @@ getRoutes.get('/', async (req: Req, res: Res, next: (param1: any) => any) => {
  * Can use query strings to return a single fighter object
  * @return { object | [object] }
  */
-getRoutes.get('/data', async (req: Req, res: Res, next: (param1: any) => any) => {
+getRoutes.get('fighters/data', async (req: Req, res: Res, next: (param1: any) => any) => {
   const fullResult: any[] = [];
   return renderAllData(0);
 
@@ -237,7 +237,7 @@ getRoutes.get('/data', async (req: Req, res: Res, next: (param1: any) => any) =>
  * @param { string } type // moves, throws, movements, stats
  * @return { [object] }
  */
-getRoutes.get('/data/:type', async (req: Req, res: Res, next: (param1: any) => any) => {
+getRoutes.get('fighters/data/:type', async (req: Req, res: Res, next: (param1: any) => any) => {
   const queryStr: QueryString = req.query;
   const queryKey = Object.keys(queryStr);
   const currentType = req.params.type;

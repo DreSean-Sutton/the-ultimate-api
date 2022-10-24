@@ -20,7 +20,7 @@ const getRoutes = require('./routes/get-routes');
 const postRoutes = require('./routes/post-routes');
 const updateRoutes = require('./routes/update-routes');
 const deleteRoutes = require('./routes/delete-routes');
-app.use('/api/fighters', getRoutes);
+app.use('/api/get', getRoutes);
 app.use('/api/add', postRoutes);
 app.use('/api/update', updateRoutes);
 app.use('/api/delete', deleteRoutes);
