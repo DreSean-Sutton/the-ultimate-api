@@ -3,7 +3,6 @@ import { db } from '../conn';
 import { Req, Res, QueryString } from '../utils/types-routes';
 
 var express = require('express');
-const sqlQueries = require('../sql-queries');
 const postRoutes = express.Router();
 
 
