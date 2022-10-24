@@ -101,6 +101,7 @@
     "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
   },
   "include": [
-    "server/*.ts"
+    "server/*.ts",
+    "server/routes/*/*.ts"
   ]
 }

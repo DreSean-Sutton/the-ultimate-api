@@ -52,13 +52,12 @@ Test out my endpoints here at: https://the-ultimate-api.herokuapp.com/
 ## Future Features
 
 - A authorization system so only administrators can manipulate the database.
-- A GUI so it's easier for users to send `add`, `put`, and `delete` requests.
 - The ability for users to sign in and have their own independent version of the master database.
 
 ## System Requirements
-- node.js 16+
-- npm 8+
-- postgreSQL 14+
+- node.js 16.x
+- npm 8.x
+- postgreSQL 14.x
 
 ### Getting Started
 
@@ -75,11 +74,11 @@ Test out my endpoints here at: https://the-ultimate-api.herokuapp.com/
     ```shell
     cp .env.example .env
     ```
-4. Change `DATABASE_URL=postgres://dev:dev@localhost/changeMe` in your .env file to the database name you desire. ex. `DATABASE_URL=postgres://dev:dev@localhost/my-example-name`
+4. Change `DATABASE_URL=postgres://dev:dev@localhost/changeMe` in your .env file to the database name you desire. ex. `DATABASE_URL=postgres://dev:dev@localhost/my-database-name`
 
-6. Create the database and set it's name to the previous name you chose
+5. Create the database and set it's name to the previous name you chose
     ```shell
-    createdb my-example-name
+    createdb my-database-name
     ```
 6. Import SQL code into database
     ```shell
@@ -89,4 +88,3 @@ Test out my endpoints here at: https://the-ultimate-api.herokuapp.com/
     ```shell
     npm run dev:server
     ```
- 
