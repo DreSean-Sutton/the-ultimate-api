@@ -4,12 +4,12 @@
  * Can use query string to set orderByRosterId to true to change order from fighterId to rosterId
  */
 
-import ClientError from '../../client-error';
-import { db } from '../../conn';
-import { Req, Res, QueryString } from '../../utils/types-routes';
+import ClientError from '../client-error';
+import { db } from '../conn';
+import { Req, Res, QueryString } from '../utils/types-routes';
 
 var express = require('express');
-const sqlQueries = require('../../sql-queries');
+const sqlQueries = require('../sql-queries');
 const getRoutes = express.Router();
 
 

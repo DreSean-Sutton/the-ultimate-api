@@ -11,7 +11,6 @@ const cors = require('cors');
 const port = process.env.PORT || 5001;
 import { ReqParams, Req, QueryString, Res } from './utils/types-routes';
 import { db } from './conn';
-console.log(process.env.DATABASE_URL)
 const app = express();
 app.use(cors());
 app.use('/api', expressJSON);
@@ -20,7 +19,7 @@ const swaggerDocument = YAML.load('./openapi.yml');
 app.use(staticMiddleware);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-const getRoutes = require('./routes/get/fighters');
+const getRoutes = require('./routes/get-routes');
 
 app.use('/api/fighters', getRoutes);
 
