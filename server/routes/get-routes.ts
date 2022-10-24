@@ -2,19 +2,25 @@
  * All routes accept query strings for specifying a single fighter
  * Can specify `fighter` name, `fighterId`, and `rosterId`
  * Can use query string to set orderByRosterId to true to change order from fighterId to rosterId
+ * @param { string } fighter // query string
+ * @param { number } fighterId // query string
+ * @param { number } rosterId // query string
+ * @param { boolean } orderByRosterId // query string
  */
 
-import ClientError from '../client-error';
+import ClientError from '../utils/client-error';
 import { db } from '../conn';
 import { Req, Res, QueryString } from '../utils/types-routes';
 
 var express = require('express');
-const sqlQueries = require('../sql-queries');
+const sqlQueries = require('../utils/sql-queries');
 const getRoutes = express.Router();
 
 
 /**
- * Get Route that returns an array of objects with basic fighter data
+ * Get Route that returns all fighters and their basic fighter data
+ * Can use query strings to return a single fighter object
+ * @return { object | [object] }
  */
 getRoutes.get('/', async (req: Req, res: Res, next: (param1: any) => any) => {
   const queryStr: QueryString = req.query;
@@ -108,7 +114,9 @@ getRoutes.get('/', async (req: Req, res: Res, next: (param1: any) => any) => {
 });
 
 /**
- * Get route that returns an array of objects with all fighters and all their data
+ * Get route that returns an array of objects with all fighters and all their non-basic data
+ * Can use query strings to return a single fighter object
+ * @return { object | [object] }
  */
 getRoutes.get('/data', async (req: Req, res: Res, next: (param1: any) => any) => {
   const fullResult: any[] = [];
@@ -226,7 +234,8 @@ getRoutes.get('/data', async (req: Req, res: Res, next: (param1: any) => any) =>
 /**
  * Get route that returns an array of objects with all fighters
  * Also accepts query params for specifying the type of data you want
- * (ie. moves, throws, movements, stats)
+ * @param { string } type // moves, throws, movements, stats
+ * @return { [object] }
  */
 getRoutes.get('/data/:type', async (req: Req, res: Res, next: (param1: any) => any) => {
   const queryStr: QueryString = req.query;

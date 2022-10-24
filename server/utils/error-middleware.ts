@@ -1,4 +1,4 @@
-import ClientError from './client-error'
+import ClientError from './client-error';
 
 export default function errorMiddleware(err: any, req: any, res: any, next: any) {
   if (err instanceof ClientError) {

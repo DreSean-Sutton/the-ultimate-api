@@ -1,10 +1,26 @@
-import ClientError from '../client-error';
+import ClientError from '../utils/client-error';
 import { db } from '../conn';
 import { Req, Res } from '../utils/types-routes';
 
 var express = require('express');
 const updateRoutes = express.Router();
 
+/**
+ * Put route that updates data at the table and id of your choice
+ * Not all params are required
+ * returns updated data
+ * @param { string } name
+ * @param { string } moveType
+ * @param { string } damage
+ * @param { string } category
+ * @param { string } activeFrames
+ * @param { string } totalFrames
+ * @param { string } firstFrame
+ * @param { string } statValue
+ * @param { string } table // fighters, moves, throws, movements, or stats
+ * @param { number } id   // fighterId, moveId, throwId, movementId, or statId
+ * @return { object }
+ */
 updateRoutes.put('/:table/:id', async (req: Req, res: Res, next: (param1: any) => any) => {
   const fullResult = {};
   const { fighter, displayName, name, moveType, damage, category, activeFrames, totalFrames, firstFrame, statValue } = req.body;

@@ -1,21 +1,17 @@
 require('dotenv/config');
 var express = require('express');
 const expressJSON = express.json();
-import ClientError from "./client-error";
-import errorMiddleware from "./error-middleware";
-const staticMiddleware = require('./static-middleware');
-const sqlQueries = require('./sql-queries');
+import errorMiddleware from './utils/error-middleware';
+const staticMiddleware = require('./utils/static-middleware');
 const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
 const cors = require('cors');
 const port = process.env.PORT || 5001;
-import { ReqParams, Req, QueryString, Res } from './utils/types-routes';
-import { db } from './conn';
 const app = express();
 app.use(cors());
 app.use('/api', expressJSON);
 const swaggerDocument = YAML.load('./openapi.yml');
-
+console.log(swaggerDocument);
 app.use(staticMiddleware);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 

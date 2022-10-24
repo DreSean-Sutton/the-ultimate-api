@@ -1,11 +1,18 @@
-import ClientError from '../client-error';
+import ClientError from '../utils/client-error';
 import { db } from '../conn';
 import { Req, Res } from '../utils/types-routes';
 
 var express = require('express');
 const postRoutes = express.Router();
 
-
+/**
+ * Post route that inserts a new fighter and their basic data to the database
+ * Returns inserted data
+ * @param { string } fighter
+ * @param { string } displayName
+ * @param { number } rosterId
+ * @return { object }
+ */
 postRoutes.post('/fighters', async (req: Req, res: Res, next: (param1: any) => any) => {
 
   const { fighter, displayName } = req.body;
@@ -43,6 +50,21 @@ postRoutes.post('/fighters', async (req: Req, res: Res, next: (param1: any) => a
   }
 });
 
+/**
+ * Post route that inserts data into a table and fighter of your choice
+ * Returns inserted data
+ * @param { string } name
+ * @param { string } moveType
+ * @param { string } damage
+ * @param { string } category
+ * @param { string } activeFrames
+ * @param { string } totalFrames
+ * @param { string } firstFrame
+ * @param { string } statValue
+ * @param { string } table // moves, throws, movements, stats
+ * @param { number } id // fighterId
+ * @return { object }
+ */
 postRoutes.post('/:table/:id', async (req: Req, res: Res, next: (param1: any) => any) => {
   const fullResult = {};
   const { name, moveType, damage, category, activeFrames, totalFrames, firstFrame, statValue } = req.body;
