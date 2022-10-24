@@ -1,6 +1,6 @@
 import ClientError from '../client-error';
 import { db } from '../conn';
-import { Req, Res, QueryString } from '../utils/types-routes';
+import { Req, Res } from '../utils/types-routes';
 
 var express = require('express');
 const postRoutes = express.Router();
