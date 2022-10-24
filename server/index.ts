@@ -11,7 +11,6 @@ const app = express();
 app.use(cors());
 app.use('/api', expressJSON);
 const swaggerDocument = YAML.load('./openapi.yml');
-console.log(swaggerDocument);
 app.use(staticMiddleware);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
