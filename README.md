@@ -8,7 +8,7 @@ Smash Ultimate is an excellent contender for my favorite game, so I made a [fram
 
 ## Live Demo and API documentation
 
-Test out my endpoints here at: https://the-ultimate-api.herokuapp.com/
+Test out my endpoints here at: https://the-ultimate-api.dreseansutton.com/
 
 ## Technologies Used
 
