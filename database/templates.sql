@@ -1,4 +1,4 @@
-INSERT INTO public.moves AS "toonLink"
+INSERT INTO public.moves AS "villager"
   ("fighterId", "name", "moveType", "type", "category")
   VALUES
     (81, 'jab 1', 'single', 'move', 'ground'),
@@ -23,7 +23,7 @@ INSERT INTO public.moves AS "toonLink"
     (81, 'up b', '', 'move', 'special'),
     (81, 'down b', '', 'move', 'special');
 
-INSERT INTO public.hitboxes AS "toonLink"
+INSERT INTO public.hitboxes AS "villager"
   ("damage", "activeFrames", "totalFrames", "firstFrame")
   VALUES
     ('.0%', '', '', ''),
@@ -48,7 +48,7 @@ INSERT INTO public.hitboxes AS "toonLink"
     ('.0%', '', '', ''),
     ('.0%', '', '', '');
 
-INSERT INTO public.throws AS "toonLink"
+INSERT INTO public.throws AS "villager"
   ("fighterId", "name", "type")
   VALUES
     (81, 'grab', 'throw'),
@@ -60,7 +60,7 @@ INSERT INTO public.throws AS "toonLink"
     (81, 'up throw', 'throw'),
     (81, 'down throw', 'throw');
 
-INSERT INTO public.grappling AS "toonLink"
+INSERT INTO public.grappling AS "villager"
   ("damage", "activeFrames", "totalFrames")
   VALUES
     (null, '6-7', '34'),
@@ -72,7 +72,7 @@ INSERT INTO public.grappling AS "toonLink"
     ('.0%', '', ''),
     ('.0%', '', '');
 
-INSERT INTO public.movements AS "toonLink"
+INSERT INTO public.movements AS "villager"
   ("fighterId", "name", "type")
   VALUES
     (81, 'spot dodge', 'movement'),
@@ -85,7 +85,7 @@ INSERT INTO public.movements AS "toonLink"
     (81, 'air dodge, side + up', 'movement'),
     (81, 'air dodge up', 'movement');
 
-INSERT INTO public.dodging AS "toonLink"
+INSERT INTO public.dodging AS "villager"
   ("activeFrames", "totalFrames")
   VALUES
     ('3-17', '20/25'),
@@ -98,7 +98,7 @@ INSERT INTO public.dodging AS "toonLink"
     ('3-21', ''),
     ('3-21', '');
 
-INSERT INTO public.stats AS "toonLink"
+INSERT INTO public.stats AS "villager"
   ("fighterId", "name", "type")
   VALUES
     (81, 'weight', 'stat'),
@@ -115,7 +115,7 @@ INSERT INTO public.stats AS "toonLink"
     (81, 'out of shield, ', 'stat'),
     (81, 'shield grab (post-shieldstun)', 'stat');
 
-INSERT INTO public.miscellaneous AS "toonLink"
+INSERT INTO public.miscellaneous AS "villager"
   ("statValue")
   VALUES
     (''),

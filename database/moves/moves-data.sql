@@ -2228,3 +2228,28 @@ INSERT INTO public.moves AS "terry"
     (80, 'down b', 'first/second/third/dunk: early/late', 'move', 'special'),
     (80, 'power geyser', 'close/far', 'move', 'special'),
     (80, 'buster wolf', 'punch/blast', 'move', 'special');
+
+INSERT INTO public.moves AS "toonLink"
+  ("fighterId", "name", "moveType", "type", "category")
+  VALUES
+    (81, 'jab 1', 'single', 'move', 'ground'),
+    (81, 'jab 2', 'single', 'move', 'ground'),
+    (81, 'jab 3', 'single', 'move', 'ground'),
+    (81, 'forward tilt', 'single', 'move', 'ground'),
+    (81, 'up tilt', 'single', 'move', 'ground'),
+    (81, 'down tilt', 'single', 'move', 'ground'),
+    (81, 'dash attack', 'single', 'move', 'ground'),
+    (81, 'forward smash', 'single', 'move', 'ground'),
+    (81, 'up smash', 'single', 'move', 'ground'),
+    (81, 'down smash', 'front/back', 'move', 'ground'),
+    (81, 'neutral air', 'first/second', 'move', 'aerial'),
+    (81, 'forward air', 'single', 'move', 'aerial'),
+    (81, 'back air', 'single', 'move', 'aerial'),
+    (81, 'up air', 'early/late', 'move', 'aerial'),
+    (81, 'down air', 'early/late/landing', 'move', 'aerial'),
+    (81, 'z air', 'single', 'move', 'aerial'),
+    (81, 'neutral b', 'uncharged-full charge', 'move', 'special'),
+    (81, 'side b', 'going: early/late/returning', 'move', 'special'),
+    (81, 'up b', 'multi/final', 'move', 'special'),
+    (81, 'up b, air', 'first/multi/final', 'move', 'special'),
+    (81, 'down b', 'item pull', 'move', 'special');

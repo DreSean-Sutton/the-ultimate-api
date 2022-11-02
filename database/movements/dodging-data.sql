@@ -1039,3 +1039,16 @@ INSERT INTO public.dodging AS "terry"
     ('3-21', null),
     ('3-21', null),
     ('3-21', null);
+
+INSERT INTO public.dodging AS "toonLink"
+  ("activeFrames", "totalFrames")
+  VALUES
+    ('3-16', '19/24'),
+    ('4-14', '28'),
+    ('4-15', '33'),
+    ('2-26', '56'),
+    ('2-19', '76'),
+    ('2-19', '85'),
+    ('2-19', '93'),
+    ('2-19', '111'),
+    ('2-19', '123');

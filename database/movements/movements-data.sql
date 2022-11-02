@@ -1039,3 +1039,16 @@ INSERT INTO public.movements AS "terry"
     (80, 'air dodge, left/right', 'movement'),
     (80, 'air dodge, side + up', 'movement'),
     (80, 'air dodge up', 'movement');
+
+INSERT INTO public.movements AS "toonLink"
+  ("fighterId", "name", "type")
+  VALUES
+    (81, 'spot dodge', 'movement'),
+    (81, 'forward roll', 'movement'),
+    (81, 'backwards roll', 'movement'),
+    (81, 'neutral air dodge', 'movement'),
+    (81, 'air dodge, down', 'movement'),
+    (81, 'air dodge, side + down', 'movement'),
+    (81, 'air dodge, left/right', 'movement'),
+    (81, 'air dodge, side + up', 'movement'),
+    (81, 'air dodge up', 'movement');

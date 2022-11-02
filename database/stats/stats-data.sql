@@ -1363,3 +1363,20 @@ INSERT INTO public.stats AS "terry"
     (80, 'out of shield, jump power dunk', 'stat'),
     (80, 'out of shield, up b / up smash / forward air / up air', 'stat'),
     (80, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.stats AS "toonLink"
+  ("fighterId", "name", "type")
+  VALUES
+    (81, 'weight', 'stat'),
+    (81, 'gravity', 'stat'),
+    (81, 'walk speed', 'stat'),
+    (81, 'run speed', 'stat'),
+    (81, 'initial dash', 'stat'),
+    (81, 'air speed', 'stat'),
+    (81, 'total air acceleration', 'stat'),
+    (81, 'sh / fh / shff / fhff', 'stat'),
+    (81, 'fall speed/fast fall speed', 'stat'),
+    (81, 'out of shield, up b', 'stat'),
+    (81, 'out of shield, neutral air / back air', 'stat'),
+    (81, 'out of shield, up smash', 'stat'),
+    (81, 'shield grab (post-shieldstun)', 'stat');

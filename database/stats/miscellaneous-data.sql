@@ -1363,3 +1363,20 @@ INSERT INTO public.miscellaneous AS "terry"
     ('9 frames'),
     ('10 frames'),
     ('10 frames');
+
+INSERT INTO public.miscellaneous AS "toonLink"
+  ("statValue")
+  VALUES
+    ('91'),
+    ('0.081'),
+    ('1.288'),
+    ('1.906'),
+    ('1.914'),
+    ('1.05'),
+    ('0.09'),
+    ('40 / 56 / 28 / 39'),
+    ('1.38 / 2.208'),
+    ('6 frames'),
+    ('9 frames'),
+    ('11 frames'),
+    ('16 frames');

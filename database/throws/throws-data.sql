@@ -962,3 +962,15 @@ INSERT INTO public.throws AS "terry"
     (80, 'backward throw', 'throw'),
     (80, 'up throw', 'throw'),
     (80, 'down throw', 'throw');
+
+INSERT INTO public.throws AS "toonLink"
+  ("fighterId", "name", "type")
+  VALUES
+    (81, 'grab', 'throw'),
+    (81, 'dash grab', 'throw'),
+    (81, 'pivot grab', 'throw'),
+    (81, 'pummel', 'throw'),
+    (81, 'forward throw', 'throw'),
+    (81, 'backward throw', 'throw'),
+    (81, 'up throw', 'throw'),
+    (81, 'down throw', 'throw');
