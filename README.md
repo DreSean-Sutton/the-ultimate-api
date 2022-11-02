@@ -57,7 +57,7 @@ Test out my endpoints here at: https://the-ultimate-api.dreseansutton.com/
 ## System Requirements
 - node.js 16.x
 - npm 8.x
-- postgreSQL 14.x
+- postgreSQL 12.x
 
 ### Getting Started
 
