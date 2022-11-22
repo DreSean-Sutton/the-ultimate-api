@@ -2253,3 +2253,31 @@ INSERT INTO public.moves AS "toonLink"
     (81, 'up b', 'multi/final', 'move', 'special'),
     (81, 'up b, air', 'first/multi/final', 'move', 'special'),
     (81, 'down b', 'item pull', 'move', 'special');
+
+INSERT INTO public.moves AS "villager"
+  ("fighterId", "name", "moveType", "type", "category")
+  VALUES
+    (82, 'jab 1', 'single', 'move', 'ground'),
+    (82, 'jab 2', 'single', 'move', 'ground'),
+    (82, 'rapid jab', 'multi', 'move', 'ground'),
+    (82, 'rapid jab finisher', 'single', 'move', 'ground'),
+    (82, 'forward tilt', 'single', 'move', 'ground'),
+    (82, 'up tilt', 'early/late', 'move', 'ground'),
+    (82, 'down tilt', 'close/far', 'move', 'ground'),
+    (82, 'dash attack', 'early/late', 'move', 'ground'),
+    (82, 'dash attack (off-ledge)', 'early/late', 'move', 'ground'),
+    (82, 'forward smash', 'early/late', 'move', 'ground'),
+    (82, 'up smash', 'first/multi/final', 'move', 'ground'),
+    (82, 'down smash', 'close/far', 'move', 'ground'),
+    (82, 'neutral air', 'early/late', 'move', 'aerial'),
+    (82, 'forward air', 'early/late/later', 'move', 'aerial'),
+    (82, 'back air', 'early/late/later', 'move', 'aerial'),
+    (82, 'up air', 'early/(late): 3/2/1 turnips', 'move', 'aerial'),
+    (82, 'down air', 'early/(late): 3/2/1 turnips', 'move', 'aerial'),
+    (82, 'neutral b, absorb', 'absorb', 'move', 'special'),
+    (82, 'neutral b, throw', 'throw', 'move', 'special'),
+    (82, 'side b', 'early/late', 'move', 'special'),
+    (82, 'up b', 'recovery', 'move', 'special'),
+    (82, 'down b', 'plant/water', 'move', 'special'),
+    (82, 'down b', 'tree: grow/fall', 'move', 'special'),
+    (82, 'down b, axe', 'normal/tree', 'move', 'special');

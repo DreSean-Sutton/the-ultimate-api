@@ -1380,3 +1380,20 @@ INSERT INTO public.stats AS "toonLink"
     (81, 'out of shield, neutral air / back air', 'stat'),
     (81, 'out of shield, up smash', 'stat'),
     (81, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.stats AS "villager"
+  ("fighterId", "name", "type")
+  VALUES
+    (82, 'weight', 'stat'),
+    (82, 'gravity', 'stat'),
+    (82, 'walk speed', 'stat'),
+    (82, 'run speed', 'stat'),
+    (82, 'initial dash', 'stat'),
+    (82, 'air speed', 'stat'),
+    (82, 'total air acceleration', 'stat'),
+    (82, 'sh / fh / shff / fhff', 'stat'),
+    (82, 'fall speed/fast fall speed', 'stat'),
+    (82, 'out of shield, neutral air', 'stat'),
+    (82, 'out of shield, up air', 'stat'),
+    (82, 'out of shield, up smash', 'stat'),
+    (82, 'shield grab (post-shieldstun)', 'stat');

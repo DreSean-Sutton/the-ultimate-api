@@ -1,27 +1,27 @@
 INSERT INTO public.moves AS "villager"
   ("fighterId", "name", "moveType", "type", "category")
   VALUES
-    (81, 'jab 1', 'single', 'move', 'ground'),
-    (81, 'jab 2', 'single', 'move', 'ground'),
-    (81, 'jab 3', 'single', 'move', 'ground'),
-    (81, 'rapid jab', 'multi', 'move', 'ground'),
-    (81, 'rapid jab finisher', 'single', 'move', 'ground'),
-    (81, 'forward tilt', '', 'move', 'ground'),
-    (81, 'up tilt', '', 'move', 'ground'),
-    (81, 'down tilt', '', 'move', 'ground'),
-    (81, 'dash attack', '', 'move', 'ground'),
-    (81, 'forward smash', '', 'move', 'ground'),
-    (81, 'up smash', '', 'move', 'ground'),
-    (81, 'down smash', '', 'move', 'ground'),
-    (81, 'neutral air', '', 'move', 'aerial'),
-    (81, 'forward air', '', 'move', 'aerial'),
-    (81, 'back air', '', 'move', 'aerial'),
-    (81, 'up air', '', 'move', 'aerial'),
-    (81, 'down air', '', 'move', 'aerial'),
-    (81, 'neutral b', '', 'move', 'special'),
-    (81, 'side b', '', 'move', 'special'),
-    (81, 'up b', '', 'move', 'special'),
-    (81, 'down b', '', 'move', 'special');
+    (82, 'jab 1', 'single', 'move', 'ground'),
+    (82, 'jab 2', 'single', 'move', 'ground'),
+    (82, 'jab 3', 'single', 'move', 'ground'),
+    (82, 'rapid jab', 'multi', 'move', 'ground'),
+    (82, 'rapid jab finisher', 'single', 'move', 'ground'),
+    (82, 'forward tilt', '', 'move', 'ground'),
+    (82, 'up tilt', '', 'move', 'ground'),
+    (82, 'down tilt', '', 'move', 'ground'),
+    (82, 'dash attack', '', 'move', 'ground'),
+    (82, 'forward smash', '', 'move', 'ground'),
+    (82, 'up smash', '', 'move', 'ground'),
+    (82, 'down smash', '', 'move', 'ground'),
+    (82, 'neutral air', '', 'move', 'aerial'),
+    (82, 'forward air', '', 'move', 'aerial'),
+    (82, 'back air', '', 'move', 'aerial'),
+    (82, 'up air', '', 'move', 'aerial'),
+    (82, 'down air', '', 'move', 'aerial'),
+    (82, 'neutral b', '', 'move', 'special'),
+    (82, 'side b', '', 'move', 'special'),
+    (82, 'up b', '', 'move', 'special'),
+    (82, 'down b', '', 'move', 'special');
 
 INSERT INTO public.hitboxes AS "villager"
   ("damage", "activeFrames", "totalFrames", "firstFrame")
@@ -51,14 +51,14 @@ INSERT INTO public.hitboxes AS "villager"
 INSERT INTO public.throws AS "villager"
   ("fighterId", "name", "type")
   VALUES
-    (81, 'grab', 'throw'),
-    (81, 'dash grab', 'throw'),
-    (81, 'pivot grab', 'throw'),
-    (81, 'pummel', 'throw'),
-    (81, 'forward throw', 'throw'),
-    (81, 'backward throw', 'throw'),
-    (81, 'up throw', 'throw'),
-    (81, 'down throw', 'throw');
+    (82, 'grab', 'throw'),
+    (82, 'dash grab', 'throw'),
+    (82, 'pivot grab', 'throw'),
+    (82, 'pummel', 'throw'),
+    (82, 'forward throw', 'throw'),
+    (82, 'backward throw', 'throw'),
+    (82, 'up throw', 'throw'),
+    (82, 'down throw', 'throw');
 
 INSERT INTO public.grappling AS "villager"
   ("damage", "activeFrames", "totalFrames")
@@ -75,15 +75,15 @@ INSERT INTO public.grappling AS "villager"
 INSERT INTO public.movements AS "villager"
   ("fighterId", "name", "type")
   VALUES
-    (81, 'spot dodge', 'movement'),
-    (81, 'forward roll', 'movement'),
-    (81, 'backwards roll', 'movement'),
-    (81, 'neutral air dodge', 'movement'),
-    (81, 'air dodge, down', 'movement'),
-    (81, 'air dodge, side + down', 'movement'),
-    (81, 'air dodge, left/right', 'movement'),
-    (81, 'air dodge, side + up', 'movement'),
-    (81, 'air dodge up', 'movement');
+    (82, 'spot dodge', 'movement'),
+    (82, 'forward roll', 'movement'),
+    (82, 'backwards roll', 'movement'),
+    (82, 'neutral air dodge', 'movement'),
+    (82, 'air dodge, down', 'movement'),
+    (82, 'air dodge, side + down', 'movement'),
+    (82, 'air dodge, left/right', 'movement'),
+    (82, 'air dodge, side + up', 'movement'),
+    (82, 'air dodge up', 'movement');
 
 INSERT INTO public.dodging AS "villager"
   ("activeFrames", "totalFrames")
@@ -101,19 +101,19 @@ INSERT INTO public.dodging AS "villager"
 INSERT INTO public.stats AS "villager"
   ("fighterId", "name", "type")
   VALUES
-    (81, 'weight', 'stat'),
-    (81, 'gravity', 'stat'),
-    (81, 'walk speed', 'stat'),
-    (81, 'run speed', 'stat'),
-    (81, 'initial dash', 'stat'),
-    (81, 'air speed', 'stat'),
-    (81, 'total air acceleration', 'stat'),
-    (81, 'sh / fh / shff / fhff', 'stat'),
-    (81, 'fall speed/fast fall speed', 'stat'),
-    (81, 'out of shield, ', 'stat'),
-    (81, 'out of shield, ', 'stat'),
-    (81, 'out of shield, ', 'stat'),
-    (81, 'shield grab (post-shieldstun)', 'stat');
+    (82, 'weight', 'stat'),
+    (82, 'gravity', 'stat'),
+    (82, 'walk speed', 'stat'),
+    (82, 'run speed', 'stat'),
+    (82, 'initial dash', 'stat'),
+    (82, 'air speed', 'stat'),
+    (82, 'total air acceleration', 'stat'),
+    (82, 'sh / fh / shff / fhff', 'stat'),
+    (82, 'fall speed/fast fall speed', 'stat'),
+    (82, 'out of shield, ', 'stat'),
+    (82, 'out of shield, ', 'stat'),
+    (82, 'out of shield, ', 'stat'),
+    (82, 'shield grab (post-shieldstun)', 'stat');
 
 INSERT INTO public.miscellaneous AS "villager"
   ("statValue")

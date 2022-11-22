@@ -1052,3 +1052,16 @@ INSERT INTO public.movements AS "toonLink"
     (81, 'air dodge, left/right', 'movement'),
     (81, 'air dodge, side + up', 'movement'),
     (81, 'air dodge up', 'movement');
+
+INSERT INTO public.movements AS "villager"
+  ("fighterId", "name", "type")
+  VALUES
+    (82, 'spot dodge', 'movement'),
+    (82, 'forward roll', 'movement'),
+    (82, 'backwards roll', 'movement'),
+    (82, 'neutral air dodge', 'movement'),
+    (82, 'air dodge, down', 'movement'),
+    (82, 'air dodge, side + down', 'movement'),
+    (82, 'air dodge, left/right', 'movement'),
+    (82, 'air dodge, side + up', 'movement'),
+    (82, 'air dodge up', 'movement');

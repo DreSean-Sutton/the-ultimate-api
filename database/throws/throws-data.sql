@@ -974,3 +974,15 @@ INSERT INTO public.throws AS "toonLink"
     (81, 'backward throw', 'throw'),
     (81, 'up throw', 'throw'),
     (81, 'down throw', 'throw');
+
+INSERT INTO public.throws AS "villager"
+  ("fighterId", "name", "type")
+  VALUES
+    (82, 'grab', 'throw'),
+    (82, 'dash grab', 'throw'),
+    (82, 'pivot grab', 'throw'),
+    (82, 'pummel', 'throw'),
+    (82, 'forward throw', 'throw'),
+    (82, 'backward throw', 'throw'),
+    (82, 'up throw', 'throw'),
+    (82, 'down throw', 'throw');

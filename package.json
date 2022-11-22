@@ -38,5 +38,9 @@
     "stylelint": "^14.9.0",
     "stylelint-config-recommended": "^7.0.0",
     "stylelint-config-standard": "^25.0.0"
+  },
+  "engine": {
+    "npm": "8.19.2",
+    "node": "18.10.0"
   }
 }

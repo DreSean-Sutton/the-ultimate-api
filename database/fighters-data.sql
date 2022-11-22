@@ -80,4 +80,5 @@ INSERT INTO public.fighters ("fighter", "rosterId", "displayName")
     ('sora', 89, 'Sora'),
     ('steve', 84, 'Steve'),
     ('terry', 81, 'Terry'),
-    ('toonLink', 48, 'Toon Link');
+    ('toonLink', 48, 'Toon Link'),
+    ('villager', 50, 'Villager');

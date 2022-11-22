@@ -1380,3 +1380,20 @@ INSERT INTO public.miscellaneous AS "toonLink"
     ('9 frames'),
     ('11 frames'),
     ('16 frames');
+
+INSERT INTO public.miscellaneous AS "villager"
+  ("statValue")
+  VALUES
+    ('92'),
+    ('0.078'),
+    ('1.092'),
+    ('1.397'),
+    ('1.815'),
+    ('0.987'),
+    ('0.06'),
+    ('40 / 56 / 28 / 39'),
+    ('1.32 / 2.112'),
+    ('6 frames'),
+    ('9 frames'),
+    ('12 frames'),
+    ('18 frames');

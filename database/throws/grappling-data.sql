@@ -974,3 +974,15 @@ INSERT INTO public.grappling AS "toonLink"
     ('7.0%', '18', '45'),
     ('5.0/2.0%', '27/28', '49'),
     ('3.0/4.0%', '22/24', '49');
+
+INSERT INTO public.grappling AS "villager"
+  ("damage", "activeFrames", "totalFrames")
+  VALUES
+    (null, '14-16', '43'),
+    (null, '16-17', '47'),
+    (null, '17-19', '44'),
+    ('1.3%', '1', '19'),
+    ('9.0%', '15', '45'),
+    ('11.0%', '11', '45'),
+    ('10.0%', '13', '45'),
+    ('6.0%', '18', '35');
