@@ -1065,3 +1065,16 @@ INSERT INTO public.movements AS "villager"
     (82, 'air dodge, left/right', 'movement'),
     (82, 'air dodge, side + up', 'movement'),
     (82, 'air dodge up', 'movement');
+
+INSERT INTO public.movements AS "wario"
+  ("fighterId", "name", "type")
+  VALUES
+    (83, 'spot dodge', 'movement'),
+    (83, 'forward roll', 'movement'),
+    (83, 'backwards roll', 'movement'),
+    (83, 'neutral air dodge', 'movement'),
+    (83, 'air dodge, down', 'movement'),
+    (83, 'air dodge, side + down', 'movement'),
+    (83, 'air dodge, left/right', 'movement'),
+    (83, 'air dodge, side + up', 'movement'),
+    (83, 'air dodge up', 'movement');

@@ -1,29 +1,29 @@
-INSERT INTO public.moves AS "villager"
+INSERT INTO public.moves AS "wiiFitTrainer"
   ("fighterId", "name", "moveType", "type", "category")
   VALUES
-    (82, 'jab 1', 'single', 'move', 'ground'),
-    (82, 'jab 2', 'single', 'move', 'ground'),
-    (82, 'jab 3', 'single', 'move', 'ground'),
-    (82, 'rapid jab', 'multi', 'move', 'ground'),
-    (82, 'rapid jab finisher', 'single', 'move', 'ground'),
-    (82, 'forward tilt', '', 'move', 'ground'),
-    (82, 'up tilt', '', 'move', 'ground'),
-    (82, 'down tilt', '', 'move', 'ground'),
-    (82, 'dash attack', '', 'move', 'ground'),
-    (82, 'forward smash', '', 'move', 'ground'),
-    (82, 'up smash', '', 'move', 'ground'),
-    (82, 'down smash', '', 'move', 'ground'),
-    (82, 'neutral air', '', 'move', 'aerial'),
-    (82, 'forward air', '', 'move', 'aerial'),
-    (82, 'back air', '', 'move', 'aerial'),
-    (82, 'up air', '', 'move', 'aerial'),
-    (82, 'down air', '', 'move', 'aerial'),
-    (82, 'neutral b', '', 'move', 'special'),
-    (82, 'side b', '', 'move', 'special'),
-    (82, 'up b', '', 'move', 'special'),
-    (82, 'down b', '', 'move', 'special');
+    (84, 'jab 1', 'single', 'move', 'ground'),
+    (84, 'jab 2', 'single', 'move', 'ground'),
+    (84, 'jab 3', 'single', 'move', 'ground'),
+    (84, 'rapid jab', 'multi', 'move', 'ground'),
+    (84, 'rapid jab finisher', 'single', 'move', 'ground'),
+    (84, 'forward tilt', '', 'move', 'ground'),
+    (84, 'up tilt', '', 'move', 'ground'),
+    (84, 'down tilt', '', 'move', 'ground'),
+    (84, 'dash attack', '', 'move', 'ground'),
+    (84, 'forward smash', '', 'move', 'ground'),
+    (84, 'up smash', '', 'move', 'ground'),
+    (84, 'down smash', '', 'move', 'ground'),
+    (84, 'neutral air', '', 'move', 'aerial'),
+    (84, 'forward air', '', 'move', 'aerial'),
+    (84, 'back air', '', 'move', 'aerial'),
+    (84, 'up air', '', 'move', 'aerial'),
+    (84, 'down air', '', 'move', 'aerial'),
+    (84, 'neutral b', '', 'move', 'special'),
+    (84, 'side b', '', 'move', 'special'),
+    (84, 'up b', '', 'move', 'special'),
+    (84, 'down b', '', 'move', 'special');
 
-INSERT INTO public.hitboxes AS "villager"
+INSERT INTO public.hitboxes AS "wiiFitTrainer"
   ("damage", "activeFrames", "totalFrames", "firstFrame")
   VALUES
     ('.0%', '', '', ''),
@@ -48,19 +48,19 @@ INSERT INTO public.hitboxes AS "villager"
     ('.0%', '', '', ''),
     ('.0%', '', '', '');
 
-INSERT INTO public.throws AS "villager"
+INSERT INTO public.throws AS "wiiFitTrainer"
   ("fighterId", "name", "type")
   VALUES
-    (82, 'grab', 'throw'),
-    (82, 'dash grab', 'throw'),
-    (82, 'pivot grab', 'throw'),
-    (82, 'pummel', 'throw'),
-    (82, 'forward throw', 'throw'),
-    (82, 'backward throw', 'throw'),
-    (82, 'up throw', 'throw'),
-    (82, 'down throw', 'throw');
+    (84, 'grab', 'throw'),
+    (84, 'dash grab', 'throw'),
+    (84, 'pivot grab', 'throw'),
+    (84, 'pummel', 'throw'),
+    (84, 'forward throw', 'throw'),
+    (84, 'backward throw', 'throw'),
+    (84, 'up throw', 'throw'),
+    (84, 'down throw', 'throw');
 
-INSERT INTO public.grappling AS "villager"
+INSERT INTO public.grappling AS "wiiFitTrainer"
   ("damage", "activeFrames", "totalFrames")
   VALUES
     (null, '6-7', '34'),
@@ -72,20 +72,20 @@ INSERT INTO public.grappling AS "villager"
     ('.0%', '', ''),
     ('.0%', '', '');
 
-INSERT INTO public.movements AS "villager"
+INSERT INTO public.movements AS "wiiFitTrainer"
   ("fighterId", "name", "type")
   VALUES
-    (82, 'spot dodge', 'movement'),
-    (82, 'forward roll', 'movement'),
-    (82, 'backwards roll', 'movement'),
-    (82, 'neutral air dodge', 'movement'),
-    (82, 'air dodge, down', 'movement'),
-    (82, 'air dodge, side + down', 'movement'),
-    (82, 'air dodge, left/right', 'movement'),
-    (82, 'air dodge, side + up', 'movement'),
-    (82, 'air dodge up', 'movement');
+    (84, 'spot dodge', 'movement'),
+    (84, 'forward roll', 'movement'),
+    (84, 'backwards roll', 'movement'),
+    (84, 'neutral air dodge', 'movement'),
+    (84, 'air dodge, down', 'movement'),
+    (84, 'air dodge, side + down', 'movement'),
+    (84, 'air dodge, left/right', 'movement'),
+    (84, 'air dodge, side + up', 'movement'),
+    (84, 'air dodge up', 'movement');
 
-INSERT INTO public.dodging AS "villager"
+INSERT INTO public.dodging AS "wiiFitTrainer"
   ("activeFrames", "totalFrames")
   VALUES
     ('3-17', '20/25'),
@@ -98,24 +98,24 @@ INSERT INTO public.dodging AS "villager"
     ('3-21', ''),
     ('3-21', '');
 
-INSERT INTO public.stats AS "villager"
+INSERT INTO public.stats AS "wiiFitTrainer"
   ("fighterId", "name", "type")
   VALUES
-    (82, 'weight', 'stat'),
-    (82, 'gravity', 'stat'),
-    (82, 'walk speed', 'stat'),
-    (82, 'run speed', 'stat'),
-    (82, 'initial dash', 'stat'),
-    (82, 'air speed', 'stat'),
-    (82, 'total air acceleration', 'stat'),
-    (82, 'sh / fh / shff / fhff', 'stat'),
-    (82, 'fall speed/fast fall speed', 'stat'),
-    (82, 'out of shield, ', 'stat'),
-    (82, 'out of shield, ', 'stat'),
-    (82, 'out of shield, ', 'stat'),
-    (82, 'shield grab (post-shieldstun)', 'stat');
+    (84, 'weight', 'stat'),
+    (84, 'gravity', 'stat'),
+    (84, 'walk speed', 'stat'),
+    (84, 'run speed', 'stat'),
+    (84, 'initial dash', 'stat'),
+    (84, 'air speed', 'stat'),
+    (84, 'total air acceleration', 'stat'),
+    (84, 'sh / fh / shff / fhff', 'stat'),
+    (84, 'fall speed/fast fall speed', 'stat'),
+    (84, 'out of shield, ', 'stat'),
+    (84, 'out of shield, ', 'stat'),
+    (84, 'out of shield, ', 'stat'),
+    (84, 'shield grab (post-shieldstun)', 'stat');
 
-INSERT INTO public.miscellaneous AS "villager"
+INSERT INTO public.miscellaneous AS "wiiFitTrainer"
   ("statValue")
   VALUES
     (''),

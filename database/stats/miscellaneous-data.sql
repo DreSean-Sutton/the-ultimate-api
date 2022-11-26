@@ -1397,3 +1397,20 @@ INSERT INTO public.miscellaneous AS "villager"
     ('9 frames'),
     ('12 frames'),
     ('18 frames');
+
+INSERT INTO public.miscellaneous AS "wario"
+  ("statValue")
+  VALUES
+    ('107'),
+    ('0.107'),
+    ('0.889'),
+    ('1.65'),
+    ('1.837'),
+    ('1.271'),
+    ('0.12'),
+    ('33 / 46 / 23 / 32'),
+    ('1.61 / 2.576'),
+    ('6 frames'),
+    ('7 frames'),
+    ('8 frames'),
+    ('12 frames');

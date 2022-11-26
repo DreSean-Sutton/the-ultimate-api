@@ -1397,3 +1397,20 @@ INSERT INTO public.stats AS "villager"
     (82, 'out of shield, up air', 'stat'),
     (82, 'out of shield, up smash', 'stat'),
     (82, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.stats AS "wario"
+  ("fighterId", "name", "type")
+  VALUES
+    (83, 'weight', 'stat'),
+    (83, 'gravity', 'stat'),
+    (83, 'walk speed', 'stat'),
+    (83, 'run speed', 'stat'),
+    (83, 'initial dash', 'stat'),
+    (83, 'air speed', 'stat'),
+    (83, 'total air acceleration', 'stat'),
+    (83, 'sh / fh / shff / fhff', 'stat'),
+    (83, 'fall speed/fast fall speed', 'stat'),
+    (83, 'out of shield, up b', 'stat'),
+    (83, 'out of shield, neutral air', 'stat'),
+    (83, 'out of shield, forward air', 'stat'),
+    (83, 'shield grab (post-shieldstun)', 'stat');

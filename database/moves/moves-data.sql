@@ -2281,3 +2281,27 @@ INSERT INTO public.moves AS "villager"
     (82, 'down b', 'plant/water', 'move', 'special'),
     (82, 'down b', 'tree: grow/fall', 'move', 'special'),
     (82, 'down b, axe', 'normal/tree', 'move', 'special');
+
+INSERT INTO public.moves AS "wario"
+  ("fighterId", "name", "moveType", "type", "category")
+  VALUES
+    (83, 'jab 1', 'single', 'move', 'ground'),
+    (83, 'jab 2', 'single', 'move', 'ground'),
+    (83, 'forward tilt', 'far/close', 'move', 'ground'),
+    (83, 'up tilt', 'early/late', 'move', 'ground'),
+    (83, 'down tilt', 'single', 'move', 'ground'),
+    (83, 'dash attack', 'early/late', 'move', 'ground'),
+    (83, 'forward smash', 'single', 'move', 'ground'),
+    (83, 'up smash', 'early/late', 'move', 'ground'),
+    (83, 'down smash', 'early/late/later', 'move', 'ground'),
+    (83, 'neutral air', 'early hit 1/late hit 1, hands/late hit 1, body/early hit 2/late hit 2', 'move', 'aerial'),
+    (83, 'forward air', 'early/late', 'move', 'aerial'),
+    (83, 'back air', 'single', 'move', 'aerial'),
+    (83, 'up air', 'single', 'move', 'aerial'),
+    (83, 'down air', 'multi/final', 'move', 'aerial'),
+    (83, 'neutral b', 'command grab', 'move', 'special'),
+    (83, 'side b', 'slowest-fastest', 'move', 'special'),
+    (83, 'side b, wheelie', 'wheel up/wheel down', 'move', 'special'),
+    (83, 'side b, turnaround', 'single', 'move', 'special'),
+    (83, 'up b', 'first/multi/final', 'move', 'special'),
+    (83, 'down b', 'stage: 1, 2, 3, final: early/late', 'move', 'special');

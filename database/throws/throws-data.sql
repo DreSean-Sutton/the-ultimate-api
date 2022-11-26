@@ -986,3 +986,15 @@ INSERT INTO public.throws AS "villager"
     (82, 'backward throw', 'throw'),
     (82, 'up throw', 'throw'),
     (82, 'down throw', 'throw');
+
+INSERT INTO public.throws AS "wario"
+  ("fighterId", "name", "type")
+  VALUES
+    (83, 'grab', 'throw'),
+    (83, 'dash grab', 'throw'),
+    (83, 'pivot grab', 'throw'),
+    (83, 'pummel', 'throw'),
+    (83, 'forward throw', 'throw'),
+    (83, 'backward throw', 'throw'),
+    (83, 'up throw', 'throw'),
+    (83, 'down throw', 'throw');
