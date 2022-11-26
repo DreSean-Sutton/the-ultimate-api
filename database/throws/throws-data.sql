@@ -998,3 +998,15 @@ INSERT INTO public.throws AS "wario"
     (83, 'backward throw', 'throw'),
     (83, 'up throw', 'throw'),
     (83, 'down throw', 'throw');
+
+INSERT INTO public.throws AS "wiiFit"
+  ("fighterId", "name", "type")
+  VALUES
+    (84, 'grab', 'throw'),
+    (84, 'dash grab', 'throw'),
+    (84, 'pivot grab', 'throw'),
+    (84, 'pummel', 'throw'),
+    (84, 'forward throw', 'throw'),
+    (84, 'backward throw', 'throw'),
+    (84, 'up throw', 'throw'),
+    (84, 'down throw', 'throw');

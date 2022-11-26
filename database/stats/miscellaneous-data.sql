@@ -1414,3 +1414,20 @@ INSERT INTO public.miscellaneous AS "wario"
     ('7 frames'),
     ('8 frames'),
     ('12 frames');
+
+INSERT INTO public.miscellaneous AS "wiiFit"
+  ("statValue")
+  VALUES
+    ('96'),
+    ('0.09'),
+    ('1.224'),
+    ('1.866'),
+    ('2.024'),
+    ('1.019'),
+    ('0.09'),
+    ('39 / 57 / 29 / 41'),
+    ('1.3 / 2.08'),
+    ('6 frames'),
+    ('8 frames'),
+    ('9 frames'),
+    ('10 frames');

@@ -1078,3 +1078,16 @@ INSERT INTO public.movements AS "wario"
     (83, 'air dodge, left/right', 'movement'),
     (83, 'air dodge, side + up', 'movement'),
     (83, 'air dodge up', 'movement');
+
+INSERT INTO public.movements AS "wiiFit"
+  ("fighterId", "name", "type")
+  VALUES
+    (84, 'spot dodge', 'movement'),
+    (84, 'forward roll', 'movement'),
+    (84, 'backwards roll', 'movement'),
+    (84, 'neutral air dodge', 'movement'),
+    (84, 'air dodge, down', 'movement'),
+    (84, 'air dodge, side + down', 'movement'),
+    (84, 'air dodge, left/right', 'movement'),
+    (84, 'air dodge, side + up', 'movement'),
+    (84, 'air dodge up', 'movement');

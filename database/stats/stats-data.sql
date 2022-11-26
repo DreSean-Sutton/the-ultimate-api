@@ -1414,3 +1414,20 @@ INSERT INTO public.stats AS "wario"
     (83, 'out of shield, neutral air', 'stat'),
     (83, 'out of shield, forward air', 'stat'),
     (83, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.stats AS "wiiFit"
+  ("fighterId", "name", "type")
+  VALUES
+    (84, 'weight', 'stat'),
+    (84, 'gravity', 'stat'),
+    (84, 'walk speed', 'stat'),
+    (84, 'run speed', 'stat'),
+    (84, 'initial dash', 'stat'),
+    (84, 'air speed', 'stat'),
+    (84, 'total air acceleration', 'stat'),
+    (84, 'sh / fh / shff / fhff', 'stat'),
+    (84, 'fall speed/fast fall speed', 'stat'),
+    (84, 'out of shield, ', 'stat'),
+    (84, 'out of shield, ', 'stat'),
+    (84, 'out of shield, ', 'stat'),
+    (84, 'shield grab (post-shieldstun)', 'stat');

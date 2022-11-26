@@ -2305,3 +2305,29 @@ INSERT INTO public.moves AS "wario"
     (83, 'side b, turnaround', 'single', 'move', 'special'),
     (83, 'up b', 'first/multi/final', 'move', 'special'),
     (83, 'down b', 'stage: 1, 2, 3, final: early/late', 'move', 'special');
+
+INSERT INTO public.moves AS "wiiFit"
+  ("fighterId", "name", "moveType", "type", "category")
+  VALUES
+    (84, 'jab 1', 'single', 'move', 'ground'),
+    (84, 'jab 2', 'single', 'move', 'ground'),
+    (84, 'jab 3', 'single', 'move', 'ground'),
+    (84, 'rapid jab', 'multi', 'move', 'ground'),
+    (84, 'rapid jab finisher', 'single', 'move', 'ground'),
+    (84, 'forward tilt', 'single', 'move', 'ground'),
+    (84, 'up tilt', 'single', 'move', 'ground'),
+    (84, 'down tilt', 'single', 'move', 'ground'),
+    (84, 'dash attack', 'early/late', 'move', 'ground'),
+    (84, 'forward smash', 'single', 'move', 'ground'),
+    (84, 'up smash', 'body/arms', 'move', 'ground'),
+    (84, 'down smash', 'single', 'move', 'ground'),
+    (84, 'neutral air', 'first/second', 'move', 'aerial'),
+    (84, 'forward air', 'early/late, meteor early/late', 'move', 'aerial'),
+    (84, 'back air', 'far/close/late', 'move', 'aerial'),
+    (84, 'up air', 'single', 'move', 'aerial'),
+    (84, 'down air', 'early/late', 'move', 'aerial'),
+    (84, 'neutral b', 'uncharged-full charge', 'move', 'special'),
+    (84, 'neutral b', 'fully charged', 'move', 'special'),
+    (84, 'side b', 'header/ball', 'move', 'special'),
+    (84, 'up b', 'recovery', 'move', 'special'),
+    (84, 'down b', 'damage buff', 'move', 'special');
