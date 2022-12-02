@@ -1,29 +1,29 @@
-INSERT INTO public.moves AS "wolf"
+INSERT INTO public.moves AS "yoshi"
   ("fighterId", "name", "moveType", "type", "category")
   VALUES
-    (85, 'jab 1', 'single', 'move', 'ground'),
-    (85, 'jab 2', 'single', 'move', 'ground'),
-    (85, 'jab 3', 'single', 'move', 'ground'),
-    (85, 'rapid jab', 'multi', 'move', 'ground'),
-    (85, 'rapid jab finisher', 'single', 'move', 'ground'),
-    (85, 'forward tilt', '', 'move', 'ground'),
-    (85, 'up tilt', '', 'move', 'ground'),
-    (85, 'down tilt', '', 'move', 'ground'),
-    (85, 'dash attack', '', 'move', 'ground'),
-    (85, 'forward smash', '', 'move', 'ground'),
-    (85, 'up smash', '', 'move', 'ground'),
-    (85, 'down smash', '', 'move', 'ground'),
-    (85, 'neutral air', '', 'move', 'aerial'),
-    (85, 'forward air', '', 'move', 'aerial'),
-    (85, 'back air', '', 'move', 'aerial'),
-    (85, 'up air', '', 'move', 'aerial'),
-    (85, 'down air', '', 'move', 'aerial'),
-    (85, 'neutral b', '', 'move', 'special'),
-    (85, 'side b', '', 'move', 'special'),
-    (85, 'up b', '', 'move', 'special'),
-    (85, 'down b', '', 'move', 'special');
+    (86, 'jab 1', 'single', 'move', 'ground'),
+    (86, 'jab 2', 'single', 'move', 'ground'),
+    (86, 'jab 3', 'single', 'move', 'ground'),
+    (86, 'rapid jab', 'multi', 'move', 'ground'),
+    (86, 'rapid jab finisher', 'single', 'move', 'ground'),
+    (86, 'forward tilt', '', 'move', 'ground'),
+    (86, 'up tilt', '', 'move', 'ground'),
+    (86, 'down tilt', '', 'move', 'ground'),
+    (86, 'dash attack', '', 'move', 'ground'),
+    (86, 'forward smash', '', 'move', 'ground'),
+    (86, 'up smash', '', 'move', 'ground'),
+    (86, 'down smash', '', 'move', 'ground'),
+    (86, 'neutral air', '', 'move', 'aerial'),
+    (86, 'forward air', '', 'move', 'aerial'),
+    (86, 'back air', '', 'move', 'aerial'),
+    (86, 'up air', '', 'move', 'aerial'),
+    (86, 'down air', '', 'move', 'aerial'),
+    (86, 'neutral b', '', 'move', 'special'),
+    (86, 'side b', '', 'move', 'special'),
+    (86, 'up b', '', 'move', 'special'),
+    (86, 'down b', '', 'move', 'special');
 
-INSERT INTO public.hitboxes AS "wolf"
+INSERT INTO public.hitboxes AS "yoshi"
   ("damage", "activeFrames", "totalFrames", "firstFrame")
   VALUES
     ('.0%', '', '', ''),
@@ -48,19 +48,19 @@ INSERT INTO public.hitboxes AS "wolf"
     ('.0%', '', '', ''),
     ('.0%', '', '', '');
 
-INSERT INTO public.throws AS "wolf"
+INSERT INTO public.throws AS "yoshi"
   ("fighterId", "name", "type")
   VALUES
-    (85, 'grab', 'throw'),
-    (85, 'dash grab', 'throw'),
-    (85, 'pivot grab', 'throw'),
-    (85, 'pummel', 'throw'),
-    (85, 'forward throw', 'throw'),
-    (85, 'backward throw', 'throw'),
-    (85, 'up throw', 'throw'),
-    (85, 'down throw', 'throw');
+    (86, 'grab', 'throw'),
+    (86, 'dash grab', 'throw'),
+    (86, 'pivot grab', 'throw'),
+    (86, 'pummel', 'throw'),
+    (86, 'forward throw', 'throw'),
+    (86, 'backward throw', 'throw'),
+    (86, 'up throw', 'throw'),
+    (86, 'down throw', 'throw');
 
-INSERT INTO public.grappling AS "wolf"
+INSERT INTO public.grappling AS "yoshi"
   ("damage", "activeFrames", "totalFrames")
   VALUES
     (null, '6-7', '34'),
@@ -72,20 +72,20 @@ INSERT INTO public.grappling AS "wolf"
     ('.0%', '', ''),
     ('.0%', '', '');
 
-INSERT INTO public.movements AS "wolf"
+INSERT INTO public.movements AS "yoshi"
   ("fighterId", "name", "type")
   VALUES
-    (85, 'spot dodge', 'movement'),
-    (85, 'forward roll', 'movement'),
-    (85, 'backwards roll', 'movement'),
-    (85, 'neutral air dodge', 'movement'),
-    (85, 'air dodge, down', 'movement'),
-    (85, 'air dodge, side + down', 'movement'),
-    (85, 'air dodge, left/right', 'movement'),
-    (85, 'air dodge, side + up', 'movement'),
-    (85, 'air dodge up', 'movement');
+    (86, 'spot dodge', 'movement'),
+    (86, 'forward roll', 'movement'),
+    (86, 'backwards roll', 'movement'),
+    (86, 'neutral air dodge', 'movement'),
+    (86, 'air dodge, down', 'movement'),
+    (86, 'air dodge, side + down', 'movement'),
+    (86, 'air dodge, left/right', 'movement'),
+    (86, 'air dodge, side + up', 'movement'),
+    (86, 'air dodge up', 'movement');
 
-INSERT INTO public.dodging AS "wolf"
+INSERT INTO public.dodging AS "yoshi"
   ("activeFrames", "totalFrames")
   VALUES
     ('3-17', '20/25'),
@@ -98,24 +98,24 @@ INSERT INTO public.dodging AS "wolf"
     ('3-21', ''),
     ('3-21', '');
 
-INSERT INTO public.stats AS "wolf"
+INSERT INTO public.stats AS "yoshi"
   ("fighterId", "name", "type")
   VALUES
-    (85, 'weight', 'stat'),
-    (85, 'gravity', 'stat'),
-    (85, 'walk speed', 'stat'),
-    (85, 'run speed', 'stat'),
-    (85, 'initial dash', 'stat'),
-    (85, 'air speed', 'stat'),
-    (85, 'total air acceleration', 'stat'),
-    (85, 'sh / fh / shff / fhff', 'stat'),
-    (85, 'fall speed/fast fall speed', 'stat'),
-    (85, 'out of shield, ', 'stat'),
-    (85, 'out of shield, ', 'stat'),
-    (85, 'out of shield, ', 'stat'),
-    (85, 'shield grab (post-shieldstun)', 'stat');
+    (86, 'weight', 'stat'),
+    (86, 'gravity', 'stat'),
+    (86, 'walk speed', 'stat'),
+    (86, 'run speed', 'stat'),
+    (86, 'initial dash', 'stat'),
+    (86, 'air speed', 'stat'),
+    (86, 'total air acceleration', 'stat'),
+    (86, 'sh / fh / shff / fhff', 'stat'),
+    (86, 'fall speed/fast fall speed', 'stat'),
+    (86, 'out of shield, ', 'stat'),
+    (86, 'out of shield, ', 'stat'),
+    (86, 'out of shield, ', 'stat'),
+    (86, 'shield grab (post-shieldstun)', 'stat');
 
-INSERT INTO public.miscellaneous AS "wolf"
+INSERT INTO public.miscellaneous AS "yoshi"
   ("statValue")
   VALUES
     (''),

@@ -1431,3 +1431,20 @@ INSERT INTO public.stats AS "wiiFit"
     (84, 'out of shield, ', 'stat'),
     (84, 'out of shield, ', 'stat'),
     (84, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.stats AS "wolf"
+  ("fighterId", "name", "type")
+  VALUES
+    (85, 'weight', 'stat'),
+    (85, 'gravity', 'stat'),
+    (85, 'walk speed', 'stat'),
+    (85, 'run speed', 'stat'),
+    (85, 'initial dash', 'stat'),
+    (85, 'air speed', 'stat'),
+    (85, 'total air acceleration', 'stat'),
+    (85, 'sh / fh / shff / fhff', 'stat'),
+    (85, 'fall speed/fast fall speed', 'stat'),
+    (85, 'out of shield, ', 'stat'),
+    (85, 'out of shield, ', 'stat'),
+    (85, 'out of shield, ', 'stat'),
+    (85, 'shield grab (post-shieldstun)', 'stat');

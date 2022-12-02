@@ -1010,3 +1010,15 @@ INSERT INTO public.throws AS "wiiFit"
     (84, 'backward throw', 'throw'),
     (84, 'up throw', 'throw'),
     (84, 'down throw', 'throw');
+
+INSERT INTO public.throws AS "wolf"
+  ("fighterId", "name", "type")
+  VALUES
+    (85, 'grab', 'throw'),
+    (85, 'dash grab', 'throw'),
+    (85, 'pivot grab', 'throw'),
+    (85, 'pummel', 'throw'),
+    (85, 'forward throw', 'throw'),
+    (85, 'backward throw', 'throw'),
+    (85, 'up throw', 'throw'),
+    (85, 'down throw', 'throw');

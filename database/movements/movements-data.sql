@@ -1091,3 +1091,16 @@ INSERT INTO public.movements AS "wiiFit"
     (84, 'air dodge, left/right', 'movement'),
     (84, 'air dodge, side + up', 'movement'),
     (84, 'air dodge up', 'movement');
+
+INSERT INTO public.movements AS "wolf"
+  ("fighterId", "name", "type")
+  VALUES
+    (85, 'spot dodge', 'movement'),
+    (85, 'forward roll', 'movement'),
+    (85, 'backwards roll', 'movement'),
+    (85, 'neutral air dodge', 'movement'),
+    (85, 'air dodge, down', 'movement'),
+    (85, 'air dodge, side + down', 'movement'),
+    (85, 'air dodge, left/right', 'movement'),
+    (85, 'air dodge, side + up', 'movement'),
+    (85, 'air dodge up', 'movement');

@@ -2331,3 +2331,26 @@ INSERT INTO public.moves AS "wiiFit"
     (84, 'side b', 'header/ball', 'move', 'special'),
     (84, 'up b', 'recovery', 'move', 'special'),
     (84, 'down b', 'damage buff', 'move', 'special');
+
+INSERT INTO public.moves AS "wolf"
+  ("fighterId", "name", "moveType", "type", "category")
+  VALUES
+    (85, 'jab 1', 'single', 'move', 'ground'),
+    (85, 'jab 2', 'single', 'move', 'ground'),
+    (85, 'jab 3', 'single', 'move', 'ground'),
+    (85, 'forward tilt', 'first/second', 'move', 'ground'),
+    (85, 'up tilt', 'early front/tip/mid/close', 'move', 'ground'),
+    (85, 'down tilt', 'single', 'move', 'ground'),
+    (85, 'dash attack', 'early/late', 'move', 'ground'),
+    (85, 'forward smash', 'single', 'move', 'ground'),
+    (85, 'up smash', 'early/late', 'move', 'ground'),
+    (85, 'down smash', 'first/second: close/far', 'move', 'ground'),
+    (85, 'neutral air', 'early/late', 'move', 'aerial'),
+    (85, 'forward air', 'single', 'move', 'aerial'),
+    (85, 'back air', 'close/mid/far', 'move', 'aerial'),
+    (85, 'up air', 'single', 'move', 'aerial'),
+    (85, 'down air', 'far/close', 'move', 'aerial'),
+    (85, 'neutral b', 'melee/early/mid/late', 'move', 'special'),
+    (85, 'side b', 'sweet/sour/trail', 'move', 'special'),
+    (85, 'up b', 'first/multi/final', 'move', 'special'),
+    (85, 'down b', 'reflector', 'move', 'special');

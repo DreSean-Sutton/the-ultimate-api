@@ -1431,3 +1431,20 @@ INSERT INTO public.miscellaneous AS "wiiFit"
     ('8 frames'),
     ('9 frames'),
     ('10 frames');
+
+INSERT INTO public.miscellaneous AS "wolf"
+  ("statValue")
+  VALUES
+    ('92'),
+    ('0.13'),
+    ('1.208'),
+    ('1.54'),
+    ('2.09'),
+    ('1.281'),
+    ('0.09'),
+    ('30 / 43 / 21 / 31'),
+    ('1.8 / 2.88'),
+    ('9 frames'),
+    ('10 frames'),
+    ('13 frames'),
+    ('10 frames');
