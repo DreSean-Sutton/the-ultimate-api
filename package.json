@@ -6,11 +6,11 @@
   "main": "server/build/index.js",
   "scripts": {
     "start": "node server/build/index.js",
+    "node": "ts-node server/index.ts",
     "build": "tsc",
-    "dev:server": "nodemon server/build/index.js",
+    "dev:server": "nodemon --exec ts-node server/index.ts",
     "db:import": "bash scripts/db-import.sh",
     "prepare": "husky install",
-    "tsc:watch": "tsc -w",
     "tsc": "./node_modules/typescript/bin/tsc"
   },
   "dependencies": {
@@ -37,7 +37,8 @@
     "nodemon": "^2.0.15",
     "stylelint": "^14.9.0",
     "stylelint-config-recommended": "^7.0.0",
-    "stylelint-config-standard": "^25.0.0"
+    "stylelint-config-standard": "^25.0.0",
+    "ts-node": "^10.9.1"
   },
   "engine": {
     "npm": "8.19.2",
