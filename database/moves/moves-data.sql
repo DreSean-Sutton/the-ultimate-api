@@ -2354,3 +2354,27 @@ INSERT INTO public.moves AS "wolf"
     (85, 'side b', 'sweet/sour/trail', 'move', 'special'),
     (85, 'up b', 'first/multi/final', 'move', 'special'),
     (85, 'down b', 'reflector', 'move', 'special');
+
+INSERT INTO public.moves AS "yoshi"
+  ("fighterId", "name", "moveType", "type", "category")
+  VALUES
+    (86, 'jab 1', 'single', 'move', 'ground'),
+    (86, 'jab 2', 'single', 'move', 'ground'),
+    (86, 'jab 3', 'single', 'move', 'ground'),
+    (86, 'forward tilt', 'single', 'move', 'ground'),
+    (86, 'up tilt', 'single', 'move', 'ground'),
+    (86, 'down tilt', 'single', 'move', 'ground'),
+    (86, 'dash attack', 'early/late', 'move', 'ground'),
+    (86, 'forward smash', 'single', 'move', 'ground'),
+    (86, 'up smash', 'early/late', 'move', 'ground'),
+    (86, 'down smash', 'first/second', 'move', 'ground'),
+    (86, 'neutral air', 'early/late/lastest', 'move', 'aerial'),
+    (86, 'forward air', 'clsoe/meteor', 'move', 'aerial'),
+    (86, 'back air', 'first/second/third', 'move', 'aerial'),
+    (86, 'up air', 'single', 'move', 'aerial'),
+    (86, 'down air', '(middle/sides)/final', 'move', 'aerial'),
+    (86, 'neutral b', 'successful/miss', 'move', 'special'),
+    (86, 'side b', 'slow-fast', 'move', 'special'),
+    (86, 'up b', 'single', 'move', 'special'),
+    (86, 'down b, ground', 'rising/falling/star', 'move', 'special'),
+    (86, 'down b, air', 'falling/star', 'move', 'special');

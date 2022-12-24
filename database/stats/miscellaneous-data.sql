@@ -1448,3 +1448,20 @@ INSERT INTO public.miscellaneous AS "wolf"
     ('10 frames'),
     ('13 frames'),
     ('10 frames');
+
+INSERT INTO public.miscellaneous AS "yoshi"
+  ("statValue")
+  VALUES
+    ('104'),
+    ('0.08'),
+    ('1.208'),
+    ('2.046'),
+    ('1.98'),
+    ('1.344'),
+    ('0.098'),
+    ('38 / 60 / 26 / 42'),
+    ('1.29 / 2.064'),
+    ('6 frames'),
+    ('8 frames'),
+    ('11 frames'),
+    ('18 frames');

@@ -1448,3 +1448,20 @@ INSERT INTO public.stats AS "wolf"
     (85, 'out of shield, ', 'stat'),
     (85, 'out of shield, ', 'stat'),
     (85, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.stats AS "yoshi"
+  ("fighterId", "name", "type")
+  VALUES
+    (86, 'weight', 'stat'),
+    (86, 'gravity', 'stat'),
+    (86, 'walk speed', 'stat'),
+    (86, 'run speed', 'stat'),
+    (86, 'initial dash', 'stat'),
+    (86, 'air speed', 'stat'),
+    (86, 'total air acceleration', 'stat'),
+    (86, 'sh / fh / shff / fhff', 'stat'),
+    (86, 'fall speed/fast fall speed', 'stat'),
+    (86, 'out of shield, neutral air', 'stat'),
+    (86, 'out of shield, up air', 'stat'),
+    (86, 'out of shield, up smash', 'stat'),
+    (86, 'shield grab (post-shieldstun)', 'stat');

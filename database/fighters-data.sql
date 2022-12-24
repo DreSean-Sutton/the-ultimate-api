@@ -84,4 +84,5 @@ INSERT INTO public.fighters ("fighter", "rosterId", "displayName")
     ('villager', 50, 'Villager'),
     ('wario', 35, 'Wario'),
     ('wiiFit', 52, 'Wii Fit Trainer'),
-    ('wolf', 49, 'Wolf');
+    ('wolf', 49, 'Wolf'),
+    ('yoshi', 6, 'Yoshi');

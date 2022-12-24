@@ -1104,3 +1104,16 @@ INSERT INTO public.movements AS "wolf"
     (85, 'air dodge, left/right', 'movement'),
     (85, 'air dodge, side + up', 'movement'),
     (85, 'air dodge up', 'movement');
+
+INSERT INTO public.movements AS "yoshi"
+  ("fighterId", "name", "type")
+  VALUES
+    (86, 'spot dodge', 'movement'),
+    (86, 'forward roll', 'movement'),
+    (86, 'backwards roll', 'movement'),
+    (86, 'neutral air dodge', 'movement'),
+    (86, 'air dodge, down', 'movement'),
+    (86, 'air dodge, side + down', 'movement'),
+    (86, 'air dodge, left/right', 'movement'),
+    (86, 'air dodge, side + up', 'movement'),
+    (86, 'air dodge up', 'movement');
