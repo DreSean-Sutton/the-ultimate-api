@@ -1034,3 +1034,15 @@ INSERT INTO public.throws AS "yoshi"
     (86, 'backward throw', 'throw'),
     (86, 'up throw', 'throw'),
     (86, 'down throw', 'throw');
+
+INSERT INTO public.throws AS "youngLink"
+  ("fighterId", "name", "type")
+  VALUES
+    (87, 'grab', 'throw'),
+    (87, 'dash grab', 'throw'),
+    (87, 'pivot grab', 'throw'),
+    (87, 'pummel', 'throw'),
+    (87, 'forward throw', 'throw'),
+    (87, 'backward throw', 'throw'),
+    (87, 'up throw', 'throw'),
+    (87, 'down throw', 'throw');

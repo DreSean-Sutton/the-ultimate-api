@@ -1117,3 +1117,16 @@ INSERT INTO public.movements AS "yoshi"
     (86, 'air dodge, left/right', 'movement'),
     (86, 'air dodge, side + up', 'movement'),
     (86, 'air dodge up', 'movement');
+
+INSERT INTO public.movements AS "youngLink"
+  ("fighterId", "name", "type")
+  VALUES
+    (87, 'spot dodge', 'movement'),
+    (87, 'forward roll', 'movement'),
+    (87, 'backwards roll', 'movement'),
+    (87, 'neutral air dodge', 'movement'),
+    (87, 'air dodge, down', 'movement'),
+    (87, 'air dodge, side + down', 'movement'),
+    (87, 'air dodge, left/right', 'movement'),
+    (87, 'air dodge, side + up', 'movement'),
+    (87, 'air dodge up', 'movement');

@@ -1465,3 +1465,20 @@ INSERT INTO public.stats AS "yoshi"
     (86, 'out of shield, up air', 'stat'),
     (86, 'out of shield, up smash', 'stat'),
     (86, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.stats AS "youngLink"
+  ("fighterId", "name", "type")
+  VALUES
+    (87, 'weight', 'stat'),
+    (87, 'gravity', 'stat'),
+    (87, 'walk speed', 'stat'),
+    (87, 'run speed', 'stat'),
+    (87, 'initial dash', 'stat'),
+    (87, 'air speed', 'stat'),
+    (87, 'total air acceleration', 'stat'),
+    (87, 'sh / fh / shff / fhff', 'stat'),
+    (87, 'fall speed/fast fall speed', 'stat'),
+    (87, 'out of shield, neutral air', 'stat'),
+    (87, 'out of shield, up air', 'stat'),
+    (87, 'out of shield, up b', 'stat'),
+    (87, 'shield grab (post-shieldstun)', 'stat');

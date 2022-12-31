@@ -1465,3 +1465,20 @@ INSERT INTO public.miscellaneous AS "yoshi"
     ('8 frames'),
     ('11 frames'),
     ('18 frames');
+
+INSERT INTO public.miscellaneous AS "youngLink"
+  ("statValue")
+  VALUES
+    ('88'),
+    ('0.096'),
+    ('1.26'),
+    ('1.749'),
+    ('2.09'),
+    ('0.966'),
+    ('0.06'),
+    ('36 / 49 / 24 / 34'),
+    ('1.8 / 2.88'),
+    ('7 frames'),
+    ('8 frames'),
+    ('9 frames'),
+    ('16 frames');

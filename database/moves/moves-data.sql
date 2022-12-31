@@ -2378,3 +2378,31 @@ INSERT INTO public.moves AS "yoshi"
     (86, 'up b', 'single', 'move', 'special'),
     (86, 'down b, ground', 'rising/falling/star', 'move', 'special'),
     (86, 'down b, air', 'falling/star', 'move', 'special');
+
+INSERT INTO public.moves AS "youngLink"
+  ("fighterId", "name", "moveType", "type", "category")
+  VALUES
+    (87, 'jab 1', 'single', 'move', 'ground'),
+    (87, 'jab 2', 'single', 'move', 'ground'),
+    (87, 'jab 3', 'single', 'move', 'ground'),
+    (87, 'rapid jab', 'multi', 'move', 'ground'),
+    (87, 'rapid jab finisher', 'single', 'move', 'ground'),
+    (87, 'forward tilt', 'close/far', 'move', 'ground'),
+    (87, 'up tilt', 'single', 'move', 'ground'),
+    (87, 'down tilt', 'close/medium/far', 'move', 'ground'),
+    (87, 'dash attack', 'close/far', 'move', 'ground'),
+    (87, 'forward smash 1', 'single', 'move', 'ground'),
+    (87, 'forward smash 2', 'single', 'move', 'ground'),
+    (87, 'up smash', 'multi/final', 'move', 'ground'),
+    (87, 'down smash', 'front/back: close/far', 'move', 'ground'),
+    (87, 'neutral air', 'early/late', 'move', 'aerial'),
+    (87, 'forward air', 'first/second close/second far', 'move', 'aerial'),
+    (87, 'back air', 'first/second', 'move', 'aerial'),
+    (87, 'up air', 'early/late', 'move', 'aerial'),
+    (87, 'down air', 'early/late/pogo', 'move', 'aerial'),
+    (87, 'z air', 'single', 'move', 'special'),
+    (87, 'neutral b', 'uncharged-full charge', 'move', 'special'),
+    (87, 'side b', 'normal/smash/return', 'move', 'special'),
+    (87, 'up b, ground', 'multi/final', 'move', 'special'),
+    (87, 'up b, air', 'first/multi/final', 'move', 'special'),
+    (87, 'down b', 'bomb pull', 'move', 'special');
