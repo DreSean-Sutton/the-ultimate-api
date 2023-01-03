@@ -1143,3 +1143,16 @@ INSERT INTO public.movements AS "zelda"
     (88, 'air dodge, left/right', 'movement'),
     (88, 'air dodge, side + up', 'movement'),
     (88, 'air dodge up', 'movement');
+
+INSERT INTO public.movements AS "ZeroSuitSamus"
+  ("fighterId", "name", "type")
+  VALUES
+    (89, 'spot dodge', 'movement'),
+    (89, 'forward roll', 'movement'),
+    (89, 'backwards roll', 'movement'),
+    (89, 'neutral air dodge', 'movement'),
+    (89, 'air dodge, down', 'movement'),
+    (89, 'air dodge, side + down', 'movement'),
+    (89, 'air dodge, left/right', 'movement'),
+    (89, 'air dodge, side + up', 'movement'),
+    (89, 'air dodge up', 'movement');

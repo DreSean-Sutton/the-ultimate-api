@@ -1,29 +1,29 @@
-INSERT INTO public.moves AS "ZeroSuitSamus"
+INSERT INTO public.moves AS "fighterName"
   ("fighterId", "name", "moveType", "type", "category")
   VALUES
-    (89, 'jab 1', 'single', 'move', 'ground'),
-    (89, 'jab 2', 'single', 'move', 'ground'),
-    (89, 'jab 3', 'single', 'move', 'ground'),
-    (89, 'rapid jab', 'multi', 'move', 'ground'),
-    (89, 'rapid jab finisher', 'single', 'move', 'ground'),
-    (89, 'forward tilt', '', 'move', 'ground'),
-    (89, 'up tilt', '', 'move', 'ground'),
-    (89, 'down tilt', '', 'move', 'ground'),
-    (89, 'dash attack', '', 'move', 'ground'),
-    (89, 'forward smash', '', 'move', 'ground'),
-    (89, 'up smash', '', 'move', 'ground'),
-    (89, 'down smash', '', 'move', 'ground'),
-    (89, 'neutral air', '', 'move', 'aerial'),
-    (89, 'forward air', '', 'move', 'aerial'),
-    (89, 'back air', '', 'move', 'aerial'),
-    (89, 'up air', '', 'move', 'aerial'),
-    (89, 'down air', '', 'move', 'aerial'),
-    (89, 'neutral b', '', 'move', 'special'),
-    (89, 'side b', '', 'move', 'special'),
-    (89, 'up b', '', 'move', 'special'),
-    (89, 'down b', '', 'move', 'special');
+    (, 'jab 1', 'single', 'move', 'ground'),
+    (, 'jab 2', 'single', 'move', 'ground'),
+    (, 'jab 3', 'single', 'move', 'ground'),
+    (, 'rapid jab', 'multi', 'move', 'ground'),
+    (, 'rapid jab finisher', 'single', 'move', 'ground'),
+    (, 'forward tilt', '', 'move', 'ground'),
+    (, 'up tilt', '', 'move', 'ground'),
+    (, 'down tilt', '', 'move', 'ground'),
+    (, 'dash attack', '', 'move', 'ground'),
+    (, 'forward smash', '', 'move', 'ground'),
+    (, 'up smash', '', 'move', 'ground'),
+    (, 'down smash', '', 'move', 'ground'),
+    (, 'neutral air', '', 'move', 'aerial'),
+    (, 'forward air', '', 'move', 'aerial'),
+    (, 'back air', '', 'move', 'aerial'),
+    (, 'up air', '', 'move', 'aerial'),
+    (, 'down air', '', 'move', 'aerial'),
+    (, 'neutral b', '', 'move', 'special'),
+    (, 'side b', '', 'move', 'special'),
+    (, 'up b', '', 'move', 'special'),
+    (, 'down b', '', 'move', 'special');
 
-INSERT INTO public.hitboxes AS "ZeroSuitSamus"
+INSERT INTO public.hitboxes AS "fighterName"
   ("damage", "activeFrames", "totalFrames", "firstFrame")
   VALUES
     ('.0%', '', '', ''),
@@ -48,19 +48,19 @@ INSERT INTO public.hitboxes AS "ZeroSuitSamus"
     ('.0%', '', '', ''),
     ('.0%', '', '', '');
 
-INSERT INTO public.throws AS "ZeroSuitSamus"
+INSERT INTO public.throws AS "fighterName"
   ("fighterId", "name", "type")
   VALUES
-    (89, 'grab', 'throw'),
-    (89, 'dash grab', 'throw'),
-    (89, 'pivot grab', 'throw'),
-    (89, 'pummel', 'throw'),
-    (89, 'forward throw', 'throw'),
-    (89, 'backward throw', 'throw'),
-    (89, 'up throw', 'throw'),
-    (89, 'down throw', 'throw');
+    (, 'grab', 'throw'),
+    (, 'dash grab', 'throw'),
+    (, 'pivot grab', 'throw'),
+    (, 'pummel', 'throw'),
+    (, 'forward throw', 'throw'),
+    (, 'backward throw', 'throw'),
+    (, 'up throw', 'throw'),
+    (, 'down throw', 'throw');
 
-INSERT INTO public.grappling AS "ZeroSuitSamus"
+INSERT INTO public.grappling AS "fighterName"
   ("damage", "activeFrames", "totalFrames")
   VALUES
     (null, '6-7', '34'),
@@ -72,20 +72,20 @@ INSERT INTO public.grappling AS "ZeroSuitSamus"
     ('.0%', '', ''),
     ('.0%', '', '');
 
-INSERT INTO public.movements AS "ZeroSuitSamus"
+INSERT INTO public.movements AS "fighterName"
   ("fighterId", "name", "type")
   VALUES
-    (89, 'spot dodge', 'movement'),
-    (89, 'forward roll', 'movement'),
-    (89, 'backwards roll', 'movement'),
-    (89, 'neutral air dodge', 'movement'),
-    (89, 'air dodge, down', 'movement'),
-    (89, 'air dodge, side + down', 'movement'),
-    (89, 'air dodge, left/right', 'movement'),
-    (89, 'air dodge, side + up', 'movement'),
-    (89, 'air dodge up', 'movement');
+    (, 'spot dodge', 'movement'),
+    (, 'forward roll', 'movement'),
+    (, 'backwards roll', 'movement'),
+    (, 'neutral air dodge', 'movement'),
+    (, 'air dodge, down', 'movement'),
+    (, 'air dodge, side + down', 'movement'),
+    (, 'air dodge, left/right', 'movement'),
+    (, 'air dodge, side + up', 'movement'),
+    (, 'air dodge up', 'movement');
 
-INSERT INTO public.dodging AS "ZeroSuitSamus"
+INSERT INTO public.dodging AS "fighterName"
   ("activeFrames", "totalFrames")
   VALUES
     ('3-17', '20/25'),
@@ -98,24 +98,24 @@ INSERT INTO public.dodging AS "ZeroSuitSamus"
     ('3-21', ''),
     ('3-21', '');
 
-INSERT INTO public.stats AS "ZeroSuitSamus"
+INSERT INTO public.stats AS "fighterName"
   ("fighterId", "name", "type")
   VALUES
-    (89, 'weight', 'stat'),
-    (89, 'gravity', 'stat'),
-    (89, 'walk speed', 'stat'),
-    (89, 'run speed', 'stat'),
-    (89, 'initial dash', 'stat'),
-    (89, 'air speed', 'stat'),
-    (89, 'total air acceleration', 'stat'),
-    (89, 'sh / fh / shff / fhff', 'stat'),
-    (89, 'fall speed/fast fall speed', 'stat'),
-    (89, 'out of shield, ', 'stat'),
-    (89, 'out of shield, ', 'stat'),
-    (89, 'out of shield, ', 'stat'),
-    (89, 'shield grab (post-shieldstun)', 'stat');
+    (, 'weight', 'stat'),
+    (, 'gravity', 'stat'),
+    (, 'walk speed', 'stat'),
+    (, 'run speed', 'stat'),
+    (, 'initial dash', 'stat'),
+    (, 'air speed', 'stat'),
+    (, 'total air acceleration', 'stat'),
+    (, 'sh / fh / shff / fhff', 'stat'),
+    (, 'fall speed/fast fall speed', 'stat'),
+    (, 'out of shield, ', 'stat'),
+    (, 'out of shield, ', 'stat'),
+    (, 'out of shield, ', 'stat'),
+    (, 'shield grab (post-shieldstun)', 'stat');
 
-INSERT INTO public.miscellaneous AS "ZeroSuitSamus"
+INSERT INTO public.miscellaneous AS "fighterName"
   ("statValue")
   VALUES
     (''),

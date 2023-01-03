@@ -1143,3 +1143,16 @@ INSERT INTO public.dodging AS "zelda"
     ('3-21', '96'),
     ('3-21', '114'),
     ('3-21', '129');
+
+INSERT INTO public.dodging AS "ZeroSuitSamus"
+  ("activeFrames", "totalFrames")
+  VALUES
+    ('3-14', '18/23'),
+    ('4-12', '26'),
+    ('4-14', '32'),
+    ('2-26', '45'),
+    ('2-19', '65'),
+    ('2-19', '73'),
+    ('2-19', '80'),
+    ('2-19', '90'),
+    ('2-19', '98');

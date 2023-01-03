@@ -1058,3 +1058,15 @@ INSERT INTO public.throws AS "zelda"
     (88, 'backward throw', 'throw'),
     (88, 'up throw', 'throw'),
     (88, 'down throw', 'throw');
+
+INSERT INTO public.throws AS "ZeroSuitSamus"
+  ("fighterId", "name", "type")
+  VALUES
+    (89, 'grab', 'throw'),
+    (89, 'dash grab', 'throw'),
+    (89, 'pivot grab', 'throw'),
+    (89, 'pummel', 'throw'),
+    (89, 'forward throw', 'throw'),
+    (89, 'backward throw', 'throw'),
+    (89, 'up throw', 'throw'),
+    (89, 'down throw', 'throw');

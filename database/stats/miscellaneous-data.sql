@@ -1499,3 +1499,20 @@ INSERT INTO public.miscellaneous AS "zelda"
     ('9 frames'),
     ('14 frames'),
     ('14 frames');
+
+INSERT INTO public.miscellaneous AS "ZeroSuitSamus"
+  ("statValue")
+  VALUES
+    ('80'),
+    ('0.12'),
+    ('1.47'),
+    ('2.31'),
+    ('2.42'),
+    ('1.26'),
+    ('0.095'),
+    ('38 / 55 / 27 / 39'),
+    ('1.7 / 2.72'),
+    ('6 frames'),
+    ('9 frames'),
+    ('10 frames'),
+    ('19 frames');
