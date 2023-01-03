@@ -2406,3 +2406,26 @@ INSERT INTO public.moves AS "youngLink"
     (87, 'up b, ground', 'multi/final', 'move', 'special'),
     (87, 'up b, air', 'first/multi/final', 'move', 'special'),
     (87, 'down b', 'bomb pull', 'move', 'special');
+
+INSERT INTO public.moves AS "zelda"
+  ("fighterId", "name", "moveType", "type", "category")
+  VALUES
+    (88, 'jab', 'first/second', 'move', 'ground'),
+    (88, 'rapid jab', 'multi', 'move', 'ground'),
+    (88, 'rapid jab finisher', 'single', 'move', 'ground'),
+    (88, 'forward tilt', 'close/far', 'move', 'ground'),
+    (88, 'up tilt', 'single', 'move', 'ground'),
+    (88, 'down tilt', 'single', 'move', 'ground'),
+    (88, 'dash attack', 'early inner/early outer/late', 'move', 'ground'),
+    (88, 'forward smash', 'multi/final', 'move', 'ground'),
+    (88, 'up smash', 'first/multi/final', 'move', 'ground'),
+    (88, 'down smash', 'first/second', 'move', 'ground'),
+    (88, 'neutral air', 'multi front/multi back/final', 'move', 'aerial'),
+    (88, 'forward air', 'sweet/late', 'move', 'aerial'),
+    (88, 'back air', 'sweet/late', 'move', 'aerial'),
+    (88, 'up air', 'early/late', 'move', 'aerial'),
+    (88, 'down air', 'early/late close/late far', 'move', 'aerial'),
+    (88, 'neutral b', 'multi: close/far/final: close/far', 'move', 'special'),
+    (88, 'side b', 'uncharged-full charge', 'move', 'special'),
+    (88, 'up b', 'hit 1/close/far: ground/aerial', 'move', 'special'),
+    (88, 'down b', 'uncharged-full charge', 'move', 'special');

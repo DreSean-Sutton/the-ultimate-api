@@ -1130,3 +1130,16 @@ INSERT INTO public.movements AS "youngLink"
     (87, 'air dodge, left/right', 'movement'),
     (87, 'air dodge, side + up', 'movement'),
     (87, 'air dodge up', 'movement');
+
+INSERT INTO public.movements AS "zelda"
+  ("fighterId", "name", "type")
+  VALUES
+    (88, 'spot dodge', 'movement'),
+    (88, 'forward roll', 'movement'),
+    (88, 'backwards roll', 'movement'),
+    (88, 'neutral air dodge', 'movement'),
+    (88, 'air dodge, down', 'movement'),
+    (88, 'air dodge, side + down', 'movement'),
+    (88, 'air dodge, left/right', 'movement'),
+    (88, 'air dodge, side + up', 'movement'),
+    (88, 'air dodge up', 'movement');

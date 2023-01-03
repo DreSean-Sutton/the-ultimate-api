@@ -1482,3 +1482,20 @@ INSERT INTO public.miscellaneous AS "youngLink"
     ('8 frames'),
     ('9 frames'),
     ('16 frames');
+
+INSERT INTO public.miscellaneous AS "zelda"
+  ("statValue")
+  VALUES
+    ('85'),
+    ('0.071'),
+    ('0.914'),
+    ('1.43'),
+    ('1.958'),
+    ('1.092'),
+    ('0.065'),
+    ('41 / 56 / 29 / 39'),
+    ('1.35 / 2.16'),
+    ('6 frames'),
+    ('9 frames'),
+    ('14 frames'),
+    ('14 frames');

@@ -1482,3 +1482,20 @@ INSERT INTO public.stats AS "youngLink"
     (87, 'out of shield, up air', 'stat'),
     (87, 'out of shield, up b', 'stat'),
     (87, 'shield grab (post-shieldstun)', 'stat');
+
+INSERT INTO public.stats AS "zelda"
+  ("fighterId", "name", "type")
+  VALUES
+    (88, 'weight', 'stat'),
+    (88, 'gravity', 'stat'),
+    (88, 'walk speed', 'stat'),
+    (88, 'run speed', 'stat'),
+    (88, 'initial dash', 'stat'),
+    (88, 'air speed', 'stat'),
+    (88, 'total air acceleration', 'stat'),
+    (88, 'sh / fh / shff / fhff', 'stat'),
+    (88, 'fall speed/fast fall speed', 'stat'),
+    (88, 'out of shield, up b', 'stat'),
+    (88, 'out of shield, neutral air / forward air / back air / up smash', 'stat'),
+    (88, 'out of shield, neutral b (air)', 'stat'),
+    (88, 'shield grab (post-shieldstun)', 'stat');

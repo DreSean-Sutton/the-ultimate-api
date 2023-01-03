@@ -1046,3 +1046,15 @@ INSERT INTO public.throws AS "youngLink"
     (87, 'backward throw', 'throw'),
     (87, 'up throw', 'throw'),
     (87, 'down throw', 'throw');
+
+INSERT INTO public.throws AS "zelda"
+  ("fighterId", "name", "type")
+  VALUES
+    (88, 'grab', 'throw'),
+    (88, 'dash grab', 'throw'),
+    (88, 'pivot grab', 'throw'),
+    (88, 'pummel', 'throw'),
+    (88, 'forward throw', 'throw'),
+    (88, 'backward throw', 'throw'),
+    (88, 'up throw', 'throw'),
+    (88, 'down throw', 'throw');
