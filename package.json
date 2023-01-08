@@ -11,7 +11,7 @@
     "dev:server": "nodemon --exec ts-node server/index.ts",
     "db:import": "bash scripts/db-import.sh",
     "prepare": "husky install",
-    "test": "ts-mocha test/*",
+    "test": "ts-mocha test/**/*.test.ts -w",
     "tsc": "./node_modules/typescript/bin/tsc"
   },
   "dependencies": {
@@ -29,6 +29,7 @@
   "devDependencies": {
     "@types/chai": "^4.3.4",
     "@types/mocha": "^10.0.1",
+    "@types/sinon": "^10.0.13",
     "chai": "^4.3.7",
     "eslint": "^7.29.0",
     "eslint-config-standard": "^16.0.3",
@@ -40,6 +41,7 @@
     "markuplint": "^2.5.0",
     "mocha": "^10.2.0",
     "nodemon": "^2.0.15",
+    "sinon": "^15.0.1",
     "stylelint": "^14.9.0",
     "stylelint-config-recommended": "^7.0.0",
     "stylelint-config-standard": "^25.0.0",
