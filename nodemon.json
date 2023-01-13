@@ -1,7 +1,8 @@
 {
   "watch": [
     ".env",
-    "server/"
+    "server/",
+    "test"
   ],
   "ignore": [
     "server/public/"
