@@ -14,6 +14,13 @@ const swaggerDocument = YAML.load('./openapi.yml');
 app.use(staticMiddleware);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
+app.use(function (req: any, res: any, next: any) {
+  // Required to bypass CORS during development
+  res.header("Access-Control-Allow-Origin", '*');
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 // All routes referenced here
 const getRoutes = require('./routes/get-routes');
 const postRoutes = require('./routes/post-routes');

@@ -119,7 +119,6 @@ getRoutes.get('/fighters', async (req: Req, res: Res, next: (param1: any) => any
  * @return { object | [object] }
  */
 getRoutes.get('/fighters/data', async (req: Req, res: Res, next: (param1: any) => any) => {
-  console.log('This hit');
   const fullResult: any[] = [];
   return renderAllData(0);
 
