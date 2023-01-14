@@ -48,7 +48,7 @@ getRoutes.get('/fighters', async (req: Req, res: Res, next: (param1: any) => any
   if (queryStr.fighterId) {
     try {
       if (!Number(queryStr.fighterId) ||
-        (Number(queryStr.fighterId) > 2147483647)) {
+      (Number(queryStr.fighterId) > 2147483647)) {
         throw new ClientError(400, 'fighterId must be an integer');
       }
       if (Number(queryStr.fighterId) > 2147483647) {
@@ -70,16 +70,17 @@ getRoutes.get('/fighters', async (req: Req, res: Res, next: (param1: any) => any
     }
   }
   if (queryStr.rosterId) {
-    const sql = `
-    ${sqlQueries.getFighters()}
-    WHERE
-      "rosterId"=$1
-    `;
-    const params = [queryStr.rosterId];
     try {
-      if (!Number(params)) {
+      if (!Number(queryStr.rosterId) ||
+      (Number(queryStr.rosterId) > 2147483647)) {
         throw new ClientError(400, 'rosterId must be an integer');
       }
+      const sql = `
+      ${sqlQueries.getFighters()}
+      WHERE
+        "rosterId"=$1
+      `;
+      const params = [queryStr.rosterId];
       const result = await db.query(sql, params);
       if (result.rows.length === 0) {
         throw new ClientError(404, `${queryKey} ${params} doesn't exist in the database`);
