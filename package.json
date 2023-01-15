@@ -8,11 +8,11 @@
     "start": "node server/build/index.js",
     "node": "ts-node server/index.ts",
     "build": "tsc",
-    "dev:server": "nodemon --exec ts-node server/index.ts",
+    "dev:server": "nodemon --config server/nodemon.json --exec ts-node server/index.ts",
     "db:import": "bash scripts/db-import.sh",
     "prepare": "husky install",
     "test": "mocha -r ts-node/register test/**/*.test.ts",
-    "test:watch": "nodemon --exec mocha -r ts-node/register test/**/*.test.ts",
+    "test:watch": "nodemon --config test/nodemon.json --exec mocha -r ts-node/register test/**/*.test.ts",
     "tsc": "./node_modules/typescript/bin/tsc"
   },
   "dependencies": {
