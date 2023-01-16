@@ -130,6 +130,7 @@ getRoutes.get('/fighters/data', async (req: Req, res: Res, next: (param1: any) =
   async function renderAllData(index: number): Promise<any[]> {
     const dataTypes = ['moves', 'throws', 'movements', 'stats'];
     const dataTypeIds = ['moveId', 'throwId', 'movementId', 'statId'];
+
     if (dataTypes.length === index) {
       return res.status(200).send(fullResult.flat(1));
     }
@@ -144,6 +145,7 @@ getRoutes.get('/fighters/data', async (req: Req, res: Res, next: (param1: any) =
       ORDER BY ${JSON.stringify(dataTypeIds[index])}
       `;
       const params: any = [queryStr.fighter];
+
       try {
         if (/\d/g.test(params)) {
           throw new ClientError(400, 'fighter name can\'t have a number');
