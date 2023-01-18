@@ -407,6 +407,7 @@ describe("GET api/get/fighters/data", () => {
   describe("orderByRosterId", () => {
 
     context("successful queries", () => {
+
       it("should return a json object that's ordered by rosterId when orderByRosterId is true", done => {
         chai.request('http://localhost:5000')
           .get('/api/get/fighters/data')
@@ -421,6 +422,7 @@ describe("GET api/get/fighters/data", () => {
     })
 
     context("unsuccessful queries", () => {
+
       it("should return an error if orderByRosterId's value isn't true", done => {
         chai.request('http://localhost:5000')
           .get('/api/get/fighters/data')
@@ -445,20 +447,26 @@ describe("GET api/get/fighters/data/:type", () => {
       .end((err, res) => {
         if(err) return done(err);
         res.should.have.status(status);
-        res.body.should.be.a('array');
-        res.body[0].type.should.equal(type);
-        if(queryKey) {
-          res.body[0][queryKey].should.equal(query[queryKey]);
+        if(!!res.body.error) {
+          res.body.should.be.a('object');
+          res.body.should.haveOwnProperty('error');
+        } else {
+          res.body.should.be.a('array');
+          res.body[0].type.should.equal(type);
+          if(queryKey) {
+            res.body[0][queryKey].should.equal(query[queryKey]);
+          }
         }
         done();
       })
   }
 
+
   describe.only("move type", () => {
 
     context("successful queries", () => {
 
-      it.only("should return a json object of all move data", done => {
+      it("should return a json object of all move data", done => {
         renderSuccessfulTests('move', 200, done, { fighter: 'inkling' });
       })
 
