@@ -490,7 +490,30 @@ describe("GET api/get/fighters/data/:type", () => {
 
     context("unsuccessful queries", () => {
 
-      it("should return an error if path doesn't exist")
+      it("should return an error if path doesn't exist", done => {
+        renderTypeTests('non_existing_path', 400, done);
+      })
+      it("should return an error if fighter is a number", done => {
+        renderTypeTests('move', 400, done, { fighter: 52 });
+      })
+      it("should return an error if fighter doesn't exist", done => {
+        renderTypeTests('move', 404, done, { fighter: 'i_dont_exist' });
+      })
+      it("should return an error if fighterId isn't an integer", done => {
+        renderTypeTests('move', 400, done, { fighterId: 'not_an_integer' });
+      })
+      it("should return an error if fighterId doesn't exist", done => {
+        renderTypeTests('move', 404, done, { fighterId: 2147483647 });
+      })
+      it("should return an error if rosterId isn't an integer", done => {
+        renderTypeTests('move', 400, done, { rosterId: 'not_an_integer' });
+      })
+      it("should return an error if rosterId doesn't exist", done => {
+        renderTypeTests('move', 404, done, { rosterId: 2147483647 });
+      })
+      it("should return an error if", done => {
+        renderTypeTests('move', 400, done, { orderByRosterId: 'not_valid' });
+      })
     })
   })
 
