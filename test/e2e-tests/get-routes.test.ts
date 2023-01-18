@@ -218,7 +218,7 @@ describe("GET api/get/fighters", () => {
   })
 });
 
-describe.only("GET api/get/fighters/data", () => {
+describe("GET api/get/fighters/data", () => {
   const expectedMovesProps = [];
   const expectedThrowsProps = [];
   const expectedMovementsProps = [];
@@ -407,22 +407,99 @@ describe.only("GET api/get/fighters/data", () => {
   describe("orderByRosterId", () => {
 
     context("successful queries", () => {
-
+      it("should return a json object that's ordered by rosterId when orderByRosterId is true", done => {
+        chai.request('http://localhost:5000')
+          .get('/api/get/fighters/data')
+          .query({ orderByRosterId: true })
+          .end((err, res) => {
+            res.should.have.status(200);
+            res.body.should.be.a('array');
+            res.body[0].rosterId.should.equal(1);
+            done();
+          })
+      })
     })
 
     context("unsuccessful queries", () => {
-
+      it("should return an error if orderByRosterId's value isn't true", done => {
+        chai.request('http://localhost:5000')
+          .get('/api/get/fighters/data')
+          .query({ orderByRosterId: 'not_true' })
+          .end((err, res) => {
+            res.should.have.status(400);
+            res.body.should.be.a('object');
+            res.body.should.haveOwnProperty('error');
+            done();
+          })
+      })
     })
   })
+})
 
-  describe("moves queries", () => {
+describe("GET api/get/fighters/data/:type", () => {
+  function renderSuccessfulTests(type: string, status: number, done: any, query?: any) {
+    const queryKey = Object.keys(query)[0];
+    return chai.request('http://localhost:5000')
+      .get(`/api/get/fighters/data/${type}s`)
+      .query(query)
+      .end((err, res) => {
+        if(err) return done(err);
+        res.should.have.status(status);
+        res.body.should.be.a('array');
+        res.body[0].type.should.equal(type);
+        if(queryKey) {
+          res.body[0][queryKey].should.equal(query[queryKey]);
+        }
+        done();
+      })
+  }
+
+  describe.only("move type", () => {
 
     context("successful queries", () => {
 
+      it.only("should return a json object of all move data", done => {
+        renderSuccessfulTests('move', 200, done, { fighter: 'inkling' });
+      })
+
+      it("should return a json object of a fighter's move data when queried by fighter", done => {
+        chai.request('http://localhost:5000')
+          .get('/api/get/fighters/data/moves')
+          .query({ fighter: 'pyra' })
+          .end((err, res) => {
+            res.should.have.status(200);
+            res.body.should.be.a('array');
+            res.body[0].fighter.should.equal('pyra');
+            done();
+          })
+      })
+      it("should return a json object of a fighter's move data when queried by fighterId", done => {
+        chai.request('http://localhost:5000')
+          .get('/api/get/fighters/data/moves')
+          .query({ fighterId: 1 })
+          .end((err, res) => {
+            res.should.have.status(200);
+            res.body.should.be.a('array');
+            res.body[0].fighterId.should.equal(1);
+            done();
+          })
+      })
+      it("should return a json object of a fighter's move data when queried by rosterId", done => {
+        chai.request('http://localhost:5000')
+          .get('/api/get/fighters/data/moves')
+          .query({ rosterId: 10 })
+          .end((err, res) => {
+            res.should.have.status(200);
+            res.body.should.be.a('array');
+            res.body[0].rosterId.should.equal(10);
+            done();
+          })
+      })
     })
 
     context("unsuccessful queries", () => {
 
+      it("should return an error if path doesn't exist")
     })
   })
 
@@ -458,5 +535,4 @@ describe.only("GET api/get/fighters/data", () => {
 
     })
   })
-
 })
