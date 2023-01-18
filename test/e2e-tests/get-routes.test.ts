@@ -439,21 +439,26 @@ describe("GET api/get/fighters/data", () => {
 })
 
 describe("GET api/get/fighters/data/:type", () => {
-  function renderSuccessfulTests(type: string, status: number, done: any, query?: any) {
-    const queryKey = Object.keys(query)[0];
-    return chai.request('http://localhost:5000')
+
+  function renderTypeTests(type: string, status: number, done: any, query?: any) {
+
+    query = query || {}
+    chai.request('http://localhost:5000')
       .get(`/api/get/fighters/data/${type}s`)
       .query(query)
       .end((err, res) => {
         if(err) return done(err);
-        res.should.have.status(status);
-        if(!!res.body.error) {
+          res.should.have.status(status);
+        if(res.body.hasOwnProperty('error')) {
           res.body.should.be.a('object');
           res.body.should.haveOwnProperty('error');
         } else {
           res.body.should.be.a('array');
           res.body[0].type.should.equal(type);
-          if(queryKey) {
+          if(!!query.orderByRosterId) {
+            res.body[0].rosterId.should.equal(1);
+          } else if(Object.keys(query).length > 0) {
+            const queryKey = Object.keys(query)[0];
             res.body[0][queryKey].should.equal(query[queryKey]);
           }
         }
@@ -462,46 +467,24 @@ describe("GET api/get/fighters/data/:type", () => {
   }
 
 
-  describe.only("move type", () => {
+  describe("move type", () => {
 
     context("successful queries", () => {
 
       it("should return a json object of all move data", done => {
-        renderSuccessfulTests('move', 200, done, { fighter: 'inkling' });
+        renderTypeTests('move', 200, done);
       })
-
-      it("should return a json object of a fighter's move data when queried by fighter", done => {
-        chai.request('http://localhost:5000')
-          .get('/api/get/fighters/data/moves')
-          .query({ fighter: 'pyra' })
-          .end((err, res) => {
-            res.should.have.status(200);
-            res.body.should.be.a('array');
-            res.body[0].fighter.should.equal('pyra');
-            done();
-          })
+      it("should return a json object of a fighter's move data when fighter is queried", done => {
+        renderTypeTests('move', 200, done, { fighter: 'inkling' });
       })
-      it("should return a json object of a fighter's move data when queried by fighterId", done => {
-        chai.request('http://localhost:5000')
-          .get('/api/get/fighters/data/moves')
-          .query({ fighterId: 1 })
-          .end((err, res) => {
-            res.should.have.status(200);
-            res.body.should.be.a('array');
-            res.body[0].fighterId.should.equal(1);
-            done();
-          })
+      it("should return a json object of a fighter's move data when fighterId is queried", done => {
+        renderTypeTests('move', 200, done, { fighterId: 5 });
       })
-      it("should return a json object of a fighter's move data when queried by rosterId", done => {
-        chai.request('http://localhost:5000')
-          .get('/api/get/fighters/data/moves')
-          .query({ rosterId: 10 })
-          .end((err, res) => {
-            res.should.have.status(200);
-            res.body.should.be.a('array');
-            res.body[0].rosterId.should.equal(10);
-            done();
-          })
+      it("should return a json object of a fighter's move data when rosterId is queried", done => {
+        renderTypeTests('move', 200, done, { rosterId: 10 });
+      })
+      it("should return a json object of a all move data ordered by rosterId", done => {
+        renderTypeTests('move', 200, done, { orderByRosterId: true });
       })
     })
 
