@@ -219,20 +219,37 @@ describe("GET api/get/fighters", () => {
 });
 
 describe("GET api/get/fighters/data", () => {
-  const expectedMovesProps = [];
-  const expectedThrowsProps = [];
-  const expectedMovementsProps = [];
-  const expectedStatsProps = [];
 
-  describe("base route", () => {
-    it("should return an array of json objects", done => {
-      chai.request('http://localhost:5000')
-        .get('/api/get/fighters/data')
-        .end((err, res) => {
-          res.should.have.status(200);
+  function renderDataTests(status: number, done: any, query?: any, log?: boolean) {
+
+    query = query || {}
+    chai.request('http://localhost:5000')
+      .get('/api/get/fighters/data')
+      .query(query)
+      .end((err, res) => {
+        if (err) return done(err);
+        if(log) console.log(res.body);
+        res.should.have.status(status);
+        if (res.body.hasOwnProperty('error')) {
+          res.body.should.be.a('object');
+          res.body.should.haveOwnProperty('error');
+        } else {
           res.body.should.be.a('array');
-          done();
-        })
+          if (!!query.orderByRosterId) {
+            res.body[0].rosterId.should.not.equal(1);
+          } else if (Object.keys(query).length > 0) {
+            const queryKey = Object.keys(query)[0];
+            res.body[0][queryKey].should.equal(query[queryKey]);
+          }
+        }
+        done();
+      })
+  }
+
+  describe.only("base route", () => {
+
+    it("should return an array of json objects", done => {
+      renderDataTests(200, done, {});
     })
     it("should return an error if url path is invalid", done => {
       chai.request('http://localhost:5000')
@@ -245,21 +262,14 @@ describe("GET api/get/fighters/data", () => {
         })
     })
     it("should return an error if an invalid query is passed", done => {
-      chai.request('http://localhost:5000')
-        .get('/api/get/fighters/data')
-        .query({ invalidKey: 'random_value' })
-        .end((err, res) => {
-          res.should.have.status(400);
-          res.body.should.be.a('object');
-          res.body.should.haveOwnProperty('error');
-          done();
-        });
-    });
+      renderDataTests(400, done, { invalidKey: 'random_value' });
+    })
   })
 
-  describe("fighter queries", () => {
+  describe.only("fighter queries", () => {
 
     context("successful queries", () => {
+
       it("should return a json object containing a fighter's data", done => {
         chai.request('http://localhost:5000')
           .get('/api/get/fighters/data')
@@ -270,6 +280,9 @@ describe("GET api/get/fighters/data", () => {
             res.body[0].fighter.should.equal('joker');
             done();
           })
+      })
+      it("should return a json object containing a fighter's data", done => {
+        renderDataTests(200, done, { fighter: 'joker' });
       })
     })
 
@@ -382,7 +395,6 @@ describe("GET api/get/fighters/data", () => {
           .get('/api/get/fighters/data')
           .query({ rosterId: "not_a_number" })
           .end((err, res) => {
-            console.log(res.body);
             res.should.have.status(400);
             res.body.should.be.a('object');
             res.body.should.haveOwnProperty('error');
@@ -440,7 +452,7 @@ describe("GET api/get/fighters/data", () => {
 
 describe("GET api/get/fighters/data/:type", () => {
 
-  function renderTypeTests(type: string, status: number, done: any, query?: any) {
+  function renderTypeTests(type: string, status: number, done: any, query?: any, log?: boolean) {
 
     query = query || {}
     chai.request('http://localhost:5000')
@@ -448,7 +460,8 @@ describe("GET api/get/fighters/data/:type", () => {
       .query(query)
       .end((err, res) => {
         if(err) return done(err);
-          res.should.have.status(status);
+        if(log) console.log(res.body);
+        res.should.have.status(status);
         if(res.body.hasOwnProperty('error')) {
           res.body.should.be.a('object');
           res.body.should.haveOwnProperty('error');
