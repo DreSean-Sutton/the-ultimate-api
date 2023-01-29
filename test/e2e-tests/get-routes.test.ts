@@ -1,7 +1,6 @@
 import chai from 'chai';
 import sinon from 'sinon';
 import chaiHttp from 'chai-http';
-import exp from 'constants';
 chai.should();
 chai.use(chaiHttp);
 
@@ -44,21 +43,27 @@ describe("GET api/get/fighters", () => {
 
   describe("base route", () => {
 
-    it("should return a json object containing all fighters' basic data", done => {
-      renderFightersTests(200, done, {}, true);
+    context("successful requests", () => {
+
+      it("should return a json object containing all fighters' basic data", done => {
+        renderFightersTests(200, done, {});
+      })
     })
-    it("should return an error if url isn't valid", done => {
-      chai.request('http://localhost:5000')
-        .get('/api/get/fighterssssss')
-        .end((err, res) => {
-          res.should.have.status(404);
-          res.body.should.be.a('object');
-          res.body.should.be.empty;
-          done();
-        });
-    });
-    it("should return an error if query key isn't valid", done => {
-      renderFightersTests(400, done, { invalidKey: 'random_value' });
+
+    context("unsuccessful requests", () => {
+      it("should return an error if url isn't valid", done => {
+        chai.request('http://localhost:5000')
+          .get('/api/get/fighterssssss')
+          .end((err, res) => {
+            res.should.have.status(404);
+            res.body.should.be.a('object');
+            res.body.should.be.empty;
+            done();
+          });
+      });
+      it("should return an error if query key isn't valid", done => {
+        renderFightersTests(400, done, { invalidKey: 'random_value' });
+      })
     })
   })
 
@@ -78,7 +83,7 @@ describe("GET api/get/fighters", () => {
         renderFightersTests(400, done, { fighter: 10 });
       })
       it("should return an error if fighter doesn't exist", done => {
-        renderFightersTests(404, done, { fighter: 'i_dont_exist' }, true);
+        renderFightersTests(404, done, { fighter: 'i_dont_exist' });
       })
     })
   })
@@ -207,7 +212,7 @@ describe("GET api/get/fighters/data", () => {
         renderDataTests(400, done, { fighter: 'joker10' });
       })
       it("should return an error if fighter is a number", done => {
-        renderDataTests(404, done, { fighter: 'not_a_fighter' }, true);
+        renderDataTests(404, done, { fighter: 'not_a_fighter' });
       })
     })
   })
