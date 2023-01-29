@@ -236,7 +236,7 @@ describe("GET api/get/fighters/data", () => {
         } else {
           res.body.should.be.a('array');
           if (!!query.orderByRosterId) {
-            res.body[0].rosterId.should.not.equal(1);
+            res.body[0].rosterId.should.equal(1);
           } else if (Object.keys(query).length > 0) {
             const queryKey = Object.keys(query)[0];
             res.body[0][queryKey].should.equal(query[queryKey]);
@@ -246,7 +246,7 @@ describe("GET api/get/fighters/data", () => {
       })
   }
 
-  describe.only("base route", () => {
+  describe("base route", () => {
 
     it("should return an array of json objects", done => {
       renderDataTests(200, done, {});
@@ -266,21 +266,10 @@ describe("GET api/get/fighters/data", () => {
     })
   })
 
-  describe.only("fighter queries", () => {
+  describe("fighter queries", () => {
 
     context("successful queries", () => {
 
-      it("should return a json object containing a fighter's data", done => {
-        chai.request('http://localhost:5000')
-          .get('/api/get/fighters/data')
-          .query({ fighter: 'joker' })
-          .end((err, res) => {
-            res.should.have.status(200);
-            res.body.should.be.a('array');
-            res.body[0].fighter.should.equal('joker');
-            done();
-          })
-      })
       it("should return a json object containing a fighter's data", done => {
         renderDataTests(200, done, { fighter: 'joker' });
       })
@@ -289,39 +278,13 @@ describe("GET api/get/fighters/data", () => {
     context("unsuccessful queries", () => {
 
       it("should return an error if fighter is a number", done => {
-        chai.request('http://localhost:5000')
-          .get('/api/get/fighters/data')
-          .query({ fighter: 10 })
-          .end((err, res) => {
-            res.should.have.status(400);
-            res.body.should.be.a('object');
-            res.body.should.haveOwnProperty('error');
-            done();
-          })
+        renderDataTests(400, done, { fighter: 10 });
       })
-
       it("should return an error if fighter has a number", done => {
-        chai.request('http://localhost:5000')
-          .get('/api/get/fighters/data')
-          .query({ fighter: 'joker10' })
-          .end((err, res) => {
-            res.should.have.status(400);
-            res.body.should.be.a('object');
-            res.body.should.haveOwnProperty('error');
-            done();
-          })
+        renderDataTests(400, done, { fighter: 'joker10' });
       })
-
       it("should return an error if fighter is a number", done => {
-        chai.request('http://localhost:5000')
-          .get('/api/get/fighters/data')
-          .query({ fighter: 'not_a_fighter' })
-          .end((err, res) => {
-            res.should.have.status(404);
-            res.body.should.be.a('object');
-            res.body.should.haveOwnProperty('error');
-            done();
-          })
+        renderDataTests(404, done, { fighter: 'not_a_fighter' }, true);
       })
     })
   })
@@ -331,42 +294,18 @@ describe("GET api/get/fighters/data", () => {
     context("successful queries", () => {
 
       it("should return a json object containing a fighter's data", done => {
-        chai.request('http://localhost:5000')
-          .get('/api/get/fighters/data')
-          .query({ fighterId: 10 })
-          .end((err, res) => {
-            res.should.have.status(200);
-            res.body.should.be.a('array');
-            res.body[0].fighterId.should.equal(10);
-            done();
-          })
+        renderDataTests(200, done, { fighterId: 10 });
       })
     })
 
     context("unsuccessful queries", () => {
 
-      it("should return a error if figherId isn't an integer", done => {
-        chai.request('http://localhost:5000')
-        .get('/api/get/fighters/data')
-        .query({ fighterId: "not_a_number" })
-        .end((err, res) => {
-          res.should.have.status(400);
-          res.body.should.be.a('object');
-          res.body.should.haveOwnProperty('error');
-          done();
-        })
+      it("should return a error if fighterId isn't an integer", done => {
+        renderDataTests(400, done, { fighterId: 'not_a_number' });
       })
 
-      it("should return a error if figherId isn't an integer", done => {
-        chai.request('http://localhost:5000')
-        .get('/api/get/fighters/data')
-          .query({ fighterId: 2147483647 })
-        .end((err, res) => {
-          res.should.have.status(404);
-          res.body.should.be.a('object');
-          res.body.should.haveOwnProperty('error');
-          done();
-        })
+      it("should return a error if fighterId doesn't exist", done => {
+        renderDataTests(404, done, { fighterId: 2147483647 });
       })
     })
   })
@@ -376,42 +315,17 @@ describe("GET api/get/fighters/data", () => {
     context("successful queries", () => {
 
       it("should return a json object containing a fighter's data", done => {
-        chai.request('http://localhost:5000')
-          .get('/api/get/fighters/data')
-          .query({ rosterId: 10 })
-          .end((err, res) => {
-            res.should.have.status(200);
-            res.body.should.be.a('array');
-            res.body[0].rosterId.should.equal(10);
-            done();
-          })
+        renderDataTests(200, done, { rosterId: 10 });
       })
     })
 
     context("unsuccessful queries", () => {
 
       it("should return a error if rosterId isn't an integer", done => {
-        chai.request('http://localhost:5000')
-          .get('/api/get/fighters/data')
-          .query({ rosterId: "not_a_number" })
-          .end((err, res) => {
-            res.should.have.status(400);
-            res.body.should.be.a('object');
-            res.body.should.haveOwnProperty('error');
-            done();
-          })
+        renderDataTests(400, done, { rosterId: 'not_a_number' });
       })
-
-      it("should return a error if rosterId isn't an integer", done => {
-        chai.request('http://localhost:5000')
-          .get('/api/get/fighters/data')
-          .query({ rosterId: 2147483647 })
-          .end((err, res) => {
-            res.should.have.status(404);
-            res.body.should.be.a('object');
-            res.body.should.haveOwnProperty('error');
-            done();
-          })
+      it("should return a error if rosterId doesn't exist", done => {
+        renderDataTests(404, done, { rosterId: 2147483647 });
       })
     })
   })
@@ -421,30 +335,14 @@ describe("GET api/get/fighters/data", () => {
     context("successful queries", () => {
 
       it("should return a json object that's ordered by rosterId when orderByRosterId is true", done => {
-        chai.request('http://localhost:5000')
-          .get('/api/get/fighters/data')
-          .query({ orderByRosterId: true })
-          .end((err, res) => {
-            res.should.have.status(200);
-            res.body.should.be.a('array');
-            res.body[0].rosterId.should.equal(1);
-            done();
-          })
+        renderDataTests(200, done, { orderByRosterId: true });
       })
     })
 
     context("unsuccessful queries", () => {
 
       it("should return an error if orderByRosterId's value isn't true", done => {
-        chai.request('http://localhost:5000')
-          .get('/api/get/fighters/data')
-          .query({ orderByRosterId: 'not_true' })
-          .end((err, res) => {
-            res.should.have.status(400);
-            res.body.should.be.a('object');
-            res.body.should.haveOwnProperty('error');
-            done();
-          })
+        renderDataTests(400, done, { orderByRosterId: 'not_true' });
       })
     })
   })
