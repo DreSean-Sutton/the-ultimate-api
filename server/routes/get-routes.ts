@@ -46,16 +46,20 @@ getRoutes.get('/fighters', async (req: Req, res: Res, next: (param1: any) => any
     }
   }
   if (queryStr.fighterId) {
-    const sql = `
-    ${sqlQueries.getFighters()}
-    WHERE
-      "fighterId"=$1
-    `;
     try {
-      const params = [queryStr.fighterId];
-      if (!Number(params)) {
+      if (!Number(queryStr.fighterId) ||
+      (Number(queryStr.fighterId) > 2147483647)) {
         throw new ClientError(400, 'fighterId must be an integer');
       }
+      if (Number(queryStr.fighterId) > 2147483647) {
+
+      }
+      const sql = `
+      ${sqlQueries.getFighters()}
+      WHERE
+        "fighterId"=$1
+      `;
+      const params = [queryStr.fighterId];
       const result = await db.query(sql, params);
       if (result.rows.length === 0) {
         throw new ClientError(404, `${queryKey} ${params} doesn't exist in the database`);
@@ -66,16 +70,17 @@ getRoutes.get('/fighters', async (req: Req, res: Res, next: (param1: any) => any
     }
   }
   if (queryStr.rosterId) {
-    const sql = `
-    ${sqlQueries.getFighters()}
-    WHERE
-      "rosterId"=$1
-    `;
-    const params = [queryStr.rosterId];
     try {
-      if (!Number(params)) {
+      if (!Number(queryStr.rosterId) ||
+      (Number(queryStr.rosterId) > 2147483647)) {
         throw new ClientError(400, 'rosterId must be an integer');
       }
+      const sql = `
+      ${sqlQueries.getFighters()}
+      WHERE
+        "rosterId"=$1
+      `;
+      const params = [queryStr.rosterId];
       const result = await db.query(sql, params);
       if (result.rows.length === 0) {
         throw new ClientError(404, `${queryKey} ${params} doesn't exist in the database`);
@@ -119,13 +124,13 @@ getRoutes.get('/fighters', async (req: Req, res: Res, next: (param1: any) => any
  * @return { object | [object] }
  */
 getRoutes.get('/fighters/data', async (req: Req, res: Res, next: (param1: any) => any) => {
-  console.log('This hit');
   const fullResult: any[] = [];
   return renderAllData(0);
 
   async function renderAllData(index: number): Promise<any[]> {
     const dataTypes = ['moves', 'throws', 'movements', 'stats'];
     const dataTypeIds = ['moveId', 'throwId', 'movementId', 'statId'];
+
     if (dataTypes.length === index) {
       return res.status(200).send(fullResult.flat(1));
     }
@@ -140,6 +145,7 @@ getRoutes.get('/fighters/data', async (req: Req, res: Res, next: (param1: any) =
       ORDER BY ${JSON.stringify(dataTypeIds[index])}
       `;
       const params: any = [queryStr.fighter];
+
       try {
         if (/\d/g.test(params)) {
           throw new ClientError(400, 'fighter name can\'t have a number');
