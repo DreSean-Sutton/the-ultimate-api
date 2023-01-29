@@ -1,6 +1,7 @@
 import chai from 'chai';
 import sinon from 'sinon';
 import chaiHttp from 'chai-http';
+import exp from 'constants';
 chai.should();
 chai.use(chaiHttp);
 
@@ -8,21 +9,44 @@ describe("GET api/get/fighters", () => {
   afterEach(() => {
     sinon.restore();
   })
+
   const expectedFighterProps = ['fighter', 'fighterId', 'rosterId', 'displayName'];
+
+  function renderFightersTests(status: number, done: any, query?: any, log?: boolean) {
+
+    query = query || {}
+    chai.request('http://localhost:5000')
+      .get('/api/get/fighters')
+      .query(query)
+      .end((err, res) => {
+        if (err) return done(err);
+        if (log) console.log(res.body);
+        res.should.have.status(status);
+        if (res.body.hasOwnProperty('error')) {
+          res.body.should.be.a('object');
+          res.body.should.haveOwnProperty('error');
+        } else {
+          if(!!res.body[0]) {
+            res.body.should.be.a('array');
+            res.body[0].should.have.all.keys(expectedFighterProps);
+          }
+          if (!!query.orderByRosterId) {
+            res.body[0].rosterId.should.equal(1);
+          } else if (Object.keys(query).length > 0) {
+            const queryKey = Object.keys(query)[0];
+            res.body[queryKey].should.equal(query[queryKey]);
+            res.body.should.have.all.keys(expectedFighterProps);
+          }
+        }
+        done();
+      })
+  }
 
   describe("base route", () => {
 
     it("should return a json object containing all fighters' basic data", done => {
-      chai.request('http://localhost:5000')
-        .get('/api/get/fighters')
-        .end((err, res) => {
-          res.should.have.status(200);
-          res.body.should.be.a('array');
-          res.body[0].should.have.all.keys(expectedFighterProps);
-          done();
-        });
-    });
-
+      renderFightersTests(200, done, {}, true);
+    })
     it("should return an error if url isn't valid", done => {
       chai.request('http://localhost:5000')
         .get('/api/get/fighterssssss')
@@ -33,19 +57,9 @@ describe("GET api/get/fighters", () => {
           done();
         });
     });
-
     it("should return an error if query key isn't valid", done => {
-      chai.request('http://localhost:5000')
-        .get('/api/get/fighters')
-        .query({ invalidKey: 'random_value' })
-        .end((err, res) => {
-          res.should.have.status(400);
-          res.body.should.be.a('object');
-          res.body.should.haveOwnProperty('error');
-          done();
-        });
-    });
-
+      renderFightersTests(400, done, { invalidKey: 'random_value' });
+    })
   })
 
 
@@ -54,43 +68,17 @@ describe("GET api/get/fighters", () => {
     context("successful requests", () => {
 
       it("should return a json object containing a fighter's basic data", done => {
-        chai.request('http://localhost:5000')
-          .get('/api/get/fighters')
-          .query({fighter: 'inkling'})
-          .end((err, res) => {
-            res.should.have.status(200);
-            res.body.should.be.a('object');
-            res.body.fighter.should.equal('inkling');
-            res.body.should.have.all.keys(expectedFighterProps);
-            done();
-          });
+        renderFightersTests(200, done, { fighter: 'inkling' });
       })
     })
 
     context("unsuccessful requests", () => {
 
       it("should return an error if fighter is a number", done => {
-        chai.request('http://localhost:5000')
-          .get('/api/get/fighters')
-          .query({ fighter: 10 })
-          .end((err, res) => {
-            res.body.should.haveOwnProperty('error');
-            res.body.should.be.a('object');
-            res.should.have.status(400);
-            done();
-          })
+        renderFightersTests(400, done, { fighter: 10 });
       })
-
       it("should return an error if fighter doesn't exist", done => {
-        chai.request('http://localhost:5000')
-          .get('/api/get/fighters')
-          .query({ fighter: 'I_dont_exist' })
-          .end((err, res) => {
-            res.body.should.haveOwnProperty('error');
-            res.body.should.be.a('object');
-            res.should.have.status(404);
-            done();
-          })
+        renderFightersTests(404, done, { fighter: 'i_dont_exist' }, true);
       })
     })
   })
