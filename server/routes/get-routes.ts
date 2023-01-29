@@ -51,9 +51,6 @@ getRoutes.get('/fighters', async (req: Req, res: Res, next: (param1: any) => any
       (Number(queryStr.fighterId) > 2147483647)) {
         throw new ClientError(400, 'fighterId must be an integer');
       }
-      if (Number(queryStr.fighterId) > 2147483647) {
-
-      }
       const sql = `
       ${sqlQueries.getFighters()}
       WHERE
