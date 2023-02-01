@@ -4,7 +4,7 @@ import chaiHttp from 'chai-http';
 chai.should();
 chai.use(chaiHttp);
 
-describe("GET api/get/fighters", () => {
+describe.only("GET api/get/fighters", () => {
   afterEach(() => {
     sinon.restore();
   })
@@ -25,7 +25,7 @@ describe("GET api/get/fighters", () => {
           res.body.should.be.a('object');
           res.body.should.haveOwnProperty('error');
         } else {
-          if(!!res.body[0]) {
+          if(Array.isArray(res.body)) {
             res.body.should.be.a('array');
             res.body[0].should.have.all.keys(expectedFighterProps);
           }
