@@ -23,8 +23,10 @@ const getRoutes = express.Router();
  * @return { object | [object] }
  */
 getRoutes.get('/fighters', async (req: Req, res: Res, next: (param1: any) => any) => {
+
   const queryStr: QueryString = req.query;
   const queryKey = Object.keys(queryStr);
+
   if (queryStr.fighter) {
     const sql = `
     ${sqlQueries.getFighters()}

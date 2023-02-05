@@ -21,6 +21,7 @@ postRoutes.post('/fighters', async (req: Req, res: Res, next: (param1: any) => a
   rosterId = Number(rosterId);
   const reqParams = [fighter, displayName, rosterId];
   const isValid = reqParams.every(param => !!param);
+
   try {
     if (!authHeader) {
       throw new ClientError(400, 'authorization header must have a value');
