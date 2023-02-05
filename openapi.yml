@@ -168,9 +168,9 @@ paths:
       security:
         - ApiKeyAuth: []
       parameters:
-        - name: authorization
+        - name: api_key
           in: header
-          required: false
+          required: true
           schema:
             type: string
       requestBody:
@@ -208,9 +208,15 @@ paths:
       security:
         - ApiKeyAuth: []
       parameters:
+<<<<<<< HEAD
       - name: authorization
         in: header
         required: false
+=======
+      - name: api_key
+        in: header
+        required: true
+>>>>>>> 4d85e9e4cd28be51034fad0f33578225966c8a18
         schema:
           type: string
       - in: path
@@ -251,9 +257,20 @@ paths:
       security:
         - ApiKeyAuth: []
       parameters:
+<<<<<<< HEAD
       - name: authorization
         in: header
         required: false
+=======
+      - name: api_key
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: api_key
+        in: header
+        required: true
+>>>>>>> 4d85e9e4cd28be51034fad0f33578225966c8a18
         schema:
           type: string
       - in: path
@@ -285,9 +302,20 @@ paths:
       security:
         - ApiKeyAuth: []
       parameters:
+<<<<<<< HEAD
       - name: authorization
         in: header
         required: false
+=======
+      - name: api_key
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: api_key
+        in: header
+        required: true
+>>>>>>> 4d85e9e4cd28be51034fad0f33578225966c8a18
         schema:
           type: string
       - in: path
@@ -326,9 +354,15 @@ paths:
       security:
         - ApiKeyAuth: []
       parameters:
+<<<<<<< HEAD
       - name: authorization
         in: header
         required: false
+=======
+      - name: api_key
+        in: header
+        required: true
+>>>>>>> 4d85e9e4cd28be51034fad0f33578225966c8a18
         schema:
           type: string
       - in: path
@@ -365,9 +399,15 @@ paths:
       security:
         - ApiKeyAuth: []
       parameters:
+<<<<<<< HEAD
       - name: authorization
         in: header
         required: false
+=======
+      - name: api_key
+        in: header
+        required: true
+>>>>>>> 4d85e9e4cd28be51034fad0f33578225966c8a18
         schema:
           type: string
       - in: path
@@ -406,9 +446,15 @@ paths:
       security:
         - ApiKeyAuth: []
       parameters:
+<<<<<<< HEAD
       - name: authorization
         in: header
         required: false
+=======
+      - name: api_key
+        in: header
+        required: true
+>>>>>>> 4d85e9e4cd28be51034fad0f33578225966c8a18
         schema:
           type: string
       - in: path
@@ -440,9 +486,15 @@ paths:
       security:
         - ApiKeyAuth: []
       parameters:
+<<<<<<< HEAD
       - name: authorization
         in: header
         required: false
+=======
+      - name: api_key
+        in: header
+        required: true
+>>>>>>> 4d85e9e4cd28be51034fad0f33578225966c8a18
         schema:
           type: string
       - in: path
@@ -474,9 +526,15 @@ paths:
       security:
         - ApiKeyAuth: []
       parameters:
+<<<<<<< HEAD
       - name: authorization
         in: header
         required: false
+=======
+      - name: api_key
+        in: header
+        required: true
+>>>>>>> 4d85e9e4cd28be51034fad0f33578225966c8a18
         schema:
           type: string
       - in: path
@@ -515,9 +573,15 @@ paths:
       security:
         - ApiKeyAuth: []
       parameters:
+<<<<<<< HEAD
       - name: authorization
         in: header
         required: false
+=======
+      - name: api_key
+        in: header
+        required: true
+>>>>>>> 4d85e9e4cd28be51034fad0f33578225966c8a18
         schema:
           type: string
       - in: path
@@ -554,9 +618,15 @@ paths:
       security:
         - ApiKeyAuth: []
       parameters:
+<<<<<<< HEAD
       - name: authorization
         in: header
         required: false
+=======
+      - name: api_key
+        in: header
+        required: true
+>>>>>>> 4d85e9e4cd28be51034fad0f33578225966c8a18
         schema:
           type: string
       - in: path
@@ -577,9 +647,15 @@ paths:
       security:
         - ApiKeyAuth: []
       parameters:
+<<<<<<< HEAD
       - name: authorization
         in: header
         required: false
+=======
+      - name: api_key
+        in: header
+        required: true
+>>>>>>> 4d85e9e4cd28be51034fad0f33578225966c8a18
         schema:
           type: string
       - in: path
@@ -600,9 +676,15 @@ paths:
       security:
         - ApiKeyAuth: []
       parameters:
+<<<<<<< HEAD
       - name: authorization
         in: header
         required: false
+=======
+      - name: api_key
+        in: header
+        required: true
+>>>>>>> 4d85e9e4cd28be51034fad0f33578225966c8a18
         schema:
           type: string
       - in: path
@@ -623,9 +705,15 @@ paths:
       security:
         - ApiKeyAuth: []
       parameters:
+<<<<<<< HEAD
       - name: authorization
         in: header
         required: false
+=======
+      - name: api_key
+        in: header
+        required: true
+>>>>>>> 4d85e9e4cd28be51034fad0f33578225966c8a18
         schema:
           type: string
       - in: path
@@ -646,7 +734,11 @@ paths:
       security:
         - ApiKeyAuth: []
       parameters:
+<<<<<<< HEAD
       - name: authorization
+=======
+      - name: api_key
+>>>>>>> 4d85e9e4cd28be51034fad0f33578225966c8a18
         in: header
         required: true
         schema:
@@ -666,7 +758,11 @@ components:
     ApiKeyAuth:
       type: apiKey
       in: header
+<<<<<<< HEAD
       name: authorization
+=======
+      name: api_key
+>>>>>>> 4d85e9e4cd28be51034fad0f33578225966c8a18
 
   schemas:
     fightersResponse:
