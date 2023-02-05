@@ -3,7 +3,7 @@ import { db } from '../conn';
 import { Req, Res } from '../utils/types-routes';
 
 var express = require('express');
-const postRoutes = express.Router();
+const postRoutes = express.Router(); // base route: 'api/add'
 
 /**
  * Post route that inserts a new fighter and their basic data to the database
@@ -15,12 +15,18 @@ const postRoutes = express.Router();
  */
 postRoutes.post('/fighters', async (req: Req, res: Res, next: (param1: any) => any) => {
 
+  const authHeader: string = req.headers['authorization'];
   const { fighter, displayName } = req.body;
   let { rosterId } = req.body;
   rosterId = Number(rosterId);
   const reqParams = [fighter, displayName, rosterId];
   const isValid = reqParams.every(param => !!param);
   try {
+    if (!authHeader) {
+      throw new ClientError(400, 'authorization header must have a value');
+    } else if (authHeader !== process.env.API_KEY) {
+      throw new ClientError(400, 'Incorrect value for authorization header');
+    }
     if (!isValid) {
       throw new ClientError(400, 'must have (fighter), (displayName), and (rosterId) as parameters');
     }
@@ -66,9 +72,16 @@ postRoutes.post('/fighters', async (req: Req, res: Res, next: (param1: any) => a
  * @return { object }
  */
 postRoutes.post('/:table/:id', async (req: Req, res: Res, next: (param1: any) => any) => {
+
+  const authHeader: string = req.headers['authorization'];
   const fullResult = {};
   const { name, moveType, damage, category, activeFrames, totalFrames, firstFrame, statValue } = req.body;
   try {
+    if (!authHeader) {
+      throw new ClientError(400, 'authorization header must have a value');
+    } else if (authHeader !== process.env.API_KEY) {
+      throw new ClientError(400, 'Incorrect value for authorization header');
+    }
     if (/[A-Z]/gi.test(req.params.id) &&
       req.params.id !== undefined) {
       throw new ClientError(400, 'fighterId must be a number');

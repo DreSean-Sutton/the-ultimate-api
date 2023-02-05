@@ -1,5 +1,6 @@
 {
   "watch": [
-    "./server"
+    "./server",
+    "./openapi.yml"
   ]
 }
