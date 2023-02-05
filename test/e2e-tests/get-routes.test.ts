@@ -25,7 +25,7 @@ describe("GET api/get/fighters", () => {
           res.body.should.be.a('object');
           res.body.should.haveOwnProperty('error');
         } else {
-          if(!!res.body[0]) {
+          if(Array.isArray(res.body)) {
             res.body.should.be.a('array');
             res.body[0].should.have.all.keys(expectedFighterProps);
           }
@@ -500,8 +500,8 @@ describe("GET api/get/fighters/data/:type", () => {
       it("should return an error if rosterId doesn't exist", done => {
         renderTypeTests('stat', 404, done, { rosterId: 2147483647 });
       })
-      it("should return an error if", done => {
-        renderTypeTests('stat', 400, done, { orderByRosterId: 'not_valid' });
+      it("should return an error if orderByRosterId isn't true", done => {
+        renderTypeTests('stat', 400, done, { orderByRosterId: 'not_true' });
       })
     })
   })

@@ -8,6 +8,9 @@ export interface Req {
   query: object,
   params: ReqParams,
   body: any
+  headers: {
+    authorization: string
+  }
 }
 
 interface ResStatus {
