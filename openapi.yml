@@ -165,6 +165,13 @@ paths:
       tags:
       - add
       summary: Add a Fighter and their basic data
+      security: []
+      parameters:
+        - name: api_key
+          in: header
+          required: true
+          schema:
+            type: string
       requestBody:
         description: Click `Try it out` and edit your request!
         required: true
@@ -198,6 +205,11 @@ paths:
       - add
       summary: Add move data to a Fighter
       parameters:
+      - name: api_key
+        in: header
+        required: true
+        schema:
+          type: string
       - in: path
         name: fighterId
         schema:
@@ -234,6 +246,16 @@ paths:
       - add
       summary: Add throw data to a Fighter
       parameters:
+      - name: api_key
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: api_key
+        in: header
+        required: true
+        schema:
+          type: string
       - in: path
         name: fighterId
         schema:
@@ -261,6 +283,16 @@ paths:
       - add
       summary: Add movement data to a Fighter
       parameters:
+      - name: api_key
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: api_key
+        in: header
+        required: true
+        schema:
+          type: string
       - in: path
         name: fighterId
         schema:
@@ -295,6 +327,11 @@ paths:
       - add
       summary: Add stat data to a Fighter
       parameters:
+      - name: api_key
+        in: header
+        required: true
+        schema:
+          type: string
       - in: path
         name: fighterId
         schema:
@@ -327,6 +364,11 @@ paths:
       - update
       summary: Update a fighter's basic information
       parameters:
+      - name: api_key
+        in: header
+        required: true
+        schema:
+          type: string
       - in: path
         name: fighterId
         schema:
@@ -361,6 +403,11 @@ paths:
       - update
       summary: Update a fighter's moves
       parameters:
+      - name: api_key
+        in: header
+        required: true
+        schema:
+          type: string
       - in: path
         name: moveId
         schema:
@@ -388,6 +435,11 @@ paths:
       - update
       summary: Update a fighter's throws
       parameters:
+      - name: api_key
+        in: header
+        required: true
+        schema:
+          type: string
       - in: path
         name: throwId
         schema:
@@ -415,6 +467,11 @@ paths:
       - update
       summary: Update a fighter's movements
       parameters:
+      - name: api_key
+        in: header
+        required: true
+        schema:
+          type: string
       - in: path
         name: movementId
         schema:
@@ -449,6 +506,11 @@ paths:
       - update
       summary: Update a fighter's stats
       parameters:
+      - name: api_key
+        in: header
+        required: true
+        schema:
+          type: string
       - in: path
         name: statId
         schema:
@@ -481,6 +543,11 @@ paths:
       - delete
       summary: Delete a fighter and all of their data
       parameters:
+      - name: api_key
+        in: header
+        required: true
+        schema:
+          type: string
       - in: path
         name: id
         schema:
@@ -497,6 +564,11 @@ paths:
       - delete
       summary: Delete a fighter's move data
       parameters:
+      - name: api_key
+        in: header
+        required: true
+        schema:
+          type: string
       - in: path
         name: id
         schema:
@@ -513,6 +585,11 @@ paths:
       - delete
       summary: Delete a fighter's throw data
       parameters:
+      - name: api_key
+        in: header
+        required: true
+        schema:
+          type: string
       - in: path
         name: id
         schema:
@@ -529,6 +606,11 @@ paths:
       - delete
       summary: Delete a fighter's movement data
       parameters:
+      - name: api_key
+        in: header
+        required: true
+        schema:
+          type: string
       - in: path
         name: id
         schema:
@@ -545,6 +627,11 @@ paths:
       - delete
       summary: Delete a fighter's stat data
       parameters:
+      - name: api_key
+        in: header
+        required: true
+        schema:
+          type: string
       - in: path
         name: id
         schema:
@@ -556,6 +643,12 @@ paths:
             no content
 
 components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: api_key
+
   schemas:
     fightersResponse:
       type: object
