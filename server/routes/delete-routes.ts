@@ -3,7 +3,7 @@ import { db } from '../conn';
 import { Req, Res } from '../utils/types-routes';
 
 var express = require('express');
-const deleteRoutes = express.Router();
+const deleteRoutes = express.Router(); // Base route: 'api/delete'
 
 /**
  * Delete route that removes data from a table and id of your choice
@@ -13,7 +13,14 @@ const deleteRoutes = express.Router();
  */
 deleteRoutes.delete('/:table/:id', async (req: Req, res: Res, next: (param1: any) => any) => {
 
+  const authHeader: string = req.headers['authorization'];
+
   try {
+    if (!authHeader) {
+      throw new ClientError(400, 'authorization header must have a value');
+    } else if (authHeader !== process.env.API_KEY) {
+      throw new ClientError(400, 'Incorrect value for authorization header');
+    }
     if (/[A-Z]/gi.test(req.params.id) &&
       req.params.id !== undefined) {
       throw new ClientError(400, 'id must be a number');

@@ -4,7 +4,7 @@ import chaiHttp from 'chai-http';
 chai.should();
 chai.use(chaiHttp);
 
-describe.only("GET api/get/fighters", () => {
+describe("GET api/get/fighters", () => {
   afterEach(() => {
     sinon.restore();
   })
@@ -500,8 +500,8 @@ describe("GET api/get/fighters/data/:type", () => {
       it("should return an error if rosterId doesn't exist", done => {
         renderTypeTests('stat', 404, done, { rosterId: 2147483647 });
       })
-      it("should return an error if", done => {
-        renderTypeTests('stat', 400, done, { orderByRosterId: 'not_valid' });
+      it("should return an error if orderByRosterId isn't true", done => {
+        renderTypeTests('stat', 400, done, { orderByRosterId: 'not_true' });
       })
     })
   })

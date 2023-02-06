@@ -3,9 +3,10 @@ import { db } from '../conn';
 import { Req, Res } from '../utils/types-routes';
 
 var express = require('express');
-const updateRoutes = express.Router();
+const updateRoutes = express.Router(); // base route: 'api/update'
 
 /**
+ *
  * Put route that updates data at the table and id of your choice
  * Not all params are required
  * returns updated data
@@ -22,10 +23,18 @@ const updateRoutes = express.Router();
  * @return { object }
  */
 updateRoutes.put('/:table/:id', async (req: Req, res: Res, next: (param1: any) => any) => {
+
+  const authHeader: string = req.headers['authorization'];
   const fullResult = {};
   const { fighter, displayName, name, moveType, damage, category, activeFrames, totalFrames, firstFrame, statValue } = req.body;
   const { rosterId } = req.body;
+
   try {
+    if (!authHeader) {
+      throw new ClientError(400, 'authorization header must have a value');
+    } else if (authHeader !== process.env.API_KEY) {
+      throw new ClientError(400, 'Incorrect value for authorization header');
+    }
     if (/[A-Z]/gi.test(req.params.id) &&
       req.params.id !== undefined) {
       throw new ClientError(400, 'fighterId must be a number');
