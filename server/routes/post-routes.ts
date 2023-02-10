@@ -1,5 +1,5 @@
 import ClientError from '../utils/client-error';
-import { db } from '../conn';
+import { client } from '../conn';
 import { Req, Res } from '../utils/types-routes';
 
 var express = require('express');
@@ -46,7 +46,7 @@ postRoutes.post('/fighters', async (req: Req, res: Res, next: (param1: any) => a
       RETURNING *;
       `;
     const params = [fighter, rosterId, displayName];
-    const result = await db.query(sql, params);
+    const result = await client.query(sql, params);
     if (result.rows.length === 0) {
       throw new ClientError(400, '(fighter), (rosterId), and (displayName) must all be unique');
     } else {
@@ -203,12 +203,12 @@ postRoutes.post('/:table/:id', async (req: Req, res: Res, next: (param1: any) =>
     } else {
       throw new ClientError(400, `${req.params.table} is not a valid path parameter`);
     }
-    let result = await db.query(sql, params);
+    let result = await client.query(sql, params);
     if (result.rows.length === 0) {
       throw new ClientError(404, `fighterId ${id} doesn't exist`);
     }
     Object.assign(fullResult, result.rows[0]);
-    result = await db.query(sql2, params2);
+    result = await client.query(sql2, params2);
     Object.assign(fullResult, result.rows[0]);
     return res.status(201).json(fullResult);
   } catch (e) {

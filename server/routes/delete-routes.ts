@@ -1,5 +1,5 @@
 import ClientError from '../utils/client-error';
-import { db } from '../conn';
+import { client } from '../conn';
 import { Req, Res } from '../utils/types-routes';
 
 var express = require('express');
@@ -73,7 +73,7 @@ deleteRoutes.delete('/:table/:id', async (req: Req, res: Res, next: (param1: any
     } else {
       throw new ClientError(400, `${req.params.table} is not a valid path parameter`);
     }
-    const result = await db.query(sql, params);
+    const result = await client.query(sql, params);
     if (result.rowCount === 0) {
       throw new ClientError(404, notFoundError);
     }

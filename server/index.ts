@@ -1,12 +1,13 @@
 require('dotenv/config');
 var express = require('express');
-const expressJSON = express.json();
 import errorMiddleware from './utils/error-middleware';
 const staticMiddleware = require('./utils/static-middleware');
 const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
 const cors = require('cors');
+
 const port = process.env.PORT || 5001;
+const expressJSON = express.json();
 const app = express();
 app.use(cors());
 app.use('/api', expressJSON);
