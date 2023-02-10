@@ -129,7 +129,95 @@ const Grappling = sequelize.define('Grappling', {
   }
 });
 
+const Movements = sequelize.define('Movements', {
+  movementId: {
+    type: Sequelize.INTEGER,
+    primaryKey: true,
+    autoIncrement: true
+  },
+  fighterId: {
+    type: Sequelize.INTEGER,
+    allowNull: false
+  },
+  name: {
+    type: Sequelize.TEXT,
+    allowNull: false
+  },
+  type: {
+    type: Sequelize.TEXT,
+    allowNull: false
+  },
+  createdAt: {
+    type: Sequelize.DATE,
+    defaultValue: Sequelize.NOW
+  }
+});
+
+const Dodging = sequelize.define('Dodging', {
+  movementId: {
+    type: Sequelize.INTEGER,
+    primaryKey: true,
+    autoIncrement: true
+  },
+  activeFrames: {
+    type: Sequelize.TEXT
+  },
+  totalFrames: {
+    type: Sequelize.TEXT
+  },
+  createdAt: {
+    type: Sequelize.DATE,
+    defaultValue: Sequelize.NOW
+  }
+});
+
+const Stats = sequelize.define('Stats', {
+  statId: {
+    type: Sequelize.INTEGER,
+    primaryKey: true,
+    autoIncrement: true
+  },
+  fighterId: {
+    type: Sequelize.INTEGER,
+    allowNull: false
+  },
+  name: {
+    type: Sequelize.TEXT,
+    allowNull: false
+  },
+  type: {
+    type: Sequelize.TEXT,
+    allowNull: false
+  },
+  createdAt: {
+    type: Sequelize.DATE,
+    defaultValue: Sequelize.NOW
+  }
+});
+
+const Miscellaneous = sequelize.define('Miscellaneous', {
+  statId: {
+    type: Sequelize.INTEGER,
+    primaryKey: true,
+    autoIncrement: true
+  },
+  statValue: {
+    type: Sequelize.TEXT,
+  },
+  createdAt: {
+    type: Sequelize.DATE,
+    defaultValue: Sequelize.NOW
+  }
+});
 
 module.exports = {
-  Fighters
+  Fighters,
+  Moves,
+  Hitboxes,
+  Throws,
+  Grappling,
+  Movements,
+  Dodging,
+  Stats,
+  Miscellaneous
 }
