@@ -1,6 +1,38 @@
-const Sequelize = require('sequelize');
 
-const sequelize = new Sequelize(process.env.DATABASE_URL);
+const Sequelize = require('sequelize');
+const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USERNAME, process.env.DB_PASSWORD, {
+  host: 'localhost',
+  dialect: 'postgres'
+});
+
+const User = sequelize.define('User', {
+  id: {
+    type: Sequelize.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+  },
+  email: {
+    type: Sequelize.STRING,
+    unique: true,
+    allowNull: false
+  },
+  username: {
+    type: Sequelize.STRING,
+    unique: true,
+    allowNull: false
+  },
+  password: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  createdAt: {
+    type: Sequelize.DATE,
+    defaultValue: Sequelize.NOW
+  }
+},
+{
+  schema: 'user'
+});
 
 const Fighters = sequelize.define('Fighters', {
   fighterId: {
@@ -27,6 +59,9 @@ const Fighters = sequelize.define('Fighters', {
     type: Sequelize.DATE,
     defaultValue: Sequelize.NOW
   }
+},
+{
+  schema: 'user'
 });
 
 const Moves = sequelize.define('Moves', {
@@ -58,6 +93,9 @@ const Moves = sequelize.define('Moves', {
     type: Sequelize.DATE,
     defaultValue: Sequelize.NOW
   }
+},
+{
+  schema: 'user'
 });
 
 const Hitboxes = sequelize.define('Hitboxes', {
@@ -82,6 +120,9 @@ const Hitboxes = sequelize.define('Hitboxes', {
     type: Sequelize.DATE,
     defaultValue: Sequelize.NOW
   }
+},
+{
+  schema: 'user'
 });
 
 const Throws = sequelize.define('Throws', {
@@ -106,6 +147,9 @@ const Throws = sequelize.define('Throws', {
     type: Sequelize.DATE,
     defaultValue: Sequelize.NOW
   }
+},
+{
+  schema: 'user'
 });
 
 const Grappling = sequelize.define('Grappling', {
@@ -127,6 +171,9 @@ const Grappling = sequelize.define('Grappling', {
     type: Sequelize.DATE,
     defaultValue: Sequelize.NOW
   }
+},
+{
+  schema: 'user'
 });
 
 const Movements = sequelize.define('Movements', {
@@ -151,6 +198,9 @@ const Movements = sequelize.define('Movements', {
     type: Sequelize.DATE,
     defaultValue: Sequelize.NOW
   }
+},
+{
+  schema: 'user'
 });
 
 const Dodging = sequelize.define('Dodging', {
@@ -169,6 +219,9 @@ const Dodging = sequelize.define('Dodging', {
     type: Sequelize.DATE,
     defaultValue: Sequelize.NOW
   }
+},
+{
+  schema: 'user'
 });
 
 const Stats = sequelize.define('Stats', {
@@ -193,6 +246,9 @@ const Stats = sequelize.define('Stats', {
     type: Sequelize.DATE,
     defaultValue: Sequelize.NOW
   }
+},
+{
+  schema: 'user'
 });
 
 const Miscellaneous = sequelize.define('Miscellaneous', {
@@ -208,9 +264,13 @@ const Miscellaneous = sequelize.define('Miscellaneous', {
     type: Sequelize.DATE,
     defaultValue: Sequelize.NOW
   }
+},
+{
+  schema: 'user'
 });
 
 module.exports = {
+  User,
   Fighters,
   Moves,
   Hitboxes,
@@ -219,5 +279,6 @@ module.exports = {
   Movements,
   Dodging,
   Stats,
-  Miscellaneous
+  Miscellaneous,
+  sequelize
 }

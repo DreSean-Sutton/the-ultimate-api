@@ -1,3 +1,17 @@
+const {
+  User,
+  Fighters,
+  Moves,
+  Hitboxes,
+  Throws,
+  Grappling,
+  Movements,
+  Dodging,
+  Stats,
+  Miscellaneous,
+  sequelize
+} = require('./model/user-database');
+
 require('dotenv/config');
 var express = require('express');
 import errorMiddleware from './utils/error-middleware';
@@ -27,7 +41,19 @@ app.use('/api/delete', deleteRoutes);
 
 app.use(errorMiddleware);
 
+
 app.listen(port, () => {
   // eslint-disable-next-line no-console
   console.log(`express server listening on port ${port}`);
 });
+
+try {
+  sequelize.authenticate().then(() => console.log('Connection has been established successfully.'));
+} catch (error) {
+  console.error('Unable to connect to the database:', error);
+}
+
+// sequelize.sync({ force: true })
+//   .then(() => {
+//     console.log('User schema and User table created');
+//   });
