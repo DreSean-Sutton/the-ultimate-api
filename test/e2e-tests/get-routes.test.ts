@@ -5,9 +5,6 @@ chai.should();
 chai.use(chaiHttp);
 
 describe("GET api/get/fighters", () => {
-  afterEach(() => {
-    sinon.restore();
-  })
 
   const expectedFighterProps = ['fighter', 'fighterId', 'rosterId', 'displayName'];
 

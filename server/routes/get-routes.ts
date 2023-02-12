@@ -1,3 +1,10 @@
+import ClientError from '../utils/client-error';
+import { client } from '../conn';
+import { Req, Res, QueryString } from '../utils/types-routes';
+var express = require('express');
+const sqlQueries = require('../utils/sql-queries');
+const getRoutes = express.Router();
+
 /**
  * All routes accept query strings for specifying a single fighter
  * Can specify `fighter` name, `fighterId`, and `rosterId`
@@ -8,13 +15,6 @@
  * @param { boolean } orderByRosterId // query string
  */
 
-import ClientError from '../utils/client-error';
-import { client } from '../conn';
-import { Req, Res, QueryString } from '../utils/types-routes';
-
-var express = require('express');
-const sqlQueries = require('../utils/sql-queries');
-const getRoutes = express.Router();
 
 
 /**

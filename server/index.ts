@@ -34,10 +34,12 @@ const getRoutes = require('./routes/get-routes');
 const postRoutes = require('./routes/post-routes');
 const updateRoutes = require('./routes/update-routes');
 const deleteRoutes = require('./routes/delete-routes');
+const registrationRoutes = require('./routes/registration-routes');
 app.use('/api/get', getRoutes);
 app.use('/api/add', postRoutes);
 app.use('/api/update', updateRoutes);
 app.use('/api/delete', deleteRoutes);
+app.use('/api/registration', registrationRoutes);
 
 app.use(errorMiddleware);
 
@@ -47,13 +49,13 @@ app.listen(port, () => {
   console.log(`express server listening on port ${port}`);
 });
 
-try {
-  sequelize.authenticate().then(() => console.log('Connection has been established successfully.'));
-} catch (error) {
-  console.error('Unable to connect to the database:', error);
-}
+// try {
+//   sequelize.authenticate().then(() => console.log('Connection has been established successfully.'));
+// } catch (error) {
+//   console.error('Unable to connect to the database:', error);
+// }
 
-sequelize.sync({ force: true })
-  .then(() => {
-    console.log('User schema and User table created');
-  });
+// sequelize.sync({ force: true })
+//   .then(() => {
+//     console.log('User schema and User table created');
+//   });
