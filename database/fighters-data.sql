@@ -17,7 +17,7 @@ INSERT INTO public.fighters ("fighter", "rosterId", "displayName")
     ('drMario', 20, 'Dr. Mario'),
     ('duckHunt', 64, 'Duck Hunt'),
     ('falco', 22, 'Falco'),
-    ('fox', 8, 'fox'),
+    ('fox', 8, 'Fox'),
     ('ganon', 26, 'Ganondorf'),
     ('greninja', 55, 'Greninja'),
     ('hero', 79, 'Hero'),
