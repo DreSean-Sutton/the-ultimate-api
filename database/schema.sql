@@ -9,8 +9,6 @@ drop schema "user" cascade;
 create schema "public";
 create schema "user";
 
-CREATE TABLE "user".users();
-
 CREATE TABLE public.fighters (
 	"fighterId" serial NOT NULL,
 	"fighter" TEXT NOT NULL UNIQUE,

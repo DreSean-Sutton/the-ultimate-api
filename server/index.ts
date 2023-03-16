@@ -55,7 +55,7 @@ app.listen(port, () => {
 //   console.error('Unable to connect to the database:', error);
 // }
 
-// sequelize.sync({ force: true })
-//   .then(() => {
-//     console.log('User schema and User table created');
-//   });
+sequelize.sync({ force: true })
+  .then(() => {
+    console.log('User schema and User table created');
+  });
