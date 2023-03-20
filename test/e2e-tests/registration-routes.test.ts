@@ -4,36 +4,46 @@ import chaiHttp from 'chai-http';
 chai.should();
 chai.use(chaiHttp);
 
-describe("POST /api/registration/sign-up", () => {
+describe.only("POST /api/registration/sign-up", () => {
+
+  const params = {
+    email: 'test_email',
+    username: 'test_username',
+    password: 'test_password'
+  }
 
   // This is used for resetting database
-  function deleteUser(done: any) {
+  function deleteUser() {
     chai.request('http://localhost:5000')
       .delete('/api/registration/delete-account')
       .query({})
       .end((err, res) => {
-        if(err) return done(err);
         res.should.have.status(204);
         console.log(res.body);
-        done();
       })
   }
 
   describe("successful request", () => {
 
+
+
     it("returns a 201 when user is created", done => {
-      deleteUser(done);
+      deleteUser();
       const userKeys = ['id', 'email', 'username', 'password', 'updatedAt', 'createdAt'];
 
       chai.request('http://localhost:5000')
         .post('/api/registration/sign-up')
-        .query({})
+        .set('content-type', 'application/json')
+        .send(params)
         .end((err, res) => {
-          if(err) return done(err);
+          if(err) {
+            console.log(err);
+            return done(err);
+          }
+          console.log(res.body);
           res.should.have.status(201);
           res.body.should.have.all.key(userKeys);
-          console.log(res.body);
-          done(err);
+          done();
         })
 
     })
