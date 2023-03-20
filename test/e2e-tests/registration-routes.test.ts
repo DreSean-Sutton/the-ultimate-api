@@ -49,6 +49,23 @@ describe.only("POST /api/registration/sign-up", () => {
     })
   })
   describe("unsuccessful request", () => {
+    it("returns a 400 request if email already exists", done => {
 
+      chai.request('http://localhost:5000')
+        .post('/api/registration/sign-up')
+        .set('content-type', 'application/json')
+        .send(params)
+        .end((err, res) => {
+          if (err) {
+            console.log(err);
+            return done(err);
+          }
+          res.should.have.status(400);
+          res.body.should.have.property('errors');
+          res.body.should.have.property('fields');
+          res.body.fields.should.have.property('email');
+          done();
+        })
+    })
   })
 })
