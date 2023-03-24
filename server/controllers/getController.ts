@@ -1,7 +1,6 @@
 import { Req, Res, QueryString } from "../utils/types-routes";
 import ClientError from "../utils/client-error";
 import { client } from '../conn';
-const { fighters } = require('../model/user-database');
 const sqlQueries = require('../utils/sql-queries');
 
 /**

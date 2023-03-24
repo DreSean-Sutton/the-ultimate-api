@@ -3,7 +3,13 @@ import { Req, Res } from "../utils/types-routes";
 import ClientError from "../utils/client-error";
 import { client } from '../conn';
 
-async function deleteUnit(req: Req, res: Res, next: any) {
+/**
+ * Delete route that removes data from a table and id of your choice
+ * @param { string } table // fighters, moves, throws, movements, or stats
+ * @param { number } id   // fighterId, moveId, throwId, movementId, or statId
+ * @return 204 status code
+ */
+async function deleteFromTable(req: Req, res: Res, next: any) {
   const authHeader: string = req.headers['authorization'];
 
   try {
@@ -75,5 +81,5 @@ async function deleteUnit(req: Req, res: Res, next: any) {
 }
 
 module.exports = {
-  deleteUnit,
+  deleteFromTable,
 }
