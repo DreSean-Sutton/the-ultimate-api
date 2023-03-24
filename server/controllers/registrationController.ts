@@ -1,6 +1,6 @@
 const { User } = require('../model/user-database');
 const { sequelize } = require('../model/user-database');
-import { Req, Res, QueryString } from '../utils/types-routes';
+import { Req, Res } from '../utils/types-routes';
 
 async function createUser(req: Req, res: Res, next: any) {
 
