@@ -10,8 +10,6 @@ async function createUser(req: Req, res: Res, next: any) {
     console.log('User schema created');
     await User.sync({ force: false });
     console.log('User table created');
-    console.log(req.body);
-    console.log({ email, username, password });
     const user = await User.create({
       email: email,
       username: username,
@@ -24,6 +22,13 @@ async function createUser(req: Req, res: Res, next: any) {
   }
 }
 
+async function deleteUser(req: Req, res: Res, next: any) {
+  const user = await User.destroy({
+    truncate: true
+  });
+  res.status(204).json(user);
+}
 module.exports = {
   createUser,
+  deleteUser,
 }
