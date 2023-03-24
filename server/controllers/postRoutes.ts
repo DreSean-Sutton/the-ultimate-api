@@ -90,8 +90,8 @@ postRoutes.post('/:table/:id', async (req: Req, res: Res, next: (param1: any) =>
     const id = Number(req.params.id);
     let sql = '';
     let sql2 = '';
-    let params = [];
-    let params2 = [];
+    let params;
+    let params2;
 
     if (req.params.table === 'moves') {
       const reqParams = [name, moveType, damage, category, activeFrames, totalFrames, firstFrame];
