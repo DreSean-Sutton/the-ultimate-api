@@ -1,10 +1,14 @@
+import { Req, Res } from '../utils/types-routes';
+import ClientError from '../utils/client-error';
 const { User } = require('../model/user-database');
 const { sequelize } = require('../model/user-database');
-import { Req, Res } from '../utils/types-routes';
 
 async function createUser(req: Req, res: Res, next: any) {
 
   const { email, username, password } = req.body;
+  if (!email || !email.includes('@') || !username || !password) {
+    return res.status(400).json({ error: 'Must be a valid email, username, and password' });
+  }
   try {
     await sequelize.query('CREATE SCHEMA IF NOT EXISTS "user"');
     console.log('User schema created');

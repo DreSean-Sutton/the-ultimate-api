@@ -22,13 +22,13 @@ describe("POST /api/registration/sign-up", () => {
   describe("successful request", () => {
 
     const params = {
-      email: 'test_email',
+      email: 'test_email@gmail.com',
       username: 'test_username',
       password: 'test_password'
     }
 
     it("returns a 201 when user is created", done => {
-      // deleteUser();
+      deleteUser();
       const userKeys = ['id', 'email', 'username', 'password', 'updatedAt', 'createdAt'];
 
       chai.request(url)
@@ -52,7 +52,7 @@ describe("POST /api/registration/sign-up", () => {
   describe("unsuccessful request", () => {
 
     const params = {
-      email: 'test_email',
+      email: 'test_email@gmail.com',
       username: 'test_username',
       password: 'test_password'
     }
@@ -77,7 +77,7 @@ describe("POST /api/registration/sign-up", () => {
     })
     it("returns a 400 request if username already exists", done => {
 
-      params.email = 'test_email2'; // Changing this value so username is checked for uniqueness
+      params.email = 'test_email@gmail.com2'; // Changing this value so username is checked for uniqueness
       chai.request(url)
         .post(path)
         .set('content-type', 'application/json')
@@ -85,14 +85,14 @@ describe("POST /api/registration/sign-up", () => {
         .end((err, res) => {
           if (err) {
             console.log(err);
-            params.email = 'test_email'; // reseting value
+            params.email = 'test_email@gmail.com'; // reseting value
             return done(err);
           }
           res.should.have.status(400);
           res.body.should.have.property('errors');
           res.body.should.have.property('fields');
           res.body.fields.should.have.property('username');
-          params.email = 'test_email'; // reseting value
+          params.email = 'test_email@gmail.com'; // reseting value
           done();
         })
     })
@@ -113,8 +113,7 @@ describe("POST /api/registration/sign-up", () => {
           }
           console.log(res.body);
           res.should.have.status(400);
-          res.body.should.have.property('errors');
-          res.body.errors[0].path.should.equal('email');
+          res.body.should.have.property('error');
           done();
         })
     })
@@ -135,8 +134,7 @@ describe("POST /api/registration/sign-up", () => {
           }
           console.log(res.body);
           res.should.have.status(400);
-          res.body.should.have.property('errors');
-          res.body.errors[0].path.should.equal('username');
+          res.body.should.have.property('error');
           done();
         })
     })
@@ -157,8 +155,7 @@ describe("POST /api/registration/sign-up", () => {
           }
           console.log(res.body);
           res.should.have.status(400);
-          res.body.should.have.property('errors');
-          res.body.errors[0].path.should.equal('password');
+          res.body.should.have.property('error');
           done();
         })
     })
