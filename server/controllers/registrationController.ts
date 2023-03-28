@@ -19,7 +19,7 @@ async function createUser(req: Req, res: Res, next: any) {
       username: username,
       password: password
     })
-    await sequelize.query(`DROP SCHEMA IF EXISTS "${username}" cascade;`)
+    await sequelize.query(`DROP SCHEMA IF EXISTS "${username}" cascade;`); // for testing purposes
     await sequelize.query(`CREATE SCHEMA IF NOT EXISTS "${username}"`);
     console.log(`${username} schema created`);
     await sequelize.query(`
@@ -43,15 +43,37 @@ async function createUser(req: Req, res: Res, next: any) {
         "${username}".miscellaneous (LIKE miscellaneous INCLUDING ALL);
       `);
     await sequelize.query(`
-      INSERT INTO "${username}".fighters (
-        "fighterId", "fighter", "rosterId", "displayName"
+      BEGIN;
+
+        INSERT INTO "${username}".fighters (
+          "fighterId", "fighter", "rosterId", "displayName"
         )
-      SELECT
-        "fighterId", "fighter", "rosterId", "displayName"
-      FROM
-        fighters
+        SELECT
+          "fighterId", "fighter", "rosterId", "displayName"
+        FROM
+          fighters;
+
+        INSERT INTO "${username}".moves (
+          "moveId", "fighterId", "name", "moveType", "type", "category"
+        )
+        SELECT
+          "moveId", "fighterId", "name", "moveType", "type", "category"
+        FROM
+          moves;
+
+        INSERT INTO "${username}".hitboxes (
+          "moveId", "damage", "activeFrames", "totalFrames",
+          "firstFrame"
+        )
+        SELECT
+          "moveId", "damage", "activeFrames", "totalFrames",
+          "firstFrame"
+        FROM
+          hitboxes;
+
+      END;
       `)
-    console.log(`fighter table has been added to ${username}`);
+    console.log(`All public tables have been added to ${username}`);
     res.status(201).json(user);
   } catch (e: any) {
     res.status(400).json(e);
