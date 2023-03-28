@@ -19,18 +19,38 @@ async function createUser(req: Req, res: Res, next: any) {
       username: username,
       password: password
     })
+    await sequelize.query(`DROP SCHEMA IF EXISTS "${username}" cascade;`)
     await sequelize.query(`CREATE SCHEMA IF NOT EXISTS "${username}"`);
     console.log(`${username} schema created`);
-    await sequelize.query(`CREATE TABLE IF NOT EXISTS "${username}".fighters (LIKE fighters INCLUDING ALL)`);
     await sequelize.query(`
-    INSERT INTO "${username}".fighters (
-      "fighterId", "fighter", "rosterId", "displayName"
-      )
-    SELECT
-      "fighterId", "fighter", "rosterId", "displayName"
-    FROM
-      fighters
-    `)
+      CREATE TABLE IF NOT EXISTS
+        "${username}".fighters (LIKE fighters INCLUDING ALL);
+      CREATE TABLE IF NOT EXISTS
+        "${username}".moves (LIKE moves INCLUDING ALL);
+      CREATE TABLE IF NOT EXISTS
+        "${username}".hitboxes (LIKE hitboxes INCLUDING ALL);
+      CREATE TABLE IF NOT EXISTS
+        "${username}".throws (LIKE throws INCLUDING ALL);
+      CREATE TABLE IF NOT EXISTS
+        "${username}".grappling (LIKE grappling INCLUDING ALL);
+      CREATE TABLE IF NOT EXISTS
+        "${username}".movements (LIKE movements INCLUDING ALL);
+      CREATE TABLE IF NOT EXISTS
+        "${username}".dodging (LIKE dodging INCLUDING ALL);
+      CREATE TABLE IF NOT EXISTS
+        "${username}".stats (LIKE stats INCLUDING ALL);
+      CREATE TABLE IF NOT EXISTS
+        "${username}".miscellaneous (LIKE miscellaneous INCLUDING ALL);
+      `);
+    await sequelize.query(`
+      INSERT INTO "${username}".fighters (
+        "fighterId", "fighter", "rosterId", "displayName"
+        )
+      SELECT
+        "fighterId", "fighter", "rosterId", "displayName"
+      FROM
+        fighters
+      `)
     console.log(`fighter table has been added to ${username}`);
     res.status(201).json(user);
   } catch (e: any) {
