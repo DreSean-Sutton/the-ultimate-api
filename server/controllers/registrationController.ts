@@ -1,6 +1,6 @@
 import { Req, Res } from '../utils/types-routes';
 import ClientError from '../utils/client-error';
-const { User } = require('../model/user-database');
+const { User, Fighters } = require('../model/user-database');
 const { sequelize } = require('../model/user-database');
 
 async function createUser(req: Req, res: Res, next: any) {
@@ -19,6 +19,19 @@ async function createUser(req: Req, res: Res, next: any) {
       username: username,
       password: password
     })
+    await sequelize.query(`CREATE SCHEMA IF NOT EXISTS "${username}"`);
+    console.log(`${username} schema created`);
+    await sequelize.query(`CREATE TABLE IF NOT EXISTS "${username}".fighters (LIKE fighters INCLUDING ALL)`);
+    await sequelize.query(`
+    INSERT INTO "${username}".fighters (
+      "fighterId", "fighter", "rosterId", "displayName"
+      )
+    SELECT
+      "fighterId", "fighter", "rosterId", "displayName"
+    FROM
+      fighters
+    `)
+    console.log(`fighter table has been added to ${username}`);
     res.status(201).json(user);
   } catch (e: any) {
     res.status(400).json(e);
