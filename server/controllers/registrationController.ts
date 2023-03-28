@@ -71,6 +71,21 @@ async function createUser(req: Req, res: Res, next: any) {
         FROM
           hitboxes;
 
+        INSERT INTO "${username}".throws (
+          "throwId", "fighterId", "name", "type"
+        )
+        SELECT
+          "throwId", "fighterId", "name", "type"
+        FROM
+          throws;
+
+        INSERT INTO "${username}".grappling (
+          "throwId", "damage", "activeFrames", "totalFrames"
+        )
+        SELECT
+          "throwId", "damage", "activeFrames", "totalFrames"
+        FROM
+          grappling;
       END;
       `)
     console.log(`All public tables have been added to ${username}`);
