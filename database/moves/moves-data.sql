@@ -2312,8 +2312,6 @@ INSERT INTO public.moves AS "wiiFit"
     (84, 'jab 1', 'single', 'move', 'ground'),
     (84, 'jab 2', 'single', 'move', 'ground'),
     (84, 'jab 3', 'single', 'move', 'ground'),
-    (84, 'rapid jab', 'multi', 'move', 'ground'),
-    (84, 'rapid jab finisher', 'single', 'move', 'ground'),
     (84, 'forward tilt', 'single', 'move', 'ground'),
     (84, 'up tilt', 'single', 'move', 'ground'),
     (84, 'down tilt', 'single', 'move', 'ground'),
@@ -2360,7 +2358,6 @@ INSERT INTO public.moves AS "yoshi"
   VALUES
     (86, 'jab 1', 'single', 'move', 'ground'),
     (86, 'jab 2', 'single', 'move', 'ground'),
-    (86, 'jab 3', 'single', 'move', 'ground'),
     (86, 'forward tilt', 'single', 'move', 'ground'),
     (86, 'up tilt', 'single', 'move', 'ground'),
     (86, 'down tilt', 'single', 'move', 'ground'),
