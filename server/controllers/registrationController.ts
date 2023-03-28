@@ -1,5 +1,6 @@
 import { Req, Res } from '../utils/types-routes';
 import ClientError from '../utils/client-error';
+import buildUserSchema from '../utils/build-user-schema';
 const { User, Fighters } = require('../model/user-database');
 const { sequelize } = require('../model/user-database');
 
@@ -42,52 +43,7 @@ async function createUser(req: Req, res: Res, next: any) {
       CREATE TABLE IF NOT EXISTS
         "${username}".miscellaneous (LIKE miscellaneous INCLUDING ALL);
       `);
-    await sequelize.query(`
-      BEGIN;
-
-        INSERT INTO "${username}".fighters (
-          "fighterId", "fighter", "rosterId", "displayName"
-        )
-        SELECT
-          "fighterId", "fighter", "rosterId", "displayName"
-        FROM
-          fighters;
-
-        INSERT INTO "${username}".moves (
-          "moveId", "fighterId", "name", "moveType", "type", "category"
-        )
-        SELECT
-          "moveId", "fighterId", "name", "moveType", "type", "category"
-        FROM
-          moves;
-
-        INSERT INTO "${username}".hitboxes (
-          "moveId", "damage", "activeFrames", "totalFrames",
-          "firstFrame"
-        )
-        SELECT
-          "moveId", "damage", "activeFrames", "totalFrames",
-          "firstFrame"
-        FROM
-          hitboxes;
-
-        INSERT INTO "${username}".throws (
-          "throwId", "fighterId", "name", "type"
-        )
-        SELECT
-          "throwId", "fighterId", "name", "type"
-        FROM
-          throws;
-
-        INSERT INTO "${username}".grappling (
-          "throwId", "damage", "activeFrames", "totalFrames"
-        )
-        SELECT
-          "throwId", "damage", "activeFrames", "totalFrames"
-        FROM
-          grappling;
-      END;
-      `)
+    await sequelize.query(buildUserSchema(username));
     console.log(`All public tables have been added to ${username}`);
     res.status(201).json(user);
   } catch (e: any) {
