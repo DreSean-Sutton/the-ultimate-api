@@ -3,6 +3,8 @@ import ClientError from '../utils/client-error';
 import buildUserSchema from '../utils/build-user-schema';
 const { User, Fighters } = require('../model/user-database');
 const { sequelize } = require('../model/user-database');
+const argon2 = require('argon2');
+const jwt = require('jsonwebtoken');
 
 async function createUser(req: Req, res: Res, next: any) {
 
@@ -15,12 +17,13 @@ async function createUser(req: Req, res: Res, next: any) {
     console.log('User schema created');
     await User.sync({ force: false });
     console.log('User table created');
+    const hashedPassword = await argon2.hash(password);
     const user = await User.create({
       email: email,
       username: username,
-      password: password
+      password: hashedPassword
     })
-    await sequelize.query(`DROP SCHEMA IF EXISTS "${username}" cascade;`); // for testing purposes
+    await sequelize.query(`DROP SCHEMA IF EXISTS "${username}" cascade;`); // for developmental testing purposes
     await sequelize.query(`CREATE SCHEMA IF NOT EXISTS "${username}"`);
     console.log(`${username} schema created`);
     await sequelize.query(`
