@@ -1,7 +1,7 @@
 import { Req, Res } from '../utils/types-routes';
 import ClientError from '../utils/client-error';
 import buildUserSchema from '../utils/build-user-schema';
-const { User, Fighters } = require('../model/user-database');
+const { User } = require('../model/user-database');
 const { sequelize } = require('../model/user-database');
 const argon2 = require('argon2');
 const jwt = require('jsonwebtoken');
@@ -55,6 +55,23 @@ async function createUser(req: Req, res: Res, next: any) {
   }
 }
 
+async function authenticateUser(req: Req, res: Res, next: any) {
+  const { email, password } = req.body;
+  if(!email || !email.includes('@') || !password) {
+    return res.status(400).json({ error: 'Must provide valid email and password'});
+  }
+  const user = await User.findOne({ where: { email: email }});
+  if(!user) {
+    return res.status(401).json({ error: 'Invalid email'});
+  }
+  const isValidPassword = await argon2.verify(user.password, password);
+  if(!isValidPassword) {
+    return res.status(401).json({ error: 'Invalid password'});
+  }
+  const token = jwt.sign({ userId: user.id }, process.env.TOKEN_SECRET, { expiresIn: 60 });
+  res.status(200).json({ token: token });
+}
+
 async function deleteUser(req: Req, res: Res, next: any) {
   const user = await User.destroy({
     truncate: true
@@ -63,5 +80,6 @@ async function deleteUser(req: Req, res: Res, next: any) {
 }
 module.exports = {
   createUser,
+  authenticateUser,
   deleteUser,
 }
