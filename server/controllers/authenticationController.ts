@@ -64,11 +64,11 @@ async function authenticateUser(req: Req, res: Res, next: any) {
   if(!user) {
     return res.status(401).json({ error: 'Invalid email'});
   }
-  const isValidPassword = await argon2.verify(user.password, password);
+  const isValidPassword = await argon2.verify(user.dataValues.password, password);
   if(!isValidPassword) {
     return res.status(401).json({ error: 'Invalid password'});
   }
-  const token = jwt.sign({ userId: user.id }, process.env.TOKEN_SECRET, { expiresIn: 60 });
+  const token = await jwt.sign({ userId: user.dataValues.id }, process.env.TOKEN_SECRET, { expiresIn: 60 });
   res.status(200).json({ token: token });
 }
 
@@ -78,6 +78,7 @@ async function deleteUser(req: Req, res: Res, next: any) {
   });
   res.status(204).json(user);
 }
+
 module.exports = {
   createUser,
   authenticateUser,

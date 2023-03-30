@@ -4,14 +4,14 @@ import chaiHttp from 'chai-http';
 chai.should();
 chai.use(chaiHttp);
 
-describe("POST /api/registration/sign-up", () => {
+describe.only("POST /api/auth/register", () => {
 
   const url = 'http://localhost:5000';
-  const path = '/api/registration/sign-up';
+  const path = '/api/auth/register';
   // This is used for resetting database
   function deleteUser() {
     chai.request(url)
-      .delete('/api/registration/delete-account')
+      .delete('/api/auth/delete-account')
       .query({})
       .end((err, res) => {
         res.should.have.status(204);
@@ -40,7 +40,6 @@ describe("POST /api/registration/sign-up", () => {
             console.log(err);
             return done(err);
           }
-          console.log(res.body);
           res.should.have.status(201);
           res.body.should.have.all.key(userKeys);
           done();
@@ -111,7 +110,6 @@ describe("POST /api/registration/sign-up", () => {
             console.log(err);
             return done(err);
           }
-          console.log(res.body);
           res.should.have.status(400);
           res.body.should.have.property('error');
           done();
@@ -132,7 +130,6 @@ describe("POST /api/registration/sign-up", () => {
             console.log(err);
             return done(err);
           }
-          console.log(res.body);
           res.should.have.status(400);
           res.body.should.have.property('error');
           done();
@@ -153,8 +150,86 @@ describe("POST /api/registration/sign-up", () => {
             console.log(err);
             return done(err);
           }
-          console.log(res.body);
           res.should.have.status(400);
+          res.body.should.have.property('error');
+          done();
+        })
+    })
+  })
+})
+
+describe.only("POST /api/auth/login", () => {
+  const email = 'test_email@gmail.com';
+  const password = 'test_password';
+  const url = 'http://localhost:5000';
+  const path = '/api/auth/login';
+
+  describe("successful requests", () => {
+    it("returns a 200 status and user token", done => {
+
+      chai.request(url)
+        .post(path)
+        .set('content-type', 'application/json')
+        .send({email: email, password: password})
+        .end((err, res) => {
+          if (err) {
+            console.log(err);
+            return done(err);
+          }
+          res.should.have.status(200);
+          res.body.should.have.property('token');
+          done();
+        })
+    })
+  })
+
+  describe("unsuccessful requests", () => {
+    it("returns a 400 request if email isn't valid", done => {
+
+      chai.request(url)
+        .post(path)
+        .set('content-type', 'application/json')
+        .send({email: null, password: password})
+        .end((err, res) => {
+          if (err) {
+            console.log(err);
+            return done(err);
+          }
+          res.should.have.status(400);
+          res.body.should.have.property('error');
+          done();
+        })
+    })
+
+    it("returns a 401 status if email isn't in the database", done => {
+
+      chai.request(url)
+        .post(path)
+        .set('content-type', 'application/json')
+        .send({email: `${email}_random_string`, password: password})
+        .end((err, res) => {
+          if (err) {
+            console.log(err);
+            return done(err);
+          }
+          res.should.have.status(401);
+          res.body.should.have.property('error');
+          done();
+        })
+    })
+
+    it("returns a 401 status if password isn't in the database", done => {
+
+      chai.request(url)
+        .post(path)
+        .set('content-type', 'application/json')
+        .send({email: email, password: `${password}_random_string`})
+        .end((err, res) => {
+          if (err) {
+            console.log(err);
+            return done(err);
+          }
+          res.should.have.status(401);
           res.body.should.have.property('error');
           done();
         })
