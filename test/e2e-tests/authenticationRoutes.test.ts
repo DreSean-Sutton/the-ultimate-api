@@ -4,20 +4,20 @@ import chaiHttp from 'chai-http';
 chai.should();
 chai.use(chaiHttp);
 
-describe.only("POST /api/auth/register", () => {
+describe("POST /api/auth/register", () => {
 
   const url = 'http://localhost:5000';
   const path = '/api/auth/register';
-  // This is used for resetting database
-  function deleteUser() {
-    chai.request(url)
-      .delete('/api/auth/delete-account')
-      .query({})
-      .end((err, res) => {
-        res.should.have.status(204);
-        console.log(res.body);
-      })
-  }
+
+  let requestStub: any;
+
+  // beforeEach(() => {
+  //   requestStub = sinon.stub(chai, 'request');
+  // });
+
+  // afterEach(() => {
+  //   requestStub.restore();
+  // });
 
   describe("successful request", () => {
 
@@ -28,8 +28,19 @@ describe.only("POST /api/auth/register", () => {
     }
 
     it("returns a 201 when user is created", done => {
-      deleteUser();
       const userKeys = ['id', 'email', 'username', 'password', 'updatedAt', 'createdAt'];
+
+      // requestStub.withArgs(url).returns({
+      //   post: () => ({
+      //     set: () => ({
+      //       send: () => ({
+      //         end: (callback: any) => {
+      //           callback(null, { status: 201, body: { id: 1, ...params, updatedAt: 'updatedTime', createdAt: 'createdTime' } });
+      //         }
+      //       })
+      //     })
+      //   })
+      // })
 
       chai.request(url)
         .post(path)
@@ -58,6 +69,21 @@ describe.only("POST /api/auth/register", () => {
 
     it("returns a 400 request if email already exists", done => {
 
+      // requestStub.withArgs(url).returns({
+      //   post: () => ({
+      //     set: () => ({
+      //       send: () => ({
+      //         end: (callback) => {
+      //           callback(null, { status: 400, body: { fields: { email: params.email } errors: [{
+      // message: 'email must be unique',
+      // path: 'email',
+      // value: params.email
+      // }] }})
+      //         }
+      //       })
+      //     })
+      //   })
+      // })
       chai.request(url)
         .post(path)
         .set('content-type', 'application/json')
@@ -67,6 +93,7 @@ describe.only("POST /api/auth/register", () => {
             console.log(err);
             return done(err);
           }
+          console.log(res.body)
           res.should.have.status(400);
           res.body.should.have.property('errors');
           res.body.should.have.property('fields');
@@ -77,6 +104,22 @@ describe.only("POST /api/auth/register", () => {
     it("returns a 400 request if username already exists", done => {
 
       params.email = 'test_email@gmail.com2'; // Changing this value so username is checked for uniqueness
+
+      // requestStub.withArgs(url).returns({
+      //   post: () => ({
+      //     set: () => ({
+      //       send: () => ({
+      //         end: (callback) => {
+      //           callback(null, { status: 400, body: { fields: { username: params.username } errors: [{
+      // message: 'username must be unique',
+      // path: 'username',
+      // value: params.username
+      // }] }})
+      //         }
+      //       })
+      //     })
+      //   })
+      // })
       chai.request(url)
         .post(path)
         .set('content-type', 'application/json')
@@ -158,7 +201,7 @@ describe.only("POST /api/auth/register", () => {
   })
 })
 
-describe.only("POST /api/auth/login", () => {
+describe("POST /api/auth/login", () => {
   const email = 'test_email@gmail.com';
   const password = 'test_password';
   const url = 'http://localhost:5000';

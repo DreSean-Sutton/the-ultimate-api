@@ -56,20 +56,26 @@ async function createUser(req: Req, res: Res, next: any) {
 }
 
 async function authenticateUser(req: Req, res: Res, next: any) {
-  const { email, password } = req.body;
-  if(!email || !email.includes('@') || !password) {
-    return res.status(400).json({ error: 'Must provide valid email and password'});
+  try {
+    const { email, password } = req.body;
+    if(!email || !email.includes('@') || !password) {
+      return res.status(400).json({ error: 'Must provide valid email and password'});
+    }
+    const user = await User.findOne({ where: { email: email }});
+    if(!user) {
+      return res.status(401).json({ error: 'Invalid email'});
+    }
+    const isValidPassword = await argon2.verify(user.dataValues.password, password);
+    if(!isValidPassword) {
+      return res.status(401).json({ error: 'Invalid password'});
+    }
+    const token = await jwt.sign({ userId: user.dataValues.id }, process.env.TOKEN_SECRET, { expiresIn: 60 });
+    res.status(200).json({ token: token });
+
+  } catch(e: any) {
+    console.error(`error authenticating user: ${e}`);
+    next(e);
   }
-  const user = await User.findOne({ where: { email: email }});
-  if(!user) {
-    return res.status(401).json({ error: 'Invalid email'});
-  }
-  const isValidPassword = await argon2.verify(user.dataValues.password, password);
-  if(!isValidPassword) {
-    return res.status(401).json({ error: 'Invalid password'});
-  }
-  const token = await jwt.sign({ userId: user.dataValues.id }, process.env.TOKEN_SECRET, { expiresIn: 60 });
-  res.status(200).json({ token: token });
 }
 
 async function deleteUser(req: Req, res: Res, next: any) {
