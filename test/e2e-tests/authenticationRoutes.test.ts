@@ -11,13 +11,13 @@ describe("POST /api/auth/register", () => {
 
   let requestStub: any;
 
-  // beforeEach(() => {
-  //   requestStub = sinon.stub(chai, 'request');
-  // });
+  beforeEach(() => {
+    requestStub = sinon.stub(chai, 'request');
+  });
 
-  // afterEach(() => {
-  //   requestStub.restore();
-  // });
+  afterEach(() => {
+    requestStub.restore();
+  });
 
   describe("successful request", () => {
 
@@ -30,17 +30,17 @@ describe("POST /api/auth/register", () => {
     it("returns a 201 when user is created", done => {
       const userKeys = ['id', 'email', 'username', 'password', 'updatedAt', 'createdAt'];
 
-      // requestStub.withArgs(url).returns({
-      //   post: () => ({
-      //     set: () => ({
-      //       send: () => ({
-      //         end: (callback: any) => {
-      //           callback(null, { status: 201, body: { id: 1, ...params, updatedAt: 'updatedTime', createdAt: 'createdTime' } });
-      //         }
-      //       })
-      //     })
-      //   })
-      // })
+      requestStub.withArgs(url).returns({
+        post: () => ({
+          set: () => ({
+            send: () => ({
+              end: (callback: any) => {
+                callback(null, { status: 201, body: { id: 1, ...params, updatedAt: 'updatedTime', createdAt: 'createdTime' } });
+              }
+            })
+          })
+        })
+      })
 
       chai.request(url)
         .post(path)
@@ -69,21 +69,21 @@ describe("POST /api/auth/register", () => {
 
     it("returns a 400 request if email already exists", done => {
 
-      // requestStub.withArgs(url).returns({
-      //   post: () => ({
-      //     set: () => ({
-      //       send: () => ({
-      //         end: (callback) => {
-      //           callback(null, { status: 400, body: { fields: { email: params.email } errors: [{
-      // message: 'email must be unique',
-      // path: 'email',
-      // value: params.email
-      // }] }})
-      //         }
-      //       })
-      //     })
-      //   })
-      // })
+      requestStub.withArgs(url).returns({
+        post: () => ({
+          set: () => ({
+            send: () => ({
+              end: (callback: any) => {
+                callback(null, { status: 400, body: { fields: { email: params.email }, errors: [{
+      message: 'email must be unique',
+      path: 'email',
+      value: params.email
+      }] }})
+              }
+            })
+          })
+        })
+      })
       chai.request(url)
         .post(path)
         .set('content-type', 'application/json')
@@ -105,21 +105,21 @@ describe("POST /api/auth/register", () => {
 
       params.email = 'test_email@gmail.com2'; // Changing this value so username is checked for uniqueness
 
-      // requestStub.withArgs(url).returns({
-      //   post: () => ({
-      //     set: () => ({
-      //       send: () => ({
-      //         end: (callback) => {
-      //           callback(null, { status: 400, body: { fields: { username: params.username } errors: [{
-      // message: 'username must be unique',
-      // path: 'username',
-      // value: params.username
-      // }] }})
-      //         }
-      //       })
-      //     })
-      //   })
-      // })
+      requestStub.withArgs(url).returns({
+        post: () => ({
+          set: () => ({
+            send: () => ({
+              end: (callback: any) => {
+                callback(null, { status: 400, body: { fields: { username: params.username }, errors: [{
+      message: 'username must be unique',
+      path: 'username',
+      value: params.username
+      }] }})
+              }
+            })
+          })
+        })
+      })
       chai.request(url)
         .post(path)
         .set('content-type', 'application/json')
@@ -140,6 +140,17 @@ describe("POST /api/auth/register", () => {
     })
     it("returns a 400 request if email is null", done => {
 
+      requestStub.withArgs(url).returns({
+        post: () => ({
+          set: () => ({
+            send: () => ({
+              end: (callback: any) => {
+                callback(null, { status: 400, body: { error: 'Must be a valid email, username, and password' } })
+              }
+            })
+          })
+        })
+      })
       chai.request(url)
         .post(path)
         .set('content-type', 'application/json')
@@ -153,6 +164,7 @@ describe("POST /api/auth/register", () => {
             console.log(err);
             return done(err);
           }
+          console.log('null email: ', res.body);
           res.should.have.status(400);
           res.body.should.have.property('error');
           done();
@@ -160,6 +172,17 @@ describe("POST /api/auth/register", () => {
     })
     it("returns a 400 request if username is null", done => {
 
+      requestStub.withArgs(url).returns({
+        post: () => ({
+          set: () => ({
+            send: () => ({
+              end: (callback: any) => {
+                callback(null, { status: 400, body: { error: 'Must be a valid email, username, and password' } })
+              }
+            })
+          })
+        })
+      })
       chai.request(url)
         .post(path)
         .set('content-type', 'application/json')
@@ -173,6 +196,7 @@ describe("POST /api/auth/register", () => {
             console.log(err);
             return done(err);
           }
+          console.log('null username: ', res.body);
           res.should.have.status(400);
           res.body.should.have.property('error');
           done();
@@ -180,6 +204,17 @@ describe("POST /api/auth/register", () => {
     })
     it("returns a 400 request if password is null", done => {
 
+      requestStub.withArgs(url).returns({
+        post: () => ({
+          set: () => ({
+            send: () => ({
+              end: (callback: any) => {
+                callback(null, { status: 400, body: { error: 'Must be a valid email, username, and password' } })
+              }
+            })
+          })
+        })
+      })
       chai.request(url)
         .post(path)
         .set('content-type', 'application/json')
@@ -193,6 +228,7 @@ describe("POST /api/auth/register", () => {
             console.log(err);
             return done(err);
           }
+          console.log('null password: ', res.body);
           res.should.have.status(400);
           res.body.should.have.property('error');
           done();
