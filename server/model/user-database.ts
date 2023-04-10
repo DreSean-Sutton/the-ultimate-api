@@ -28,6 +28,14 @@ const User = sequelize.define('user', {
   createdAt: {
     type: Sequelize.DATE,
     defaultValue: Sequelize.NOW
+  },
+  token: {
+    type: Sequelize.STRING,
+    allowNull: true
+  },
+  tokenExpiration: {
+    type: Sequelize.DATE,
+    allowNull: true
   }
 },
 {

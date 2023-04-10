@@ -1,6 +1,7 @@
 import { Req, Res } from '../utils/types-routes';
 import ClientError from '../utils/client-error';
 import buildUserSchema from '../utils/build-user-schema';
+const crypto = require('crypto');
 const { User } = require('../model/user-database');
 const { sequelize } = require('../model/user-database');
 const argon2 = require('argon2');
@@ -69,9 +70,15 @@ async function authenticateUser(req: Req, res: Res, next: any) {
     if(!isValidPassword) {
       return res.status(401).json({ error: 'Invalid password'});
     }
-    const token = await jwt.sign({ userId: user.dataValues.id }, process.env.TOKEN_SECRET, { expiresIn: 60 });
-    res.status(200).json({ token: token });
-
+    const minutes = 3
+    const expiration = Math.floor(Date.now() / 1000) + 60 * minutes;
+    const apiKey = crypto.randomBytes(8).toString('hex');
+    console.log('API_KEY Value: ', apiKey);
+    const token = await jwt.sign({ userId: user.dataValues.id, exp: expiration }, apiKey);
+    user.token = token;
+    user.tokenExpiration = new Date(expiration * 1000);
+    await user.save();
+    res.status(200).json({ token: token, expiration: `Token expires in ${minutes} minute(s)` });
   } catch(e: any) {
     console.error(`error authenticating user: ${e}`);
     next(e);

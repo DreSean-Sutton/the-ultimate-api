@@ -12,7 +12,7 @@
     "db:import": "bash scripts/db-import.sh",
     "prepare": "husky install",
     "test": "mocha -r ts-node/register test/**/*.test.ts",
-    "test:watch": "nodemon --config test/nodemon.json --exec mocha -r ts-node/register test/**/*.test.ts",
+    "test:watch": "nodemon --config test/nodemon.json --exec mocha -r ts-node/register test/**/authentication*.test.ts",
     "tsc": "./node_modules/typescript/bin/tsc"
   },
   "dependencies": {
@@ -21,6 +21,7 @@
     "@types/pg": "^8.6.5",
     "argon2": "^0.30.3",
     "cors": "^2.8.5",
+    "crypto": "^1.0.1",
     "dotenv": "^16.0.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^9.0.0",

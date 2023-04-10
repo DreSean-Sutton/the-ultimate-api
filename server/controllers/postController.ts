@@ -28,8 +28,9 @@ async function postFighters(req: Req, res: Res, next: any) {
     if (!isValid) {
       throw new ClientError(400, 'must have (fighter), (displayName), and (rosterId) as parameters');
     }
+    const table: string = '"Test_email".fighters"' || 'public.fighters';
     const sql = `
-      INSERT INTO public.fighters (
+      INSERT INTO $4 (
         "fighter", "rosterId", "displayName"
       )
       SELECT $1, $2, $3
@@ -42,7 +43,7 @@ async function postFighters(req: Req, res: Res, next: any) {
         )
       RETURNING *;
       `;
-    const params = [fighter, rosterId, displayName];
+    const params = [fighter, rosterId, displayName, table];
     const result = await client.query(sql, params);
     if (result.rows.length === 0) {
       throw new ClientError(400, '(fighter), (rosterId), and (displayName) must all be unique');

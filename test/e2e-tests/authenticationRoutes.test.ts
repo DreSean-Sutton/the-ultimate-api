@@ -9,15 +9,25 @@ describe("POST /api/auth/register", () => {
   const url = 'http://localhost:5000';
   const path = '/api/auth/register';
 
-  let requestStub: any;
+  // This is used for resetting database
+  function deleteUser() {
+    chai.request(url)
+      .delete('/api/auth/delete-account')
+      .query({})
+      .end((err, res) => {
+        res.should.have.status(204);
+        console.log(res.body);
+      })
+  }
+  // let requestStub: any;
 
-  beforeEach(() => {
-    requestStub = sinon.stub(chai, 'request');
-  });
+  // beforeEach(() => {
+  //   requestStub = sinon.stub(chai, 'request');
+  // });
 
-  afterEach(() => {
-    requestStub.restore();
-  });
+  // afterEach(() => {
+  //   requestStub.restore();
+  // });
 
   describe("successful request", () => {
 
@@ -28,19 +38,20 @@ describe("POST /api/auth/register", () => {
     }
 
     it("returns a 201 when user is created", done => {
-      const userKeys = ['id', 'email', 'username', 'password', 'updatedAt', 'createdAt'];
+      const userKeys = ['id', 'email', 'username', 'password', 'updatedAt', 'createdAt', 'token', 'tokenExpiration'];
+      deleteUser();
 
-      requestStub.withArgs(url).returns({
-        post: () => ({
-          set: () => ({
-            send: () => ({
-              end: (callback: any) => {
-                callback(null, { status: 201, body: { id: 1, ...params, updatedAt: 'updatedTime', createdAt: 'createdTime' } });
-              }
-            })
-          })
-        })
-      })
+      // requestStub.withArgs(url).returns({
+      //   post: () => ({
+      //     set: () => ({
+      //       send: () => ({
+      //         end: (callback: any) => {
+      //           callback(null, { status: 201, body: { id: 1, ...params, updatedAt: 'updatedTime', createdAt: 'createdTime' } });
+      //         }
+      //       })
+      //     })
+      //   })
+      // })
 
       chai.request(url)
         .post(path)
@@ -69,21 +80,21 @@ describe("POST /api/auth/register", () => {
 
     it("returns a 400 request if email already exists", done => {
 
-      requestStub.withArgs(url).returns({
-        post: () => ({
-          set: () => ({
-            send: () => ({
-              end: (callback: any) => {
-                callback(null, { status: 400, body: { fields: { email: params.email }, errors: [{
-      message: 'email must be unique',
-      path: 'email',
-      value: params.email
-      }] }})
-              }
-            })
-          })
-        })
-      })
+      // requestStub.withArgs(url).returns({
+      //   post: () => ({
+      //     set: () => ({
+      //       send: () => ({
+      //         end: (callback: any) => {
+      //           callback(null, { status: 400, body: { fields: { email: params.email }, errors: [{
+      // message: 'email must be unique',
+      // path: 'email',
+      // value: params.email
+      // }] }})
+      //         }
+      //       })
+      //     })
+      //   })
+      // })
       chai.request(url)
         .post(path)
         .set('content-type', 'application/json')
@@ -93,7 +104,6 @@ describe("POST /api/auth/register", () => {
             console.log(err);
             return done(err);
           }
-          console.log(res.body)
           res.should.have.status(400);
           res.body.should.have.property('errors');
           res.body.should.have.property('fields');
@@ -105,21 +115,21 @@ describe("POST /api/auth/register", () => {
 
       params.email = 'test_email@gmail.com2'; // Changing this value so username is checked for uniqueness
 
-      requestStub.withArgs(url).returns({
-        post: () => ({
-          set: () => ({
-            send: () => ({
-              end: (callback: any) => {
-                callback(null, { status: 400, body: { fields: { username: params.username }, errors: [{
-      message: 'username must be unique',
-      path: 'username',
-      value: params.username
-      }] }})
-              }
-            })
-          })
-        })
-      })
+      // requestStub.withArgs(url).returns({
+      //   post: () => ({
+      //     set: () => ({
+      //       send: () => ({
+      //         end: (callback: any) => {
+      //           callback(null, { status: 400, body: { fields: { username: params.username }, errors: [{
+      // message: 'username must be unique',
+      // path: 'username',
+      // value: params.username
+      // }] }})
+      //         }
+      //       })
+      //     })
+      //   })
+      // })
       chai.request(url)
         .post(path)
         .set('content-type', 'application/json')
@@ -140,17 +150,17 @@ describe("POST /api/auth/register", () => {
     })
     it("returns a 400 request if email is null", done => {
 
-      requestStub.withArgs(url).returns({
-        post: () => ({
-          set: () => ({
-            send: () => ({
-              end: (callback: any) => {
-                callback(null, { status: 400, body: { error: 'Must be a valid email, username, and password' } })
-              }
-            })
-          })
-        })
-      })
+      // requestStub.withArgs(url).returns({
+      //   post: () => ({
+      //     set: () => ({
+      //       send: () => ({
+      //         end: (callback: any) => {
+      //           callback(null, { status: 400, body: { error: 'Must be a valid email, username, and password' } })
+      //         }
+      //       })
+      //     })
+      //   })
+      // })
       chai.request(url)
         .post(path)
         .set('content-type', 'application/json')
@@ -172,17 +182,17 @@ describe("POST /api/auth/register", () => {
     })
     it("returns a 400 request if username is null", done => {
 
-      requestStub.withArgs(url).returns({
-        post: () => ({
-          set: () => ({
-            send: () => ({
-              end: (callback: any) => {
-                callback(null, { status: 400, body: { error: 'Must be a valid email, username, and password' } })
-              }
-            })
-          })
-        })
-      })
+      // requestStub.withArgs(url).returns({
+      //   post: () => ({
+      //     set: () => ({
+      //       send: () => ({
+      //         end: (callback: any) => {
+      //           callback(null, { status: 400, body: { error: 'Must be a valid email, username, and password' } })
+      //         }
+      //       })
+      //     })
+      //   })
+      // })
       chai.request(url)
         .post(path)
         .set('content-type', 'application/json')
@@ -204,17 +214,17 @@ describe("POST /api/auth/register", () => {
     })
     it("returns a 400 request if password is null", done => {
 
-      requestStub.withArgs(url).returns({
-        post: () => ({
-          set: () => ({
-            send: () => ({
-              end: (callback: any) => {
-                callback(null, { status: 400, body: { error: 'Must be a valid email, username, and password' } })
-              }
-            })
-          })
-        })
-      })
+      // requestStub.withArgs(url).returns({
+      //   post: () => ({
+      //     set: () => ({
+      //       send: () => ({
+      //         end: (callback: any) => {
+      //           callback(null, { status: 400, body: { error: 'Must be a valid email, username, and password' } })
+      //         }
+      //       })
+      //     })
+      //   })
+      // })
       chai.request(url)
         .post(path)
         .set('content-type', 'application/json')
@@ -243,30 +253,30 @@ describe("POST /api/auth/login", () => {
   const url = 'http://localhost:5000';
   const path = '/api/auth/login';
 
-  let requestStub: any;
+  // let requestStub: any;
 
-  beforeEach(() => {
-    requestStub = sinon.stub(chai, 'request');
-  });
+  // beforeEach(() => {
+  //   requestStub = sinon.stub(chai, 'request');
+  // });
 
-  afterEach(() => {
-    requestStub.restore();
-  });
+  // afterEach(() => {
+  //   requestStub.restore();
+  // });
 
   describe("successful requests", () => {
     it("returns a 200 status and user token", done => {
 
-      requestStub.withArgs(url).returns({
-        post: () => ({
-          set: () => ({
-            send: () => ({
-              end: (callback: any) => {
-                callback(null, { status: 200, body: { token: 'token_string' } })
-              }
-            })
-          })
-        })
-      })
+      // requestStub.withArgs(url).returns({
+      //   post: () => ({
+      //     set: () => ({
+      //       send: () => ({
+      //         end: (callback: any) => {
+      //           callback(null, { status: 200, body: { token: 'token_string' } })
+      //         }
+      //       })
+      //     })
+      //   })
+      // })
       chai.request(url)
         .post(path)
         .set('content-type', 'application/json')
@@ -276,7 +286,7 @@ describe("POST /api/auth/login", () => {
             console.log(err);
             return done(err);
           }
-          console.log(res.body)
+          console.log(res.body);
           res.should.have.status(200);
           res.body.should.have.property('token');
           done();
@@ -287,17 +297,17 @@ describe("POST /api/auth/login", () => {
   describe("unsuccessful requests", () => {
     it("returns a 400 request if email isn't valid", done => {
 
-      requestStub.withArgs(url).returns({
-        post: () => ({
-          set: () => ({
-            send: () => ({
-              end: (callback: any) => {
-                callback(null, { status: 400, body: { error: 'Must provide valid email and password' } })
-              }
-            })
-          })
-        })
-      })
+      // requestStub.withArgs(url).returns({
+      //   post: () => ({
+      //     set: () => ({
+      //       send: () => ({
+      //         end: (callback: any) => {
+      //           callback(null, { status: 400, body: { error: 'Must provide valid email and password' } })
+      //         }
+      //       })
+      //     })
+      //   })
+      // })
       chai.request(url)
         .post(path)
         .set('content-type', 'application/json')
@@ -307,7 +317,6 @@ describe("POST /api/auth/login", () => {
             console.log(err);
             return done(err);
           }
-          console.log(res.body)
           res.should.have.status(400);
           res.body.should.have.property('error');
           done();
@@ -316,17 +325,17 @@ describe("POST /api/auth/login", () => {
 
     it("returns a 401 status if email isn't in the database", done => {
 
-      requestStub.withArgs(url).returns({
-        post: () => ({
-          set: () => ({
-            send: () => ({
-              end: (callback: any) => {
-                callback(null, { status: 401, body: { error: 'Invalid email' } })
-              }
-            })
-          })
-        })
-      })
+      // requestStub.withArgs(url).returns({
+      //   post: () => ({
+      //     set: () => ({
+      //       send: () => ({
+      //         end: (callback: any) => {
+      //           callback(null, { status: 401, body: { error: 'Invalid email' } })
+      //         }
+      //       })
+      //     })
+      //   })
+      // })
       chai.request(url)
         .post(path)
         .set('content-type', 'application/json')
@@ -336,7 +345,6 @@ describe("POST /api/auth/login", () => {
             console.log(err);
             return done(err);
           }
-          console.log(res.body)
           res.should.have.status(401);
           res.body.should.have.property('error');
           done();
@@ -345,17 +353,17 @@ describe("POST /api/auth/login", () => {
 
     it("returns a 401 status if password isn't in the database", done => {
 
-      requestStub.withArgs(url).returns({
-        post: () => ({
-          set: () => ({
-            send: () => ({
-              end: (callback: any) => {
-                callback(null, { status: 401, body: { error: 'Invalid password' } })
-              }
-            })
-          })
-        })
-      })
+      // requestStub.withArgs(url).returns({
+      //   post: () => ({
+      //     set: () => ({
+      //       send: () => ({
+      //         end: (callback: any) => {
+      //           callback(null, { status: 401, body: { error: 'Invalid password' } })
+      //         }
+      //       })
+      //     })
+      //   })
+      // })
       chai.request(url)
         .post(path)
         .set('content-type', 'application/json')
@@ -365,7 +373,6 @@ describe("POST /api/auth/login", () => {
             console.log(err);
             return done(err);
           }
-          console.log(res.body)
           res.should.have.status(401);
           res.body.should.have.property('error');
           done();
