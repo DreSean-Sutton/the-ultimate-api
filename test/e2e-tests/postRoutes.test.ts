@@ -13,8 +13,8 @@ describe("POST /api/add/fighters", () => {
   describe("successful requests", () => {
     it("returns a 201 status if a fighter successfully inserted", done => {
 
-      console.log(process.env.TEST_API_KEY);
       process.env.TEST_API_KEY = process.env.TEST_API_KEY || '';
+      console.log(process.env.TEST_API_KEY);
 
       chai.request(url)
         .post(path)
@@ -29,6 +29,7 @@ describe("POST /api/add/fighters", () => {
           }
           console.log(res.body);
           res.should.have.status(200);
+          done();
         })
     })
   })

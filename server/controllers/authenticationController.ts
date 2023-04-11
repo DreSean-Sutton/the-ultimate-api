@@ -74,8 +74,7 @@ async function authenticateUser(req: Req, res: Res, next: any) {
     const minutes = 3;
     const expiration = Math.floor(Date.now() / 1000) + 60 * minutes;
     const apiKey = crypto.randomBytes(8).toString('hex');
-    process.env.TEST_API_KEY = apiKey || 'test';
-    const token = email === 'testing_email@gmail.com'
+    const token = email === 'test_email@gmail.com'
     ? await jwt.sign({ userId: user.dataValues.id, exp: expiration }, process.env.TEST_API_KEY)
     : await jwt.sign({ userId: user.dataValues.id, exp: expiration }, apiKey)
     user.token = token;

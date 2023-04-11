@@ -22,7 +22,7 @@ async function postFighters(req: Req, res: Res, next: any) {
   try {
     if (!authHeader) {
       throw new ClientError(400, 'authorization header must have a value');
-    } else if (authHeader !== process.env.API_KEY) {
+    } else if (authHeader !== process.env.TEST_API_KEY) {
       throw new ClientError(400, 'Incorrect value for authorization header');
     }
     if (!isValid) {
