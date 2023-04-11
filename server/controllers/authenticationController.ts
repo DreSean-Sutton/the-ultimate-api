@@ -1,6 +1,7 @@
 import { Req, Res } from '../utils/types-routes';
 import ClientError from '../utils/client-error';
 import buildUserSchema from '../utils/build-user-schema';
+require('dotenv/config');
 const crypto = require('crypto');
 const { User } = require('../model/user-database');
 const { sequelize } = require('../model/user-database');
@@ -70,11 +71,13 @@ async function authenticateUser(req: Req, res: Res, next: any) {
     if(!isValidPassword) {
       return res.status(401).json({ error: 'Invalid password'});
     }
-    const minutes = 3
+    const minutes = 3;
     const expiration = Math.floor(Date.now() / 1000) + 60 * minutes;
     const apiKey = crypto.randomBytes(8).toString('hex');
-    console.log('API_KEY Value: ', apiKey);
-    const token = await jwt.sign({ userId: user.dataValues.id, exp: expiration }, apiKey);
+    process.env.TEST_API_KEY = apiKey || 'test';
+    const token = email === 'testing_email@gmail.com'
+    ? await jwt.sign({ userId: user.dataValues.id, exp: expiration }, process.env.TEST_API_KEY)
+    : await jwt.sign({ userId: user.dataValues.id, exp: expiration }, apiKey)
     user.token = token;
     user.tokenExpiration = new Date(expiration * 1000);
     await user.save();

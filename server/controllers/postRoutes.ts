@@ -1,5 +1,3 @@
-import ClientError from '../utils/client-error';
-import { client } from '../conn';
 const postControllers = require('../controllers/postController');
 var express = require('express');
 const postRoutes = express.Router(); // base route: 'api/add'
