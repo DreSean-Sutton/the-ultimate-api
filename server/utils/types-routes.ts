@@ -9,7 +9,8 @@ export interface Req {
   params: ReqParams,
   body: any
   headers: {
-    authorization: string
+    authorization: string,
+    username: string
   }
 }
 

@@ -1,6 +1,8 @@
 import { Req, Res } from "../utils/types-routes";
 import ClientError from "../utils/client-error";
 import { client } from '../conn';
+import { QueryTypes } from "sequelize";
+const { sequelize } = require('../model/user-database');
 
 /**
  * Post route that inserts a new fighter and their basic data to the database
@@ -13,6 +15,7 @@ import { client } from '../conn';
 
 async function postFighters(req: Req, res: Res, next: any) {
   const authHeader: string = req.headers['authorization'];
+  const usernameHeader: string = req.headers['username'];
   const { fighter, displayName } = req.body;
   let { rosterId } = req.body;
   rosterId = Number(rosterId);
@@ -26,30 +29,40 @@ async function postFighters(req: Req, res: Res, next: any) {
       throw new ClientError(400, 'Incorrect value for authorization header');
     }
     if (!isValid) {
-      throw new ClientError(400, 'must have (fighter), (displayName), and (rosterId) as parameters');
+      throw new ClientError(400, 'Must have (fighter), (displayName), and (rosterId) as parameters');
     }
-    const table: string = '"Test_email".fighters"' || 'public.fighters';
-    const sql = `
-      INSERT INTO $4 (
+    const table: string = `"${usernameHeader}".fighters` || 'public.fighters';
+
+    // OR "rosterId" = : rosterId
+    //     OR "displayName" = : displayName
+    const selectRes = await sequelize.query(`
+      SELECT *
+      FROM ${table}
+      WHERE
+        "rosterId" = 9001
+    `, {
+      type: QueryTypes.SELECT
+    })
+    console.log('selectRes value: ', selectRes);
+    // if (selectRes[1].rowCount > 0) {
+    //   throw new ClientError(400, 'fighter, rosterId, and displayName must all be unique');
+    // }
+    const insertRes = await sequelize.query(`
+      INSERT INTO ${table} (
         "fighter", "rosterId", "displayName"
       )
-      SELECT $1, $2, $3
-      WHERE NOT EXISTS (
-        SELECT 3
-        FROM "fighters"
-        WHERE "fighter"=$1
-        OR "rosterId"=$2
-        OR "displayName"=$3
-        )
-      RETURNING *;
-      `;
-    const params = [fighter, rosterId, displayName, table];
-    const result = await client.query(sql, params);
-    if (result.rows.length === 0) {
-      throw new ClientError(400, '(fighter), (rosterId), and (displayName) must all be unique');
-    } else {
-      return res.status(201).json(result.rows[0]);
-    }
+      VALUES (
+        :fighter, :rosterId, :displayName
+      )
+      RETURNING *
+    `, {
+      replacements: {
+        fighter,
+        rosterId,
+        displayName
+      }
+    })
+    return res.status(201).json(insertRes[0]);
   } catch (e) {
     return next(e);
   }
