@@ -10,7 +10,7 @@ const {
   Stats,
   Miscellaneous,
   sequelize
-} = require('./model/user-database');
+} = require('./conn');
 
 require('dotenv/config');
 var express = require('express');

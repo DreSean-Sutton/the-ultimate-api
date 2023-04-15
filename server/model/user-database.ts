@@ -1,9 +1,5 @@
-require('dotenv/config');
+import { sequelize } from '../conn';
 const Sequelize = require('sequelize');
-const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USERNAME, process.env.DB_PASSWORD, {
-  host: 'localhost',
-  dialect: 'postgres'
-});
 
 const User = sequelize.define('user', {
   id: {
@@ -36,24 +32,17 @@ const User = sequelize.define('user', {
   tokenExpiration: {
     type: Sequelize.DATE,
     allowNull: true
+  },
+  updatedAt: {
+    type: Sequelize.DATE,
+    defaultValue: Sequelize.NOW,
+    allowNull: true
   }
 },
 {
   schema: 'user'
 });
 
-
-
 module.exports = {
   User,
-  sequelize,
-  // Fighters,
-  // Moves,
-  // Hitboxes,
-  // Throws,
-  // Grappling,
-  // Movements,
-  // Dodging,
-  // Stats,
-  // Miscellaneous,
 }

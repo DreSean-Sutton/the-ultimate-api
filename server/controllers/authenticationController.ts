@@ -1,10 +1,11 @@
 import { Req, Res } from '../utils/types-routes';
 import ClientError from '../utils/client-error';
 import buildUserSchema from '../utils/build-user-schema';
+import defineUserDb from '../utils/define-user-db';
 require('dotenv/config');
 const crypto = require('crypto');
 const { User } = require('../model/user-database');
-const { sequelize } = require('../model/user-database');
+const { sequelize } = require('../conn');
 const argon2 = require('argon2');
 const jwt = require('jsonwebtoken');
 
@@ -28,26 +29,28 @@ async function createUser(req: Req, res: Res, next: any) {
     await sequelize.query(`DROP SCHEMA IF EXISTS "${username}" cascade;`); // for developmental testing purposes
     await sequelize.query(`CREATE SCHEMA IF NOT EXISTS "${username}"`);
     console.log(`${username} schema created`);
-    await sequelize.query(`
-      CREATE TABLE IF NOT EXISTS
-        "${username}".fighters (LIKE fighters INCLUDING ALL);
-      CREATE TABLE IF NOT EXISTS
-        "${username}".moves (LIKE moves INCLUDING ALL);
-      CREATE TABLE IF NOT EXISTS
-        "${username}".hitboxes (LIKE hitboxes INCLUDING ALL);
-      CREATE TABLE IF NOT EXISTS
-        "${username}".throws (LIKE throws INCLUDING ALL);
-      CREATE TABLE IF NOT EXISTS
-        "${username}".grappling (LIKE grappling INCLUDING ALL);
-      CREATE TABLE IF NOT EXISTS
-        "${username}".movements (LIKE movements INCLUDING ALL);
-      CREATE TABLE IF NOT EXISTS
-        "${username}".dodging (LIKE dodging INCLUDING ALL);
-      CREATE TABLE IF NOT EXISTS
-        "${username}".stats (LIKE stats INCLUDING ALL);
-      CREATE TABLE IF NOT EXISTS
-        "${username}".miscellaneous (LIKE miscellaneous INCLUDING ALL);
-      `);
+    defineUserDb(sequelize, username);
+    // await sequelize.query(`
+    //   CREATE TABLE IF NOT EXISTS
+    //     "${username}".fighters (LIKE fighters INCLUDING ALL);
+    //   CREATE TABLE IF NOT EXISTS
+    //     "${username}".moves (LIKE moves INCLUDING ALL);
+    //   CREATE TABLE IF NOT EXISTS
+    //     "${username}".hitboxes (LIKE hitboxes INCLUDING ALL);
+    //   CREATE TABLE IF NOT EXISTS
+    //     "${username}".throws (LIKE throws INCLUDING ALL);
+    //   CREATE TABLE IF NOT EXISTS
+    //     "${username}".grappling (LIKE grappling INCLUDING ALL);
+    //   CREATE TABLE IF NOT EXISTS
+    //     "${username}".movements (LIKE movements INCLUDING ALL);
+    //   CREATE TABLE IF NOT EXISTS
+    //     "${username}".dodging (LIKE dodging INCLUDING ALL);
+    //   CREATE TABLE IF NOT EXISTS
+    //     "${username}".stats (LIKE stats INCLUDING ALL);
+    //   CREATE TABLE IF NOT EXISTS
+    //     "${username}".miscellaneous (LIKE miscellaneous INCLUDING ALL);
+    //   `);
+    await sequelize.sync({ schema: username });
     await sequelize.query(buildUserSchema(username));
     console.log(`All public tables have been added to ${username}`);
     res.status(201).json(user);

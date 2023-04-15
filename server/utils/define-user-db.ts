@@ -1,4 +1,6 @@
-function defineUserDb(sequelize: any, schemaName: string) {
+const Sequelize = require('sequelize');
+
+export default function defineUserDb(sequelize: any, schemaName: string) {
 
   const Fighters = sequelize.define('fighters', {
     fighterId: {
@@ -24,9 +26,20 @@ function defineUserDb(sequelize: any, schemaName: string) {
     createdAt: {
       type: Sequelize.DATE,
       defaultValue: Sequelize.NOW
+    },
+    updatedAt: {
+      type: Sequelize.DATE,
+      defaultValue: Sequelize.NOW,
+      allowNull: true
     }
   }, {
-    schema: schemaName
+    schema: schemaName,
+    freezeTableName: true,
+    options: {
+      postgresql: {
+        inherits: 'fighters INCLUDING ALL'
+      }
+    }
   });
 
   const Moves = sequelize.define('moves', {
@@ -57,9 +70,20 @@ function defineUserDb(sequelize: any, schemaName: string) {
     createdAt: {
       type: Sequelize.DATE,
       defaultValue: Sequelize.NOW
+    },
+    updatedAt: {
+      type: Sequelize.DATE,
+      defaultValue: Sequelize.NOW,
+      allowNull: true
     }
   }, {
-    schema: schemaName
+    schema: schemaName,
+    freezeTableName: true,
+    options: {
+      postgresql: {
+        inherits: 'moves INCLUDING ALL'
+      }
+    }
   });
 
   const Hitboxes = sequelize.define('hitboxes', {
@@ -83,9 +107,20 @@ function defineUserDb(sequelize: any, schemaName: string) {
     createdAt: {
       type: Sequelize.DATE,
       defaultValue: Sequelize.NOW
+    },
+    updatedAt: {
+      type: Sequelize.DATE,
+      defaultValue: Sequelize.NOW,
+      allowNull: true
     }
   }, {
-    schema: schemaName
+    schema: schemaName,
+    freezeTableName: true,
+    options: {
+      postgresql: {
+        inherits: 'hitboxes INCLUDING ALL'
+      }
+    }
   });
 
   const Throws = sequelize.define('throws', {
@@ -109,9 +144,20 @@ function defineUserDb(sequelize: any, schemaName: string) {
     createdAt: {
       type: Sequelize.DATE,
       defaultValue: Sequelize.NOW
+    },
+    updatedAt: {
+      type: Sequelize.DATE,
+      defaultValue: Sequelize.NOW,
+      allowNull: true
     }
   }, {
-    schema: schemaName
+    schema: schemaName,
+    freezeTableName: true,
+    options: {
+      postgresql: {
+        inherits: 'throws INCLUDING ALL'
+      }
+    }
   });
 
   const Grappling = sequelize.define('grappling', {
@@ -132,9 +178,20 @@ function defineUserDb(sequelize: any, schemaName: string) {
     createdAt: {
       type: Sequelize.DATE,
       defaultValue: Sequelize.NOW
+    },
+    updatedAt: {
+      type: Sequelize.DATE,
+      defaultValue: Sequelize.NOW,
+      allowNull: true
     }
   }, {
-    schema: schemaName
+    schema: schemaName,
+    freezeTableName: true,
+    options: {
+      postgresql: {
+        inherits: 'grappling INCLUDING ALL'
+      }
+    }
   });
 
   const Movements = sequelize.define('movements', {
@@ -158,9 +215,20 @@ function defineUserDb(sequelize: any, schemaName: string) {
     createdAt: {
       type: Sequelize.DATE,
       defaultValue: Sequelize.NOW
+    },
+    updatedAt: {
+      type: Sequelize.DATE,
+      defaultValue: Sequelize.NOW,
+      allowNull: true
     }
   }, {
-    schema: schemaName
+    schema: schemaName,
+    freezeTableName: true,
+    options: {
+      postgresql: {
+        inherits: 'movements INCLUDING ALL'
+      }
+    }
   });
 
   const Dodging = sequelize.define('dodging', {
@@ -178,9 +246,20 @@ function defineUserDb(sequelize: any, schemaName: string) {
     createdAt: {
       type: Sequelize.DATE,
       defaultValue: Sequelize.NOW
+    },
+    updatedAt: {
+      type: Sequelize.DATE,
+      defaultValue: Sequelize.NOW,
+      allowNull: true
     }
   }, {
-    schema: schemaName
+    schema: schemaName,
+    freezeTableName: true,
+    options: {
+      postgresql: {
+        inherits: 'dodging INCLUDING ALL'
+      }
+    }
   });
 
   const Stats = sequelize.define('stats', {
@@ -204,9 +283,20 @@ function defineUserDb(sequelize: any, schemaName: string) {
     createdAt: {
       type: Sequelize.DATE,
       defaultValue: Sequelize.NOW
+    },
+    updatedAt: {
+      type: Sequelize.DATE,
+      defaultValue: Sequelize.NOW,
+      allowNull: true
     }
   }, {
-    schema: schemaName
+    schema: schemaName,
+    freezeTableName: true,
+    options: {
+      postgresql: {
+        inherits: 'stats INCLUDING ALL'
+      }
+    }
   });
 
   const Miscellaneous = sequelize.define('miscellaneous', {
@@ -221,12 +311,30 @@ function defineUserDb(sequelize: any, schemaName: string) {
     createdAt: {
       type: Sequelize.DATE,
       defaultValue: Sequelize.NOW
+    },
+    updatedAt: {
+      type: Sequelize.DATE,
+      defaultValue: Sequelize.NOW,
+      allowNull: true
     }
   }, {
-    schema: schemaName
+    schema: schemaName,
+    freezeTableName: true,
+    options: {
+      postgresql: {
+        inherits: 'miscellaneous INCLUDING ALL'
+      }
+    }
   });
+
+  Moves.hasMany(Hitboxes, { foreignKey: 'moveId' });
+  Hitboxes.belongsTo(Moves, { foreignKey: 'moveId' });
+  Throws.hasMany(Grappling, { foreignKey: 'throwId' });
+  Grappling.belongsTo(Throws, { foreignKey: 'throwId' });
+  Movements.hasMany(Dodging, { foreignKey: 'movementId' });
+  Dodging.belongsTo(Movements, { foreignKey: 'movementId' });
+  Stats.hasMany(Miscellaneous, { foreignKey: 'statId' });
+  Miscellaneous.belongsTo(Stats, { foreignKey: 'statId' });
 
   return { Fighters, Moves, Hitboxes, Throws, Grappling, Movements, Dodging, Stats, Miscellaneous };
 }
-
-module.exports = defineUserDb;
