@@ -6,7 +6,7 @@ dotenv.config({ path: '.env' });
 chai.should();
 chai.use(chaiHttp);
 
-describe.skip("POST /api/add/fighters", () => {
+describe("POST /api/add/fighters", () => {
   const url = 'http://localhost:5000';
   const path = '/api/add/fighters';
 

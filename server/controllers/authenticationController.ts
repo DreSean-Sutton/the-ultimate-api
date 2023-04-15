@@ -30,28 +30,16 @@ async function createUser(req: Req, res: Res, next: any) {
     await sequelize.query(`CREATE SCHEMA IF NOT EXISTS "${username}"`);
     console.log(`${username} schema created`);
     defineUserDb(sequelize, username);
-    // await sequelize.query(`
-    //   CREATE TABLE IF NOT EXISTS
-    //     "${username}".fighters (LIKE fighters INCLUDING ALL);
-    //   CREATE TABLE IF NOT EXISTS
-    //     "${username}".moves (LIKE moves INCLUDING ALL);
-    //   CREATE TABLE IF NOT EXISTS
-    //     "${username}".hitboxes (LIKE hitboxes INCLUDING ALL);
-    //   CREATE TABLE IF NOT EXISTS
-    //     "${username}".throws (LIKE throws INCLUDING ALL);
-    //   CREATE TABLE IF NOT EXISTS
-    //     "${username}".grappling (LIKE grappling INCLUDING ALL);
-    //   CREATE TABLE IF NOT EXISTS
-    //     "${username}".movements (LIKE movements INCLUDING ALL);
-    //   CREATE TABLE IF NOT EXISTS
-    //     "${username}".dodging (LIKE dodging INCLUDING ALL);
-    //   CREATE TABLE IF NOT EXISTS
-    //     "${username}".stats (LIKE stats INCLUDING ALL);
-    //   CREATE TABLE IF NOT EXISTS
-    //     "${username}".miscellaneous (LIKE miscellaneous INCLUDING ALL);
-    //   `);
     await sequelize.sync({ schema: username });
+    console.log(`${username} tables have been synced`);
     await sequelize.query(buildUserSchema(username));
+    await sequelize.sync({ schema: username });
+    const userFighterModel = sequelize.model('fighters', null, { schema: username });
+    const maxFighterId = await userFighterModel.max('fighterId');
+    await sequelize.query(`ALTER SEQUENCE "${username}"."fighters_fighterId_seq" RESTART WITH ${maxFighterId + 1}`);
+    console.log('maxFighterId: ', maxFighterId);
+    // await sequelize.sync();
+    console.log(`${username} tables information inserted`);
     console.log(`All public tables have been added to ${username}`);
     res.status(201).json(user);
   } catch (e: any) {

@@ -1,8 +1,7 @@
 import { Req, Res } from "../utils/types-routes";
 import ClientError from "../utils/client-error";
 import { client } from '../conn';
-import { QueryTypes } from "sequelize";
-const { sequelize } = require('../model/user-database');
+const { sequelize } = require('../conn');
 
 /**
  * Post route that inserts a new fighter and their basic data to the database
@@ -35,34 +34,46 @@ async function postFighters(req: Req, res: Res, next: any) {
 
     // OR "rosterId" = : rosterId
     //     OR "displayName" = : displayName
-    const selectRes = await sequelize.query(`
-      SELECT *
-      FROM ${table}
-      WHERE
-        "rosterId" = 9001
-    `, {
-      type: QueryTypes.SELECT
-    })
+
+    // console.log(sequelize)
+    const fightersModel = sequelize.models.fighters;
+
+    const selectRes = await fightersModel.findOne({ where: {
+      rosterId: rosterId
+    }})
+    //   (`SELECT *
+    //   FROM ${table}
+    //   WHERE
+    //     "rosterId" = 9001
+    // `, {
+    //   type: QueryTypes.SELECT
+    // })
     console.log('selectRes value: ', selectRes);
+    const insertRes = await fightersModel.create({
+      fighter: fighter, rosterId: rosterId, displayName: displayName
+    })
+    console.log(insertRes);
     // if (selectRes[1].rowCount > 0) {
     //   throw new ClientError(400, 'fighter, rosterId, and displayName must all be unique');
     // }
-    const insertRes = await sequelize.query(`
-      INSERT INTO ${table} (
-        "fighter", "rosterId", "displayName"
-      )
-      VALUES (
-        :fighter, :rosterId, :displayName
-      )
-      RETURNING *
-    `, {
-      replacements: {
-        fighter,
-        rosterId,
-        displayName
-      }
-    })
-    return res.status(201).json(insertRes[0]);
+    // const insertRes = await sequelize.query(`
+    //   INSERT INTO ${table} (
+    //     "fighter", "rosterId", "displayName"
+    //   )
+    //   VALUES (
+    //     :fighter, :rosterId, :displayName
+    //   )
+    //   RETURNING *
+    // `, {
+    //   replacements: {
+    //     fighter,
+    //     rosterId,
+    //     displayName
+    //   }
+    // })
+    return res.status(201).json({}
+      // insertRes[0]
+      );
   } catch (e) {
     return next(e);
   }
