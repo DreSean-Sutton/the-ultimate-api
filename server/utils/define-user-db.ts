@@ -25,11 +25,13 @@ export default function defineUserDb(sequelize: any, schemaName: string) {
     },
     createdAt: {
       type: Sequelize.DATE,
-      defaultValue: Sequelize.NOW
+      defaultValue: Sequelize.NOW,
+      precision: 3
     },
     updatedAt: {
       type: Sequelize.DATE,
       defaultValue: Sequelize.NOW,
+      precision: 3,
       allowNull: true
     }
   }, {
@@ -69,11 +71,13 @@ export default function defineUserDb(sequelize: any, schemaName: string) {
     },
     createdAt: {
       type: Sequelize.DATE,
-      defaultValue: Sequelize.NOW
+      defaultValue: Sequelize.NOW,
+      precision: 3
     },
     updatedAt: {
       type: Sequelize.DATE,
       defaultValue: Sequelize.NOW,
+      precision: 3,
       allowNull: true
     }
   }, {
@@ -106,11 +110,13 @@ export default function defineUserDb(sequelize: any, schemaName: string) {
     },
     createdAt: {
       type: Sequelize.DATE,
-      defaultValue: Sequelize.NOW
+      defaultValue: Sequelize.NOW,
+      precision: 3
     },
     updatedAt: {
       type: Sequelize.DATE,
       defaultValue: Sequelize.NOW,
+      precision: 3,
       allowNull: true
     }
   }, {
@@ -143,11 +149,13 @@ export default function defineUserDb(sequelize: any, schemaName: string) {
     },
     createdAt: {
       type: Sequelize.DATE,
-      defaultValue: Sequelize.NOW
+      defaultValue: Sequelize.NOW,
+      precision: 3
     },
     updatedAt: {
       type: Sequelize.DATE,
       defaultValue: Sequelize.NOW,
+      precision: 3,
       allowNull: true
     }
   }, {
@@ -177,11 +185,13 @@ export default function defineUserDb(sequelize: any, schemaName: string) {
     },
     createdAt: {
       type: Sequelize.DATE,
-      defaultValue: Sequelize.NOW
+      defaultValue: Sequelize.NOW,
+      precision: 3
     },
     updatedAt: {
       type: Sequelize.DATE,
       defaultValue: Sequelize.NOW,
+      precision: 3,
       allowNull: true
     }
   }, {
@@ -214,11 +224,13 @@ export default function defineUserDb(sequelize: any, schemaName: string) {
     },
     createdAt: {
       type: Sequelize.DATE,
-      defaultValue: Sequelize.NOW
+      defaultValue: Sequelize.NOW,
+      precision: 3
     },
     updatedAt: {
       type: Sequelize.DATE,
       defaultValue: Sequelize.NOW,
+      precision: 3,
       allowNull: true
     }
   }, {
@@ -245,11 +257,13 @@ export default function defineUserDb(sequelize: any, schemaName: string) {
     },
     createdAt: {
       type: Sequelize.DATE,
-      defaultValue: Sequelize.NOW
+      defaultValue: Sequelize.NOW,
+      precision: 3
     },
     updatedAt: {
       type: Sequelize.DATE,
       defaultValue: Sequelize.NOW,
+      precision: 3,
       allowNull: true
     }
   }, {
@@ -282,11 +296,13 @@ export default function defineUserDb(sequelize: any, schemaName: string) {
     },
     createdAt: {
       type: Sequelize.DATE,
-      defaultValue: Sequelize.NOW
+      defaultValue: Sequelize.NOW,
+      precision: 3
     },
     updatedAt: {
       type: Sequelize.DATE,
       defaultValue: Sequelize.NOW,
+      precision: 3,
       allowNull: true
     }
   }, {
@@ -310,11 +326,13 @@ export default function defineUserDb(sequelize: any, schemaName: string) {
     },
     createdAt: {
       type: Sequelize.DATE,
-      defaultValue: Sequelize.NOW
+      defaultValue: Sequelize.NOW,
+      precision: 3
     },
     updatedAt: {
       type: Sequelize.DATE,
       defaultValue: Sequelize.NOW,
+      precision: 3,
       allowNull: true
     }
   }, {
