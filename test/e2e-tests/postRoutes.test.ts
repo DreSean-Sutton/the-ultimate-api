@@ -44,7 +44,7 @@ describe("POST /api/add/fighters", () => {
         .set('authorization', testKey)
         .set('username', 'test_username')
         .set('content-type', 'application/json')
-        .send({ fighter: 'goku2', displayName: 'Son Goku', rosterId: '9001' })
+        .send({ fighter: 'goku', displayName: 'Son Goku2', rosterId: '90012' })
         .end((err, res) => {
           if (err) {
             console.log(err);
@@ -56,11 +56,43 @@ describe("POST /api/add/fighters", () => {
           done();
         })
     });
-    // it("returns a 400 status if the displayName is already in the database", done => {
+    it("returns a 400 status if the displayName is already in the database", done => {
 
-    // });
-    // it("returns a 400 status if the rosterId is already in the database", done => {
+      chai.request(url)
+        .post(path)
+        .set('authorization', testKey)
+        .set('username', 'test_username')
+        .set('content-type', 'application/json')
+        .send({ fighter: 'goku2', displayName: 'Son Goku', rosterId: '90012' })
+        .end((err, res) => {
+          if (err) {
+            console.log(err);
+            return done(err);
+          }
+          console.log(res.body);
+          res.should.have.status(400);
+          res.body.should.have.property('error');
+          done();
+        })
+    });
+    it("returns a 400 status if the rosterId is already in the database", done => {
 
-    // });
+      chai.request(url)
+        .post(path)
+        .set('authorization', testKey)
+        .set('username', 'test_username')
+        .set('content-type', 'application/json')
+        .send({ fighter: 'goku2', displayName: 'Son Goku2', rosterId: '9001' })
+        .end((err, res) => {
+          if (err) {
+            console.log(err);
+            return done(err);
+          }
+          console.log(res.body);
+          res.should.have.status(400);
+          res.body.should.have.property('error');
+          done();
+        })
+    });
   })
 })

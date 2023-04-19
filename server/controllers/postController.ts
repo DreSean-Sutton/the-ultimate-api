@@ -43,13 +43,6 @@ async function postFighters(req: Req, res: Res, next: any) {
         ]
       },
       schema: usernameHeader})
-    //   (`SELECT *
-    //   FROM ${table}
-    //   WHERE
-    //     "rosterId" = 9001
-    // `, {
-    //   type: QueryTypes.SELECT
-    // })
     if(selectResult) {
       const { dataValues } = selectResult;
       console.log('selectResult value: ', selectResult);
