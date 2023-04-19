@@ -174,7 +174,6 @@ describe("POST /api/auth/register", () => {
             console.log(err);
             return done(err);
           }
-          console.log('null email: ', res.body);
           res.should.have.status(400);
           res.body.should.have.property('error');
           done();
@@ -206,7 +205,6 @@ describe("POST /api/auth/register", () => {
             console.log(err);
             return done(err);
           }
-          console.log('null username: ', res.body);
           res.should.have.status(400);
           res.body.should.have.property('error');
           done();
@@ -238,7 +236,6 @@ describe("POST /api/auth/register", () => {
             console.log(err);
             return done(err);
           }
-          console.log('null password: ', res.body);
           res.should.have.status(400);
           res.body.should.have.property('error');
           done();
@@ -286,7 +283,6 @@ describe("POST /api/auth/login", () => {
             console.log(err);
             return done(err);
           }
-          console.log(res.body);
           res.should.have.status(200);
           res.body.should.have.property('token');
           done();

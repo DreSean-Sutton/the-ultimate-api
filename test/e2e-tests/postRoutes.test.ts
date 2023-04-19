@@ -13,6 +13,7 @@ describe("POST /api/add/fighters", () => {
   describe("successful requests", () => {
     it("returns a 201 status if a fighter successfully inserted", done => {
 
+      const returnedKeys = ['createdAt', 'updatedAt', 'fighterId', 'fighter', 'rosterId', 'displayName'];
       process.env.TEST_API_KEY = process.env.TEST_API_KEY || '';
       console.log(process.env.TEST_API_KEY);
 
@@ -27,10 +28,13 @@ describe("POST /api/add/fighters", () => {
             console.log(err);
             return done(err);
           }
-          console.log(res.body);
-          res.should.have.status(200);
+          res.body.should.have.all.keys(returnedKeys);
+          res.should.have.status(201);
           done();
         })
     })
+  })
+  describe("unsuccessful requests", () => {
+
   })
 })

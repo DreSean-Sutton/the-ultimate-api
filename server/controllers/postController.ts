@@ -30,7 +30,6 @@ async function postFighters(req: Req, res: Res, next: any) {
     if (!isValid) {
       throw new ClientError(400, 'Must have (fighter), (displayName), and (rosterId) as parameters');
     }
-    const table: string = `"${usernameHeader}".fighters` || 'public.fighters';
 
     // OR "rosterId" = : rosterId
     //     OR "displayName" = : displayName
@@ -72,9 +71,7 @@ async function postFighters(req: Req, res: Res, next: any) {
     //     displayName
     //   }
     // })
-    return res.status(201).json({}
-      // insertRes[0]
-      );
+    return res.status(201).json(insertRes);
   } catch (e) {
     return next(e);
   }
