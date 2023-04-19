@@ -1,6 +1,7 @@
 import { Req, Res } from "../utils/types-routes";
 import ClientError from "../utils/client-error";
 import { client } from '../conn';
+import { Op } from "sequelize";
 const { sequelize } = require('../conn');
 
 /**
@@ -31,15 +32,17 @@ async function postFighters(req: Req, res: Res, next: any) {
       throw new ClientError(400, 'Must have (fighter), (displayName), and (rosterId) as parameters');
     }
 
-    // OR "rosterId" = : rosterId
-    //     OR "displayName" = : displayName
-
     const fightersModel = sequelize.models.fighters;
 
-    const selectRes = await fightersModel.findOne({ where: {
-      rosterId: rosterId
-    },
-  schema: usernameHeader})
+    const selectResult = await fightersModel.findOne({
+      where: {
+        [Op.or]: [
+          { rosterId: rosterId },
+          { fighter: fighter },
+          { displayName: displayName }
+        ]
+      },
+      schema: usernameHeader})
     //   (`SELECT *
     //   FROM ${table}
     //   WHERE
@@ -47,16 +50,24 @@ async function postFighters(req: Req, res: Res, next: any) {
     // `, {
     //   type: QueryTypes.SELECT
     // })
-    console.log('selectRes value: ', selectRes);
-    const insertRes = await fightersModel.create({
-      fighter: fighter, rosterId: rosterId, displayName: displayName
+    if(selectResult) {
+      const { dataValues } = selectResult;
+      console.log('selectResult value: ', selectResult);
+      if(dataValues.fighter === fighter) throw new ClientError(400, `Fighter (${fighter}) must be unique`);
+      if(dataValues.rosterId === rosterId) throw new ClientError(400, `RosterId (${rosterId}) must be unique`);
+      if(dataValues.displayName === displayName) throw new ClientError(400, `DisplayName (${displayName}) must be unique`);
+    }
+    const insertResult = await fightersModel.create({
+      fighter: fighter,
+      rosterId: rosterId,
+      displayName: displayName
     })
-    console.log(insertRes);
+    console.log('insertResult: ', insertResult);
     await sequelize.sync({ schema: usernameHeader });
-    // if (selectRes[1].rowCount > 0) {
+    // if (selectResult[1].rowCount > 0) {
     //   throw new ClientError(400, 'fighter, rosterId, and displayName must all be unique');
     // }
-    // const insertRes = await sequelize.query(`
+    // const insertResult = await sequelize.query(`
     //   INSERT INTO ${table} (
     //     "fighter", "rosterId", "displayName"
     //   )
@@ -71,7 +82,7 @@ async function postFighters(req: Req, res: Res, next: any) {
     //     displayName
     //   }
     // })
-    return res.status(201).json(insertRes);
+    return res.status(201).json(insertResult);
   } catch (e) {
     return next(e);
   }
