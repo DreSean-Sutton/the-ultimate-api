@@ -35,12 +35,12 @@ async function postFighters(req: Req, res: Res, next: any) {
     // OR "rosterId" = : rosterId
     //     OR "displayName" = : displayName
 
-    // console.log(sequelize)
     const fightersModel = sequelize.models.fighters;
 
     const selectRes = await fightersModel.findOne({ where: {
       rosterId: rosterId
-    }})
+    },
+  schema: usernameHeader})
     //   (`SELECT *
     //   FROM ${table}
     //   WHERE
@@ -53,6 +53,7 @@ async function postFighters(req: Req, res: Res, next: any) {
       fighter: fighter, rosterId: rosterId, displayName: displayName
     })
     console.log(insertRes);
+    await sequelize.sync({ schema: usernameHeader });
     // if (selectRes[1].rowCount > 0) {
     //   throw new ClientError(400, 'fighter, rosterId, and displayName must all be unique');
     // }

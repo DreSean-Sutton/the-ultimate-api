@@ -1,4 +1,12 @@
 const Sequelize = require('sequelize');
+/**
+ * Dynamically builds unique models
+ * Uses the user's information to connect each model to their personal schema
+ *
+ * @param sequelize
+ * @param schemaName
+ * @returns { Fighters, Moves, Hitboxes, Throws, Grappling, Movements, Dodging, Stats, Miscellaneous }
+ */
 
 export default function defineUserDb(sequelize: any, schemaName: string) {
 
@@ -26,12 +34,10 @@ export default function defineUserDb(sequelize: any, schemaName: string) {
     createdAt: {
       type: Sequelize.DATE,
       defaultValue: Sequelize.NOW,
-      precision: 3
     },
     updatedAt: {
       type: Sequelize.DATE,
       defaultValue: Sequelize.NOW,
-      precision: 3,
       allowNull: true
     }
   }, {
@@ -72,12 +78,10 @@ export default function defineUserDb(sequelize: any, schemaName: string) {
     createdAt: {
       type: Sequelize.DATE,
       defaultValue: Sequelize.NOW,
-      precision: 3
     },
     updatedAt: {
       type: Sequelize.DATE,
       defaultValue: Sequelize.NOW,
-      precision: 3,
       allowNull: true
     }
   }, {
@@ -111,12 +115,10 @@ export default function defineUserDb(sequelize: any, schemaName: string) {
     createdAt: {
       type: Sequelize.DATE,
       defaultValue: Sequelize.NOW,
-      precision: 3
     },
     updatedAt: {
       type: Sequelize.DATE,
       defaultValue: Sequelize.NOW,
-      precision: 3,
       allowNull: true
     }
   }, {
@@ -150,12 +152,10 @@ export default function defineUserDb(sequelize: any, schemaName: string) {
     createdAt: {
       type: Sequelize.DATE,
       defaultValue: Sequelize.NOW,
-      precision: 3
     },
     updatedAt: {
       type: Sequelize.DATE,
       defaultValue: Sequelize.NOW,
-      precision: 3,
       allowNull: true
     }
   }, {
@@ -186,12 +186,10 @@ export default function defineUserDb(sequelize: any, schemaName: string) {
     createdAt: {
       type: Sequelize.DATE,
       defaultValue: Sequelize.NOW,
-      precision: 3
     },
     updatedAt: {
       type: Sequelize.DATE,
       defaultValue: Sequelize.NOW,
-      precision: 3,
       allowNull: true
     }
   }, {
@@ -225,12 +223,10 @@ export default function defineUserDb(sequelize: any, schemaName: string) {
     createdAt: {
       type: Sequelize.DATE,
       defaultValue: Sequelize.NOW,
-      precision: 3
     },
     updatedAt: {
       type: Sequelize.DATE,
       defaultValue: Sequelize.NOW,
-      precision: 3,
       allowNull: true
     }
   }, {
@@ -258,12 +254,10 @@ export default function defineUserDb(sequelize: any, schemaName: string) {
     createdAt: {
       type: Sequelize.DATE,
       defaultValue: Sequelize.NOW,
-      precision: 3
     },
     updatedAt: {
       type: Sequelize.DATE,
       defaultValue: Sequelize.NOW,
-      precision: 3,
       allowNull: true
     }
   }, {
@@ -297,12 +291,10 @@ export default function defineUserDb(sequelize: any, schemaName: string) {
     createdAt: {
       type: Sequelize.DATE,
       defaultValue: Sequelize.NOW,
-      precision: 3
     },
     updatedAt: {
       type: Sequelize.DATE,
       defaultValue: Sequelize.NOW,
-      precision: 3,
       allowNull: true
     }
   }, {
@@ -327,12 +319,10 @@ export default function defineUserDb(sequelize: any, schemaName: string) {
     createdAt: {
       type: Sequelize.DATE,
       defaultValue: Sequelize.NOW,
-      precision: 3
     },
     updatedAt: {
       type: Sequelize.DATE,
       defaultValue: Sequelize.NOW,
-      precision: 3,
       allowNull: true
     }
   }, {

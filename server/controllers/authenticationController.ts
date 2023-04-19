@@ -34,13 +34,11 @@ async function createUser(req: Req, res: Res, next: any) {
     console.log(`${username} tables have been synced`);
     await sequelize.query(buildUserSchema(username));
     await sequelize.sync({ schema: username });
+    console.log(`All public tables have been added to ${username}`);
     const userFighterModel = sequelize.model('fighters', null, { schema: username });
     const maxFighterId = await userFighterModel.max('fighterId');
     await sequelize.query(`ALTER SEQUENCE "${username}"."fighters_fighterId_seq" RESTART WITH ${maxFighterId + 1}`);
-    console.log('maxFighterId: ', maxFighterId);
-    // await sequelize.sync();
-    console.log(`${username} tables information inserted`);
-    console.log(`All public tables have been added to ${username}`);
+    console.log("Fighters model's fighterId incrementation value has been synced");
     res.status(201).json(user);
   } catch (e: any) {
     res.status(400).json(e);
