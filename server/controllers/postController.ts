@@ -27,8 +27,6 @@ async function postFighters(req: Req, res: Res, next: any) {
   try {
     if (!authHeader) {
       throw new ClientError(400, 'authorization header must have a value');
-    } else if (authHeader !== process.env.TEST_API_KEY) {
-      throw new ClientError(400, 'Incorrect value for authorization header');
     }
     if (!isValid) {
       throw new ClientError(400, 'Must have (fighter), (displayName), and (rosterId) as parameters');
@@ -38,18 +36,16 @@ async function postFighters(req: Req, res: Res, next: any) {
         username: usernameHeader
       }
     })
-    if(!userFindResult) throw new ClientError(400, `Username (${usernameHeader}) doesn't exist`);
+    if(!userFindResult) throw new ClientError(401, `Username (${usernameHeader}) doesn't exist`);
     console.log('User.findOne value: ', userFindResult);
     const currentTime = new Date();
     if(currentTime > userFindResult.tokenExpiration) throw new ClientError(401, 'Token has expired. Please log in to receive another');
 
-    const decoded = jwt.verify(userFindResult.token, authHeader, (err: any, decoded: any) => {
+    jwt.verify(userFindResult.token, authHeader, (err: any) => {
       if(err) throw new ClientError(401, 'incorrect authorization header');
-      return decoded;
     });
-    console.log('decoded value: ', decoded)
-    const fightersModel = sequelize.models.fighters;
 
+    const fightersModel = sequelize.models.fighters;
     const selectResult = await fightersModel.findOne({
       where: {
         [Op.or]: [
