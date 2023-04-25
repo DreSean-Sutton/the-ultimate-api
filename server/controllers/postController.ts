@@ -2,7 +2,9 @@ import { Req, Res } from "../utils/types-routes";
 import ClientError from "../utils/client-error";
 import { client } from '../conn';
 import { Op } from "sequelize";
+const jwt = require('jsonwebtoken');
 const { sequelize } = require('../conn');
+const { User } = require('../model/user-database');
 
 /**
  * Post route that inserts a new fighter and their basic data to the database
@@ -31,7 +33,21 @@ async function postFighters(req: Req, res: Res, next: any) {
     if (!isValid) {
       throw new ClientError(400, 'Must have (fighter), (displayName), and (rosterId) as parameters');
     }
+    const userFindResult = await User.findOne({
+      where: {
+        username: usernameHeader
+      }
+    })
+    if(!userFindResult) throw new ClientError(400, `Username (${usernameHeader}) doesn't exist`);
+    console.log('User.findOne value: ', userFindResult);
+    const currentTime = new Date();
+    if(currentTime > userFindResult.tokenExpiration) throw new ClientError(401, 'Token has expired. Please log in to receive another');
 
+    const decoded = jwt.verify(userFindResult.token, authHeader, (err: any, decoded: any) => {
+      if(err) throw new ClientError(401, 'incorrect authorization header');
+      return decoded;
+    });
+    console.log('decoded value: ', decoded)
     const fightersModel = sequelize.models.fighters;
 
     const selectResult = await fightersModel.findOne({
@@ -42,10 +58,10 @@ async function postFighters(req: Req, res: Res, next: any) {
           { displayName: displayName }
         ]
       },
-      schema: usernameHeader})
+      schema: usernameHeader});
+
     if(selectResult) {
       const { dataValues } = selectResult;
-      console.log('selectResult value: ', selectResult);
       if(dataValues.fighter === fighter) throw new ClientError(400, `Fighter (${fighter}) must be unique`);
       if(dataValues.rosterId === rosterId) throw new ClientError(400, `RosterId (${rosterId}) must be unique`);
       if(dataValues.displayName === displayName) throw new ClientError(400, `DisplayName (${displayName}) must be unique`);
@@ -55,7 +71,6 @@ async function postFighters(req: Req, res: Res, next: any) {
       rosterId: rosterId,
       displayName: displayName
     })
-    console.log('insertResult: ', insertResult);
     await sequelize.sync({ schema: usernameHeader });
     return res.status(201).json(insertResult);
   } catch (e) {
