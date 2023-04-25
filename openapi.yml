@@ -167,12 +167,7 @@ paths:
       summary: Add a Fighter and their basic data
       security:
         - ApiKeyAuth: []
-      parameters:
-        - name: api_key
-          in: header
-          required: true
-          schema:
-            type: string
+        - UsernameHeader: []
       requestBody:
         description: Click `Try it out` and edit your request!
         required: true
@@ -207,12 +202,8 @@ paths:
       summary: Add move data to a Fighter
       security:
         - ApiKeyAuth: []
+        - UsernameHeader: []
       parameters:
-      - name: authorization
-        in: header
-        required: false
-        schema:
-          type: string
       - in: path
         name: fighterId
         schema:
@@ -250,12 +241,8 @@ paths:
       summary: Add throw data to a Fighter
       security:
         - ApiKeyAuth: []
+        - UsernameHeader: []
       parameters:
-      - name: authorization
-        in: header
-        required: false
-        schema:
-          type: string
       - in: path
         name: fighterId
         schema:
@@ -284,12 +271,8 @@ paths:
       summary: Add movement data to a Fighter
       security:
         - ApiKeyAuth: []
+        - UsernameHeader: []
       parameters:
-      - name: authorization
-        in: header
-        required: false
-        schema:
-          type: string
       - in: path
         name: fighterId
         schema:
@@ -325,12 +308,8 @@ paths:
       summary: Add stat data to a Fighter
       security:
         - ApiKeyAuth: []
+        - UsernameHeader: []
       parameters:
-      - name: authorization
-        in: header
-        required: false
-        schema:
-          type: string
       - in: path
         name: fighterId
         schema:
@@ -364,12 +343,8 @@ paths:
       summary: Update a fighter's basic information
       security:
         - ApiKeyAuth: []
+        - UsernameHeader: []
       parameters:
-      - name: authorization
-        in: header
-        required: false
-        schema:
-          type: string
       - in: path
         name: fighterId
         schema:
@@ -405,12 +380,8 @@ paths:
       summary: Update a fighter's moves
       security:
         - ApiKeyAuth: []
+        - UsernameHeader: []
       parameters:
-      - name: authorization
-        in: header
-        required: false
-        schema:
-          type: string
       - in: path
         name: moveId
         schema:
@@ -439,12 +410,8 @@ paths:
       summary: Update a fighter's throws
       security:
         - ApiKeyAuth: []
+        - UsernameHeader: []
       parameters:
-      - name: authorization
-        in: header
-        required: false
-        schema:
-          type: string
       - in: path
         name: throwId
         schema:
@@ -473,12 +440,8 @@ paths:
       summary: Update a fighter's movements
       security:
         - ApiKeyAuth: []
+        - UsernameHeader: []
       parameters:
-      - name: authorization
-        in: header
-        required: false
-        schema:
-          type: string
       - in: path
         name: movementId
         schema:
@@ -514,12 +477,8 @@ paths:
       summary: Update a fighter's stats
       security:
         - ApiKeyAuth: []
+        - UsernameHeader: []
       parameters:
-      - name: authorization
-        in: header
-        required: false
-        schema:
-          type: string
       - in: path
         name: statId
         schema:
@@ -553,12 +512,8 @@ paths:
       summary: Delete a fighter and all of their data
       security:
         - ApiKeyAuth: []
+        - UsernameHeader: []
       parameters:
-      - name: authorization
-        in: header
-        required: false
-        schema:
-          type: string
       - in: path
         name: id
         schema:
@@ -576,12 +531,8 @@ paths:
       summary: Delete a fighter's move data
       security:
         - ApiKeyAuth: []
+        - UsernameHeader: []
       parameters:
-      - name: authorization
-        in: header
-        required: false
-        schema:
-          type: string
       - in: path
         name: id
         schema:
@@ -599,12 +550,8 @@ paths:
       summary: Delete a fighter's throw data
       security:
         - ApiKeyAuth: []
+        - UsernameHeader: []
       parameters:
-      - name: authorization
-        in: header
-        required: false
-        schema:
-          type: string
       - in: path
         name: id
         schema:
@@ -622,12 +569,8 @@ paths:
       summary: Delete a fighter's movement data
       security:
         - ApiKeyAuth: []
+        - UsernameHeader: []
       parameters:
-      - name: authorization
-        in: header
-        required: false
-        schema:
-          type: string
       - in: path
         name: id
         schema:
@@ -645,12 +588,8 @@ paths:
       summary: Delete a fighter's stat data
       security:
         - ApiKeyAuth: []
+        - UsernameHeader: []
       parameters:
-      - name: authorization
-        in: header
-        required: true
-        schema:
-          type: string
       - in: path
         name: id
         schema:
@@ -667,7 +606,10 @@ components:
       type: apiKey
       in: header
       name: authorization
-
+    UsernameHeader:
+      type: apiKey
+      in: header
+      name: username
   schemas:
     fightersResponse:
       type: object
