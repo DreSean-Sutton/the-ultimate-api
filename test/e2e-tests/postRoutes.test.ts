@@ -17,8 +17,6 @@ describe("POST /api/add/fighters", () => {
 
       const returnedKeys = ['createdAt', 'updatedAt', 'fighterId', 'fighter', 'rosterId', 'displayName'];
 
-      console.log(testKey);
-
       chai.request(url)
         .post(path)
         .set('authorization', testKey)
@@ -35,7 +33,29 @@ describe("POST /api/add/fighters", () => {
           done();
         })
     })
+
+    it("returns a 201 status if a second fighter successfully inserted", done => {
+
+      const returnedKeys = ['createdAt', 'updatedAt', 'fighterId', 'fighter', 'rosterId', 'displayName'];
+
+      chai.request(url)
+        .post(path)
+        .set('authorization', testKey)
+        .set('username', 'test_username')
+        .set('content-type', 'application/json')
+        .send({ fighter: 'krillin', displayName: 'Krillin', rosterId: '523' })
+        .end((err, res) => {
+          if(err) {
+            console.log(err);
+            return done(err);
+          }
+          res.body.should.have.all.keys(returnedKeys);
+          res.should.have.status(201);
+          done();
+        })
+    })
   })
+
   describe("unsuccessful requests", () => {
     it("returns a 400 status if the fighter is already in the database", done => {
 

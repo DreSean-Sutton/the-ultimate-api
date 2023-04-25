@@ -57,24 +57,6 @@ async function postFighters(req: Req, res: Res, next: any) {
     })
     console.log('insertResult: ', insertResult);
     await sequelize.sync({ schema: usernameHeader });
-    // if (selectResult[1].rowCount > 0) {
-    //   throw new ClientError(400, 'fighter, rosterId, and displayName must all be unique');
-    // }
-    // const insertResult = await sequelize.query(`
-    //   INSERT INTO ${table} (
-    //     "fighter", "rosterId", "displayName"
-    //   )
-    //   VALUES (
-    //     :fighter, :rosterId, :displayName
-    //   )
-    //   RETURNING *
-    // `, {
-    //   replacements: {
-    //     fighter,
-    //     rosterId,
-    //     displayName
-    //   }
-    // })
     return res.status(201).json(insertResult);
   } catch (e) {
     return next(e);
