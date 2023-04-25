@@ -25,12 +25,10 @@ async function postFighters(req: Req, res: Res, next: any) {
   const isValid = reqParams.every(param => !!param);
 
   try {
-    if (!authHeader) {
-      throw new ClientError(400, 'authorization header must have a value');
-    }
-    if (!isValid) {
-      throw new ClientError(400, 'Must have (fighter), (displayName), and (rosterId) as parameters');
-    }
+    if(!authHeader) throw new ClientError(400, '(authorization) header must have a value');
+    if(!usernameHeader) throw new ClientError(400, '(username) header must have a value');
+    if(!isValid) throw new ClientError(400, 'Must have (fighter), (displayName), and (rosterId) as parameters');
+
     const userFindResult = await User.findOne({
       where: {
         username: usernameHeader

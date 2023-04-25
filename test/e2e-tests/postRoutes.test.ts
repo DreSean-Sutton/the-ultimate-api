@@ -57,6 +57,42 @@ describe("POST /api/add/fighters", () => {
   })
 
   describe("unsuccessful requests", () => {
+    it("returns a 400 status if username header is falsy", done => {
+
+      chai.request(url)
+        .post(path)
+        .set('authorization', testKey)
+        .set('content-type', 'application/json')
+        .send({ fighter: 'goku', displayName: 'Son Goku', rosterId: '9001' })
+        .end((err, res) => {
+          if (err) {
+            console.log(err);
+            return done(err);
+          }
+          console.log(res.body);
+          res.should.have.status(400);
+          res.body.should.have.property('error');
+          done();
+        })
+    });
+    it("returns a 400 status authorization header is falsy", done => {
+
+      chai.request(url)
+        .post(path)
+        .set('username', 'test_username')
+        .set('content-type', 'application/json')
+        .send({ fighter: 'goku', displayName: 'Son Goku', rosterId: '9001' })
+        .end((err, res) => {
+          if (err) {
+            console.log(err);
+            return done(err);
+          }
+          console.log(res.body);
+          res.should.have.status(400);
+          res.body.should.have.property('error');
+          done();
+        })
+    });
     it("returns a 401 status if username header is incorrect", done => {
 
       chai.request(url)
