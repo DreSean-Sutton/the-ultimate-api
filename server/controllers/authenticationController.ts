@@ -60,12 +60,9 @@ async function authenticateUser(req: Req, res: Res, next: any) {
     if(!isValidPassword) {
       return res.status(401).json({ error: 'Invalid password'});
     }
-    const minutes = 3;
+    const minutes = 30;
     const expiration = Math.floor(Date.now() / 1000) + 60 * minutes;
-    const apiKey = crypto.randomBytes(8).toString('hex');
-    const token = email === 'test_email@gmail.com'
-    ? await jwt.sign({ userId: user.dataValues.id, exp: expiration }, process.env.TEST_API_KEY)
-    : await jwt.sign({ userId: user.dataValues.id, exp: expiration }, apiKey)
+    const token = await jwt.sign({ userId: user.dataValues.id, exp: expiration }, process.env.TOKEN_SECRET);
     user.token = token;
     user.tokenExpiration = new Date(expiration * 1000);
     await user.save();

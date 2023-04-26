@@ -2,6 +2,7 @@ import { Req, Res } from "../utils/types-routes";
 import ClientError from "../utils/client-error";
 import { client } from '../conn';
 import { Op } from "sequelize";
+require('dotenv/config');
 const jwt = require('jsonwebtoken');
 const { sequelize } = require('../conn');
 const { User } = require('../model/user-database');
@@ -39,7 +40,8 @@ async function postFighters(req: Req, res: Res, next: any) {
     const currentTime = new Date();
     if(currentTime > userFindResult.tokenExpiration) throw new ClientError(401, 'Token has expired. Please log in to receive another');
 
-    jwt.verify(userFindResult.token, authHeader, (err: any) => {
+    const token = authHeader && authHeader.split(' ')[1]; // Checks if authHeader is truthy, then splits 'Bearer' from it's value
+    jwt.verify(token, process.env.TOKEN_SECRET, (err: any) => {
       if(err) throw new ClientError(401, 'incorrect authorization header');
     });
 

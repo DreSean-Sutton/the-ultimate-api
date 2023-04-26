@@ -166,7 +166,7 @@ paths:
       - add
       summary: Add a Fighter and their basic data
       security:
-        - ApiKeyAuth: []
+        - BearerAuth: []
         - UsernameHeader: []
       requestBody:
         description: Click `Try it out` and edit your request!
@@ -201,7 +201,7 @@ paths:
       - add
       summary: Add move data to a Fighter
       security:
-        - ApiKeyAuth: []
+        - BearerAuth: []
         - UsernameHeader: []
       parameters:
       - in: path
@@ -240,7 +240,7 @@ paths:
       - add
       summary: Add throw data to a Fighter
       security:
-        - ApiKeyAuth: []
+        - BearerAuth: []
         - UsernameHeader: []
       parameters:
       - in: path
@@ -270,7 +270,7 @@ paths:
       - add
       summary: Add movement data to a Fighter
       security:
-        - ApiKeyAuth: []
+        - BearerAuth: []
         - UsernameHeader: []
       parameters:
       - in: path
@@ -307,7 +307,7 @@ paths:
       - add
       summary: Add stat data to a Fighter
       security:
-        - ApiKeyAuth: []
+        - BearerAuth: []
         - UsernameHeader: []
       parameters:
       - in: path
@@ -342,7 +342,7 @@ paths:
       - update
       summary: Update a fighter's basic information
       security:
-        - ApiKeyAuth: []
+        - BearerAuth: []
         - UsernameHeader: []
       parameters:
       - in: path
@@ -379,7 +379,7 @@ paths:
       - update
       summary: Update a fighter's moves
       security:
-        - ApiKeyAuth: []
+        - BearerAuth: []
         - UsernameHeader: []
       parameters:
       - in: path
@@ -409,7 +409,7 @@ paths:
       - update
       summary: Update a fighter's throws
       security:
-        - ApiKeyAuth: []
+        - BearerAuth: []
         - UsernameHeader: []
       parameters:
       - in: path
@@ -439,7 +439,7 @@ paths:
       - update
       summary: Update a fighter's movements
       security:
-        - ApiKeyAuth: []
+        - BearerAuth: []
         - UsernameHeader: []
       parameters:
       - in: path
@@ -476,7 +476,7 @@ paths:
       - update
       summary: Update a fighter's stats
       security:
-        - ApiKeyAuth: []
+        - BearerAuth: []
         - UsernameHeader: []
       parameters:
       - in: path
@@ -511,7 +511,7 @@ paths:
       - delete
       summary: Delete a fighter and all of their data
       security:
-        - ApiKeyAuth: []
+        - BearerAuth: []
         - UsernameHeader: []
       parameters:
       - in: path
@@ -530,7 +530,7 @@ paths:
       - delete
       summary: Delete a fighter's move data
       security:
-        - ApiKeyAuth: []
+        - BearerAuth: []
         - UsernameHeader: []
       parameters:
       - in: path
@@ -549,7 +549,7 @@ paths:
       - delete
       summary: Delete a fighter's throw data
       security:
-        - ApiKeyAuth: []
+        - BearerAuth: []
         - UsernameHeader: []
       parameters:
       - in: path
@@ -568,7 +568,7 @@ paths:
       - delete
       summary: Delete a fighter's movement data
       security:
-        - ApiKeyAuth: []
+        - BearerAuth: []
         - UsernameHeader: []
       parameters:
       - in: path
@@ -587,7 +587,7 @@ paths:
       - delete
       summary: Delete a fighter's stat data
       security:
-        - ApiKeyAuth: []
+        - BearerAuth: []
         - UsernameHeader: []
       parameters:
       - in: path
@@ -602,10 +602,9 @@ paths:
 
 components:
   securitySchemes:
-    ApiKeyAuth:
-      type: apiKey
-      in: header
-      name: authorization
+    BearerAuth:
+      type: http
+      scheme: bearer
     UsernameHeader:
       type: apiKey
       in: header
