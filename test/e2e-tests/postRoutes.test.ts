@@ -1,25 +1,35 @@
 import chai from 'chai';
 import sinon from 'sinon';
 import chaiHttp from 'chai-http';
-const dotenv = require('dotenv');
-dotenv.config({ path: '.env' });
+// const testToken = require('../../server/utils/jwt-test-utils');
+// console.log('testToken value: ', testToken)
+require('dotenv/config');
 chai.should();
 chai.use(chaiHttp);
 
-const testKey = process.env.TEST_API_KEY || '';
-
 describe("POST /api/add/fighters", () => {
+
+  const jwt = require('jsonwebtoken');
+
+  const testPayload = {
+    userId: 123,
+    exp: Math.floor(Date.now() / 1000) + (60 * 30)
+  };
+
+  const testToken = jwt.sign(testPayload, process.env.TOKEN_SECRET);
+
   const url = 'http://localhost:5000';
   const path = '/api/add/fighters';
 
   describe("successful requests", () => {
     it("returns a 201 status if a fighter successfully inserted", done => {
 
+      console.log(testToken);
       const returnedKeys = ['createdAt', 'updatedAt', 'fighterId', 'fighter', 'rosterId', 'displayName'];
 
       chai.request(url)
         .post(path)
-        .set('authorization', testKey)
+        .set('authorization', `Bearer ${testToken}`)
         .set('username', 'test_username')
         .set('content-type', 'application/json')
         .send({ fighter: 'goku', displayName: 'Son Goku', rosterId: '9001' })
@@ -40,7 +50,7 @@ describe("POST /api/add/fighters", () => {
 
       chai.request(url)
         .post(path)
-        .set('authorization', testKey)
+        .set('authorization', `Bearer ${testToken}`)
         .set('username', 'test_username')
         .set('content-type', 'application/json')
         .send({ fighter: 'krillin', displayName: 'Krillin', rosterId: '523' })
@@ -61,7 +71,7 @@ describe("POST /api/add/fighters", () => {
 
       chai.request(url)
         .post(path)
-        .set('authorization', testKey)
+        .set('authorization', `Bearer ${testToken}`)
         .set('content-type', 'application/json')
         .send({ fighter: 'goku', displayName: 'Son Goku', rosterId: '9001' })
         .end((err, res) => {
@@ -97,7 +107,7 @@ describe("POST /api/add/fighters", () => {
 
       chai.request(url)
         .post(path)
-        .set('authorization', testKey)
+        .set('authorization', `Bearer ${testToken}`)
         .set('username', 'wrong_username')
         .set('content-type', 'application/json')
         .send({ fighter: 'goku', displayName: 'Son Goku', rosterId: '9001' })
@@ -135,7 +145,7 @@ describe("POST /api/add/fighters", () => {
 
       chai.request(url)
         .post(path)
-        .set('authorization', testKey)
+        .set('authorization', `Bearer ${testToken}`)
         .set('username', 'test_username')
         .set('content-type', 'application/json')
         .send({ fighter: 'goku', displayName: 'Son Goku2', rosterId: '90012' })
@@ -154,7 +164,7 @@ describe("POST /api/add/fighters", () => {
 
       chai.request(url)
         .post(path)
-        .set('authorization', testKey)
+        .set('authorization', `Bearer ${testToken}`)
         .set('username', 'test_username')
         .set('content-type', 'application/json')
         .send({ fighter: 'goku2', displayName: 'Son Goku', rosterId: '90012' })
@@ -173,7 +183,7 @@ describe("POST /api/add/fighters", () => {
 
       chai.request(url)
         .post(path)
-        .set('authorization', testKey)
+        .set('authorization', `Bearer ${testToken}`)
         .set('username', 'test_username')
         .set('content-type', 'application/json')
         .send({ fighter: 'goku2', displayName: 'Son Goku2', rosterId: '9001' })
