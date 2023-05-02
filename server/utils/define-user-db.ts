@@ -1,4 +1,5 @@
 const Sequelize = require('sequelize');
+const { sequelize } = require('../conn');
 /**
  * Dynamically builds unique models
  * Uses the user's information to connect each model to their personal schema
@@ -8,7 +9,7 @@ const Sequelize = require('sequelize');
  * @returns { Fighters, Moves, Hitboxes, Throws, Grappling, Movements, Dodging, Stats, Miscellaneous }
  */
 
-export default function defineUserDb(sequelize: any, schemaName: string) {
+export default function defineUserDb(schemaName: string) {
 
   const Fighters = sequelize.define('fighters', {
     fighterId: {

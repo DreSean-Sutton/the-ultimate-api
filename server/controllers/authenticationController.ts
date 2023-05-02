@@ -2,8 +2,8 @@ import { Req, Res } from '../utils/types-routes';
 import ClientError from '../utils/client-error';
 import buildUserSchema from '../utils/build-user-schema';
 import defineUserDb from '../utils/define-user-db';
+import handleRestartIds from '../utils/handle-restart-id';
 require('dotenv/config');
-const crypto = require('crypto');
 const { User } = require('../model/user-database');
 const { sequelize } = require('../conn');
 const argon2 = require('argon2');
@@ -29,16 +29,13 @@ async function createUser(req: Req, res: Res, next: any) {
     await sequelize.query(`DROP SCHEMA IF EXISTS "${username}" cascade;`); // for developmental testing purposes
     await sequelize.query(`CREATE SCHEMA IF NOT EXISTS "${username}"`);
     console.log(`${username} schema created`);
-    defineUserDb(sequelize, username);
+    defineUserDb(username);
     await sequelize.sync({ schema: username });
     console.log(`${username} tables have been synced`);
     await sequelize.query(buildUserSchema(username));
     await sequelize.sync({ schema: username });
     console.log(`All public tables have been added to ${username}`);
-    const userFighterModel = sequelize.model('fighters', null, { schema: username });
-    const maxFighterId = await userFighterModel.max('fighterId');
-    await sequelize.query(`ALTER SEQUENCE "${username}"."fighters_fighterId_seq" RESTART WITH ${maxFighterId + 1}`);
-    console.log("Fighters model's fighterId incrementation value has been synced");
+    handleRestartIds(username);
     res.status(201).json(user);
   } catch (e: any) {
     res.status(400).json(e);

@@ -40,9 +40,6 @@ async function postFighters(req: Req, res: Res, next: any) {
     if(currentTime > userFindResult.tokenExpiration) throw new ClientError(401, 'Token has expired. Please log in to receive another');
     const token = authHeader && authHeader.split(' ')[1]; // Checks if authHeader is truthy, then splits 'Bearer' from it's value
 
-    console.log('token value: ', token);
-    console.log('user token value: ', userFindResult.token)
-
     // Token will not be verified if the username is 'test_username' while in a non-production env
     // Used specifically for testing purposes
     if(usernameHeader !== 'test_username' && process.env.NODE_ENV !== 'production') {
@@ -52,8 +49,8 @@ async function postFighters(req: Req, res: Res, next: any) {
       if(err) throw new ClientError(401, 'incorrect authorization header');
     });
 
-    const fightersModel = sequelize.models.fighters;
-    const selectResult = await fightersModel.findOne({
+    const FightersModel = sequelize.models.fighters;
+    const selectResult = await FightersModel.findOne({
       where: {
         [Op.or]: [
           { rosterId: rosterId },
@@ -69,11 +66,11 @@ async function postFighters(req: Req, res: Res, next: any) {
       if(dataValues.rosterId === rosterId) throw new ClientError(400, `RosterId (${rosterId}) must be unique`);
       if(dataValues.displayName === displayName) throw new ClientError(400, `DisplayName (${displayName}) must be unique`);
     }
-    const insertResult = await fightersModel.create({
+    const insertResult = await FightersModel.create({
       fighter: fighter,
       rosterId: rosterId,
       displayName: displayName
-    })
+    }, { schema: usernameHeader });
     await sequelize.sync({ schema: usernameHeader });
     return res.status(201).json(insertResult);
   } catch (e) {
@@ -100,6 +97,7 @@ async function postTableData(req: Req, res: Res, next: any) {
   const authHeader: string = req.headers['authorization'];
   const usernameHeader: string = req.headers['username'];
   const fullResult = {};
+  console.log(req.body);
   const { name, moveType, damage, category, activeFrames, totalFrames, firstFrame, statValue } = req.body;
   try {
     if (!authHeader) throw new ClientError(400, 'authorization header must have a value');
@@ -117,8 +115,13 @@ async function postTableData(req: Req, res: Res, next: any) {
     if (!userFindResult) throw new ClientError(401, `Username (${usernameHeader}) doesn't exist`);
     const currentTime = new Date();
     if (currentTime > userFindResult.tokenExpiration) throw new ClientError(401, 'Token has expired. Please log in to receive another');
-
     const token = authHeader && authHeader.split(' ')[1]; // Checks if authHeader is truthy, then splits 'Bearer' from it's value
+
+    // Token will not be verified if the username is 'test_username' while in a non-production env
+    // Used specifically for testing purposes
+    if (usernameHeader !== 'test_username' && process.env.NODE_ENV !== 'production') {
+      if (token !== userFindResult.token) throw new ClientError(401, 'Invalid authorization token');
+    }
     jwt.verify(token, process.env.TOKEN_SECRET, (err: any) => {
       if (err) throw new ClientError(401, 'incorrect authorization header');
     });
@@ -130,36 +133,45 @@ async function postTableData(req: Req, res: Res, next: any) {
 
     if (req.params.table === 'moves') {
       const reqParams = [name, moveType, damage, category, activeFrames, totalFrames, firstFrame];
+      console.log(reqParams);
       const isValid = reqParams.every(param => !!param);
       if (!isValid) {
-        throw new ClientError(400, 'must have (name), (moveType), (damage), (category), (activeFrames), (totalFrames), and (firstFrame) as parameters');
+        throw new ClientError(400, 'Must have (name), (moveType), (damage), (category), (activeFrames), (totalFrames), and (firstFrame) as parameters');
       }
-      sql = `
-        INSERT INTO public.moves (
-          "fighterId", "name", "moveType", "category", "type"
-        )
-        SELECT $1, $2, $3, $4, 'moves'
-        WHERE EXISTS (
-            SELECT 1
-              FROM "fighters"
-            WHERE "fighterId"=$1
-        )
-        RETURNING *;
-      `;
-      params = [id, name, moveType, category];
-      sql2 = `
-        INSERT INTO public.hitboxes
-          ("damage", "activeFrames", "totalFrames", "firstFrame")
-        VALUES ($1, $2, $3, $4)
-        RETURNING *;
-      `;
-      params2 = [damage, activeFrames, totalFrames, firstFrame];
+      const MovesModel = sequelize.models.moves;
+      const HitboxesModel = sequelize.models.hitboxes;
+
+      const [moves, hitboxes] = await sequelize.transaction(async (t: any) => {
+
+        const moves = await MovesModel.create({
+          category: category,
+          fighterId: id,
+          moveType: moveType,
+          name: name,
+          type: 'move'
+        }, { transaction: t, schema: usernameHeader });
+
+        const hitboxes = await HitboxesModel.create({
+          activeFrames: activeFrames,
+          damage: damage,
+          firstFrame: firstFrame,
+          totalFrames: totalFrames
+        }, { transaction: t, schema: usernameHeader });
+
+        return [moves, hitboxes];
+      });
+
+      console.log('moves value: ', moves);
+      console.log('hitboxes value: ', hitboxes);
+      Object.assign(fullResult, moves);
+      Object.assign(fullResult, hitboxes);
+      return res.status(201).json(fullResult);
 
     } else if (req.params.table === 'throws') {
       const reqParams = [name, damage, activeFrames, totalFrames];
       const isValid = reqParams.every(param => !!param);
       if (!isValid) {
-        throw new ClientError(400, 'must have (name), (damage), (activeFrames), (totalFrames) as parameters');
+        throw new ClientError(400, 'Must have (name), (damage), (activeFrames), (totalFrames) as parameters');
       }
       sql = `
         INSERT INTO public.throws (
@@ -186,7 +198,7 @@ async function postTableData(req: Req, res: Res, next: any) {
       const reqParams = [name, activeFrames, totalFrames];
       const isValid = reqParams.every(param => !!param);
       if (!isValid) {
-        throw new ClientError(400, 'must have (name), (activeFrames), and (totalFrames) as parameters');
+        throw new ClientError(400, 'Must have (name), (activeFrames), and (totalFrames) as parameters');
       }
       sql = `
         INSERT INTO public.movements (
@@ -213,7 +225,7 @@ async function postTableData(req: Req, res: Res, next: any) {
       const reqParams = [name, statValue];
       const isValid = reqParams.every(param => !!param);
       if (!isValid) {
-        throw new ClientError(400, 'must have (name), and (statValue) as parameters');
+        throw new ClientError(400, 'Must have (name), and (statValue) as parameters');
       }
       sql = `
         INSERT INTO public.stats (
