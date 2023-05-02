@@ -36,11 +36,18 @@ async function postFighters(req: Req, res: Res, next: any) {
       }
     })
     if(!userFindResult) throw new ClientError(401, `Username (${usernameHeader}) doesn't exist`);
-    console.log('User.findOne value: ', userFindResult);
     const currentTime = new Date();
     if(currentTime > userFindResult.tokenExpiration) throw new ClientError(401, 'Token has expired. Please log in to receive another');
-
     const token = authHeader && authHeader.split(' ')[1]; // Checks if authHeader is truthy, then splits 'Bearer' from it's value
+
+    console.log('token value: ', token);
+    console.log('user token value: ', userFindResult.token)
+
+    // Token will not be verified if the username is 'test_username' while in a non-production env
+    // Used specifically for testing purposes
+    if(usernameHeader !== 'test_username' && process.env.NODE_ENV !== 'production') {
+      if (token !== userFindResult.token) throw new ClientError(401, 'Invalid authorization token');
+    }
     jwt.verify(token, process.env.TOKEN_SECRET, (err: any) => {
       if(err) throw new ClientError(401, 'incorrect authorization header');
     });
@@ -91,19 +98,31 @@ async function postFighters(req: Req, res: Res, next: any) {
  */
 async function postTableData(req: Req, res: Res, next: any) {
   const authHeader: string = req.headers['authorization'];
+  const usernameHeader: string = req.headers['username'];
   const fullResult = {};
   const { name, moveType, damage, category, activeFrames, totalFrames, firstFrame, statValue } = req.body;
   try {
-    if (!authHeader) {
-      throw new ClientError(400, 'authorization header must have a value');
-    } else if (authHeader !== process.env.API_KEY) {
-      throw new ClientError(400, 'Incorrect value for authorization header');
-    }
+    if (!authHeader) throw new ClientError(400, 'authorization header must have a value');
+    if (!usernameHeader) throw new ClientError(400, '(username) header must have a value');
     if (/[A-Z]/gi.test(req.params.id) &&
       req.params.id !== undefined) {
       throw new ClientError(400, 'fighterId must be a number');
     }
     const id = Number(req.params.id);
+    const userFindResult = await User.findOne({
+      where: {
+        username: usernameHeader
+      }
+    })
+    if (!userFindResult) throw new ClientError(401, `Username (${usernameHeader}) doesn't exist`);
+    const currentTime = new Date();
+    if (currentTime > userFindResult.tokenExpiration) throw new ClientError(401, 'Token has expired. Please log in to receive another');
+
+    const token = authHeader && authHeader.split(' ')[1]; // Checks if authHeader is truthy, then splits 'Bearer' from it's value
+    jwt.verify(token, process.env.TOKEN_SECRET, (err: any) => {
+      if (err) throw new ClientError(401, 'incorrect authorization header');
+    });
+
     let sql = '';
     let sql2 = '';
     let params;
