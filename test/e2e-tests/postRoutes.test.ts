@@ -1,22 +1,20 @@
 import chai from 'chai';
 import sinon from 'sinon';
 import chaiHttp from 'chai-http';
-// const testToken = require('../../server/utils/jwt-test-utils');
-// console.log('testToken value: ', testToken)
 require('dotenv/config');
+const jwt = require('jsonwebtoken');
 chai.should();
 chai.use(chaiHttp);
 
+
+const testPayload = {
+  userId: 123,
+  exp: Math.floor(Date.now() / 1000) + (60 * 30)
+};
+const testToken = jwt.sign(testPayload, process.env.TOKEN_SECRET);
+
 describe("POST /api/add/fighters", () => {
 
-  const jwt = require('jsonwebtoken');
-
-  const testPayload = {
-    userId: 123,
-    exp: Math.floor(Date.now() / 1000) + (60 * 30)
-  };
-
-  const testToken = jwt.sign(testPayload, process.env.TOKEN_SECRET);
 
   const url = 'http://localhost:5000';
   const path = '/api/add/fighters';
@@ -198,5 +196,47 @@ describe("POST /api/add/fighters", () => {
           done();
         })
     });
+  })
+})
+
+describe("POST /api/add/:table/:id", () => {
+
+  const url = 'http://localhost:5000';
+
+  describe("POST /api/add/moves/:id", () => {
+    const path = '/api/add/moves/90';
+    const moveProperties = ['activeFrames', 'category', 'createdAt', 'damage', 'fighterId', 'firstFrame', 'moveId', 'moveType', 'name', 'totalFrames', 'type', 'updatedAt'];
+
+    describe("Successful requests", () => {
+      it("Returns a 201 status if a move is successfully inserted", done => {
+        chai.request(url)
+          .post(path)
+          .set('authorization', `Bearer ${testToken}`)
+          .set('username', 'test_username')
+          .set('content-type', 'application/json')
+          .send({
+            activeFrames: '1-50',
+            category: 'special',
+            damage: '9000',
+            firstFrame: '1',
+            moveType: 'single hit',
+            name: 'kamehameha',
+            totalFrames: '80',
+          })
+          .end((err, res) => {
+            if (err) {
+              console.log(err);
+              return done(err);
+            }
+            console.log(res.body.dataValues);
+            res.should.have.status(201);
+            res.body.should.have.all.keys(moveProperties);
+            done();
+          })
+      })
+    })
+    describe("Unsuccessful requests", () => {
+
+    })
   })
 })

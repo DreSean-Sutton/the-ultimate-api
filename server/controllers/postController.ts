@@ -163,8 +163,9 @@ async function postTableData(req: Req, res: Res, next: any) {
 
       console.log('moves value: ', moves);
       console.log('hitboxes value: ', hitboxes);
-      Object.assign(fullResult, moves);
-      Object.assign(fullResult, hitboxes);
+      Object.assign(fullResult, moves.dataValues);
+      Object.assign(fullResult, hitboxes.dataValues);
+      console.log('fullResult value: ', fullResult);
       return res.status(201).json(fullResult);
 
     } else if (req.params.table === 'throws') {
