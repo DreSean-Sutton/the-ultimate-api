@@ -208,6 +208,7 @@ describe("POST /api/add/:table/:id", () => {
     const moveProperties = ['activeFrames', 'category', 'createdAt', 'damage', 'fighterId', 'firstFrame', 'moveId', 'moveType', 'name', 'totalFrames', 'type', 'updatedAt'];
 
     describe("Successful requests", () => {
+
       it("Returns a 201 status if a move is successfully inserted", done => {
         chai.request(url)
           .post(path)
@@ -221,14 +222,39 @@ describe("POST /api/add/:table/:id", () => {
             firstFrame: '1',
             moveType: 'single hit',
             name: 'kamehameha',
-            totalFrames: '80',
+            totalFrames: '80'
           })
           .end((err, res) => {
             if (err) {
               console.log(err);
               return done(err);
             }
-            console.log(res.body.dataValues);
+            res.should.have.status(201);
+            res.body.should.have.all.keys(moveProperties);
+            done();
+          })
+      })
+
+      it("Returns a 201 status if a second move is successfully inserted", done => {
+        chai.request(url)
+          .post('/api/add/moves/91')
+          .set('authorization', `Bearer ${testToken}`)
+          .set('username', 'test_username')
+          .set('content-type', 'application/json')
+          .send({
+            activeFrames: '1',
+            category: 'special',
+            damage: 'yes',
+            firstFrame: '1',
+            moveType: 'self damage',
+            name: 'instantly die',
+            totalFrames: '1',
+          })
+          .end((err, res) => {
+            if (err) {
+              console.log(err);
+              return done(err);
+            }
             res.should.have.status(201);
             res.body.should.have.all.keys(moveProperties);
             done();
@@ -238,5 +264,58 @@ describe("POST /api/add/:table/:id", () => {
     describe("Unsuccessful requests", () => {
 
     })
+  })
+
+  describe("POST /api/add/throws/:id", () => {
+    const path = '/api/add/throws/90';
+    const throwProperties = ['activeFrames', 'createdAt', 'damage', 'fighterId', 'throwId', 'name', 'totalFrames', 'type', 'updatedAt'];
+
+    describe("Successful requests", () => {
+      it("Returns a 201 status if a throw is successfully inserted", done => {
+        chai.request(url)
+          .post(path)
+          .set('authorization', `Bearer ${testToken}`)
+          .set('username', 'test_username')
+          .set('content-type', 'application/json')
+          .send({
+            activeFrames: '10-20/33/35/37/39/51',
+            damage: '10.0/2.0/2.0/2.0/2.0/5.0%',
+            name: 'forward throw',
+            totalFrames: '90'
+          })
+          .end((err, res) => {
+            if(err) {
+              console.log(err);
+              return done(err);
+            }
+            res.should.have.status(201);
+            res.body.should.have.all.keys(throwProperties);
+            done();
+          })
+      })
+    })
+    it("Returns a 201 status if a second fighter's throw is successfully inserted", done => {
+      chai.request(url)
+        .post('/api/add/throws/91')
+        .set('authorization', `Bearer ${testToken}`)
+        .set('username', 'test_username')
+        .set('content-type', 'application/json')
+        .send({
+          activeFrames: '30',
+          damage: '8.0%',
+          name: 'down throw',
+          totalFrames: '40'
+        })
+        .end((err, res) => {
+          if(err) {
+            console.log(err);
+            return done(err);
+          }
+          res.should.have.status(201);
+          res.body.should.have.all.keys(throwProperties);
+          done();
+        })
+    })
+
   })
 })
