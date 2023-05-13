@@ -332,9 +332,9 @@ describe("POST /api/add/:table/:id", () => {
           .set('username', 'test_username')
           .set('content-type', 'application/json')
           .send({
-            activeFrames: '10-20/33/35/37/39/51',
-            name: 'air dodge',
-            totalFrames: '90'
+            activeFrames: '3-17',
+            name: 'spot dodge',
+            totalFrames: '20/25'
           })
           .end((err, res) => {
             if(err) {
@@ -355,9 +355,9 @@ describe("POST /api/add/:table/:id", () => {
         .set('username', 'test_username')
         .set('content-type', 'application/json')
         .send({
-          activeFrames: '30',
-          name: 'spot dodge',
-          totalFrames: '40'
+          activeFrames: '4-15',
+          name: 'forward roll',
+          totalFrames: '29'
         })
         .end((err, res) => {
           if(err) {
