@@ -161,8 +161,6 @@ async function postTableData(req: Req, res: Res, next: any) {
         return [moves, hitboxes];
       });
 
-      console.log('moves value: ', moves);
-      console.log('hitboxes value: ', hitboxes);
       Object.assign(fullResult, moves.dataValues);
       Object.assign(fullResult, hitboxes.dataValues);
       console.log('fullResult value: ', fullResult);
@@ -195,8 +193,6 @@ async function postTableData(req: Req, res: Res, next: any) {
         return [throws, grappling];
       });
 
-      console.log('throws value: ', throws);
-      console.log('grappling value: ', grappling);
       Object.assign(fullResult, throws.dataValues);
       Object.assign(fullResult, grappling.dataValues);
       console.log('fullResult value: ', fullResult);
@@ -208,26 +204,30 @@ async function postTableData(req: Req, res: Res, next: any) {
       if (!isValid) {
         throw new ClientError(400, 'Must have (name), (activeFrames), and (totalFrames) as parameters');
       }
-      sql = `
-        INSERT INTO public.movements (
-          "fighterId", "name", "type"
-        )
-        SELECT $1, $2, 'movement'
-        WHERE EXISTS (
-          SELECT 1
-          FROM "fighters"
-          WHERE "fighterId"=$1
-        )
-        RETURNING *;
-      `;
-      params = [id, name];
-      sql2 = `
-        INSERT INTO public.dodging
-          ("activeFrames", "totalFrames")
-        VALUES ($1, $2)
-        RETURNING *;
-      `;
-      params2 = [activeFrames, totalFrames];
+
+      const MovementsModel = sequelize.models.movements;
+      const DodgingModel = sequelize.models.dodging;
+
+      const [movements, dodging] = await sequelize.transaction(async (t: any) => {
+
+        const movements = await MovementsModel.create({
+          fighterId: id,
+          name: name,
+          type: 'movement',
+        }, { transaction: t, schema: usernameHeader });
+
+        const dodging = await DodgingModel.create({
+          activeFrames: activeFrames,
+          totalFrames: totalFrames
+        }, { transaction: t, schema: usernameHeader });
+
+        return [movements, dodging];
+      });
+
+      Object.assign(fullResult, movements.dataValues);
+      Object.assign(fullResult, dodging.dataValues);
+      console.log('fullResult value: ', fullResult);
+      return res.status(201).json(fullResult);
 
     } else if (req.params.table === 'stats') {
       const reqParams = [name, statValue];
@@ -235,37 +235,36 @@ async function postTableData(req: Req, res: Res, next: any) {
       if (!isValid) {
         throw new ClientError(400, 'Must have (name), and (statValue) as parameters');
       }
-      sql = `
-        INSERT INTO public.stats (
-          "fighterId", "name", "type"
-        )
-        SELECT $1, $2, 'stat'
-        WHERE EXISTS (
-          SELECT 1
-          FROM "fighters"
-          WHERE "fighterId"=$1
-        )
-        RETURNING *;
-        `;
-      params = [id, name];
-      sql2 = `
-        INSERT INTO public.miscellaneous
-          ("statValue")
-        VALUES ($1)
-        RETURNING *;
-        `;
-      params2 = [statValue];
+
+      const StatsModel = sequelize.models.stats;
+      const MiscellaneousModel = sequelize.models.miscellaneous;
+
+      const [stats, miscellaneous] = await sequelize.transaction(async (t: any) => {
+
+        const stats = await StatsModel.create({
+          fighterId: id,
+          name: name,
+          type: 'stat',
+        }, { transaction: t, schema: usernameHeader });
+
+        const miscellaneous = await MiscellaneousModel.create({
+          statValue: statValue
+        }, { transaction: t, schema: usernameHeader });
+
+        return [stats, miscellaneous];
+      });
+
+      Object.assign(fullResult, stats.dataValues);
+      Object.assign(fullResult, miscellaneous.dataValues);
+      console.log('fullResult value: ', fullResult);
+      return res.status(201).json(fullResult);
+
     } else {
       throw new ClientError(400, `${req.params.table} is not a valid path parameter`);
     }
-    let result = await client.query(sql, params);
-    if (result.rows.length === 0) {
-      throw new ClientError(404, `fighterId ${id} doesn't exist`);
-    }
-    Object.assign(fullResult, result.rows[0]);
-    result = await client.query(sql2, params2);
-    Object.assign(fullResult, result.rows[0]);
-    return res.status(201).json(fullResult);
+    // if (result.rows.length === 0) {
+    //   throw new ClientError(404, `fighterId ${id} doesn't exist`);
+    // }
   } catch (e) {
     return next(e);
   }
