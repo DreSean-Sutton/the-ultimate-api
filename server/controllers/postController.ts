@@ -174,26 +174,33 @@ async function postTableData(req: Req, res: Res, next: any) {
       if (!isValid) {
         throw new ClientError(400, 'Must have (name), (damage), (activeFrames), (totalFrames) as parameters');
       }
-      sql = `
-        INSERT INTO public.throws (
-          "fighterId", "name", "type"
-        )
-        SELECT $1, $2, 'throw'
-        WHERE EXISTS (
-          SELECT 1
-          FROM "fighters"
-          WHERE "fighterId"=$1
-        )
-        RETURNING *;
-      `;
-      params = [id, name];
-      sql2 = `
-          INSERT INTO public.grappling
-            ("damage", "activeFrames", "totalFrames")
-          VALUES ($1, $2, $3)
-          RETURNING *;
-        `;
-      params2 = [damage, activeFrames, totalFrames];
+
+      const ThrowsModel = sequelize.models.throws;
+      const GrapplingModel = sequelize.models.grappling;
+
+      const [throws, grappling] = await sequelize.transaction(async (t: any) => {
+
+        const throws = await ThrowsModel.create({
+          fighterId: id,
+          name: name,
+          type: 'throw',
+        }, { transaction: t, schema: usernameHeader });
+
+        const grappling = await GrapplingModel.create({
+          activeFrames: activeFrames,
+          damage: damage,
+          totalFrames: totalFrames
+        }, { transaction: t, schema: usernameHeader });
+
+        return [throws, grappling];
+      });
+
+      console.log('throws value: ', throws);
+      console.log('grappling value: ', grappling);
+      Object.assign(fullResult, throws.dataValues);
+      Object.assign(fullResult, grappling.dataValues);
+      console.log('fullResult value: ', fullResult);
+      return res.status(201).json(fullResult);
 
     } else if (req.params.table === 'movements') {
       const reqParams = [name, activeFrames, totalFrames];
