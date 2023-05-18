@@ -204,6 +204,7 @@ describe("POST /api/add/:table/:id", () => {
   const url = 'http://localhost:5000';
 
   describe("POST /api/add/moves/:id", () => {
+
     const path = '/api/add/moves/90';
     const moveProperties = ['activeFrames', 'category', 'createdAt', 'damage', 'fighterId', 'firstFrame', 'moveId', 'moveType', 'name', 'totalFrames', 'type', 'updatedAt'];
 
@@ -293,30 +294,35 @@ describe("POST /api/add/:table/:id", () => {
             done();
           })
       })
+
+      it("Returns a 201 status if a second fighter's throw is successfully inserted", done => {
+        chai.request(url)
+          .post('/api/add/throws/91')
+          .set('authorization', `Bearer ${testToken}`)
+          .set('username', 'test_username')
+          .set('content-type', 'application/json')
+          .send({
+            activeFrames: '30',
+            damage: '8.0%',
+            name: 'down throw',
+            totalFrames: '40'
+          })
+          .end((err, res) => {
+            if(err) {
+              console.log(err);
+              return done(err);
+            }
+            res.should.have.status(201);
+            res.body.should.have.all.keys(throwProperties);
+            done();
+          })
+      })
     })
 
-    it("Returns a 201 status if a second fighter's throw is successfully inserted", done => {
-      chai.request(url)
-        .post('/api/add/throws/91')
-        .set('authorization', `Bearer ${testToken}`)
-        .set('username', 'test_username')
-        .set('content-type', 'application/json')
-        .send({
-          activeFrames: '30',
-          damage: '8.0%',
-          name: 'down throw',
-          totalFrames: '40'
-        })
-        .end((err, res) => {
-          if(err) {
-            console.log(err);
-            return done(err);
-          }
-          res.should.have.status(201);
-          res.body.should.have.all.keys(throwProperties);
-          done();
-        })
+    describe("Unsuccessful requests", () => {
+
     })
+
 
   })
 
@@ -346,29 +352,34 @@ describe("POST /api/add/:table/:id", () => {
             done();
           })
       })
+
+      it("Returns a 201 status if a second fighter's movement is successfully inserted", done => {
+        chai.request(url)
+          .post('/api/add/movements/91')
+          .set('authorization', `Bearer ${testToken}`)
+          .set('username', 'test_username')
+          .set('content-type', 'application/json')
+          .send({
+            activeFrames: '4-15',
+            name: 'forward roll',
+            totalFrames: '29'
+          })
+          .end((err, res) => {
+            if(err) {
+              console.log(err);
+              return done(err);
+            }
+            res.should.have.status(201);
+            res.body.should.have.all.keys(movementProperties);
+            done();
+          })
+      })
     })
 
-    it("Returns a 201 status if a second fighter's movement is successfully inserted", done => {
-      chai.request(url)
-        .post('/api/add/movements/91')
-        .set('authorization', `Bearer ${testToken}`)
-        .set('username', 'test_username')
-        .set('content-type', 'application/json')
-        .send({
-          activeFrames: '4-15',
-          name: 'forward roll',
-          totalFrames: '29'
-        })
-        .end((err, res) => {
-          if(err) {
-            console.log(err);
-            return done(err);
-          }
-          res.should.have.status(201);
-          res.body.should.have.all.keys(movementProperties);
-          done();
-        })
+    describe("Unsuccessful requests", () => {
+
     })
+
 
   })
 
@@ -397,27 +408,32 @@ describe("POST /api/add/:table/:id", () => {
             done();
           })
       })
+
+      it("Returns a 201 status if a second fighter's stat is successfully inserted", done => {
+        chai.request(url)
+          .post('/api/add/stats/91')
+          .set('authorization', `Bearer ${testToken}`)
+          .set('username', 'test_username')
+          .set('content-type', 'application/json')
+          .send({
+            name: 'running speed',
+            statValue: '3.052'
+          })
+          .end((err, res) => {
+            if(err) {
+              console.log(err);
+              return done(err);
+            }
+            res.should.have.status(201);
+            res.body.should.have.all.keys(statProperties);
+            done();
+          })
+      })
     })
 
-    it("Returns a 201 status if a second fighter's stat is successfully inserted", done => {
-      chai.request(url)
-        .post('/api/add/stats/91')
-        .set('authorization', `Bearer ${testToken}`)
-        .set('username', 'test_username')
-        .set('content-type', 'application/json')
-        .send({
-          name: 'running speed',
-          statValue: '3.052'
-        })
-        .end((err, res) => {
-          if(err) {
-            console.log(err);
-            return done(err);
-          }
-          res.should.have.status(201);
-          res.body.should.have.all.keys(statProperties);
-          done();
-        })
+    describe("Unsuccessful requests", () => {
+
     })
+
   })
 })
