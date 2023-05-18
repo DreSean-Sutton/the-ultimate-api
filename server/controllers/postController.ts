@@ -97,7 +97,6 @@ async function postTableData(req: Req, res: Res, next: any) {
   const authHeader: string = req.headers['authorization'];
   const usernameHeader: string = req.headers['username'];
   const fullResult = {};
-  console.log(req.body);
   const { name, moveType, damage, category, activeFrames, totalFrames, firstFrame, statValue } = req.body;
   try {
     if (!authHeader) throw new ClientError(400, 'authorization header must have a value');
@@ -168,7 +167,6 @@ async function postTableData(req: Req, res: Res, next: any) {
 
       Object.assign(fullResult, moves.dataValues);
       Object.assign(fullResult, hitboxes.dataValues);
-      console.log('fullResult value: ', fullResult);
       return res.status(201).json(fullResult);
 
     } else if (req.params.table === 'throws') {
@@ -200,7 +198,6 @@ async function postTableData(req: Req, res: Res, next: any) {
 
       Object.assign(fullResult, throws.dataValues);
       Object.assign(fullResult, grappling.dataValues);
-      console.log('fullResult value: ', fullResult);
       return res.status(201).json(fullResult);
 
     } else if (req.params.table === 'movements') {
@@ -231,7 +228,6 @@ async function postTableData(req: Req, res: Res, next: any) {
 
       Object.assign(fullResult, movements.dataValues);
       Object.assign(fullResult, dodging.dataValues);
-      console.log('fullResult value: ', fullResult);
       return res.status(201).json(fullResult);
 
     } else if (req.params.table === 'stats') {
@@ -261,15 +257,11 @@ async function postTableData(req: Req, res: Res, next: any) {
 
       Object.assign(fullResult, stats.dataValues);
       Object.assign(fullResult, miscellaneous.dataValues);
-      console.log('fullResult value: ', fullResult);
       return res.status(201).json(fullResult);
 
     } else {
       throw new ClientError(400, `${req.params.table} is not a valid path parameter`);
     }
-    // if (result.rows.length === 0) {
-    //   throw new ClientError(404, `fighterId ${id} doesn't exist`);
-    // }
   } catch (e) {
     return next(e);
   }

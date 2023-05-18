@@ -26,7 +26,12 @@ async function createUser(req: Req, res: Res, next: any) {
       username: username,
       password: hashedPassword
     })
-    await sequelize.query(`DROP SCHEMA IF EXISTS "${username}" cascade;`); // for developmental testing purposes
+
+    // for developmental testing purposes
+    if(process.env.NODE_ENV === 'development') {
+      await sequelize.query(`DROP SCHEMA IF EXISTS "${username}" cascade;`);
+    }
+
     await sequelize.query(`CREATE SCHEMA IF NOT EXISTS "${username}"`);
     console.log(`${username} schema created`);
     defineUserDb(username);
@@ -57,13 +62,13 @@ async function authenticateUser(req: Req, res: Res, next: any) {
     if(!isValidPassword) {
       return res.status(401).json({ error: 'Invalid password'});
     }
-    const minutes = 30;
-    const expiration = Math.floor(Date.now() / 1000) + 60 * minutes;
+    const months = 1;
+    const expiration = Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 30 * months;
     const token = await jwt.sign({ userId: user.dataValues.id, exp: expiration }, process.env.TOKEN_SECRET);
     user.token = token;
     user.tokenExpiration = new Date(expiration * 1000);
     await user.save();
-    res.status(200).json({ token: token, expiration: `Token expires in ${minutes} minute(s)` });
+    res.status(200).json({ token: token, expiration: `Token expires in ${months} month` });
   } catch(e: any) {
     console.error(`error authenticating user: ${e}`);
     next(e);

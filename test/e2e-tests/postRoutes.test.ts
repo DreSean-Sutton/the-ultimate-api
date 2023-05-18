@@ -203,31 +203,61 @@ describe("POST /api/add/:table/:id", () => {
 
   const url = 'http://localhost:5000';
 
-  it("Returns a 400 status if fighterId doesn't exist", done => {
-        chai.request(url)
-          .post('/api/add/moves/923944')
-          .set('authorization', `Bearer ${testToken}`)
-          .set('username', 'test_username')
-          .set('content-type', 'application/json')
-          .send({
-            activeFrames: '155',
-            category: 'special',
-            damage: 'yes',
-            firstFrame: '1',
-            moveType: 'self damage',
-            name: 'instantly die',
-            totalFrames: '1',
-          })
-          .end((err, res) => {
-            if (err) {
-              console.log(err);
-              return done(err);
-            }
-            res.should.have.status(400);
-            res.body.should.have.property('error');
-            done();
-          })
-      })
+  describe("Unsuccessful requests", () => {
+
+    it("Returns a 400 status if fighterId doesn't exist", done => {
+          chai.request(url)
+            .post('/api/add/moves/923944')
+            .set('authorization', `Bearer ${testToken}`)
+            .set('username', 'test_username')
+            .set('content-type', 'application/json')
+            .send({
+              activeFrames: '155',
+              category: 'special',
+              damage: 'yes',
+              firstFrame: '1',
+              moveType: 'self damage',
+              name: 'instantly die',
+              totalFrames: '1',
+            })
+            .end((err, res) => {
+              if (err) {
+                console.log(err);
+                return done(err);
+              }
+              res.should.have.status(400);
+              res.body.should.have.property('error');
+              done();
+            })
+    })
+
+    it("Returns a 400 status if the table name doesn't exist", done => {
+      chai.request(url)
+            .post('/api/add/invalidTable/1')
+            .set('authorization', `Bearer ${testToken}`)
+            .set('username', 'test_username')
+            .set('content-type', 'application/json')
+            .send({
+              activeFrames: '155',
+              category: 'special',
+              damage: 'yes',
+              firstFrame: '1',
+              moveType: 'self damage',
+              name: 'instantly die',
+              totalFrames: '1',
+            })
+            .end((err, res) => {
+              if (err) {
+                console.log(err);
+                return done(err);
+              }
+              console.log(res.body);
+              res.should.have.status(400);
+              res.body.should.have.property('error');
+              done();
+            })
+    })
+  })
 
   describe("POST /api/add/moves/:id", () => {
 
