@@ -203,6 +203,32 @@ describe("POST /api/add/:table/:id", () => {
 
   const url = 'http://localhost:5000';
 
+  it("Returns a 400 status if fighterId doesn't exist", done => {
+        chai.request(url)
+          .post('/api/add/moves/923944')
+          .set('authorization', `Bearer ${testToken}`)
+          .set('username', 'test_username')
+          .set('content-type', 'application/json')
+          .send({
+            activeFrames: '155',
+            category: 'special',
+            damage: 'yes',
+            firstFrame: '1',
+            moveType: 'self damage',
+            name: 'instantly die',
+            totalFrames: '1',
+          })
+          .end((err, res) => {
+            if (err) {
+              console.log(err);
+              return done(err);
+            }
+            res.should.have.status(400);
+            res.body.should.have.property('error');
+            done();
+          })
+      })
+
   describe("POST /api/add/moves/:id", () => {
 
     const path = '/api/add/moves/90';
@@ -264,6 +290,27 @@ describe("POST /api/add/:table/:id", () => {
     })
     describe("Unsuccessful requests", () => {
 
+      it("Returns a 401 status if there's missing move req parameters", done => {
+        chai.request(url)
+          .post(path)
+          .set('authorization', `Bearer ${testToken}`)
+          .set('username', 'test_username')
+          .set('content-type', 'application/json')
+          .send({
+            activeFrames: '1',
+            category: 'special',
+            totalFrames: '1',
+          })
+          .end((err, res) => {
+            if (err) {
+              console.log(err);
+              return done(err);
+            }
+            res.should.have.status(400);
+            res.body.should.have.property('error');
+            done();
+          })
+      })
     })
   })
 
@@ -321,6 +368,26 @@ describe("POST /api/add/:table/:id", () => {
 
     describe("Unsuccessful requests", () => {
 
+      it("Returns a 401 status if there's missing throw req parameters", done => {
+        chai.request(url)
+          .post(path)
+          .set('authorization', `Bearer ${testToken}`)
+          .set('username', 'test_username')
+          .set('content-type', 'application/json')
+          .send({
+            activeFrames: '30',
+            totalFrames: '40'
+          })
+          .end((err, res) => {
+            if (err) {
+              console.log(err);
+              return done(err);
+            }
+            res.should.have.status(400);
+            res.body.should.have.property('error');
+            done();
+          })
+      })
     })
 
 
@@ -377,7 +444,26 @@ describe("POST /api/add/:table/:id", () => {
     })
 
     describe("Unsuccessful requests", () => {
-
+      it("Returns a 401 status if there's missing movement req parameters", done => {
+        chai.request(url)
+          .post(path)
+          .set('authorization', `Bearer ${testToken}`)
+          .set('username', 'test_username')
+          .set('content-type', 'application/json')
+          .send({
+            activeFrames: '3-17',
+            totalFrames: '20/25'
+          })
+          .end((err, res) => {
+            if (err) {
+              console.log(err);
+              return done(err);
+            }
+            res.should.have.status(400);
+            res.body.should.have.property('error');
+            done();
+          })
+      })
     })
 
 
@@ -432,7 +518,25 @@ describe("POST /api/add/:table/:id", () => {
     })
 
     describe("Unsuccessful requests", () => {
-
+      it("Returns a 401 status if there's missing stat req parameters", done => {
+        chai.request(url)
+          .post(path)
+          .set('authorization', `Bearer ${testToken}`)
+          .set('username', 'test_username')
+          .set('content-type', 'application/json')
+          .send({
+            name: 'walk speed',
+          })
+          .end((err, res) => {
+            if (err) {
+              console.log(err);
+              return done(err);
+            }
+            res.should.have.status(400);
+            res.body.should.have.property('error');
+            done();
+          })
+      })
     })
 
   })
