@@ -126,14 +126,19 @@ async function postTableData(req: Req, res: Res, next: any) {
       if (err) throw new ClientError(401, 'incorrect authorization header');
     });
 
-    let sql = '';
-    let sql2 = '';
-    let params;
-    let params2;
+    const FightersModel = sequelize.models.fighters;
+    const selectResult = await FightersModel.findOne({
+      where: {
+        fighterId: id
+      },
+      schema: usernameHeader});
+
+      if(!selectResult) {
+        throw new ClientError(400, `fighterId ${(id)} doesn't exist`);
+      }
 
     if (req.params.table === 'moves') {
       const reqParams = [name, moveType, damage, category, activeFrames, totalFrames, firstFrame];
-      console.log(reqParams);
       const isValid = reqParams.every(param => !!param);
       if (!isValid) {
         throw new ClientError(400, 'Must have (name), (moveType), (damage), (category), (activeFrames), (totalFrames), and (firstFrame) as parameters');
