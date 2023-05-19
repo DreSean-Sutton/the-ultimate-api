@@ -21,12 +21,13 @@ async function createUser(req: Req, res: Res, next: any) {
     await User.sync({ force: false });
     console.log('User table created');
     const hashedPassword = await argon2.hash(password);
-    const user = await User.create({
+    const { dataValues } = await User.create({
       email: email,
       username: username,
       password: hashedPassword
     })
-
+    delete dataValues.password;
+    console.log(dataValues);
     // for developmental testing purposes
     if(process.env.NODE_ENV === 'development') {
       await sequelize.query(`DROP SCHEMA IF EXISTS "${username}" cascade;`);
@@ -41,7 +42,7 @@ async function createUser(req: Req, res: Res, next: any) {
     await sequelize.sync({ schema: username });
     console.log(`All public tables have been added to ${username}`);
     handleRestartIds(username);
-    res.status(201).json(user);
+    res.status(201).json({ message: 'Registration successful', data: dataValues });
   } catch (e: any) {
     res.status(400).json(e);
     console.error(`Error creating schema: ${e}`);

@@ -29,7 +29,7 @@ describe("POST /api/auth/register", () => {
     }
 
     it("returns a 201 when user is created", done => {
-      const userKeys = ['id', 'email', 'username', 'password', 'updatedAt', 'createdAt', 'token', 'tokenExpiration'];
+      const userKeys = ['id', 'email', 'username', 'updatedAt', 'createdAt', 'token', 'tokenExpiration'];
       deleteUser();
 
 
@@ -43,7 +43,8 @@ describe("POST /api/auth/register", () => {
             return done(err);
           }
           res.should.have.status(201);
-          res.body.should.have.all.key(userKeys);
+          res.body.should.have.property('message');
+          res.body.data.should.have.all.key(userKeys);
           done();
         })
 
