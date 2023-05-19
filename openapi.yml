@@ -160,10 +160,77 @@ paths:
               schema:
                 $ref: '#/components/schemas/allData'
 
+  /api/auth/register:
+    post:
+      tags:
+      - Authentication
+      summary: >
+       Registers to the API and copies it's public fighter
+       information into your own database
+      requestBody:
+        description: >
+          Send a request with your `username`, `email`,
+          and `password` to register
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+              - username
+              - email
+              - password
+      responses:
+        '201':
+          description:
+            created
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                    data:
+                      type: object
+                      properties:
+                        createdAt:
+                          type: string
+                        email:
+                          type: string
+                        id:
+                          type: string
+                        token:
+                          nullable: true
+                        tokenExpiration:
+                          nullable: true
+                        updatedAt:
+                          type: string
+                        username:
+                          type: string
+                example:
+                  createdAt: 2023-05-19T16:36:48.131Z
+                  updatedAt: 2023-05-19T16:36:48.131Z
+                  id: 1
+                  email: songoku@gmail.com
+                  username: goku
+                  token: null
+                  tokenExpiration: null
+
+
   /api/add/fighters:
     post:
       tags:
-      - add
+      - Add
       summary: Add a Fighter and their basic data
       security:
         - BearerAuth: []
@@ -198,7 +265,7 @@ paths:
   /api/add/moves/{fighterId}:
     post:
       tags:
-      - add
+      - Add
       summary: Add move data to a Fighter
       security:
         - BearerAuth: []
@@ -237,7 +304,7 @@ paths:
   /api/add/throws/{fighterId}:
     post:
       tags:
-      - add
+      - Add
       summary: Add throw data to a Fighter
       security:
         - BearerAuth: []
@@ -267,7 +334,7 @@ paths:
   /api/add/movements/{fighterId}:
     post:
       tags:
-      - add
+      - Add
       summary: Add movement data to a Fighter
       security:
         - BearerAuth: []
@@ -304,7 +371,7 @@ paths:
   /api/add/stats/{fighterId}:
     post:
       tags:
-      - add
+      - Add
       summary: Add stat data to a Fighter
       security:
         - BearerAuth: []
@@ -339,7 +406,7 @@ paths:
   /api/update/fighters/{fighterId}:
     put:
       tags:
-      - update
+      - Update (Currently under maintenance)
       summary: Update a fighter's basic information
       security:
         - BearerAuth: []
@@ -376,7 +443,7 @@ paths:
   /api/update/moves/{moveId}:
     put:
       tags:
-      - update
+      - Update (Currently under maintenance)
       summary: Update a fighter's moves
       security:
         - BearerAuth: []
@@ -406,7 +473,7 @@ paths:
   /api/update/throws/{throwId}:
     put:
       tags:
-      - update
+      - Update (Currently under maintenance)
       summary: Update a fighter's throws
       security:
         - BearerAuth: []
@@ -436,7 +503,7 @@ paths:
   /api/update/movements/{movementId}:
     put:
       tags:
-      - update
+      - Update (Currently under maintenance)
       summary: Update a fighter's movements
       security:
         - BearerAuth: []
@@ -473,7 +540,7 @@ paths:
   /api/update/stats/{statId}:
     put:
       tags:
-      - update
+      - Update (Currently under maintenance)
       summary: Update a fighter's stats
       security:
         - BearerAuth: []
@@ -508,7 +575,7 @@ paths:
   /api/delete/fighters/{id}:
     delete:
       tags:
-      - delete
+      - Delete (Currently under maintenance)
       summary: Delete a fighter and all of their data
       security:
         - BearerAuth: []
@@ -527,7 +594,7 @@ paths:
   /api/delete/moves/{id}:
     delete:
       tags:
-      - delete
+      - Delete (Currently under maintenance)
       summary: Delete a fighter's move data
       security:
         - BearerAuth: []
@@ -546,7 +613,7 @@ paths:
   /api/delete/throws/{id}:
     delete:
       tags:
-      - delete
+      - Delete (Currently under maintenance)
       summary: Delete a fighter's throw data
       security:
         - BearerAuth: []
@@ -565,7 +632,7 @@ paths:
   /api/delete/movements/{id}:
     delete:
       tags:
-      - delete
+      - Delete (Currently under maintenance)
       summary: Delete a fighter's movement data
       security:
         - BearerAuth: []
@@ -584,7 +651,7 @@ paths:
   /api/delete/stats/{id}:
     delete:
       tags:
-      - delete
+      - Delete (Currently under maintenance)
       summary: Delete a fighter's stat data
       security:
         - BearerAuth: []
