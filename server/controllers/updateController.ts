@@ -20,6 +20,8 @@ import { client } from '../conn';
  * @return { object }
  */
 async function updateTableData(req: Req, res: Res, next: any) {
+  return res.status(401).json({ error: 'Currently undergoing maintenance' }); // temporary until update is finished
+
   const authHeader: string = req.headers['authorization'];
   const fullResult = {};
   const { fighter, displayName, name, moveType, damage, category, activeFrames, totalFrames, firstFrame, statValue } = req.body;

@@ -32,7 +32,6 @@ describe("POST /api/auth/register", () => {
       const userKeys = ['id', 'email', 'username', 'updatedAt', 'createdAt', 'token', 'tokenExpiration'];
       deleteUser();
 
-
       chai.request(url)
         .post(path)
         .set('content-type', 'application/json')
@@ -162,11 +161,11 @@ describe("POST /api/auth/register", () => {
   })
 })
 
-describe("POST /api/auth/login", () => {
+describe("POST /api/auth/generate-token", () => {
   const email = 'test_email@gmail.com';
   const password = 'test_password';
   const url = 'http://localhost:5000';
-  const path = '/api/auth/login';
+  const path = '/api/auth/generate-token';
 
 
   describe("successful requests", () => {

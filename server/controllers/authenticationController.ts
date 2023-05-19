@@ -69,7 +69,7 @@ async function authenticateUser(req: Req, res: Res, next: any) {
     user.token = token;
     user.tokenExpiration = new Date(expiration * 1000);
     await user.save();
-    res.status(200).json({ token: token, expiration: `Token expires in ${months} month` });
+    res.status(200).json({ token: token, expiration: `${months} month` });
   } catch(e: any) {
     console.error(`error authenticating user: ${e}`);
     next(e);
@@ -77,6 +77,7 @@ async function authenticateUser(req: Req, res: Res, next: any) {
 }
 
 async function deleteUser(req: Req, res: Res, next: any) {
+  if(process.env.NODE_ENV !== 'development') return;
   const user = await User.destroy({
     truncate: true
   });

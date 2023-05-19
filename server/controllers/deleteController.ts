@@ -10,6 +10,8 @@ import { client } from '../conn';
  * @return 204 status code
  */
 async function deleteFromTable(req: Req, res: Res, next: any) {
+  return res.status(401).json({ error: 'Currently undergoing maintenance' }); // temporary until update is finished
+
   const authHeader: string = req.headers['authorization'];
 
   try {
