@@ -166,7 +166,7 @@ paths:
       - Authentication
       summary: >
        Registers to the API and copies it's public fighter
-       information into your own database
+       information into your personal database
       requestBody:
         description: >
           Send a request with your `username`, `email`,
@@ -226,6 +226,48 @@ paths:
                   token: null
                   tokenExpiration: null
 
+  /api/auth/generate-token:
+    post:
+      tags:
+      - Authentication
+      summary: >
+        Generates a token that can be used to interact
+        with your personal database
+      requestBody:
+        description: >
+          Send a request with your `email` and `password`
+          to receive your authentication token
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+              - email
+              - password
+      responses:
+        '200':
+          description:
+            ok
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  type: object
+                  properties:
+                    token:
+                      type: string
+                    expiration:
+                      type: string
+                example:
+                  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImV4cCI6MTY4NzEwODA2MCwiaWF0IjoxNjg0NTE2MDYwfQ.vtMcElnVPyKj6O_5GAGrKoarEynPjHJTo8oZXY5VWRc
+                  expiration: 1 month
 
   /api/add/fighters:
     post:
