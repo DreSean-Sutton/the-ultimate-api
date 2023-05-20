@@ -51,19 +51,22 @@ async function registerUser(req: Req, res: Res, next: any) {
 async function showToken(req: Req, res: Res, next: any) {
   try {
     const { email, password } = req.body;
-    console.log({email, password});
     if(!email || !email.includes('@') || !password) {
-      return res.status(400).json({ error: 'Must provide valid email and password'});
+      throw new ClientError(400, 'Must provide valid email and password');
     }
     const user = await User.findOne({ where: { email: email }});
     if(!user) {
-      return res.status(401).json({ error: 'Invalid email'});
+      throw new ClientError(401, 'Invalid email');
     }
-    const { token, tokenExpiration } = user.dataValues;
     const isValidPassword = await argon2.verify(user.dataValues.password, password);
     if(!isValidPassword) {
-      return res.status(401).json({ error: 'Invalid password'});
+      throw new ClientError(401, 'Invalid password');
     }
+    const { token, tokenExpiration } = user.dataValues;
+    if(!token) {
+      throw new ClientError(401, "Token doesn't exist. Please generate a token");
+    }
+    console.log(token, tokenExpiration)
     res.status(200).json({ token: token, expirationDate: tokenExpiration })
   } catch(e) {
     console.error(`error authenticating user: ${e}`);
@@ -75,15 +78,15 @@ async function generateToken(req: Req, res: Res, next: any) {
   try {
     const { email, password } = req.body;
     if(!email || !email.includes('@') || !password) {
-      return res.status(400).json({ error: 'Must provide valid email and password'});
+      throw new ClientError(400, 'Must provide valid email and password');
     }
     const user = await User.findOne({ where: { email: email }});
     if(!user) {
-      return res.status(401).json({ error: 'Invalid email'});
+      throw new ClientError(401, 'Invalid email');
     }
     const isValidPassword = await argon2.verify(user.dataValues.password, password);
     if(!isValidPassword) {
-      return res.status(401).json({ error: 'Invalid password'});
+      throw new ClientError(401, 'Invalid password');
     }
     const months = 1;
     const expiration = Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 30 * months;

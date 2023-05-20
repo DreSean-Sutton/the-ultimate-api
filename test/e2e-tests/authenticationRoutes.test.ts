@@ -296,7 +296,6 @@ describe("POST /api/auth/show-token", () => {
           done();
         })
     })
-
     it("returns a 401 status if email isn't in the database", done => {
 
       chai.request(url)
