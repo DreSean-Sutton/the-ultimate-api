@@ -16,7 +16,6 @@ describe("POST /api/auth/register", () => {
       .query({})
       .end((err, res) => {
         res.should.have.status(204);
-        console.log(res.body);
       })
   }
 
@@ -228,6 +227,82 @@ describe("POST /api/auth/generate-token", () => {
         .post(path)
         .set('content-type', 'application/json')
         .send({email: email, password: `${password}_random_string`})
+        .end((err, res) => {
+          if (err) {
+            console.log(err);
+            return done(err);
+          }
+          res.should.have.status(401);
+          res.body.should.have.property('error');
+          done();
+        })
+    })
+  })
+})
+
+describe("POST /api/auth/show-token", () => {
+  const email = 'test_email@gmail.com';
+  const password = 'test_password';
+  const url = 'http://localhost:5000';
+  const path = '/api/auth/show-token';
+
+  describe("successful requests", () => {
+    it("Returns a user's token and it's expiration date", done => {
+      chai.request(url)
+        .post(path)
+        .set('content-type', 'application/json')
+        .send({ email: email, password: password })
+        .end((err, res) => {
+          if(err) {
+            console.log(err)
+            return done(err);
+          }
+          res.should.have.status(200);
+          res.body.should.have.all.keys(['token', 'expirationDate']);
+          done();
+        })
+    })
+  })
+  describe("unsuccessful requests", () => {
+    it("returns a 401 status if password isn't in the database", done => {
+
+      chai.request(url)
+        .post(path)
+        .set('content-type', 'application/json')
+        .send({email: email, password: `${password}_random_string`})
+        .end((err, res) => {
+          if (err) {
+            console.log(err);
+            return done(err);
+          }
+          res.should.have.status(401);
+          res.body.should.have.property('error');
+          done();
+        })
+    })
+    it("returns a 400 request if email isn't valid", done => {
+
+      chai.request(url)
+        .post(path)
+        .set('content-type', 'application/json')
+        .send({email: null, password: password})
+        .end((err, res) => {
+          if (err) {
+            console.log(err);
+            return done(err);
+          }
+          res.should.have.status(400);
+          res.body.should.have.property('error');
+          done();
+        })
+    })
+
+    it("returns a 401 status if email isn't in the database", done => {
+
+      chai.request(url)
+        .post(path)
+        .set('content-type', 'application/json')
+        .send({email: `${email}_random_string`, password: password})
         .end((err, res) => {
           if (err) {
             console.log(err);

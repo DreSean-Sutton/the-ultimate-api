@@ -22,7 +22,6 @@ describe("POST /api/add/fighters", () => {
   describe("successful requests", () => {
     it("returns a 201 status if a fighter successfully inserted", done => {
 
-      console.log(testToken);
       const returnedKeys = ['createdAt', 'updatedAt', 'fighterId', 'fighter', 'rosterId', 'displayName'];
 
       chai.request(url)
@@ -77,7 +76,6 @@ describe("POST /api/add/fighters", () => {
             console.log(err);
             return done(err);
           }
-          console.log(res.body);
           res.should.have.status(400);
           res.body.should.have.property('error');
           done();
@@ -95,7 +93,6 @@ describe("POST /api/add/fighters", () => {
             console.log(err);
             return done(err);
           }
-          console.log(res.body);
           res.should.have.status(400);
           res.body.should.have.property('error');
           done();
@@ -114,7 +111,6 @@ describe("POST /api/add/fighters", () => {
             console.log(err);
             return done(err);
           }
-          console.log(res.body);
           res.should.have.status(401);
           res.body.should.have.property('error');
           done();
@@ -133,7 +129,6 @@ describe("POST /api/add/fighters", () => {
             console.log(err);
             return done(err);
           }
-          console.log(res.body);
           res.should.have.status(401);
           res.body.should.have.property('error');
           done();
@@ -152,7 +147,6 @@ describe("POST /api/add/fighters", () => {
             console.log(err);
             return done(err);
           }
-          console.log(res.body);
           res.should.have.status(400);
           res.body.should.have.property('error');
           done();
@@ -171,7 +165,6 @@ describe("POST /api/add/fighters", () => {
             console.log(err);
             return done(err);
           }
-          console.log(res.body);
           res.should.have.status(400);
           res.body.should.have.property('error');
           done();
@@ -190,7 +183,6 @@ describe("POST /api/add/fighters", () => {
             console.log(err);
             return done(err);
           }
-          console.log(res.body);
           res.should.have.status(400);
           res.body.should.have.property('error');
           done();
@@ -251,7 +243,6 @@ describe("POST /api/add/:table/:id", () => {
                 console.log(err);
                 return done(err);
               }
-              console.log(res.body);
               res.should.have.status(400);
               res.body.should.have.property('error');
               done();
