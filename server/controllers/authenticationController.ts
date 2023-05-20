@@ -9,7 +9,7 @@ const { sequelize } = require('../conn');
 const argon2 = require('argon2');
 const jwt = require('jsonwebtoken');
 
-async function createUser(req: Req, res: Res, next: any) {
+async function registerUser(req: Req, res: Res, next: any) {
 
   const { email, username, password } = req.body;
   if (!email || !email.includes('@') || !username || !password) {
@@ -27,7 +27,6 @@ async function createUser(req: Req, res: Res, next: any) {
       password: hashedPassword
     })
     delete dataValues.password;
-    console.log(dataValues);
     // for developmental testing purposes
     if(process.env.NODE_ENV === 'development') {
       await sequelize.query(`DROP SCHEMA IF EXISTS "${username}" cascade;`);
@@ -49,7 +48,30 @@ async function createUser(req: Req, res: Res, next: any) {
   }
 }
 
-async function authenticateUser(req: Req, res: Res, next: any) {
+async function showToken(req: Req, res: Res, next: any) {
+  try {
+    const { email, password } = req.body;
+    console.log({email, password});
+    if(!email || !email.includes('@') || !password) {
+      return res.status(400).json({ error: 'Must provide valid email and password'});
+    }
+    const user = await User.findOne({ where: { email: email }});
+    if(!user) {
+      return res.status(401).json({ error: 'Invalid email'});
+    }
+    const { token, tokenExpiration } = user.dataValues;
+    const isValidPassword = await argon2.verify(user.dataValues.password, password);
+    if(!isValidPassword) {
+      return res.status(401).json({ error: 'Invalid password'});
+    }
+    res.status(200).json({ token: token, expirationDate: tokenExpiration })
+  } catch(e) {
+    console.error(`error authenticating user: ${e}`);
+    next(e);
+  }
+}
+
+async function generateToken(req: Req, res: Res, next: any) {
   try {
     const { email, password } = req.body;
     if(!email || !email.includes('@') || !password) {
@@ -85,7 +107,8 @@ async function deleteUser(req: Req, res: Res, next: any) {
 }
 
 module.exports = {
-  createUser,
-  authenticateUser,
+  registerUser,
+  showToken,
+  generateToken,
   deleteUser,
 }
