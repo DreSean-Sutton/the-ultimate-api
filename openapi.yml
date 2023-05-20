@@ -234,9 +234,7 @@ paths:
         Generates a token that can be used to interact
         with your personal database
       requestBody:
-        description: >
-          Send a request with your `email` and `password`
-          to receive your authentication token
+        description: Send a request with your valid `email` and `password`
         required: true
         content:
           application/json:
@@ -268,6 +266,45 @@ paths:
                 example:
                   token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImV4cCI6MTY4NzEwODA2MCwiaWF0IjoxNjg0NTE2MDYwfQ.vtMcElnVPyKj6O_5GAGrKoarEynPjHJTo8oZXY5VWRc
                   expiration: 1 month
+
+  /api/auth/show-token:
+    post:
+      tags:
+      - Authentication
+      summary: Show's your token and its expiration date
+      requestBody:
+        description: Send a request with your valid `email` and `password`
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+              - email
+              - password
+      responses:
+        '200':
+          description:
+            ok
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  type: object
+                  properties:
+                    token:
+                      type: string
+                    expirationDate:
+                      type: string
+                example:
+                  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImV4cCI6MTY4NzE5MDE5NCwiaWF0IjoxNjg0NTk4MTk0fQ.0RA0Y2WRoA16Bs0YUxgHrvU7e2PG0ng2aR6b4K3ms0o
+                  expirationDate: 2023-06-19T15:56:34.000Z
 
   /api/add/fighters:
     post:
