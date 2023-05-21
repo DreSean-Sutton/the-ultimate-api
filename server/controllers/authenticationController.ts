@@ -108,9 +108,9 @@ async function deleteUser(req: Req, res: Res, next: any) {
       FROM information_schema.schemata
       WHERE schema_name = 'user'
     `;
-    const [result] = await sequelize.query(schemaQuery);
-
-    if(!result.length) {
+    const [schemaResult] = await sequelize.query(schemaQuery);
+    console.log(schemaResult);
+    if(!schemaResult.length) {
       return;
     }
     const user = await User.destroy({ truncate: true });
