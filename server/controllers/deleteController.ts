@@ -1,9 +1,7 @@
-import ClientError from '../utils/client-error';
-import { db } from '../conn';
-import { Req, Res } from '../utils/types-routes';
-
-var express = require('express');
-const deleteRoutes = express.Router(); // Base route: 'api/delete'
+const { fighters } = require('../model/user-database');
+import { Req, Res } from "../utils/types-routes";
+import ClientError from "../utils/client-error";
+import { client } from '../conn';
 
 /**
  * Delete route that removes data from a table and id of your choice
@@ -11,7 +9,8 @@ const deleteRoutes = express.Router(); // Base route: 'api/delete'
  * @param { number } id   // fighterId, moveId, throwId, movementId, or statId
  * @return 204 status code
  */
-deleteRoutes.delete('/:table/:id', async (req: Req, res: Res, next: (param1: any) => any) => {
+async function deleteFromTable(req: Req, res: Res, next: any) {
+  return res.status(401).json({ error: 'Currently undergoing maintenance' }); // temporary until update is finished
 
   const authHeader: string = req.headers['authorization'];
 
@@ -73,7 +72,7 @@ deleteRoutes.delete('/:table/:id', async (req: Req, res: Res, next: (param1: any
     } else {
       throw new ClientError(400, `${req.params.table} is not a valid path parameter`);
     }
-    const result = await db.query(sql, params);
+    const result = await client.query(sql, params);
     if (result.rowCount === 0) {
       throw new ClientError(404, notFoundError);
     }
@@ -81,6 +80,8 @@ deleteRoutes.delete('/:table/:id', async (req: Req, res: Res, next: (param1: any
   } catch (e) {
     return next(e);
   }
-});
+}
 
-module.exports = deleteRoutes;
+module.exports = {
+  deleteFromTable,
+}

@@ -1,9 +1,6 @@
-import ClientError from '../utils/client-error';
-import { db } from '../conn';
-import { Req, Res } from '../utils/types-routes';
-
-var express = require('express');
-const updateRoutes = express.Router(); // base route: 'api/update'
+import { Req, Res } from "../utils/types-routes";
+import ClientError from "../utils/client-error";
+import { client } from '../conn';
 
 /**
  *
@@ -22,7 +19,8 @@ const updateRoutes = express.Router(); // base route: 'api/update'
  * @param { number } id   // fighterId, moveId, throwId, movementId, or statId
  * @return { object }
  */
-updateRoutes.put('/:table/:id', async (req: Req, res: Res, next: (param1: any) => any) => {
+async function updateTableData(req: Req, res: Res, next: any) {
+  return res.status(401).json({ error: 'Currently undergoing maintenance' }); // temporary until update is finished
 
   const authHeader: string = req.headers['authorization'];
   const fullResult = {};
@@ -58,7 +56,7 @@ updateRoutes.put('/:table/:id', async (req: Req, res: Res, next: (param1: any) =
         RETURNING *;
       `;
       const params = [id, fighter, rosterId, displayName];
-      const result = await db.query(sql, params);
+      const result = await client.query(sql, params);
       if (result.rows.length === 0) {
         throw new ClientError(404, `fighterId ${id} does not exist`);
       }
@@ -77,7 +75,7 @@ updateRoutes.put('/:table/:id', async (req: Req, res: Res, next: (param1: any) =
           RETURNING *;
       `;
       let params = [id, name, moveType, category];
-      let result = await db.query(sql, params);
+      let result = await client.query(sql, params);
       if (result.rows.length === 0) {
         throw new ClientError(404, `moveId ${id} does not exist`);
       }
@@ -95,7 +93,7 @@ updateRoutes.put('/:table/:id', async (req: Req, res: Res, next: (param1: any) =
         RETURNING *;
       `;
       params = [id, damage, activeFrames, totalFrames, firstFrame];
-      result = await db.query(sql, params);
+      result = await client.query(sql, params);
       Object.assign(fullResult, result.rows[0]);
       return res.status(200).json(fullResult);
 
@@ -110,7 +108,7 @@ updateRoutes.put('/:table/:id', async (req: Req, res: Res, next: (param1: any) =
         RETURNING *;
       `;
       let params = [id, name];
-      let result = await db.query(sql, params);
+      let result = await client.query(sql, params);
       if (result.rows.length === 0) {
         throw new ClientError(404, `throwId ${id} does not exist`);
       }
@@ -127,7 +125,7 @@ updateRoutes.put('/:table/:id', async (req: Req, res: Res, next: (param1: any) =
         RETURNING *;
       `;
       params = [id, damage, activeFrames, totalFrames];
-      result = await db.query(sql, params);
+      result = await client.query(sql, params);
       if (result.rows.length === 0) {
         throw new ClientError(404, `throwId ${id} does not exist`);
       }
@@ -145,7 +143,7 @@ updateRoutes.put('/:table/:id', async (req: Req, res: Res, next: (param1: any) =
         RETURNING *;
       `;
       let params = [id, name];
-      let result = await db.query(sql, params);
+      let result = await client.query(sql, params);
       if (result.rows.length === 0) {
         throw new ClientError(404, `movementId ${id} does not exist`);
       }
@@ -161,7 +159,7 @@ updateRoutes.put('/:table/:id', async (req: Req, res: Res, next: (param1: any) =
         RETURNING *;
       `;
       params = [id, activeFrames, totalFrames];
-      result = await db.query(sql, params);
+      result = await client.query(sql, params);
       if (result.rows.length === 0) {
         throw new ClientError(404, `movementId ${id} does not exist`);
       }
@@ -179,7 +177,7 @@ updateRoutes.put('/:table/:id', async (req: Req, res: Res, next: (param1: any) =
         RETURNING *;
       `;
       let params = [id, name];
-      let result = await db.query(sql, params);
+      let result = await client.query(sql, params);
       if (result.rows.length === 0) {
         throw new ClientError(404, `statId ${id} does not exist`);
       }
@@ -194,7 +192,7 @@ updateRoutes.put('/:table/:id', async (req: Req, res: Res, next: (param1: any) =
         RETURNING *;
       `;
       params = [id, statValue];
-      result = await db.query(sql, params);
+      result = await client.query(sql, params);
       if (result.rows.length === 0) {
         throw new ClientError(404, `statId ${id} does not exist`);
       }
@@ -206,6 +204,8 @@ updateRoutes.put('/:table/:id', async (req: Req, res: Res, next: (param1: any) =
   } catch (e) {
     return next(e);
   }
-});
+}
 
-module.exports = updateRoutes;
+module.exports = {
+  updateTableData,
+}

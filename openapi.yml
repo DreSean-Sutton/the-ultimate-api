@@ -160,19 +160,160 @@ paths:
               schema:
                 $ref: '#/components/schemas/allData'
 
+  /api/auth/register:
+    post:
+      tags:
+      - Authentication
+      summary: >
+       Registers to the API and copies it's public fighter
+       information into your personal database
+      requestBody:
+        description: >
+          Send a request with your `username`, `email`,
+          and `password` to register
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+              - username
+              - email
+              - password
+      responses:
+        '201':
+          description:
+            created
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                    data:
+                      type: object
+                      properties:
+                        createdAt:
+                          type: string
+                        email:
+                          type: string
+                        id:
+                          type: string
+                        token:
+                          nullable: true
+                        tokenExpiration:
+                          nullable: true
+                        updatedAt:
+                          type: string
+                        username:
+                          type: string
+                example:
+                  createdAt: 2023-05-19T16:36:48.131Z
+                  updatedAt: 2023-05-19T16:36:48.131Z
+                  id: 1
+                  email: songoku@gmail.com
+                  username: goku
+                  token: null
+                  tokenExpiration: null
+
+  /api/auth/generate-token:
+    post:
+      tags:
+      - Authentication
+      summary: >
+        Generates a token that can be used to interact
+        with your personal database
+      requestBody:
+        description: Send a request with your valid `email` and `password`
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+              - email
+              - password
+      responses:
+        '200':
+          description:
+            ok
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  type: object
+                  properties:
+                    token:
+                      type: string
+                    expiration:
+                      type: string
+                example:
+                  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImV4cCI6MTY4NzEwODA2MCwiaWF0IjoxNjg0NTE2MDYwfQ.vtMcElnVPyKj6O_5GAGrKoarEynPjHJTo8oZXY5VWRc
+                  expiration: 1 month
+
+  /api/auth/show-token:
+    post:
+      tags:
+      - Authentication
+      summary: Show's your token and its expiration date
+      requestBody:
+        description: Send a request with your valid `email` and `password`
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+              - email
+              - password
+      responses:
+        '200':
+          description:
+            ok
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  type: object
+                  properties:
+                    token:
+                      type: string
+                    expirationDate:
+                      type: string
+                example:
+                  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImV4cCI6MTY4NzE5MDE5NCwiaWF0IjoxNjg0NTk4MTk0fQ.0RA0Y2WRoA16Bs0YUxgHrvU7e2PG0ng2aR6b4K3ms0o
+                  expirationDate: 2023-06-19T15:56:34.000Z
+
   /api/add/fighters:
     post:
       tags:
-      - add
+      - Add
       summary: Add a Fighter and their basic data
       security:
-        - ApiKeyAuth: []
-      parameters:
-        - name: api_key
-          in: header
-          required: true
-          schema:
-            type: string
+        - BearerAuth: []
+        - UsernameHeader: []
       requestBody:
         description: Click `Try it out` and edit your request!
         required: true
@@ -203,16 +344,12 @@ paths:
   /api/add/moves/{fighterId}:
     post:
       tags:
-      - add
+      - Add
       summary: Add move data to a Fighter
       security:
-        - ApiKeyAuth: []
+        - BearerAuth: []
+        - UsernameHeader: []
       parameters:
-      - name: authorization
-        in: header
-        required: false
-        schema:
-          type: string
       - in: path
         name: fighterId
         schema:
@@ -246,16 +383,12 @@ paths:
   /api/add/throws/{fighterId}:
     post:
       tags:
-      - add
+      - Add
       summary: Add throw data to a Fighter
       security:
-        - ApiKeyAuth: []
+        - BearerAuth: []
+        - UsernameHeader: []
       parameters:
-      - name: authorization
-        in: header
-        required: false
-        schema:
-          type: string
       - in: path
         name: fighterId
         schema:
@@ -280,16 +413,12 @@ paths:
   /api/add/movements/{fighterId}:
     post:
       tags:
-      - add
+      - Add
       summary: Add movement data to a Fighter
       security:
-        - ApiKeyAuth: []
+        - BearerAuth: []
+        - UsernameHeader: []
       parameters:
-      - name: authorization
-        in: header
-        required: false
-        schema:
-          type: string
       - in: path
         name: fighterId
         schema:
@@ -321,16 +450,12 @@ paths:
   /api/add/stats/{fighterId}:
     post:
       tags:
-      - add
+      - Add
       summary: Add stat data to a Fighter
       security:
-        - ApiKeyAuth: []
+        - BearerAuth: []
+        - UsernameHeader: []
       parameters:
-      - name: authorization
-        in: header
-        required: false
-        schema:
-          type: string
       - in: path
         name: fighterId
         schema:
@@ -360,16 +485,12 @@ paths:
   /api/update/fighters/{fighterId}:
     put:
       tags:
-      - update
+      - Update (Currently under maintenance)
       summary: Update a fighter's basic information
       security:
-        - ApiKeyAuth: []
+        - BearerAuth: []
+        - UsernameHeader: []
       parameters:
-      - name: authorization
-        in: header
-        required: false
-        schema:
-          type: string
       - in: path
         name: fighterId
         schema:
@@ -401,16 +522,12 @@ paths:
   /api/update/moves/{moveId}:
     put:
       tags:
-      - update
+      - Update (Currently under maintenance)
       summary: Update a fighter's moves
       security:
-        - ApiKeyAuth: []
+        - BearerAuth: []
+        - UsernameHeader: []
       parameters:
-      - name: authorization
-        in: header
-        required: false
-        schema:
-          type: string
       - in: path
         name: moveId
         schema:
@@ -435,16 +552,12 @@ paths:
   /api/update/throws/{throwId}:
     put:
       tags:
-      - update
+      - Update (Currently under maintenance)
       summary: Update a fighter's throws
       security:
-        - ApiKeyAuth: []
+        - BearerAuth: []
+        - UsernameHeader: []
       parameters:
-      - name: authorization
-        in: header
-        required: false
-        schema:
-          type: string
       - in: path
         name: throwId
         schema:
@@ -469,16 +582,12 @@ paths:
   /api/update/movements/{movementId}:
     put:
       tags:
-      - update
+      - Update (Currently under maintenance)
       summary: Update a fighter's movements
       security:
-        - ApiKeyAuth: []
+        - BearerAuth: []
+        - UsernameHeader: []
       parameters:
-      - name: authorization
-        in: header
-        required: false
-        schema:
-          type: string
       - in: path
         name: movementId
         schema:
@@ -510,16 +619,12 @@ paths:
   /api/update/stats/{statId}:
     put:
       tags:
-      - update
+      - Update (Currently under maintenance)
       summary: Update a fighter's stats
       security:
-        - ApiKeyAuth: []
+        - BearerAuth: []
+        - UsernameHeader: []
       parameters:
-      - name: authorization
-        in: header
-        required: false
-        schema:
-          type: string
       - in: path
         name: statId
         schema:
@@ -549,16 +654,12 @@ paths:
   /api/delete/fighters/{id}:
     delete:
       tags:
-      - delete
+      - Delete (Currently under maintenance)
       summary: Delete a fighter and all of their data
       security:
-        - ApiKeyAuth: []
+        - BearerAuth: []
+        - UsernameHeader: []
       parameters:
-      - name: authorization
-        in: header
-        required: false
-        schema:
-          type: string
       - in: path
         name: id
         schema:
@@ -572,16 +673,12 @@ paths:
   /api/delete/moves/{id}:
     delete:
       tags:
-      - delete
+      - Delete (Currently under maintenance)
       summary: Delete a fighter's move data
       security:
-        - ApiKeyAuth: []
+        - BearerAuth: []
+        - UsernameHeader: []
       parameters:
-      - name: authorization
-        in: header
-        required: false
-        schema:
-          type: string
       - in: path
         name: id
         schema:
@@ -595,16 +692,12 @@ paths:
   /api/delete/throws/{id}:
     delete:
       tags:
-      - delete
+      - Delete (Currently under maintenance)
       summary: Delete a fighter's throw data
       security:
-        - ApiKeyAuth: []
+        - BearerAuth: []
+        - UsernameHeader: []
       parameters:
-      - name: authorization
-        in: header
-        required: false
-        schema:
-          type: string
       - in: path
         name: id
         schema:
@@ -618,16 +711,12 @@ paths:
   /api/delete/movements/{id}:
     delete:
       tags:
-      - delete
+      - Delete (Currently under maintenance)
       summary: Delete a fighter's movement data
       security:
-        - ApiKeyAuth: []
+        - BearerAuth: []
+        - UsernameHeader: []
       parameters:
-      - name: authorization
-        in: header
-        required: false
-        schema:
-          type: string
       - in: path
         name: id
         schema:
@@ -641,16 +730,12 @@ paths:
   /api/delete/stats/{id}:
     delete:
       tags:
-      - delete
+      - Delete (Currently under maintenance)
       summary: Delete a fighter's stat data
       security:
-        - ApiKeyAuth: []
+        - BearerAuth: []
+        - UsernameHeader: []
       parameters:
-      - name: authorization
-        in: header
-        required: true
-        schema:
-          type: string
       - in: path
         name: id
         schema:
@@ -663,11 +748,13 @@ paths:
 
 components:
   securitySchemes:
-    ApiKeyAuth:
+    BearerAuth:
+      type: http
+      scheme: bearer
+    UsernameHeader:
       type: apiKey
       in: header
-      name: authorization
-
+      name: username
   schemas:
     fightersResponse:
       type: object

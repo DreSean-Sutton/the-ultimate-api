@@ -1,3 +1,8 @@
+import { Req, Res, QueryString } from "../utils/types-routes";
+import ClientError from "../utils/client-error";
+import { client } from '../conn';
+const sqlQueries = require('../utils/sql-queries');
+
 /**
  * All routes accept query strings for specifying a single fighter
  * Can specify `fighter` name, `fighterId`, and `rosterId`
@@ -8,22 +13,14 @@
  * @param { boolean } orderByRosterId // query string
  */
 
-import ClientError from '../utils/client-error';
-import { db } from '../conn';
-import { Req, Res, QueryString } from '../utils/types-routes';
-
-var express = require('express');
-const sqlQueries = require('../utils/sql-queries');
-const getRoutes = express.Router();
 
 
 /**
- * Get Route that returns all fighters and their basic fighter data
+ * Get controller that returns all fighters and their basic fighter data
  * Can use query strings to return a single fighter object
  * @return { object | [object] }
  */
-getRoutes.get('/fighters', async (req: Req, res: Res, next: (param1: any) => any) => {
-
+async function getFighters(req: Req, res: Res, next: any) {
   const queryStr: QueryString = req.query;
   const queryKey = Object.keys(queryStr);
 
@@ -38,7 +35,7 @@ getRoutes.get('/fighters', async (req: Req, res: Res, next: (param1: any) => any
       if (/\d/g.test(params[0])) {
         throw new ClientError(400, 'fighter name can\'t have a number');
       }
-      const result = await db.query(sql, params);
+      const result = await client.query(sql, params);
       if (result.rows.length === 0) {
         throw new ClientError(404, `${queryKey} named ${params} doesn't exist in the database`);
       }
@@ -50,7 +47,7 @@ getRoutes.get('/fighters', async (req: Req, res: Res, next: (param1: any) => any
   if (queryStr.fighterId) {
     try {
       if (!Number(queryStr.fighterId) ||
-      (Number(queryStr.fighterId) > 2147483647)) {
+        (Number(queryStr.fighterId) > 2147483647)) {
         throw new ClientError(400, 'fighterId must be an integer');
       }
       const sql = `
@@ -59,7 +56,7 @@ getRoutes.get('/fighters', async (req: Req, res: Res, next: (param1: any) => any
         "fighterId"=$1
       `;
       const params = [queryStr.fighterId];
-      const result = await db.query(sql, params);
+      const result = await client.query(sql, params);
       if (result.rows.length === 0) {
         throw new ClientError(404, `${queryKey} ${params} doesn't exist in the database`);
       }
@@ -71,7 +68,7 @@ getRoutes.get('/fighters', async (req: Req, res: Res, next: (param1: any) => any
   if (queryStr.rosterId) {
     try {
       if (!Number(queryStr.rosterId) ||
-      (Number(queryStr.rosterId) > 2147483647)) {
+        (Number(queryStr.rosterId) > 2147483647)) {
         throw new ClientError(400, 'rosterId must be an integer');
       }
       const sql = `
@@ -80,7 +77,7 @@ getRoutes.get('/fighters', async (req: Req, res: Res, next: (param1: any) => any
         "rosterId"=$1
       `;
       const params = [queryStr.rosterId];
-      const result = await db.query(sql, params);
+      const result = await client.query(sql, params);
       if (result.rows.length === 0) {
         throw new ClientError(404, `${queryKey} ${params} doesn't exist in the database`);
       }
@@ -99,7 +96,7 @@ getRoutes.get('/fighters', async (req: Req, res: Res, next: (param1: any) => any
       ORDER BY
       "rosterId"
       `;
-      const result = await db.query(sql);
+      const result = await client.query(sql);
       return res.status(200).send(result.rows);
     } catch (e) {
       return next(e);
@@ -110,19 +107,19 @@ getRoutes.get('/fighters', async (req: Req, res: Res, next: (param1: any) => any
       throw new ClientError(400, `${queryKey} is not a valid query key`);
     }
     const sql = `${sqlQueries.getFighters()}`;
-    const result = await db.query(sql);
+    const result = await client.query(sql);
     return res.status(200).send(result.rows);
   } catch (e) {
     return next(e);
   }
-});
+}
 
 /**
  * Get route that returns an array of objects with all fighters and all their non-basic data
  * Can use query strings to return a single fighter object
  * @return { object | [object] }
  */
-getRoutes.get('/fighters/data', async (req: Req, res: Res, next: (param1: any) => any) => {
+async function getFightersData(req: Req, res: Res, next: any) {
   const fullResult: any[] = [];
   return renderAllData(0);
 
@@ -149,7 +146,7 @@ getRoutes.get('/fighters/data', async (req: Req, res: Res, next: (param1: any) =
         if (/\d/g.test(params)) {
           throw new ClientError(400, 'fighter name can\'t have a number');
         }
-        const result: any = await db.query(sql, params);
+        const result: any = await client.query(sql, params);
         if (result.rows.length === 0) {
           throw new ClientError(404, `${queryKey} named ${params} doesn't exist in the database`);
         }
@@ -171,7 +168,7 @@ getRoutes.get('/fighters/data', async (req: Req, res: Res, next: (param1: any) =
         if (!Number(params)) {
           throw new ClientError(400, 'fighterId must be an integer');
         }
-        const result = await db.query(sql, params);
+        const result = await client.query(sql, params);
         if (result.rows.length === 0) {
           throw new ClientError(404, `${queryKey} ${params} doesn't exist in the database`);
         }
@@ -193,7 +190,7 @@ getRoutes.get('/fighters/data', async (req: Req, res: Res, next: (param1: any) =
         if (!Number(params)) {
           throw new ClientError(400, 'rosterId must be an integer');
         }
-        const result = await db.query(sql, params);
+        const result = await client.query(sql, params);
         if (result.rows.length === 0) {
           throw new ClientError(404, `${queryKey} ${params} doesn't exist in the database`);
         }
@@ -213,7 +210,7 @@ getRoutes.get('/fighters/data', async (req: Req, res: Res, next: (param1: any) =
         ORDER BY
         "rosterId", ${JSON.stringify(dataTypeIds[index])}
         `;
-        const result = await db.query(sql);
+        const result = await client.query(sql);
         fullResult.push(result.rows);
         return renderAllData(index + 1);
       } catch (e) {
@@ -228,14 +225,14 @@ getRoutes.get('/fighters/data', async (req: Req, res: Res, next: (param1: any) =
       ${sqlQueries.getFightersData(dataTypes[index])}
       ORDER BY ${JSON.stringify(dataTypeIds[index])}
     `;
-      const result = await db.query(sql);
+      const result = await client.query(sql);
       fullResult.push(result.rows);
       return renderAllData(index + 1);
     } catch (e) {
       return next(e);
     }
   }
-});
+}
 
 /**
  * Get route that returns an array of objects with all fighters
@@ -243,7 +240,7 @@ getRoutes.get('/fighters/data', async (req: Req, res: Res, next: (param1: any) =
  * @param { string } type // moves, throws, movements, stats
  * @return { [object] }
  */
-getRoutes.get('/fighters/data/:type', async (req: Req, res: Res, next: (param1: any) => any) => {
+async function getFightersDataByType(req: Req, res: Res, next: any) {
   const queryStr: QueryString = req.query;
   const queryKey = Object.keys(queryStr);
   const currentType = req.params.type;
@@ -265,7 +262,7 @@ getRoutes.get('/fighters/data/:type', async (req: Req, res: Res, next: (param1: 
       if (/\d/g.test(params)) {
         throw new ClientError(400, 'fighter name can\'t have a number');
       }
-      const result = await db.query(sql, params);
+      const result = await client.query(sql, params);
       if (result.rows.length === 0) {
         throw new ClientError(404, `${queryKey} named ${params} doesn't exist in the database`);
       }
@@ -286,7 +283,7 @@ getRoutes.get('/fighters/data/:type', async (req: Req, res: Res, next: (param1: 
       if (!Number(params)) {
         throw new ClientError(400, 'fighterId must be an integer');
       }
-      const result = await db.query(sql, params);
+      const result = await client.query(sql, params);
       if (result.rows.length === 0) {
         throw new ClientError(404, `${queryKey} ${params} doesn't exist in the database`);
       }
@@ -307,7 +304,7 @@ getRoutes.get('/fighters/data/:type', async (req: Req, res: Res, next: (param1: 
       if (!Number(params)) {
         throw new ClientError(400, 'rosterId must be an integer');
       }
-      const result = await db.query(sql, params);
+      const result = await client.query(sql, params);
       if (result.rows.length === 0) {
         throw new ClientError(404, `${queryKey} ${params} doesn't exist in the database`);
       }
@@ -326,7 +323,7 @@ getRoutes.get('/fighters/data/:type', async (req: Req, res: Res, next: (param1: 
       ORDER BY
       "rosterId", ${JSON.stringify(dataTypeIds[index])}
       `;
-      const result = await db.query(sql);
+      const result = await client.query(sql);
       return res.status(200).send(result.rows);
     } catch (e) {
       return next(e);
@@ -340,7 +337,7 @@ getRoutes.get('/fighters/data/:type', async (req: Req, res: Res, next: (param1: 
     ${sqlQueries.getFightersData(dataTypes[index])}
     ORDER BY ${JSON.stringify(dataTypeIds[index])}
     `;
-    const result = await db.query(sql);
+    const result = await client.query(sql);
     return res.status(200).send(result.rows);
   } catch (e) {
     return next(e);
@@ -355,6 +352,10 @@ getRoutes.get('/fighters/data/:type', async (req: Req, res: Res, next: (param1: 
     }
     return false;
   }
-});
+}
 
-module.exports = getRoutes;
+module.exports = {
+  getFighters,
+  getFightersData,
+  getFightersDataByType
+}
