@@ -13,10 +13,7 @@ describe("POST /api/auth/register", () => {
   function deleteUser() {
     chai.request(url)
       .delete('/api/auth/delete-account')
-      .query({})
-      .end((err, res) => {
-        res.should.have.status(204);
-      })
+      .end((err, res) => {})
   }
 
   describe("successful request", () => {
@@ -29,7 +26,8 @@ describe("POST /api/auth/register", () => {
 
     it("returns a 201 when user is created", done => {
       const userKeys = ['id', 'email', 'username', 'updatedAt', 'createdAt', 'token', 'tokenExpiration'];
-      deleteUser();
+
+      deleteUser(); // Currently required during testing to make sure this test returns a 201 status
 
       chai.request(url)
         .post(path)

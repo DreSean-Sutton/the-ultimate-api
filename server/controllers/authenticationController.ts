@@ -18,7 +18,7 @@ async function registerUser(req: Req, res: Res, next: any) {
   try {
     await sequelize.query('CREATE SCHEMA IF NOT EXISTS "user"');
     console.log('User schema created');
-    await User.sync({ force: false });
+    await User.sync();
     console.log('User table created');
     const hashedPassword = await argon2.hash(password);
     const { dataValues } = await User.create({
@@ -27,8 +27,8 @@ async function registerUser(req: Req, res: Res, next: any) {
       password: hashedPassword
     })
     delete dataValues.password;
-    // for developmental testing purposes
-    if(process.env.NODE_ENV === 'development') {
+
+    if(process.env.NODE_ENV === 'development') { // Only for developmental testing purposes
       await sequelize.query(`DROP SCHEMA IF EXISTS "${username}" cascade;`);
     }
 
@@ -66,8 +66,7 @@ async function showToken(req: Req, res: Res, next: any) {
     if(!token) {
       throw new ClientError(401, "Token doesn't exist. Please generate a token");
     }
-    console.log(token, tokenExpiration)
-    res.status(200).json({ token: token, expirationDate: tokenExpiration })
+    res.status(200).json({ token: token, expirationDate: tokenExpiration });
   } catch(e) {
     console.error(`error authenticating user: ${e}`);
     next(e);
@@ -103,10 +102,23 @@ async function generateToken(req: Req, res: Res, next: any) {
 
 async function deleteUser(req: Req, res: Res, next: any) {
   if(process.env.NODE_ENV !== 'development') return;
-  const user = await User.destroy({
-    truncate: true
-  });
-  res.status(204).json(user);
+  try {
+    const schemaQuery = `
+      SELECT *
+      FROM information_schema.schemata
+      WHERE schema_name = 'user'
+    `;
+    const [result] = await sequelize.query(schemaQuery);
+
+    if(!result.length) {
+      return;
+    }
+    const user = await User.destroy({ truncate: true });
+    res.status(204).json(user);
+  } catch(e) {
+    console.error('Error deleting users:', e);
+    res.status(500).json({ error: 'Error deleting users' });
+  }
 }
 
 module.exports = {
