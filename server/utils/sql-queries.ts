@@ -1,14 +1,14 @@
 const sqlQueries = {
-  getFighters() {
+  getFighters(schemaName: string) {
     return `
       SELECT
         "fighterId", fighter,
         "rosterId", "displayName"
       FROM
-        fighters
+        "${schemaName}".fighters
       `;
   },
-  getFightersData(type: string) {
+  getFightersData(type: string, schemaName: string) {
     try {
 
       if (type === 'moves') {
@@ -19,7 +19,7 @@ const sqlQueries = {
             "moveType", "name", "rosterId",
             "firstFrame", "totalFrames", "type"
           FROM
-            fighters
+            "${schemaName}".fighters
           JOIN "moves" USING ("fighterId")
           JOIN "hitboxes" USING ("moveId")
         `;
@@ -32,7 +32,7 @@ const sqlQueries = {
             "name", "rosterId",
             "totalFrames", "throwId", "type"
           FROM
-            fighters
+            "${schemaName}".fighters
           JOIN "throws" USING ("fighterId")
           JOIN "grappling" USING ("throwId")
         `;
@@ -45,7 +45,7 @@ const sqlQueries = {
             "movementId", "name", "rosterId",
             "totalFrames", "type"
           FROM
-            fighters
+            "${schemaName}".fighters
           JOIN "movements" USING ("fighterId")
           JOIN "dodging" USING ("movementId")
         `;
@@ -58,7 +58,7 @@ const sqlQueries = {
             "name", "rosterId",
             "statId", "statValue", "type"
           FROM
-            fighters
+            "${schemaName}".fighters
           JOIN "stats" USING ("fighterId")
           JOIN "miscellaneous" USING ("statId")
         `;

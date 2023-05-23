@@ -4,7 +4,7 @@ import chaiHttp from 'chai-http';
 chai.should();
 chai.use(chaiHttp);
 
-describe.skip("GET api/get/fighters", () => {
+describe("GET api/get/fighters", () => {
 
   const expectedFighterProps = ['fighter', 'fighterId', 'rosterId', 'displayName'];
 
@@ -143,7 +143,7 @@ describe.skip("GET api/get/fighters", () => {
   })
 });
 
-describe.skip("GET api/get/fighters/data", () => {
+describe("GET api/get/fighters/data", () => {
 
   function renderDataTests(status: number, done: any, query?: any, log?: boolean) {
 
@@ -273,7 +273,7 @@ describe.skip("GET api/get/fighters/data", () => {
   })
 })
 
-describe.skip("GET api/get/fighters/data/:type", () => {
+describe("GET api/get/fighters/data/:type", () => {
 
   function renderTypeTests(type: string, status: number, done: any, query?: any, log?: boolean) {
 

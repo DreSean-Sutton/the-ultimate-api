@@ -2,6 +2,7 @@ import { Req, Res, QueryString } from "../utils/types-routes";
 import ClientError from "../utils/client-error";
 import { client } from '../conn';
 const sqlQueries = require('../utils/sql-queries');
+const { authorizeUser } = require('../lib/authorizeUser');
 
 /**
  * All routes accept query strings for specifying a single fighter
@@ -21,12 +22,19 @@ const sqlQueries = require('../utils/sql-queries');
  * @return { object | [object] }
  */
 async function getFighters(req: Req, res: Res, next: any) {
+  const { authorization, username } = req.headers;
+  const userIsTrue = authorization && username;
+  const schemaName = userIsTrue ? username : 'public';
+
+  if(userIsTrue) {
+    authorizeUser(authorization, username, next);
+  }
   const queryStr: QueryString = req.query;
   const queryKey = Object.keys(queryStr);
 
   if (queryStr.fighter) {
     const sql = `
-    ${sqlQueries.getFighters()}
+    ${sqlQueries.getFighters(schemaName)}
     WHERE
       fighter=$1
     `;
@@ -51,7 +59,7 @@ async function getFighters(req: Req, res: Res, next: any) {
         throw new ClientError(400, 'fighterId must be an integer');
       }
       const sql = `
-      ${sqlQueries.getFighters()}
+      ${sqlQueries.getFighters(schemaName)}
       WHERE
         "fighterId"=$1
       `;
@@ -72,7 +80,7 @@ async function getFighters(req: Req, res: Res, next: any) {
         throw new ClientError(400, 'rosterId must be an integer');
       }
       const sql = `
-      ${sqlQueries.getFighters()}
+      ${sqlQueries.getFighters(schemaName)}
       WHERE
         "rosterId"=$1
       `;
@@ -92,7 +100,7 @@ async function getFighters(req: Req, res: Res, next: any) {
         throw new ClientError(400, 'orderByRosterId must be true');
       }
       const sql = `
-      ${sqlQueries.getFighters()}
+      ${sqlQueries.getFighters(schemaName)}
       ORDER BY
       "rosterId"
       `;
@@ -106,7 +114,7 @@ async function getFighters(req: Req, res: Res, next: any) {
     if (queryKey.length > 0) {
       throw new ClientError(400, `${queryKey} is not a valid query key`);
     }
-    const sql = `${sqlQueries.getFighters()}`;
+    const sql = `${sqlQueries.getFighters(schemaName)}`;
     const result = await client.query(sql);
     return res.status(200).send(result.rows);
   } catch (e) {
@@ -124,6 +132,13 @@ async function getFightersData(req: Req, res: Res, next: any) {
   return renderAllData(0);
 
   async function renderAllData(index: number): Promise<any[]> {
+
+    const { authorization, username } = req.headers;
+    const userIsTrue = authorization && username;
+    const schemaName = userIsTrue ? username : 'public';
+    if(userIsTrue) {
+      authorizeUser(authorization, username, next);
+    }
     const dataTypes = ['moves', 'throws', 'movements', 'stats'];
     const dataTypeIds = ['moveId', 'throwId', 'movementId', 'statId'];
 
@@ -135,7 +150,7 @@ async function getFightersData(req: Req, res: Res, next: any) {
 
     if (queryStr.fighter) {
       const sql = `
-      ${sqlQueries.getFightersData(dataTypes[index])}
+      ${sqlQueries.getFightersData(dataTypes[index], schemaName)}
       WHERE
       fighter=$1
       ORDER BY ${JSON.stringify(dataTypeIds[index])}
@@ -158,7 +173,7 @@ async function getFightersData(req: Req, res: Res, next: any) {
     }
     if (queryStr.fighterId) {
       const sql = `
-      ${sqlQueries.getFightersData(dataTypes[index])}
+      ${sqlQueries.getFightersData(dataTypes[index], schemaName)}
       WHERE
       "fighterId"=$1
       ORDER BY ${JSON.stringify(dataTypeIds[index])}
@@ -180,7 +195,7 @@ async function getFightersData(req: Req, res: Res, next: any) {
     }
     if (queryStr.rosterId) {
       const sql = `
-      ${sqlQueries.getFightersData(dataTypes[index])}
+      ${sqlQueries.getFightersData(dataTypes[index], schemaName)}
       WHERE
       "rosterId"=$1
       ORDER BY ${JSON.stringify(dataTypeIds[index])}
@@ -206,7 +221,7 @@ async function getFightersData(req: Req, res: Res, next: any) {
           throw new ClientError(400, 'orderByRosterId must be true');
         }
         const sql = `
-        ${sqlQueries.getFightersData(dataTypes[index])}
+        ${sqlQueries.getFightersData(dataTypes[index], schemaName)}
         ORDER BY
         "rosterId", ${JSON.stringify(dataTypeIds[index])}
         `;
@@ -222,7 +237,7 @@ async function getFightersData(req: Req, res: Res, next: any) {
         throw new ClientError(400, `${queryKey} is not a valid query key`);
       }
       const sql = `
-      ${sqlQueries.getFightersData(dataTypes[index])}
+      ${sqlQueries.getFightersData(dataTypes[index], schemaName)}
       ORDER BY ${JSON.stringify(dataTypeIds[index])}
     `;
       const result = await client.query(sql);
@@ -241,6 +256,13 @@ async function getFightersData(req: Req, res: Res, next: any) {
  * @return { [object] }
  */
 async function getFightersDataByType(req: Req, res: Res, next: any) {
+
+  const { authorization, username } = req.headers;
+  const userIsTrue = authorization && username;
+  const schemaName = userIsTrue ? username : 'public';
+  if(userIsTrue) {
+    authorizeUser(authorization, username, next);
+  }
   const queryStr: QueryString = req.query;
   const queryKey = Object.keys(queryStr);
   const currentType = req.params.type;
@@ -253,7 +275,7 @@ async function getFightersDataByType(req: Req, res: Res, next: any) {
     }
     if (queryStr.fighter) {
       const sql = `
-      ${sqlQueries.getFightersData(dataTypes[index])}
+      ${sqlQueries.getFightersData(dataTypes[index], schemaName)}
       WHERE
       fighter=$1
       ORDER BY ${JSON.stringify(dataTypeIds[index])}
@@ -273,7 +295,7 @@ async function getFightersDataByType(req: Req, res: Res, next: any) {
   }
   if (queryStr.fighterId) {
     const sql = `
-      ${sqlQueries.getFightersData(dataTypes[index])}
+      ${sqlQueries.getFightersData(dataTypes[index], schemaName)}
       WHERE
       "fighterId"=$1
       ORDER BY ${JSON.stringify(dataTypeIds[index])}
@@ -294,7 +316,7 @@ async function getFightersDataByType(req: Req, res: Res, next: any) {
   }
   if (queryStr.rosterId) {
     const sql = `
-      ${sqlQueries.getFightersData(dataTypes[index])}
+      ${sqlQueries.getFightersData(dataTypes[index], schemaName)}
       WHERE
       "rosterId"=$1
       ORDER BY ${JSON.stringify(dataTypeIds[index])}
@@ -319,7 +341,7 @@ async function getFightersDataByType(req: Req, res: Res, next: any) {
         throw new ClientError(400, 'orderByRosterId must be true');
       }
       const sql = `
-      ${sqlQueries.getFightersData(dataTypes[index])}
+      ${sqlQueries.getFightersData(dataTypes[index], schemaName)}
       ORDER BY
       "rosterId", ${JSON.stringify(dataTypeIds[index])}
       `;
@@ -334,7 +356,7 @@ async function getFightersDataByType(req: Req, res: Res, next: any) {
       throw new ClientError(400, `${queryKey} is not a valid query key`);
     }
     const sql = `
-    ${sqlQueries.getFightersData(dataTypes[index])}
+    ${sqlQueries.getFightersData(dataTypes[index], schemaName)}
     ORDER BY ${JSON.stringify(dataTypeIds[index])}
     `;
     const result = await client.query(sql);
