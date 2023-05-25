@@ -9,7 +9,7 @@ describe("POST /api/auth/register", () => {
   const url = 'http://localhost:5000';
   const path = '/api/auth/register';
 
-  // This is used for resetting database
+  // This is used for resetting the User schema in the database
   function deleteUser() {
     chai.request(url)
       .delete('/api/auth/delete-account')

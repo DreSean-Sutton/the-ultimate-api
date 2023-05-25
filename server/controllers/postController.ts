@@ -27,8 +27,10 @@ async function postFighters(req: Req, res: Res, next: any) {
 
   try {
     if(!isValid) throw new ClientError(400, 'Must have (fighter), (displayName), and (rosterId) as parameters');
+    const userIsTrue = authorization || username;
+    const authResult = userIsTrue ? await authorizeUser(authorization, username, next) : null;
+    if(authResult) throw new ClientError(authResult.status, authResult.message);
 
-    authorizeUser(authorization, username, next);
     const FightersModel = sequelize.models.fighters;
     const selectResult = await FightersModel.findOne({
       where: {
@@ -83,7 +85,10 @@ async function postTableData(req: Req, res: Res, next: any) {
       throw new ClientError(400, 'fighterId must be a number');
     }
     const id = Number(req.params.id);
-    authorizeUser(authorization, username, next);
+    const userIsTrue = authorization || username;
+    const authResult = userIsTrue ? await authorizeUser(authorization, username, next) : null;
+    if(authResult) throw new ClientError(authResult.status, authResult.message);
+
     const FightersModel = sequelize.models.fighters;
     const selectResult = await FightersModel.findOne({
       where: {

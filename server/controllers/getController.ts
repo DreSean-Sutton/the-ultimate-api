@@ -23,12 +23,15 @@ const { authorizeUser } = require('../lib/authorizeUser');
  */
 async function getFighters(req: Req, res: Res, next: any) {
   const { authorization, username } = req.headers;
-  const userIsTrue = authorization && username;
-  const schemaName = userIsTrue ? username : 'public';
-
-  if(userIsTrue) {
-    authorizeUser(authorization, username, next);
+  const userIsTrue = authorization || username;
+  try {
+    const authResult = userIsTrue ? await authorizeUser(authorization, username, next) : null;
+    if(authResult) throw new ClientError(authResult.status, authResult.message);
+  } catch(e) {
+    console.error(e);
+    return next(e);
   }
+  const schemaName = userIsTrue ? username : 'public';
   const queryStr: QueryString = req.query;
   const queryKey = Object.keys(queryStr);
 

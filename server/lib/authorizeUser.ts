@@ -3,31 +3,48 @@ const jwt = require('jsonwebtoken');
 const { User } = require('../model/user-database');
 require('dotenv/config');
 
-export async function authorizeUser(authorization: string, username: string, next: any) {
+export async function authorizeUser(authorization: string, username: string, next: any): Promise<{ status: number, message: string } | undefined> {
   try {
-    if(!authorization) throw new ClientError(400, '(authorization) header must have a value');
-    if(!username) throw new ClientError(400, '(username) header must have a value');
+    if (!authorization) {
+      throw { status: 400, message: '(authorization) header must have a value' };
+    }
+    if (!username) {
+      throw { status: 400, message: '(username) header must have a value' };
+    }
+    if (!/^Bearer/.test(authorization)) {
+      throw { status: 400, message: "(authorization) header must start with 'Bearer '" };
+    }
 
     const userFindResult = await User.findOne({
       where: {
         username: username
       }
-    })
-    if(!userFindResult) throw new ClientError(401, `Username (${username}) doesn't exist`);
+    });
+    if (!userFindResult) {
+      throw { status: 401, message: `Username (${username}) doesn't exist` };
+    }
     const currentTime = new Date();
-    if(currentTime > userFindResult.tokenExpiration) throw new ClientError(401, 'Token has expired. Please log in to receive another');
-    const token = authorization && authorization.split(' ')[1]; // Checks if authorization is truthy, then splits 'Bearer' from it's value
+    if (currentTime > userFindResult.tokenExpiration) {
+      throw { status: 401, message: 'Token has expired. Please log in to receive another' };
+    }
+    const token = authorization && authorization.split(' ')[1]; // Checks if authorization is truthy, then splits 'Bearer' from its value
 
     // Token will not be verified if the username is 'test_username' while in a non-production env
     // Used specifically for testing purposes
-    if(username !== 'test_username' && process.env.NODE_ENV !== 'production') {
-      if (token !== userFindResult.token) throw new ClientError(401, 'Invalid authorization token');
+    if (username !== 'test_username' && process.env.NODE_ENV !== 'production') {
+      if (token !== userFindResult.token) {
+        throw { status: 401, message: 'Invalid authorization token' };
+      }
     }
-    jwt.verify(token, process.env.TOKEN_SECRET, (err: any) => {
-      if(err) throw new ClientError(401, 'incorrect authorization header');
-    });
-  } catch(e) {
-    next(e);
-  }
 
+    jwt.verify(token, process.env.TOKEN_SECRET, (err: any) => {
+      if (err) {
+        throw { status: 401, message: 'incorrect authorization header' };
+      }
+    });
+
+    return undefined;
+  } catch (e: any) {
+    return e;
+  }
 }
