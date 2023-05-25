@@ -116,7 +116,25 @@ describe("POST /api/add/fighters", () => {
           done();
         })
     });
-    it("returns a 401 status authorization header is incorrect", done => {
+    it("returns a 401 status if authorization header is incorrect", done => {
+
+      chai.request(url)
+        .post(path)
+        .set('authorization', 'Bearer wrong_apikey')
+        .set('username', 'test_username')
+        .set('content-type', 'application/json')
+        .send({ fighter: 'goku', displayName: 'Son Goku', rosterId: '9001' })
+        .end((err, res) => {
+          if (err) {
+            console.log(err);
+            return done(err);
+          }
+          res.should.have.status(401);
+          res.body.should.have.property('error');
+          done();
+        })
+    });
+    it("returns a 400 status if authorization header doesn't start with 'Bearer '", done => {
 
       chai.request(url)
         .post(path)
@@ -129,7 +147,7 @@ describe("POST /api/add/fighters", () => {
             console.log(err);
             return done(err);
           }
-          res.should.have.status(401);
+          res.should.have.status(400);
           res.body.should.have.property('error');
           done();
         })
