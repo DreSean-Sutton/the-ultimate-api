@@ -60,7 +60,7 @@ describe("GET api/get/fighters", () => {
         renderFightersTests(200, done, {});
       })
       it("Returns a json object containing all of a user's basic fighter data", done => {
-        renderFightersTests(200, done, {}, { authorization: testToken, username: 'test_username' })
+        renderFightersTests(200, done, {}, { authorization: testToken, username: 'test_username' });
       })
     })
 
@@ -85,7 +85,7 @@ describe("GET api/get/fighters", () => {
         renderFightersTests(400, done, {}, { authorization: testToken, username: '' });
       })
       it("Returns a 400 request if authorization header doesn't start with 'Bearer '", done => {
-        renderFightersTests(400, done, {}, { authorization: testToken.substring(7), username: 'test_username' }, true);
+        renderFightersTests(400, done, {}, { authorization: testToken.substring(7), username: 'test_username' });
       })
     })
   })
@@ -97,6 +97,9 @@ describe("GET api/get/fighters", () => {
 
       it("Returns a json object containing a fighter's basic data", done => {
         renderFightersTests(200, done, { fighter: 'inkling' });
+      })
+      it("Returns a json object containing a user's fighter's basic data", done => {
+        renderFightersTests(200, done, { fighter: 'goku' }, { authorization: testToken, username: 'test_username' });
       })
     })
 
@@ -118,6 +121,9 @@ describe("GET api/get/fighters", () => {
       it("Returns a json object containing a fighter's basic data", done => {
         renderFightersTests(200, done, { fighterId: 10 });
       })
+      it("Returns a json object containing a user's fighter's basic data", done => {
+        renderFightersTests(200, done, { fighterId: 91 }, { authorization: testToken, username: 'test_username' });
+      })
     })
 
     context('unsuccessful requests', () => {
@@ -138,6 +144,9 @@ describe("GET api/get/fighters", () => {
       it("Returns a json object containing a fighter's basic data", done => {
         renderFightersTests(200, done, { rosterId: 10 });
       })
+      it("Returns a json object containing a user's fighter's basic data", done => {
+        renderFightersTests(200, done, { rosterId: 9001 }, { authorization: testToken, username: 'test_username' });
+      })
     })
 
     context('unsuccessful requests', () => {
@@ -157,6 +166,9 @@ describe("GET api/get/fighters", () => {
 
       it("Returns an json object containing all fighter's basic data", done => {
         renderFightersTests(200, done, { orderByRosterId: true });
+      })
+      it("Returns a json object containing a user's fighter's basic data", done => {
+        renderFightersTests(200, done, { orderByRosterId: true }, { authorization: testToken, username: 'test_username' });
       })
     })
 

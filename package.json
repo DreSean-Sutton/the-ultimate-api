@@ -12,7 +12,7 @@
     "db:import": "bash scripts/db-import.sh",
     "prepare": "husky install",
     "test": "mocha -r ts-node/register test/**/*.test.ts",
-    "test:watch": "nodemon --config test/nodemon.json --exec mocha -r ts-node/register --file 'test/**/authenticationRoutes.test.ts' test/**/*.test.ts",
+    "test:watch": "nodemon --config test/nodemon.json --exec mocha -r ts-node/register --file 'test/**/authenticationRoutes.test.ts' 'test/**/postRoutes.test.ts' test/**/*.test.ts",
     "tsc": "./node_modules/typescript/bin/tsc"
   },
   "dependencies": {
