@@ -131,6 +131,7 @@ async function postTableData(req: Req, res: Res, next: any) {
 
       Object.assign(fullResult, moves.dataValues);
       Object.assign(fullResult, hitboxes.dataValues);
+      await sequelize.sync({ schema: username });
       return res.status(201).json(fullResult);
 
     } else if (req.params.table === 'throws') {
@@ -162,6 +163,7 @@ async function postTableData(req: Req, res: Res, next: any) {
 
       Object.assign(fullResult, throws.dataValues);
       Object.assign(fullResult, grappling.dataValues);
+      await sequelize.sync({ schema: username });
       return res.status(201).json(fullResult);
 
     } else if (req.params.table === 'movements') {
@@ -192,6 +194,7 @@ async function postTableData(req: Req, res: Res, next: any) {
 
       Object.assign(fullResult, movements.dataValues);
       Object.assign(fullResult, dodging.dataValues);
+      await sequelize.sync({ schema: username });
       return res.status(201).json(fullResult);
 
     } else if (req.params.table === 'stats') {
@@ -221,6 +224,7 @@ async function postTableData(req: Req, res: Res, next: any) {
 
       Object.assign(fullResult, stats.dataValues);
       Object.assign(fullResult, miscellaneous.dataValues);
+      await sequelize.sync({ schema: username });
       return res.status(201).json(fullResult);
 
     } else {
