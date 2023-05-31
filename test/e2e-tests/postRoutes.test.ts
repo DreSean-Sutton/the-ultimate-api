@@ -13,7 +13,7 @@ const testPayload = {
 };
 const testToken = jwt.sign(testPayload, process.env.TOKEN_SECRET);
 
-describe("POST /api/add/fighters", () => {
+describe.only("POST /api/add/fighters", () => {
 
 
   const url = 'http://localhost:5000';
@@ -209,7 +209,7 @@ describe("POST /api/add/fighters", () => {
   })
 })
 
-describe("POST /api/add/:table/:id", () => {
+describe.only("POST /api/add/:table/:id", () => {
 
   const url = 'http://localhost:5000';
 
@@ -268,7 +268,7 @@ describe("POST /api/add/:table/:id", () => {
     })
   })
 
-  describe("POST /api/add/moves/:id", () => {
+  describe.only("POST /api/add/moves/:id", () => {
 
     const path = '/api/add/moves/90';
     const moveProperties = ['activeFrames', 'category', 'createdAt', 'damage', 'fighterId', 'firstFrame', 'moveId', 'moveType', 'name', 'totalFrames', 'type', 'updatedAt'];
@@ -353,7 +353,7 @@ describe("POST /api/add/:table/:id", () => {
     })
   })
 
-  describe("POST /api/add/throws/:id", () => {
+  describe.only("POST /api/add/throws/:id", () => {
     const path = '/api/add/throws/90';
     const throwProperties = ['activeFrames', 'createdAt', 'damage', 'fighterId', 'throwId', 'name', 'totalFrames', 'type', 'updatedAt'];
 
@@ -432,7 +432,7 @@ describe("POST /api/add/:table/:id", () => {
 
   })
 
-  describe("POST /api/add/movements/:id", () => {
+  describe.only("POST /api/add/movements/:id", () => {
     const path = '/api/add/movements/90';
     const movementProperties = ['activeFrames', 'createdAt', 'fighterId', 'movementId', 'name', 'totalFrames', 'type', 'updatedAt'];
 
@@ -508,7 +508,7 @@ describe("POST /api/add/:table/:id", () => {
 
   })
 
-  describe("POST /api/add/stats/:id", () => {
+  describe.only("POST /api/add/stats/:id", () => {
     const path = '/api/add/stats/90';
     const statProperties = ['createdAt', 'fighterId', 'statId', 'name', 'statValue', 'type', 'updatedAt'];
 

@@ -60,7 +60,7 @@ describe("GET api/get/fighters", () => {
         renderFightersTests(200, done, {});
       })
       it("Returns a json object containing all of a user's basic fighter data", done => {
-        renderFightersTests(200, done, {}, { authorization: testToken, username: 'test_username' });
+        renderFightersTests(200, done, {}, { authorization: testToken, username: 'test_username' }, true);
       })
     })
 
@@ -99,7 +99,7 @@ describe("GET api/get/fighters", () => {
         renderFightersTests(200, done, { fighter: 'inkling' });
       })
       it("Returns a json object containing a user's fighter's basic data", done => {
-        renderFightersTests(200, done, { fighter: 'goku' }, { authorization: testToken, username: 'test_username' });
+        renderFightersTests(200, done, { fighter: 'goku' }, { authorization: testToken, username: 'test_username' }, true);
       })
     })
 
@@ -183,12 +183,16 @@ describe("GET api/get/fighters", () => {
 
 describe("GET api/get/fighters/data", () => {
 
-  function renderDataTests(status: number, done: any, query?: any, log?: boolean) {
+  function renderDataTests(status: number, done: any, query?: any, headers?: any, log?: boolean) {
+    const authorization = headers?.authorization ? headers.authorization : '';
+    const username = headers?.username || '';
 
     query = query || {}
     chai.request('http://localhost:5000')
       .get('/api/get/fighters/data')
       .query(query)
+      .set('authorization', authorization)
+      .set('username', username)
       .end((err, res) => {
         if (err) return done(err);
         if(log) console.log(res.body);
@@ -214,6 +218,9 @@ describe("GET api/get/fighters/data", () => {
     it("Returns a 200 status and array of json objects", done => {
       renderDataTests(200, done, {});
     })
+    it("Returns a 200 status and array of a user's json objects", done => {
+      renderDataTests(200, done, {}, { authorization: testToken, username: 'test_username' }, true);
+    })
     it("Returns an error if url path is invalid", done => {
       chai.request('http://localhost:5000')
         .get('/api/get/fighters/dataaaaaaa')
@@ -233,9 +240,12 @@ describe("GET api/get/fighters/data", () => {
 
     context("successful queries", () => {
 
-      it("Returns a json object containing a fighter's data", done => {
+      it("Returns a 200 status and json object containing a fighter's data", done => {
         renderDataTests(200, done, { fighter: 'joker' });
       })
+      it.only("Returns a 200 status and a user's json object containing a fighter's data", done => {
+        renderDataTests(200, done, { fighter: 'goku' }, { authorization: testToken, username: 'test_username' }, true);
+    })
     })
 
     context("unsuccessful queries", () => {

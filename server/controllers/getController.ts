@@ -161,52 +161,12 @@ async function getFightersData(req: Req, res: Res, next: any) {
         if (/\d/g.test(fighter)) {
           throw new ClientError(400, 'fighter name can\'t have a number');
         }
-        const FightersModel = sequelize.models.fighters;
-        const MovesModel = sequelize.models.moves;
-        const HitboxesModel = sequelize.models.hitboxes;
-        console.log(FightersModel, MovesModel, HitboxesModel);
-        const result = await FightersModel.findOne({
-          where: {
-            fighter: fighter
-          },
-          include: [
-            {
-              model: MovesModel,
-              attributes: {
-                exclude: ['createdAt', 'updatedAt']
-              },
-              include: [
-                {
-                  model: HitboxesModel,
-                  attributes: {
-                    exclude: ['createdAt', 'updatedAt']
-                  }
-                }
-              ],
-              schema: username, // Specify the schema here
-            }
-          ],
-          schema: username, // Also specify the schema for the main table
-          raw: true
-        });
-        // const result = await MovesModel.findOne({
-        //   where: {
-        //     fighterId: 91
-        //   },
-        //   include: [
-        //     {
-        //       model: HitboxesModel,
-        //       attributes: [],
-        //     }
-        //   ]
-        // }, { schema: username })
-
-        // const result: any = await sequelize.query(`
-        //   ${sqlQueries.getFightersData(dataTypes[index], schemaName)}
-        //   WHERE
-        //     "fighter"='${fighter}'
-        //   ORDER BY ${JSON.stringify(dataTypeIds[index])}
-        // `);
+        const result: any = await sequelize.query(`
+          ${sqlQueries.getFightersData(dataTypes[index], schemaName)}
+          WHERE
+            "fighter"='${fighter}'
+          ORDER BY ${JSON.stringify(dataTypeIds[index])}
+        `);
         console.log(result);
         if (result[1].rowCount === 0) {
           throw new ClientError(404, `${queryKey} named ${fighter} doesn't exist in the database`);

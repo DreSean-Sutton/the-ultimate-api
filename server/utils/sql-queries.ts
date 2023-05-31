@@ -20,23 +20,9 @@ const sqlQueries = {
             "firstFrame", "totalFrames", "type"
           FROM
             "${schemaName}".fighters
-          JOIN "moves" USING ("fighterId")
-          JOIN "hitboxes" USING ("moveId")
+          JOIN "${schemaName}"."moves" USING ("fighterId")
+          JOIN "${schemaName}"."hitboxes" USING ("moveId")
         `;
-        // const formattedResult = result.map(fighter => ({
-        //   fighterId: fighter.fighterId,
-        //   fighter: fighter.fighter,
-        //   displayName: fighter.displayName,
-        //   moveId: fighter.Moves.moveId,
-        //   moveType: fighter.Moves.moveType,
-        //   name: fighter.Moves.name,
-        //   category: fighter.Moves.category,
-        //   damage: fighter.Moves.Hitboxes.damage,
-        //   activeFrames: fighter.Moves.Hitboxes.activeFrames,
-        //   totalFrames: fighter.Moves.Hitboxes.totalFrames,
-        //   firstFrame: fighter.Moves.Hitboxes.firstFrame
-        // }));
-        // return formattedResult;
       }
       if (type === 'throws') {
         return `
@@ -47,8 +33,8 @@ const sqlQueries = {
             "totalFrames", "throwId", "type"
           FROM
             "${schemaName}".fighters
-          JOIN "throws" USING ("fighterId")
-          JOIN "grappling" USING ("throwId")
+          JOIN "${schemaName}"."throws" USING ("fighterId")
+          JOIN "${schemaName}"."grappling" USING ("throwId")
         `;
       }
       if (type === 'movements') {
@@ -60,8 +46,8 @@ const sqlQueries = {
             "totalFrames", "type"
           FROM
             "${schemaName}".fighters
-          JOIN "movements" USING ("fighterId")
-          JOIN "dodging" USING ("movementId")
+          JOIN "${schemaName}"."movements" USING ("fighterId")
+          JOIN "${schemaName}"."dodging" USING ("movementId")
         `;
       }
       if (type === 'stats') {
@@ -73,8 +59,8 @@ const sqlQueries = {
             "statId", "statValue", "type"
           FROM
             "${schemaName}".fighters
-          JOIN "stats" USING ("fighterId")
-          JOIN "miscellaneous" USING ("statId")
+          JOIN "${schemaName}"."stats" USING ("fighterId")
+          JOIN "${schemaName}"."miscellaneous" USING ("statId")
         `;
       }
       throw new Error('incorrect type parameter');
