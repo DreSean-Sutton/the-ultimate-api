@@ -23,6 +23,20 @@ const sqlQueries = {
           JOIN "moves" USING ("fighterId")
           JOIN "hitboxes" USING ("moveId")
         `;
+        // const formattedResult = result.map(fighter => ({
+        //   fighterId: fighter.fighterId,
+        //   fighter: fighter.fighter,
+        //   displayName: fighter.displayName,
+        //   moveId: fighter.Moves.moveId,
+        //   moveType: fighter.Moves.moveType,
+        //   name: fighter.Moves.name,
+        //   category: fighter.Moves.category,
+        //   damage: fighter.Moves.Hitboxes.damage,
+        //   activeFrames: fighter.Moves.Hitboxes.activeFrames,
+        //   totalFrames: fighter.Moves.Hitboxes.totalFrames,
+        //   firstFrame: fighter.Moves.Hitboxes.firstFrame
+        // }));
+        // return formattedResult;
       }
       if (type === 'throws') {
         return `

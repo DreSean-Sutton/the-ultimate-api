@@ -336,6 +336,8 @@ export default function defineUserDb(schemaName: string) {
     }
   });
 
+  Fighters.hasMany(Moves, { foreignKey: 'fighterId' });
+  Moves.belongsTo(Fighters, { foreignKey: 'fighterId' })
   Moves.hasMany(Hitboxes, { foreignKey: 'moveId' });
   Hitboxes.belongsTo(Moves, { foreignKey: 'moveId' });
   Throws.hasMany(Grappling, { foreignKey: 'throwId' });
