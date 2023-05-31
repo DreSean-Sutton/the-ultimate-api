@@ -144,7 +144,6 @@ async function getFightersData(req: Req, res: Res, next: any) {
       return next(e);
     }
     const schemaName = userIsTrue ? username : 'public';
-    console.log({schemaName});
     const dataTypes = ['moves', 'throws', 'movements', 'stats'];
     const dataTypeIds = ['moveId', 'throwId', 'movementId', 'statId'];
 
@@ -156,7 +155,6 @@ async function getFightersData(req: Req, res: Res, next: any) {
 
     if (queryStr.fighter) {
       const { fighter } = queryStr;
-      console.count(fighter);
       try {
         if (/\d/g.test(fighter)) {
           throw new ClientError(400, 'fighter name can\'t have a number');
@@ -167,7 +165,6 @@ async function getFightersData(req: Req, res: Res, next: any) {
             "fighter"='${fighter}'
           ORDER BY ${JSON.stringify(dataTypeIds[index])}
         `);
-        console.log(result);
         if (result[1].rowCount === 0) {
           throw new ClientError(404, `${queryKey} named ${fighter} doesn't exist in the database`);
         }
@@ -178,44 +175,42 @@ async function getFightersData(req: Req, res: Res, next: any) {
       }
     }
     if (queryStr.fighterId) {
-      const sql = `
-      ${sqlQueries.getFightersData(dataTypes[index], schemaName)}
-      WHERE
-      "fighterId"=$1
-      ORDER BY ${JSON.stringify(dataTypeIds[index])}
-      `;
-      const params = [queryStr.fighterId];
       try {
-        if (!Number(params)) {
+        const { fighterId } = queryStr;
+        if (!Number(fighterId)) {
           throw new ClientError(400, 'fighterId must be an integer');
         }
-        const result = await client.query(sql, params);
-        if (result.rows.length === 0) {
-          throw new ClientError(404, `${queryKey} ${params} doesn't exist in the database`);
+        const result = await sequelize.query(`
+          ${sqlQueries.getFightersData(dataTypes[index], schemaName)}
+          WHERE
+            "fighterId"=${fighterId}
+          ORDER BY ${JSON.stringify(dataTypeIds[index])}
+        `);
+        if (result[1].rowCount === 0) {
+          throw new ClientError(404, `${queryKey} ${fighterId} doesn't exist in the database`);
         }
-        fullResult.push(result.rows);
+        fullResult.push(result[0]);
         return renderAllData(index + 1);
       } catch (e) {
         return next(e);
       }
     }
     if (queryStr.rosterId) {
-      const sql = `
-      ${sqlQueries.getFightersData(dataTypes[index], schemaName)}
-      WHERE
-      "rosterId"=$1
-      ORDER BY ${JSON.stringify(dataTypeIds[index])}
-      `;
-      const params = [queryStr.rosterId];
       try {
-        if (!Number(params)) {
+        const { rosterId } = queryStr;
+        if (!Number(rosterId)) {
           throw new ClientError(400, 'rosterId must be an integer');
         }
-        const result = await client.query(sql, params);
-        if (result.rows.length === 0) {
-          throw new ClientError(404, `${queryKey} ${params} doesn't exist in the database`);
+        const result = await sequelize.query(`
+          ${sqlQueries.getFightersData(dataTypes[index], schemaName)}
+          WHERE
+            "rosterId"=${rosterId}
+          ORDER BY ${JSON.stringify(dataTypeIds[index])}
+        `);
+        if (result[1].rowCount === 0) {
+          throw new ClientError(404, `${queryKey} ${rosterId} doesn't exist in the database`);
         }
-        fullResult.push(result.rows);
+        fullResult.push(result[0]);
         return renderAllData(index + 1);
       } catch (e) {
         return next(e);
@@ -223,16 +218,16 @@ async function getFightersData(req: Req, res: Res, next: any) {
     }
     if (queryStr.orderByRosterId) {
       try {
-        if (queryStr.orderByRosterId !== 'true') {
+        const { orderByRosterId } = queryStr;
+        if (orderByRosterId !== 'true') {
           throw new ClientError(400, 'orderByRosterId must be true');
         }
-        const sql = `
-        ${sqlQueries.getFightersData(dataTypes[index], schemaName)}
-        ORDER BY
-        "rosterId", ${JSON.stringify(dataTypeIds[index])}
-        `;
-        const result = await client.query(sql);
-        fullResult.push(result.rows);
+        const result = await sequelize.query(`
+          ${sqlQueries.getFightersData(dataTypes[index], schemaName)}
+          ORDER BY
+            "rosterId", ${JSON.stringify(dataTypeIds[index])}
+        `)
+        fullResult.push(result[0]);
         return renderAllData(index + 1);
       } catch (e) {
         return next(e);

@@ -243,8 +243,8 @@ describe("GET api/get/fighters/data", () => {
       it("Returns a 200 status and json object containing a fighter's data", done => {
         renderDataTests(200, done, { fighter: 'joker' });
       })
-      it.only("Returns a 200 status and a user's json object containing a fighter's data", done => {
-        renderDataTests(200, done, { fighter: 'goku' }, { authorization: testToken, username: 'test_username' }, true);
+      it("Returns a 200 status and a user's json object containing a fighter's data", done => {
+        renderDataTests(200, done, { fighter: 'goku' }, { authorization: testToken, username: 'test_username' });
     })
     })
 
@@ -269,6 +269,9 @@ describe("GET api/get/fighters/data", () => {
       it("Returns a json object containing a fighter's data", done => {
         renderDataTests(200, done, { fighterId: 10 });
       })
+      it("Returns a json object containing a user's fighter's data", done => {
+        renderDataTests(200, done, { fighterId: 90 }, { authorization: testToken, username: 'test_username' });
+      })
     })
 
     context("unsuccessful queries", () => {
@@ -290,6 +293,9 @@ describe("GET api/get/fighters/data", () => {
       it("Returns a json object containing a fighter's data", done => {
         renderDataTests(200, done, { rosterId: 10 });
       })
+      it("Returns a json object containing a user's fighter's data", done => {
+        renderDataTests(200, done, { rosterId: 9001 }, { authorization: testToken, username: 'test_username' }, true);
+      })
     })
 
     context("unsuccessful queries", () => {
@@ -309,6 +315,9 @@ describe("GET api/get/fighters/data", () => {
 
       it("Returns a json object that's ordered by rosterId when orderByRosterId is true", done => {
         renderDataTests(200, done, { orderByRosterId: true });
+      })
+      it("Returns a user's json object that's ordered by rosterId when orderByRosterId is true", done => {
+        renderDataTests(200, done, { orderByRosterId: true }, { authorization: testToken, username: 'test_username' }, true);
       })
     })
 
