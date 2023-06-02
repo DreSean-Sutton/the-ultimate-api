@@ -19,9 +19,9 @@ const sqlQueries = {
             "moveType", "name", "rosterId",
             "firstFrame", "totalFrames", "type"
           FROM
-            "${schemaName}".fighters
-          JOIN "${schemaName}"."moves" USING ("fighterId")
+            "${schemaName}".moves
           JOIN "${schemaName}"."hitboxes" USING ("moveId")
+          JOIN "${schemaName}"."fighters" USING ("fighterId")
         `;
       }
       if (type === 'throws') {
@@ -32,9 +32,9 @@ const sqlQueries = {
             "name", "rosterId",
             "totalFrames", "throwId", "type"
           FROM
-            "${schemaName}".fighters
-          JOIN "${schemaName}"."throws" USING ("fighterId")
+            "${schemaName}".throws
           JOIN "${schemaName}"."grappling" USING ("throwId")
+          JOIN "${schemaName}"."fighters" USING ("fighterId")
         `;
       }
       if (type === 'movements') {
@@ -45,9 +45,9 @@ const sqlQueries = {
             "movementId", "name", "rosterId",
             "totalFrames", "type"
           FROM
-            "${schemaName}".fighters
-          JOIN "${schemaName}"."movements" USING ("fighterId")
+            "${schemaName}".movements
           JOIN "${schemaName}"."dodging" USING ("movementId")
+          JOIN "${schemaName}"."fighters" USING ("fighterId")
         `;
       }
       if (type === 'stats') {
@@ -58,9 +58,9 @@ const sqlQueries = {
             "name", "rosterId",
             "statId", "statValue", "type"
           FROM
-            "${schemaName}".fighters
-          JOIN "${schemaName}"."stats" USING ("fighterId")
+            "${schemaName}".stats
           JOIN "${schemaName}"."miscellaneous" USING ("statId")
+          JOIN "${schemaName}"."fighters" USING ("fighterId")
         `;
       }
       throw new Error('incorrect type parameter');

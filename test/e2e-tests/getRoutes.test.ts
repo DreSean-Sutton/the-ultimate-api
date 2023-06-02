@@ -12,7 +12,7 @@ const testPayload = {
 };
 const testToken = `Bearer ${jwt.sign(testPayload, process.env.TOKEN_SECRET)}`;
 
-describe("GET /api/get/fighters", () => {
+describe.only("GET /api/get/fighters", () => {
 
   const expectedFighterProps = ['fighter', 'fighterId', 'rosterId', 'displayName'];
   const url = 'http://localhost:5000';
@@ -36,7 +36,7 @@ describe("GET /api/get/fighters", () => {
           res.body.should.be.a('object');
           res.body.should.haveOwnProperty('error');
         } else {
-          if(Array.isArray(res.body)) {
+          if (Array.isArray(res.body)) {
             res.body.should.be.a('array');
             res.body[0].should.have.all.keys(expectedFighterProps);
           }
@@ -181,7 +181,7 @@ describe("GET /api/get/fighters", () => {
   })
 });
 
-describe("GET /api/get/fighters/data", () => {
+describe.only("GET /api/get/fighters/data", () => {
 
   function renderDataTests(status: number, done: any, query?: any, headers?: any, log?: boolean) {
     const authorization = headers?.authorization ? headers.authorization : '';
@@ -195,7 +195,7 @@ describe("GET /api/get/fighters/data", () => {
       .set('username', username)
       .end((err, res) => {
         if (err) return done(err);
-        if(log) console.log(res.body);
+        if (log) console.log(res.body);
         res.should.have.status(status);
         if (res.body.hasOwnProperty('error')) {
           res.body.should.be.a('object');
@@ -244,7 +244,7 @@ describe("GET /api/get/fighters/data", () => {
         renderDataTests(200, done, { fighter: 'joker' });
       })
       it("Returns a 200 status and a user's json object containing a fighter's data", done => {
-        renderDataTests(200, done, { fighter: 'goku' }, { authorization: testToken, username: 'test_username' });
+        renderDataTests(200, done, { fighter: 'goku' }, { authorization: testToken, username: 'test_username' }, true);
     })
     })
 
@@ -343,18 +343,18 @@ describe("GET /api/get/fighters/data/:type", () => {
       .set('authorization', authorization)
       .set('username', username)
       .end((err, res) => {
-        if(err) return done(err);
-        if(log) console.log(res.body);
+        if (err) return done(err);
+        if (log) console.log(res.body);
         res.should.have.status(status);
-        if(res.body.hasOwnProperty('error')) {
+        if (res.body.hasOwnProperty('error')) {
           res.body.should.be.a('object');
           res.body.should.haveOwnProperty('error');
         } else {
           res.body.should.be.a('array');
           res.body[0].type.should.equal(type);
-          if(!!query.orderByRosterId) {
+          if (!!query.orderByRosterId) {
             res.body[0].rosterId.should.equal(1);
-          } else if(Object.keys(query).length > 0) {
+          } else if (Object.keys(query).length > 0) {
             const queryKey = Object.keys(query)[0];
             res.body[0][queryKey].should.equal(query[queryKey]);
           }
