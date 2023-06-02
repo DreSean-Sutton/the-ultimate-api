@@ -61,6 +61,27 @@ describe.only("POST /api/add/fighters", () => {
           done();
         })
     })
+
+    it("returns a 201 status if a third fighter successfully inserted", done => {
+
+      const returnedKeys = ['createdAt', 'updatedAt', 'fighterId', 'fighter', 'rosterId', 'displayName'];
+
+      chai.request(url)
+        .post(path)
+        .set('authorization', `Bearer ${testToken}`)
+        .set('username', 'test_username')
+        .set('content-type', 'application/json')
+        .send({ fighter: 'mrVoid', displayName: 'Mr. Void', rosterId: '690' })
+        .end((err, res) => {
+          if(err) {
+            console.log(err);
+            return done(err);
+          }
+          res.body.should.have.all.keys(returnedKeys);
+          res.should.have.status(201);
+          done();
+        })
+    })
   })
 
   describe("unsuccessful requests", () => {
