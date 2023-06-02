@@ -116,7 +116,6 @@ async function getFighters(req: Req, res: Res, next: any) {
       throw new ClientError(400, `${queryKey} is not a valid query key`);
     }
     const result = await sequelize.query(`${sqlQueries.getFighters(schemaName)}`);
-    console.log({ result })
     return res.status(200).send(result[0]);
   } catch (e) {
     return next(e);
@@ -149,8 +148,10 @@ async function getFightersData(req: Req, res: Res, next: any) {
     const authResult = userIsTrue ? await authorizeUser(authorization, username, next) : null;
     if (authResult) throw new ClientError(authResult.status, authResult.message);
     const schemaName = userIsTrue ? username : 'public';
+    const queryTypes = ['fighter', 'fighterId', 'rosterId', 'orderByRosterId'];
     const dataTypes = ['moves', 'throws', 'movements', 'stats'];
     const dataTypeIds = ['moveId', 'throwId', 'movementId', 'statId'];
+    const isValidQuery = queryTypes.some(e => e === queryKey);
 
     if (fighter && /\d/g.test(fighter)) {
       throw new ClientError(400, 'fighter name can\'t have a number');
@@ -158,32 +159,50 @@ async function getFightersData(req: Req, res: Res, next: any) {
       throw new ClientError(400, 'fighterId must be an integer');
     } else if (rosterId && !Number(rosterId)) {
       throw new ClientError(400, 'rosterId must be an integer');
+    } else if (orderByRosterId && orderByRosterId !== 'true') {
+      throw new ClientError(400, 'orderByRosterId query string can only be true');
     }
-
+    if (queryKey && !isValidQuery) {
+      throw new ClientError(400, `${queryKey} is not a valid query string`)
+    }
+    if (Object.keys(queryStr).length > 1) {
+      throw new ClientError(400, 'Only one query string is allowed');
+    }
     const FightersModel = sequelize.models.fighters;
+    let fightersResult;
     const whereCondition: any = {};
     whereCondition[queryKey] = currentQueryStr;
-    const fightersResult = await FightersModel.findOne({
-      where: whereCondition
-    });
+    if (!queryKey || orderByRosterId) {
+      fightersResult = await FightersModel.findOne({});
+    } else {
+      fightersResult = await FightersModel.findOne({ where: whereCondition });
+    }
     if (!fightersResult) {
       throw new ClientError(404, `(${queryKey}) named (${currentQueryStr}) doesn't exist in the database`);
     }
     const currentFighterId = fightersResult.dataValues.fighterId;
 
-    for(let i = 0; i < dataTypes.length; i++) {
+    for (let i = 0; i < dataTypes.length; i++) {
       let result;
       if (!queryKey) {
         result = await sequelize.query(`
           ${sqlQueries.getFightersData(dataTypes[i], schemaName, currentFighterId)}
-          ORDER BY ${JSON.stringify(dataTypes[i])}
+          ORDER BY
+            "${dataTypeIds[i]}"
+        `);
+      } else if (orderByRosterId) {
+        result = await sequelize.query(`
+          ${sqlQueries.getFightersData(dataTypes[i], schemaName, currentFighterId)}
+          ORDER BY
+            "rosterId", "${dataTypeIds[i]}"
         `);
       } else {
         result = await sequelize.query(`
           ${sqlQueries.getFightersData(dataTypes[i], schemaName, currentFighterId)}
           WHERE
             "fighterId"=${currentFighterId}
-          ORDER BY "${rosterId || dataTypes[i]}"
+          ORDER BY
+            "${dataTypeIds[i]}"
         `);
       }
       if (result[1].rowCount !== 0) {
@@ -191,8 +210,7 @@ async function getFightersData(req: Req, res: Res, next: any) {
       }
     }
     if (fullResult.length === 0) {
-      throw new ClientError(404, `(${queryKey}) named (${currentQueryStr}) doesn't have any data`)
-
+      throw new ClientError(404, `(${queryKey}) named (${currentQueryStr}) doesn't have any data`);
     }
     return res.status(200).send(fullResult.flat(1));
   } catch (e) {
@@ -218,7 +236,6 @@ async function getFightersDataByType(req: Req, res: Res, next: any) {
   }
   const queryStr: QueryString = req.query;
   const queryKey = Object.keys(queryStr);
-  console.log({queryKey})
   const currentType = req.params.type;
   let index = 0;
   const dataTypes = ['moves', 'throws', 'movements', 'stats'];

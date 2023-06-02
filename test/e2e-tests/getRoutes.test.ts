@@ -244,7 +244,7 @@ describe.only("GET /api/get/fighters/data", () => {
         renderDataTests(200, done, { fighter: 'joker' });
       })
       it("Returns a 200 status and a user's json object containing a fighter's data", done => {
-        renderDataTests(200, done, { fighter: 'goku' }, { authorization: testToken, username: 'test_username' }, true);
+        renderDataTests(200, done, { fighter: 'goku' }, { authorization: testToken, username: 'test_username' });
     })
     })
 
