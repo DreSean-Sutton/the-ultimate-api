@@ -330,7 +330,7 @@ describe.only("GET /api/get/fighters/data", () => {
   })
 })
 
-describe("GET /api/get/fighters/data/:type", () => {
+describe.only("GET /api/get/fighters/data/:type", () => {
 
   function renderTypeTests(type: string, status: number, done: any, query?: any, headers?: any, log?: boolean) {
     const authorization = headers?.authorization ? headers.authorization : '';

@@ -28,17 +28,12 @@ async function getFighters(req: Req, res: Res, next: any) {
   try {
     const authResult = userIsTrue ? await authorizeUser(authorization, username, next) : null;
     if (authResult) throw new ClientError(authResult.status, authResult.message);
-  } catch(e) {
-    console.error(e);
-    return next(e);
-  }
-  const schemaName = userIsTrue ? username : 'public';
-  const queryStr: QueryString = req.query;
-  const queryKey = Object.keys(queryStr);
+    const schemaName = userIsTrue ? username : 'public';
+    const queryStr: QueryString = req.query;
+    const queryKey = Object.keys(queryStr);
 
-  if (queryStr.fighter) {
-    const { fighter } = queryStr;
-    try {
+    if (queryStr.fighter) {
+      const { fighter } = queryStr;
       if (/\d/g.test(fighter)) {
         throw new ClientError(400, 'fighter name can\'t have a number');
       }
@@ -51,12 +46,8 @@ async function getFighters(req: Req, res: Res, next: any) {
         throw new ClientError(404, `${queryKey} named (${fighter}) doesn't exist in the database`);
       }
       return res.status(200).send(result[0][0]);
-    } catch (e) {
-      return next(e);
     }
-  }
-  if (queryStr.fighterId) {
-    try {
+    if (queryStr.fighterId) {
       const { fighterId } = queryStr;
       if (!Number(fighterId) ||
         (Number(fighterId) > 2147483647)) {
@@ -71,12 +62,8 @@ async function getFighters(req: Req, res: Res, next: any) {
         throw new ClientError(404, `${queryKey} named (${fighterId}) doesn't exist in the database`);
       }
       return res.status(200).send(result[0][0]);
-    } catch (e) {
-      return next(e);
     }
-  }
-  if (queryStr.rosterId) {
-    try {
+    if (queryStr.rosterId) {
       const { rosterId } = queryStr;
       if (!Number(rosterId) ||
         (Number(rosterId) > 2147483647)) {
@@ -91,12 +78,8 @@ async function getFighters(req: Req, res: Res, next: any) {
         throw new ClientError(404, `${queryKey} named (${rosterId}) doesn't exist in the database`);
       }
       return res.status(200).send(result[0][0]);
-    } catch (e) {
-      return next(e);
     }
-  }
-  if (queryStr.orderByRosterId) {
-    try {
+    if (queryStr.orderByRosterId) {
       const { orderByRosterId } = queryStr;
       if (orderByRosterId !== 'true') {
         throw new ClientError(400, 'orderByRosterId must be true');
@@ -107,11 +90,8 @@ async function getFighters(req: Req, res: Res, next: any) {
           "rosterId"
       `);
       return res.status(200).send(result[0]);
-    } catch (e) {
-      return next(e);
     }
-  }
-  try {
+
     if (queryKey.length > 0) {
       throw new ClientError(400, `${queryKey} is not a valid query key`);
     }
@@ -240,13 +220,11 @@ async function getFightersDataByType(req: Req, res: Res, next: any) {
   const dataTypeIds = ['moveId', 'throwId', 'movementId', 'statId'];
   const isValidQuery = queryTypes.some(e => e === queryKey);
   const isValidType = dataTypes.some((e, i) => {
-    console.log({e})
     if (e === type) {
       dataTypeIndex = i
       return true;
     }
   });
-  console.log({isValidType});
 
   let currentQueryStr;
   if (fighter) {
