@@ -13,7 +13,7 @@ const testPayload = {
 };
 const testToken = jwt.sign(testPayload, process.env.TOKEN_SECRET);
 
-describe("POST /api/add/fighters", () => {
+describe.only("POST /api/add/fighters", () => {
 
 
   const url = 'http://localhost:5000';
@@ -51,6 +51,27 @@ describe("POST /api/add/fighters", () => {
         .set('username', 'test_username')
         .set('content-type', 'application/json')
         .send({ fighter: 'krillin', displayName: 'Krillin', rosterId: '523' })
+        .end((err, res) => {
+          if(err) {
+            console.log(err);
+            return done(err);
+          }
+          res.body.should.have.all.keys(returnedKeys);
+          res.should.have.status(201);
+          done();
+        })
+    })
+
+    it("returns a 201 status if a third fighter successfully inserted", done => {
+
+      const returnedKeys = ['createdAt', 'updatedAt', 'fighterId', 'fighter', 'rosterId', 'displayName'];
+
+      chai.request(url)
+        .post(path)
+        .set('authorization', `Bearer ${testToken}`)
+        .set('username', 'test_username')
+        .set('content-type', 'application/json')
+        .send({ fighter: 'mrVoid', displayName: 'Mr. Void', rosterId: '690' })
         .end((err, res) => {
           if(err) {
             console.log(err);
@@ -116,7 +137,25 @@ describe("POST /api/add/fighters", () => {
           done();
         })
     });
-    it("returns a 401 status authorization header is incorrect", done => {
+    it("returns a 401 status if authorization header is incorrect", done => {
+
+      chai.request(url)
+        .post(path)
+        .set('authorization', 'Bearer wrong_apikey')
+        .set('username', 'test_username')
+        .set('content-type', 'application/json')
+        .send({ fighter: 'goku', displayName: 'Son Goku', rosterId: '9001' })
+        .end((err, res) => {
+          if (err) {
+            console.log(err);
+            return done(err);
+          }
+          res.should.have.status(401);
+          res.body.should.have.property('error');
+          done();
+        })
+    });
+    it("returns a 400 status if authorization header doesn't start with 'Bearer '", done => {
 
       chai.request(url)
         .post(path)
@@ -129,7 +168,7 @@ describe("POST /api/add/fighters", () => {
             console.log(err);
             return done(err);
           }
-          res.should.have.status(401);
+          res.should.have.status(400);
           res.body.should.have.property('error');
           done();
         })
@@ -191,7 +230,7 @@ describe("POST /api/add/fighters", () => {
   })
 })
 
-describe("POST /api/add/:table/:id", () => {
+describe.only("POST /api/add/:table/:id", () => {
 
   const url = 'http://localhost:5000';
 
@@ -250,7 +289,7 @@ describe("POST /api/add/:table/:id", () => {
     })
   })
 
-  describe("POST /api/add/moves/:id", () => {
+  describe.only("POST /api/add/moves/:id", () => {
 
     const path = '/api/add/moves/90';
     const moveProperties = ['activeFrames', 'category', 'createdAt', 'damage', 'fighterId', 'firstFrame', 'moveId', 'moveType', 'name', 'totalFrames', 'type', 'updatedAt'];
@@ -335,7 +374,7 @@ describe("POST /api/add/:table/:id", () => {
     })
   })
 
-  describe("POST /api/add/throws/:id", () => {
+  describe.only("POST /api/add/throws/:id", () => {
     const path = '/api/add/throws/90';
     const throwProperties = ['activeFrames', 'createdAt', 'damage', 'fighterId', 'throwId', 'name', 'totalFrames', 'type', 'updatedAt'];
 
@@ -414,7 +453,7 @@ describe("POST /api/add/:table/:id", () => {
 
   })
 
-  describe("POST /api/add/movements/:id", () => {
+  describe.only("POST /api/add/movements/:id", () => {
     const path = '/api/add/movements/90';
     const movementProperties = ['activeFrames', 'createdAt', 'fighterId', 'movementId', 'name', 'totalFrames', 'type', 'updatedAt'];
 
@@ -490,7 +529,7 @@ describe("POST /api/add/:table/:id", () => {
 
   })
 
-  describe("POST /api/add/stats/:id", () => {
+  describe.only("POST /api/add/stats/:id", () => {
     const path = '/api/add/stats/90';
     const statProperties = ['createdAt', 'fighterId', 'statId', 'name', 'statValue', 'type', 'updatedAt'];
 

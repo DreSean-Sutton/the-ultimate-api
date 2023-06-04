@@ -2,6 +2,8 @@ import { Req, Res, QueryString } from "../utils/types-routes";
 import ClientError from "../utils/client-error";
 import { client } from '../conn';
 const sqlQueries = require('../utils/sql-queries');
+const { sequelize } = require('../conn');
+const { authorizeUser } = require('../lib/authorizeUser');
 
 /**
  * All routes accept query strings for specifying a single fighter
@@ -21,94 +23,80 @@ const sqlQueries = require('../utils/sql-queries');
  * @return { object | [object] }
  */
 async function getFighters(req: Req, res: Res, next: any) {
-  const queryStr: QueryString = req.query;
-  const queryKey = Object.keys(queryStr);
+  const { authorization, username } = req.headers;
+  const userIsTrue = authorization || username;
+  try {
+    const authResult = userIsTrue ? await authorizeUser(authorization, username, next) : null;
+    if (authResult) throw new ClientError(authResult.status, authResult.message);
+    const schemaName = userIsTrue ? username : 'public';
+    const queryStr: QueryString = req.query;
+    const queryKey = Object.keys(queryStr);
 
-  if (queryStr.fighter) {
-    const sql = `
-    ${sqlQueries.getFighters()}
-    WHERE
-      fighter=$1
-    `;
-    const params: string[] = [queryStr.fighter];
-    try {
-      if (/\d/g.test(params[0])) {
+    if (queryStr.fighter) {
+      const { fighter } = queryStr;
+      if (/\d/g.test(fighter)) {
         throw new ClientError(400, 'fighter name can\'t have a number');
       }
-      const result = await client.query(sql, params);
-      if (result.rows.length === 0) {
-        throw new ClientError(404, `${queryKey} named ${params} doesn't exist in the database`);
+      const result = await sequelize.query(`
+        ${sqlQueries.getFighters(schemaName)}
+        WHERE
+          "fighter"='${fighter}'
+      `);
+      if (result[1].rowCount === 0) {
+        throw new ClientError(404, `${queryKey} named (${fighter}) doesn't exist in the database`);
       }
-      return res.status(200).send(result.rows[0]);
-    } catch (e) {
-      return next(e);
+      return res.status(200).send(result[0][0]);
     }
-  }
-  if (queryStr.fighterId) {
-    try {
-      if (!Number(queryStr.fighterId) ||
-        (Number(queryStr.fighterId) > 2147483647)) {
+    if (queryStr.fighterId) {
+      const { fighterId } = queryStr;
+      if (!Number(fighterId) ||
+        (Number(fighterId) > 2147483647)) {
         throw new ClientError(400, 'fighterId must be an integer');
       }
-      const sql = `
-      ${sqlQueries.getFighters()}
-      WHERE
-        "fighterId"=$1
-      `;
-      const params = [queryStr.fighterId];
-      const result = await client.query(sql, params);
-      if (result.rows.length === 0) {
-        throw new ClientError(404, `${queryKey} ${params} doesn't exist in the database`);
+      const result = await sequelize.query(`
+        ${sqlQueries.getFighters(schemaName)}
+        WHERE
+          "fighterId"='${fighterId}'
+      `);
+      if (result[1].rowCount === 0) {
+        throw new ClientError(404, `${queryKey} named (${fighterId}) doesn't exist in the database`);
       }
-      return res.status(200).send(result.rows[0]);
-    } catch (e) {
-      return next(e);
+      return res.status(200).send(result[0][0]);
     }
-  }
-  if (queryStr.rosterId) {
-    try {
-      if (!Number(queryStr.rosterId) ||
-        (Number(queryStr.rosterId) > 2147483647)) {
+    if (queryStr.rosterId) {
+      const { rosterId } = queryStr;
+      if (!Number(rosterId) ||
+        (Number(rosterId) > 2147483647)) {
         throw new ClientError(400, 'rosterId must be an integer');
       }
-      const sql = `
-      ${sqlQueries.getFighters()}
-      WHERE
-        "rosterId"=$1
-      `;
-      const params = [queryStr.rosterId];
-      const result = await client.query(sql, params);
-      if (result.rows.length === 0) {
-        throw new ClientError(404, `${queryKey} ${params} doesn't exist in the database`);
+      const result = await sequelize.query(`
+        ${sqlQueries.getFighters(schemaName)}
+        WHERE
+          "rosterId"='${rosterId}'
+      `);
+      if (result[1].rowCount === 0) {
+        throw new ClientError(404, `${queryKey} named (${rosterId}) doesn't exist in the database`);
       }
-      return res.status(200).send(result.rows[0]);
-    } catch (e) {
-      return next(e);
+      return res.status(200).send(result[0][0]);
     }
-  }
-  if (queryStr.orderByRosterId) {
-    try {
-      if (queryStr.orderByRosterId !== 'true') {
+    if (queryStr.orderByRosterId) {
+      const { orderByRosterId } = queryStr;
+      if (orderByRosterId !== 'true') {
         throw new ClientError(400, 'orderByRosterId must be true');
       }
-      const sql = `
-      ${sqlQueries.getFighters()}
-      ORDER BY
-      "rosterId"
-      `;
-      const result = await client.query(sql);
-      return res.status(200).send(result.rows);
-    } catch (e) {
-      return next(e);
+      const result = await sequelize.query(`
+        ${sqlQueries.getFighters(schemaName)}
+        ORDER BY
+          "rosterId"
+      `);
+      return res.status(200).send(result[0]);
     }
-  }
-  try {
+
     if (queryKey.length > 0) {
       throw new ClientError(400, `${queryKey} is not a valid query key`);
     }
-    const sql = `${sqlQueries.getFighters()}`;
-    const result = await client.query(sql);
-    return res.status(200).send(result.rows);
+    const result = await sequelize.query(`${sqlQueries.getFighters(schemaName)}`);
+    return res.status(200).send(result[0]);
   } catch (e) {
     return next(e);
   }
@@ -121,116 +109,93 @@ async function getFighters(req: Req, res: Res, next: any) {
  */
 async function getFightersData(req: Req, res: Res, next: any) {
   const fullResult: any[] = [];
-  return renderAllData(0);
+  const queryStr: QueryString = req.query;
+  const { fighter, fighterId, rosterId, orderByRosterId } = queryStr;
+  const queryKey: string = Object.keys(queryStr)[0];
+  const { authorization, username } = req.headers;
+  const userIsTrue = authorization || username;
+  const queryTypes = ['fighter', 'fighterId', 'rosterId', 'orderByRosterId'];
+  const dataTypes = ['moves', 'throws', 'movements', 'stats'];
+  const dataTypeIds = ['moveId', 'throwId', 'movementId', 'statId'];
+  const isValidQuery = queryTypes.some(e => e === queryKey);
 
-  async function renderAllData(index: number): Promise<any[]> {
-    const dataTypes = ['moves', 'throws', 'movements', 'stats'];
-    const dataTypeIds = ['moveId', 'throwId', 'movementId', 'statId'];
+  let currentQueryStr;
+  if (fighter) {
+    currentQueryStr = fighter;
+  } else if (fighterId) {
+    currentQueryStr = fighterId;
+  } else if (rosterId) {
+    currentQueryStr = rosterId;
+  }
 
-    if (dataTypes.length === index) {
-      return res.status(200).send(fullResult.flat(1));
-    }
-    const queryStr: QueryString = req.query;
-    const queryKey = Object.keys(queryStr);
+  try {
+    const authResult = userIsTrue ? await authorizeUser(authorization, username, next) : null;
+    if (authResult) throw new ClientError(authResult.status, authResult.message);
+    const schemaName = userIsTrue ? username : 'public';
 
-    if (queryStr.fighter) {
-      const sql = `
-      ${sqlQueries.getFightersData(dataTypes[index])}
-      WHERE
-      fighter=$1
-      ORDER BY ${JSON.stringify(dataTypeIds[index])}
-      `;
-      const params: any = [queryStr.fighter];
+    if (fighter && /\d/g.test(fighter)) {
+      throw new ClientError(400, 'fighter name can\'t have a number');
+    } else if (fighterId && !Number(fighterId)) {
+      throw new ClientError(400, 'fighterId must be an integer');
+    } else if (rosterId && !Number(rosterId)) {
+      throw new ClientError(400, 'rosterId must be an integer');
+    } else if (orderByRosterId && orderByRosterId !== 'true') {
+      throw new ClientError(400, 'orderByRosterId query string can only be true');
+    }
+    if (queryKey && !isValidQuery) {
+      throw new ClientError(400, `${queryKey} is not a valid query string`)
+    }
+    if (Object.keys(queryStr).length > 1) {
+      throw new ClientError(400, 'Only one query string is allowed');
+    }
+    const FightersModel = sequelize.models.fighters;
+    let fightersResult;
+    const whereCondition: any = {};
+    whereCondition[queryKey] = currentQueryStr;
+    if (!queryKey || orderByRosterId) {
+      fightersResult = await FightersModel.findOne({});
+    } else {
+      fightersResult = await FightersModel.findOne({ where: whereCondition });
+    }
+    if (!fightersResult) {
+      throw new ClientError(404, `(${queryKey}) named (${currentQueryStr}) doesn't exist in the database`);
+    }
+    const currentFighterId = fightersResult.dataValues.fighterId;
 
-      try {
-        if (/\d/g.test(params)) {
-          throw new ClientError(400, 'fighter name can\'t have a number');
-        }
-        const result: any = await client.query(sql, params);
-        if (result.rows.length === 0) {
-          throw new ClientError(404, `${queryKey} named ${params} doesn't exist in the database`);
-        }
-        fullResult.push(result.rows);
-        return renderAllData(index + 1);
-      } catch (e) {
-        return next(e);
+    for (let i = 0; i < dataTypes.length; i++) {
+      let result;
+      if (!queryKey) {
+        result = await sequelize.query(`
+          ${sqlQueries.getFightersData(dataTypes[i], schemaName, currentFighterId)}
+          ORDER BY
+            "${dataTypeIds[i]}"
+        `);
+      } else if (orderByRosterId) {
+        result = await sequelize.query(`
+          ${sqlQueries.getFightersData(dataTypes[i], schemaName, currentFighterId)}
+          ORDER BY
+            "rosterId", "${dataTypeIds[i]}"
+        `);
+      } else {
+        result = await sequelize.query(`
+          ${sqlQueries.getFightersData(dataTypes[i], schemaName, currentFighterId)}
+          WHERE
+            "fighterId"=${currentFighterId}
+          ORDER BY
+            "${dataTypeIds[i]}"
+        `);
+      }
+      if (result[1].rowCount !== 0) {
+        fullResult.push(result[0]);
       }
     }
-    if (queryStr.fighterId) {
-      const sql = `
-      ${sqlQueries.getFightersData(dataTypes[index])}
-      WHERE
-      "fighterId"=$1
-      ORDER BY ${JSON.stringify(dataTypeIds[index])}
-      `;
-      const params = [queryStr.fighterId];
-      try {
-        if (!Number(params)) {
-          throw new ClientError(400, 'fighterId must be an integer');
-        }
-        const result = await client.query(sql, params);
-        if (result.rows.length === 0) {
-          throw new ClientError(404, `${queryKey} ${params} doesn't exist in the database`);
-        }
-        fullResult.push(result.rows);
-        return renderAllData(index + 1);
-      } catch (e) {
-        return next(e);
-      }
+    if (fullResult.length === 0) {
+      throw new ClientError(404, `(${queryKey}) named (${currentQueryStr}) doesn't have any data`);
     }
-    if (queryStr.rosterId) {
-      const sql = `
-      ${sqlQueries.getFightersData(dataTypes[index])}
-      WHERE
-      "rosterId"=$1
-      ORDER BY ${JSON.stringify(dataTypeIds[index])}
-      `;
-      const params = [queryStr.rosterId];
-      try {
-        if (!Number(params)) {
-          throw new ClientError(400, 'rosterId must be an integer');
-        }
-        const result = await client.query(sql, params);
-        if (result.rows.length === 0) {
-          throw new ClientError(404, `${queryKey} ${params} doesn't exist in the database`);
-        }
-        fullResult.push(result.rows);
-        return renderAllData(index + 1);
-      } catch (e) {
-        return next(e);
-      }
-    }
-    if (queryStr.orderByRosterId) {
-      try {
-        if (queryStr.orderByRosterId !== 'true') {
-          throw new ClientError(400, 'orderByRosterId must be true');
-        }
-        const sql = `
-        ${sqlQueries.getFightersData(dataTypes[index])}
-        ORDER BY
-        "rosterId", ${JSON.stringify(dataTypeIds[index])}
-        `;
-        const result = await client.query(sql);
-        fullResult.push(result.rows);
-        return renderAllData(index + 1);
-      } catch (e) {
-        return next(e);
-      }
-    }
-    try {
-      if (queryKey.length > 0) {
-        throw new ClientError(400, `${queryKey} is not a valid query key`);
-      }
-      const sql = `
-      ${sqlQueries.getFightersData(dataTypes[index])}
-      ORDER BY ${JSON.stringify(dataTypeIds[index])}
-    `;
-      const result = await client.query(sql);
-      fullResult.push(result.rows);
-      return renderAllData(index + 1);
-    } catch (e) {
-      return next(e);
-    }
+    return res.status(200).send(fullResult.flat(1));
+  } catch (e) {
+    console.error(e);
+    return next(e);
   }
 }
 
@@ -240,117 +205,102 @@ async function getFightersData(req: Req, res: Res, next: any) {
  * @param { string } type // moves, throws, movements, stats
  * @return { [object] }
  */
+
 async function getFightersDataByType(req: Req, res: Res, next: any) {
+
+  const { type } = req.params;
+  let dataTypeIndex = 0;
   const queryStr: QueryString = req.query;
-  const queryKey = Object.keys(queryStr);
-  const currentType = req.params.type;
-  let index = 0;
+  const { fighter, fighterId, rosterId, orderByRosterId } = queryStr;
+  const queryKey: string = Object.keys(queryStr)[0];
+  const { authorization, username } = req.headers;
+  const userIsTrue = authorization || username;
+  const queryTypes = ['fighter', 'fighterId', 'rosterId', 'orderByRosterId'];
   const dataTypes = ['moves', 'throws', 'movements', 'stats'];
   const dataTypeIds = ['moveId', 'throwId', 'movementId', 'statId'];
-  try {
-    if (!checkValidType()) {
-      throw new ClientError(400, `${currentType} is not a valid parameter`);
+  const isValidQuery = queryTypes.some(e => e === queryKey);
+  const isValidType = dataTypes.some((e, i) => {
+    if (e === type) {
+      dataTypeIndex = i
+      return true;
     }
-    if (queryStr.fighter) {
-      const sql = `
-      ${sqlQueries.getFightersData(dataTypes[index])}
-      WHERE
-      fighter=$1
-      ORDER BY ${JSON.stringify(dataTypeIds[index])}
-      `;
-      const params: any = [queryStr.fighter];
-      if (/\d/g.test(params)) {
-        throw new ClientError(400, 'fighter name can\'t have a number');
-      }
-      const result = await client.query(sql, params);
-      if (result.rows.length === 0) {
-        throw new ClientError(404, `${queryKey} named ${params} doesn't exist in the database`);
-      }
-      return res.status(200).send(result.rows);
-    }
-  } catch (e) {
-    return next(e);
-  }
-  if (queryStr.fighterId) {
-    const sql = `
-      ${sqlQueries.getFightersData(dataTypes[index])}
-      WHERE
-      "fighterId"=$1
-      ORDER BY ${JSON.stringify(dataTypeIds[index])}
-      `;
-    const params = [queryStr.fighterId];
-    try {
-      if (!Number(params)) {
-        throw new ClientError(400, 'fighterId must be an integer');
-      }
-      const result = await client.query(sql, params);
-      if (result.rows.length === 0) {
-        throw new ClientError(404, `${queryKey} ${params} doesn't exist in the database`);
-      }
-      return res.status(200).send(result.rows);
-    } catch (e) {
-      return next(e);
-    }
-  }
-  if (queryStr.rosterId) {
-    const sql = `
-      ${sqlQueries.getFightersData(dataTypes[index])}
-      WHERE
-      "rosterId"=$1
-      ORDER BY ${JSON.stringify(dataTypeIds[index])}
-      `;
-    const params = [queryStr.rosterId];
-    try {
-      if (!Number(params)) {
-        throw new ClientError(400, 'rosterId must be an integer');
-      }
-      const result = await client.query(sql, params);
-      if (result.rows.length === 0) {
-        throw new ClientError(404, `${queryKey} ${params} doesn't exist in the database`);
-      }
-      return res.status(200).send(result.rows);
-    } catch (e) {
-      return next(e);
-    }
-  }
-  if (queryStr.orderByRosterId) {
-    try {
-      if (queryStr.orderByRosterId !== 'true') {
-        throw new ClientError(400, 'orderByRosterId must be true');
-      }
-      const sql = `
-      ${sqlQueries.getFightersData(dataTypes[index])}
-      ORDER BY
-      "rosterId", ${JSON.stringify(dataTypeIds[index])}
-      `;
-      const result = await client.query(sql);
-      return res.status(200).send(result.rows);
-    } catch (e) {
-      return next(e);
-    }
-  }
-  try {
-    if (queryKey.length > 0) {
-      throw new ClientError(400, `${queryKey} is not a valid query key`);
-    }
-    const sql = `
-    ${sqlQueries.getFightersData(dataTypes[index])}
-    ORDER BY ${JSON.stringify(dataTypeIds[index])}
-    `;
-    const result = await client.query(sql);
-    return res.status(200).send(result.rows);
-  } catch (e) {
-    return next(e);
+  });
+
+  let currentQueryStr;
+  if (fighter) {
+    currentQueryStr = fighter;
+  } else if (fighterId) {
+    currentQueryStr = fighterId;
+  } else if (rosterId) {
+    currentQueryStr = rosterId;
   }
 
-  function checkValidType(): boolean {
-    for (let i = 0; i < dataTypes.length; i++) {
-      if (currentType === dataTypes[i]) {
-        index = i;
-        return true;
-      }
+  try {
+    if (!isValidType) {
+      throw new ClientError(400, `${type} is not a valid parameter`);
     }
-    return false;
+    const authResult = userIsTrue ? await authorizeUser(authorization, username, next) : null;
+    if (authResult) throw new ClientError(authResult.status, authResult.message);
+    const schemaName = userIsTrue ? username : 'public';
+
+
+    if (fighter && /\d/g.test(fighter)) {
+      throw new ClientError(400, 'fighter name can\'t have a number');
+    } else if (fighterId && !Number(fighterId)) {
+      throw new ClientError(400, 'fighterId must be an integer');
+    } else if (rosterId && !Number(rosterId)) {
+      throw new ClientError(400, 'rosterId must be an integer');
+    } else if (orderByRosterId && orderByRosterId !== 'true') {
+      throw new ClientError(400, 'orderByRosterId query string can only be true');
+    }
+    if (queryKey && !isValidQuery) {
+      throw new ClientError(400, `${queryKey} is not a valid query string`)
+    }
+    if (Object.keys(queryStr).length > 1) {
+      throw new ClientError(400, 'Only one query string is allowed');
+    }
+    const FightersModel = sequelize.models.fighters;
+    let fightersResult;
+    const whereCondition: any = {};
+    whereCondition[queryKey] = currentQueryStr;
+    if (!queryKey || orderByRosterId) {
+      fightersResult = await FightersModel.findOne({});
+    } else {
+      fightersResult = await FightersModel.findOne({ where: whereCondition });
+    }
+    if (!fightersResult) {
+      throw new ClientError(404, `(${queryKey}) named (${currentQueryStr}) doesn't exist in the database`);
+    }
+    const currentFighterId = fightersResult.dataValues.fighterId;
+
+    let result;
+    if (!queryKey) {
+      result = await sequelize.query(`
+        ${sqlQueries.getFightersData(type, schemaName)}
+        ORDER BY
+          "${dataTypeIds[dataTypeIndex]}"
+      `);
+    } else if (orderByRosterId) {
+      result = await sequelize.query(`
+        ${sqlQueries.getFightersData(type, schemaName)}
+        ORDER BY
+          "rosterId", "${dataTypeIds[dataTypeIndex]}"
+      `);
+    } else {
+      result = await sequelize.query(`
+        ${sqlQueries.getFightersData(type, schemaName)}
+        WHERE
+          "fighterId"=${currentFighterId}
+        ORDER BY
+          "${dataTypeIds[dataTypeIndex]}"
+      `);
+    }
+    if (result[1].rowCount === 0) {
+      throw new ClientError(404, `(${queryKey}) named (${currentQueryStr}) doesn't have any (${type}) type data`);
+    }
+    return res.status(200).send(result[0]);
+  } catch (e) {
+    return next(e);
   }
 }
 

@@ -16,7 +16,7 @@ info:
     [GitHub](https://github.com/DreSean-Sutton/the-ultimate-api)
     [LinkedIn](https://www.linkedin.com/in/dre-sean-sutton/)
 
-  version: v9
+  version: v10
 
 paths:
   /api/get/fighters:
@@ -27,6 +27,9 @@ paths:
       description: >
        Use `fighter`, `fighterId`, and `rosterId`
        to specify a single fighter
+      security:
+        - BearerAuth: []
+        - UsernameHeader: []
       parameters:
       - in: query
         name: fighter
@@ -86,6 +89,9 @@ paths:
       description: >
        Use `fighter`, `fighterId`, and `rosterId`
        to specify a single fighter
+      security:
+        - BearerAuth: []
+        - UsernameHeader: []
       parameters:
       - in: query
         name: fighter
@@ -124,6 +130,9 @@ paths:
       description: >
        Use `fighter`, `fighterId`, and `rosterId`
        to specify a single fighter
+      security:
+        - BearerAuth: []
+        - UsernameHeader: []
       parameters:
       - in: path
         name: type
@@ -367,6 +376,7 @@ paths:
               - category
               - damage
               - fighterId
+              - firstFrame
               - moveType
               - name
               - totalFrames
@@ -751,6 +761,7 @@ components:
     BearerAuth:
       type: http
       scheme: bearer
+      bearerFormat: JWT
     UsernameHeader:
       type: apiKey
       in: header
@@ -855,6 +866,8 @@ components:
           type: string
         damage:
           type: string
+        firstFrame:
+          type: string
         moveType:
           type: string
         name:
@@ -875,6 +888,8 @@ components:
             type: string
           fighterId:
             type: integer
+          firstFrame:
+            type: string
           moveId:
             type: integer
           moveType:
@@ -890,6 +905,7 @@ components:
         category: special
         damage: 9001%
         fighterId: 1
+        firstFrame: '1'
         moveId: 150
         movetype: multi
         name: kamehameha

@@ -336,14 +336,25 @@ export default function defineUserDb(schemaName: string) {
     }
   });
 
-  Moves.hasMany(Hitboxes, { foreignKey: 'moveId' });
-  Hitboxes.belongsTo(Moves, { foreignKey: 'moveId' });
-  Throws.hasMany(Grappling, { foreignKey: 'throwId' });
-  Grappling.belongsTo(Throws, { foreignKey: 'throwId' });
-  Movements.hasMany(Dodging, { foreignKey: 'movementId' });
-  Dodging.belongsTo(Movements, { foreignKey: 'movementId' });
-  Stats.hasMany(Miscellaneous, { foreignKey: 'statId' });
-  Miscellaneous.belongsTo(Stats, { foreignKey: 'statId' });
+  Fighters.hasMany(Moves, { foreignKey: 'fighterId', onDelete: 'CASCADE' });
+  Moves.belongsTo(Fighters, { foreignKey: 'fighterId', onDelete: 'CASCADE' });
+  Moves.hasMany(Hitboxes, { foreignKey: 'moveId', onDelete: 'CASCADE' });
+  Hitboxes.belongsTo(Moves, { foreignKey: 'moveId', onDelete: 'CASCADE' });
+
+  Fighters.hasMany(Throws, { foreignKey: 'fighterId', onDelete: 'CASCADE' });
+  Throws.belongsTo(Fighters, { foreignKey: 'fighterId', onDelete: 'CASCADE' });
+  Throws.hasMany(Grappling, { foreignKey: 'throwId', onDelete: 'CASCADE' });
+  Grappling.belongsTo(Throws, { foreignKey: 'throwId', onDelete: 'CASCADE' });
+
+  Fighters.hasMany(Movements, { foreignKey: 'fighterId', onDelete: 'CASCADE' });
+  Movements.belongsTo(Fighters, { foreignKey: 'fighterId', onDelete: 'CASCADE' });
+  Movements.hasMany(Dodging, { foreignKey: 'movementId', onDelete: 'CASCADE' });
+  Dodging.belongsTo(Movements, { foreignKey: 'movementId', onDelete: 'CASCADE' });
+
+  Fighters.hasMany(Stats, { foreignKey: 'fighterId', onDelete: 'CASCADE' });
+  Stats.belongsTo(Fighters, { foreignKey: 'fighterId', onDelete: 'CASCADE' });
+  Stats.hasMany(Miscellaneous, { foreignKey: 'statId', onDelete: 'CASCADE' });
+  Miscellaneous.belongsTo(Stats, { foreignKey: 'statId', onDelete: 'CASCADE' });
 
   return { Fighters, Moves, Hitboxes, Throws, Grappling, Movements, Dodging, Stats, Miscellaneous };
 }

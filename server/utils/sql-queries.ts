@@ -1,14 +1,14 @@
 const sqlQueries = {
-  getFighters() {
+  getFighters(schemaName: string) {
     return `
       SELECT
         "fighterId", fighter,
         "rosterId", "displayName"
       FROM
-        fighters
+        "${schemaName}".fighters
       `;
   },
-  getFightersData(type: string) {
+  getFightersData(type: string, schemaName: string) {
     try {
 
       if (type === 'moves') {
@@ -19,9 +19,9 @@ const sqlQueries = {
             "moveType", "name", "rosterId",
             "firstFrame", "totalFrames", "type"
           FROM
-            fighters
-          JOIN "moves" USING ("fighterId")
-          JOIN "hitboxes" USING ("moveId")
+            "${schemaName}".moves
+          JOIN "${schemaName}"."hitboxes" USING ("moveId")
+          JOIN "${schemaName}"."fighters" USING ("fighterId")
         `;
       }
       if (type === 'throws') {
@@ -32,9 +32,9 @@ const sqlQueries = {
             "name", "rosterId",
             "totalFrames", "throwId", "type"
           FROM
-            fighters
-          JOIN "throws" USING ("fighterId")
-          JOIN "grappling" USING ("throwId")
+            "${schemaName}".throws
+          JOIN "${schemaName}"."grappling" USING ("throwId")
+          JOIN "${schemaName}"."fighters" USING ("fighterId")
         `;
       }
       if (type === 'movements') {
@@ -45,9 +45,9 @@ const sqlQueries = {
             "movementId", "name", "rosterId",
             "totalFrames", "type"
           FROM
-            fighters
-          JOIN "movements" USING ("fighterId")
-          JOIN "dodging" USING ("movementId")
+            "${schemaName}".movements
+          JOIN "${schemaName}"."dodging" USING ("movementId")
+          JOIN "${schemaName}"."fighters" USING ("fighterId")
         `;
       }
       if (type === 'stats') {
@@ -58,9 +58,9 @@ const sqlQueries = {
             "name", "rosterId",
             "statId", "statValue", "type"
           FROM
-            fighters
-          JOIN "stats" USING ("fighterId")
-          JOIN "miscellaneous" USING ("statId")
+            "${schemaName}".stats
+          JOIN "${schemaName}"."miscellaneous" USING ("statId")
+          JOIN "${schemaName}"."fighters" USING ("fighterId")
         `;
       }
       throw new Error('incorrect type parameter');

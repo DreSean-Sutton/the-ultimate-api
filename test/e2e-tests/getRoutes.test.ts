@@ -1,19 +1,33 @@
 import chai from 'chai';
 import sinon from 'sinon';
 import chaiHttp from 'chai-http';
+require('dotenv/config');
+const jwt = require('jsonwebtoken');
 chai.should();
 chai.use(chaiHttp);
 
-describe.skip("GET api/get/fighters", () => {
+const testPayload = {
+  userId: 123,
+  exp: Math.floor(Date.now() / 1000) + (60 * 30)
+};
+const testToken = `Bearer ${jwt.sign(testPayload, process.env.TOKEN_SECRET)}`;
+
+describe.only("GET /api/get/fighters", () => {
 
   const expectedFighterProps = ['fighter', 'fighterId', 'rosterId', 'displayName'];
+  const url = 'http://localhost:5000';
+  const path = '/api/get/fighters';
 
-  function renderFightersTests(status: number, done: any, query?: any, log?: boolean) {
+  function renderFightersTests(status: number, done: any, query?: any, headers?: any, log?: boolean) {
+    const authorization = headers?.authorization ? headers.authorization : '';
+    const username = headers?.username || '';
 
     query = query || {}
-    chai.request('http://localhost:5000')
-      .get('/api/get/fighters')
+    chai.request(url)
+      .get(path)
       .query(query)
+      .set('authorization', authorization)
+      .set('username', username)
       .end((err, res) => {
         if (err) return done(err);
         if (log) console.log(res.body);
@@ -22,7 +36,7 @@ describe.skip("GET api/get/fighters", () => {
           res.body.should.be.a('object');
           res.body.should.haveOwnProperty('error');
         } else {
-          if(Array.isArray(res.body)) {
+          if (Array.isArray(res.body)) {
             res.body.should.be.a('array');
             res.body[0].should.have.all.keys(expectedFighterProps);
           }
@@ -42,13 +56,16 @@ describe.skip("GET api/get/fighters", () => {
 
     context("successful requests", () => {
 
-      it("should return a json object containing all fighters' basic data", done => {
+      it("Returns a json object containing all fighters' basic data", done => {
         renderFightersTests(200, done, {});
+      })
+      it("Returns a json object containing all of a user's basic fighter data", done => {
+        renderFightersTests(200, done, {}, { authorization: testToken, username: 'test_username' });
       })
     })
 
     context("unsuccessful requests", () => {
-      it("should return an error if url isn't valid", done => {
+      it("Returns an error if url isn't valid", done => {
         chai.request('http://localhost:5000')
           .get('/api/get/fighterssssss')
           .end((err, res) => {
@@ -58,8 +75,17 @@ describe.skip("GET api/get/fighters", () => {
             done();
           });
       });
-      it("should return an error if query key isn't valid", done => {
+      it("Returns an error if query key isn't valid", done => {
         renderFightersTests(400, done, { invalidKey: 'random_value' });
+      })
+      it("Returns a 400 request if authorization header doesn't have a value", done => {
+        renderFightersTests(400, done, {}, { authorization: '', username: 'test_username' });
+      })
+      it("Returns a 400 request if username header doesn't have a value", done => {
+        renderFightersTests(400, done, {}, { authorization: testToken, username: '' });
+      })
+      it("Returns a 400 request if authorization header doesn't start with 'Bearer '", done => {
+        renderFightersTests(400, done, {}, { authorization: testToken.substring(7), username: 'test_username' });
       })
     })
   })
@@ -69,17 +95,20 @@ describe.skip("GET api/get/fighters", () => {
 
     context("successful requests", () => {
 
-      it("should return a json object containing a fighter's basic data", done => {
+      it("Returns a json object containing a fighter's basic data", done => {
         renderFightersTests(200, done, { fighter: 'inkling' });
+      })
+      it("Returns a json object containing a user's fighter's basic data", done => {
+        renderFightersTests(200, done, { fighter: 'goku' }, { authorization: testToken, username: 'test_username' });
       })
     })
 
     context("unsuccessful requests", () => {
 
-      it("should return an error if fighter is a number", done => {
+      it("Returns an error if fighter is a number", done => {
         renderFightersTests(400, done, { fighter: 10 });
       })
-      it("should return an error if fighter doesn't exist", done => {
+      it("Returns an error if fighter doesn't exist", done => {
         renderFightersTests(404, done, { fighter: 'i_dont_exist' });
       })
     })
@@ -89,17 +118,20 @@ describe.skip("GET api/get/fighters", () => {
 
     context("successful requests", () => {
 
-      it("should return a json object containing a fighter's basic data", done => {
+      it("Returns a json object containing a fighter's basic data", done => {
         renderFightersTests(200, done, { fighterId: 10 });
+      })
+      it("Returns a json object containing a user's fighter's basic data", done => {
+        renderFightersTests(200, done, { fighterId: 91 }, { authorization: testToken, username: 'test_username' });
       })
     })
 
-    context('failed requests', () => {
+    context('unsuccessful requests', () => {
 
-      it("should return an error if fighterId isn't an integer", done => {
+      it("Returns an error if fighterId isn't an integer", done => {
         renderFightersTests(400, done, { fighterId: 'not a number' });
       })
-      it("should return an error if fighterId doesn't exist", done => {
+      it("Returns an error if fighterId doesn't exist", done => {
         renderFightersTests(404, done, { fighterId: 2147483647 });
       })
     })
@@ -109,17 +141,20 @@ describe.skip("GET api/get/fighters", () => {
 
     context("successful requests", () => {
 
-      it("should return a json object containing a fighter's basic data", done => {
+      it("Returns a json object containing a fighter's basic data", done => {
         renderFightersTests(200, done, { rosterId: 10 });
+      })
+      it("Returns a json object containing a user's fighter's basic data", done => {
+        renderFightersTests(200, done, { rosterId: 9001 }, { authorization: testToken, username: 'test_username' });
       })
     })
 
-    context('failed requests', () => {
+    context('unsuccessful requests', () => {
 
-      it("should return an error if rosterId isn't an integer", done => {
+      it("Returns an error if rosterId isn't an integer", done => {
         renderFightersTests(400, done, { rosterId: 'not_a_number' });
       })
-      it("should return an error if rosterId doesn't exist", done => {
+      it("Returns an error if rosterId doesn't exist", done => {
         renderFightersTests(404, done, { rosterId: 2147483647 });
       })
     })
@@ -129,31 +164,38 @@ describe.skip("GET api/get/fighters", () => {
 
     context("successful requests", () => {
 
-      it("should return an json object containing all fighter's basic data", done => {
+      it("Returns an json object containing all fighter's basic data", done => {
         renderFightersTests(200, done, { orderByRosterId: true });
+      })
+      it("Returns a json object containing a user's fighter's basic data", done => {
+        renderFightersTests(200, done, { orderByRosterId: true }, { authorization: testToken, username: 'test_username' });
       })
     })
 
-    context('failed requests', () => {
+    context('unsuccessful requests', () => {
 
-      it("should return an error if orderByTestId isn't true", done => {
+      it("Returns an error if orderByTestId isn't true", done => {
         renderFightersTests(400, done, { orderByRosterId: 'not_true' });
       })
     })
   })
 });
 
-describe.skip("GET api/get/fighters/data", () => {
+describe.only("GET /api/get/fighters/data", () => {
 
-  function renderDataTests(status: number, done: any, query?: any, log?: boolean) {
+  function renderDataTests(status: number, done: any, query?: any, headers?: any, log?: boolean) {
+    const authorization = headers?.authorization ? headers.authorization : '';
+    const username = headers?.username || '';
 
     query = query || {}
     chai.request('http://localhost:5000')
       .get('/api/get/fighters/data')
       .query(query)
+      .set('authorization', authorization)
+      .set('username', username)
       .end((err, res) => {
         if (err) return done(err);
-        if(log) console.log(res.body);
+        if (log) console.log(res.body);
         res.should.have.status(status);
         if (res.body.hasOwnProperty('error')) {
           res.body.should.be.a('object');
@@ -173,10 +215,13 @@ describe.skip("GET api/get/fighters/data", () => {
 
   describe("base route", () => {
 
-    it("should return an array of json objects", done => {
+    it("Returns a 200 status and array of json objects", done => {
       renderDataTests(200, done, {});
     })
-    it("should return an error if url path is invalid", done => {
+    it("Returns a 200 status and array of a user's json objects", done => {
+      renderDataTests(200, done, {}, { authorization: testToken, username: 'test_username' });
+    })
+    it("Returns an error if url path is invalid", done => {
       chai.request('http://localhost:5000')
         .get('/api/get/fighters/dataaaaaaa')
         .end((err, res) => {
@@ -186,7 +231,7 @@ describe.skip("GET api/get/fighters/data", () => {
           done();
         })
     })
-    it("should return an error if an invalid query is passed", done => {
+    it("Returns an error if an invalid query is passed", done => {
       renderDataTests(400, done, { invalidKey: 'random_value' });
     })
   })
@@ -195,20 +240,23 @@ describe.skip("GET api/get/fighters/data", () => {
 
     context("successful queries", () => {
 
-      it("should return a json object containing a fighter's data", done => {
+      it("Returns a 200 status and json object containing a fighter's data", done => {
         renderDataTests(200, done, { fighter: 'joker' });
       })
+      it("Returns a 200 status and a user's json object containing a fighter's data", done => {
+        renderDataTests(200, done, { fighter: 'goku' }, { authorization: testToken, username: 'test_username' });
+    })
     })
 
     context("unsuccessful queries", () => {
 
-      it("should return an error if fighter is a number", done => {
+      it("Returns an error if fighter is a number", done => {
         renderDataTests(400, done, { fighter: 10 });
       })
-      it("should return an error if fighter has a number", done => {
+      it("Returns an error if fighter has a number", done => {
         renderDataTests(400, done, { fighter: 'joker10' });
       })
-      it("should return an error if fighter is a number", done => {
+      it("Returns an error if fighter is a number", done => {
         renderDataTests(404, done, { fighter: 'not_a_fighter' });
       })
     })
@@ -218,18 +266,21 @@ describe.skip("GET api/get/fighters/data", () => {
 
     context("successful queries", () => {
 
-      it("should return a json object containing a fighter's data", done => {
+      it("Returns a json object containing a fighter's data", done => {
         renderDataTests(200, done, { fighterId: 10 });
+      })
+      it("Returns a json object containing a user's fighter's data", done => {
+        renderDataTests(200, done, { fighterId: 90 }, { authorization: testToken, username: 'test_username' });
       })
     })
 
     context("unsuccessful queries", () => {
 
-      it("should return a error if fighterId isn't an integer", done => {
+      it("Returns a error if fighterId isn't an integer", done => {
         renderDataTests(400, done, { fighterId: 'not_a_number' });
       })
 
-      it("should return a error if fighterId doesn't exist", done => {
+      it("Returns a error if fighterId doesn't exist", done => {
         renderDataTests(404, done, { fighterId: 2147483647 });
       })
     })
@@ -239,17 +290,20 @@ describe.skip("GET api/get/fighters/data", () => {
 
     context("successful queries", () => {
 
-      it("should return a json object containing a fighter's data", done => {
+      it("Returns a json object containing a fighter's data", done => {
         renderDataTests(200, done, { rosterId: 10 });
+      })
+      it("Returns a json object containing a user's fighter's data", done => {
+        renderDataTests(200, done, { rosterId: 9001 }, { authorization: testToken, username: 'test_username' });
       })
     })
 
     context("unsuccessful queries", () => {
 
-      it("should return a error if rosterId isn't an integer", done => {
+      it("Returns a error if rosterId isn't an integer", done => {
         renderDataTests(400, done, { rosterId: 'not_a_number' });
       })
-      it("should return a error if rosterId doesn't exist", done => {
+      it("Returns a error if rosterId doesn't exist", done => {
         renderDataTests(404, done, { rosterId: 2147483647 });
       })
     })
@@ -259,41 +313,48 @@ describe.skip("GET api/get/fighters/data", () => {
 
     context("successful queries", () => {
 
-      it("should return a json object that's ordered by rosterId when orderByRosterId is true", done => {
+      it("Returns a json object that's ordered by rosterId when orderByRosterId is true", done => {
         renderDataTests(200, done, { orderByRosterId: true });
+      })
+      it("Returns a user's json object that's ordered by rosterId when orderByRosterId is true", done => {
+        renderDataTests(200, done, { orderByRosterId: true }, { authorization: testToken, username: 'test_username' });
       })
     })
 
     context("unsuccessful queries", () => {
 
-      it("should return an error if orderByRosterId's value isn't true", done => {
+      it("Returns an error if orderByRosterId's value isn't true", done => {
         renderDataTests(400, done, { orderByRosterId: 'not_true' });
       })
     })
   })
 })
 
-describe.skip("GET api/get/fighters/data/:type", () => {
+describe.only("GET /api/get/fighters/data/:type", () => {
 
-  function renderTypeTests(type: string, status: number, done: any, query?: any, log?: boolean) {
+  function renderTypeTests(type: string, status: number, done: any, query?: any, headers?: any, log?: boolean) {
+    const authorization = headers?.authorization ? headers.authorization : '';
+    const username = headers?.username || '';
 
     query = query || {}
     chai.request('http://localhost:5000')
       .get(`/api/get/fighters/data/${type}s`)
       .query(query)
+      .set('authorization', authorization)
+      .set('username', username)
       .end((err, res) => {
-        if(err) return done(err);
-        if(log) console.log(res.body);
+        if (err) return done(err);
+        if (log) console.log(res.body);
         res.should.have.status(status);
-        if(res.body.hasOwnProperty('error')) {
+        if (res.body.hasOwnProperty('error')) {
           res.body.should.be.a('object');
           res.body.should.haveOwnProperty('error');
         } else {
           res.body.should.be.a('array');
           res.body[0].type.should.equal(type);
-          if(!!query.orderByRosterId) {
+          if (!!query.orderByRosterId) {
             res.body[0].rosterId.should.equal(1);
-          } else if(Object.keys(query).length > 0) {
+          } else if (Object.keys(query).length > 0) {
             const queryKey = Object.keys(query)[0];
             res.body[0][queryKey].should.equal(query[queryKey]);
           }
@@ -307,48 +368,66 @@ describe.skip("GET api/get/fighters/data/:type", () => {
 
     context("successful queries", () => {
 
-      it("should return a json object of all move data", done => {
+      it("Returns a json object of all move data", done => {
         renderTypeTests('move', 200, done);
       })
-      it("should return a json object of a fighter's move data when fighter is queried", done => {
+      it("Returns a user's json object of all move data", done => {
+        renderTypeTests('move', 200, done, {}, { authorization: testToken, username: 'test_username' });
+      })
+      it("Returns a json object of a fighter's move data when fighter is queried", done => {
         renderTypeTests('move', 200, done, { fighter: 'inkling' });
       })
-      it("should return a json object of a fighter's move data when fighterId is queried", done => {
+      it("Returns a user's json object of all move data", done => {
+        renderTypeTests('move', 200, done, { fighter: 'goku' }, { authorization: testToken, username: 'test_username' });
+      })
+      it("Returns a json object of a fighter's move data when fighterId is queried", done => {
         renderTypeTests('move', 200, done, { fighterId: 5 });
       })
-      it("should return a json object of a fighter's move data when rosterId is queried", done => {
+      it("Returns a user's json object of a fighter's move data when fighterId is queried", done => {
+        renderTypeTests('move', 200, done, { fighterId: 90 }, { authorization: testToken, username: 'test_username' });
+      })
+      it("Returns a json object of a fighter's move data when rosterId is queried", done => {
         renderTypeTests('move', 200, done, { rosterId: 10 });
       })
-      it("should return a json object of a all move data ordered by rosterId", done => {
+      it("Returns a user's json object of a fighter's move data when rosterId is queried", done => {
+        renderTypeTests('move', 200, done, { rosterId: 9001 }, { authorization: testToken, username: 'test_username' });
+      })
+      it("Returns a json object of a all move data ordered by rosterId", done => {
         renderTypeTests('move', 200, done, { orderByRosterId: true });
+      })
+      it("Returns a user's json object of a all move data ordered by rosterId", done => {
+        renderTypeTests('move', 200, done, { orderByRosterId: true }, { authorization: testToken, username: 'test_username' });
       })
     })
 
     context("unsuccessful queries", () => {
 
-      it("should return an error if path doesn't exist", done => {
+      it("Returns an error if path doesn't exist", done => {
         renderTypeTests('non_existing_path', 400, done);
       })
-      it("should return an error if fighter is a number", done => {
+      it("Returns an error if fighter is a number", done => {
         renderTypeTests('move', 400, done, { fighter: 52 });
       })
-      it("should return an error if fighter doesn't exist", done => {
+      it("Returns an error if fighter doesn't exist", done => {
         renderTypeTests('move', 404, done, { fighter: 'i_dont_exist' });
       })
-      it("should return an error if fighterId isn't an integer", done => {
+      it("Returns an error if fighterId isn't an integer", done => {
         renderTypeTests('move', 400, done, { fighterId: 'not_an_integer' });
       })
-      it("should return an error if fighterId doesn't exist", done => {
+      it("Returns an error if fighterId doesn't exist", done => {
         renderTypeTests('move', 404, done, { fighterId: 2147483647 });
       })
-      it("should return an error if rosterId isn't an integer", done => {
+      it("Returns an error if rosterId isn't an integer", done => {
         renderTypeTests('move', 400, done, { rosterId: 'not_an_integer' });
       })
-      it("should return an error if rosterId doesn't exist", done => {
+      it("Returns an error if rosterId doesn't exist", done => {
         renderTypeTests('move', 404, done, { rosterId: 2147483647 });
       })
-      it("should return an error if", done => {
+      it("Returns an error if orderByRosterId is invalid", done => {
         renderTypeTests('move', 400, done, { orderByRosterId: 'not_valid' });
+      })
+      it("Returns an error if a fighter doesn't have any move type data", done => {
+        renderTypeTests('move', 404, done, { rosterId: 690 });
       })
     })
   })
@@ -357,48 +436,66 @@ describe.skip("GET api/get/fighters/data/:type", () => {
 
     context("successful queries", () => {
 
-      it("should return a json object of all throw data", done => {
+      it("Returns a json object of all throw data", done => {
         renderTypeTests('throw', 200, done);
       })
-      it("should return a json object of a fighter's throw data when fighter is queried", done => {
+      it("Returns a user's json object of all throw data", done => {
+        renderTypeTests('throw', 200, done, {}, { authorization: testToken, username: 'test_username' });
+      })
+      it("Returns a json object of a fighter's throw data when fighter is queried", done => {
         renderTypeTests('throw', 200, done, { fighter: 'inkling' });
       })
-      it("should return a json object of a fighter's throw data when fighterId is queried", done => {
+      it("Returns a user's json object of a fighter's throw data when fighter is queried", done => {
+        renderTypeTests('throw', 200, done, { fighter: 'goku' }, { authorization: testToken, username: 'test_username' });
+      })
+      it("Returns a json object of a fighter's throw data when fighterId is queried", done => {
         renderTypeTests('throw', 200, done, { fighterId: 5 });
       })
-      it("should return a json object of a fighter's throw data when rosterId is queried", done => {
+      it("Returns a user's json object of a fighter's throw data when fighterId is queried", done => {
+        renderTypeTests('throw', 200, done, { fighterId: 90 }, { authorization: testToken, username: 'test_username' });
+      })
+      it("Returns a json object of a fighter's throw data when rosterId is queried", done => {
         renderTypeTests('throw', 200, done, { rosterId: 10 });
       })
-      it("should return a json object of a all throw data ordered by rosterId", done => {
+      it("Returns a user's json object of a fighter's throw data when rosterId is queried", done => {
+        renderTypeTests('throw', 200, done, { rosterId: 9001 }, { authorization: testToken, username: 'test_username' });
+      })
+      it("Returns a json object of a all throw data ordered by rosterId", done => {
         renderTypeTests('throw', 200, done, { orderByRosterId: true });
+      })
+      it("Returns a user's json object of a all throw data ordered by rosterId", done => {
+        renderTypeTests('throw', 200, done, { orderByRosterId: true }, { authorization: testToken, username: 'test_username' });
       })
     })
 
     context("unsuccessful queries", () => {
 
-      it("should return an error if path doesn't exist", done => {
+      it("Returns an error if path doesn't exist", done => {
         renderTypeTests('non_existing_path', 400, done);
       })
-      it("should return an error if fighter is a number", done => {
+      it("Returns an error if fighter is a number", done => {
         renderTypeTests('throw', 400, done, { fighter: 52 });
       })
-      it("should return an error if fighter doesn't exist", done => {
+      it("Returns an error if fighter doesn't exist", done => {
         renderTypeTests('throw', 404, done, { fighter: 'i_dont_exist' });
       })
-      it("should return an error if fighterId isn't an integer", done => {
+      it("Returns an error if fighterId isn't an integer", done => {
         renderTypeTests('throw', 400, done, { fighterId: 'not_an_integer' });
       })
-      it("should return an error if fighterId doesn't exist", done => {
+      it("Returns an error if fighterId doesn't exist", done => {
         renderTypeTests('throw', 404, done, { fighterId: 2147483647 });
       })
-      it("should return an error if rosterId isn't an integer", done => {
+      it("Returns an error if rosterId isn't an integer", done => {
         renderTypeTests('throw', 400, done, { rosterId: 'not_an_integer' });
       })
-      it("should return an error if rosterId doesn't exist", done => {
+      it("Returns an error if rosterId doesn't exist", done => {
         renderTypeTests('throw', 404, done, { rosterId: 2147483647 });
       })
-      it("should return an error if", done => {
+      it("Returns an error if orderByRosterId is invalid", done => {
         renderTypeTests('throw', 400, done, { orderByRosterId: 'not_valid' });
+      })
+      it("Returns an error if a fighter doesn't have any throw type data", done => {
+        renderTypeTests('throw', 404, done, { rosterId: 690 });
       })
     })
   })
@@ -407,48 +504,66 @@ describe.skip("GET api/get/fighters/data/:type", () => {
 
     context("successful queries", () => {
 
-      it("should return a json object of all movement data", done => {
+      it("Returns a json object of all movement data", done => {
         renderTypeTests('movement', 200, done);
       })
-      it("should return a json object of a fighter's movement data when fighter is queried", done => {
+      it("Returns a user's json object of all movement data", done => {
+        renderTypeTests('movement', 200, done, {}, { authorization: testToken, username: 'test_username' });
+      })
+      it("Returns a json object of a fighter's movement data when fighter is queried", done => {
         renderTypeTests('movement', 200, done, { fighter: 'inkling' });
       })
-      it("should return a json object of a fighter's movement data when fighterId is queried", done => {
+      it("Returns a user's json object of a fighter's movement data when fighter is queried", done => {
+        renderTypeTests('movement', 200, done, { fighter: 'goku' }, { authorization: testToken, username: 'test_username' });
+      })
+      it("Returns a json object of a fighter's movement data when fighterId is queried", done => {
         renderTypeTests('movement', 200, done, { fighterId: 5 });
       })
-      it("should return a json object of a fighter's movement data when rosterId is queried", done => {
+      it("Returns a user's json object of a fighter's movement data when fighterId is queried", done => {
+        renderTypeTests('movement', 200, done, { fighterId: 90 }, { authorization: testToken, username: 'test_username' });
+      })
+      it("Returns a json object of a fighter's movement data when rosterId is queried", done => {
         renderTypeTests('movement', 200, done, { rosterId: 10 });
       })
-      it("should return a json object of a all movement data ordered by rosterId", done => {
+      it("Returns a json object of a fighter's movement data when rosterId is queried", done => {
+        renderTypeTests('movement', 200, done, { rosterId: 9001 }, { authorization: testToken, username: 'test_username' });
+      })
+      it("Returns a json object of a all movement data ordered by rosterId", done => {
         renderTypeTests('movement', 200, done, { orderByRosterId: true });
+      })
+      it("Returns a user's json object of a all movement data ordered by rosterId", done => {
+        renderTypeTests('movement', 200, done, { orderByRosterId: true }, { authorization: testToken, username: 'test_username' });
       })
     })
 
     context("unsuccessful queries", () => {
 
-      it("should return an error if path doesn't exist", done => {
+      it("Returns an error if path doesn't exist", done => {
         renderTypeTests('non_existing_path', 400, done);
       })
-      it("should return an error if fighter is a number", done => {
+      it("Returns an error if fighter is a number", done => {
         renderTypeTests('movement', 400, done, { fighter: 52 });
       })
-      it("should return an error if fighter doesn't exist", done => {
+      it("Returns an error if fighter doesn't exist", done => {
         renderTypeTests('movement', 404, done, { fighter: 'i_dont_exist' });
       })
-      it("should return an error if fighterId isn't an integer", done => {
+      it("Returns an error if fighterId isn't an integer", done => {
         renderTypeTests('movement', 400, done, { fighterId: 'not_an_integer' });
       })
-      it("should return an error if fighterId doesn't exist", done => {
+      it("Returns an error if fighterId doesn't exist", done => {
         renderTypeTests('movement', 404, done, { fighterId: 2147483647 });
       })
-      it("should return an error if rosterId isn't an integer", done => {
+      it("Returns an error if rosterId isn't an integer", done => {
         renderTypeTests('movement', 400, done, { rosterId: 'not_an_integer' });
       })
-      it("should return an error if rosterId doesn't exist", done => {
+      it("Returns an error if rosterId doesn't exist", done => {
         renderTypeTests('movement', 404, done, { rosterId: 2147483647 });
       })
-      it("should return an error if", done => {
+      it("Returns an error if orderByRosterId is invalid", done => {
         renderTypeTests('movement', 400, done, { orderByRosterId: 'not_valid' });
+      })
+      it("Returns an error if a fighter doesn't have any movement type data", done => {
+        renderTypeTests('movement', 404, done, { rosterId: 690 });
       })
     })
   })
@@ -457,48 +572,66 @@ describe.skip("GET api/get/fighters/data/:type", () => {
 
     context("successful queries", () => {
 
-      it("should return a json object of all stat data", done => {
+      it("Returns a json object of all stat data", done => {
         renderTypeTests('stat', 200, done);
       })
-      it("should return a json object of a fighter's stat data when fighter is queried", done => {
+      it("Returns a user's json object of all stat data", done => {
+        renderTypeTests('stat', 200, done, {}, { authorization: testToken, username: 'test_username' });
+      })
+      it("Returns a json object of a fighter's stat data when fighter is queried", done => {
         renderTypeTests('stat', 200, done, { fighter: 'inkling' });
       })
-      it("should return a json object of a fighter's stat data when fighterId is queried", done => {
+      it("Returns a user's json object of a fighter's stat data when fighter is queried", done => {
+        renderTypeTests('stat', 200, done, { fighter: 'goku' }, { authorization: testToken, username: 'test_username' });
+      })
+      it("Returns a json object of a fighter's stat data when fighterId is queried", done => {
         renderTypeTests('stat', 200, done, { fighterId: 5 });
       })
-      it("should return a json object of a fighter's stat data when rosterId is queried", done => {
+      it("Returns a user's json object of a fighter's stat data when fighterId is queried", done => {
+        renderTypeTests('stat', 200, done, { fighterId: 90 }, { authorization: testToken, username: 'test_username' });
+      })
+      it("Returns a json object of a fighter's stat data when rosterId is queried", done => {
         renderTypeTests('stat', 200, done, { rosterId: 10 });
       })
-      it("should return a json object of a all stat data ordered by rosterId", done => {
+      it("Returns a user's json object of a fighter's stat data when rosterId is queried", done => {
+        renderTypeTests('stat', 200, done, { rosterId: 9001 }, { authorization: testToken, username: 'test_username' });
+      })
+      it("Returns a json object of a all stat data ordered by rosterId", done => {
         renderTypeTests('stat', 200, done, { orderByRosterId: true });
+      })
+      it("Returns a user's json object of a all stat data ordered by rosterId", done => {
+        renderTypeTests('stat', 200, done, { orderByRosterId: true }, { authorization: testToken, username: 'test_username' });
       })
     })
 
     context("unsuccessful queries", () => {
 
-      it("should return an error if path doesn't exist", done => {
+      it("Returns an error if path doesn't exist", done => {
         renderTypeTests('non_existing_path', 400, done);
       })
-      it("should return an error if fighter is a number", done => {
+      it("Returns an error if fighter is a number", done => {
         renderTypeTests('stat', 400, done, { fighter: 52 });
       })
-      it("should return an error if fighter doesn't exist", done => {
+      it("Returns an error if fighter doesn't exist", done => {
         renderTypeTests('stat', 404, done, { fighter: 'i_dont_exist' });
       })
-      it("should return an error if fighterId isn't an integer", done => {
+      it("Returns an error if fighterId isn't an integer", done => {
         renderTypeTests('stat', 400, done, { fighterId: 'not_an_integer' });
       })
-      it("should return an error if fighterId doesn't exist", done => {
+      it("Returns an error if fighterId doesn't exist", done => {
         renderTypeTests('stat', 404, done, { fighterId: 2147483647 });
       })
-      it("should return an error if rosterId isn't an integer", done => {
+      it("Returns an error if rosterId isn't an integer", done => {
         renderTypeTests('stat', 400, done, { rosterId: 'not_an_integer' });
       })
-      it("should return an error if rosterId doesn't exist", done => {
+      it("Returns an error if rosterId doesn't exist", done => {
         renderTypeTests('stat', 404, done, { rosterId: 2147483647 });
       })
-      it("should return an error if orderByRosterId isn't true", done => {
-        renderTypeTests('stat', 400, done, { orderByRosterId: 'not_true' });
+      it("Returns an error if orderByRosterId is invalid", done => {
+        renderTypeTests('stat', 400, done, { orderByRosterId: 'not_valid' });
+      })
+      it("Returns an error if a fighter doesn't have any stat type data", done => {
+        renderTypeTests('stat', 404, done, { rosterId: 690 });
       })
     })
   })

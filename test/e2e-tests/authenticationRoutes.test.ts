@@ -4,12 +4,12 @@ import chaiHttp from 'chai-http';
 chai.should();
 chai.use(chaiHttp);
 
-describe("POST /api/auth/register", () => {
+describe.only("POST /api/auth/register", () => {
 
   const url = 'http://localhost:5000';
   const path = '/api/auth/register';
 
-  // This is used for resetting database
+  // This is used for resetting the User schema in the database
   function deleteUser() {
     chai.request(url)
       .delete('/api/auth/delete-account')
@@ -158,7 +158,7 @@ describe("POST /api/auth/register", () => {
   })
 })
 
-describe("POST /api/auth/generate-token", () => {
+describe.only("POST /api/auth/generate-token", () => {
   const email = 'test_email@gmail.com';
   const password = 'test_password';
   const url = 'http://localhost:5000';
@@ -238,7 +238,7 @@ describe("POST /api/auth/generate-token", () => {
   })
 })
 
-describe("POST /api/auth/show-token", () => {
+describe.only("POST /api/auth/show-token", () => {
   const email = 'test_email@gmail.com';
   const password = 'test_password';
   const url = 'http://localhost:5000';

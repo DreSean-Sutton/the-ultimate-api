@@ -6,6 +6,7 @@ require('dotenv/config');
 const jwt = require('jsonwebtoken');
 const { sequelize } = require('../conn');
 const { User } = require('../model/user-database');
+const { authorizeUser } = require('../lib/authorizeUser');
 
 /**
  * Post route that inserts a new fighter and their basic data to the database
@@ -17,8 +18,7 @@ const { User } = require('../model/user-database');
  */
 
 async function postFighters(req: Req, res: Res, next: any) {
-  const authHeader: string = req.headers['authorization'];
-  const usernameHeader: string = req.headers['username'];
+  const { authorization, username } = req.headers;
   const { fighter, displayName } = req.body;
   let { rosterId } = req.body;
   rosterId = Number(rosterId);
@@ -26,28 +26,10 @@ async function postFighters(req: Req, res: Res, next: any) {
   const isValid = reqParams.every(param => !!param);
 
   try {
-    if(!authHeader) throw new ClientError(400, '(authorization) header must have a value');
-    if(!usernameHeader) throw new ClientError(400, '(username) header must have a value');
     if(!isValid) throw new ClientError(400, 'Must have (fighter), (displayName), and (rosterId) as parameters');
-
-    const userFindResult = await User.findOne({
-      where: {
-        username: usernameHeader
-      }
-    })
-    if(!userFindResult) throw new ClientError(401, `Username (${usernameHeader}) doesn't exist`);
-    const currentTime = new Date();
-    if(currentTime > userFindResult.tokenExpiration) throw new ClientError(401, 'Token has expired. Please log in to receive another');
-    const token = authHeader && authHeader.split(' ')[1]; // Checks if authHeader is truthy, then splits 'Bearer' from it's value
-
-    // Token will not be verified if the username is 'test_username' while in a non-production env
-    // Used specifically for testing purposes
-    if(usernameHeader !== 'test_username' && process.env.NODE_ENV !== 'production') {
-      if (token !== userFindResult.token) throw new ClientError(401, 'Invalid authorization token');
-    }
-    jwt.verify(token, process.env.TOKEN_SECRET, (err: any) => {
-      if(err) throw new ClientError(401, 'incorrect authorization header');
-    });
+    const userIsTrue = authorization || username;
+    const authResult = userIsTrue ? await authorizeUser(authorization, username, next) : null;
+    if(authResult) throw new ClientError(authResult.status, authResult.message);
 
     const FightersModel = sequelize.models.fighters;
     const selectResult = await FightersModel.findOne({
@@ -58,7 +40,7 @@ async function postFighters(req: Req, res: Res, next: any) {
           { displayName: displayName }
         ]
       },
-      schema: usernameHeader});
+      schema: username});
 
     if(selectResult) {
       const { dataValues } = selectResult;
@@ -70,8 +52,8 @@ async function postFighters(req: Req, res: Res, next: any) {
       fighter: fighter,
       rosterId: rosterId,
       displayName: displayName
-    }, { schema: usernameHeader });
-    await sequelize.sync({ schema: usernameHeader });
+    }, { schema: username });
+    await sequelize.sync({ schema: username });
     return res.status(201).json(insertResult);
   } catch (e) {
     return next(e);
@@ -94,43 +76,25 @@ async function postFighters(req: Req, res: Res, next: any) {
  * @return { object }
  */
 async function postTableData(req: Req, res: Res, next: any) {
-  const authHeader: string = req.headers['authorization'];
-  const usernameHeader: string = req.headers['username'];
+  const { authorization, username } = req.headers;
   const fullResult = {};
   const { name, moveType, damage, category, activeFrames, totalFrames, firstFrame, statValue } = req.body;
   try {
-    if (!authHeader) throw new ClientError(400, 'authorization header must have a value');
-    if (!usernameHeader) throw new ClientError(400, '(username) header must have a value');
     if (/[A-Z]/gi.test(req.params.id) &&
       req.params.id !== undefined) {
       throw new ClientError(400, 'fighterId must be a number');
     }
     const id = Number(req.params.id);
-    const userFindResult = await User.findOne({
-      where: {
-        username: usernameHeader
-      }
-    })
-    if (!userFindResult) throw new ClientError(401, `Username (${usernameHeader}) doesn't exist`);
-    const currentTime = new Date();
-    if (currentTime > userFindResult.tokenExpiration) throw new ClientError(401, 'Token has expired. Please log in to receive another');
-    const token = authHeader && authHeader.split(' ')[1]; // Checks if authHeader is truthy, then splits 'Bearer' from it's value
-
-    // Token will not be verified if the username is 'test_username' while in a non-production env
-    // Used specifically for testing purposes
-    if (usernameHeader !== 'test_username' && process.env.NODE_ENV !== 'production') {
-      if (token !== userFindResult.token) throw new ClientError(401, 'Invalid authorization token');
-    }
-    jwt.verify(token, process.env.TOKEN_SECRET, (err: any) => {
-      if (err) throw new ClientError(401, 'incorrect authorization header');
-    });
+    const userIsTrue = authorization || username;
+    const authResult = userIsTrue ? await authorizeUser(authorization, username, next) : null;
+    if(authResult) throw new ClientError(authResult.status, authResult.message);
 
     const FightersModel = sequelize.models.fighters;
     const selectResult = await FightersModel.findOne({
       where: {
         fighterId: id
       },
-      schema: usernameHeader});
+      schema: username});
 
       if(!selectResult) {
         throw new ClientError(400, `fighterId ${(id)} doesn't exist`);
@@ -153,20 +117,21 @@ async function postTableData(req: Req, res: Res, next: any) {
           moveType: moveType,
           name: name,
           type: 'move'
-        }, { transaction: t, schema: usernameHeader });
+        }, { transaction: t, schema: username });
 
         const hitboxes = await HitboxesModel.create({
           activeFrames: activeFrames,
           damage: damage,
           firstFrame: firstFrame,
           totalFrames: totalFrames
-        }, { transaction: t, schema: usernameHeader });
+        }, { transaction: t, schema: username });
 
         return [moves, hitboxes];
       });
 
       Object.assign(fullResult, moves.dataValues);
       Object.assign(fullResult, hitboxes.dataValues);
+      await sequelize.sync({ schema: username });
       return res.status(201).json(fullResult);
 
     } else if (req.params.table === 'throws') {
@@ -185,19 +150,20 @@ async function postTableData(req: Req, res: Res, next: any) {
           fighterId: id,
           name: name,
           type: 'throw',
-        }, { transaction: t, schema: usernameHeader });
+        }, { transaction: t, schema: username });
 
         const grappling = await GrapplingModel.create({
           activeFrames: activeFrames,
           damage: damage,
           totalFrames: totalFrames
-        }, { transaction: t, schema: usernameHeader });
+        }, { transaction: t, schema: username });
 
         return [throws, grappling];
       });
 
       Object.assign(fullResult, throws.dataValues);
       Object.assign(fullResult, grappling.dataValues);
+      await sequelize.sync({ schema: username });
       return res.status(201).json(fullResult);
 
     } else if (req.params.table === 'movements') {
@@ -216,18 +182,19 @@ async function postTableData(req: Req, res: Res, next: any) {
           fighterId: id,
           name: name,
           type: 'movement',
-        }, { transaction: t, schema: usernameHeader });
+        }, { transaction: t, schema: username });
 
         const dodging = await DodgingModel.create({
           activeFrames: activeFrames,
           totalFrames: totalFrames
-        }, { transaction: t, schema: usernameHeader });
+        }, { transaction: t, schema: username });
 
         return [movements, dodging];
       });
 
       Object.assign(fullResult, movements.dataValues);
       Object.assign(fullResult, dodging.dataValues);
+      await sequelize.sync({ schema: username });
       return res.status(201).json(fullResult);
 
     } else if (req.params.table === 'stats') {
@@ -246,17 +213,18 @@ async function postTableData(req: Req, res: Res, next: any) {
           fighterId: id,
           name: name,
           type: 'stat',
-        }, { transaction: t, schema: usernameHeader });
+        }, { transaction: t, schema: username });
 
         const miscellaneous = await MiscellaneousModel.create({
           statValue: statValue
-        }, { transaction: t, schema: usernameHeader });
+        }, { transaction: t, schema: username });
 
         return [stats, miscellaneous];
       });
 
       Object.assign(fullResult, stats.dataValues);
       Object.assign(fullResult, miscellaneous.dataValues);
+      await sequelize.sync({ schema: username });
       return res.status(201).json(fullResult);
 
     } else {
