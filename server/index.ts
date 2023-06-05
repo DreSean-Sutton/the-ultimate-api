@@ -1,16 +1,4 @@
-const {
-  User,
-  Fighters,
-  Moves,
-  Hitboxes,
-  Throws,
-  Grappling,
-  Movements,
-  Dodging,
-  Stats,
-  Miscellaneous,
-  sequelize
-} = require('./conn');
+const { sequelize } = require('./conn');
 
 require('dotenv/config');
 var express = require('express');
@@ -43,8 +31,14 @@ app.use('/api/auth', authenticationRoutes);
 
 app.use(errorMiddleware);
 
+sequelize.sync()
+  .then(() => {
+    console.log('Models have been synced with the database');
+  })
+  .catch((e: any) => {
+    console.error('Failed to sync models with the database:', e);
+  });
 
 app.listen(port, () => {
-  // eslint-disable-next-line no-console
   console.log(`express server listening on port ${port}`);
 });

@@ -1,4 +1,3 @@
-const { fighters } = require('../model/user-database');
 import { Req, Res } from "../utils/types-routes";
 import ClientError from "../utils/client-error";
 import { client } from '../conn';

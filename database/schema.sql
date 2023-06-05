@@ -15,6 +15,7 @@ CREATE TABLE public.fighters (
 	"rosterId" int NOT NULL UNIQUE,
 	"displayName" TEXT NOT NULL UNIQUE,
 	"createdAt" timestamp with time zone DEFAULT NOW(),
+	"updatedAt" timestamp with time zone DEFAULT NOW(),
 	CONSTRAINT "fighters_pk" PRIMARY KEY ("fighterId")
 ) WITH (
   OIDS=FALSE
@@ -30,6 +31,7 @@ CREATE TABLE public.moves (
 	"type" TEXT NOT NULL,
   "category" TEXT NOT NULL,
 	"createdAt" timestamp with time zone DEFAULT NOW(),
+	"updatedAt" timestamp with time zone DEFAULT NOW(),
 	CONSTRAINT "moves_pk" PRIMARY KEY ("moveId")
 ) WITH (
   OIDS=FALSE
@@ -44,6 +46,7 @@ CREATE TABLE public.hitboxes (
 	"totalFrames" TEXT,
   "firstFrame" TEXT,
 	"createdAt" timestamp with time zone DEFAULT NOW(),
+	"updatedAt" timestamp with time zone DEFAULT NOW(),
 	CONSTRAINT "hitboxes_pk" PRIMARY KEY ("moveId")
 ) WITH (
   OIDS=FALSE
@@ -57,6 +60,7 @@ CREATE TABLE public.throws (
 	"name" TEXT NOT NULL,
 	"type" TEXT NOT NULL,
 	"createdAt" timestamp with time zone DEFAULT NOW(),
+	"updatedAt" timestamp with time zone DEFAULT NOW(),
 	CONSTRAINT "throws_pk" PRIMARY KEY ("throwId")
 ) WITH (
   OIDS=FALSE
@@ -70,6 +74,7 @@ CREATE TABLE public.grappling (
 	"activeFrames" TEXT,
 	"totalFrames" TEXT,
 	"createdAt" timestamp with time zone DEFAULT NOW(),
+	"updatedAt" timestamp with time zone DEFAULT NOW(),
 	CONSTRAINT "grappling_pk" PRIMARY KEY ("throwId")
 ) WITH (
   OIDS=FALSE
@@ -83,6 +88,7 @@ CREATE TABLE public.movements (
 	"name" TEXT NOT NULL,
 	"type" TEXT NOT NULL,
 	"createdAt" timestamp with time zone DEFAULT NOW(),
+	"updatedAt" timestamp with time zone DEFAULT NOW(),
 	CONSTRAINT "movements_pk" PRIMARY KEY ("movementId")
 ) WITH (
   OIDS=FALSE
@@ -95,6 +101,7 @@ CREATE TABLE public.dodging (
 	"activeFrames" TEXT NOT NULL,
 	"totalFrames" TEXT,
 	"createdAt" timestamp with time zone DEFAULT NOW(),
+	"updatedAt" timestamp with time zone DEFAULT NOW(),
 	CONSTRAINT "dodging_pk" PRIMARY KEY ("movementId")
 ) WITH (
   OIDS=FALSE
@@ -108,6 +115,7 @@ CREATE TABLE public.stats (
 	"name" TEXT NOT NULL,
 	"type" TEXT NOT NULL,
 	"createdAt" timestamp with time zone DEFAULT NOW(),
+	"updatedAt" timestamp with time zone DEFAULT NOW(),
 	CONSTRAINT "stats_pk" PRIMARY KEY ("statId")
 ) WITH (
   OIDS=FALSE
@@ -119,6 +127,7 @@ CREATE TABLE public.miscellaneous (
 	"statId" serial NOT NULL,
 	"statValue" TEXT,
 	"createdAt" timestamp with time zone DEFAULT NOW(),
+	"updatedAt" timestamp with time zone DEFAULT NOW(),
 	CONSTRAINT "miscellaneous_pk" PRIMARY KEY ("statId")
 ) WITH (
   OIDS=FALSE

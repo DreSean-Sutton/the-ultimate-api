@@ -5,7 +5,7 @@ import { Op } from "sequelize";
 require('dotenv/config');
 const jwt = require('jsonwebtoken');
 const { sequelize } = require('../conn');
-const { User } = require('../model/user-database');
+const { User } = require('../model/user-table');
 const { authorizeUser } = require('../lib/authorizeUser');
 
 /**

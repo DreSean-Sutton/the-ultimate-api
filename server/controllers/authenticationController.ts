@@ -4,7 +4,7 @@ import buildUserSchema from '../utils/build-user-schema';
 import defineUserDb from '../utils/define-user-db';
 import handleRestartIds from '../utils/handle-restart-id';
 require('dotenv/config');
-const { User } = require('../model/user-database');
+const { User } = require('../model/user-table');
 const { sequelize } = require('../conn');
 const argon2 = require('argon2');
 const jwt = require('jsonwebtoken');

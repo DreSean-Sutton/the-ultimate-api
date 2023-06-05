@@ -243,7 +243,6 @@ async function getFightersDataByType(req: Req, res: Res, next: any) {
     if (authResult) throw new ClientError(authResult.status, authResult.message);
     const schemaName = userIsTrue ? username : 'public';
 
-
     if (fighter && /\d/g.test(fighter)) {
       throw new ClientError(400, 'fighter name can\'t have a number');
     } else if (fighterId && !Number(fighterId)) {
@@ -272,6 +271,24 @@ async function getFightersDataByType(req: Req, res: Res, next: any) {
       throw new ClientError(404, `(${queryKey}) named (${currentQueryStr}) doesn't exist in the database`);
     }
     const currentFighterId = fightersResult.dataValues.fighterId;
+    // let fightersResult;
+    // const whereCondition: any = {};
+    // whereCondition[queryKey] = currentQueryStr;
+
+    // if (!queryKey || orderByRosterId) {
+    //   fightersResult = await sequelize.query('SELECT * FROM fighters LIMIT 1', { type: sequelize.QueryTypes.SELECT });
+    // } else {
+    //   fightersResult = await sequelize.query('SELECT * FROM fighters WHERE ?? = ? LIMIT 1', {
+    //     replacements: [queryKey, currentQueryStr],
+    //     type: sequelize.QueryTypes.SELECT
+    //   });
+    // }
+
+    // if (fightersResult.length === 0) {
+    //   throw new ClientError(404, `(${queryKey}) named (${currentQueryStr}) doesn't exist in the database`);
+    // }
+
+    // const currentFighterId = fightersResult[0].fighterId;
 
     let result;
     if (!queryKey) {
