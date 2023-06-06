@@ -148,6 +148,7 @@ async function getFightersData(req: Req, res: Res, next: any) {
     if (Object.keys(queryStr).length > 1) {
       throw new ClientError(400, 'Only one query string is allowed');
     }
+
     const FightersModel = sequelize.models.fighters;
     let fightersResult;
     const whereCondition: any = {};
@@ -258,6 +259,7 @@ async function getFightersDataByType(req: Req, res: Res, next: any) {
     if (Object.keys(queryStr).length > 1) {
       throw new ClientError(400, 'Only one query string is allowed');
     }
+
     const FightersModel = sequelize.models.fighters;
     let fightersResult;
     const whereCondition: any = {};
@@ -271,24 +273,6 @@ async function getFightersDataByType(req: Req, res: Res, next: any) {
       throw new ClientError(404, `(${queryKey}) named (${currentQueryStr}) doesn't exist in the database`);
     }
     const currentFighterId = fightersResult.dataValues.fighterId;
-    // let fightersResult;
-    // const whereCondition: any = {};
-    // whereCondition[queryKey] = currentQueryStr;
-
-    // if (!queryKey || orderByRosterId) {
-    //   fightersResult = await sequelize.query('SELECT * FROM fighters LIMIT 1', { type: sequelize.QueryTypes.SELECT });
-    // } else {
-    //   fightersResult = await sequelize.query('SELECT * FROM fighters WHERE ?? = ? LIMIT 1', {
-    //     replacements: [queryKey, currentQueryStr],
-    //     type: sequelize.QueryTypes.SELECT
-    //   });
-    // }
-
-    // if (fightersResult.length === 0) {
-    //   throw new ClientError(404, `(${queryKey}) named (${currentQueryStr}) doesn't exist in the database`);
-    // }
-
-    // const currentFighterId = fightersResult[0].fighterId;
 
     let result;
     if (!queryKey) {

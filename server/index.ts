@@ -1,4 +1,15 @@
 const { sequelize } = require('./conn');
+const {
+  Fighters,
+  Moves,
+  Hitboxes,
+  Throws,
+  Grappling,
+  Movements,
+  Dodging,
+  Stats,
+  Miscellaneous
+} = require('./model/all-fighter-data');
 
 require('dotenv/config');
 var express = require('express');
@@ -31,7 +42,7 @@ app.use('/api/auth', authenticationRoutes);
 
 app.use(errorMiddleware);
 
-sequelize.sync()
+sequelize.sync({ schema: 'public' })
   .then(() => {
     console.log('Models have been synced with the database');
   })
