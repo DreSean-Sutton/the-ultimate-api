@@ -15,7 +15,6 @@ const testToken = jwt.sign(testPayload, process.env.TOKEN_SECRET);
 
 describe.only("POST /api/add/fighters", () => {
 
-
   const url = 'http://localhost:5000';
   const path = '/api/add/fighters';
 
