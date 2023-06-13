@@ -46,40 +46,40 @@ async function updateTableData(req: Req, res: Res, next: any) {
         fighterId: id
       },
       schema: username});
-      // console.log(selectResult);
       if(!selectResult) {
-        throw new ClientError(400, `fighterId ${(id)} doesn't exist`);
+        throw new ClientError(404, `fighterId ${(id)} doesn't exist`);
       }
 
     if (req.params.table === 'fighters') {
-      if (/[A-Z]/gi.test(rosterId)) {
+      if (/[A-Z]/gi.test(rosterId) &&
+      rosterId) {
         throw new ClientError(400, 'rosterId must be a number');
       }
-      const updateFields: any = { length: 0 };
+      const updateFields: any = {};
+      let fieldsCounter = 0;
 
-      if (rosterId !== undefined) {
+      if (rosterId) {
         updateFields.rosterId = rosterId;
-        updateFields.length++;
+        fieldsCounter++;
       }
-      if (fighter !== undefined) {
+      if (fighter) {
         updateFields.fighter = fighter;
-        updateFields.length++;
+        fieldsCounter++;
       }
-      if (displayName !== undefined) {
+      if (displayName) {
         updateFields.displayName = displayName;
-        updateFields.length++;
+        fieldsCounter++;
       }
-      if(updateFields.length === 0) {
-        throw new ClientError(400, 'At least one of each (fighter), (rosterId), or (displayName) must have a value');
+      if(fieldsCounter === 0) {
+        throw new ClientError(400, 'At least one of (fighter), (rosterId), or (displayName) must have a value');
       }
       const updateResult = await FightersModel.update(
-        { rosterId: rosterId, fighter: fighter, displayName: displayName }, {
+        updateFields, {
         where: { fighterId: id }
-      })
+      });
       if(updateResult) {
         return res.status(200).json(updateResult);
       }
-      throw new ClientError(404, `fighterId ${id} does not exist`);
     } else if (req.params.table === 'moves') {
       let sql = `
         UPDATE
@@ -219,7 +219,11 @@ async function updateTableData(req: Req, res: Res, next: any) {
     } else {
       throw new ClientError(400, `${req.params.table} is not a valid path parameter`);
     }
-  } catch (e) {
+  } catch (e: any) {
+    // console.error(e);
+    if(e.name === 'SequelizeUniqueConstraintError') {
+      return next(new ClientError(400, e.errors[0].message));
+    }
     return next(e);
   }
 }
