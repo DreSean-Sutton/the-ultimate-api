@@ -1,8 +1,8 @@
 import { Req, Res } from '../utils/types-routes';
 import ClientError from '../utils/client-error';
-import buildUserSchema from '../utils/build-user-schema';
-import defineUserDb from '../utils/define-user-db';
-import handleRestartIds from '../utils/handle-restart-id';
+import buildUserSchema from '../lib/build-user-schema';
+import defineUserDb from '../lib/define-user-db';
+import handleRestartIds from '../lib/handle-restart-id';
 require('dotenv/config');
 const { User } = require('../model/user-table');
 const { sequelize } = require('../conn');
