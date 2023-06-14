@@ -47,10 +47,10 @@ async function updateTableData(req: Req, res: Res, next: any) {
 
       await sequelize.transaction(async (t: any) => {
         const FightersModel = sequelize.models.fighters;
-        const selectResult = await FightersModel.findOne({
+        const result = await FightersModel.findOne({
           where: { fighterId: id }, transaction: t, schema: username });
 
-        if (!selectResult) {
+        if (!result) {
           throw new ClientError(404, `fighterId ${(id)} doesn't exist`);
         }
         const updateResult = await FightersModel.update(
@@ -61,7 +61,7 @@ async function updateTableData(req: Req, res: Res, next: any) {
           throw new ClientError(400, 'At least one of (fighter), (rosterId), or (displayName) must have a value');
         }
         await sequelize.sync({ schema: username });
-        return res.status(200).json(updateResult);
+        return res.status(200).json({ message: 'Fighter has been updated successfully', affectedFighterId: result.dataValues.fighterId });
       })
 
     } else if (req.params.table === 'moves') {

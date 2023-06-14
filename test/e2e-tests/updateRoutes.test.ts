@@ -31,7 +31,8 @@ describe.only("PUT /api/update/fighters/id", () => {
             return done(err);
           }
           res.should.have.status(200);
-          res.body[0].should.equal(1);
+          res.body.should.have.property('message');
+          res.body.should.have.property('affectedFighterId');
           done();
         })
     })
@@ -49,7 +50,8 @@ describe.only("PUT /api/update/fighters/id", () => {
             return done(err);
           }
           res.should.have.status(200);
-          res.body[0].should.equal(1);
+          res.body.should.have.property('message');
+          res.body.should.have.property('affectedFighterId');
           done();
         })
     })
@@ -60,14 +62,15 @@ describe.only("PUT /api/update/fighters/id", () => {
         .set('authorization', `Bearer ${testToken}`)
         .set('username', 'test_username')
         .set('content-type', 'application/json')
-        .send({  rosterId: 9003 })
+        .send({ rosterId: 9003 })
         .end((err, res) => {
           if(err) {
             console.log(err);
             return done(err);
           }
           res.should.have.status(200);
-          res.body[0].should.equal(1);
+          res.body.should.have.property('message');
+          res.body.should.have.property('affectedFighterId');
           done();
         })
     })
@@ -85,7 +88,8 @@ describe.only("PUT /api/update/fighters/id", () => {
             return done(err);
           }
           res.should.have.status(200);
-          res.body[0].should.equal(1);
+          res.body.should.have.property('message');
+          res.body.should.have.property('affectedFighterId');
           done();
         })
     })
@@ -185,6 +189,7 @@ describe.only("PUT /api/update/moves/id", () => {
           }
           res.should.have.status(200);
           res.body.should.have.property('message');
+          res.body.should.have.property('affectedFighterId');
           done();
         })
     })
@@ -202,6 +207,7 @@ describe.only("PUT /api/update/moves/id", () => {
           }
           res.should.have.status(200);
           res.body.should.have.property('message');
+          res.body.should.have.property('affectedFighterId');
           done();
         })
     })
