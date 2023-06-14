@@ -17,7 +17,7 @@ describe.only("PUT /api/update/fighters/id", () => {
   const path = '/api/update/fighters/90';
 
   describe("Successfulful requests", () => {
-    it("returns a 200 status if a fighter's successfully updated", done => {
+    it("returns a 200 status if a fighter is successfully updated", done => {
 
       chai.request(url)
         .put(path)
@@ -35,7 +35,7 @@ describe.only("PUT /api/update/fighters/id", () => {
           done();
         })
     })
-    it("returns a 200 status if a fighter's successfully updated", done => {
+    it("returns a 200 status if another fighter is successfully updated", done => {
 
       chai.request(url)
         .put('/api/update/fighters/91')
@@ -71,7 +71,7 @@ describe.only("PUT /api/update/fighters/id", () => {
           done();
         })
     })
-    it("returns a 200 status if a fighter's successfully updated", done => {
+    it("returns a 200 status if a fighter is successfully updated", done => {
 
       chai.request(url)
         .put('/api/update/fighters/91')
@@ -109,7 +109,7 @@ describe.only("PUT /api/update/fighters/id", () => {
           done();
         })
     })
-    it("returns a 400 status if a fighter, displayName, or rosterId aren't sent", done => {
+    it("returns a 400 status rosterId isn't a number", done => {
 
       chai.request(url)
         .put(path)
@@ -127,7 +127,7 @@ describe.only("PUT /api/update/fighters/id", () => {
           done();
         })
     })
-    it("returns a 400 status if a fighter, displayName, or rosterId aren't sent", done => {
+    it("returns a 404 status if a fighterId doesn't exist", done => {
 
       chai.request(url)
         .put('/api/update/fighters/999999')
@@ -146,7 +146,7 @@ describe.only("PUT /api/update/fighters/id", () => {
           done();
         })
     })
-    it("returns a 400 status if a fighter, displayName, or rosterId aren't sent", done => {
+    it("returns a 400 status if fighter, displayName, or rosterId aren't unique", done => {
 
       chai.request(url)
         .put(path)
@@ -165,6 +165,86 @@ describe.only("PUT /api/update/fighters/id", () => {
           done();
         })
     })
-    // Add a test for trying to update a fighter's key to a value that already exists
+  })
+})
+
+describe.only("PUT /api/update/moves/id", () => {
+  const url = 'http://localhost:5000';
+
+  describe("Successful Requests", () => {
+    it("returns a 200 status if a fighter's moves are successfully updated", done => {
+      chai.request(url)
+        .put('/api/update/moves/2099')
+        .set('authorization', `Bearer ${testToken}`)
+        .set('username', 'test_username')
+        .set('content-type', 'application/json')
+        .send({ activeFrames: '10', firstFrame: '10', totalFrames: '20', damage: '9.0%', name: 'uwu', category: 'special', moveType: 'single' })
+        .end((err, res) => {
+          if(err) {
+            console.log(err);
+            return done(err);
+          }
+          console.log(res.body);
+          res.should.have.status(200);
+          res.body.should.have.property('message');
+          done();
+        })
+    })
+    it("returns a 200 status if another fighter's moves are successfully updated", done => {
+      chai.request(url)
+        .put('/api/update/moves/2100')
+        .set('authorization', `Bearer ${testToken}`)
+        .set('username', 'test_username')
+        .set('content-type', 'application/json')
+        .send({ activeFrames: '10-20', firstFrame: '10', totalFrames: '40', damage: '9.0-18.0%', name: 'uwu but again', category: 'special', moveType: 'charge' })
+        .end((err, res) => {
+          if(err) {
+            console.log(err);
+            return done(err);
+          }
+          console.log(res.body);
+          res.should.have.status(200);
+          res.body.should.have.property('message');
+          done();
+        })
+    })
+  })
+  describe("Unsuccessful Requests", () => {
+    it("returns a 404 status if moveId isn't found", done => {
+      chai.request(url)
+        .put('/api/update/moves/90000')
+        .set('authorization', `Bearer ${testToken}`)
+        .set('username', 'test_username')
+        .set('content-type', 'application/json')
+        .send({ activeFrames: '10', firstFrame: '10', totalFrames: '20', damage: '20.0%', name: 'UwU'})
+        .end((err, res) => {
+          if(err) {
+            console.log(err);
+            return done(err);
+          }
+          console.log(res.body);
+          res.should.have.status(404);
+          res.body.should.have.property('error');
+          done();
+        })
+    })
+    it("returns a 400 status if no values were changed", done => {
+      chai.request(url)
+        .put('/api/update/moves/2099')
+        .set('authorization', `Bearer ${testToken}`)
+        .set('username', 'test_username')
+        .set('content-type', 'application/json')
+        .send({})
+        .end((err, res) => {
+          if(err) {
+            console.log(err);
+            return done(err);
+          }
+          console.log(res.body);
+          res.should.have.status(400);
+          res.body.should.have.property('error');
+          done();
+        })
+    })
   })
 })
