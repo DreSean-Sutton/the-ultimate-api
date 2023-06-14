@@ -17,7 +17,7 @@ describe.only("PUT /api/update/fighters/id", () => {
   const path = '/api/update/fighters/90';
 
   describe("Successfulful requests", () => {
-    it("returns a 200 status if a fighter is successfully updated", done => {
+    it("returns a 200 status if a fighter is updated", done => {
 
       chai.request(url)
         .put(path)
@@ -35,7 +35,7 @@ describe.only("PUT /api/update/fighters/id", () => {
           done();
         })
     })
-    it("returns a 200 status if another fighter is successfully updated", done => {
+    it("returns a 200 status if another fighter is updated", done => {
 
       chai.request(url)
         .put('/api/update/fighters/91')
@@ -53,7 +53,7 @@ describe.only("PUT /api/update/fighters/id", () => {
           done();
         })
     })
-    it("returns a 200 status if a fighter's rosterId is successfully updated", done => {
+    it("returns a 200 status if a fighter's rosterId is updated", done => {
 
       chai.request(url)
         .put(path)
@@ -71,7 +71,7 @@ describe.only("PUT /api/update/fighters/id", () => {
           done();
         })
     })
-    it("returns a 200 status if a fighter is successfully updated", done => {
+    it("returns a 200 status if a fighter is updated", done => {
 
       chai.request(url)
         .put('/api/update/fighters/91')
@@ -90,6 +90,7 @@ describe.only("PUT /api/update/fighters/id", () => {
         })
     })
   })
+
   describe("Unsuccessful requests", () => {
     it("returns a 400 status if a fighter, displayName, or rosterId aren't sent", done => {
 
@@ -140,7 +141,6 @@ describe.only("PUT /api/update/fighters/id", () => {
             console.log(err);
             return done(err);
           }
-          console.log(res.body);
           res.should.have.status(404);
           res.body.should.have.property('error');
           done();
@@ -159,7 +159,6 @@ describe.only("PUT /api/update/fighters/id", () => {
             console.log(err);
             return done(err);
           }
-          console.log(res.body);
           res.should.have.status(400);
           res.body.should.have.property('error');
           done();
@@ -172,7 +171,7 @@ describe.only("PUT /api/update/moves/id", () => {
   const url = 'http://localhost:5000';
 
   describe("Successful Requests", () => {
-    it("returns a 200 status if a fighter's moves are successfully updated", done => {
+    it("returns a 200 status if a fighter's moves are updated", done => {
       chai.request(url)
         .put('/api/update/moves/2099')
         .set('authorization', `Bearer ${testToken}`)
@@ -184,13 +183,12 @@ describe.only("PUT /api/update/moves/id", () => {
             console.log(err);
             return done(err);
           }
-          console.log(res.body);
           res.should.have.status(200);
           res.body.should.have.property('message');
           done();
         })
     })
-    it("returns a 200 status if another fighter's moves are successfully updated", done => {
+    it("returns a 200 status if another fighter's moves are updated", done => {
       chai.request(url)
         .put('/api/update/moves/2100')
         .set('authorization', `Bearer ${testToken}`)
@@ -202,13 +200,13 @@ describe.only("PUT /api/update/moves/id", () => {
             console.log(err);
             return done(err);
           }
-          console.log(res.body);
           res.should.have.status(200);
           res.body.should.have.property('message');
           done();
         })
     })
   })
+
   describe("Unsuccessful Requests", () => {
     it("returns a 404 status if moveId isn't found", done => {
       chai.request(url)
@@ -222,7 +220,6 @@ describe.only("PUT /api/update/moves/id", () => {
             console.log(err);
             return done(err);
           }
-          console.log(res.body);
           res.should.have.status(404);
           res.body.should.have.property('error');
           done();
@@ -240,7 +237,86 @@ describe.only("PUT /api/update/moves/id", () => {
             console.log(err);
             return done(err);
           }
-          console.log(res.body);
+          res.should.have.status(400);
+          res.body.should.have.property('error');
+          done();
+        })
+    })
+  })
+})
+
+describe.only("PUT /api/update/throws/:id", () => {
+  const url = 'http://localhost:5000';
+
+  describe("Successful requests", () => {
+    it("Returns a 200 status if a fighter's throws updated", done => {
+      chai.request(url)
+        .put('/api/update/throws/718')
+        .set('authorization', `Bearer ${testToken}`)
+        .set('username', 'test_username')
+        .set('content-type', 'application/json')
+        .send({ name: 'back throw', activeFrames: '10', totalFrames: '25', damage: '15.0%' })
+        .end((err, res) => {
+          if(err) {
+            console.log(err);
+            return done(err);
+          }
+          res.should.have.status(200);
+          res.body.should.have.property('message');
+          res.body.should.have.property('affectedFighterId');
+          done();
+        })
+    })
+    it("Returns a 200 status if a fighter's throws updated", done => {
+      chai.request(url)
+        .put('/api/update/throws/719')
+        .set('authorization', `Bearer ${testToken}`)
+        .set('username', 'test_username')
+        .set('content-type', 'application/json')
+        .send({ name: 'up throw', activeFrames: '20', totalFrames: '40', damage: '10.0%' })
+        .end((err, res) => {
+          if(err) {
+            console.log(err);
+            return done(err);
+          }
+          res.should.have.status(200);
+          res.body.should.have.property('message');
+          res.body.should.have.property('affectedFighterId');
+          done();
+        })
+    })
+  })
+
+  describe("Unsuccessful Requests", () => {
+    it("returns a 404 status if moveId isn't found", done => {
+      chai.request(url)
+        .put('/api/update/throws/90000')
+        .set('authorization', `Bearer ${testToken}`)
+        .set('username', 'test_username')
+        .set('content-type', 'application/json')
+        .send({ activeFrames: '10', totalFrames: '20', damage: '20.0%', name: 'UwU'})
+        .end((err, res) => {
+          if(err) {
+            console.log(err);
+            return done(err);
+          }
+          res.should.have.status(404);
+          res.body.should.have.property('error');
+          done();
+        })
+    })
+    it("returns a 400 status if no values were changed", done => {
+      chai.request(url)
+        .put('/api/update/throws/718')
+        .set('authorization', `Bearer ${testToken}`)
+        .set('username', 'test_username')
+        .set('content-type', 'application/json')
+        .send({})
+        .end((err, res) => {
+          if(err) {
+            console.log(err);
+            return done(err);
+          }
           res.should.have.status(400);
           res.body.should.have.property('error');
           done();

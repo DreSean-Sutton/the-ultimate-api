@@ -61,7 +61,7 @@ async function updateTableData(req: Req, res: Res, next: any) {
           throw new ClientError(400, 'At least one of (fighter), (rosterId), or (displayName) must have a value');
         }
         await sequelize.sync({ schema: username });
-        return res.status(200).json({updateResult});
+        return res.status(200).json(updateResult);
       })
 
     } else if (req.params.table === 'moves') {
@@ -107,7 +107,6 @@ async function updateTableData(req: Req, res: Res, next: any) {
             throwId: id
           }, transaction: t, schema: username
         })
-        console.log({ result });
         if (!result) {
           throw new ClientError(404, `(throwId) ${id} doesn't exist`);
         }
@@ -118,7 +117,7 @@ async function updateTableData(req: Req, res: Res, next: any) {
         const grappling = await GrapplingModel.update({
           activeFrames: activeFrames, damage: damage, totalFrames
         }, { where: { throwId: id }, transaction: t, schema: username });
-        console.log({ throws, grappling });
+
         if(throws[0] === 0 && grappling[0] === 0) {
           throw new ClientError(400, 'No values were changed');
         }
