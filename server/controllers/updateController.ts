@@ -1,5 +1,5 @@
-import { Req, Res } from "../utils/types-routes";
-import ClientError from "../utils/client-error";
+import { Req, Res } from '../utils/types-routes';
+import ClientError from '../utils/client-error';
 import { client, sequelize } from '../conn';
 require('dotenv/config');
 const jwt = require('jsonwebtoken');
@@ -37,7 +37,7 @@ async function updateTableData(req: Req, res: Res, next: any) {
     const id = Number(req.params.id);
     const userIsTrue = authorization || username;
     const authResult = userIsTrue ? await authorizeUser(authorization, username, next) : null;
-    if(authResult) throw new ClientError(authResult.status, authResult.message);
+    if (authResult) throw new ClientError(authResult.status, authResult.message);
 
     if (req.params.table === 'fighters') {
       if (/[A-Z]/gi.test(rosterId) &&
@@ -50,31 +50,31 @@ async function updateTableData(req: Req, res: Res, next: any) {
         const selectResult = await FightersModel.findOne({
           where: { fighterId: id }, transaction: t, schema: username });
 
-        if(!selectResult) {
+        if (!selectResult) {
           throw new ClientError(404, `fighterId ${(id)} doesn't exist`);
         }
         const updateResult = await FightersModel.update(
           { fighter: fighter, displayName: displayName, rosterId: rosterId }, {
             where: { fighterId: id }, transaction: t, schema: username });
 
-        if(updateResult[0] === 0) {
+        if (updateResult[0] === 0) {
           throw new ClientError(400, 'At least one of (fighter), (rosterId), or (displayName) must have a value');
         }
         await sequelize.sync({ schema: username });
-        return res.status(200).json(updateResult);
+        return res.status(200).json({updateResult});
       })
 
     } else if (req.params.table === 'moves') {
-      const MovesModel = sequelize.models.moves;
-      const HitboxesModel = sequelize.models.hitboxes;
 
       await sequelize.transaction(async (t: any) => {
+        const MovesModel = sequelize.models.moves;
+        const HitboxesModel = sequelize.models.hitboxes;
 
         const result = await MovesModel.findOne({
           where: { moveId: id }
         }, { transaction: t, schema: username });
 
-        if(!result) {
+        if (!result) {
           throw new ClientError(404, `(moveId) ${id} doesn't exist`);
         }
         const moves = await MovesModel.update({
@@ -90,7 +90,7 @@ async function updateTableData(req: Req, res: Res, next: any) {
           totalFrames: totalFrames
         }, { where: { moveId: id }, transaction: t, schema: username });
 
-        if(moves[0] === 0 && hitboxes[0] === 0) {
+        if (moves[0] === 0 && hitboxes[0] === 0) {
           throw new ClientError(400, 'No values were changed');
         }
         await sequelize.sync({ schema: username });
@@ -98,39 +98,33 @@ async function updateTableData(req: Req, res: Res, next: any) {
       });
 
     } else if (req.params.table === 'throws') {
-      let sql = `
-        UPDATE
-          public.throws
-        SET
-          "name" = coalesce($2, "name")
-        WHERE
-          "throwId"=$1
-        RETURNING *;
-      `;
-      let params = [id, name];
-      let result = await client.query(sql, params);
-      if (result.rows.length === 0) {
-        throw new ClientError(404, `throwId ${id} does not exist`);
-      }
-      Object.assign(fullResult, result.rows[0]);
-      sql = `
-        UPDATE
-            public.grappling
-        SET
-          "damage" = coalesce($2, "damage"),
-          "activeFrames" = coalesce($3, "activeFrames"),
-          "totalFrames" = coalesce($4, "totalFrames")
-        WHERE
-          "throwId"=$1
-        RETURNING *;
-      `;
-      params = [id, damage, activeFrames, totalFrames];
-      result = await client.query(sql, params);
-      if (result.rows.length === 0) {
-        throw new ClientError(404, `throwId ${id} does not exist`);
-      }
-      Object.assign(fullResult, result.rows[0]);
-      return res.status(200).json(fullResult);
+      await sequelize.transaction(async (t: any) => {
+        const ThrowsModel = sequelize.models.throws;
+        const GrapplingModel = sequelize.models.grappling;
+
+        const result = await ThrowsModel.findOne({
+          where: {
+            throwId: id
+          }, transaction: t, schema: username
+        })
+        console.log({ result });
+        if (!result) {
+          throw new ClientError(404, `(throwId) ${id} doesn't exist`);
+        }
+        const throws = await ThrowsModel.update({
+          name: name
+        }, { where: {throwId: id}, transaction: t, schema: username });
+
+        const grappling = await GrapplingModel.update({
+          activeFrames: activeFrames, damage: damage, totalFrames
+        }, { where: { throwId: id }, transaction: t, schema: username });
+        console.log({ throws, grappling });
+        if(throws[0] === 0 && grappling[0] === 0) {
+          throw new ClientError(400, 'No values were changed');
+        }
+        await sequelize.sync({ schema: username });
+        return res.status(200).json({ message: 'Throws have been updated successfully', affectedFighterId: result.dataValues.fighterId });
+      })
 
     } else if (req.params.table === 'movements') {
       let sql = `
@@ -203,7 +197,7 @@ async function updateTableData(req: Req, res: Res, next: any) {
     }
   } catch (e: any) {
     // console.error(e);
-    if(e.name === 'SequelizeUniqueConstraintError') {
+    if (e.name === 'SequelizeUniqueConstraintError') {
       return next(new ClientError(400, e.errors[0].message));
     }
     return next(e);
