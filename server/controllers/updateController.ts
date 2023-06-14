@@ -1,9 +1,8 @@
 import { Req, Res } from "../utils/types-routes";
 import ClientError from "../utils/client-error";
-import { client } from '../conn';
 require('dotenv/config');
 const jwt = require('jsonwebtoken');
-const { sequelize } = require('../conn');
+const { client, sequelize } = require('../conn');
 const { User } = require('../model/user-table');
 const { authorizeUser } = require('../lib/authorizeUser');
 
@@ -40,80 +39,82 @@ async function updateTableData(req: Req, res: Res, next: any) {
     const authResult = userIsTrue ? await authorizeUser(authorization, username, next) : null;
     if(authResult) throw new ClientError(authResult.status, authResult.message);
 
-    const FightersModel = sequelize.models.fighters;
-    const selectResult = await FightersModel.findOne({
-      where: {
-        fighterId: id
-      },
-      schema: username});
-      if(!selectResult) {
-        throw new ClientError(404, `fighterId ${(id)} doesn't exist`);
-      }
-
     if (req.params.table === 'fighters') {
+      const FightersModel = sequelize.models.fighters;
+      const selectResult = await FightersModel.findOne({
+        where: {
+          fighterId: id
+        },
+        schema: username});
+        if(!selectResult) {
+          throw new ClientError(404, `fighterId ${(id)} doesn't exist`);
+        }
       if (/[A-Z]/gi.test(rosterId) &&
       rosterId) {
         throw new ClientError(400, 'rosterId must be a number');
       }
-      const updateFields: any = {};
+      const fighterUpdateFields: any = {}; // This will allow a user to specify an update without having to use all fields
       let fieldsCounter = 0;
 
       if (rosterId) {
-        updateFields.rosterId = rosterId;
+        fighterUpdateFields.rosterId = rosterId;
         fieldsCounter++;
       }
       if (fighter) {
-        updateFields.fighter = fighter;
+        fighterUpdateFields.fighter = fighter;
         fieldsCounter++;
       }
       if (displayName) {
-        updateFields.displayName = displayName;
+        fighterUpdateFields.displayName = displayName;
         fieldsCounter++;
       }
       if(fieldsCounter === 0) {
         throw new ClientError(400, 'At least one of (fighter), (rosterId), or (displayName) must have a value');
       }
       const updateResult = await FightersModel.update(
-        updateFields, {
+        fighterUpdateFields, {
         where: { fighterId: id }
       });
       if(updateResult) {
+        await sequelize.sync({ schema: username });
         return res.status(200).json(updateResult);
       }
+
     } else if (req.params.table === 'moves') {
-      let sql = `
-        UPDATE
-          public.moves
-        SET
-          "name" = coalesce($2, "name"),
-          "moveType" = coalesce($3, "moveType"),
-          "category" = coalesce($4, "category")
-          WHERE
-          "moveId"=$1
-          RETURNING *;
-      `;
-      let params = [id, name, moveType, category];
-      let result = await client.query(sql, params);
-      if (result.rows.length === 0) {
-        throw new ClientError(404, `moveId ${id} does not exist`);
-      }
-      Object.assign(fullResult, result.rows[0]);
-      sql = `
-        UPDATE
-          public.hitboxes
-        SET
-          "damage" = coalesce($2, "damage"),
-          "activeFrames" = coalesce($3, "activeFrames"),
-          "totalFrames" = coalesce($4, "totalFrames"),
-          "firstFrame" = coalesce($5, "firstFrame")
-        WHERE
-          "moveId"=$1
-        RETURNING *;
-      `;
-      params = [id, damage, activeFrames, totalFrames, firstFrame];
-      result = await client.query(sql, params);
-      Object.assign(fullResult, result.rows[0]);
-      return res.status(200).json(fullResult);
+      const MovesModel = sequelize.models.moves;
+      const HitboxesModel = sequelize.models.hitboxes;
+      const movesUpdateFields = {};
+      const hitboxesUpdateFields = {};
+
+      await sequelize.transaction(async (t: any) => {
+
+        const result = await MovesModel.findOne({
+          where: { moveId: id }
+        }, { transaction: t, schema: username });
+
+        console.log({ result });
+        if(!result) {
+          throw new ClientError(404, `(moveId) ${id} doesn't exist`);
+        }
+        const moves = await MovesModel.update({
+          name: name,
+          moveType: moveType,
+          category: category
+        }, { where: { moveId: id }, transaction: t, schema: username });
+
+        const hitboxes = await HitboxesModel.update({
+          activeFrames: activeFrames,
+          damage: damage,
+          firstFrame: firstFrame,
+          totalFrames: totalFrames
+        }, { where: { moveId: id }, transaction: t, schema: username });
+
+        if(moves[0] === 0 && hitboxes[0] === 0) {
+          throw new ClientError(400, 'No values were changed')
+        }
+        await sequelize.sync({ schema: username });
+        return res.status(200).json({ message: 'Moves have been updated successfully', affectedFighterId: result.dataValues.fighterId });
+      });
 
     } else if (req.params.table === 'throws') {
       let sql = `
