@@ -47,6 +47,7 @@ async function updateTableData(req: Req, res: Res, next: any) {
 
       await sequelize.transaction(async (t: any) => {
         const FightersModel = sequelize.models.fighters;
+
         const result = await FightersModel.findOne({
           where: { fighterId: id }, transaction: t, schema: username
         });
@@ -67,7 +68,6 @@ async function updateTableData(req: Req, res: Res, next: any) {
       })
 
     } else if (req.params.table === 'moves') {
-
       await sequelize.transaction(async (t: any) => {
         const MovesModel = sequelize.models.moves;
         const HitboxesModel = sequelize.models.hitboxes;
@@ -178,7 +178,7 @@ async function updateTableData(req: Req, res: Res, next: any) {
         }
         await sequelize.sync({ schema: username });
         return res.status(200).json({ message: 'Stats have been updated successfully', affectedFighterId: result.dataValues.fighterId });
-      })
+      });
     } else {
       throw new ClientError(400, `${req.params.table} is not a valid path parameter`);
     }
