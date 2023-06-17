@@ -183,7 +183,6 @@ async function updateTableData(req: Req, res: Res, next: any) {
       throw new ClientError(400, `${req.params.table} is not a valid path parameter`);
     }
   } catch (e: any) {
-    // console.error(e);
     if (e.name === 'SequelizeUniqueConstraintError') {
       return next(new ClientError(400, e.errors[0].message));
     }
