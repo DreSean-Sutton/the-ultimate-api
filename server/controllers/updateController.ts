@@ -112,7 +112,7 @@ async function updateTableData(req: Req, res: Res, next: any) {
         }
         const throws = await ThrowsModel.update({
           name: name
-        }, { where: {throwId: id}, transaction: t, schema: username });
+        }, { where: { throwId: id }, transaction: t, schema: username });
 
         const grappling = await GrapplingModel.update({
           activeFrames: activeFrames, damage: damage, totalFrames
@@ -126,38 +126,30 @@ async function updateTableData(req: Req, res: Res, next: any) {
       })
 
     } else if (req.params.table === 'movements') {
-      let sql = `
-        UPDATE
-          public.movements
-        SET
-          "name" = coalesce($2, "name")
-        WHERE
-          "movementId"=$1
-        RETURNING *;
-      `;
-      let params = [id, name];
-      let result = await client.query(sql, params);
-      if (result.rows.length === 0) {
-        throw new ClientError(404, `movementId ${id} does not exist`);
-      }
-      Object.assign(fullResult, result.rows[0]);
-      sql = `
-        UPDATE
-            public.dodging
-        SET
-          "activeFrames" = coalesce($2, "activeFrames"),
-          "totalFrames" = coalesce($3, "totalFrames")
-        WHERE
-          "movementId"=$1
-        RETURNING *;
-      `;
-      params = [id, activeFrames, totalFrames];
-      result = await client.query(sql, params);
-      if (result.rows.length === 0) {
-        throw new ClientError(404, `movementId ${id} does not exist`);
-      }
-      Object.assign(fullResult, result.rows[0]);
-      return res.status(200).json(fullResult);
+      await sequelize.transaction(async (t: any) => {
+        const MovementsModel = sequelize.models.movements;
+        const DodgingModel = sequelize.models.dodging;
+
+        const result = await MovementsModel.findOne({
+          where: { movementId: id }, transaction: t, schema: username });
+        if(!result) {
+          throw new ClientError(404, `(movementId) ${id} doesn't exist`);
+        }
+
+        const movements = await MovementsModel.update({
+          name: name
+        }, { where: { movementId: id }, transaction: t, schema: username});
+
+        const dodging = await DodgingModel.update({
+          activeFrames: activeFrames, totalFrames: totalFrames
+        }, { where: { movementId: id }, transaction: t, schema: username });
+
+        if (movements[0] === 0 && dodging[0] === 0) {
+          throw new ClientError(400, 'No values were changed');
+        }
+        await sequelize.sync({ schema: username });
+        return res.status(200).json({ message: 'Movements have been updated successfully', affectedFighterId: result.dataValues.fighterId });
+      });
 
     } else if (req.params.table === 'stats') {
       let sql = `
