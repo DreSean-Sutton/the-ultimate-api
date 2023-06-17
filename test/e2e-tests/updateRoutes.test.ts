@@ -12,7 +12,32 @@ const testPayload = {
 };
 const testToken = jwt.sign(testPayload, process.env.TOKEN_SECRET);
 
-describe.only("PUT /api/update/fighters/id", () => {
+describe.only("PUT /api/update/wrong_param/:id", () => {
+  const url = 'http://localhost:5000';
+
+  describe("Unsuccessful request", () => {
+
+    it("Returns a 400 request if the wrong request param is used", done => {
+      chai.request(url)
+      .put('/api/update/wrong_param/1')
+      .set('authorization', `Bearer ${testToken}`)
+      .set('username', 'test_username')
+      .set('content-type', 'application/json')
+      .send({ fighter: 'gokus', displayName: 'Son Gokus', rosterId: 9002 })
+      .end((err, res) => {
+        if(err) {
+          console.log(err);
+          return done(err);
+        }
+        res.should.have.status(400);
+        res.body.should.have.property('error');
+        done();
+      })
+    })
+  })
+})
+
+describe.only("PUT /api/update/fighters/:id", () => {
   const url = 'http://localhost:5000';
   const path = '/api/update/fighters/90';
 
@@ -171,7 +196,7 @@ describe.only("PUT /api/update/fighters/id", () => {
   })
 })
 
-describe.only("PUT /api/update/moves/id", () => {
+describe.only("PUT /api/update/moves/:id", () => {
   const url = 'http://localhost:5000';
 
   describe("Successful Requests", () => {
@@ -331,7 +356,7 @@ describe.only("PUT /api/update/throws/:id", () => {
   })
 })
 
-describe.only("POST /api/update/movements/:id", () => {
+describe.only("PUT /api/update/movements/:id", () => {
   const url = 'http://localhost:5000';
 
   describe("Successful requests", () => {
@@ -385,7 +410,6 @@ describe.only("POST /api/update/movements/:id", () => {
             console.log(err);
             return done(err);
           }
-          console.log(res.body);
           res.should.have.status(404);
           res.body.should.have.property('error');
           done();
@@ -403,7 +427,6 @@ describe.only("POST /api/update/movements/:id", () => {
             console.log(err);
             return done(err);
           }
-          console.log(res.body);
           res.should.have.status(400);
           res.body.should.have.property('error');
           done();
