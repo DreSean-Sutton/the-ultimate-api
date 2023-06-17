@@ -22,5 +22,6 @@ export default async function handleRestartIds(schema: string) {
   await sequelize.query(`ALTER SEQUENCE "${schema}"."dodging_movementId_seq" RESTART WITH ${maxMovementId + 1}`);
   await sequelize.query(`ALTER SEQUENCE "${schema}"."stats_statId_seq" RESTART WITH ${maxStatId + 1}`);
   await sequelize.query(`ALTER SEQUENCE "${schema}"."miscellaneous_statId_seq" RESTART WITH ${maxStatId + 1}`);
+  await sequelize.sync({ schema: schema });
   console.log("All model's id incrementation value has been synced");
 }

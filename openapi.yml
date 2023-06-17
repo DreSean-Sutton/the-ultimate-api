@@ -495,7 +495,7 @@ paths:
   /api/update/fighters/{fighterId}:
     put:
       tags:
-      - Update (Currently under maintenance)
+      - Update
       summary: Update a fighter's basic information
       security:
         - BearerAuth: []
@@ -508,7 +508,6 @@ paths:
         required: true
       requestBody:
         description: Click `Try it out` and edit your request!
-        required: true
         content:
           application/json:
             schema:
@@ -527,12 +526,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/fightersResponse'
+                $ref: '#/components/schemas/UpdateResponse'
 
   /api/update/moves/{moveId}:
     put:
       tags:
-      - Update (Currently under maintenance)
+      - Update
       summary: Update a fighter's moves
       security:
         - BearerAuth: []
@@ -545,7 +544,6 @@ paths:
         required: true
       requestBody:
         description: Click `Try it out` and edit your request!
-        required: true
         content:
           application/json:
             schema:
@@ -557,12 +555,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/movesResponse'
+                $ref: '#/components/schemas/UpdateResponse'
 
   /api/update/throws/{throwId}:
     put:
       tags:
-      - Update (Currently under maintenance)
+      - Update
       summary: Update a fighter's throws
       security:
         - BearerAuth: []
@@ -575,7 +573,6 @@ paths:
         required: true
       requestBody:
         description: Click `Try it out` and edit your request!
-        required: true
         content:
           application/json:
             schema:
@@ -587,12 +584,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/throwsResponse'
+                $ref: '#/components/schemas/UpdateResponse'
 
   /api/update/movements/{movementId}:
     put:
       tags:
-      - Update (Currently under maintenance)
+      - Update
       summary: Update a fighter's movements
       security:
         - BearerAuth: []
@@ -605,7 +602,6 @@ paths:
         required: true
       requestBody:
         description: Click `Try it out` and edit your request!
-        required: true
         content:
           application/json:
             schema:
@@ -624,12 +620,12 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/movementsResponse'
+                $ref: '#/components/schemas/UpdateResponse'
 
   /api/update/stats/{statId}:
     put:
       tags:
-      - Update (Currently under maintenance)
+      - Update
       summary: Update a fighter's stats
       security:
         - BearerAuth: []
@@ -642,7 +638,6 @@ paths:
         required: true
       requestBody:
         description: Click `Try it out` and edit your request!
-        required: true
         content:
           application/json:
             schema:
@@ -659,7 +654,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/statsResponse'
+                $ref: '#/components/schemas/UpdateResponse'
 
   /api/delete/fighters/{id}:
     delete:
@@ -1002,3 +997,16 @@ components:
         statValue: 120
         type: stat
         createdAt: 2020-02-20etc
+
+    UpdateResponse:
+      type: object
+      items:
+        type: object
+        properties:
+          message:
+            type: string
+          affectedFighterId:
+            type: integer
+      example:
+        message: Updated successfully
+        affectedFighterId: 1
