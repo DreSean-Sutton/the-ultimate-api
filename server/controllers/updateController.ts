@@ -48,14 +48,16 @@ async function updateTableData(req: Req, res: Res, next: any) {
       await sequelize.transaction(async (t: any) => {
         const FightersModel = sequelize.models.fighters;
         const result = await FightersModel.findOne({
-          where: { fighterId: id }, transaction: t, schema: username });
+          where: { fighterId: id }, transaction: t, schema: username
+        });
 
         if (!result) {
           throw new ClientError(404, `fighterId ${(id)} doesn't exist`);
         }
-        const updateResult = await FightersModel.update(
-          { fighter: fighter, displayName: displayName, rosterId: rosterId }, {
-            where: { fighterId: id }, transaction: t, schema: username });
+        const updateResult = await FightersModel.update({
+          fighter: fighter, displayName: displayName, rosterId: rosterId
+        },
+        { where: { fighterId: id }, transaction: t, schema: username });
 
         if (updateResult[0] === 0) {
           throw new ClientError(400, 'At least one of (fighter), (rosterId), or (displayName) must have a value');
@@ -71,8 +73,8 @@ async function updateTableData(req: Req, res: Res, next: any) {
         const HitboxesModel = sequelize.models.hitboxes;
 
         const result = await MovesModel.findOne({
-          where: { moveId: id }
-        }, { transaction: t, schema: username });
+          where: { moveId: id }, transaction: t, schema: username
+        });
 
         if (!result) {
           throw new ClientError(404, `(moveId) ${id} doesn't exist`);
@@ -103,10 +105,8 @@ async function updateTableData(req: Req, res: Res, next: any) {
         const GrapplingModel = sequelize.models.grappling;
 
         const result = await ThrowsModel.findOne({
-          where: {
-            throwId: id
-          }, transaction: t, schema: username
-        })
+          where: { throwId: id }, transaction: t, schema: username
+        });
         if (!result) {
           throw new ClientError(404, `(throwId) ${id} doesn't exist`);
         }
@@ -131,7 +131,8 @@ async function updateTableData(req: Req, res: Res, next: any) {
         const DodgingModel = sequelize.models.dodging;
 
         const result = await MovementsModel.findOne({
-          where: { movementId: id }, transaction: t, schema: username });
+          where: { movementId: id }, transaction: t, schema: username
+        });
         if(!result) {
           throw new ClientError(404, `(movementId) ${id} doesn't exist`);
         }
@@ -152,37 +153,32 @@ async function updateTableData(req: Req, res: Res, next: any) {
       });
 
     } else if (req.params.table === 'stats') {
-      let sql = `
-        UPDATE
-          public.stats
-        SET
-          "name" = coalesce($2, "name")
-        WHERE
-          "statId"=$1
-        RETURNING *;
-      `;
-      let params = [id, name];
-      let result = await client.query(sql, params);
-      if (result.rows.length === 0) {
-        throw new ClientError(404, `statId ${id} does not exist`);
-      }
-      Object.assign(fullResult, result.rows[0]);
-      sql = `
-        UPDATE
-          public.miscellaneous
-        SET
-          "statValue" = coalesce($2, "statValue")
-        WHERE
-          "statId"=$1
-        RETURNING *;
-      `;
-      params = [id, statValue];
-      result = await client.query(sql, params);
-      if (result.rows.length === 0) {
-        throw new ClientError(404, `statId ${id} does not exist`);
-      }
-      Object.assign(fullResult, result.rows[0]);
-      return res.status(200).json(fullResult);
+      await sequelize.transaction(async (t: any) => {
+        const StatsModel = sequelize.models.stats;
+        const MiscellaneousModel = sequelize.models.miscellaneous;
+
+        const result = await StatsModel.findOne({
+          where: { statId: id }, transaction: t, schema: username
+        });
+
+        if (!result) {
+          throw new ClientError(404, `(statId) ${id} doesn't exist`);
+        }
+
+        const stats = await StatsModel.update({
+          name: name
+        }, { where: { statId: id }, transaction: t, schema: username });
+
+        const miscellaneous = await MiscellaneousModel.update({
+          statValue: statValue
+        }, { where: { statId: id }, transaction: t, schema: username });
+
+        if(stats[0] === 0 && miscellaneous[0] === 0) {
+          throw new ClientError(400, 'No values were changed');
+        }
+        await sequelize.sync({ schema: username });
+        return res.status(200).json({ message: 'Stats have been updated successfully', affectedFighterId: result.dataValues.fighterId });
+      })
     } else {
       throw new ClientError(400, `${req.params.table} is not a valid path parameter`);
     }
