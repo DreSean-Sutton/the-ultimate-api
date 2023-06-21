@@ -30,20 +30,18 @@ async function deleteFromTable(req: Req, res: Res, next: any) {
     const notFoundError: string = `${req.params.table.slice(0, req.params.table.length - 1)}Id ${id} doesn't exist`;
 
     if (req.params.table === 'fighters') {
-      const fightersModel = sequelize.models.fighters;
 
-      const fighters = await fightersModel.destroy({
-        where: {
-          fighterId: id
-        },
-        schema: username
-      });
-      console.log({fighters});
-      if(fighters[0] !== 1) {
-        throw new ClientError(404, notFoundError);
-      }
-      // later return the deleted data
-      return res.status(204).json({ message: 'Fighter has been successfully deleted', affectedFighterId: id })
+        const fightersModel = sequelize.models.fighters;
+
+        const fighters = await fightersModel.destroy({
+          where: { fighterId: id }, schema: username
+        });
+        console.log(fighters);
+        if (fighters !== 1) {
+          throw new ClientError(404, notFoundError);
+        }
+
+        return res.status(204).json({});
     } else if (req.params.table === 'moves') {
       const sql = `
         DELETE FROM
