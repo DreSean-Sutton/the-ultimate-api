@@ -1,6 +1,10 @@
-import { Req, Res } from "../utils/types-routes";
-import ClientError from "../utils/client-error";
-import { client } from '../conn';
+import { Req, Res } from '../utils/types-routes';
+import ClientError from '../utils/client-error';
+import { sequelize } from '../conn';
+require('dotenv/config');
+const jwt = require('jsonwebtoken');
+const { User } = require('../model/user-table');
+const { authorizeUser } = require('../lib/authorizeUser');
 
 /**
  * Delete route that removes data from a table and id of your choice
@@ -9,35 +13,39 @@ import { client } from '../conn';
  * @return 204 status code
  */
 async function deleteFromTable(req: Req, res: Res, next: any) {
-  return res.status(401).json({ error: 'Currently undergoing maintenance' }); // temporary until update is finished
 
-  const authHeader: string = req.headers['authorization'];
+  const { authorization, username } = req.headers;
 
   try {
-    if (!authHeader) {
-      throw new ClientError(400, 'authorization header must have a value');
-    } else if (authHeader !== process.env.API_KEY) {
-      throw new ClientError(400, 'Incorrect value for authorization header');
-    }
     if (/[A-Z]/gi.test(req.params.id) &&
       req.params.id !== undefined) {
       throw new ClientError(400, 'id must be a number');
     }
+
     const id = Number(req.params.id);
-    let sql = '';
-    const notFoundError = `${req.params.table.slice(0, req.params.table.length - 1)}Id ${id} doesn't exist`;
-    const params = [id];
+    const userIsTrue = authorization || username;
+    const authResult = userIsTrue ? await authorizeUser(authorization, username, next) : null;
+    if (authResult) throw new ClientError(authResult.status, authResult.message);
+
+    const notFoundError: string = `${req.params.table.slice(0, req.params.table.length - 1)}Id ${id} doesn't exist`;
 
     if (req.params.table === 'fighters') {
-      sql = `
-        DELETE FROM
-          public.fighters
-        WHERE
-          "fighterId"=$1
-        RETURNING *;
-      `;
+      const fightersModel = sequelize.models.fighters;
+
+      const fighters = await fightersModel.destroy({
+        where: {
+          fighterId: id
+        },
+        schema: username
+      });
+      console.log({fighters});
+      if(fighters[0] !== 1) {
+        throw new ClientError(404, notFoundError);
+      }
+      // later return the deleted data
+      return res.status(204).json({ message: 'Fighter has been successfully deleted', affectedFighterId: id })
     } else if (req.params.table === 'moves') {
-      sql = `
+      const sql = `
         DELETE FROM
           public.moves
         WHERE
@@ -45,7 +53,7 @@ async function deleteFromTable(req: Req, res: Res, next: any) {
         RETURNING *;
       `;
     } else if (req.params.table === 'throws') {
-      sql = `
+      const sql = `
         DELETE FROM
           public.throws
         WHERE
@@ -53,7 +61,7 @@ async function deleteFromTable(req: Req, res: Res, next: any) {
         RETURNING *;
       `;
     } else if (req.params.table === 'movements') {
-      sql = `
+      const sql = `
         DELETE FROM
           public.movements
         WHERE
@@ -61,7 +69,7 @@ async function deleteFromTable(req: Req, res: Res, next: any) {
         RETURNING *;
       `;
     } else if (req.params.table === 'stats') {
-      sql = `
+      const sql = `
         DELETE FROM
           public.stats
         WHERE
@@ -71,11 +79,6 @@ async function deleteFromTable(req: Req, res: Res, next: any) {
     } else {
       throw new ClientError(400, `${req.params.table} is not a valid path parameter`);
     }
-    const result = await client.query(sql, params);
-    if (result.rowCount === 0) {
-      throw new ClientError(404, notFoundError);
-    }
-    return res.status(204).json(result.rowCount);
   } catch (e) {
     return next(e);
   }

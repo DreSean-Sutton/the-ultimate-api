@@ -100,20 +100,17 @@ async function generateToken(req: Req, res: Res, next: any) {
   }
 }
 
-async function deleteUser(req: Req, res: Res, next: any) {
+async function resetTests(req: Req, res: Res, next: any) {
   if(process.env.NODE_ENV !== 'development') return;
   try {
-    const schemaQuery = `
+    const userQuery = `
       SELECT *
       FROM information_schema.schemata
       WHERE schema_name = 'user'
     `;
-    const [schemaResult] = await sequelize.query(schemaQuery);
-    console.log(schemaResult);
-    if(!schemaResult.length) {
-      return;
-    }
+    const [userQueryResult] = await sequelize.query(userQuery);
     const user = await User.destroy({ truncate: true });
+    await sequelize.query('DROP SCHEMA IF EXISTS "test_username" cascade;');
     res.status(204).json(user);
   } catch(e) {
     console.error('Error deleting users:', e);
@@ -125,5 +122,5 @@ module.exports = {
   registerUser,
   showToken,
   generateToken,
-  deleteUser,
+  resetTests,
 }

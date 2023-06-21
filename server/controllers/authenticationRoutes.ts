@@ -6,6 +6,6 @@ const authenticationRoutes = express.Router();
 authenticationRoutes.post('/register', authenticationController.registerUser);
 authenticationRoutes.post('/show-token', authenticationController.showToken);
 authenticationRoutes.post('/generate-token', authenticationController.generateToken);
-authenticationRoutes.delete('/delete-account', authenticationController.deleteUser);
+authenticationRoutes.delete('/reset-tests', authenticationController.resetTests);
 
 module.exports = authenticationRoutes;

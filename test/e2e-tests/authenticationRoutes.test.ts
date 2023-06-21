@@ -10,9 +10,9 @@ describe.only("POST /api/auth/register", () => {
   const path = '/api/auth/register';
 
   // This is used for resetting the User schema in the database
-  function deleteUser() {
+  function resetTests() {
     chai.request(url)
-      .delete('/api/auth/delete-account')
+      .delete('/api/auth/reset-tests')
       .end((err, res) => {})
   }
 
@@ -27,7 +27,7 @@ describe.only("POST /api/auth/register", () => {
     it("returns a 201 when user is created", done => {
       const userKeys = ['id', 'email', 'username', 'updatedAt', 'createdAt', 'token', 'tokenExpiration'];
 
-      deleteUser(); // Currently required during testing to make sure this test returns a 201 status
+      resetTests(); // Currently required during testing to make sure this test returns a 201 status
 
       chai.request(url)
         .post(path)
