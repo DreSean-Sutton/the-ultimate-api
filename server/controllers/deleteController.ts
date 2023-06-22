@@ -36,20 +36,23 @@ async function deleteFromTable(req: Req, res: Res, next: any) {
         const fighters = await fightersModel.destroy({
           where: { fighterId: id }, schema: username
         });
-        console.log(fighters);
         if (fighters !== 1) {
           throw new ClientError(404, notFoundError);
         }
 
         return res.status(204).json({});
     } else if (req.params.table === 'moves') {
-      const sql = `
-        DELETE FROM
-          public.moves
-        WHERE
-          "moveId"=$1
-        RETURNING *;
-      `;
+
+      const movesModel = sequelize.models.moves;
+
+      const moves = await movesModel.destroy({
+        where: { moveId: id }, schema: username
+      });
+      if (moves !== 1) {
+        throw new ClientError(404, notFoundError);
+      }
+
+      return res.status(204).json({});
     } else if (req.params.table === 'throws') {
       const sql = `
         DELETE FROM
