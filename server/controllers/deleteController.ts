@@ -67,21 +67,31 @@ async function deleteFromTable(req: Req, res: Res, next: any) {
 
       return res.status(204).json({});
     } else if (req.params.table === 'movements') {
-      const sql = `
-        DELETE FROM
-          public.movements
-        WHERE
-          "movementId"=$1
-        RETURNING *;
-      `;
+
+      const movementsModel = sequelize.models.movements;
+
+      const movements = await movementsModel.destroy({
+        where: { movementId: id }, schema: username
+      });
+
+      if (movements!== 1) {
+        throw new ClientError(404, notFoundError);
+      }
+
+      return res.status(204).json({});
     } else if (req.params.table === 'stats') {
-      const sql = `
-        DELETE FROM
-          public.stats
-        WHERE
-          "statId"=$1
-        RETURNING *;
-      `;
+
+      const statsModel = sequelize.models.stats;
+
+      const stats = await statsModel.destroy({
+        where: { statId: id }, schema: username
+      });
+
+      if (stats!== 1) {
+        throw new ClientError(404, notFoundError);
+      }
+
+      return res.status(204).json({});
     } else {
       throw new ClientError(400, `${req.params.table} is not a valid path parameter`);
     }

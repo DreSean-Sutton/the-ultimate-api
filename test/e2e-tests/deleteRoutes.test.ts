@@ -93,6 +93,7 @@ describe.only("DELETE 'api/delete/moves/:id", () => {
   })
 
   describe("Unsuccessful Requests", () => {
+
     it("returns a 404 request when a fighter's moves aren't found", done => {
       chai.request(url)
         .delete('/api/delete/moves/999999')
@@ -131,9 +132,10 @@ describe.only("DELETE 'api/delete/throws/:id", () => {
           done();
         });
     });
-  })
+  });
 
   describe("Unsuccessful Requests", () => {
+
     it("returns a 404 request when a fighter's throws aren't found", done => {
       chai.request(url)
         .delete('/api/delete/throws/999999')
@@ -150,5 +152,89 @@ describe.only("DELETE 'api/delete/throws/:id", () => {
           done();
         });
     });
-  })
-})
+  });
+});
+
+describe.only("DELETE 'api/delete/movements/:id", () => {
+
+  describe("Successful requests", () => {
+
+    it("returns a 204 request when a fighter's movements are deleted", done => {
+      chai.request(url)
+        .delete('/api/delete/movements/805')
+        .set('authorization', `Bearer ${testToken}`)
+        .set('username', 'test_username')
+        .set('content-type', 'application/json')
+        .end((err, res) => {
+          if(err) {
+            console.log(err);
+            return done(err);
+          }
+          res.should.have.status(204);
+          done();
+        });
+    });
+  });
+
+  describe("Unsuccessful requests", () => {
+
+    it("returns a 404 request when a fighter's movements aren't found", done => {
+      chai.request(url)
+        .delete('/api/delete/movements/999999')
+        .set('authorization', `Bearer ${testToken}`)
+        .set('username', 'test_username')
+        .set('content-type', 'application/json')
+        .end((err, res) => {
+          if(err) {
+            console.log(err);
+            return done(err);
+          }
+          res.should.have.status(404);
+          res.body.should.have.property('error');
+          done();
+        })
+    });
+  });
+});
+
+describe.only("DELETE 'api/delete/stats/:id", () => {
+
+  describe("Successful requests", () => {
+
+    it("returns a 204 request when a fighter's stats are deleted", done => {
+      chai.request(url)
+        .delete('/api/delete/stats/1165')
+        .set('authorization', `Bearer ${testToken}`)
+        .set('username', 'test_username')
+        .set('content-type', 'application/json')
+        .end((err, res) => {
+          if(err) {
+            console.log(err);
+            return done(err);
+          }
+          res.should.have.status(204);
+          done();
+        });
+    });
+  });
+
+  describe("Unsuccessful requests", () => {
+
+    it("returns a 404 request when a fighter's stats aren't found", done => {
+      chai.request(url)
+        .delete('/api/delete/stats/999999')
+        .set('authorization', `Bearer ${testToken}`)
+        .set('username', 'test_username')
+        .set('content-type', 'application/json')
+        .end((err, res) => {
+          if(err) {
+            console.log(err);
+            return done(err);
+          }
+          res.should.have.status(404);
+          res.body.should.have.property('error');
+          done();
+        })
+    });
+  });
+});
