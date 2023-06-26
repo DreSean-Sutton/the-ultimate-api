@@ -659,7 +659,7 @@ paths:
   /api/delete/fighters/{id}:
     delete:
       tags:
-      - Delete (Currently under maintenance)
+      - Delete
       summary: Delete a fighter and all of their data
       security:
         - BearerAuth: []
@@ -678,7 +678,7 @@ paths:
   /api/delete/moves/{id}:
     delete:
       tags:
-      - Delete (Currently under maintenance)
+      - Delete
       summary: Delete a fighter's move data
       security:
         - BearerAuth: []
@@ -697,7 +697,7 @@ paths:
   /api/delete/throws/{id}:
     delete:
       tags:
-      - Delete (Currently under maintenance)
+      - Delete
       summary: Delete a fighter's throw data
       security:
         - BearerAuth: []
@@ -716,7 +716,7 @@ paths:
   /api/delete/movements/{id}:
     delete:
       tags:
-      - Delete (Currently under maintenance)
+      - Delete
       summary: Delete a fighter's movement data
       security:
         - BearerAuth: []
@@ -735,7 +735,7 @@ paths:
   /api/delete/stats/{id}:
     delete:
       tags:
-      - Delete (Currently under maintenance)
+      - Delete
       summary: Delete a fighter's stat data
       security:
         - BearerAuth: []
