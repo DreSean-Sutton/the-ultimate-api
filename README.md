@@ -12,12 +12,14 @@ Test out my endpoints here at: https://the-ultimate-api.dreseansutton.com/
 
 ## Technologies Used
 
-- HTML5
 - JavaScript (es5/es6)
 - Typescript
 - Node.js
 - express.js
 - postgreSQL
+- AWS
+- Dokku
+- Sequelize
 - YAML
 - yamljs
 - Swagger-ui-express
@@ -25,7 +27,6 @@ Test out my endpoints here at: https://the-ultimate-api.dreseansutton.com/
 - postinstall
 - dotenv
 - shell
-- Heroku
 
 ## Features
 
