@@ -1,10 +1,10 @@
 import { Req, Res, QueryString } from "../utils/types-routes";
 import ClientError from "../utils/client-error";
 import { client } from '../conn';
+import defineUserDb from '../lib/define-user-db';
 const sqlQueries = require('../utils/sql-queries');
 const { sequelize } = require('../conn');
 const { authorizeUser } = require('../lib/authorizeUser');
-
 /**
  * All routes accept query strings for specifying a single fighter
  * Can specify `fighter` name, `fighterId`, and `rosterId`
@@ -31,6 +31,7 @@ async function getFighters(req: Req, res: Res, next: any) {
     const schemaName = userIsTrue ? username : 'public';
     const queryStr: QueryString = req.query;
     const queryKey = Object.keys(queryStr);
+    defineUserDb(username);
 
     if (queryStr.fighter) {
       const { fighter } = queryStr;
@@ -148,15 +149,14 @@ async function getFightersData(req: Req, res: Res, next: any) {
     if (Object.keys(queryStr).length > 1) {
       throw new ClientError(400, 'Only one query string is allowed');
     }
-
-    const FightersModel = sequelize.models.fighters;
+    const { Fighters } = defineUserDb(username);
     let fightersResult;
     const whereCondition: any = {};
     whereCondition[queryKey] = currentQueryStr;
     if (!queryKey || orderByRosterId) {
-      fightersResult = await FightersModel.findOne({});
+      fightersResult = await Fighters.findOne({});
     } else {
-      fightersResult = await FightersModel.findOne({ where: whereCondition });
+      fightersResult = await Fighters.findOne({ where: whereCondition });
     }
     if (!fightersResult) {
       throw new ClientError(404, `(${queryKey}) named (${currentQueryStr}) doesn't exist in the database`);
@@ -260,14 +260,14 @@ async function getFightersDataByType(req: Req, res: Res, next: any) {
       throw new ClientError(400, 'Only one query string is allowed');
     }
 
-    const FightersModel = sequelize.models.fighters;
+    const { Fighters } = defineUserDb(username);
     let fightersResult;
     const whereCondition: any = {};
     whereCondition[queryKey] = currentQueryStr;
     if (!queryKey || orderByRosterId) {
-      fightersResult = await FightersModel.findOne({});
+      fightersResult = await Fighters.findOne({});
     } else {
-      fightersResult = await FightersModel.findOne({ where: whereCondition });
+      fightersResult = await Fighters.findOne({ where: whereCondition });
     }
     if (!fightersResult) {
       throw new ClientError(404, `(${queryKey}) named (${currentQueryStr}) doesn't exist in the database`);

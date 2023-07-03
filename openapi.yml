@@ -174,8 +174,14 @@ paths:
       tags:
       - Authentication
       summary: >
-       Registers to the API and copies it's public fighter
-       information into your personal database
+       Registers to the API and copies the public tables's
+       information into your personal database, if desired
+      parameters:
+      - in: query
+        name: emptyDB
+        schema:
+          type: boolean
+        required: false
       requestBody:
         description: >
           Send a request with your `username`, `email`,

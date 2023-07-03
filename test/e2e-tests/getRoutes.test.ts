@@ -12,7 +12,7 @@ const testPayload = {
 };
 const testToken = `Bearer ${jwt.sign(testPayload, process.env.TOKEN_SECRET)}`;
 
-describe("GET /api/get/fighters", () => {
+describe.only("GET /api/get/fighters", () => {
 
   const expectedFighterProps = ['fighter', 'fighterId', 'rosterId', 'displayName'];
   const url = 'http://localhost:5000';
@@ -99,7 +99,7 @@ describe("GET /api/get/fighters", () => {
         renderFightersTests(200, done, { fighter: 'inkling' });
       })
       it("Returns a json object containing a user's fighter's basic data", done => {
-        renderFightersTests(200, done, { fighter: 'goku' }, { authorization: testToken, username: 'test_username' });
+        renderFightersTests(200, done, { fighter: 'krillinss' }, { authorization: testToken, username: 'test_username' });
       })
     })
 
@@ -145,7 +145,7 @@ describe("GET /api/get/fighters", () => {
         renderFightersTests(200, done, { rosterId: 10 });
       })
       it("Returns a json object containing a user's fighter's basic data", done => {
-        renderFightersTests(200, done, { rosterId: 9001 }, { authorization: testToken, username: 'test_username' });
+        renderFightersTests(200, done, { rosterId: 525 }, { authorization: testToken, username: 'test_username' });
       })
     })
 
@@ -181,7 +181,7 @@ describe("GET /api/get/fighters", () => {
   })
 });
 
-describe("GET /api/get/fighters/data", () => {
+describe.only("GET /api/get/fighters/data", () => {
 
   function renderDataTests(status: number, done: any, query?: any, headers?: any, log?: boolean) {
     const authorization = headers?.authorization ? headers.authorization : '';
@@ -244,7 +244,7 @@ describe("GET /api/get/fighters/data", () => {
         renderDataTests(200, done, { fighter: 'joker' });
       })
       it("Returns a 200 status and a user's json object containing a fighter's data", done => {
-        renderDataTests(200, done, { fighter: 'goku' }, { authorization: testToken, username: 'test_username' });
+        renderDataTests(200, done, { fighter: 'krillinss' }, { authorization: testToken, username: 'test_username' }, true);
     })
     })
 
@@ -270,7 +270,7 @@ describe("GET /api/get/fighters/data", () => {
         renderDataTests(200, done, { fighterId: 10 });
       })
       it("Returns a json object containing a user's fighter's data", done => {
-        renderDataTests(200, done, { fighterId: 90 }, { authorization: testToken, username: 'test_username' });
+        renderDataTests(200, done, { fighterId: 91 }, { authorization: testToken, username: 'test_username' });
       })
     })
 
@@ -294,7 +294,7 @@ describe("GET /api/get/fighters/data", () => {
         renderDataTests(200, done, { rosterId: 10 });
       })
       it("Returns a json object containing a user's fighter's data", done => {
-        renderDataTests(200, done, { rosterId: 9001 }, { authorization: testToken, username: 'test_username' });
+        renderDataTests(200, done, { rosterId: 525 }, { authorization: testToken, username: 'test_username' });
       })
     })
 
@@ -330,7 +330,7 @@ describe("GET /api/get/fighters/data", () => {
   })
 })
 
-describe("GET /api/get/fighters/data/:type", () => {
+describe.only("GET /api/get/fighters/data/:type", () => {
 
   function renderTypeTests(type: string, status: number, done: any, query?: any, headers?: any, log?: boolean) {
     const authorization = headers?.authorization ? headers.authorization : '';
@@ -378,19 +378,19 @@ describe("GET /api/get/fighters/data/:type", () => {
         renderTypeTests('move', 200, done, { fighter: 'inkling' });
       })
       it("Returns a user's json object of all move data", done => {
-        renderTypeTests('move', 200, done, { fighter: 'goku' }, { authorization: testToken, username: 'test_username' });
+        renderTypeTests('move', 200, done, { fighter: 'krillinss' }, { authorization: testToken, username: 'test_username' });
       })
       it("Returns a json object of a fighter's move data when fighterId is queried", done => {
         renderTypeTests('move', 200, done, { fighterId: 5 });
       })
       it("Returns a user's json object of a fighter's move data when fighterId is queried", done => {
-        renderTypeTests('move', 200, done, { fighterId: 90 }, { authorization: testToken, username: 'test_username' });
+        renderTypeTests('move', 200, done, { fighterId: 91 }, { authorization: testToken, username: 'test_username' });
       })
       it("Returns a json object of a fighter's move data when rosterId is queried", done => {
         renderTypeTests('move', 200, done, { rosterId: 10 });
       })
       it("Returns a user's json object of a fighter's move data when rosterId is queried", done => {
-        renderTypeTests('move', 200, done, { rosterId: 9001 }, { authorization: testToken, username: 'test_username' });
+        renderTypeTests('move', 200, done, { rosterId: 525 }, { authorization: testToken, username: 'test_username' });
       })
       it("Returns a json object of a all move data ordered by rosterId", done => {
         renderTypeTests('move', 200, done, { orderByRosterId: true });
@@ -427,7 +427,7 @@ describe("GET /api/get/fighters/data/:type", () => {
         renderTypeTests('move', 400, done, { orderByRosterId: 'not_valid' });
       })
       it("Returns an error if a fighter doesn't have any move type data", done => {
-        renderTypeTests('move', 404, done, { rosterId: 690 });
+        renderTypeTests('move', 404, done, { rosterId: 691 });
       })
     })
   })
@@ -446,19 +446,19 @@ describe("GET /api/get/fighters/data/:type", () => {
         renderTypeTests('throw', 200, done, { fighter: 'inkling' });
       })
       it("Returns a user's json object of a fighter's throw data when fighter is queried", done => {
-        renderTypeTests('throw', 200, done, { fighter: 'goku' }, { authorization: testToken, username: 'test_username' });
+        renderTypeTests('throw', 200, done, { fighter: 'krillinss' }, { authorization: testToken, username: 'test_username' });
       })
       it("Returns a json object of a fighter's throw data when fighterId is queried", done => {
         renderTypeTests('throw', 200, done, { fighterId: 5 });
       })
       it("Returns a user's json object of a fighter's throw data when fighterId is queried", done => {
-        renderTypeTests('throw', 200, done, { fighterId: 90 }, { authorization: testToken, username: 'test_username' });
+        renderTypeTests('throw', 200, done, { fighterId: 91 }, { authorization: testToken, username: 'test_username' });
       })
       it("Returns a json object of a fighter's throw data when rosterId is queried", done => {
         renderTypeTests('throw', 200, done, { rosterId: 10 });
       })
       it("Returns a user's json object of a fighter's throw data when rosterId is queried", done => {
-        renderTypeTests('throw', 200, done, { rosterId: 9001 }, { authorization: testToken, username: 'test_username' });
+        renderTypeTests('throw', 200, done, { rosterId: 525 }, { authorization: testToken, username: 'test_username' });
       })
       it("Returns a json object of a all throw data ordered by rosterId", done => {
         renderTypeTests('throw', 200, done, { orderByRosterId: true });
@@ -495,7 +495,7 @@ describe("GET /api/get/fighters/data/:type", () => {
         renderTypeTests('throw', 400, done, { orderByRosterId: 'not_valid' });
       })
       it("Returns an error if a fighter doesn't have any throw type data", done => {
-        renderTypeTests('throw', 404, done, { rosterId: 690 });
+        renderTypeTests('throw', 404, done, { rosterId: 691 });
       })
     })
   })
@@ -514,19 +514,19 @@ describe("GET /api/get/fighters/data/:type", () => {
         renderTypeTests('movement', 200, done, { fighter: 'inkling' });
       })
       it("Returns a user's json object of a fighter's movement data when fighter is queried", done => {
-        renderTypeTests('movement', 200, done, { fighter: 'goku' }, { authorization: testToken, username: 'test_username' });
+        renderTypeTests('movement', 200, done, { fighter: 'krillinss' }, { authorization: testToken, username: 'test_username' });
       })
       it("Returns a json object of a fighter's movement data when fighterId is queried", done => {
         renderTypeTests('movement', 200, done, { fighterId: 5 });
       })
       it("Returns a user's json object of a fighter's movement data when fighterId is queried", done => {
-        renderTypeTests('movement', 200, done, { fighterId: 90 }, { authorization: testToken, username: 'test_username' });
+        renderTypeTests('movement', 200, done, { fighterId: 91 }, { authorization: testToken, username: 'test_username' });
       })
       it("Returns a json object of a fighter's movement data when rosterId is queried", done => {
         renderTypeTests('movement', 200, done, { rosterId: 10 });
       })
       it("Returns a json object of a fighter's movement data when rosterId is queried", done => {
-        renderTypeTests('movement', 200, done, { rosterId: 9001 }, { authorization: testToken, username: 'test_username' });
+        renderTypeTests('movement', 200, done, { rosterId: 525 }, { authorization: testToken, username: 'test_username' });
       })
       it("Returns a json object of a all movement data ordered by rosterId", done => {
         renderTypeTests('movement', 200, done, { orderByRosterId: true });
@@ -563,7 +563,7 @@ describe("GET /api/get/fighters/data/:type", () => {
         renderTypeTests('movement', 400, done, { orderByRosterId: 'not_valid' });
       })
       it("Returns an error if a fighter doesn't have any movement type data", done => {
-        renderTypeTests('movement', 404, done, { rosterId: 690 });
+        renderTypeTests('movement', 404, done, { rosterId: 691 });
       })
     })
   })
@@ -582,19 +582,19 @@ describe("GET /api/get/fighters/data/:type", () => {
         renderTypeTests('stat', 200, done, { fighter: 'inkling' });
       })
       it("Returns a user's json object of a fighter's stat data when fighter is queried", done => {
-        renderTypeTests('stat', 200, done, { fighter: 'goku' }, { authorization: testToken, username: 'test_username' });
+        renderTypeTests('stat', 200, done, { fighter: 'krillinss' }, { authorization: testToken, username: 'test_username' });
       })
       it("Returns a json object of a fighter's stat data when fighterId is queried", done => {
         renderTypeTests('stat', 200, done, { fighterId: 5 });
       })
       it("Returns a user's json object of a fighter's stat data when fighterId is queried", done => {
-        renderTypeTests('stat', 200, done, { fighterId: 90 }, { authorization: testToken, username: 'test_username' });
+        renderTypeTests('stat', 200, done, { fighterId: 91 }, { authorization: testToken, username: 'test_username' });
       })
       it("Returns a json object of a fighter's stat data when rosterId is queried", done => {
         renderTypeTests('stat', 200, done, { rosterId: 10 });
       })
       it("Returns a user's json object of a fighter's stat data when rosterId is queried", done => {
-        renderTypeTests('stat', 200, done, { rosterId: 9001 }, { authorization: testToken, username: 'test_username' });
+        renderTypeTests('stat', 200, done, { rosterId: 525 }, { authorization: testToken, username: 'test_username' });
       })
       it("Returns a json object of a all stat data ordered by rosterId", done => {
         renderTypeTests('stat', 200, done, { orderByRosterId: true });
@@ -631,7 +631,7 @@ describe("GET /api/get/fighters/data/:type", () => {
         renderTypeTests('stat', 400, done, { orderByRosterId: 'not_valid' });
       })
       it("Returns an error if a fighter doesn't have any stat type data", done => {
-        renderTypeTests('stat', 404, done, { rosterId: 690 });
+        renderTypeTests('stat', 404, done, { rosterId: 691 });
       })
     })
   })

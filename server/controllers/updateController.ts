@@ -1,6 +1,7 @@
 import { Req, Res } from '../utils/types-routes';
 import ClientError from '../utils/client-error';
 import { client, sequelize } from '../conn';
+import defineUserDb from '../lib/define-user-db';
 require('dotenv/config');
 const jwt = require('jsonwebtoken');
 const { User } = require('../model/user-table');
@@ -38,6 +39,7 @@ async function updateTableData(req: Req, res: Res, next: any) {
     const userIsTrue = authorization || username;
     const authResult = userIsTrue ? await authorizeUser(authorization, username, next) : null;
     if (authResult) throw new ClientError(authResult.status, authResult.message);
+    const { Fighters, Moves, Hitboxes, Throws, Grappling, Movements, Dodging, Stats, Miscellaneous } = defineUserDb(username);
 
     if (req.params.table === 'fighters') {
       if (/[A-Z]/gi.test(rosterId) &&
@@ -46,16 +48,15 @@ async function updateTableData(req: Req, res: Res, next: any) {
       }
 
       await sequelize.transaction(async (t: any) => {
-        const FightersModel = sequelize.models.fighters;
 
-        const result = await FightersModel.findOne({
+        const result = await Fighters.findOne({
           where: { fighterId: id }, transaction: t, schema: username
         });
 
         if (!result) {
           throw new ClientError(404, `fighterId ${(id)} doesn't exist`);
         }
-        const updateResult = await FightersModel.update({
+        const updateResult = await Fighters.update({
           fighter: fighter, displayName: displayName, rosterId: rosterId
         },
         { where: { fighterId: id }, transaction: t, schema: username });
@@ -69,23 +70,21 @@ async function updateTableData(req: Req, res: Res, next: any) {
 
     } else if (req.params.table === 'moves') {
       await sequelize.transaction(async (t: any) => {
-        const MovesModel = sequelize.models.moves;
-        const HitboxesModel = sequelize.models.hitboxes;
 
-        const result = await MovesModel.findOne({
+        const result = await Moves.findOne({
           where: { moveId: id }, transaction: t, schema: username
         });
 
         if (!result) {
           throw new ClientError(404, `(moveId) ${id} doesn't exist`);
         }
-        const moves = await MovesModel.update({
+        const moves = await Moves.update({
           name: name,
           moveType: moveType,
           category: category
         }, { where: { moveId: id }, transaction: t, schema: username });
 
-        const hitboxes = await HitboxesModel.update({
+        const hitboxes = await Hitboxes.update({
           activeFrames: activeFrames,
           damage: damage,
           firstFrame: firstFrame,
@@ -101,20 +100,18 @@ async function updateTableData(req: Req, res: Res, next: any) {
 
     } else if (req.params.table === 'throws') {
       await sequelize.transaction(async (t: any) => {
-        const ThrowsModel = sequelize.models.throws;
-        const GrapplingModel = sequelize.models.grappling;
 
-        const result = await ThrowsModel.findOne({
+        const result = await Throws.findOne({
           where: { throwId: id }, transaction: t, schema: username
         });
         if (!result) {
           throw new ClientError(404, `(throwId) ${id} doesn't exist`);
         }
-        const throws = await ThrowsModel.update({
+        const throws = await Throws.update({
           name: name
         }, { where: { throwId: id }, transaction: t, schema: username });
 
-        const grappling = await GrapplingModel.update({
+        const grappling = await Grappling.update({
           activeFrames: activeFrames, damage: damage, totalFrames
         }, { where: { throwId: id }, transaction: t, schema: username });
 
@@ -127,21 +124,19 @@ async function updateTableData(req: Req, res: Res, next: any) {
 
     } else if (req.params.table === 'movements') {
       await sequelize.transaction(async (t: any) => {
-        const MovementsModel = sequelize.models.movements;
-        const DodgingModel = sequelize.models.dodging;
 
-        const result = await MovementsModel.findOne({
+        const result = await Movements.findOne({
           where: { movementId: id }, transaction: t, schema: username
         });
         if(!result) {
           throw new ClientError(404, `(movementId) ${id} doesn't exist`);
         }
 
-        const movements = await MovementsModel.update({
+        const movements = await Movements.update({
           name: name
         }, { where: { movementId: id }, transaction: t, schema: username});
 
-        const dodging = await DodgingModel.update({
+        const dodging = await Dodging.update({
           activeFrames: activeFrames, totalFrames: totalFrames
         }, { where: { movementId: id }, transaction: t, schema: username });
 
@@ -154,10 +149,8 @@ async function updateTableData(req: Req, res: Res, next: any) {
 
     } else if (req.params.table === 'stats') {
       await sequelize.transaction(async (t: any) => {
-        const StatsModel = sequelize.models.stats;
-        const MiscellaneousModel = sequelize.models.miscellaneous;
 
-        const result = await StatsModel.findOne({
+        const result = await Stats.findOne({
           where: { statId: id }, transaction: t, schema: username
         });
 
@@ -165,11 +158,11 @@ async function updateTableData(req: Req, res: Res, next: any) {
           throw new ClientError(404, `(statId) ${id} doesn't exist`);
         }
 
-        const stats = await StatsModel.update({
+        const stats = await Stats.update({
           name: name
         }, { where: { statId: id }, transaction: t, schema: username });
 
-        const miscellaneous = await MiscellaneousModel.update({
+        const miscellaneous = await Miscellaneous.update({
           statValue: statValue
         }, { where: { statId: id }, transaction: t, schema: username });
 
