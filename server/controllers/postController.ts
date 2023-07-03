@@ -2,6 +2,7 @@ import { Req, Res } from "../utils/types-routes";
 import ClientError from "../utils/client-error";
 import { client } from '../conn';
 import { Op } from "sequelize";
+import defineUserDb from '../lib/define-user-db';
 require('dotenv/config');
 const jwt = require('jsonwebtoken');
 const { sequelize } = require('../conn');
@@ -31,6 +32,7 @@ async function postFighters(req: Req, res: Res, next: any) {
     const authResult = userIsTrue ? await authorizeUser(authorization, username, next) : null;
     if(authResult) throw new ClientError(authResult.status, authResult.message);
 
+    defineUserDb(username);
     const FightersModel = sequelize.models.fighters;
     const selectResult = await FightersModel.findOne({
       where: {
@@ -52,7 +54,7 @@ async function postFighters(req: Req, res: Res, next: any) {
       fighter: fighter,
       rosterId: rosterId,
       displayName: displayName
-    }, { schema: username });
+    }, { searchPath: username });
     await sequelize.sync({ schema: username });
     return res.status(201).json(insertResult);
   } catch (e) {
@@ -89,6 +91,7 @@ async function postTableData(req: Req, res: Res, next: any) {
     const authResult = userIsTrue ? await authorizeUser(authorization, username, next) : null;
     if(authResult) throw new ClientError(authResult.status, authResult.message);
 
+    defineUserDb(username);
     const FightersModel = sequelize.models.fighters;
     const selectResult = await FightersModel.findOne({
       where: {

@@ -12,6 +12,7 @@ const jwt = require('jsonwebtoken');
 async function registerUser(req: Req, res: Res, next: any) {
 
   const { email, username, password } = req.body;
+  const { emptyDB }: any = req.query;
   if (!email || !email.includes('@') || !username || !password) {
     return res.status(400).json({ error: 'Must be a valid email, username, and password' });
   }
@@ -37,10 +38,12 @@ async function registerUser(req: Req, res: Res, next: any) {
     defineUserDb(username);
     await sequelize.sync({ schema: username });
     console.log(`${username} tables have been synced`);
-    await sequelize.query(buildUserSchema(username));
-    await sequelize.sync({ schema: username });
-    console.log(`All public tables have been added to ${username}`);
-    handleRestartIds(username);
+    if(!emptyDB) {
+      await sequelize.query(buildUserSchema(username));
+      await sequelize.sync({ schema: username });
+      console.log(`All public tables have been added to ${username}`);
+      handleRestartIds(username);
+    }
     res.status(201).json({ message: 'Registration successful', data: dataValues });
   } catch (e: any) {
     res.status(400).json(e);
@@ -111,6 +114,7 @@ async function resetTests(req: Req, res: Res, next: any) {
     const [userQueryResult] = await sequelize.query(userQuery);
     const user = await User.destroy({ truncate: true });
     await sequelize.query('DROP SCHEMA IF EXISTS "test_username" cascade;');
+    await sequelize.query('DROP SCHEMA IF EXISTS "other_test_username" cascade;');
     res.status(204).json(user);
   } catch(e) {
     console.error('Error deleting users:', e);

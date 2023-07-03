@@ -1,6 +1,7 @@
 import { Req, Res } from '../utils/types-routes';
 import ClientError from '../utils/client-error';
 import { client, sequelize } from '../conn';
+import defineUserDb from '../lib/define-user-db';
 require('dotenv/config');
 const jwt = require('jsonwebtoken');
 const { User } = require('../model/user-table');
@@ -38,6 +39,7 @@ async function updateTableData(req: Req, res: Res, next: any) {
     const userIsTrue = authorization || username;
     const authResult = userIsTrue ? await authorizeUser(authorization, username, next) : null;
     if (authResult) throw new ClientError(authResult.status, authResult.message);
+    defineUserDb(username);
 
     if (req.params.table === 'fighters') {
       if (/[A-Z]/gi.test(rosterId) &&
