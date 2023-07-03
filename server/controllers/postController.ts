@@ -32,9 +32,8 @@ async function postFighters(req: Req, res: Res, next: any) {
     const authResult = userIsTrue ? await authorizeUser(authorization, username, next) : null;
     if(authResult) throw new ClientError(authResult.status, authResult.message);
 
-    defineUserDb(username);
-    const FightersModel = sequelize.models.fighters;
-    const selectResult = await FightersModel.findOne({
+    const { Fighters } = defineUserDb(username);
+    const selectResult = await Fighters.findOne({
       where: {
         [Op.or]: [
           { rosterId: rosterId },
@@ -50,7 +49,7 @@ async function postFighters(req: Req, res: Res, next: any) {
       if(dataValues.rosterId === rosterId) throw new ClientError(400, `RosterId (${rosterId}) must be unique`);
       if(dataValues.displayName === displayName) throw new ClientError(400, `DisplayName (${displayName}) must be unique`);
     }
-    const insertResult = await FightersModel.create({
+    const insertResult = await Fighters.create({
       fighter: fighter,
       rosterId: rosterId,
       displayName: displayName
@@ -91,9 +90,8 @@ async function postTableData(req: Req, res: Res, next: any) {
     const authResult = userIsTrue ? await authorizeUser(authorization, username, next) : null;
     if(authResult) throw new ClientError(authResult.status, authResult.message);
 
-    defineUserDb(username);
-    const FightersModel = sequelize.models.fighters;
-    const selectResult = await FightersModel.findOne({
+    const { Fighters, Moves, Hitboxes, Throws, Grappling, Movements, Dodging, Stats, Miscellaneous } = defineUserDb(username);
+    const selectResult = await Fighters.findOne({
       where: {
         fighterId: id
       },
@@ -109,12 +107,10 @@ async function postTableData(req: Req, res: Res, next: any) {
       if (!isValid) {
         throw new ClientError(400, 'Must have (name), (moveType), (damage), (category), (activeFrames), (totalFrames), and (firstFrame) as parameters');
       }
-      const MovesModel = sequelize.models.moves;
-      const HitboxesModel = sequelize.models.hitboxes;
 
       const [moves, hitboxes] = await sequelize.transaction(async (t: any) => {
 
-        const moves = await MovesModel.create({
+        const moves = await Moves.create({
           category: category,
           fighterId: id,
           moveType: moveType,
@@ -122,7 +118,7 @@ async function postTableData(req: Req, res: Res, next: any) {
           type: 'move'
         }, { transaction: t, schema: username });
 
-        const hitboxes = await HitboxesModel.create({
+        const hitboxes = await Hitboxes.create({
           activeFrames: activeFrames,
           damage: damage,
           firstFrame: firstFrame,
@@ -144,18 +140,15 @@ async function postTableData(req: Req, res: Res, next: any) {
         throw new ClientError(400, 'Must have (name), (damage), (activeFrames), (totalFrames) as parameters');
       }
 
-      const ThrowsModel = sequelize.models.throws;
-      const GrapplingModel = sequelize.models.grappling;
-
       const [throws, grappling] = await sequelize.transaction(async (t: any) => {
 
-        const throws = await ThrowsModel.create({
+        const throws = await Throws.create({
           fighterId: id,
           name: name,
           type: 'throw',
         }, { transaction: t, schema: username });
 
-        const grappling = await GrapplingModel.create({
+        const grappling = await Grappling.create({
           activeFrames: activeFrames,
           damage: damage,
           totalFrames: totalFrames
@@ -176,18 +169,15 @@ async function postTableData(req: Req, res: Res, next: any) {
         throw new ClientError(400, 'Must have (name), (activeFrames), and (totalFrames) as parameters');
       }
 
-      const MovementsModel = sequelize.models.movements;
-      const DodgingModel = sequelize.models.dodging;
-
       const [movements, dodging] = await sequelize.transaction(async (t: any) => {
 
-        const movements = await MovementsModel.create({
+        const movements = await Movements.create({
           fighterId: id,
           name: name,
           type: 'movement',
         }, { transaction: t, schema: username });
 
-        const dodging = await DodgingModel.create({
+        const dodging = await Dodging.create({
           activeFrames: activeFrames,
           totalFrames: totalFrames
         }, { transaction: t, schema: username });
@@ -207,18 +197,15 @@ async function postTableData(req: Req, res: Res, next: any) {
         throw new ClientError(400, 'Must have (name), and (statValue) as parameters');
       }
 
-      const StatsModel = sequelize.models.stats;
-      const MiscellaneousModel = sequelize.models.miscellaneous;
-
       const [stats, miscellaneous] = await sequelize.transaction(async (t: any) => {
 
-        const stats = await StatsModel.create({
+        const stats = await Stats.create({
           fighterId: id,
           name: name,
           type: 'stat',
         }, { transaction: t, schema: username });
 
-        const miscellaneous = await MiscellaneousModel.create({
+        const miscellaneous = await Miscellaneous.create({
           statValue: statValue
         }, { transaction: t, schema: username });
 

@@ -27,14 +27,13 @@ async function deleteFromTable(req: Req, res: Res, next: any) {
     const userIsTrue = authorization || username;
     const authResult = userIsTrue ? await authorizeUser(authorization, username, next) : null;
     if (authResult) throw new ClientError(authResult.status, authResult.message);
-    defineUserDb(username);
     const notFoundError: string = `${req.params.table.slice(0, req.params.table.length - 1)}Id ${id} doesn't exist`;
+
+    const { Fighters, Moves, Hitboxes, Throws, Grappling, Movements, Dodging, Stats, Miscellaneous } = defineUserDb(username);
 
     if (req.params.table === 'fighters') {
 
-        const fightersModel = sequelize.models.fighters;
-
-        const fighters = await fightersModel.destroy({
+        const fighters = await Fighters.destroy({
           where: { fighterId: id }, schema: username
         });
         if (fighters !== 1) {
@@ -44,9 +43,7 @@ async function deleteFromTable(req: Req, res: Res, next: any) {
         return res.status(204).json({});
     } else if (req.params.table === 'moves') {
 
-      const movesModel = sequelize.models.moves;
-
-      const moves = await movesModel.destroy({
+      const moves = await Moves.destroy({
         where: { moveId: id }, schema: username
       });
       if (moves !== 1) {
@@ -56,9 +53,7 @@ async function deleteFromTable(req: Req, res: Res, next: any) {
       return res.status(204).json({});
     } else if (req.params.table === 'throws') {
 
-      const throwsModel = sequelize.models.throws;
-
-      const throws = await throwsModel.destroy({
+      const throws = await Throws.destroy({
         where: { throwId: id }, schema: username
       });
 
@@ -69,9 +64,7 @@ async function deleteFromTable(req: Req, res: Res, next: any) {
       return res.status(204).json({});
     } else if (req.params.table === 'movements') {
 
-      const movementsModel = sequelize.models.movements;
-
-      const movements = await movementsModel.destroy({
+      const movements = await Movements.destroy({
         where: { movementId: id }, schema: username
       });
 
@@ -82,9 +75,7 @@ async function deleteFromTable(req: Req, res: Res, next: any) {
       return res.status(204).json({});
     } else if (req.params.table === 'stats') {
 
-      const statsModel = sequelize.models.stats;
-
-      const stats = await statsModel.destroy({
+      const stats = await Stats.destroy({
         where: { statId: id }, schema: username
       });
 
