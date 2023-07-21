@@ -23,6 +23,9 @@ export async function authorizeUser(authorization: string, username: string, nex
     if (!userFindResult) {
       throw { status: 401, message: `Username (${username}) doesn't exist` };
     }
+    if(!userFindResult.token) {
+      throw { status: 401, message: "You don't have a token. Please log in first." };
+    }
     const currentTime = new Date();
     if (currentTime > userFindResult.tokenExpiration) {
       throw { status: 401, message: 'Token has expired. Please log in to receive another' };
@@ -31,7 +34,7 @@ export async function authorizeUser(authorization: string, username: string, nex
 
     // Token will not be verified if the username is 'test_username' while in a non-production env
     // Used specifically for testing purposes
-    if (username !== 'test_username' && process.env.NODE_ENV !== 'production') {
+    if (username !== 'test_username' && username !== 'other_test_username' && process.env.NODE_ENV !== 'production') {
       if (token !== userFindResult.token) {
         throw { status: 401, message: 'Invalid authorization token' };
       }

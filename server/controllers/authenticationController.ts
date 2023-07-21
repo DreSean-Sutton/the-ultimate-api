@@ -1,5 +1,6 @@
 import { Req, Res } from '../utils/types-routes';
 import ClientError from '../utils/client-error';
+const { authorizeUser } = require('../lib/authorizeUser');
 import buildUserSchema from '../lib/build-user-schema';
 import defineUserDb from '../lib/define-user-db';
 import handleRestartIds from '../lib/handle-restart-id';
@@ -29,7 +30,7 @@ async function registerUser(req: Req, res: Res, next: any) {
     })
     delete dataValues.password;
 
-    if(process.env.NODE_ENV === 'development') { // Only for developmental testing purposes
+    if (process.env.NODE_ENV === 'development') { // Only for developmental testing purposes
       await sequelize.query(`DROP SCHEMA IF EXISTS "${username}" cascade;`);
     }
 
@@ -38,7 +39,7 @@ async function registerUser(req: Req, res: Res, next: any) {
     defineUserDb(username);
     await sequelize.sync({ schema: username });
     console.log(`${username} tables have been synced`);
-    if(!emptyDB) {
+    if (!emptyDB) {
       await sequelize.query(buildUserSchema(username));
       await sequelize.sync({ schema: username });
       console.log(`All public tables have been added to ${username}`);
@@ -54,19 +55,19 @@ async function registerUser(req: Req, res: Res, next: any) {
 async function showToken(req: Req, res: Res, next: any) {
   try {
     const { email, password } = req.body;
-    if(!email || !email.includes('@') || !password) {
+    if (!email || !email.includes('@') || !password) {
       throw new ClientError(400, 'Must provide valid email and password');
     }
     const user = await User.findOne({ where: { email: email }});
-    if(!user) {
+    if (!user) {
       throw new ClientError(401, 'Invalid email');
     }
     const isValidPassword = await argon2.verify(user.dataValues.password, password);
-    if(!isValidPassword) {
+    if (!isValidPassword) {
       throw new ClientError(401, 'Invalid password');
     }
     const { token, tokenExpiration } = user.dataValues;
-    if(!token) {
+    if (!token) {
       throw new ClientError(401, "Token doesn't exist. Please generate a token");
     }
     res.status(200).json({ token: token, expirationDate: tokenExpiration });
@@ -79,15 +80,15 @@ async function showToken(req: Req, res: Res, next: any) {
 async function generateToken(req: Req, res: Res, next: any) {
   try {
     const { email, password } = req.body;
-    if(!email || !email.includes('@') || !password) {
+    if (!email || !email.includes('@') || !password) {
       throw new ClientError(400, 'Must provide valid email and password');
     }
     const user = await User.findOne({ where: { email: email }});
-    if(!user) {
+    if (!user) {
       throw new ClientError(401, 'Invalid email');
     }
     const isValidPassword = await argon2.verify(user.dataValues.password, password);
-    if(!isValidPassword) {
+    if (!isValidPassword) {
       throw new ClientError(401, 'Invalid password');
     }
     const months = 1;
@@ -103,8 +104,24 @@ async function generateToken(req: Req, res: Res, next: any) {
   }
 }
 
+async function deleteUser(req: Req, res: Res, next: any) {
+  const { authorization, username } = req.headers;
+  const userIsTrue = authorization || username;
+  console.log({authorization: authorization, username: username})
+  try {
+    const authResult = userIsTrue ? await authorizeUser(authorization, username, next) : null;
+    if (authResult) throw new ClientError(authResult.status, authResult.message);
+    await User.destroy({ where: { username: username }});
+    await sequelize.query(`DROP SCHEMA IF EXISTS "${username}" cascade;`);
+    res.status(204).json({});
+  } catch (e) {
+    console.error(`error deleting user: ${e}`);
+    next(e);
+  }
+}
+
 async function resetTests(req: Req, res: Res, next: any) {
-  if(process.env.NODE_ENV !== 'development') return;
+  if (process.env.NODE_ENV !== 'development') return;
   try {
     const userQuery = `
       SELECT *
@@ -126,5 +143,6 @@ module.exports = {
   registerUser,
   showToken,
   generateToken,
+  deleteUser,
   resetTests,
 }
