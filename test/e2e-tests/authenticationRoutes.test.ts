@@ -1,8 +1,16 @@
 import chai from 'chai';
 import sinon from 'sinon';
 import chaiHttp from 'chai-http';
+require('dotenv/config');
+const jwt = require('jsonwebtoken');
 chai.should();
 chai.use(chaiHttp);
+
+const testPayload = {
+  userId: 123,
+  exp: Math.floor(Date.now() / 1000) + (60 * 30)
+};
+const testToken = jwt.sign(testPayload, process.env.TOKEN_SECRET);
 
 describe.only("POST /api/auth/register", () => {
 
@@ -54,7 +62,6 @@ describe.only("POST /api/auth/register", () => {
         username: 'other_test_username',
         password: 'other_test_password'
       }
-      // resetTests(); // Currently required during testing to make sure this test returns a 201 status
 
       chai.request(url)
         .post(path)
@@ -211,6 +218,26 @@ describe.only("POST /api/auth/generate-token", () => {
           done();
         })
     })
+    it("returns a 200 status and a different user's token", done => {
+
+      const params2 = {
+        email: 'other_test_email@gmail.com',
+        password: 'other_test_password'
+      }
+      chai.request(url)
+        .post(path)
+        .set('content-type', 'application/json')
+        .send({email: params2.email, password: params2.password})
+        .end((err, res) => {
+          if (err) {
+            console.log(err);
+            return done(err);
+          }
+          res.should.have.status(200);
+          res.body.should.have.property('token');
+          done();
+        })
+    })
   })
 
   describe("unsuccessful requests", () => {
@@ -338,6 +365,29 @@ describe.only("POST /api/auth/show-token", () => {
           res.body.should.have.property('error');
           done();
         })
+    })
+  })
+})
+
+describe.only("DELETE /api/auth/delete-user", () => {
+  const url = 'http://localhost:5000';
+  const path = '/api/auth/delete-account';
+
+  describe("successful requests", () => {
+    it("returns a 204 status if the user is deleted", done => {
+      chai.request(url)
+        .delete(path)
+        .set('authorization', `Bearer ${testToken}`)
+        .set('username', 'other_test_username')
+        .set('content-type', 'application/json')
+        .end((err, res) => {
+          if(err) {
+            console.log(err);
+            return done(err);
+          }
+          res.should.have.status(204);
+          done();
+        });
     })
   })
 })
