@@ -62,7 +62,6 @@ describe.only("POST /api/auth/register", () => {
         username: 'other_test_username',
         password: 'other_test_password'
       }
-      // resetTests(); // Currently required during testing to make sure this test returns a 201 status
 
       chai.request(url)
         .post(path)
