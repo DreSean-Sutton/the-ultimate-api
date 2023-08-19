@@ -18,8 +18,10 @@ if(process.env.NODE_ENV === 'development') {
 const rateLimiter = new RateLimiterMemory(opts);
 
 async function rateLimiterMiddleware(req: any, res: any, next: any) {
+  const { authorization } = req.headers;
   const remoteAddress = req.ip;
-  rateLimiter.consume(remoteAddress)
+
+  rateLimiter.consume(authorization || remoteAddress)
     .then(() => {
       next();
     })
