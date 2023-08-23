@@ -12,14 +12,15 @@ const {
 } = require('./model/all-fighter-data');
 
 require('dotenv/config');
-var express = require('express');
 import errorMiddleware from './utils/error-middleware';
+var express = require('express');
+const rateLimiterMiddleware = require('./utils/rate-limiter-middleware');
 const staticMiddleware = require('./utils/static-middleware');
 const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
 const cors = require('cors');
 
-const port = process.env.PORT || 5001;
+const port = process.env.PORT || 5000;
 const expressJSON = express.json();
 const app = express();
 app.use(cors());
@@ -27,6 +28,7 @@ app.use('/api', expressJSON);
 const swaggerDocument = YAML.load('./openapi.yml');
 app.use(staticMiddleware);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use('/api', rateLimiterMiddleware);
 
 // All routes referenced here
 const getRoutes = require('./controllers/getRoutes');
