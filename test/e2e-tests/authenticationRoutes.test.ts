@@ -73,7 +73,6 @@ describe.only("POST /api/auth/register", () => {
             console.log(err);
             return done(err);
           }
-          console.log(res.body);
           res.should.have.status(201);
           res.body.should.have.property('message');
           res.body.data.should.have.all.key(userKeys);
@@ -369,25 +368,47 @@ describe.only("POST /api/auth/show-token", () => {
   })
 })
 
-describe.only("DELETE /api/auth/delete-user", () => {
+describe.only("POST /api/auth/reset-database", () => {
+  const url = 'http://localhost:5000';
+  const path = '/api/auth/reset-database';
+
+  it("returns a 200 status code on successful user database reset", done => {
+
+    chai.request(url)
+      .post(path)
+      .set('Content-Type', 'application/json')
+      .set('authorization', `Bearer ${testToken}`)
+      .set('username', 'other_test_username')
+      .end((err, res) => {
+        if(err) {
+          console.log(err);
+          return done(err);
+        }
+        console.log(res.body);
+        res.should.have.status(200);
+        res.body.should.have.property('message');
+        done();
+      })
+  });
+});
+
+describe.only("Delete /api/auth/delete-user", () => {
   const url = 'http://localhost:5000';
   const path = '/api/auth/delete-account';
 
-  describe("successful requests", () => {
-    it("returns a 204 status if the user is deleted", done => {
-      chai.request(url)
-        .delete(path)
-        .set('authorization', `Bearer ${testToken}`)
-        .set('username', 'other_test_username')
-        .set('content-type', 'application/json')
-        .end((err, res) => {
-          if(err) {
-            console.log(err);
-            return done(err);
-          }
-          res.should.have.status(204);
-          done();
-        });
-    })
-  })
-})
+  it("returns a 204 status if the user is deleted", done => {
+    chai.request(url)
+      .delete(path)
+      .set('content-type', 'application/json')
+      .set('authorization', `Bearer ${testToken}`)
+      .set('username', 'other_test_username')
+      .end((err, res) => {
+        if(err) {
+          console.log(err);
+          return done(err);
+        }
+        res.should.have.status(204);
+        done();
+      });
+  });
+});

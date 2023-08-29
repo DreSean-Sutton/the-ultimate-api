@@ -116,14 +116,13 @@ async function resetDatabase(req: Req, res: Res, next: Function) {
 
     await sequelize.query(`DROP SCHEMA IF EXISTS "${username}" cascade;`);
     await sequelize.query(`CREATE SCHEMA IF NOT EXISTS "${username}"`);
-    console.log(`${username} schema recreated`);
     defineUserDb(username);
     await sequelize.sync({ schema: username });
-    console.log(`${username} tables have been resynced`);
+    console.log(`${username} tables have been re-synced`);
     if (!emptyDB) {
       await sequelize.query(buildUserSchema(username));
       await sequelize.sync({ schema: username });
-      console.log(`All public tables have been readded to ${username}`);
+      console.log(`All public tables have been re-added to ${username}`);
       await handleRestartIds(username);
     }
     res.status(200).json({ message: 'Database Reset successful' });
