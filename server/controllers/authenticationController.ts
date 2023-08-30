@@ -132,26 +132,9 @@ async function resetDatabase(req: Req, res: Res, next: Function) {
   }
 }
 
-// async function changeUsername(req: Req, res: Res, next: any) {
-//   { authorization, username } = req.params;
-//   const userIsTrue = authorization || username
-
-//   try {
-
-//   } catch (err) {
-//     console.error(`error deleting user: ${e}`);
-//     next(e);
-//   }
-// }
-
-// async function changePassword(req: Req, res: Res, next: any) {
-//   { username, password } = req.params;
-// }
-
 async function deleteUser(req: Req, res: Res, next: any) {
   const { authorization, username } = req.headers;
   const userIsTrue = authorization || username;
-  console.log({authorization: authorization, username: username})
   try {
     const authResult = userIsTrue ? await authorizeUser(authorization, username, next) : null;
     if (authResult) throw new ClientError(authResult.status, authResult.message);
