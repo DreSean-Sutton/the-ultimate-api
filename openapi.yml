@@ -321,7 +321,37 @@ paths:
                   token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImV4cCI6MTY4NzE5MDE5NCwiaWF0IjoxNjg0NTk4MTk0fQ.0RA0Y2WRoA16Bs0YUxgHrvU7e2PG0ng2aR6b4K3ms0o
                   expirationDate: 2023-06-19T15:56:34.000Z
 
-  /api/auth/delete-account:
+  /api/auth/reset-database:
+    post:
+      tags:
+      - Authentication
+      summary: Resets the database
+      security:
+        - BearerAuth: []
+        - UsernameHeader: []
+      parameters:
+      - in: query
+        name: emptyDB
+        schema:
+          type: boolean
+        required: false
+      responses:
+        '200':
+          description:
+            OK
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+                example:
+                  message: 'Database reset successful'
+
+  /api/auth/delete-user:
     delete:
       tags:
       - Authentication
