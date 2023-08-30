@@ -40,8 +40,7 @@ async function postFighters(req: Req, res: Res, next: any) {
           { fighter: fighter },
           { displayName: displayName }
         ]
-      },
-      schema: username});
+      }});
 
     if(selectResult) {
       const { dataValues } = selectResult;
@@ -53,8 +52,8 @@ async function postFighters(req: Req, res: Res, next: any) {
       fighter: fighter,
       rosterId: rosterId,
       displayName: displayName
-    }, { searchPath: username });
-    await sequelize.sync({ schema: username });
+    });
+    await insertResult.save();
     return res.status(201).json(insertResult);
   } catch (e) {
     return next(e);
@@ -94,8 +93,7 @@ async function postTableData(req: Req, res: Res, next: any) {
     const selectResult = await Fighters.findOne({
       where: {
         fighterId: id
-      },
-      schema: username});
+      }});
 
       if(!selectResult) {
         throw new ClientError(400, `fighterId ${(id)} doesn't exist`);
@@ -116,21 +114,22 @@ async function postTableData(req: Req, res: Res, next: any) {
           moveType: moveType,
           name: name,
           type: 'move'
-        }, { transaction: t, schema: username });
+        }, { transaction: t });
 
         const hitboxes = await Hitboxes.create({
           activeFrames: activeFrames,
           damage: damage,
           firstFrame: firstFrame,
           totalFrames: totalFrames
-        }, { transaction: t, schema: username });
+        }, { transaction: t });
 
         return [moves, hitboxes];
       });
 
       Object.assign(fullResult, moves.dataValues);
       Object.assign(fullResult, hitboxes.dataValues);
-      await sequelize.sync({ schema: username });
+      await moves.save();
+      await hitboxes.save();
       return res.status(201).json(fullResult);
 
     } else if (req.params.table === 'throws') {
@@ -146,20 +145,21 @@ async function postTableData(req: Req, res: Res, next: any) {
           fighterId: id,
           name: name,
           type: 'throw',
-        }, { transaction: t, schema: username });
+        }, { transaction: t });
 
         const grappling = await Grappling.create({
           activeFrames: activeFrames,
           damage: damage,
           totalFrames: totalFrames
-        }, { transaction: t, schema: username });
+        }, { transaction: t });
 
         return [throws, grappling];
       });
 
       Object.assign(fullResult, throws.dataValues);
       Object.assign(fullResult, grappling.dataValues);
-      await sequelize.sync({ schema: username });
+      await throws.save();
+      await grappling.save();
       return res.status(201).json(fullResult);
 
     } else if (req.params.table === 'movements') {
@@ -175,19 +175,20 @@ async function postTableData(req: Req, res: Res, next: any) {
           fighterId: id,
           name: name,
           type: 'movement',
-        }, { transaction: t, schema: username });
+        }, { transaction: t });
 
         const dodging = await Dodging.create({
           activeFrames: activeFrames,
           totalFrames: totalFrames
-        }, { transaction: t, schema: username });
+        }, { transaction: t });
 
         return [movements, dodging];
       });
 
       Object.assign(fullResult, movements.dataValues);
       Object.assign(fullResult, dodging.dataValues);
-      await sequelize.sync({ schema: username });
+      await movements.save();
+      await dodging.save();
       return res.status(201).json(fullResult);
 
     } else if (req.params.table === 'stats') {
@@ -203,18 +204,19 @@ async function postTableData(req: Req, res: Res, next: any) {
           fighterId: id,
           name: name,
           type: 'stat',
-        }, { transaction: t, schema: username });
+        }, { transaction: t });
 
         const miscellaneous = await Miscellaneous.create({
           statValue: statValue
-        }, { transaction: t, schema: username });
+        }, { transaction: t });
 
         return [stats, miscellaneous];
       });
 
       Object.assign(fullResult, stats.dataValues);
       Object.assign(fullResult, miscellaneous.dataValues);
-      await sequelize.sync({ schema: username });
+      await stats.save();
+      await miscellaneous.save();
       return res.status(201).json(fullResult);
 
     } else {

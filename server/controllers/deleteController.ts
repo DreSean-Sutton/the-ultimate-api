@@ -34,7 +34,7 @@ async function deleteFromTable(req: Req, res: Res, next: any) {
     if (req.params.table === 'fighters') {
 
         const fighters = await Fighters.destroy({
-          where: { fighterId: id }, schema: username
+          where: { fighterId: id }
         });
         if (fighters !== 1) {
           throw new ClientError(404, notFoundError);
@@ -44,7 +44,7 @@ async function deleteFromTable(req: Req, res: Res, next: any) {
     } else if (req.params.table === 'moves') {
 
       const moves = await Moves.destroy({
-        where: { moveId: id }, schema: username
+        where: { moveId: id }
       });
       if (moves !== 1) {
         throw new ClientError(404, notFoundError);
@@ -54,7 +54,7 @@ async function deleteFromTable(req: Req, res: Res, next: any) {
     } else if (req.params.table === 'throws') {
 
       const throws = await Throws.destroy({
-        where: { throwId: id }, schema: username
+        where: { throwId: id }
       });
 
       if (throws!== 1) {
@@ -65,7 +65,7 @@ async function deleteFromTable(req: Req, res: Res, next: any) {
     } else if (req.params.table === 'movements') {
 
       const movements = await Movements.destroy({
-        where: { movementId: id }, schema: username
+        where: { movementId: id }
       });
 
       if (movements!== 1) {
@@ -76,7 +76,7 @@ async function deleteFromTable(req: Req, res: Res, next: any) {
     } else if (req.params.table === 'stats') {
 
       const stats = await Stats.destroy({
-        where: { statId: id }, schema: username
+        where: { statId: id }
       });
 
       if (stats!== 1) {
