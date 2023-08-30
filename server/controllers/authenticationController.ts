@@ -37,12 +37,11 @@ async function registerUser(req: Req, res: Res, next: any) {
 
     await sequelize.query(`CREATE SCHEMA IF NOT EXISTS "${username}"`);
     console.log(`${username} schema created`);
-    defineUserDb(username);
+    await defineUserDb(username);
     await sequelize.sync({ schema: username });
     console.log(`${username} tables have been synced`);
     if (!emptyDB || emptyDB === 'false') {
       await sequelize.query(buildUserSchema(username));
-      await sequelize.sync({ schema: username });
       console.log(`All public tables have been added to ${username}`);
       await handleRestartIds(username);
     }
@@ -116,12 +115,11 @@ async function resetDatabase(req: Req, res: Res, next: Function) {
 
     await sequelize.query(`DROP SCHEMA IF EXISTS "${username}" cascade;`);
     await sequelize.query(`CREATE SCHEMA IF NOT EXISTS "${username}"`);
-    defineUserDb(username);
+    await defineUserDb(username);
     await sequelize.sync({ schema: username });
     console.log(`${username} tables have been re-synced`);
     if (!emptyDB || emptyDB === 'false') {
       await sequelize.query(buildUserSchema(username));
-      await sequelize.sync({ schema: username });
       console.log(`All public tables have been re-added to ${username}`);
       await handleRestartIds(username);
     }

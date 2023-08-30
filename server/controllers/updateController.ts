@@ -50,7 +50,7 @@ async function updateTableData(req: Req, res: Res, next: any) {
       await sequelize.transaction(async (t: any) => {
 
         const result = await Fighters.findOne({
-          where: { fighterId: id }, transaction: t, schema: username
+          where: { fighterId: id }, transaction: t
         });
 
         if (!result) {
@@ -59,12 +59,11 @@ async function updateTableData(req: Req, res: Res, next: any) {
         const updateResult = await Fighters.update({
           fighter: fighter, displayName: displayName, rosterId: rosterId
         },
-        { where: { fighterId: id }, transaction: t, schema: username });
+        { where: { fighterId: id }, transaction: t });
 
         if (updateResult[0] === 0) {
           throw new ClientError(400, 'At least one of (fighter), (rosterId), or (displayName) must have a value');
         }
-        await sequelize.sync({ schema: username });
         return res.status(200).json({ message: 'Fighter has been updated successfully', affectedFighterId: result.dataValues.fighterId });
       })
 
@@ -72,7 +71,7 @@ async function updateTableData(req: Req, res: Res, next: any) {
       await sequelize.transaction(async (t: any) => {
 
         const result = await Moves.findOne({
-          where: { moveId: id }, transaction: t, schema: username
+          where: { moveId: id }, transaction: t
         });
 
         if (!result) {
@@ -82,19 +81,18 @@ async function updateTableData(req: Req, res: Res, next: any) {
           name: name,
           moveType: moveType,
           category: category
-        }, { where: { moveId: id }, transaction: t, schema: username });
+        }, { where: { moveId: id }, transaction: t });
 
         const hitboxes = await Hitboxes.update({
           activeFrames: activeFrames,
           damage: damage,
           firstFrame: firstFrame,
           totalFrames: totalFrames
-        }, { where: { moveId: id }, transaction: t, schema: username });
+        }, { where: { moveId: id }, transaction: t });
 
         if (moves[0] === 0 && hitboxes[0] === 0) {
           throw new ClientError(400, 'No values were changed');
         }
-        await sequelize.sync({ schema: username });
         return res.status(200).json({ message: 'Moves have been updated successfully', affectedFighterId: result.dataValues.fighterId });
       });
 
@@ -102,23 +100,22 @@ async function updateTableData(req: Req, res: Res, next: any) {
       await sequelize.transaction(async (t: any) => {
 
         const result = await Throws.findOne({
-          where: { throwId: id }, transaction: t, schema: username
+          where: { throwId: id }, transaction: t
         });
         if (!result) {
           throw new ClientError(404, `(throwId) ${id} doesn't exist`);
         }
         const throws = await Throws.update({
           name: name
-        }, { where: { throwId: id }, transaction: t, schema: username });
+        }, { where: { throwId: id }, transaction: t });
 
         const grappling = await Grappling.update({
           activeFrames: activeFrames, damage: damage, totalFrames
-        }, { where: { throwId: id }, transaction: t, schema: username });
+        }, { where: { throwId: id }, transaction: t });
 
         if(throws[0] === 0 && grappling[0] === 0) {
           throw new ClientError(400, 'No values were changed');
         }
-        await sequelize.sync({ schema: username });
         return res.status(200).json({ message: 'Throws have been updated successfully', affectedFighterId: result.dataValues.fighterId });
       })
 
@@ -126,7 +123,7 @@ async function updateTableData(req: Req, res: Res, next: any) {
       await sequelize.transaction(async (t: any) => {
 
         const result = await Movements.findOne({
-          where: { movementId: id }, transaction: t, schema: username
+          where: { movementId: id }, transaction: t
         });
         if(!result) {
           throw new ClientError(404, `(movementId) ${id} doesn't exist`);
@@ -134,16 +131,15 @@ async function updateTableData(req: Req, res: Res, next: any) {
 
         const movements = await Movements.update({
           name: name
-        }, { where: { movementId: id }, transaction: t, schema: username});
+        }, { where: { movementId: id }, transaction: t});
 
         const dodging = await Dodging.update({
           activeFrames: activeFrames, totalFrames: totalFrames
-        }, { where: { movementId: id }, transaction: t, schema: username });
+        }, { where: { movementId: id }, transaction: t });
 
         if (movements[0] === 0 && dodging[0] === 0) {
           throw new ClientError(400, 'No values were changed');
         }
-        await sequelize.sync({ schema: username });
         return res.status(200).json({ message: 'Movements have been updated successfully', affectedFighterId: result.dataValues.fighterId });
       });
 
@@ -151,7 +147,7 @@ async function updateTableData(req: Req, res: Res, next: any) {
       await sequelize.transaction(async (t: any) => {
 
         const result = await Stats.findOne({
-          where: { statId: id }, transaction: t, schema: username
+          where: { statId: id }, transaction: t
         });
 
         if (!result) {
@@ -160,16 +156,15 @@ async function updateTableData(req: Req, res: Res, next: any) {
 
         const stats = await Stats.update({
           name: name
-        }, { where: { statId: id }, transaction: t, schema: username });
+        }, { where: { statId: id }, transaction: t });
 
         const miscellaneous = await Miscellaneous.update({
           statValue: statValue
-        }, { where: { statId: id }, transaction: t, schema: username });
+        }, { where: { statId: id }, transaction: t });
 
         if(stats[0] === 0 && miscellaneous[0] === 0) {
           throw new ClientError(400, 'No values were changed');
         }
-        await sequelize.sync({ schema: username });
         return res.status(200).json({ message: 'Stats have been updated successfully', affectedFighterId: result.dataValues.fighterId });
       });
     } else {
