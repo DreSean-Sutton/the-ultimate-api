@@ -13,7 +13,7 @@ const jwt = require('jsonwebtoken');
 async function registerUser(req: Req, res: Res, next: any) {
 
   const { email, username, password } = req.body;
-  const { emptyDB }: { emptyDB?: boolean } = req.query;
+  const { emptyDB }: { emptyDB?: string } = req.query;
 
   if (!email || !email.includes('@') || !username || !password) {
     return res.status(400).json({ error: 'Must be a valid email, username, and password' });
@@ -40,7 +40,7 @@ async function registerUser(req: Req, res: Res, next: any) {
     defineUserDb(username);
     await sequelize.sync({ schema: username });
     console.log(`${username} tables have been synced`);
-    if (!emptyDB) {
+    if (!emptyDB || emptyDB === 'false') {
       await sequelize.query(buildUserSchema(username));
       await sequelize.sync({ schema: username });
       console.log(`All public tables have been added to ${username}`);
@@ -108,7 +108,7 @@ async function generateToken(req: Req, res: Res, next: any) {
 async function resetDatabase(req: Req, res: Res, next: Function) {
   const { authorization, username } = req.headers;
   const userIsTrue = authorization || username;
-  const { emptyDB }: { emptyDB?: boolean } = req.query;
+  const { emptyDB }: { emptyDB?: string } = req.query;
 
   try {
     const authResult = userIsTrue ? await authorizeUser(authorization, username, next) : null;
@@ -119,13 +119,13 @@ async function resetDatabase(req: Req, res: Res, next: Function) {
     defineUserDb(username);
     await sequelize.sync({ schema: username });
     console.log(`${username} tables have been re-synced`);
-    if (!emptyDB) {
+    if (!emptyDB || emptyDB === 'false') {
       await sequelize.query(buildUserSchema(username));
       await sequelize.sync({ schema: username });
       console.log(`All public tables have been re-added to ${username}`);
       await handleRestartIds(username);
     }
-    res.status(200).json({ message: 'Database Reset successful' });
+    res.status(200).json({ message: 'Database reset successful' });
   } catch (e: any) {
     console.error(`Error creating schema: ${e}`);
     res.status(400).json(e);
