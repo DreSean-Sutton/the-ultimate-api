@@ -38,8 +38,8 @@ async function updateTableData(req: Req, res: Res, next: any) {
     const id = Number(req.params.id);
     const userIsTrue = authorization || username;
     const authResult = userIsTrue ? await authorizeUser(authorization, username, next) : null;
-    if (authResult) throw new ClientError(authResult.status, authResult.message);
-    const { Fighters, Moves, Hitboxes, Throws, Grappling, Movements, Dodging, Stats, Miscellaneous } = defineUserDb(username);
+    if (!authResult.userDB) throw new ClientError(authResult.status, authResult.message);
+    const { Fighters, Moves, Hitboxes, Throws, Grappling, Movements, Dodging, Stats, Miscellaneous } = defineUserDb(authResult.userDB);
 
     if (req.params.table === 'fighters') {
       if (/[A-Z]/gi.test(rosterId) &&

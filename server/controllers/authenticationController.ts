@@ -139,7 +139,7 @@ async function deleteUser(req: Req, res: Res, next: any) {
     const authResult = userIsTrue ? await authorizeUser(authorization, username, next) : null;
     if (!authResult.userDB) throw new ClientError(authResult.status, authResult.message);
     await User.destroy({ where: { username: username }});
-    await sequelize.query(`DROP SCHEMA IF EXISTS "${username}" cascade;`);
+    await sequelize.query(`DROP SCHEMA IF EXISTS "${authResult.userDB}" cascade;`);
     res.status(204).json({});
   } catch (e) {
     console.error(`error deleting user: ${e}`);
@@ -157,8 +157,8 @@ async function resetTests(req: Req, res: Res, next: any) {
     `;
     const [userQueryResult] = await sequelize.query(userQuery);
     const user = await User.destroy({ truncate: true });
-    await sequelize.query('DROP SCHEMA IF EXISTS "test_username" cascade;');
-    await sequelize.query('DROP SCHEMA IF EXISTS "other_test_username" cascade;');
+    await sequelize.query('DROP SCHEMA IF EXISTS "test_username@test_password" cascade;');
+    await sequelize.query('DROP SCHEMA IF EXISTS "other_test_username@other_test_password" cascade;');
     res.status(204).json(user);
   } catch(e) {
     console.error('Error deleting users:', e);

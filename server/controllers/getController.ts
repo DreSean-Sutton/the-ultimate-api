@@ -27,11 +27,13 @@ async function getFighters(req: Req, res: Res, next: any) {
   const userIsTrue = authorization || username;
   try {
     const authResult = userIsTrue ? await authorizeUser(authorization, username, next) : null;
-    if (authResult) throw new ClientError(authResult.status, authResult.message);
-    const schemaName = userIsTrue ? username : 'public';
+    if (authResult) {
+      if (!authResult.userDB) throw new ClientError(authResult.status, authResult.message);
+    }
+    const schemaName = userIsTrue ? authResult.userDB : 'public';
     const queryStr: QueryString = req.query;
     const queryKey = Object.keys(queryStr);
-    defineUserDb(username);
+    defineUserDb(schemaName);
 
     if (queryStr.fighter) {
       const { fighter } = queryStr;
@@ -131,8 +133,10 @@ async function getFightersData(req: Req, res: Res, next: any) {
 
   try {
     const authResult = userIsTrue ? await authorizeUser(authorization, username, next) : null;
-    if (authResult) throw new ClientError(authResult.status, authResult.message);
-    const schemaName = userIsTrue ? username : 'public';
+    if (authResult) {
+      if (!authResult.userDB) throw new ClientError(authResult.status, authResult.message);
+    }
+    const schemaName = userIsTrue ? authResult.userDB : 'public';
 
     if (fighter && /\d/g.test(fighter)) {
       throw new ClientError(400, 'fighter name can\'t have a number');
@@ -149,7 +153,7 @@ async function getFightersData(req: Req, res: Res, next: any) {
     if (Object.keys(queryStr).length > 1) {
       throw new ClientError(400, 'Only one query string is allowed');
     }
-    const { Fighters } = defineUserDb(username);
+    const { Fighters } = defineUserDb(schemaName);
     let fightersResult;
     const whereCondition: any = {};
     whereCondition[queryKey] = currentQueryStr;
@@ -241,8 +245,10 @@ async function getFightersDataByType(req: Req, res: Res, next: any) {
       throw new ClientError(400, `${type} is not a valid parameter`);
     }
     const authResult = userIsTrue ? await authorizeUser(authorization, username, next) : null;
-    if (authResult) throw new ClientError(authResult.status, authResult.message);
-    const schemaName = userIsTrue ? username : 'public';
+    if (authResult) {
+      if (!authResult.userDB) throw new ClientError(authResult.status, authResult.message);
+    }
+    const schemaName = userIsTrue ? authResult.userDB : 'public';
 
     if (fighter && /\d/g.test(fighter)) {
       throw new ClientError(400, 'fighter name can\'t have a number');
@@ -260,7 +266,7 @@ async function getFightersDataByType(req: Req, res: Res, next: any) {
       throw new ClientError(400, 'Only one query string is allowed');
     }
 
-    const { Fighters } = defineUserDb(username);
+    const { Fighters } = defineUserDb(schemaName);
     let fightersResult;
     const whereCondition: any = {};
     whereCondition[queryKey] = currentQueryStr;
