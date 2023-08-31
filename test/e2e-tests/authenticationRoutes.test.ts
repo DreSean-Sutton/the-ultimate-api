@@ -33,7 +33,7 @@ describe.only("POST /api/auth/register", () => {
     }
 
     it("returns a 201 when user is created", done => {
-      const userKeys = ['id', 'email', 'username', 'updatedAt', 'createdAt', 'token', 'tokenExpiration'];
+      const userKeys = ['id', 'email', 'username', 'userDB', 'updatedAt', 'createdAt', 'token', 'tokenExpiration'];
 
       resetTests(); // Currently required during testing to make sure this test returns a 201 status
 
@@ -46,6 +46,7 @@ describe.only("POST /api/auth/register", () => {
             console.log(err);
             return done(err);
           }
+          console.log(res.body);
           res.should.have.status(201);
           res.body.should.have.property('message');
           res.body.data.should.have.all.key(userKeys);
@@ -55,7 +56,7 @@ describe.only("POST /api/auth/register", () => {
     })
 
     it("returns a 201 when user is created with emptyDB querystring set to true", done => {
-      const userKeys = ['id', 'email', 'username', 'updatedAt', 'createdAt', 'token', 'tokenExpiration'];
+      const userKeys = ['id', 'email', 'username', 'userDB', 'updatedAt', 'createdAt', 'token', 'tokenExpiration'];
 
       const params2 = {
         email: 'other_test_email@gmail.com',

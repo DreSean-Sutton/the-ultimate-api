@@ -9,6 +9,7 @@ const { User } = require('../model/user-table');
 const { sequelize } = require('../conn');
 const argon2 = require('argon2');
 const jwt = require('jsonwebtoken');
+const crypto = require('crypto');
 
 async function registerUser(req: Req, res: Res, next: any) {
 
@@ -27,10 +28,11 @@ async function registerUser(req: Req, res: Res, next: any) {
     const { dataValues } = await User.create({
       email: email,
       username: username,
-      password: hashedPassword
+      password: hashedPassword,
+      userDB: 'testing'
     });
     delete dataValues.password;
-
+    console.log({ dataValues });
     if (process.env.NODE_ENV === 'development') { // Only for developmental testing purposes
       await sequelize.query(`DROP SCHEMA IF EXISTS "${username}" cascade;`);
     }

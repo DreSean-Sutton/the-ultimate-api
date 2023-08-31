@@ -44,14 +44,6 @@ app.use('/api/auth', authenticationRoutes);
 
 app.use(errorMiddleware);
 
-sequelize.sync({ schema: 'public' })
-  .then(() => {
-    console.log('Models have been synced with the database');
-  })
-  .catch((e: any) => {
-    console.error('Failed to sync models with the database:', e);
-  });
-
 app.listen(port, () => {
   console.log(`express server listening on port ${port}`);
 });
