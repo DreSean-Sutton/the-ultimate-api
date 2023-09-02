@@ -11,6 +11,7 @@ const { sequelize } = require('../conn');
 const { Op } = require('sequelize');
 const argon2 = require('argon2');
 const jwt = require('jsonwebtoken');
+let testSchemaName: string = '';
 
 async function registerUser(req: Req, res: Res, next: any) {
 
@@ -34,27 +35,22 @@ async function registerUser(req: Req, res: Res, next: any) {
     if(checkUniqueUser) {
       throw checkUniqueUser.email ? new ClientError(400, "email must be unique") : new ClientError(400, "username must be unique");
     }
-    if (process.env.NODE_ENV === 'development') { // Only for developmental testing purposes
-      const testFindResult = await User.findOne({ where: { username: username }});
-      if(testFindResult) {
-        await sequelize.query(`DROP SCHEMA IF EXISTS "${testFindResult.dataValues.userDB}" cascade;`);
-      }
+    if (process.env.NODE_ENV === 'development' && testSchemaName) { // Only for developmental testing purposes
+      await sequelize.query(`DROP SCHEMA IF EXISTS "${testSchemaName}" cascade;`);
     }
     const randomString = generateRandomString(32);
     const hashedPassword = await argon2.hash(password);
-    console.log('this hit');
     const { dataValues } = await User.create({
       email: email,
       username: username,
       password: hashedPassword,
-      userDB: `${username}@${password}`
+      userDB: `${randomString}`
     });
-    console.log('dataValues result: ', dataValues);
     await sequelize.query(`CREATE SCHEMA IF NOT EXISTS "${dataValues.userDB}"`);
     console.log(`${dataValues.userDB} schema created`);
     await defineUserDb(dataValues.userDB);
     await sequelize.sync({ schema: dataValues.userDB });
-    console.log(`${username} tables have been synced`);
+    console.log(`${username}'s tables have been synced`);
     if (!emptyDB || emptyDB === 'false') {
       await sequelize.query(buildUserSchema(dataValues.userDB));
       console.log(`All public tables have been added to ${dataValues.userDB}`);
@@ -134,10 +130,10 @@ async function resetDatabase(req: Req, res: Res, next: Function) {
     await sequelize.query(`CREATE SCHEMA IF NOT EXISTS "${authResult.userDB}"`);
     await defineUserDb(authResult.userDB);
     await sequelize.sync({ schema: authResult.userDB });
-    console.log(`${username} tables have been re-synced`);
+    console.log(`${username}'s tables have been re-synced`);
     if (!emptyDB || emptyDB === 'false') {
       await sequelize.query(buildUserSchema(authResult.userDB));
-      console.log(`All public tables have been re-added to ${username}`);
+      console.log(`All public tables have been re-added to ${username}'s schema`);
       await handleRestartIds(authResult.userDB);
     }
     res.status(200).json({ message: 'Database reset successful' });
@@ -165,10 +161,18 @@ async function deleteUser(req: Req, res: Res, next: any) {
 async function resetTests(req: Req, res: Res, next: any) {
   if (process.env.NODE_ENV !== 'development') return;
   try {
-    await sequelize.query('DROP SCHEMA IF EXISTS "user" cascade;');
-    await sequelize.query('DROP SCHEMA IF EXISTS "test_username@test_password" cascade;');
-    await sequelize.query('DROP SCHEMA IF EXISTS "other_test_username@other_test_password" cascade;');
-    res.status(204).json({ message: 'Tests successfully reset'});
+    const userQuery = `
+      SELECT *
+      FROM information_schema.schemata
+      WHERE schema_name = 'user'
+    `;
+    const [userQueryResult] = await sequelize.query(userQuery);
+    if(userQueryResult.length > 0) {
+      const { dataValues } = await User.findOne({ where: { username: 'test_username' } });
+      testSchemaName = dataValues.userDB;
+      await sequelize.query('DROP SCHEMA IF EXISTS "user" cascade;');
+    }
+    res.status(200).json({ message: 'Tests successfully reset'});
   } catch(e) {
     console.error('Error resetting tests:', e);
     res.status(500).json({ error: 'Error resetting tests' });
