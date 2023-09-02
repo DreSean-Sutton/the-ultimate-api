@@ -8,6 +8,7 @@ import generateRandomString from '../lib/generate-random-string';
 require('dotenv/config');
 const { User } = require('../model/user-table');
 const { sequelize } = require('../conn');
+const { Op } = require('sequelize');
 const argon2 = require('argon2');
 const jwt = require('jsonwebtoken');
 
@@ -25,6 +26,14 @@ async function registerUser(req: Req, res: Res, next: any) {
     await sequelize.sync();
     console.log('User table created');
 
+    const checkUniqueUser = await User.findOne({
+      where: {
+        [Op.or]: [{ username: username}, { email: email }]
+      }
+    });
+    if(checkUniqueUser) {
+      throw checkUniqueUser.email ? new ClientError(400, "email must be unique") : new ClientError(400, "username must be unique");
+    }
     if (process.env.NODE_ENV === 'development') { // Only for developmental testing purposes
       const testFindResult = await User.findOne({ where: { username: username }});
       if(testFindResult) {
@@ -56,7 +65,7 @@ async function registerUser(req: Req, res: Res, next: any) {
     res.status(201).json({ message: 'Registration successful', data: dataValues });
   } catch (e: any) {
     console.error(`Error creating schema: ${e}`);
-    res.status(400).json(e);
+    next(e);
   }
 }
 

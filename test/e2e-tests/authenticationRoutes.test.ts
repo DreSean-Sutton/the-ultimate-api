@@ -107,9 +107,7 @@ describe.only("POST /api/auth/register", () => {
             return done(err);
           }
           res.should.have.status(400);
-          res.body.should.have.property('errors');
-          res.body.should.have.property('fields');
-          res.body.fields.should.have.property('email');
+          res.body.should.have.property('error');
           done();
         })
     })
@@ -128,9 +126,7 @@ describe.only("POST /api/auth/register", () => {
             return done(err);
           }
           res.should.have.status(400);
-          res.body.should.have.property('errors');
-          res.body.should.have.property('fields');
-          res.body.fields.should.have.property('username');
+          res.body.should.have.property('error');
           params.email = 'test_email@gmail.com'; // reseting value
           done();
         })
