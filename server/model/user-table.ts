@@ -23,7 +23,7 @@ const User = sequelize.define('user', {
   },
   userDB: {
     type: Sequelize.STRING,
-    // unique: true,
+    unique: true,
     allowNull: false
   },
   createdAt: {

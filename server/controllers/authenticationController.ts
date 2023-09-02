@@ -4,12 +4,12 @@ const { authorizeUser } = require('../lib/authorizeUser');
 import buildUserSchema from '../lib/build-user-schema';
 import defineUserDb from '../lib/define-user-db';
 import handleRestartIds from '../lib/handle-restart-id';
+import generateRandomString from '../lib/generate-random-string';
 require('dotenv/config');
 const { User } = require('../model/user-table');
 const { sequelize } = require('../conn');
 const argon2 = require('argon2');
 const jwt = require('jsonwebtoken');
-const crypto = require('crypto');
 
 async function registerUser(req: Req, res: Res, next: any) {
 
@@ -22,21 +22,25 @@ async function registerUser(req: Req, res: Res, next: any) {
   try {
     await sequelize.query('CREATE SCHEMA IF NOT EXISTS "user"');
     console.log('User schema created');
-    await User.sync();
+    await sequelize.sync();
     console.log('User table created');
+
+    if (process.env.NODE_ENV === 'development') { // Only for developmental testing purposes
+      const testFindResult = await User.findOne({ where: { username: username }});
+      if(testFindResult) {
+        await sequelize.query(`DROP SCHEMA IF EXISTS "${testFindResult.dataValues.userDB}" cascade;`);
+      }
+    }
+    const randomString = generateRandomString(32);
     const hashedPassword = await argon2.hash(password);
+    console.log('this hit');
     const { dataValues } = await User.create({
       email: email,
       username: username,
       password: hashedPassword,
       userDB: `${username}@${password}`
     });
-    delete dataValues.password;
-    console.log({ dataValues });
-    if (process.env.NODE_ENV === 'development') { // Only for developmental testing purposes
-      await sequelize.query(`DROP SCHEMA IF EXISTS "${dataValues.userDB}" cascade;`);
-    }
-
+    console.log('dataValues result: ', dataValues)
     await sequelize.query(`CREATE SCHEMA IF NOT EXISTS "${dataValues.userDB}"`);
     console.log(`${username} schema created`);
     await defineUserDb(dataValues.userDB);
@@ -47,6 +51,8 @@ async function registerUser(req: Req, res: Res, next: any) {
       console.log(`All public tables have been added to ${dataValues.userDB}`);
       await handleRestartIds(dataValues.userDB);
     }
+    delete dataValues.password;
+    delete dataValues.userDB;
     res.status(201).json({ message: 'Registration successful', data: dataValues });
   } catch (e: any) {
     console.error(`Error creating schema: ${e}`);
@@ -150,19 +156,16 @@ async function deleteUser(req: Req, res: Res, next: any) {
 async function resetTests(req: Req, res: Res, next: any) {
   if (process.env.NODE_ENV !== 'development') return;
   try {
-    const userQuery = `
-      SELECT *
-      FROM information_schema.schemata
-      WHERE schema_name = 'user'
-    `;
-    const [userQueryResult] = await sequelize.query(userQuery);
-    const user = await User.destroy({ truncate: true });
+    await sequelize.query('DROP SCHEMA IF EXISTS "user" cascade;');
+    console.log('DROP SCHEMA IF EXISTS "user" cascade;');
     await sequelize.query('DROP SCHEMA IF EXISTS "test_username@test_password" cascade;');
+    console.log('DROP SCHEMA IF EXISTS "test_username@test_password" cascade;');
     await sequelize.query('DROP SCHEMA IF EXISTS "other_test_username@other_test_password" cascade;');
-    res.status(204).json(user);
+    console.log('DROP SCHEMA IF EXISTS "other_test_username@other_test_password" cascade;');
+    res.status(204).json({ message: 'Tests successfully reset'});
   } catch(e) {
-    console.error('Error deleting users:', e);
-    res.status(500).json({ error: 'Error deleting users' });
+    console.error('Error resetting tests:', e);
+    res.status(500).json({ error: 'Error resetting tests' });
   }
 }
 

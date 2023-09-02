@@ -17,12 +17,8 @@ describe.only("POST /api/auth/register", () => {
   const url = 'http://localhost:5000';
   const path = '/api/auth/register';
 
-  // This is used for resetting the User schema in the database
-  function resetTests() {
-    chai.request(url)
-      .delete('/api/auth/reset-tests')
-      .end((err, res) => {})
-  }
+
+
 
   describe("successful request", () => {
 
@@ -32,10 +28,18 @@ describe.only("POST /api/auth/register", () => {
       password: 'test_password'
     }
 
+    it("Resets my tests", done => { // Currently required during testing to make sure this test returns a 201 status
+      // This is used for resetting the User schema in the database
+      chai.request(url)
+        .delete('/api/auth/reset-tests')
+        .end((err, res) => {
+          console.log(res.body);
+          done();
+        });
+    });
     it("returns a 201 when user is created", done => {
-      const userKeys = ['id', 'email', 'username', 'userDB', 'updatedAt', 'createdAt', 'token', 'tokenExpiration'];
+      const userKeys = ['id', 'email', 'username', 'updatedAt', 'createdAt', 'token', 'tokenExpiration'];
 
-      resetTests(); // Currently required during testing to make sure this test returns a 201 status
 
       chai.request(url)
         .post(path)
@@ -56,7 +60,7 @@ describe.only("POST /api/auth/register", () => {
     })
 
     it("returns a 201 when user is created with emptyDB querystring set to true", done => {
-      const userKeys = ['id', 'email', 'username', 'userDB', 'updatedAt', 'createdAt', 'token', 'tokenExpiration'];
+      const userKeys = ['id', 'email', 'username', 'updatedAt', 'createdAt', 'token', 'tokenExpiration'];
 
       const params2 = {
         email: 'other_test_email@gmail.com',
