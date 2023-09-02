@@ -40,9 +40,9 @@ async function registerUser(req: Req, res: Res, next: any) {
       password: hashedPassword,
       userDB: `${username}@${password}`
     });
-    console.log('dataValues result: ', dataValues)
+    console.log('dataValues result: ', dataValues);
     await sequelize.query(`CREATE SCHEMA IF NOT EXISTS "${dataValues.userDB}"`);
-    console.log(`${username} schema created`);
+    console.log(`${dataValues.userDB} schema created`);
     await defineUserDb(dataValues.userDB);
     await sequelize.sync({ schema: dataValues.userDB });
     console.log(`${username} tables have been synced`);
@@ -157,11 +157,8 @@ async function resetTests(req: Req, res: Res, next: any) {
   if (process.env.NODE_ENV !== 'development') return;
   try {
     await sequelize.query('DROP SCHEMA IF EXISTS "user" cascade;');
-    console.log('DROP SCHEMA IF EXISTS "user" cascade;');
     await sequelize.query('DROP SCHEMA IF EXISTS "test_username@test_password" cascade;');
-    console.log('DROP SCHEMA IF EXISTS "test_username@test_password" cascade;');
     await sequelize.query('DROP SCHEMA IF EXISTS "other_test_username@other_test_password" cascade;');
-    console.log('DROP SCHEMA IF EXISTS "other_test_username@other_test_password" cascade;');
     res.status(204).json({ message: 'Tests successfully reset'});
   } catch(e) {
     console.error('Error resetting tests:', e);

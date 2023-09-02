@@ -1,9 +1,9 @@
-export default function buildUserSchema(username: string) {
+export default function buildUserSchema(userSchema: string) {
   return (
     `
       BEGIN;
 
-        INSERT INTO "${username}".fighters (
+        INSERT INTO "${userSchema}".fighters (
           "fighterId", "fighter", "rosterId", "displayName",
           "createdAt", "updatedAt"
         )
@@ -13,7 +13,7 @@ export default function buildUserSchema(username: string) {
         FROM
           fighters;
 
-        INSERT INTO "${username}".moves (
+        INSERT INTO "${userSchema}".moves (
           "moveId", "fighterId", "name", "moveType", "type", "category",
           "createdAt", "updatedAt"
         )
@@ -23,7 +23,7 @@ export default function buildUserSchema(username: string) {
         FROM
           moves;
 
-        INSERT INTO "${username}".hitboxes (
+        INSERT INTO "${userSchema}".hitboxes (
           "moveId", "damage", "activeFrames", "totalFrames",
           "firstFrame", "createdAt", "updatedAt"
         )
@@ -33,7 +33,7 @@ export default function buildUserSchema(username: string) {
         FROM
           hitboxes;
 
-        INSERT INTO "${username}".throws (
+        INSERT INTO "${userSchema}".throws (
           "throwId", "fighterId", "name", "type",
           "createdAt", "updatedAt"
         )
@@ -43,7 +43,7 @@ export default function buildUserSchema(username: string) {
         FROM
           throws;
 
-        INSERT INTO "${username}".grappling (
+        INSERT INTO "${userSchema}".grappling (
           "throwId", "damage", "activeFrames", "totalFrames",
           "createdAt", "updatedAt"
         )
@@ -53,7 +53,7 @@ export default function buildUserSchema(username: string) {
         FROM
           grappling;
 
-        INSERT INTO "${username}".movements (
+        INSERT INTO "${userSchema}".movements (
           "movementId", "fighterId", "name", "type",
           "createdAt", "updatedAt"
         )
@@ -63,7 +63,7 @@ export default function buildUserSchema(username: string) {
         FROM
           movements;
 
-        INSERT INTO "${username}".dodging (
+        INSERT INTO "${userSchema}".dodging (
           "movementId", "activeFrames", "totalFrames",
           "createdAt", "updatedAt"
         )
@@ -73,7 +73,7 @@ export default function buildUserSchema(username: string) {
         FROM
           dodging;
 
-        INSERT INTO "${username}".stats (
+        INSERT INTO "${userSchema}".stats (
           "statId", "fighterId", "name", "type",
           "createdAt", "updatedAt"
         )
@@ -83,7 +83,7 @@ export default function buildUserSchema(username: string) {
         FROM
           stats;
 
-        INSERT INTO "${username}".miscellaneous (
+        INSERT INTO "${userSchema}".miscellaneous (
           "statId", "statValue",
           "createdAt", "updatedAt"
         )
