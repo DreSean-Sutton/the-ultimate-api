@@ -26,10 +26,10 @@ async function deleteFromTable(req: Req, res: Res, next: any) {
     const id = Number(req.params.id);
     const userIsTrue = authorization || username;
     const authResult = userIsTrue ? await authorizeUser(authorization, username, next) : null;
-    if (authResult) throw new ClientError(authResult.status, authResult.message);
+    if (!authResult.userDB) throw new ClientError(authResult.status, authResult.message);
     const notFoundError: string = `${req.params.table.slice(0, req.params.table.length - 1)}Id ${id} doesn't exist`;
 
-    const { Fighters, Moves, Hitboxes, Throws, Grappling, Movements, Dodging, Stats, Miscellaneous } = defineUserDb(username);
+    const { Fighters, Moves, Hitboxes, Throws, Grappling, Movements, Dodging, Stats, Miscellaneous } = defineUserDb(authResult.userDB);
 
     if (req.params.table === 'fighters') {
 

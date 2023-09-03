@@ -17,14 +17,7 @@ describe.only("POST /api/auth/register", () => {
   const url = 'http://localhost:5000';
   const path = '/api/auth/register';
 
-  // This is used for resetting the User schema in the database
-  function resetTests() {
-    chai.request(url)
-      .delete('/api/auth/reset-tests')
-      .end((err, res) => {})
-  }
-
-  describe("successful request", () => {
+  describe.only("successful request", () => {
 
     const params = {
       email: 'test_email@gmail.com',
@@ -32,10 +25,18 @@ describe.only("POST /api/auth/register", () => {
       password: 'test_password'
     }
 
+    it("Resets my tests", done => { // Currently required during testing to make sure this test returns a 201 status
+      // This is used for resetting the User schema in the database
+      chai.request(url)
+        .delete('/api/auth/reset-tests')
+        .end((err, res) => {
+          console.log(res.body);
+          done();
+        });
+    });
     it("returns a 201 when user is created", done => {
       const userKeys = ['id', 'email', 'username', 'updatedAt', 'createdAt', 'token', 'tokenExpiration'];
 
-      resetTests(); // Currently required during testing to make sure this test returns a 201 status
 
       chai.request(url)
         .post(path)
@@ -50,9 +51,8 @@ describe.only("POST /api/auth/register", () => {
           res.body.should.have.property('message');
           res.body.data.should.have.all.key(userKeys);
           done();
-        })
-
-    })
+        });
+    });
 
     it("returns a 201 when user is created with emptyDB querystring set to true", done => {
       const userKeys = ['id', 'email', 'username', 'updatedAt', 'createdAt', 'token', 'tokenExpiration'];
@@ -102,9 +102,7 @@ describe.only("POST /api/auth/register", () => {
             return done(err);
           }
           res.should.have.status(400);
-          res.body.should.have.property('errors');
-          res.body.should.have.property('fields');
-          res.body.fields.should.have.property('email');
+          res.body.should.have.property('error');
           done();
         })
     })
@@ -123,9 +121,7 @@ describe.only("POST /api/auth/register", () => {
             return done(err);
           }
           res.should.have.status(400);
-          res.body.should.have.property('errors');
-          res.body.should.have.property('fields');
-          res.body.fields.should.have.property('username');
+          res.body.should.have.property('error');
           params.email = 'test_email@gmail.com'; // reseting value
           done();
         })
@@ -200,7 +196,7 @@ describe.only("POST /api/auth/generate-token", () => {
   const path = '/api/auth/generate-token';
 
 
-  describe("successful requests", () => {
+  describe.only("successful requests", () => {
     it("returns a 200 status and user token", done => {
 
       chai.request(url)
@@ -299,7 +295,7 @@ describe.only("POST /api/auth/show-token", () => {
   const url = 'http://localhost:5000';
   const path = '/api/auth/show-token';
 
-  describe("successful requests", () => {
+  describe.only("successful requests", () => {
     it("Returns a user's token and it's expiration date", done => {
       chai.request(url)
         .post(path)
@@ -372,43 +368,47 @@ describe.only("POST /api/auth/reset-database", () => {
   const url = 'http://localhost:5000';
   const path = '/api/auth/reset-database';
 
-  it("returns a 200 status code on successful user database reset", done => {
+  describe.only("successful requests", () => {
+    it("returns a 200 status code on successful user database reset", done => {
 
-    chai.request(url)
-      .post(path)
-      .set('Content-Type', 'application/json')
-      .set('authorization', `Bearer ${testToken}`)
-      .set('username', 'other_test_username')
-      .end((err, res) => {
-        if(err) {
-          console.log(err);
-          return done(err);
-        }
-        console.log(res.body);
-        res.should.have.status(200);
-        res.body.should.have.property('message');
-        done();
-      })
-  });
+      chai.request(url)
+        .post(path)
+        .set('Content-Type', 'application/json')
+        .set('authorization', `Bearer ${testToken}`)
+        .set('username', 'other_test_username')
+        .end((err, res) => {
+          if(err) {
+            console.log(err);
+            return done(err);
+          }
+          res.should.have.status(200);
+          res.body.should.have.property('message');
+          done();
+        })
+    });
+  })
 });
 
 describe.only("Delete /api/auth/delete-user", () => {
   const url = 'http://localhost:5000';
   const path = '/api/auth/delete-account';
 
-  it("returns a 204 status if the user is deleted", done => {
-    chai.request(url)
-      .delete(path)
-      .set('content-type', 'application/json')
-      .set('authorization', `Bearer ${testToken}`)
-      .set('username', 'other_test_username')
-      .end((err, res) => {
-        if(err) {
-          console.log(err);
-          return done(err);
-        }
-        res.should.have.status(204);
-        done();
-      });
-  });
+  describe.only("successful requests", () => {
+    it("returns a 204 status if the user is deleted", done => {
+      chai.request(url)
+        .delete(path)
+        .set('content-type', 'application/json')
+        .set('authorization', `Bearer ${testToken}`)
+        .set('username', 'other_test_username')
+        .end((err, res) => {
+          if(err) {
+            console.log(err);
+            return done(err);
+          }
+          res.should.have.status(204);
+          done();
+        });
+    });
+  })
+
 });

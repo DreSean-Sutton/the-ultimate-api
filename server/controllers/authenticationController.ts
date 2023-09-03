@@ -4,11 +4,14 @@ const { authorizeUser } = require('../lib/authorizeUser');
 import buildUserSchema from '../lib/build-user-schema';
 import defineUserDb from '../lib/define-user-db';
 import handleRestartIds from '../lib/handle-restart-id';
+import generateRandomString from '../lib/generate-random-string';
 require('dotenv/config');
 const { User } = require('../model/user-table');
 const { sequelize } = require('../conn');
+const { Op } = require('sequelize');
 const argon2 = require('argon2');
 const jwt = require('jsonwebtoken');
+let testSchemaName: string = '';
 
 async function registerUser(req: Req, res: Res, next: any) {
 
@@ -21,34 +24,44 @@ async function registerUser(req: Req, res: Res, next: any) {
   try {
     await sequelize.query('CREATE SCHEMA IF NOT EXISTS "user"');
     console.log('User schema created');
-    await User.sync();
+    await sequelize.sync();
     console.log('User table created');
+
+    const checkUniqueUser = await User.findOne({
+      where: {
+        [Op.or]: [{ username: username}, { email: email }]
+      }
+    });
+    if(checkUniqueUser) {
+      throw checkUniqueUser.email ? new ClientError(400, "email must be unique") : new ClientError(400, "username must be unique");
+    }
+    if (process.env.NODE_ENV === 'development' && testSchemaName) { // Only for developmental testing purposes
+      await sequelize.query(`DROP SCHEMA IF EXISTS "${testSchemaName}" cascade;`);
+    }
+    const randomString = generateRandomString(32);
     const hashedPassword = await argon2.hash(password);
     const { dataValues } = await User.create({
       email: email,
       username: username,
-      password: hashedPassword
+      password: hashedPassword,
+      userDB: `${randomString}`
     });
-    delete dataValues.password;
-
-    if (process.env.NODE_ENV === 'development') { // Only for developmental testing purposes
-      await sequelize.query(`DROP SCHEMA IF EXISTS "${username}" cascade;`);
-    }
-
-    await sequelize.query(`CREATE SCHEMA IF NOT EXISTS "${username}"`);
-    console.log(`${username} schema created`);
-    await defineUserDb(username);
-    await sequelize.sync({ schema: username });
-    console.log(`${username} tables have been synced`);
+    await sequelize.query(`CREATE SCHEMA IF NOT EXISTS "${dataValues.userDB}"`);
+    console.log(`${dataValues.userDB} schema created`);
+    await defineUserDb(dataValues.userDB);
+    await sequelize.sync({ schema: dataValues.userDB });
+    console.log(`${username}'s tables have been synced`);
     if (!emptyDB || emptyDB === 'false') {
-      await sequelize.query(buildUserSchema(username));
-      console.log(`All public tables have been added to ${username}`);
-      await handleRestartIds(username);
+      await sequelize.query(buildUserSchema(dataValues.userDB));
+      console.log(`All public tables have been added to ${dataValues.userDB}`);
+      await handleRestartIds(dataValues.userDB);
     }
+    delete dataValues.password;
+    delete dataValues.userDB;
     res.status(201).json({ message: 'Registration successful', data: dataValues });
   } catch (e: any) {
     console.error(`Error creating schema: ${e}`);
-    res.status(400).json(e);
+    next(e);
   }
 }
 
@@ -111,17 +124,17 @@ async function resetDatabase(req: Req, res: Res, next: Function) {
 
   try {
     const authResult = userIsTrue ? await authorizeUser(authorization, username, next) : null;
-    if (authResult) throw new ClientError(authResult.status, authResult.message);
+    if (!authResult.userDB) throw new ClientError(authResult.status, authResult.message);
 
-    await sequelize.query(`DROP SCHEMA IF EXISTS "${username}" cascade;`);
-    await sequelize.query(`CREATE SCHEMA IF NOT EXISTS "${username}"`);
-    await defineUserDb(username);
-    await sequelize.sync({ schema: username });
-    console.log(`${username} tables have been re-synced`);
+    await sequelize.query(`DROP SCHEMA IF EXISTS "${authResult.userDB}" cascade;`);
+    await sequelize.query(`CREATE SCHEMA IF NOT EXISTS "${authResult.userDB}"`);
+    await defineUserDb(authResult.userDB);
+    await sequelize.sync({ schema: authResult.userDB });
+    console.log(`${username}'s tables have been re-synced`);
     if (!emptyDB || emptyDB === 'false') {
-      await sequelize.query(buildUserSchema(username));
-      console.log(`All public tables have been re-added to ${username}`);
-      await handleRestartIds(username);
+      await sequelize.query(buildUserSchema(authResult.userDB));
+      console.log(`All public tables have been re-added to ${username}'s schema`);
+      await handleRestartIds(authResult.userDB);
     }
     res.status(200).json({ message: 'Database reset successful' });
   } catch (e: any) {
@@ -135,9 +148,9 @@ async function deleteUser(req: Req, res: Res, next: any) {
   const userIsTrue = authorization || username;
   try {
     const authResult = userIsTrue ? await authorizeUser(authorization, username, next) : null;
-    if (authResult) throw new ClientError(authResult.status, authResult.message);
+    if (!authResult.userDB) throw new ClientError(authResult.status, authResult.message);
     await User.destroy({ where: { username: username }});
-    await sequelize.query(`DROP SCHEMA IF EXISTS "${username}" cascade;`);
+    await sequelize.query(`DROP SCHEMA IF EXISTS "${authResult.userDB}" cascade;`);
     res.status(204).json({});
   } catch (e) {
     console.error(`error deleting user: ${e}`);
@@ -154,13 +167,15 @@ async function resetTests(req: Req, res: Res, next: any) {
       WHERE schema_name = 'user'
     `;
     const [userQueryResult] = await sequelize.query(userQuery);
-    const user = await User.destroy({ truncate: true });
-    await sequelize.query('DROP SCHEMA IF EXISTS "test_username" cascade;');
-    await sequelize.query('DROP SCHEMA IF EXISTS "other_test_username" cascade;');
-    res.status(204).json(user);
+    if(userQueryResult.length > 0) {
+      const { dataValues } = await User.findOne({ where: { username: 'test_username' } });
+      testSchemaName = dataValues.userDB;
+      await sequelize.query('DROP SCHEMA IF EXISTS "user" cascade;');
+    }
+    res.status(200).json({ message: 'Tests successfully reset'});
   } catch(e) {
-    console.error('Error deleting users:', e);
-    res.status(500).json({ error: 'Error deleting users' });
+    console.error('Error resetting tests:', e);
+    res.status(500).json({ error: 'Error resetting tests' });
   }
 }
 

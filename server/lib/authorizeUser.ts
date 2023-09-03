@@ -46,7 +46,7 @@ export async function authorizeUser(authorization: string, username: string, nex
       }
     });
 
-    return undefined;
+    return userFindResult.dataValues;
   } catch (e: any) {
     return e;
   }

@@ -21,6 +21,11 @@ const User = sequelize.define('user', {
     type: Sequelize.STRING,
     allowNull: false
   },
+  userDB: {
+    type: Sequelize.STRING,
+    unique: true,
+    allowNull: false
+  },
   createdAt: {
     type: Sequelize.DATE,
     defaultValue: Sequelize.NOW
