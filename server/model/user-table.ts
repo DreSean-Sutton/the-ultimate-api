@@ -26,6 +26,10 @@ const User = sequelize.define('user', {
     unique: true,
     allowNull: false
   },
+  rowCount: {
+    type: Sequelize.INTEGER,
+    defaultValue: 0
+  },
   createdAt: {
     type: Sequelize.DATE,
     defaultValue: Sequelize.NOW

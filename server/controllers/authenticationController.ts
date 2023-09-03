@@ -159,6 +159,8 @@ async function deleteUser(req: Req, res: Res, next: any) {
 }
 
 async function resetTests(req: Req, res: Res, next: any) {
+   // This function is used to reset e2e tests during development
+
   if (process.env.NODE_ENV !== 'development') return;
   try {
     await sequelize.sync({ schema: 'user' });
