@@ -24,7 +24,7 @@ async function registerUser(req: Req, res: Res, next: any) {
   try {
     await sequelize.query('CREATE SCHEMA IF NOT EXISTS "user"');
     console.log('User schema created');
-    await sequelize.sync();
+    await sequelize.sync({ schema: 'user' });
     console.log('User table created');
 
     const checkUniqueUser = await User.findOne({
@@ -161,17 +161,12 @@ async function deleteUser(req: Req, res: Res, next: any) {
 async function resetTests(req: Req, res: Res, next: any) {
   if (process.env.NODE_ENV !== 'development') return;
   try {
-    const userQuery = `
-      SELECT *
-      FROM information_schema.schemata
-      WHERE schema_name = 'user'
-    `;
-    const [userQueryResult] = await sequelize.query(userQuery);
-    if(userQueryResult.length > 0) {
-      const { dataValues } = await User.findOne({ where: { username: 'test_username' } });
-      testSchemaName = dataValues.userDB;
-      await sequelize.query('DROP SCHEMA IF EXISTS "user" cascade;');
+    await sequelize.sync({ schema: 'user' });
+    const userFindResult = await User.findOne({ where: { username: 'test_username' } });
+    if(userFindResult) {
+      testSchemaName = userFindResult.dataValues.userDB;
     }
+    await sequelize.query('DROP SCHEMA IF EXISTS "user" cascade;');
     res.status(200).json({ message: 'Tests successfully reset'});
   } catch(e) {
     console.error('Error resetting tests:', e);
