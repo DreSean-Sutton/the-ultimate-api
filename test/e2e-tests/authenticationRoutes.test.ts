@@ -47,7 +47,6 @@ describe.only("POST /api/auth/register", () => {
             console.log(err);
             return done(err);
           }
-          console.log(res.body);
           res.should.have.status(201);
           res.body.should.have.property('message');
           res.body.data.should.have.all.key(userKeys);
@@ -382,7 +381,6 @@ describe.only("POST /api/auth/reset-database", () => {
             console.log(err);
             return done(err);
           }
-          console.log(res.body);
           res.should.have.status(200);
           res.body.should.have.property('message');
           done();
