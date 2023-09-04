@@ -34,8 +34,8 @@ describe.only("POST /api/add/fighters", () => {
             console.log(err);
             return done(err);
           }
-          res.body.should.have.all.keys(returnedKeys);
           res.should.have.status(201);
+          res.body.should.have.all.keys(returnedKeys);
           done();
         })
     })
@@ -55,8 +55,8 @@ describe.only("POST /api/add/fighters", () => {
             console.log(err);
             return done(err);
           }
-          res.body.should.have.all.keys(returnedKeys);
           res.should.have.status(201);
+          res.body.should.have.all.keys(returnedKeys);
           done();
         })
     })
@@ -76,8 +76,8 @@ describe.only("POST /api/add/fighters", () => {
             console.log(err);
             return done(err);
           }
-          res.body.should.have.all.keys(returnedKeys);
           res.should.have.status(201);
+          res.body.should.have.all.keys(returnedKeys);
           done();
         })
     })

@@ -35,7 +35,7 @@ describe.only("POST /api/auth/register", () => {
         });
     });
     it("returns a 201 when user is created", done => {
-      const userKeys = ['id', 'email', 'username', 'updatedAt', 'createdAt', 'token', 'tokenExpiration'];
+      const userKeys = ['id', 'email', 'username', 'updatedAt', 'rowCount', 'createdAt', 'token', 'tokenExpiration'];
 
 
       chai.request(url)
@@ -55,7 +55,7 @@ describe.only("POST /api/auth/register", () => {
     });
 
     it("returns a 201 when user is created with emptyDB querystring set to true", done => {
-      const userKeys = ['id', 'email', 'username', 'updatedAt', 'createdAt', 'token', 'tokenExpiration'];
+      const userKeys = ['id', 'email', 'username', 'updatedAt', 'rowCount', 'createdAt', 'token', 'tokenExpiration'];
 
       const params2 = {
         email: 'other_test_email@gmail.com',
@@ -393,7 +393,7 @@ describe.only("Delete /api/auth/delete-user", () => {
   const url = 'http://localhost:5000';
   const path = '/api/auth/delete-account';
 
-  describe.only("successful requests", () => {
+  describe("successful requests", () => {
     it("returns a 204 status if the user is deleted", done => {
       chai.request(url)
         .delete(path)

@@ -26,10 +26,10 @@ async function deleteFromTable(req: Req, res: Res, next: any) {
     const id = Number(req.params.id);
     const userIsTrue = authorization || username;
     const authResult = userIsTrue ? await authorizeUser(authorization, username, next) : null;
-    if (!authResult.userDB) throw new ClientError(authResult.status, authResult.message);
+    if (!authResult.dataValues) throw new ClientError(authResult.status, authResult.message);
     const notFoundError: string = `${req.params.table.slice(0, req.params.table.length - 1)}Id ${id} doesn't exist`;
 
-    const { Fighters, Moves, Hitboxes, Throws, Grappling, Movements, Dodging, Stats, Miscellaneous } = defineUserDb(authResult.userDB);
+    const { Fighters, Moves, Hitboxes, Throws, Grappling, Movements, Dodging, Stats, Miscellaneous } = defineUserDb(authResult.dataValues.userDB);
 
     if (req.params.table === 'fighters') {
 
@@ -39,7 +39,8 @@ async function deleteFromTable(req: Req, res: Res, next: any) {
         if (fighters !== 1) {
           throw new ClientError(404, notFoundError);
         }
-
+        authResult.rowCount --;
+        await authResult.save();
         return res.status(204).json({});
     } else if (req.params.table === 'moves') {
 
@@ -49,7 +50,8 @@ async function deleteFromTable(req: Req, res: Res, next: any) {
       if (moves !== 1) {
         throw new ClientError(404, notFoundError);
       }
-
+      authResult.rowCount -= 2;
+      await authResult.save();
       return res.status(204).json({});
     } else if (req.params.table === 'throws') {
 
@@ -60,7 +62,8 @@ async function deleteFromTable(req: Req, res: Res, next: any) {
       if (throws!== 1) {
         throw new ClientError(404, notFoundError);
       }
-
+      authResult.rowCount -= 2;
+      await authResult.save();
       return res.status(204).json({});
     } else if (req.params.table === 'movements') {
 
@@ -71,7 +74,8 @@ async function deleteFromTable(req: Req, res: Res, next: any) {
       if (movements!== 1) {
         throw new ClientError(404, notFoundError);
       }
-
+      authResult.rowCount -= 2;
+      await authResult.save();
       return res.status(204).json({});
     } else if (req.params.table === 'stats') {
 
@@ -82,7 +86,8 @@ async function deleteFromTable(req: Req, res: Res, next: any) {
       if (stats!== 1) {
         throw new ClientError(404, notFoundError);
       }
-
+      authResult.rowCount -= 2;
+      await authResult.save();
       return res.status(204).json({});
     } else {
       throw new ClientError(400, `${req.params.table} is not a valid path parameter`);

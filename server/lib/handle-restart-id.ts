@@ -1,5 +1,6 @@
 const { sequelize } = require('../conn');
 import defineUserDb from './define-user-db';
+import changeRowCount from './change-row-count';
 
 export default async function handleRestartIds(schemaName: string) {
 
@@ -21,4 +22,7 @@ export default async function handleRestartIds(schemaName: string) {
   await sequelize.query(`ALTER SEQUENCE "${schemaName}"."miscellaneous_statId_seq" RESTART WITH ${maxStatId + 1}`);
   await sequelize.sync({ schema: schemaName });
   console.log("All model's id incrementation value has been synced");
+  const totalRows = (maxFighterId + maxMoveId + maxThrowId + maxMovementId + maxStatId) * 2;
+  await changeRowCount(schemaName, totalRows);
+  console.log("User row count has been synced");
 }

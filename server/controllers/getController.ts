@@ -28,9 +28,9 @@ async function getFighters(req: Req, res: Res, next: any) {
   try {
     const authResult = userIsTrue ? await authorizeUser(authorization, username, next) : null;
     if (authResult) {
-      if (!authResult.userDB) throw new ClientError(authResult.status, authResult.message);
+      if (!authResult.dataValues) throw new ClientError(authResult.status, authResult.message);
     }
-    const schemaName = userIsTrue ? authResult.userDB : 'public';
+    const schemaName = userIsTrue ? authResult.dataValues.userDB : 'public';
     const queryStr: QueryString = req.query;
     const queryKey = Object.keys(queryStr);
     defineUserDb(schemaName);
@@ -134,9 +134,9 @@ async function getFightersData(req: Req, res: Res, next: any) {
   try {
     const authResult = userIsTrue ? await authorizeUser(authorization, username, next) : null;
     if (authResult) {
-      if (!authResult.userDB) throw new ClientError(authResult.status, authResult.message);
+      if (!authResult.dataValues) throw new ClientError(authResult.status, authResult.message);
     }
-    const schemaName = userIsTrue ? authResult.userDB : 'public';
+    const schemaName = userIsTrue ? authResult.dataValues.userDB : 'public';
 
     if (fighter && /\d/g.test(fighter)) {
       throw new ClientError(400, 'fighter name can\'t have a number');
@@ -246,9 +246,9 @@ async function getFightersDataByType(req: Req, res: Res, next: any) {
     }
     const authResult = userIsTrue ? await authorizeUser(authorization, username, next) : null;
     if (authResult) {
-      if (!authResult.userDB) throw new ClientError(authResult.status, authResult.message);
+      if (!authResult.dataValues) throw new ClientError(authResult.status, authResult.message);
     }
-    const schemaName = userIsTrue ? authResult.userDB : 'public';
+    const schemaName = userIsTrue ? authResult.dataValues.userDB : 'public';
 
     if (fighter && /\d/g.test(fighter)) {
       throw new ClientError(400, 'fighter name can\'t have a number');

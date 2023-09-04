@@ -30,9 +30,10 @@ async function postFighters(req: Req, res: Res, next: any) {
     if(!isValid) throw new ClientError(400, 'Must have (fighter), (displayName), and (rosterId) as parameters');
     const userIsTrue = authorization || username;
     const authResult = userIsTrue ? await authorizeUser(authorization, username, next) : null;
-    if (!authResult.userDB) throw new ClientError(authResult.status, authResult.message);
+    if (!authResult.dataValues) throw new ClientError(authResult.status, authResult.message);
+    if(authResult.rowCount >= 12000) throw new ClientError(403, "Row count limit has been reached");
 
-    const { Fighters } = defineUserDb(authResult.userDB);
+    const { Fighters } = defineUserDb(authResult.dataValues.userDB);
     const selectResult = await Fighters.findOne({
       where: {
         [Op.or]: [
@@ -53,6 +54,8 @@ async function postFighters(req: Req, res: Res, next: any) {
       rosterId: rosterId,
       displayName: displayName
     });
+    authResult.rowCount++;
+    await authResult.save();
     await insertResult.save();
     return res.status(201).json(insertResult);
   } catch (e) {
@@ -87,9 +90,10 @@ async function postTableData(req: Req, res: Res, next: any) {
     const id = Number(req.params.id);
     const userIsTrue = authorization || username;
     const authResult = userIsTrue ? await authorizeUser(authorization, username, next) : null;
-    if (!authResult.userDB) throw new ClientError(authResult.status, authResult.message);
+    if (!authResult.dataValues) throw new ClientError(authResult.status, authResult.message);
+    if(authResult.rowCount >= 11999) throw new ClientError(403, "Row count limit has been reached");
 
-    const { Fighters, Moves, Hitboxes, Throws, Grappling, Movements, Dodging, Stats, Miscellaneous } = defineUserDb(authResult.userDB);
+    const { Fighters, Moves, Hitboxes, Throws, Grappling, Movements, Dodging, Stats, Miscellaneous } = defineUserDb(authResult.dataValues.userDB);
     const selectResult = await Fighters.findOne({
       where: {
         fighterId: id
@@ -128,6 +132,8 @@ async function postTableData(req: Req, res: Res, next: any) {
 
       Object.assign(fullResult, moves.dataValues);
       Object.assign(fullResult, hitboxes.dataValues);
+      authResult.rowCount += 2;
+      await authResult.save();
       await moves.save();
       await hitboxes.save();
       return res.status(201).json(fullResult);
@@ -158,6 +164,8 @@ async function postTableData(req: Req, res: Res, next: any) {
 
       Object.assign(fullResult, throws.dataValues);
       Object.assign(fullResult, grappling.dataValues);
+      authResult.rowCount += 2;
+      await authResult.save();
       await throws.save();
       await grappling.save();
       return res.status(201).json(fullResult);
@@ -187,6 +195,8 @@ async function postTableData(req: Req, res: Res, next: any) {
 
       Object.assign(fullResult, movements.dataValues);
       Object.assign(fullResult, dodging.dataValues);
+      authResult.rowCount += 2;
+      await authResult.save();
       await movements.save();
       await dodging.save();
       return res.status(201).json(fullResult);
@@ -215,6 +225,8 @@ async function postTableData(req: Req, res: Res, next: any) {
 
       Object.assign(fullResult, stats.dataValues);
       Object.assign(fullResult, miscellaneous.dataValues);
+      authResult.rowCount += 2;
+      await authResult.save();
       await stats.save();
       await miscellaneous.save();
       return res.status(201).json(fullResult);
