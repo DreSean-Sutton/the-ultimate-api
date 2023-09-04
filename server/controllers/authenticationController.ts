@@ -118,23 +118,29 @@ async function generateToken(req: Req, res: Res, next: any) {
 }
 
 async function resetDatabase(req: Req, res: Res, next: Function) {
+
+  // Make row count work with this function
+
   const { authorization, username } = req.headers;
   const userIsTrue = authorization || username;
   const { emptyDB }: { emptyDB?: string } = req.query;
 
   try {
     const authResult = userIsTrue ? await authorizeUser(authorization, username, next) : null;
-    if (!authResult.userDB) throw new ClientError(authResult.status, authResult.message);
-
-    await sequelize.query(`DROP SCHEMA IF EXISTS "${authResult.userDB}" cascade;`);
-    await sequelize.query(`CREATE SCHEMA IF NOT EXISTS "${authResult.userDB}"`);
-    await defineUserDb(authResult.userDB);
-    await sequelize.sync({ schema: authResult.userDB });
+    if (!authResult.dataValues) throw new ClientError(authResult.status, authResult.message);
+    const { userDB } = authResult.dataValues;
+    await sequelize.query(`DROP SCHEMA IF EXISTS "${userDB}" cascade;`);
+    await sequelize.query(`CREATE SCHEMA IF NOT EXISTS "${userDB}"`);
+    await defineUserDb(userDB);
+    await sequelize.sync({ schema: userDB });
     console.log(`${username}'s tables have been re-synced`);
+    authResult.dataValues.rowCount = 0;
+    await authResult.save();
+    console.log('authResult value: ', authResult);
     if (!emptyDB || emptyDB === 'false') {
-      await sequelize.query(buildUserSchema(authResult.userDB));
+      await sequelize.query(buildUserSchema(userDB));
       console.log(`All public tables have been re-added to ${username}'s schema`);
-      await handleRestartIds(authResult.userDB);
+      await handleRestartIds(userDB);
     }
     res.status(200).json({ message: 'Database reset successful' });
   } catch (e: any) {
@@ -148,9 +154,9 @@ async function deleteUser(req: Req, res: Res, next: any) {
   const userIsTrue = authorization || username;
   try {
     const authResult = userIsTrue ? await authorizeUser(authorization, username, next) : null;
-    if (!authResult.userDB) throw new ClientError(authResult.status, authResult.message);
+    if (!authResult.dataValues) throw new ClientError(authResult.status, authResult.message);
     await User.destroy({ where: { username: username }});
-    await sequelize.query(`DROP SCHEMA IF EXISTS "${authResult.userDB}" cascade;`);
+    await sequelize.query(`DROP SCHEMA IF EXISTS "${authResult.dataValues.userDB}" cascade;`);
     res.status(204).json({});
   } catch (e) {
     console.error(`error deleting user: ${e}`);

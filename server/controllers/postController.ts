@@ -30,9 +30,9 @@ async function postFighters(req: Req, res: Res, next: any) {
     if(!isValid) throw new ClientError(400, 'Must have (fighter), (displayName), and (rosterId) as parameters');
     const userIsTrue = authorization || username;
     const authResult = userIsTrue ? await authorizeUser(authorization, username, next) : null;
-    if (!authResult.userDB) throw new ClientError(authResult.status, authResult.message);
+    if (!authResult.dataValues) throw new ClientError(authResult.status, authResult.message);
 
-    const { Fighters } = defineUserDb(authResult.userDB);
+    const { Fighters } = defineUserDb(authResult.dataValues.userDB);
     const selectResult = await Fighters.findOne({
       where: {
         [Op.or]: [
@@ -87,9 +87,9 @@ async function postTableData(req: Req, res: Res, next: any) {
     const id = Number(req.params.id);
     const userIsTrue = authorization || username;
     const authResult = userIsTrue ? await authorizeUser(authorization, username, next) : null;
-    if (!authResult.userDB) throw new ClientError(authResult.status, authResult.message);
+    if (!authResult.dataValues) throw new ClientError(authResult.status, authResult.message);
 
-    const { Fighters, Moves, Hitboxes, Throws, Grappling, Movements, Dodging, Stats, Miscellaneous } = defineUserDb(authResult.userDB);
+    const { Fighters, Moves, Hitboxes, Throws, Grappling, Movements, Dodging, Stats, Miscellaneous } = defineUserDb(authResult.dataValues.userDB);
     const selectResult = await Fighters.findOne({
       where: {
         fighterId: id
