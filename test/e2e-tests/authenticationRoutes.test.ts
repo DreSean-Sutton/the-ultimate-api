@@ -393,7 +393,7 @@ describe.only("Delete /api/auth/delete-user", () => {
   const url = 'http://localhost:5000';
   const path = '/api/auth/delete-account';
 
-  describe.only("successful requests", () => {
+  describe("successful requests", () => {
     it("returns a 204 status if the user is deleted", done => {
       chai.request(url)
         .delete(path)

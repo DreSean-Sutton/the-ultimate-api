@@ -39,7 +39,8 @@ async function deleteFromTable(req: Req, res: Res, next: any) {
         if (fighters !== 1) {
           throw new ClientError(404, notFoundError);
         }
-
+        authResult.rowCount --;
+        await authResult.save();
         return res.status(204).json({});
     } else if (req.params.table === 'moves') {
 
@@ -49,7 +50,8 @@ async function deleteFromTable(req: Req, res: Res, next: any) {
       if (moves !== 1) {
         throw new ClientError(404, notFoundError);
       }
-
+      authResult.rowCount -= 2;
+      await authResult.save();
       return res.status(204).json({});
     } else if (req.params.table === 'throws') {
 
@@ -60,7 +62,8 @@ async function deleteFromTable(req: Req, res: Res, next: any) {
       if (throws!== 1) {
         throw new ClientError(404, notFoundError);
       }
-
+      authResult.rowCount -= 2;
+      await authResult.save();
       return res.status(204).json({});
     } else if (req.params.table === 'movements') {
 
@@ -71,7 +74,8 @@ async function deleteFromTable(req: Req, res: Res, next: any) {
       if (movements!== 1) {
         throw new ClientError(404, notFoundError);
       }
-
+      authResult.rowCount -= 2;
+      await authResult.save();
       return res.status(204).json({});
     } else if (req.params.table === 'stats') {
 
@@ -82,7 +86,8 @@ async function deleteFromTable(req: Req, res: Res, next: any) {
       if (stats!== 1) {
         throw new ClientError(404, notFoundError);
       }
-
+      authResult.rowCount -= 2;
+      await authResult.save();
       return res.status(204).json({});
     } else {
       throw new ClientError(400, `${req.params.table} is not a valid path parameter`);

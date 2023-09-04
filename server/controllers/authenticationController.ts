@@ -136,7 +136,6 @@ async function resetDatabase(req: Req, res: Res, next: Function) {
     console.log(`${username}'s tables have been re-synced`);
     authResult.dataValues.rowCount = 0;
     await authResult.save();
-    console.log('authResult value: ', authResult);
     if (!emptyDB || emptyDB === 'false') {
       await sequelize.query(buildUserSchema(userDB));
       console.log(`All public tables have been re-added to ${username}'s schema`);

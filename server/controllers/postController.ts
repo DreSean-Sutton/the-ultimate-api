@@ -53,6 +53,8 @@ async function postFighters(req: Req, res: Res, next: any) {
       rosterId: rosterId,
       displayName: displayName
     });
+    authResult.rowCount++;
+    await authResult.save();
     await insertResult.save();
     return res.status(201).json(insertResult);
   } catch (e) {
@@ -128,6 +130,8 @@ async function postTableData(req: Req, res: Res, next: any) {
 
       Object.assign(fullResult, moves.dataValues);
       Object.assign(fullResult, hitboxes.dataValues);
+      authResult.rowCount += 2;
+      await authResult.save();
       await moves.save();
       await hitboxes.save();
       return res.status(201).json(fullResult);
@@ -158,6 +162,8 @@ async function postTableData(req: Req, res: Res, next: any) {
 
       Object.assign(fullResult, throws.dataValues);
       Object.assign(fullResult, grappling.dataValues);
+      authResult.rowCount += 2;
+      await authResult.save();
       await throws.save();
       await grappling.save();
       return res.status(201).json(fullResult);
@@ -187,6 +193,8 @@ async function postTableData(req: Req, res: Res, next: any) {
 
       Object.assign(fullResult, movements.dataValues);
       Object.assign(fullResult, dodging.dataValues);
+      authResult.rowCount += 2;
+      await authResult.save();
       await movements.save();
       await dodging.save();
       return res.status(201).json(fullResult);
@@ -215,6 +223,8 @@ async function postTableData(req: Req, res: Res, next: any) {
 
       Object.assign(fullResult, stats.dataValues);
       Object.assign(fullResult, miscellaneous.dataValues);
+      authResult.rowCount += 2;
+      await authResult.save();
       await stats.save();
       await miscellaneous.save();
       return res.status(201).json(fullResult);
