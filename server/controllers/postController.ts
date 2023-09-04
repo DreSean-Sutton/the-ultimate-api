@@ -31,6 +31,7 @@ async function postFighters(req: Req, res: Res, next: any) {
     const userIsTrue = authorization || username;
     const authResult = userIsTrue ? await authorizeUser(authorization, username, next) : null;
     if (!authResult.dataValues) throw new ClientError(authResult.status, authResult.message);
+    if(authResult.rowCount >= 12000) throw new ClientError(403, "Row count limit has been reached");
 
     const { Fighters } = defineUserDb(authResult.dataValues.userDB);
     const selectResult = await Fighters.findOne({
@@ -90,6 +91,7 @@ async function postTableData(req: Req, res: Res, next: any) {
     const userIsTrue = authorization || username;
     const authResult = userIsTrue ? await authorizeUser(authorization, username, next) : null;
     if (!authResult.dataValues) throw new ClientError(authResult.status, authResult.message);
+    if(authResult.rowCount >= 11999) throw new ClientError(403, "Row count limit has been reached");
 
     const { Fighters, Moves, Hitboxes, Throws, Grappling, Movements, Dodging, Stats, Miscellaneous } = defineUserDb(authResult.dataValues.userDB);
     const selectResult = await Fighters.findOne({
