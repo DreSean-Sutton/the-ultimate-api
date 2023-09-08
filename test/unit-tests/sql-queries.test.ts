@@ -2,7 +2,7 @@ const sqlQueries = require('../../server/utils/sql-queries');
 
 import { expect } from 'chai';
 
-describe("Testing sqlQueries's methods", () => {
+describe.only("Testing sqlQueries's methods", () => {
 
   describe("getFighters method", () => {
 
