@@ -6,7 +6,6 @@ const jwt = require('jsonwebtoken');
 chai.should();
 chai.use(chaiHttp);
 
-
 const testPayload = {
   userId: 123,
   exp: Math.floor(Date.now() / 1000) + (60 * 30)

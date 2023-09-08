@@ -1,4 +1,4 @@
-const postControllers = require('../controllers/postController');
+const postControllers = require('./postController');
 var express = require('express');
 const postRoutes = express.Router(); // base route: 'api/add'
 
