@@ -1,7 +1,8 @@
 import { sequelize } from '../conn';
+import { Reset } from './reset-table';
 const Sequelize = require('sequelize');
 
-const User = sequelize.define('user', {
+export const User = sequelize.define('user', {
   id: {
     type: Sequelize.INTEGER,
     primaryKey: true,
@@ -51,7 +52,3 @@ const User = sequelize.define('user', {
 {
   schema: 'user'
 });
-
-module.exports = {
-  User,
-}

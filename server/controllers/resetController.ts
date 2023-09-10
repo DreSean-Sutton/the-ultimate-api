@@ -8,13 +8,14 @@ require('dotenv/config');
 const jwt = require('jsonwebtoken');
 const { sequelize } = require('../conn');
 const { User } = require('../model/user-table');
+const { Reset } = require('../model/reset-table');
 const { authorizeUser } = require('../lib/authorizeUser');
 
 async function getResetToken(req: Req, res: Res, next: any) {
   const { email } = req.body;
 
   try {
-    const user = await User.findOne({ where: { email: email }});
+    const user = await User.findOne({ where: { email: email }, include: [{ model: Reset }] });
     if (!user) throw new ClientError(404, "Email not found");
 
     const randomString = generateRandomString(16);
@@ -29,12 +30,23 @@ async function getResetToken(req: Req, res: Res, next: any) {
           route to reset your desired information:
         </p>
         <p style="font-weight: bold;">${randomString}</p>
-        <p>This code expires in 10 minutes.</p>
+        <p style="font-weight: bold;">This code expires in 10 minutes.</p>
       </div>
     `
+    const minutes = 10;
+    const expiration = Math.floor(Date.now() / 1000) + 60 * minutes;
+    if(user.dataValues.Reset) {
+      user.dataValues.Reset.token = randomString;
+      user.dataValues.Reset.tokenExpiration = new Date(expiration * 1000);
+      await user.Reset.save();
+    } else {
+      const resetInsert = await Reset.create({
+        token: randomString,
+        tokenExpiration: new Date(expiration * 1000),
+      }, { where: { id: user.id }});
+    }
     const emailResult = await sendEmail(user.email, 'Information Reset Token', emailMessage);
-    console.log({ emailResult });
-    return res.status(200).json({emailResult: emailResult });
+    return res.status(200).json({ emailResult: emailResult });
 
   } catch (e: any) {
     console.error('Error creating reset token: ', e);
