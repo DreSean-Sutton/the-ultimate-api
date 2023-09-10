@@ -6,7 +6,6 @@ export const Reset = sequelize.define('Reset', {
   id: {
     type: Sequelize.INTEGER,
     primaryKey: true,
-    autoIncrement: true
   },
   token: {
     type: Sequelize.STRING,

@@ -35,16 +35,13 @@ async function getResetToken(req: Req, res: Res, next: any) {
     `
     const minutes = 10;
     const expiration = Math.floor(Date.now() / 1000) + 60 * minutes;
-    if(user.dataValues.Reset) {
-      user.dataValues.Reset.token = randomString;
-      user.dataValues.Reset.tokenExpiration = new Date(expiration * 1000);
-      await user.Reset.save();
-    } else {
-      const resetInsert = await Reset.create({
-        token: randomString,
-        tokenExpiration: new Date(expiration * 1000),
-      }, { where: { id: user.id }});
-    }
+
+    const [reset] = await Reset.upsert({
+      id: user.id,
+      token: randomString,
+      tokenExpiration: new Date(expiration * 1000),
+    }, { where: { id: user.id }});
+
     const emailResult = await sendEmail(user.email, 'Information Reset Token', emailMessage);
     return res.status(200).json({ emailResult: emailResult });
 
