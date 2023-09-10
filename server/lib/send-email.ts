@@ -1,7 +1,7 @@
 const nodemailer = require('nodemailer');
 require('dotenv/config');
 
-export default async function emailMiddleware(recipient: string, recipientEmail: string, subject: string, message: string, next: any) {
+export default async function sendEmail( recipientEmail: string, subject: string, message: string) {
 
   const transporter = nodemailer.createTransport({
     service: 'Gmail',
@@ -15,7 +15,7 @@ export default async function emailMiddleware(recipient: string, recipientEmail:
     from:`noreply.${process.env.EMAIL_USER}`,
     to: recipientEmail,
     subject: subject,
-    text: message
+    html: message
   }
 
   return new Promise((resolve, reject) => {
