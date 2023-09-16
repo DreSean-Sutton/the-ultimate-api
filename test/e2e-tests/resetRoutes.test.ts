@@ -20,8 +20,6 @@ describe.only("POST /api/reset/getResetToken", () => {
     it("should send a token to a user's email address", done => {
       chai.request(url)
         .post(path)
-        .set('authorization', `Bearer ${testToken}`)
-        .set('username', 'test_username')
         .set('content-type', 'application/json')
         .send({ email: 'test_email@gmail.com' })
         .end((err, res) => {
@@ -36,5 +34,49 @@ describe.only("POST /api/reset/getResetToken", () => {
         })
 
     });
+  });
+  describe("Unsuccessful Requests", () => {
+    it("Returns a 404 request if email doesn't exist", done => {
+      chai.request(url)
+        .post(path)
+        .set('content-type', 'application/json')
+        .send({ email: 'i_dont_exist@gmail.com' })
+        .end((err, res) => {
+          if(err) {
+            console.log(err);
+            return done(err);
+          }
+          res.should.have.status(404);
+          res.body.should.have.property('error');
+          done();
+        })
+    });
+  });
+});
+
+describe.only("PUT /api/reset/information", () => {
+  const url = 'http://localhost:5000';
+  const path = '/api/reset/information';
+
+  describe("Successful Requests", () => {
+    it("Returns a 200 status code if information is reset", done => {
+      chai.request(url)
+        .put(path)
+        .set('Content-Type', 'application/json')
+        .send({ email: 'changed_test_email@gmail.com', username: 'changed_test_username', password: 'changed_test_password' })
+        .end((err, res) => {
+          if(err) {
+            console.log(err);
+            return done(err);
+          }
+          console.log(res.body);
+          res.should.have.status(200);
+          res.body.should.have.keys(['email', 'username', 'password']);
+          done();
+        })
+    });
+  });
+  describe("Unsuccessful Requests", () => {
+
   });
 });

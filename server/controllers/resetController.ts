@@ -42,8 +42,11 @@ async function getResetToken(req: Req, res: Res, next: any) {
       tokenExpiration: new Date(expiration * 1000),
     }, { where: { id: user.id }});
 
-    const emailResult = await sendEmail(user.email, 'Information Reset Token', emailMessage);
-    return res.status(200).json({ emailResult: emailResult });
+    // const emailResult = await sendEmail(user.email, 'Information Reset Token', emailMessage);
+    return res.status(200).json(
+      {}
+      //  { emailResult: emailResult }
+       );
 
   } catch (e: any) {
     console.error('Error creating reset token: ', e);
@@ -51,25 +54,12 @@ async function getResetToken(req: Req, res: Res, next: any) {
   }
 }
 async function changeInformation(req: Req, res: Res, next: any) {
-
-}
-async function changeUsername(req: Req, res: Res, next: any) {
-  const { authorization, username } = req.headers;
-
-  try {
-
-  } catch(e: any) {
-    console.error('Error changing username: ', e);
-    next(e);
-  }
-}
-
-async function resetPassword(req: Req, res: Res, next: any) {
-  return {};
+  console.log('This hit');
+  const { email, username, password, userResetToken } = req.body;
+  return res.status(200).json({});
 }
 
 module.exports = {
   getResetToken,
-  changeUsername,
-  resetPassword,
+  changeInformation,
 }
