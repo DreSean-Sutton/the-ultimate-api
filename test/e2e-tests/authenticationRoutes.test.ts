@@ -40,7 +40,7 @@ describe.only("POST /api/auth/register", () => {
 
       chai.request(url)
         .post(path)
-        .set('content-type', 'application/json')
+        .set('Content-Type', 'application/json')
         .send(params)
         .end((err, res) => {
           if(err) {
@@ -65,7 +65,7 @@ describe.only("POST /api/auth/register", () => {
 
       chai.request(url)
         .post(path)
-        .set('content-type', 'application/json')
+        .set('Content-Type', 'application/json')
         .query({ emptyDB: true })
         .send(params2)
         .end((err, res) => {
@@ -94,7 +94,7 @@ describe.only("POST /api/auth/register", () => {
 
       chai.request(url)
         .post(path)
-        .set('content-type', 'application/json')
+        .set('Content-Type', 'application/json')
         .send(params)
         .end((err, res) => {
           if (err) {
@@ -112,7 +112,7 @@ describe.only("POST /api/auth/register", () => {
 
       chai.request(url)
         .post(path)
-        .set('content-type', 'application/json')
+        .set('Content-Type', 'application/json')
         .send(params)
         .end((err, res) => {
           if (err) {
@@ -130,7 +130,7 @@ describe.only("POST /api/auth/register", () => {
 
       chai.request(url)
         .post(path)
-        .set('content-type', 'application/json')
+        .set('Content-Type', 'application/json')
         .send({
           email: null,
           username: params.username,
@@ -150,7 +150,7 @@ describe.only("POST /api/auth/register", () => {
 
       chai.request(url)
         .post(path)
-        .set('content-type', 'application/json')
+        .set('Content-Type', 'application/json')
         .send({
           email: params.email,
           username: null,
@@ -170,7 +170,7 @@ describe.only("POST /api/auth/register", () => {
 
       chai.request(url)
         .post(path)
-        .set('content-type', 'application/json')
+        .set('Content-Type', 'application/json')
         .send({
           email: params.email,
           username: params.username,
@@ -201,7 +201,7 @@ describe.only("POST /api/auth/generate-token", () => {
 
       chai.request(url)
         .post(path)
-        .set('content-type', 'application/json')
+        .set('Content-Type', 'application/json')
         .send({email: email, password: password})
         .end((err, res) => {
           if (err) {
@@ -221,7 +221,7 @@ describe.only("POST /api/auth/generate-token", () => {
       }
       chai.request(url)
         .post(path)
-        .set('content-type', 'application/json')
+        .set('Content-Type', 'application/json')
         .send({email: params2.email, password: params2.password})
         .end((err, res) => {
           if (err) {
@@ -240,7 +240,7 @@ describe.only("POST /api/auth/generate-token", () => {
 
       chai.request(url)
         .post(path)
-        .set('content-type', 'application/json')
+        .set('Content-Type', 'application/json')
         .send({email: null, password: password})
         .end((err, res) => {
           if (err) {
@@ -257,7 +257,7 @@ describe.only("POST /api/auth/generate-token", () => {
 
       chai.request(url)
         .post(path)
-        .set('content-type', 'application/json')
+        .set('Content-Type', 'application/json')
         .send({email: `${email}_random_string`, password: password})
         .end((err, res) => {
           if (err) {
@@ -274,7 +274,7 @@ describe.only("POST /api/auth/generate-token", () => {
 
       chai.request(url)
         .post(path)
-        .set('content-type', 'application/json')
+        .set('Content-Type', 'application/json')
         .send({email: email, password: `${password}_random_string`})
         .end((err, res) => {
           if (err) {
@@ -299,7 +299,7 @@ describe.only("POST /api/auth/show-token", () => {
     it("Returns a user's token and it's expiration date", done => {
       chai.request(url)
         .post(path)
-        .set('content-type', 'application/json')
+        .set('Content-Type', 'application/json')
         .send({ email: email, password: password })
         .end((err, res) => {
           if(err) {
@@ -317,7 +317,7 @@ describe.only("POST /api/auth/show-token", () => {
 
       chai.request(url)
         .post(path)
-        .set('content-type', 'application/json')
+        .set('Content-Type', 'application/json')
         .send({email: email, password: `${password}_random_string`})
         .end((err, res) => {
           if (err) {
@@ -333,7 +333,7 @@ describe.only("POST /api/auth/show-token", () => {
 
       chai.request(url)
         .post(path)
-        .set('content-type', 'application/json')
+        .set('Content-Type', 'application/json')
         .send({email: null, password: password})
         .end((err, res) => {
           if (err) {
@@ -349,7 +349,7 @@ describe.only("POST /api/auth/show-token", () => {
 
       chai.request(url)
         .post(path)
-        .set('content-type', 'application/json')
+        .set('Content-Type', 'application/json')
         .send({email: `${email}_random_string`, password: password})
         .end((err, res) => {
           if (err) {
@@ -374,8 +374,8 @@ describe.only("POST /api/auth/reset-database", () => {
       chai.request(url)
         .post(path)
         .set('Content-Type', 'application/json')
-        .set('authorization', `Bearer ${testToken}`)
-        .set('username', 'other_test_username')
+        .set('Authorization', `Bearer ${testToken}`)
+        .set('Username', 'other_test_username')
         .end((err, res) => {
           if(err) {
             console.log(err);
@@ -397,9 +397,9 @@ describe.only("Delete /api/auth/delete-user", () => {
     it("returns a 204 status if the user is deleted", done => {
       chai.request(url)
         .delete(path)
-        .set('content-type', 'application/json')
-        .set('authorization', `Bearer ${testToken}`)
-        .set('username', 'other_test_username')
+        .set('Content-Type', 'application/json')
+        .set('Authorization', `Bearer ${testToken}`)
+        .set('Username', 'other_test_username')
         .end((err, res) => {
           if(err) {
             console.log(err);

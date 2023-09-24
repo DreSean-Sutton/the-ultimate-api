@@ -24,9 +24,9 @@ describe.only("POST /api/add/fighters", () => {
 
       chai.request(url)
         .post(path)
-        .set('authorization', `Bearer ${testToken}`)
-        .set('username', 'test_username')
-        .set('content-type', 'application/json')
+        .set('Authorization', `Bearer ${testToken}`)
+        .set('Username', 'test_username')
+        .set('Content-Type', 'application/json')
         .send({ fighter: 'goku', displayName: 'Son Goku', rosterId: '9001' })
         .end((err, res) => {
           if(err) {
@@ -45,9 +45,9 @@ describe.only("POST /api/add/fighters", () => {
 
       chai.request(url)
         .post(path)
-        .set('authorization', `Bearer ${testToken}`)
-        .set('username', 'test_username')
-        .set('content-type', 'application/json')
+        .set('Authorization', `Bearer ${testToken}`)
+        .set('Username', 'test_username')
+        .set('Content-Type', 'application/json')
         .send({ fighter: 'krillin', displayName: 'Krillin', rosterId: '523' })
         .end((err, res) => {
           if(err) {
@@ -66,9 +66,9 @@ describe.only("POST /api/add/fighters", () => {
 
       chai.request(url)
         .post(path)
-        .set('authorization', `Bearer ${testToken}`)
-        .set('username', 'test_username')
-        .set('content-type', 'application/json')
+        .set('Authorization', `Bearer ${testToken}`)
+        .set('Username', 'test_username')
+        .set('Content-Type', 'application/json')
         .send({ fighter: 'mrVoid', displayName: 'Mr. Void', rosterId: '690' })
         .end((err, res) => {
           if(err) {
@@ -87,8 +87,8 @@ describe.only("POST /api/add/fighters", () => {
 
       chai.request(url)
         .post(path)
-        .set('authorization', `Bearer ${testToken}`)
-        .set('content-type', 'application/json')
+        .set('Authorization', `Bearer ${testToken}`)
+        .set('Content-Type', 'application/json')
         .send({ fighter: 'goku', displayName: 'Son Goku', rosterId: '9001' })
         .end((err, res) => {
           if (err) {
@@ -104,8 +104,8 @@ describe.only("POST /api/add/fighters", () => {
 
       chai.request(url)
         .post(path)
-        .set('username', 'test_username')
-        .set('content-type', 'application/json')
+        .set('Username', 'test_username')
+        .set('Content-Type', 'application/json')
         .send({ fighter: 'goku', displayName: 'Son Goku', rosterId: '9001' })
         .end((err, res) => {
           if (err) {
@@ -121,9 +121,9 @@ describe.only("POST /api/add/fighters", () => {
 
       chai.request(url)
         .post(path)
-        .set('authorization', `Bearer ${testToken}`)
-        .set('username', 'wrong_username')
-        .set('content-type', 'application/json')
+        .set('Authorization', `Bearer ${testToken}`)
+        .set('Username', 'wrong_username')
+        .set('Content-Type', 'application/json')
         .send({ fighter: 'goku', displayName: 'Son Goku', rosterId: '9001' })
         .end((err, res) => {
           if (err) {
@@ -139,9 +139,9 @@ describe.only("POST /api/add/fighters", () => {
 
       chai.request(url)
         .post(path)
-        .set('authorization', 'Bearer wrong_apikey')
-        .set('username', 'test_username')
-        .set('content-type', 'application/json')
+        .set('Authorization', 'Bearer wrong_apikey')
+        .set('Username', 'test_username')
+        .set('Content-Type', 'application/json')
         .send({ fighter: 'goku', displayName: 'Son Goku', rosterId: '9001' })
         .end((err, res) => {
           if (err) {
@@ -157,9 +157,9 @@ describe.only("POST /api/add/fighters", () => {
 
       chai.request(url)
         .post(path)
-        .set('authorization', 'wrong_apikey')
-        .set('username', 'test_username')
-        .set('content-type', 'application/json')
+        .set('Authorization', 'wrong_apikey')
+        .set('Username', 'test_username')
+        .set('Content-Type', 'application/json')
         .send({ fighter: 'goku', displayName: 'Son Goku', rosterId: '9001' })
         .end((err, res) => {
           if (err) {
@@ -175,9 +175,9 @@ describe.only("POST /api/add/fighters", () => {
 
       chai.request(url)
         .post(path)
-        .set('authorization', `Bearer ${testToken}`)
-        .set('username', 'test_username')
-        .set('content-type', 'application/json')
+        .set('Authorization', `Bearer ${testToken}`)
+        .set('Username', 'test_username')
+        .set('Content-Type', 'application/json')
         .send({ fighter: 'goku', displayName: 'Son Goku2', rosterId: '90012' })
         .end((err, res) => {
           if (err) {
@@ -193,9 +193,9 @@ describe.only("POST /api/add/fighters", () => {
 
       chai.request(url)
         .post(path)
-        .set('authorization', `Bearer ${testToken}`)
-        .set('username', 'test_username')
-        .set('content-type', 'application/json')
+        .set('Authorization', `Bearer ${testToken}`)
+        .set('Username', 'test_username')
+        .set('Content-Type', 'application/json')
         .send({ fighter: 'goku2', displayName: 'Son Goku', rosterId: '90012' })
         .end((err, res) => {
           if (err) {
@@ -211,9 +211,9 @@ describe.only("POST /api/add/fighters", () => {
 
       chai.request(url)
         .post(path)
-        .set('authorization', `Bearer ${testToken}`)
-        .set('username', 'test_username')
-        .set('content-type', 'application/json')
+        .set('Authorization', `Bearer ${testToken}`)
+        .set('Username', 'test_username')
+        .set('Content-Type', 'application/json')
         .send({ fighter: 'goku2', displayName: 'Son Goku2', rosterId: '9001' })
         .end((err, res) => {
           if (err) {
@@ -237,9 +237,9 @@ describe.only("POST /api/add/:table/:id", () => {
     it("Returns a 400 status if fighterId doesn't exist", done => {
           chai.request(url)
             .post('/api/add/moves/923944')
-            .set('authorization', `Bearer ${testToken}`)
-            .set('username', 'test_username')
-            .set('content-type', 'application/json')
+            .set('Authorization', `Bearer ${testToken}`)
+            .set('Username', 'test_username')
+            .set('Content-Type', 'application/json')
             .send({
               activeFrames: '155',
               category: 'special',
@@ -263,9 +263,9 @@ describe.only("POST /api/add/:table/:id", () => {
     it("Returns a 400 status if the table name doesn't exist", done => {
       chai.request(url)
             .post('/api/add/invalidTable/1')
-            .set('authorization', `Bearer ${testToken}`)
-            .set('username', 'test_username')
-            .set('content-type', 'application/json')
+            .set('Authorization', `Bearer ${testToken}`)
+            .set('Username', 'test_username')
+            .set('Content-Type', 'application/json')
             .send({
               activeFrames: '155',
               category: 'special',
@@ -297,9 +297,9 @@ describe.only("POST /api/add/:table/:id", () => {
       it("Returns a 201 status if a move is successfully inserted", done => {
         chai.request(url)
           .post(path)
-          .set('authorization', `Bearer ${testToken}`)
-          .set('username', 'test_username')
-          .set('content-type', 'application/json')
+          .set('Authorization', `Bearer ${testToken}`)
+          .set('Username', 'test_username')
+          .set('Content-Type', 'application/json')
           .send({
             activeFrames: '1-50',
             category: 'special',
@@ -323,9 +323,9 @@ describe.only("POST /api/add/:table/:id", () => {
       it("Returns a 201 status if a second move is successfully inserted", done => {
         chai.request(url)
           .post('/api/add/moves/91')
-          .set('authorization', `Bearer ${testToken}`)
-          .set('username', 'test_username')
-          .set('content-type', 'application/json')
+          .set('Authorization', `Bearer ${testToken}`)
+          .set('Username', 'test_username')
+          .set('Content-Type', 'application/json')
           .send({
             activeFrames: '1',
             category: 'special',
@@ -351,9 +351,9 @@ describe.only("POST /api/add/:table/:id", () => {
       it("Returns a 401 status if there's missing move req parameters", done => {
         chai.request(url)
           .post(path)
-          .set('authorization', `Bearer ${testToken}`)
-          .set('username', 'test_username')
-          .set('content-type', 'application/json')
+          .set('Authorization', `Bearer ${testToken}`)
+          .set('Username', 'test_username')
+          .set('Content-Type', 'application/json')
           .send({
             activeFrames: '1',
             category: 'special',
@@ -380,9 +380,9 @@ describe.only("POST /api/add/:table/:id", () => {
       it("Returns a 201 status if a throw is successfully inserted", done => {
         chai.request(url)
           .post(path)
-          .set('authorization', `Bearer ${testToken}`)
-          .set('username', 'test_username')
-          .set('content-type', 'application/json')
+          .set('Authorization', `Bearer ${testToken}`)
+          .set('Username', 'test_username')
+          .set('Content-Type', 'application/json')
           .send({
             activeFrames: '10-20/33/35/37/39/51',
             damage: '10.0/2.0/2.0/2.0/2.0/5.0%',
@@ -403,9 +403,9 @@ describe.only("POST /api/add/:table/:id", () => {
       it("Returns a 201 status if a second fighter's throw is successfully inserted", done => {
         chai.request(url)
           .post('/api/add/throws/91')
-          .set('authorization', `Bearer ${testToken}`)
-          .set('username', 'test_username')
-          .set('content-type', 'application/json')
+          .set('Authorization', `Bearer ${testToken}`)
+          .set('Username', 'test_username')
+          .set('Content-Type', 'application/json')
           .send({
             activeFrames: '30',
             damage: '8.0%',
@@ -429,9 +429,9 @@ describe.only("POST /api/add/:table/:id", () => {
       it("Returns a 401 status if there's missing throw req parameters", done => {
         chai.request(url)
           .post(path)
-          .set('authorization', `Bearer ${testToken}`)
-          .set('username', 'test_username')
-          .set('content-type', 'application/json')
+          .set('Authorization', `Bearer ${testToken}`)
+          .set('Username', 'test_username')
+          .set('Content-Type', 'application/json')
           .send({
             activeFrames: '30',
             totalFrames: '40'
@@ -459,9 +459,9 @@ describe.only("POST /api/add/:table/:id", () => {
       it("Returns a 201 status if a movement is successfully inserted", done => {
         chai.request(url)
           .post(path)
-          .set('authorization', `Bearer ${testToken}`)
-          .set('username', 'test_username')
-          .set('content-type', 'application/json')
+          .set('Authorization', `Bearer ${testToken}`)
+          .set('Username', 'test_username')
+          .set('Content-Type', 'application/json')
           .send({
             activeFrames: '3-17',
             name: 'spot dodge',
@@ -481,9 +481,9 @@ describe.only("POST /api/add/:table/:id", () => {
       it("Returns a 201 status if a second fighter's movement is successfully inserted", done => {
         chai.request(url)
           .post('/api/add/movements/91')
-          .set('authorization', `Bearer ${testToken}`)
-          .set('username', 'test_username')
-          .set('content-type', 'application/json')
+          .set('Authorization', `Bearer ${testToken}`)
+          .set('Username', 'test_username')
+          .set('Content-Type', 'application/json')
           .send({
             activeFrames: '4-15',
             name: 'forward roll',
@@ -505,9 +505,9 @@ describe.only("POST /api/add/:table/:id", () => {
       it("Returns a 401 status if there's missing movement req parameters", done => {
         chai.request(url)
           .post(path)
-          .set('authorization', `Bearer ${testToken}`)
-          .set('username', 'test_username')
-          .set('content-type', 'application/json')
+          .set('Authorization', `Bearer ${testToken}`)
+          .set('Username', 'test_username')
+          .set('Content-Type', 'application/json')
           .send({
             activeFrames: '3-17',
             totalFrames: '20/25'
@@ -535,9 +535,9 @@ describe.only("POST /api/add/:table/:id", () => {
       it("Returns a 201 status if a stat is successfully inserted", done => {
         chai.request(url)
           .post(path)
-          .set('authorization', `Bearer ${testToken}`)
-          .set('username', 'test_username')
-          .set('content-type', 'application/json')
+          .set('Authorization', `Bearer ${testToken}`)
+          .set('Username', 'test_username')
+          .set('Content-Type', 'application/json')
           .send({
             name: 'walk speed',
             statValue: '1.502'
@@ -556,9 +556,9 @@ describe.only("POST /api/add/:table/:id", () => {
       it("Returns a 201 status if a second fighter's stat is successfully inserted", done => {
         chai.request(url)
           .post('/api/add/stats/91')
-          .set('authorization', `Bearer ${testToken}`)
-          .set('username', 'test_username')
-          .set('content-type', 'application/json')
+          .set('Authorization', `Bearer ${testToken}`)
+          .set('Username', 'test_username')
+          .set('Content-Type', 'application/json')
           .send({
             name: 'running speed',
             statValue: '3.052'
@@ -579,9 +579,9 @@ describe.only("POST /api/add/:table/:id", () => {
       it("Returns a 401 status if there's missing stat req parameters", done => {
         chai.request(url)
           .post(path)
-          .set('authorization', `Bearer ${testToken}`)
-          .set('username', 'test_username')
-          .set('content-type', 'application/json')
+          .set('Authorization', `Bearer ${testToken}`)
+          .set('Username', 'test_username')
+          .set('Content-Type', 'application/json')
           .send({
             name: 'walk speed',
           })
