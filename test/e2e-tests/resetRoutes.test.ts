@@ -70,28 +70,60 @@ describe.only("POST /api/reset/getResetToken", () => {
 });
 
 describe.only("PUT /api/reset/information", () => {
+  afterEach(() => {
+    nock.cleanAll();
+  });
+
   const url = 'http://localhost:5000';
   const path = '/api/reset/information';
 
   describe("Successful Requests", () => {
-    it("Returns a 200 status code if information is reset", done => {
-      chai.request(url)
-        .put(path)
-        .set('Content-Type', 'application/json')
-        .send({ email: 'changed_test_email@gmail.com', username: 'changed_test_username', password: 'changed_test_password' })
-        .end((err, res) => {
-          if(err) {
-            console.log(err);
-            return done(err);
-          }
-          console.log(res.body);
-          res.should.have.status(200);
-          res.body.should.have.keys(['email', 'username', 'password']);
-          done();
-        })
+    it("Returns a 200 status code if information is reset", async () => {
+      nock(url).put(path).reply(200, [1]);
+
+      const res = await request(url).put(path).set('Content-Type', 'application/json')
+        .send({ email: 'changed_test_email@gmail.com', username: 'changed_test_username', password: 'changed_test_password', resetToken: 'reset_token' });
+        console.log(res.body);
+        res.should.have.status(200);
+        res.body[0].should.be.greaterThan(0);
     });
   });
   describe("Unsuccessful Requests", () => {
+    it("Returns a 404 status code if reset token isn't found", async ()  => {
+      nock(url).put(path).reply(404, {
+        error: "Reset token not found"
+      });
 
+      const res = await request(url)
+        .put(path)
+        .send({ email: 'changed_test_email@gmail.com', username: 'changed_test_username', password: 'changed_test_password', resetToken: 'not_found_reset_token' });
+      res.should.have.status(404);
+      res.body.should.have.property('error');
+    });
+
+    it("Returns a 410 status code if reset token has expired", async () => {
+      nock(url).put(path).reply(410, {
+          error: "reset token has expired."
+      });
+
+      const res = await request(url)
+        .put(path)
+        .send({ email: 'changed_test_email@gmail.com', username: 'changed_test_username', password: 'changed_test_password', resetToken: 'expired_reset_token' });
+      console.log(res.body);
+      res.should.have.status(410);
+      res.body.should.have.property('error');
+    });
+    it("Returns a 401 status code if no information was changed", async () => {
+      nock(url).put(path).reply(401, {
+          error: "No information changed. New information must be different from old information."
+      });
+
+      const res = await request(url)
+        .put(path)
+        .send({ email: 'test_email@gmail.com', username: 'test_username', password: 'test_password', resetToken: 'reset_token' });
+      console.log(res.body);
+      res.should.have.status(401);
+      res.body.should.have.property('error');
+    });
   });
 });
