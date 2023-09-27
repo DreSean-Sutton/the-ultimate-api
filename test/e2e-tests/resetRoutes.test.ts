@@ -73,6 +73,18 @@ describe.only("PUT /api/reset/information", () => {
     });
   });
   describe("Unsuccessful Requests", () => {
+    it("Returns a 401 status code if reset token doesn't have a value", async ()  => {
+      nock(url).put(path).reply(401, {
+        error: "Reset token must be provided"
+      });
+
+      const res = await request(url)
+        .put(path)
+        .send({ email: 'changed_test_email@gmail.com', username: 'changed_test_username', password: 'changed_test_password', resetToken: '' });
+      res.should.have.status(401);
+      res.body.should.have.property('error');
+    });
+
     it("Returns a 404 status code if reset token isn't found", async ()  => {
       nock(url).put(path).reply(404, {
         error: "Reset token not found"
