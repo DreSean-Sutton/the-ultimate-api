@@ -1,4 +1,4 @@
-const updateControllers = require('../controllers/updateController');
+const updateControllers = require('./updateController');
 var express = require('express');
 const updateRoutes = express.Router(); // base route: 'api/update'
 

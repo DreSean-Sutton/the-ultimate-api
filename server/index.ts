@@ -36,11 +36,13 @@ const postRoutes = require('./controllers/postRoutes');
 const updateRoutes = require('./controllers/updateRoutes');
 const deleteRoutes = require('./controllers/deleteRoutes');
 const authenticationRoutes = require('./controllers/authenticationRoutes');
+const resetRoutes = require('./controllers/resetRoutes');
 app.use('/api/get', getRoutes);
 app.use('/api/add', postRoutes);
 app.use('/api/update', updateRoutes);
 app.use('/api/delete', deleteRoutes);
 app.use('/api/auth', authenticationRoutes);
+app.use('/api/reset', resetRoutes);
 
 app.use(errorMiddleware);
 

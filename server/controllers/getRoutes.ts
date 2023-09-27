@@ -1,7 +1,7 @@
 import ClientError from '../utils/client-error';
 import { client } from '../conn';
 var express = require('express');
-const getController = require('../controllers/getController');
+const getController = require('./getController');
 const getRoutes = express.Router();
 
 getRoutes.get('/fighters', getController.getFighters);

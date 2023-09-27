@@ -4,10 +4,8 @@ set client_min_messages to warning;
 -- DANGER: this is NOT how to do it in the real world.
 -- `drop schema` INSTANTLY ERASES EVERYTHING.
 drop schema "public" cascade;
-drop schema "user" cascade;
 
 create schema "public";
-create schema "user";
 
 CREATE TABLE public.fighters (
 	"fighterId" serial NOT NULL,

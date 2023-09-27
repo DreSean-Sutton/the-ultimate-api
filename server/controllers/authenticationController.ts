@@ -7,6 +7,7 @@ import handleRestartIds from '../lib/handle-restart-id';
 import generateRandomString from '../lib/generate-random-string';
 require('dotenv/config');
 const { User } = require('../model/user-table');
+const { Reset } = require('../model/reset-table');
 const { sequelize } = require('../conn');
 const { Op } = require('sequelize');
 const argon2 = require('argon2');
@@ -26,6 +27,10 @@ async function registerUser(req: Req, res: Res, next: any) {
     console.log('User schema created');
     await sequelize.sync({ schema: 'user' });
     console.log('User table created');
+    await sequelize.query('CREATE SCHEMA IF NOT EXISTS "reset"');
+    console.log('Reset schema created');
+    await sequelize.sync({ schema: 'reset' });
+    console.log('Reset table created');
 
     const checkUniqueUser = await User.findOne({
       where: {
@@ -46,6 +51,7 @@ async function registerUser(req: Req, res: Res, next: any) {
       password: hashedPassword,
       userDB: `${randomString}`
     });
+
     await sequelize.query(`CREATE SCHEMA IF NOT EXISTS "${dataValues.userDB}"`);
     console.log(`${dataValues.userDB} schema created`);
     await defineUserDb(dataValues.userDB);

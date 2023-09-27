@@ -20,9 +20,9 @@ describe.only("DELETE 'api/delete/moves/:id", () => {
     it("returns a 204 request when a fighter's moves are deleted", done => {
       chai.request(url)
         .delete('/api/delete/moves/2099')
-        .set('authorization', `Bearer ${testToken}`)
-        .set('username', 'test_username')
-        .set('content-type', 'application/json')
+        .set('Authorization', `Bearer ${testToken}`)
+        .set('Username', 'test_username')
+        .set('Content-Type', 'application/json')
         .end((err, res) => {
           if(err) {
             console.log(err);
@@ -39,9 +39,9 @@ describe.only("DELETE 'api/delete/moves/:id", () => {
     it("returns a 404 request when a fighter's moves aren't found", done => {
       chai.request(url)
         .delete('/api/delete/moves/999999')
-        .set('authorization', `Bearer ${testToken}`)
-        .set('username', 'test_username')
-        .set('content-type', 'application/json')
+        .set('Authorization', `Bearer ${testToken}`)
+        .set('Username', 'test_username')
+        .set('Content-Type', 'application/json')
         .end((err, res) => {
           if(err) {
             console.log(err);
@@ -62,9 +62,9 @@ describe.only("DELETE 'api/delete/throws/:id", () => {
     it("returns a 204 request when a fighter's throws are deleted", done => {
       chai.request(url)
         .delete('/api/delete/throws/718')
-        .set('authorization', `Bearer ${testToken}`)
-        .set('username', 'test_username')
-        .set('content-type', 'application/json')
+        .set('Authorization', `Bearer ${testToken}`)
+        .set('Username', 'test_username')
+        .set('Content-Type', 'application/json')
         .end((err, res) => {
           if(err) {
             console.log(err);
@@ -81,9 +81,9 @@ describe.only("DELETE 'api/delete/throws/:id", () => {
     it("returns a 404 request when a fighter's throws aren't found", done => {
       chai.request(url)
         .delete('/api/delete/throws/999999')
-        .set('authorization', `Bearer ${testToken}`)
-        .set('username', 'test_username')
-        .set('content-type', 'application/json')
+        .set('Authorization', `Bearer ${testToken}`)
+        .set('Username', 'test_username')
+        .set('Content-Type', 'application/json')
         .end((err, res) => {
           if(err) {
             console.log(err);
@@ -104,9 +104,9 @@ describe.only("DELETE 'api/delete/movements/:id", () => {
     it("returns a 204 request when a fighter's movements are deleted", done => {
       chai.request(url)
         .delete('/api/delete/movements/804')
-        .set('authorization', `Bearer ${testToken}`)
-        .set('username', 'test_username')
-        .set('content-type', 'application/json')
+        .set('Authorization', `Bearer ${testToken}`)
+        .set('Username', 'test_username')
+        .set('Content-Type', 'application/json')
         .end((err, res) => {
           if(err) {
             console.log(err);
@@ -123,9 +123,9 @@ describe.only("DELETE 'api/delete/movements/:id", () => {
     it("returns a 404 request when a fighter's movements aren't found", done => {
       chai.request(url)
         .delete('/api/delete/movements/999999')
-        .set('authorization', `Bearer ${testToken}`)
-        .set('username', 'test_username')
-        .set('content-type', 'application/json')
+        .set('Authorization', `Bearer ${testToken}`)
+        .set('Username', 'test_username')
+        .set('Content-Type', 'application/json')
         .end((err, res) => {
           if(err) {
             console.log(err);
@@ -146,9 +146,9 @@ describe.only("DELETE 'api/delete/stats/:id", () => {
     it("returns a 204 request when a fighter's stats are deleted", done => {
       chai.request(url)
         .delete('/api/delete/stats/1164')
-        .set('authorization', `Bearer ${testToken}`)
-        .set('username', 'test_username')
-        .set('content-type', 'application/json')
+        .set('Authorization', `Bearer ${testToken}`)
+        .set('Username', 'test_username')
+        .set('Content-Type', 'application/json')
         .end((err, res) => {
           if(err) {
             console.log(err);
@@ -165,9 +165,9 @@ describe.only("DELETE 'api/delete/stats/:id", () => {
     it("returns a 404 request when a fighter's stats aren't found", done => {
       chai.request(url)
         .delete('/api/delete/stats/999999')
-        .set('authorization', `Bearer ${testToken}`)
-        .set('username', 'test_username')
-        .set('content-type', 'application/json')
+        .set('Authorization', `Bearer ${testToken}`)
+        .set('Username', 'test_username')
+        .set('Content-Type', 'application/json')
         .end((err, res) => {
           if(err) {
             console.log(err);
@@ -188,9 +188,9 @@ describe.only("DELETE /api/delete/fighters/:id", () => {
     it("returns a 204 request when a fighter is deleted", done => {
       chai.request(url)
         .delete('/api/delete/fighters/90')
-        .set('authorization', `Bearer ${testToken}`)
-        .set('username', 'test_username')
-        .set('content-type', 'application/json')
+        .set('Authorization', `Bearer ${testToken}`)
+        .set('Username', 'test_username')
+        .set('Content-Type', 'application/json')
         .end((err, res) => {
           if(err) {
             console.log(err);
@@ -207,9 +207,9 @@ describe.only("DELETE /api/delete/fighters/:id", () => {
     it("returns a 404 request when a fighter isn't found", done => {
       chai.request(url)
         .delete('/api/delete/fighters/90000')
-        .set('authorization', `Bearer ${testToken}`)
-        .set('username', 'test_username')
-        .set('content-type', 'application/json')
+        .set('Authorization', `Bearer ${testToken}`)
+        .set('Username', 'test_username')
+        .set('Content-Type', 'application/json')
         .end((err, res) => {
           if(err) {
             console.log(err);
@@ -223,9 +223,9 @@ describe.only("DELETE /api/delete/fighters/:id", () => {
     it("returns an error if the id is not a number", done => {
     chai.request(url)
       .delete('/api/delete/fighters/not_a_number')
-      .set('authorization', `Bearer ${testToken}`)
-      .set('username', 'test_username')
-      .set('content-type', 'application/json')
+      .set('Authorization', `Bearer ${testToken}`)
+      .set('Username', 'test_username')
+      .set('Content-Type', 'application/json')
       .end((err, res) => {
         if(err) {
           console.log(err);
