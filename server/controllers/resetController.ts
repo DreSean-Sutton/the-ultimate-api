@@ -42,8 +42,8 @@ async function getResetToken(req: Req, res: Res, next: any) {
       tokenExpiration: new Date(expiration * 1000),
     }, { where: { id: user.id }});
 
-    const emailResult = await sendEmail(user.email, 'Information Reset Token', emailMessage);
-    return res.status(200).json({ emailResult: emailResult });
+    const emailResult = await sendEmail(email, 'Information Reset Token', emailMessage);
+    return res.status(200).json({ message: `Email successfully sent to your email address (${email}).` });
 
   } catch (e: any) {
     console.error('Error creating reset token: ', e);
@@ -53,9 +53,10 @@ async function getResetToken(req: Req, res: Res, next: any) {
 async function changeInformation(req: Req, res: Res, next: any) {
   const { email, username, password, resetToken } = req.body;
   try {
+    if (!resetToken) throw new ClientError(401, "Reset token must be provided");
     const findResult = await Reset.findOne({ where: { token: resetToken }, include: [{ model: User }] });
-    if(!findResult) throw new ClientError(404, "Reset token not found");
-    if(Date.now() >= findResult.tokenExpiration.getTime()) throw new ClientError(410, "reset token has expired.");
+    if (!findResult) throw new ClientError(404, "Reset token not found");
+    if (Date.now() >= findResult.tokenExpiration.getTime()) throw new ClientError(410, "reset token has expired.");
 
     await sequelize.transaction(async (t: any) => {
       const userUpdate = await User.update({
@@ -63,11 +64,11 @@ async function changeInformation(req: Req, res: Res, next: any) {
         username: username || findResult.user.username,
         password: password || findResult.user.password
       }, { where: { id: findResult.id }, transaction: t });
-      if(userUpdate[0] === 0) throw new ClientError(401, "No information changed. New information must be different from old information.");
+      if (userUpdate[0] === 0) throw new ClientError(401, "No information changed. New information must be different from old information.");
 
       await Reset.destroy({
         where: { id: findResult.id }, transaction: t });
-      return res.status(200).json(userUpdate);
+      return res.status(200).json({ message: "Information has successfully been changed." });
     })
 
   } catch(e) {

@@ -25,7 +25,7 @@ describe.only("POST /api/reset/getResetToken", () => {
   describe("successful requests", () => {
     it("should send a token to a user's email address", async () => {
       nock(url).post(path).reply(200, {
-          status: 200, body: { accepted: ['test_email@gmail.com'], rejected: [] }
+          status: 200, body: { message: "Token has been successfully sent to your email (test_email@gmail.com)" }
         });
 
         const res = await request(url).post(path)
@@ -35,21 +35,6 @@ describe.only("POST /api/reset/getResetToken", () => {
           })
         res.should.have.status(200);
         res.body.should.not.have.property('error');
-      // chai.request(url)
-      //   .post(path)
-      //   .set('Content-Type', 'application/json')
-      //   .send({ email: 'test_email@gmail.com' })
-      //   .end((err, res) => {
-      //     if(err) {
-      //       console.log('An error has occurred: ', err);
-      //       return done(err);
-      //     }
-      //     console.log(res.body);
-      //     res.should.have.status(200);
-      //     res.body.should.not.have.property('error');
-      //     done();
-      //   })
-
     });
   });
   describe("Unsuccessful Requests", () => {
@@ -79,13 +64,12 @@ describe.only("PUT /api/reset/information", () => {
 
   describe("Successful Requests", () => {
     it("Returns a 200 status code if information is reset", async () => {
-      nock(url).put(path).reply(200, [1]);
+      nock(url).put(path).reply(200, { message: "Information has successfully been changed." });
 
       const res = await request(url).put(path).set('Content-Type', 'application/json')
         .send({ email: 'changed_test_email@gmail.com', username: 'changed_test_username', password: 'changed_test_password', resetToken: 'reset_token' });
-        console.log(res.body);
         res.should.have.status(200);
-        res.body[0].should.be.greaterThan(0);
+        res.body.should.not.have.property('error');
     });
   });
   describe("Unsuccessful Requests", () => {
@@ -109,7 +93,6 @@ describe.only("PUT /api/reset/information", () => {
       const res = await request(url)
         .put(path)
         .send({ email: 'changed_test_email@gmail.com', username: 'changed_test_username', password: 'changed_test_password', resetToken: 'expired_reset_token' });
-      console.log(res.body);
       res.should.have.status(410);
       res.body.should.have.property('error');
     });
@@ -121,7 +104,6 @@ describe.only("PUT /api/reset/information", () => {
       const res = await request(url)
         .put(path)
         .send({ email: 'test_email@gmail.com', username: 'test_username', password: 'test_password', resetToken: 'reset_token' });
-      console.log(res.body);
       res.should.have.status(401);
       res.body.should.have.property('error');
     });
