@@ -22,7 +22,7 @@ paths:
   /api/get/fighters:
     get:
       tags:
-        - fighters
+        - Get Fighters
       summary: Returns basic information for all fighters
       description: >
        Use `fighter`, `fighterId`, and `rosterId`
@@ -84,7 +84,7 @@ paths:
   /api/get/fighters/data:
     get:
       tags:
-        - fighters
+        - Get Fighters
       summary: Returns all frame data for all Fighters
       description: >
        Use `fighter`, `fighterId`, and `rosterId`
@@ -125,7 +125,7 @@ paths:
   /api/get/fighters/data/{type}:
     get:
       tags:
-      - fighters
+      - Get Fighters
       summary: Returns a specific type of frame data for all Fighters
       description: >
        Use `fighter`, `fighterId`, and `rosterId`
@@ -351,7 +351,67 @@ paths:
                 example:
                   message: 'Database reset successful'
 
-  /api/auth/delete-user:
+  /api/reset/get-reset-token:
+    post:
+      tags:
+      - Authentication
+      summary: Sends a reset token to your email address
+      requestBody:
+        description: Input your email to send a reset token there that can be used to reset your information
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+              required:
+              - email
+      responses:
+        '200':
+          description:
+            OK
+          content:
+            application/json:
+              schema:
+                example:
+                  message: Email successfully sent to your email address.
+
+  /api/reset/information:
+    put:
+      tags:
+      - Authentication
+      summary: Allows you to change your registered email, username, and/or password using a reset token
+      requestBody:
+        description: >
+          Delete properties that aren't needed. </br>
+          Add your resetToken and desired new values for email, suername, and/or password.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                username:
+                  type: string
+                passsword:
+                  type: string
+                resetToken:
+                  type: string
+              required:
+              - resetToken
+      responses:
+        '200':
+          description:
+            OK
+          content:
+            application/json:
+              schema:
+                example:
+                  message: No information changed. New information must be different from old information.
+
+  /api/auth/delete-account:
     delete:
       tags:
       - Authentication
