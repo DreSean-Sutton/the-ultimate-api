@@ -151,7 +151,9 @@ async function resetDatabase(req: Req, res: Res, next: Function) {
       authResult.dataValues.rowCount = totalIds;
       console.log("User row count has been synced");
     }
-    res.status(200).json({ message: 'Database reset successful' });
+    delete authResult.dataValues.password;
+    delete authResult.dataValues.userDB;
+    res.status(200).json({ message: 'Database reset successful', data: authResult.dataValues });
   } catch (e: any) {
     console.error(`Error creating schema: ${e}`);
     res.status(400).json(e);

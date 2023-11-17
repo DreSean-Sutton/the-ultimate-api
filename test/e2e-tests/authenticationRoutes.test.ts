@@ -371,6 +371,8 @@ describe.only("POST /api/auth/reset-database", () => {
   describe.only("successful requests", () => {
     it("returns a 200 status code on successful user database reset", done => {
 
+      const userKeys = ['id', 'email', 'username', 'updatedAt', 'rowCount', 'createdAt', 'token', 'tokenExpiration'];
+
       chai.request(url)
         .post(path)
         .set('Content-Type', 'application/json')
@@ -381,8 +383,10 @@ describe.only("POST /api/auth/reset-database", () => {
             console.log(err);
             return done(err);
           }
+          console.log(res.body);
           res.should.have.status(200);
           res.body.should.have.property('message');
+          res.body.data.should.have.all.key(userKeys);
           done();
         })
     });
