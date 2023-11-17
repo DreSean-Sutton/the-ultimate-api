@@ -60,7 +60,9 @@ async function registerUser(req: Req, res: Res, next: any) {
     if (!emptyDB || emptyDB === 'false') {
       await sequelize.query(buildUserSchema(dataValues.userDB));
       console.log(`All public tables have been added to ${dataValues.userDB}`);
-      await handleRestartIds(dataValues.userDB);
+      const totalIds = await handleRestartIds(dataValues.userDB);
+      dataValues.rowCount = totalIds;
+      console.log("User row count has been synced");
     }
     delete dataValues.password;
     delete dataValues.userDB;
@@ -145,7 +147,9 @@ async function resetDatabase(req: Req, res: Res, next: Function) {
     if (!emptyDB || emptyDB === 'false') {
       await sequelize.query(buildUserSchema(userDB));
       console.log(`All public tables have been re-added to ${username}'s schema`);
-      await handleRestartIds(userDB);
+      const totalIds = await handleRestartIds(authResult.dataValues.userDB);
+      authResult.dataValues.rowCount = totalIds;
+      console.log("User row count has been synced");
     }
     res.status(200).json({ message: 'Database reset successful' });
   } catch (e: any) {
