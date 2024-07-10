@@ -61,10 +61,10 @@ INSERT INTO public.stats AS "bowserJr"
     (4, 'total air acceleration', 'stat'),
     (4, 'sh / fh / shff / fhff', 'stat'),
     (4, 'fall speed / fast fall speed', 'stat'),
-    (3, 'out of shield, up smash', 'stat'),
-    (3, 'out of shield, up air', 'stat'),
-    (3, 'out of shield, neutral air', 'stat'),
-    (3, 'shield grab (post-shieldstun)', 'stat');
+    (4, 'out of shield, up smash', 'stat'),
+    (4, 'out of shield, up air', 'stat'),
+    (4, 'out of shield, neutral air', 'stat'),
+    (4, 'shield grab (post-shieldstun)', 'stat');
 
 INSERT INTO public.stats AS "byleth"
   ("fighterId", "name", "type")
