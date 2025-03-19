@@ -16,6 +16,7 @@
     "tsc": "./node_modules/typescript/bin/tsc"
   },
   "dependencies": {
+    "@aws-sdk/client-ssm": "^3.759.0",
     "@types/express": "^4.17.13",
     "@types/node": "^17.0.41",
     "@types/pg": "^8.6.5",

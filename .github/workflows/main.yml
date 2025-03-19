@@ -17,17 +17,17 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v3
 
-      - name: Build project
+      - name: Build projects/the-ultimate-api
         run: |
           npm ci
           npm run build
 
-      - name: Copy project to EC2
+      - name: Copy the-ultimate-api to EC2/projects
         uses: burnett01/rsync-deployments@7.0.1
         with:
           switches: -avzr --delete
           path: ./*
-          remote_path: /home/ec2-user/project/
+          remote_path: /home/ec2-user/projects/the-ultimate-api/
           remote_host: ${{ env.EC2_HOST }}
           remote_user: ec2-user
           remote_key: "${{ env.SSH_PRIVATE_KEY }}"
@@ -38,7 +38,7 @@ jobs:
           username: ec2-user
           key: ${{ env.SSH_PRIVATE_KEY }}
           script: |
-            cd /home/ec2-user/project
+            cd /home/ec2-user/projects/the-ultimate-api
             sh scripts/ec2env.sh
             npm run db:import
             pm2 start --time npm -- start
