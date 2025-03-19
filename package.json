@@ -12,7 +12,7 @@
     "db:import": "bash scripts/db-import.sh",
     "prepare": "husky install",
     "test": "mocha -r ts-node/register test/**/*.test.ts",
-    "test:watch": "nodemon --config test/nodemon.json --exec mocha -r ts-node/register --file 'test/**/authenticationRoutes.test.ts' 'test/**/postRoutes.test.ts' 'test/**/updateRoutes.test.ts' 'test/**/deleteRoutes.test.ts' test/**/*.test.ts",
+    "test:watch": "nodemon --config test/nodemon.json --exec mocha -r ts-node/register --file 'test/**/authenticationRoutes.test.ts'",
     "tsc": "./node_modules/typescript/bin/tsc"
   },
   "dependencies": {
@@ -49,6 +49,7 @@
     "mocha": "^10.2.0",
     "nock": "^13.3.3",
     "nodemon": "^2.0.15",
+    "pm2": "^6.0.5",
     "sinon": "^15.0.1",
     "stylelint": "^14.9.0",
     "stylelint-config-recommended": "^7.0.0",
