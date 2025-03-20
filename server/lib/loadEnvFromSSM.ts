@@ -1,6 +1,8 @@
 import { SSMClient, GetParametersCommand } from '@aws-sdk/client-ssm';
 
-const ssm = new SSMClient({ region: process.env.AWS_REGION || 'us-east-1' });
+const ssm = new SSMClient({
+  region: 'us-east-1'
+});
 
 const PARAMETER_NAMES = [
   'the-ultimate-api/DATABASE_URL',
@@ -14,7 +16,7 @@ const PARAMETER_NAMES = [
 
 export async function loadEnvFromSSM() {
   if (process.env.NODE_ENV !== 'production') {
-    console.log('Skipping SSM loading – running in development');
+    console.log('Skipping SSM loading - running in development');
     return;
   }
 
