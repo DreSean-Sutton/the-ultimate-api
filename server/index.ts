@@ -1,4 +1,8 @@
-require('dotenv/config');
+// index.ts or config.ts
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
+
 import errorMiddleware from './utils/error-middleware';
 import { loadEnvFromSSM } from './lib/loadEnvFromSSM';
 

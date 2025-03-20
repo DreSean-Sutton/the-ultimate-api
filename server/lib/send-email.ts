@@ -1,5 +1,4 @@
 const nodemailer = require('nodemailer');
-require('dotenv/config');
 
 export default async function sendEmail( recipientEmail: string, subject: string, message: string) {
 

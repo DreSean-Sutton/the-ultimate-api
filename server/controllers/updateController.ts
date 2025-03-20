@@ -2,7 +2,6 @@ import { Req, Res } from '../utils/types-routes';
 import ClientError from '../utils/client-error';
 import { client, sequelize } from '../conn';
 import defineUserDb from '../lib/define-user-db';
-require('dotenv/config');
 const jwt = require('jsonwebtoken');
 const { User } = require('../model/user-table');
 const { authorizeUser } = require('../lib/authorizeUser');

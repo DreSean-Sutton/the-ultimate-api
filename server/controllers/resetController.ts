@@ -4,7 +4,6 @@ import { client } from '../conn';
 import { Op } from "sequelize";
 import sendEmail from "../lib/send-email";
 import generateRandomString from "../lib/generate-random-string";
-require('dotenv/config');
 const jwt = require('jsonwebtoken');
 const { sequelize } = require('../conn');
 const { User } = require('../model/user-table');

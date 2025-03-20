@@ -4,7 +4,6 @@ import chaiHttp from "chai-http";
 import nock from "nock";
 const request = require("supertest");
 const resetControllers = require('../../server/controllers/resetController');
-require('dotenv/config');
 const jwt = require('jsonwebtoken');
 chai.should();
 chai.use(chaiHttp);

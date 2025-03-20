@@ -3,7 +3,6 @@ import ClientError from "../utils/client-error";
 import { client } from '../conn';
 import { Op } from "sequelize";
 import defineUserDb from '../lib/define-user-db';
-require('dotenv/config');
 const jwt = require('jsonwebtoken');
 const { sequelize } = require('../conn');
 const { User } = require('../model/user-table');

@@ -1,7 +1,6 @@
 import ClientError from '../utils/client-error';
 const jwt = require('jsonwebtoken');
 const { User } = require('../model/user-table');
-require('dotenv/config');
 
 export async function authorizeUser(authorization: string, username: string, next: any): Promise<{ status: number, message: string } | undefined> {
   try {

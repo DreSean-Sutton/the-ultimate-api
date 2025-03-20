@@ -5,7 +5,6 @@ import buildUserSchema from '../lib/build-user-schema';
 import defineUserDb from '../lib/define-user-db';
 import handleRestartIds from '../lib/handle-restart-id';
 import generateRandomString from '../lib/generate-random-string';
-require('dotenv/config');
 const { User } = require('../model/user-table');
 const { Reset } = require('../model/reset-table');
 const { sequelize } = require('../conn');

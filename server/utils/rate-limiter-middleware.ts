@@ -1,6 +1,5 @@
 // express = require('express');
 const { RateLimiterMemory } = require('rate-limiter-flexible');
-require('dotenv/config');
 
 let opts;
 if(process.env.NODE_ENV === 'development') {

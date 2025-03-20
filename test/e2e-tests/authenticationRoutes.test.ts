@@ -1,7 +1,6 @@
 import chai from 'chai';
 import sinon from 'sinon';
 import chaiHttp from 'chai-http';
-require('dotenv/config');
 const jwt = require('jsonwebtoken');
 chai.should();
 chai.use(chaiHttp);
