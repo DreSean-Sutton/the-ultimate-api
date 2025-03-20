@@ -49,6 +49,6 @@ const app = express();
     });
   } catch (err) {
     console.error('❌ Failed to start the app:', err);
-    process.exit(1); // Exit if SSM loading fails to avoid partial app state
+    // process.exit(1); // Exit if SSM loading fails to avoid partial app state
   }
 })();
