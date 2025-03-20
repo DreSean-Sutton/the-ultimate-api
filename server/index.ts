@@ -49,6 +49,10 @@ const app = express();
     });
   } catch (err) {
     console.error('❌ Failed to start the app:', err);
-    process.exit(1); // Exit if SSM loading fails to avoid partial app state
+
+    setTimeout(() => {
+      console.log('💥 Exiting due to startup failure...');
+      process.exit(1);
+    }, 3000); // 3-second delay before exiting
   }
 })();
