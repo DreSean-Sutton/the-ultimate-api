@@ -49,11 +49,5 @@ const app = express();
     });
   } catch (err) {
     console.error('❌ Failed to start the app:', err);
-
-    // Add a small delay and exit gracefully
-    setTimeout(() => {
-      console.log('Exiting due to startup failure...');
-      process.exit(1);
-    }, 3000); // 3-second delay before exiting
   }
 })();
