@@ -5,14 +5,16 @@ const ssm = new SSMClient({
 });
 
 const PARAMETER_NAMES = [
-  'the-ultimate-api/DATABASE_URL',
-  'the-ultimate-api/DB_NAME',
-  'the-ultimate-api/EMAIL_PASSWORD',
-  'the-ultimate-api/EMAIL_USER',
-  'the-ultimate-api/NODE_ENV',
-  'the-ultimate-api/PORT',
-  'the-ultimate-api/TOKEN_SECRET',
+  'DATABASE_URL',
+  'DB_NAME',
+  'EMAIL_PASSWORD',
+  'EMAIL_USER',
+  'NODE_ENV',
+  'PORT',
+  'TOKEN_SECRET',
 ];
+
+console.log(`NODE_ENV value: ${process.env.NODE_ENV}`);
 
 export async function loadEnvFromSSM() {
   if (process.env.NODE_ENV !== 'production') {
