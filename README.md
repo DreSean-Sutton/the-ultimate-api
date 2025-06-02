@@ -18,13 +18,11 @@ Test out my endpoints here at: https://the-ultimate-api.dreseansutton.com/
 - express.js
 - postgreSQL
 - AWS
-- Dokku
 - Sequelize
 - YAML
 - yamljs
 - Swagger-ui-express
 - openapi
-- postinstall
 - dotenv
 - shell
 

@@ -10,7 +10,7 @@
     "build": "tsc",
     "dev:server": "nodemon --config server/nodemon.json --exec ts-node server/index.ts",
     "db:import": "bash scripts/db-import.sh",
-    "prepare": "husky install",
+    "prepare": "if [ \"$NODE_ENV\" != \"production\" ]; then husky install; fi",
     "test": "mocha -r ts-node/register test/**/*.test.ts",
     "test:watch": "nodemon --config test/nodemon.json --exec mocha -r ts-node/register --file 'test/**/authenticationRoutes.test.ts'",
     "tsc": "./node_modules/typescript/bin/tsc"
