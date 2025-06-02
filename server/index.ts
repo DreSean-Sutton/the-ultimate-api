@@ -4,7 +4,6 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 import errorMiddleware from './utils/error-middleware';
-import { loadEnvFromSSM } from './lib/loadEnvFromSSM';
 
 const express = require('express');
 const rateLimiterMiddleware = require('./utils/rate-limiter-middleware');

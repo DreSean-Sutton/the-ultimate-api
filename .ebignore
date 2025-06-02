@@ -1,0 +1,9 @@
+.git/
+node_modules/
+*.log
+*.env
+node_modules
+.DS_Store
+.vscode
+.test/*
+database/test.sql
