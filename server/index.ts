@@ -18,9 +18,6 @@ const app = express();
 
 (async () => {
   try {
-    // Load environment variables from SSM before starting the app
-    await loadEnvFromSSM();
-
     app.use(cors());
     app.use('/api', expressJSON);
     app.use('/api', rateLimiterMiddleware);
