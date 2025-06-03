@@ -16,6 +16,16 @@ const port = process.env.PORT || 5000;
 const expressJSON = express.json();
 const app = express();
 
+app.get('/', (req: any, res: any) => {
+  res.status(200).send('OK');
+});
+
+// Health check endpoint
+app.get('/api/ping', (_: any, res: any) => {
+  res.json({ message: 'pong' });
+});
+
+
 (async () => {
   try {
     app.use(cors());

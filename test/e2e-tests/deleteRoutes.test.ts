@@ -5,7 +5,9 @@ const jwt = require('jsonwebtoken');
 chai.should();
 chai.use(chaiHttp);
 
-const url = 'http://localhost:5000';
+const baseUrl = process.env.APP_BASE_URL || 'localhost:5000';
+
+const url = baseUrl;
 const testPayload = {
   userId: 123,
   exp: Math.floor(Date.now() / 1000) + (60 * 30)

@@ -10,10 +10,11 @@ const testPayload = {
   exp: Math.floor(Date.now() / 1000) + (60 * 30)
 };
 const testToken = jwt.sign(testPayload, process.env.TOKEN_SECRET);
+const baseUrl = process.env.APP_BASE_URL || 'localhost:5000';
 
 describe.only("POST /api/auth/register", () => {
 
-  const url = 'http://localhost:5000';
+  const url = baseUrl;
   const path = '/api/auth/register';
 
   describe.only("successful request", () => {
@@ -191,7 +192,7 @@ describe.only("POST /api/auth/register", () => {
 describe.only("POST /api/auth/generate-token", () => {
   const email = 'test_email@gmail.com';
   const password = 'test_password';
-  const url = 'http://localhost:5000';
+  const url = baseUrl;
   const path = '/api/auth/generate-token';
 
 
@@ -291,7 +292,7 @@ describe.only("POST /api/auth/generate-token", () => {
 describe.only("POST /api/auth/show-token", () => {
   const email = 'test_email@gmail.com';
   const password = 'test_password';
-  const url = 'http://localhost:5000';
+  const url = baseUrl;
   const path = '/api/auth/show-token';
 
   describe.only("successful requests", () => {
@@ -364,7 +365,7 @@ describe.only("POST /api/auth/show-token", () => {
 })
 
 describe.only("POST /api/auth/reset-database", () => {
-  const url = 'http://localhost:5000';
+  const url = baseUrl;
   const path = '/api/auth/reset-database';
 
   describe.only("successful requests", () => {
@@ -393,7 +394,7 @@ describe.only("POST /api/auth/reset-database", () => {
 });
 
 describe.only("Delete /api/auth/delete-user", () => {
-  const url = 'http://localhost:5000';
+  const url = baseUrl;
   const path = '/api/auth/delete-account';
 
   describe("successful requests", () => {
