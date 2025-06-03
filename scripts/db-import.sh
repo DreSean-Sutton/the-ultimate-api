@@ -17,7 +17,7 @@ fi
 # Build connection string
 if [ -n "$DATABASE_URL" ]; then
   echo "Using DATABASE_URL"
-  PSQL_CMD="psql \"$DATABASE_URL\""
+  PSQL_CMD="psql \"$DATABASE_URL\" -v ON_ERROR_STOP=1"
 elif [ -n "$RDS_HOSTNAME" ]; then
   echo "Using RDS environment variables"
   PSQL_CMD="PGPASSWORD=$RDS_PASSWORD psql -h \"$RDS_HOSTNAME\" -p \"$RDS_PORT\" -U \"$RDS_USERNAME\" -d \"$RDS_DB_NAME\""
