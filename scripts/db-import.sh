@@ -1,43 +1,54 @@
 #!/bin/sh
-# if [ -f /tmp/db-imported.flag ]; then
-#   echo "DB already imported — skipping."
-#   exit 0
-# fi
-
 set -e
 
 echo "Starting database import..."
 
-# If running locally and .env exists, source it
+
+# Load .env in dev
 if [ -f .env ]; then
   echo "Loading .env"
   . .env
 fi
 
-# Build connection string
+# Combine SQL into transaction and import
 if [ -n "$DATABASE_URL" ]; then
   echo "Using DATABASE_URL"
-  PSQL_CMD="psql \"$DATABASE_URL\" -v ON_ERROR_STOP=1"
+  (echo "BEGIN;";
+   cat \
+     database/schema.sql \
+     database/fighters-data.sql \
+     database/moves/moves-data.sql \
+     database/moves/hitboxes-data.sql \
+     database/throws/throws-data.sql \
+     database/throws/grappling-data.sql \
+     database/movements/movements-data.sql \
+     database/movements/dodging-data.sql \
+     database/stats/stats-data.sql \
+     database/stats/miscellaneous-data.sql;
+   echo "COMMIT;") | psql "$DATABASE_URL" -v ON_ERROR_STOP=1
 elif [ -n "$RDS_HOSTNAME" ]; then
-  echo "Using RDS environment variables"
-  PSQL_CMD="PGPASSWORD=$RDS_PASSWORD psql -h \"$RDS_HOSTNAME\" -p \"$RDS_PORT\" -U \"$RDS_USERNAME\" -d \"$RDS_DB_NAME\""
+  echo "Using RDS env vars"
+  (echo "BEGIN;";
+   cat \
+     database/schema.sql \
+     database/fighters-data.sql \
+     database/moves/moves-data.sql \
+     database/moves/hitboxes-data.sql \
+     database/throws/throws-data.sql \
+     database/throws/grappling-data.sql \
+     database/movements/movements-data.sql \
+     database/movements/dodging-data.sql \
+     database/stats/stats-data.sql \
+     database/stats/miscellaneous-data.sql;
+   echo "COMMIT;") | PGPASSWORD=$RDS_PASSWORD psql \
+     -h "$RDS_HOSTNAME" \
+     -p "$RDS_PORT" \
+     -U "$RDS_USERNAME" \
+     -d "$RDS_DB_NAME" \
+     -v ON_ERROR_STOP=1
 else
-  echo "No database configuration found. Exiting."
+  echo "No DB config found. Exiting."
   exit 1
 fi
 
-# Run import
-eval $PSQL_CMD \
-  -f database/schema.sql \
-  -f database/fighters-data.sql \
-  -f database/moves/moves-data.sql \
-  -f database/moves/hitboxes-data.sql \
-  -f database/throws/throws-data.sql \
-  -f database/throws/grappling-data.sql \
-  -f database/movements/movements-data.sql \
-  -f database/movements/dodging-data.sql \
-  -f database/stats/stats-data.sql \
-  -f database/stats/miscellaneous-data.sql
-
 echo "Finished database import."
-touch /tmp/db-imported.flag
