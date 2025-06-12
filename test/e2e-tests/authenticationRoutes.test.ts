@@ -4,6 +4,7 @@ import chaiHttp from 'chai-http';
 const jwt = require('jsonwebtoken');
 chai.should();
 chai.use(chaiHttp);
+require('dotenv').config();
 
 const testPayload = {
   userId: 123,
