@@ -4,6 +4,7 @@ import chaiHttp from 'chai-http';
 const jwt = require('jsonwebtoken');
 chai.should();
 chai.use(chaiHttp);
+require('dotenv').config();
 
 const baseUrl = process.env.APP_BASE_URL || 'localhost:5000';
 

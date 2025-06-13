@@ -4,7 +4,7 @@ const { RateLimiterMemory } = require('rate-limiter-flexible');
 let opts;
 if(process.env.NODE_ENV === 'development') {
   opts = {
-    points: 80,
+    points: 200,
     duration: 1
   }
 } else {

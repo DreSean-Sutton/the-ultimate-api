@@ -4,6 +4,7 @@ import chaiHttp from 'chai-http';
 const jwt = require('jsonwebtoken');
 chai.should();
 chai.use(chaiHttp);
+require('dotenv').config();
 
 const testPayload = {
   userId: 123,
@@ -98,7 +99,7 @@ describe.only("GET /api/get/fighters", () => {
         renderFightersTests(200, done, { fighter: 'inkling' });
       })
       it("Returns a json object containing a user's fighter's basic data", done => {
-        renderFightersTests(200, done, { fighter: 'krillinss' }, { authorization: testToken, username: 'test_username' });
+        renderFightersTests(200, done, { fighter: 'krillinss' }, { authorization: testToken, username: 'test_username' }, true);
       })
     })
 

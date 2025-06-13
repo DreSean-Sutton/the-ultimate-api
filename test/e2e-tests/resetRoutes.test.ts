@@ -7,6 +7,7 @@ const resetControllers = require('../../server/controllers/resetController');
 const jwt = require('jsonwebtoken');
 chai.should();
 chai.use(chaiHttp);
+require('dotenv').config();
 
 const testPayload = {
   userId: 123,
