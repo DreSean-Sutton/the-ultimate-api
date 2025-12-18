@@ -6,7 +6,7 @@ chai.should();
 chai.use(chaiHttp);
 require('dotenv').config();
 
-const baseUrl = process.env.APP_BASE_URL || 'localhost:5000';
+const baseUrl = process.env.APP_BASE_URL || 'localhost:5001';
 
 const url = baseUrl;
 const testPayload = {

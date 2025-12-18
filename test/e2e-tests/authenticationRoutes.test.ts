@@ -11,7 +11,7 @@ const testPayload = {
   exp: Math.floor(Date.now() / 1000) + (60 * 30)
 };
 const testToken = jwt.sign(testPayload, process.env.TOKEN_SECRET);
-const baseUrl = process.env.APP_BASE_URL || 'localhost:5000';
+const baseUrl = process.env.APP_BASE_URL || 'localhost:5001';
 
 describe.only("POST /api/auth/register", () => {
 
@@ -31,7 +31,8 @@ describe.only("POST /api/auth/register", () => {
       chai.request(url)
         .delete('/api/auth/reset-tests')
         .end((err, res) => {
-          console.log(res.body);
+          console.log(err);
+          console.log(res);
           done();
         });
     });
@@ -45,9 +46,11 @@ describe.only("POST /api/auth/register", () => {
         .send(params)
         .end((err, res) => {
           if(err) {
+            console.log(res.body);
             console.log(err);
             return done(err);
           }
+          console.log(res.body);
           res.should.have.status(201);
           res.body.should.have.property('message');
           res.body.data.should.have.all.key(userKeys);

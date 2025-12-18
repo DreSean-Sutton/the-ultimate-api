@@ -19,7 +19,7 @@ describe.only("POST /api/reset/getResetToken", () => {
   afterEach(() => {
     nock.cleanAll();
   });
-  const url = 'http://localhost:5000';
+  const url = 'http://localhost:5001';
   const path = '/api/reset/get-reset-token';
 
   describe("successful requests", () => {
@@ -59,7 +59,7 @@ describe.only("PUT /api/reset/information", () => {
     nock.cleanAll();
   });
 
-  const url = 'http://localhost:5000';
+  const url = 'http://localhost:5001';
   const path = '/api/reset/information';
 
   describe("Successful Requests", () => {

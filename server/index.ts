@@ -12,7 +12,7 @@ const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
 const cors = require('cors');
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5001;
 const expressJSON = express.json();
 const app = express();
 

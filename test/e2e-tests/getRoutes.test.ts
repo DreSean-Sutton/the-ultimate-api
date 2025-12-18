@@ -15,7 +15,7 @@ const testToken = `Bearer ${jwt.sign(testPayload, process.env.TOKEN_SECRET)}`;
 describe.only("GET /api/get/fighters", () => {
 
   const expectedFighterProps = ['fighter', 'fighterId', 'rosterId', 'displayName'];
-  const url = 'http://localhost:5000';
+  const url = 'http://localhost:5001';
   const path = '/api/get/fighters';
 
   function renderFightersTests(status: number, done: any, query?: any, headers?: any, log?: boolean) {
@@ -66,7 +66,7 @@ describe.only("GET /api/get/fighters", () => {
 
     context("unsuccessful requests", () => {
       it("Returns an error if url isn't valid", done => {
-        chai.request('http://localhost:5000')
+        chai.request('http://localhost:5001')
           .get('/api/get/fighterssssss')
           .end((err, res) => {
             res.should.have.status(404);
@@ -188,7 +188,7 @@ describe.only("GET /api/get/fighters/data", () => {
     const username = headers?.username || '';
 
     query = query || {}
-    chai.request('http://localhost:5000')
+    chai.request('http://localhost:5001')
       .get('/api/get/fighters/data')
       .query(query)
       .set('authorization', authorization)
@@ -222,7 +222,7 @@ describe.only("GET /api/get/fighters/data", () => {
       renderDataTests(200, done, {}, { authorization: testToken, username: 'test_username' });
     })
     it("Returns an error if url path is invalid", done => {
-      chai.request('http://localhost:5000')
+      chai.request('http://localhost:5001')
         .get('/api/get/fighters/dataaaaaaa')
         .end((err, res) => {
           res.should.have.status(404);
@@ -337,7 +337,7 @@ describe.only("GET /api/get/fighters/data/:type", () => {
     const username = headers?.username || '';
 
     query = query || {}
-    chai.request('http://localhost:5000')
+    chai.request('http://localhost:5001')
       .get(`/api/get/fighters/data/${type}s`)
       .query(query)
       .set('authorization', authorization)

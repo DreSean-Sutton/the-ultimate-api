@@ -14,7 +14,7 @@ const testToken = jwt.sign(testPayload, process.env.TOKEN_SECRET);
 
 describe.only("POST /api/add/fighters", () => {
 
-  const url = 'http://localhost:5000';
+  const url = 'http://localhost:5001';
   const path = '/api/add/fighters';
 
   describe("successful requests", () => {
@@ -230,7 +230,7 @@ describe.only("POST /api/add/fighters", () => {
 
 describe.only("POST /api/add/:table/:id", () => {
 
-  const url = 'http://localhost:5000';
+  const url = 'http://localhost:5001';
 
   describe("Unsuccessful requests", () => {
 

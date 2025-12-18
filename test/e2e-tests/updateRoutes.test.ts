@@ -13,7 +13,7 @@ const testPayload = {
 const testToken = jwt.sign(testPayload, process.env.TOKEN_SECRET);
 
 describe.only("PUT /api/update/wrong_param/:id", () => {
-  const url = 'http://localhost:5000';
+  const url = 'http://localhost:5001';
 
   describe("Unsuccessful request", () => {
 
@@ -38,7 +38,7 @@ describe.only("PUT /api/update/wrong_param/:id", () => {
 })
 
 describe.only("PUT /api/update/fighters/:id", () => {
-  const url = 'http://localhost:5000';
+  const url = 'http://localhost:5001';
   const path = '/api/update/fighters/90';
 
   describe("Successfulful requests", () => {
@@ -197,7 +197,7 @@ describe.only("PUT /api/update/fighters/:id", () => {
 })
 
 describe.only("PUT /api/update/moves/:id", () => {
-  const url = 'http://localhost:5000';
+  const url = 'http://localhost:5001';
 
   describe("Successful Requests", () => {
     it("returns a 200 status if a fighter's moves are updated", done => {
@@ -277,7 +277,7 @@ describe.only("PUT /api/update/moves/:id", () => {
 })
 
 describe.only("PUT /api/update/throws/:id", () => {
-  const url = 'http://localhost:5000';
+  const url = 'http://localhost:5001';
 
   describe("Successful requests", () => {
     it("Returns a 200 status if a fighter's throws are updated", done => {
@@ -357,7 +357,7 @@ describe.only("PUT /api/update/throws/:id", () => {
 })
 
 describe.only("PUT /api/update/movements/:id", () => {
-  const url = 'http://localhost:5000';
+  const url = 'http://localhost:5001';
 
   describe("Successful requests", () => {
     it("Returns a 200 status if a fighter's movements are updated", done => {
@@ -436,7 +436,7 @@ describe.only("PUT /api/update/movements/:id", () => {
 })
 
 describe.only("PUT /api/update/stats/:id", () => {
-  const url = 'http://localhost:5000';
+  const url = 'http://localhost:5001';
 
   describe("Successful requests", () => {
     it("Returns a 200 status if a fighter's stats are updated", done => {
